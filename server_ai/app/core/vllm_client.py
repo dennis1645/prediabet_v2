@@ -43,23 +43,50 @@ class VLLMInferenceClient:
         dan menjalankan Post-Generation Allergen Guardrail.
         """
         start_time = time.perf_counter()
-        url = f"{self.api_base}/chat/completions"
+        
+        # Dukung endpoint ganda (internal container 'http://vllm:8000/v1' dan host 'http://host.docker.internal:8000/v1')
+        candidate_bases = [self.api_base]
+        if "vllm" in self.api_base:
+            candidate_bases.append("http://host.docker.internal:8000/v1")
+            candidate_bases.append("http://localhost:8000/v1")
+        else:
+            candidate_bases.append("http://vllm:8000/v1")
+
+        raw_text = ""
+        total_tokens = 0
+        is_live_vllm = False
+        target_model = self.model_id
+
+        # 1. Cari endpoint aktif dan sinkronkan model_id resmi dari vLLM
+        active_base = candidate_bases[0]
+        for base in candidate_bases:
+            try:
+                async with httpx.AsyncClient(timeout=2.0) as client:
+                    m_res = await client.get(f"{base}/models", headers={"Authorization": f"Bearer {self.api_key}"})
+                    if m_res.status_code == 200:
+                        active_base = base
+                        m_data = m_res.json()
+                        models_list = m_data.get("data", [])
+                        if models_list and "id" in models_list[0]:
+                            target_model = models_list[0]["id"]
+                            self.model_id = target_model
+                        break
+            except Exception:
+                continue
+
+        url = f"{active_base}/chat/completions"
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.api_key}"
         }
         payload = {
-            "model": self.model_id,
+            "model": target_model,
             "messages": messages,
             "max_tokens": max_tokens,
             "temperature": temperature,
             "top_p": settings.VLLM_TOP_P,
             "stream": False
         }
-
-        raw_text = ""
-        total_tokens = 0
-        is_live_vllm = False
 
         try:
             async with httpx.AsyncClient(timeout=self.timeout) as client:
@@ -70,11 +97,13 @@ class VLLMInferenceClient:
                     usage = data.get("usage", {})
                     total_tokens = usage.get("completion_tokens", len(raw_text.split()))
                     is_live_vllm = True
+                    print(f"[vLLM Client] [SUCCESS] Inferensi sukses dari {active_base} (Model: {target_model})")
                 else:
+                    print(f"[vLLM Client] Error: vLLM HTTP {res.status_code} response: {res.text}")
                     raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
                     total_tokens = len(raw_text.split())
         except Exception as e:
-            print(f"[vLLM Client] Notice: vLLM server offline ({e}). Menggunakan dynamic clinical engine fallback.")
+            print(f"[vLLM Client] Notice: vLLM offline/unreachable di {url} ({e}). Menggunakan dynamic clinical engine fallback.")
             raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
             total_tokens = len(raw_text.split())
 
