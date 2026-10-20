@@ -1,7 +1,9 @@
 # ==============================================================================
-# PrediaBeat Multi-Container Architecture (Docker Compose)
-# 1. prediabeat-web : Combined React Frontend + Express Backend (Port 5000)
-# 2. server_ai      : Hybrid GraphRAG + FastAPI + vLLM Client (Port 8000)
+# PrediaBeat Multi-Container Architecture (Docker Compose - All-in-One)
+# 1. prediabeat-web : Combined React Frontend + Express Backend (Port 8080 & 5000)
+# 2. server_ai      : Hybrid GraphRAG + FastAPI + Allergen Guardrail (Port 8002)
+# 3. vllm           : Qwen 2.5 Inference Engine via NVIDIA GPU (Port 8000)
+# 4. neo4j          : Medical Knowledge Graph Database (Port 7687 & 7474)
 # Network           : prediabeat-network (Docker Bridge)
 # ==============================================================================
 
@@ -37,7 +39,7 @@ services:
       - server_ai
 
   # ----------------------------------------------------------------------------
-  # SERVICE 2: Server AI (FastAPI + Hybrid GraphRAG + vLLM Client)
+  # SERVICE 2: Server AI (FastAPI + Hybrid GraphRAG + Allergen Guardrail)
   # ----------------------------------------------------------------------------
   server_ai:
     build:
@@ -52,17 +54,69 @@ services:
       - PORT=8000
       - HOST=0.0.0.0
       - MODEL_ID=Qwen/Qwen2.5-7B-Instruct-GPTQ-Int8
-      - VLLM_API_BASE=http://host.docker.internal:8000/v1
+      - VLLM_API_BASE=http://vllm:8000/v1
       - EXPRESS_BACKEND_URL=http://prediabeat-web:5000/api
-      - NEO4J_URI=bolt://host.docker.internal:7687
+      - NEO4J_URI=bolt://neo4j:7687
       - NEO4J_USER=neo4j
       - NEO4J_PASSWORD=prediabeat2026
     volumes:
       - server-ai-knowledge:/app/knowledge_base
     networks:
       - prediabeat-network
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    depends_on:
+      - vllm
+      - neo4j
+
+  # ----------------------------------------------------------------------------
+  # SERVICE 3: vLLM Inference Engine (GPU RTX 5070 Ti)
+  # ----------------------------------------------------------------------------
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: prediabeat-vllm
+    restart: unless-stopped
+    ipc: host
+    ports:
+      - "8000:8000"
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN:-}
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: >
+      --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int8
+      --port 8000
+      --gpu-memory-utilization 0.85
+      --max-model-len 4096
+      --dtype auto
+      --trust-remote-code
+    networks:
+      - prediabeat-network
+
+  # ----------------------------------------------------------------------------
+  # SERVICE 4: Neo4j Medical Knowledge Graph Database
+  # ----------------------------------------------------------------------------
+  neo4j:
+    image: neo4j:5.18.0
+    container_name: prediabeat-neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/prediabeat2026
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - prediabeat-neo4j-data:/data
+      - prediabeat-neo4j-logs:/logs
+      - ./server_ai/knowledge_base/neo4j:/var/lib/neo4j/import
+    networks:
+      - prediabeat-network
 
 # ------------------------------------------------------------------------------
 # Isolated Bridge Network for Safe Inter-Service Communication
@@ -80,3 +134,7 @@ volumes:
     name: prediabeat-db-data
   server-ai-knowledge:
     name: server-ai-knowledge
+  prediabeat-neo4j-data:
+    name: prediabeat-neo4j-data
+  prediabeat-neo4j-logs:
+    name: prediabeat-neo4j-logs

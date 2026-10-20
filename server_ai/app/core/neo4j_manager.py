@@ -34,12 +34,49 @@ class Neo4jClinicalGraphManager:
             self.driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
             self.driver.verify_connectivity()
             print(f"[Neo4j Manager] [OK] Terhubung ke database Neo4j di {self.uri}")
+            self.ensure_seeded()
         except Exception as e:
             print(f"[Neo4j Manager] [Notice] Neo4j belum aktif di {self.uri} ({e}). Menggunakan Hybrid CSV deterministic engine fallback.")
             self.driver = None
 
+    def ensure_seeded(self):
+        """Memastikan node makanan terisi di Neo4j jika database graf masih kosong."""
+        if not self.driver:
+            return
+        try:
+            with self.driver.session(database=self.database) as session:
+                res = session.run("MATCH (m:Food) RETURN count(m) AS cnt").single()
+                cnt = res["cnt"] if res else 0
+                if cnt == 0:
+                    print("[Neo4j Manager] Database Neo4j kosong. Memulai inisialisasi seeding node makanan...")
+                    foods = self._load_local_dataset()
+                    if foods:
+                        batch_size = 500
+                        for i in range(0, len(foods), batch_size):
+                            batch = foods[i:i + batch_size]
+                            session.run("""
+                                UNWIND $batch AS item
+                                MERGE (m:Food {nama_makanan: item.nama})
+                                SET m.kalori_kal = item.kalori,
+                                    m.karbohidrat_g = item.karbohidrat,
+                                    m.protein_g = item.protein,
+                                    m.lemak_g = item.lemak,
+                                    m.serat_g = item.serat,
+                                    m.sodium_mg = item.sodium_mg,
+                                    m.glikemik_indeks = item.gi,
+                                    m.kategori_spesifik = item.kategori,
+                                    m.cara_olah = item.cara_olah
+                            """, batch=batch)
+                        print(f"[Neo4j Manager] [OK] Berhasil menyuntikkan {len(foods)} node makanan ke Neo4j!")
+        except Exception as e:
+            print(f"[Neo4j Manager] [Notice] Gagal auto-seed Neo4j ({e}). Tetap menggunakan CSV fallback.")
+
     def is_connected(self) -> bool:
-        if not self.driver or not HAS_NEO4J:
+        if not HAS_NEO4J:
+            return False
+        if not self.driver:
+            self._connect()
+        if not self.driver:
             return False
         try:
             self.driver.verify_connectivity()
