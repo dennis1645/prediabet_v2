@@ -228,19 +228,33 @@ class VLLMInferenceClient:
         # 3. Pertanyaan seputar Kandungan Nutrisi Bahan Makanan (misal: "dada ayam", "telur", "tempe", dsb)
         try:
             from app.core.neo4j_manager import neo4j_manager
-            all_foods = neo4j_manager._load_local_dataset()
+            raw_foods = neo4j_manager._load_local_dataset()
+            all_foods = allergen_guardrail.filter_safe_food_candidates(raw_foods, user_allergens or [])
         except Exception:
             all_foods = []
 
         matched_food = None
-        for word in q.split():
-            if len(word) >= 4 and word not in ["berapa", "gram", "kalori", "protein", "lemak", "karbohidrat", "makan", "apakah"]:
+        # Prioritaskan pencarian frasa makanan spesifik
+        for phrase in ["dada ayam", "daging ayam", "ayam", "ikan mas", "telur", "tempe", "tahu", "beras merah", "oatmeal", "bayam", "sayur bening"]:
+            if phrase in q:
+                if phrase == "ayam":
+                    candidates = [f for f in all_foods if "ayam" in f["nama"].lower() and "bayam" not in f["nama"].lower()]
+                else:
+                    candidates = [f for f in all_foods if phrase in f["nama"].lower()]
+                if candidates:
+                    matched_food = candidates[0]
+                    break
+
+        if not matched_food:
+            stop_words = {"berapa", "jumlah", "protein", "dalam", "gram", "kalori", "lemak", "karbohidrat", "makan", "apakah", "untuk", "pada", "banyak", "kandungan", "nutrisi", "halo", "dok"}
+            words = [w.strip("?,.!") for w in q.split() if len(w.strip("?,.!")) >= 3 and w.strip("?,.!") not in stop_words]
+            for w in words:
                 for f in all_foods:
-                    if re.search(r'\b' + re.escape(word) + r'\b', f["nama"], re.IGNORECASE):
+                    if re.search(r'\b' + re.escape(w) + r'\b', f["nama"], re.IGNORECASE):
                         matched_food = f
                         break
-            if matched_food:
-                break
+                if matched_food:
+                    break
 
         if matched_food or any(k in q for k in ["ayam", "ikan", "telur", "tempe", "tahu", "daging", "nasi", "protein", "kalori", "gizi"]):
             target_item = matched_food if matched_food else {
