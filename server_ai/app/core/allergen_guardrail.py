@@ -79,6 +79,7 @@ class ClinicalAllergenGuardrail:
         """
         Lapisan 2 (Post-Filter): Memeriksa respon LLM.
         Jika LLM berhalusinasi merekomendasikan bahan terlarang, respon disterilkan secara otomatis.
+        Mengecualikan konteks keselamatan seperti 'bebas dari [alergen]', 'hindari [alergen]', atau 'pantangan: [alergen]'.
         """
         if not user_allergens:
             return text, []
@@ -88,11 +89,19 @@ class ClinicalAllergenGuardrail:
 
         # Deteksi apakah ada rekomendasi yang memuat kata kunci alergen
         for allergen in expanded:
-            # Cari jika bahan tersebut disarankan
-            pattern = re.compile(rf'(?:rekomendasi|konsumsi|menu|makan|sajikan|masak|gunakan)\s+[^\.\n]*?({re.escape(allergen)})', re.IGNORECASE)
-            matches = pattern.findall(text)
-            if matches:
-                detected_violations.append(allergen)
+            rec_pattern = re.compile(
+                rf'(?:rekomendasi|anjuran|konsumsi|menu|makan|sajikan|masak|gunakan|pilihan)\s+[^\.\n]*?({re.escape(allergen)})',
+                re.IGNORECASE
+            )
+            matches = rec_pattern.findall(text)
+            for match in matches:
+                # Periksa apakah kalimat tersebut sebenarnya adalah pernyataan keselamatan / negasi
+                exclusion_pattern = re.compile(
+                    rf'(?:bebas|bebas dari|hindari|pantangan|pantang|dilarang|jangan|tanpa|bukan|alergi)\s+[^.\n]*?{re.escape(match)}',
+                    re.IGNORECASE
+                )
+                if not exclusion_pattern.search(text):
+                    detected_violations.append(match)
 
         if detected_violations:
             unique_violations = list(set(detected_violations))

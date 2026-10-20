@@ -19,6 +19,7 @@ services:
     container_name: prediabeat-web
     restart: unless-stopped
     ports:
+      - "8080:5000"
       - "5000:5000"
     environment:
       - PORT=5000
@@ -46,7 +47,7 @@ services:
     container_name: prediabeat-server-ai
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "8002:8000"
     environment:
       - PORT=8000
       - HOST=0.0.0.0

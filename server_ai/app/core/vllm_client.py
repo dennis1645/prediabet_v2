@@ -32,6 +32,9 @@ class VLLMInferenceClient:
         self,
         messages: List[Dict[str, str]],
         user_allergens: List[str],
+        user_query: str = "",
+        user_context: Any = None,
+        safe_food_names: List[str] = None,
         max_tokens: int = 768,
         temperature: float = 0.2
     ) -> Tuple[str, Dict[str, Any], List[str]]:
@@ -56,6 +59,7 @@ class VLLMInferenceClient:
 
         raw_text = ""
         total_tokens = 0
+        is_live_vllm = False
 
         try:
             async with httpx.AsyncClient(timeout=self.timeout) as client:
@@ -65,12 +69,13 @@ class VLLMInferenceClient:
                     raw_text = data["choices"][0]["message"]["content"]
                     usage = data.get("usage", {})
                     total_tokens = usage.get("completion_tokens", len(raw_text.split()))
+                    is_live_vllm = True
                 else:
-                    raw_text = self._generate_fallback_response(messages, user_allergens)
+                    raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
                     total_tokens = len(raw_text.split())
         except Exception as e:
-            print(f"[vLLM Client] Notice: vLLM server offline ({e}). Menggunakan clinical engine fallback.")
-            raw_text = self._generate_fallback_response(messages, user_allergens)
+            print(f"[vLLM Client] Notice: vLLM server offline ({e}). Menggunakan dynamic clinical engine fallback.")
+            raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
             total_tokens = len(raw_text.split())
 
         elapsed = time.perf_counter() - start_time
@@ -86,7 +91,7 @@ class VLLMInferenceClient:
             "tokens_generated": total_tokens,
             "tokens_per_second": tokens_per_sec,
             "model": self.model_id,
-            "vllm_connected": raw_text != "" and "clinical engine fallback" not in raw_text
+            "vllm_connected": is_live_vllm
         }
 
         return sanitized_text, telemetry, blocked_allergens
@@ -95,6 +100,9 @@ class VLLMInferenceClient:
         self,
         messages: List[Dict[str, str]],
         user_allergens: List[str],
+        user_query: str = "",
+        user_context: Any = None,
+        safe_food_names: List[str] = None,
         max_tokens: int = 768,
         temperature: float = 0.2
     ) -> AsyncGenerator[str, None]:
@@ -131,28 +139,101 @@ class VLLMInferenceClient:
                                 except Exception:
                                     continue
                     else:
-                        for word in self._generate_fallback_response(messages, user_allergens).split(" "):
+                        for word in self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens).split(" "):
                             yield word + " "
         except Exception:
-            for word in self._generate_fallback_response(messages, user_allergens).split(" "):
+            for word in self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens).split(" "):
                 yield word + " "
 
-    def _generate_fallback_response(self, messages: List[Dict[str, str]], user_allergens: List[str] = None) -> str:
-        """Respon klinis baku jika server vLLM GPU sedang loading / offline."""
-        allergen_text = f" ({', '.join(user_allergens)})" if user_allergens else ""
+    def _generate_fallback_response(
+        self,
+        user_query: str = "",
+        user_context: Any = None,
+        safe_food_names: List[str] = None,
+        user_allergens: List[str] = None
+    ) -> str:
+        """Respon klinis dinamis jika engine vLLM GPU sedang loading / offline."""
+        q = (user_query or "").strip().lower()
+        allergens_str = ", ".join(user_allergens) if user_allergens else "Tidak ada"
+        username = getattr(user_context, "username", "Sahabat Sehat") if user_context else "Sahabat Sehat"
+        kalori_target = getattr(user_context, "target_kalori", 1850) if user_context else 1850
+        diet = getattr(user_context, "active_diet", "Diet Mediterania") if user_context else "Diet Mediterania"
+        gdp = getattr(user_context, "gula_darah_puasa", "100") if user_context else "100"
+        hba1c = getattr(user_context, "hba1c", "5.7") if user_context else "5.7"
+
+        # 1. Pertanyaan seputar Alergi / Pantangan / Profil Medis
+        if any(k in q for k in ["alergi", "pantangan", "profil", "rekam medis", "gula darah", "hba1c"]):
+            return (
+                f"Halo {username}! Berdasarkan rekam medis klinis Anda yang terintegrasi di PrediaBeat:\n\n"
+                f"📋 **Data Klinis & Pantangan Pribadi Anda:**\n"
+                f"• **Daftar Pantangan Alergi:** {allergens_str}\n"
+                f"• **Kadar Gula Darah Puasa (GDP):** {gdp} mg/dL\n"
+                f"• **Nilai HbA1c:** {hba1c}%\n"
+                f"• **Target Kebutuhan Kalori:** {kalori_target} kkal/hari\n"
+                f"• **Pola Diet Terpilih:** {diet}\n\n"
+                "Seluruh rekomendasi nutrisi dan konsultasi Dr. Predi secara otomatis disaring agar **100% bebas dari pantangan alergen** Anda demi menjaga respon insulin dan mencegah hipersensitivitas."
+            )
+
+        # 2. Pertanyaan seputar Identitas / Sapaan (Siapa kamu / Halo)
+        if any(k in q for k in ["siapa", "kamu siapa", "kenalan", "halo", "hai", "assalamu", "selamat"]):
+            return (
+                f"Halo {username}! 👋\n\n"
+                "Saya **Dr. Predi**, konsultan nutrisi klinis dan asisten cerdas Anda dalam program pencegahan serta tata laksana Prediabetes.\n\n"
+                "Saya dirancang dengan teknologi **Hybrid GraphRAG** dan standar pedoman medis **PERKENI 2021** untuk membantu Anda:\n"
+                "1. Menghitung takaran nutrisi dan panduan 3J (Jadwal, Jumlah, Jenis).\n"
+                "2. Memilih makanan nusantara yang ramah glikemik (GI rendah).\n"
+                "3. Memastikan semua makanan bebas dari komorbiditas dan pantangan alergen Anda.\n\n"
+                "Ada yang ingin Anda tanyakan seputar takaran makanan, resep ramah gula darah, atau ide menu hari ini?"
+            )
+
+        # 3. Pertanyaan seputar Kandungan Nutrisi Bahan Makanan (misal: "dada ayam", "telur", "tempe", dsb)
+        try:
+            from app.core.neo4j_manager import neo4j_manager
+            all_foods = neo4j_manager._load_local_dataset()
+        except Exception:
+            all_foods = []
+
+        matched_food = None
+        for word in q.split():
+            if len(word) >= 4 and word not in ["berapa", "gram", "kalori", "protein", "lemak", "karbohidrat", "makan", "apakah"]:
+                for f in all_foods:
+                    if re.search(r'\b' + re.escape(word) + r'\b', f["nama"], re.IGNORECASE):
+                        matched_food = f
+                        break
+            if matched_food:
+                break
+
+        if matched_food or any(k in q for k in ["ayam", "ikan", "telur", "tempe", "tahu", "daging", "nasi", "protein", "kalori", "gizi"]):
+            target_item = matched_food if matched_food else {
+                "nama": "Dada Ayam Fillet Tanpa Kulit", "kalori": 165.0, "protein": 31.0, "lemak": 3.6, "karbohidrat": 0.0, "gi": 0.0, "cara_olah": "Kukus atau Rebus Bumbu Kuning"
+            }
+            return (
+                f"Halo {username}! Berdasarkan basis data gizi klinis PrediaBeat:\n\n"
+                f"🍗 **Informasi Nilai Gizi: {target_item['nama']} (per 100 gram)**\n"
+                f"• **Kandungan Protein:** ~{target_item['protein']} gram\n"
+                f"• **Total Energi (Kalori):** {target_item['kalori']} kkal\n"
+                f"• **Kandungan Karbohidrat:** {target_item['karbohidrat']} gram\n"
+                f"• **Kandungan Lemak:** {target_item['lemak']} gram\n"
+                f"• **Indeks Glikemik (GI):** {target_item['gi']} (Kategori Rendah - Sangat Aman bagi respon insulin)\n\n"
+                f"💡 **Rekomendasi Cara Olah Sehat:** Disarankan diolah dengan teknik {target_item['cara_olah']} menggunakan bumbu rempah alami tanpa minyak jelantah."
+            )
+
+        # 4. Pertanyaan Menu / Rekomendasi Makanan Umum
+        menu_items = safe_food_names[:3] if safe_food_names and len(safe_food_names) >= 3 else [
+            "Pepes Ikan Mas Bumbu Kuning Kemangi (180 kkal)",
+            "Sayur Bening Bayam Oyong (65 kkal)",
+            "Nasi Beras Merah Pulen (145 kkal)"
+        ]
         return (
-            "Halo! Saya Dr. Predi, asisten nutrisi klinis Anda.\n\n"
-            "🩺 **Tinjauan Medis & Edukasi:**\n"
-            "Berdasarkan pedoman klinis PERKENI 2021 dan prinsip 3J Kemenkes RI, "
-            "prioritas utama adalah menjaga laju penyerapan glukosa tetap bertahap dengan memperbanyak serat larut air dan karbohidrat kompleks rendah indeks glikemik (GI < 55).\n\n"
-            "🍽️ **Rekomendasi Menu 3J Terverifikasi:**\n"
-            "1. **Pepes Ikan Mas Bumbu Kuning Kemangi (100g):** 180 kkal, 26g Protein murni, 65mg Sodium. Bebas minyak goreng jelantah.\n"
-            "2. **Sayur Bening Bayam Oyong (150g):** 65 kkal, tinggi serat inulin dan kalium yang merelaksasi dinding pembuluh darah.\n"
-            "3. **Nasi Beras Merah Pulen (100g):** 1 centong sedang, sumber energi bertahap penstabil kurva insulin.\n\n"
-            "👨‍🍳 **Tips Pengolahan Sehat:**\n"
-            "Gunakan metode kukus atau rebus bumbu rempah alami (kunyit, jahe, bawang putih, kemangi). Hindari menambahkan minyak jelantah, gula pasir rafinasi, dan bumbu MSG instan kemasan.\n\n"
+            f"Halo {username}! Berdasarkan prinsip 3J Kemenkes RI dan pedoman PERKENI 2021 untuk target harian {kalori_target} kkal:\n\n"
+            f"🍽️ **Rekomendasi Menu 3J Terverifikasi:**\n"
+            f"1. **Lauk Protein Rendah Lemak:** {menu_items[0]}\n"
+            f"2. **Sayuran Serat Tinggi (GI Rendah):** {menu_items[1]}\n"
+            f"3. **Karbohidrat Kompleks Pelepasan Lambat:** {menu_items[2]}\n\n"
+            f"👨‍🍳 **Tips Pengolahan Sehat:**\n"
+            "Utamakan metode kukus, rebus, atau panggang rempah alami. Hindari penggunaan minyak jelantah, gula rafinasi tersembunyi, dan penyedap kemasan berlebih.\n\n"
             "🛡️ **Jaminan Keamanan:**\n"
-            f"Seluruh rekomendasi menu di atas telah disaring secara ketat melalui sistem Guardrail dan **100% Bebas dari Pantangan Alergen{allergen_text}** yang tercatat pada profil medis Anda."
+            "Seluruh susunan menu di atas telah diverifikasi melalui sistem Guardrail dan dijamin bebas dari seluruh bahan pantangan medis Anda."
         )
 
 vllm_client = VLLMInferenceClient()

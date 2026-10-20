@@ -90,10 +90,13 @@ async def chat_endpoint(request: ChatRequest):
     # 3. Format prompt sesuai template resmi Qwen/vLLM
     messages = build_vllm_messages(request.message, dossier_text, request.chat_history or [])
 
-    # 4. Generate jawaban lewat vLLM
+    # 4. Generate jawaban lewat vLLM (dengan fallback cerdas jika vLLM offline)
     response_text, telemetry, blocked_allergens = await vllm_client.generate_chat_response(
         messages=messages,
         user_allergens=user_allergens,
+        user_query=request.message,
+        user_context=user_context,
+        safe_food_names=safe_food_names,
         max_tokens=settings.VLLM_MAX_TOKENS,
         temperature=settings.VLLM_TEMPERATURE
     )
@@ -131,7 +134,13 @@ async def chat_stream_endpoint(request: ChatRequest):
 
     async def event_generator():
         async for token in vllm_client.stream_chat_response(
-            messages, user_allergens, max_tokens=settings.VLLM_MAX_TOKENS, temperature=settings.VLLM_TEMPERATURE
+            messages=messages,
+            user_allergens=user_allergens,
+            user_query=request.message,
+            user_context=user_context,
+            safe_food_names=safe_food_names,
+            max_tokens=settings.VLLM_MAX_TOKENS,
+            temperature=settings.VLLM_TEMPERATURE
         ):
             yield f"data: {token}\n\n"
         yield "data: [DONE]\n\n"

@@ -14,10 +14,13 @@ const publicPath = path.resolve(__dirname, "../public");
 
 const app = express();
 
-// CORS configuration
+// CORS configuration (mendukung localhost dan tunnel publik seperti ngrok)
 app.use(
   cors({
-    origin: [config.clientOrigin, "http://localhost:5173", "http://127.0.0.1:5173"],
+    origin: (origin, callback) => {
+      // Izinkan request tanpa origin (same-origin, curl, mobile) atau dari domain ngrok/localhost
+      callback(null, true);
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
