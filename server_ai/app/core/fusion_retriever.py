@@ -23,15 +23,20 @@ class HybridGraphVectorFusion:
         - safe_food_names: Daftar nama makanan yang dijamin aman
         - allergens_prevented: Daftar alergen yang dicegah
         """
-        # 1. Parsing Komorbiditas & Alergen Pengguna
+        # 1. Parsing Komorbiditas & Alergen Pengguna (Deduplikasi Bersih)
         komorbid_list = []
         if isinstance(user_context.komorbiditas, list):
             komorbid_list = user_context.komorbiditas
         elif isinstance(user_context.komorbiditas, str) and user_context.komorbiditas.strip() and user_context.komorbiditas != "-":
             komorbid_list = [c.strip() for c in user_context.komorbiditas.split(",") if c.strip()]
 
+        raw_allergens = user_context.pantangan_alergi or []
+        if isinstance(raw_allergens, str):
+            raw_allergens = [a.strip() for a in raw_allergens.split(",") if a.strip()]
+
+        # Bersihkan & hilangkan duplikasi (misal 'kacang' ganda)
+        allergens = list(dict.fromkeys([a.strip().capitalize() for a in raw_allergens if a and a.strip()]))
         conditions = [f"Risiko: {user_context.kategori_risiko}"] + komorbid_list
-        allergens = user_context.pantangan_alergi or []
 
         # 2. Penelusuran Graf Deterministik (Neo4j / Fallback Engine)
         safe_foods = self.graph.get_safe_foods_by_profile(conditions, allergens, limit=8)
@@ -69,7 +74,7 @@ class HybridGraphVectorFusion:
                 dossier_lines.append(doc[:400])
 
         dossier_lines.append(
-            f"\nINSTRUKSI KEAMANAN GUARDRAIL: DILARANG KERAS menyarankan makanan yang mengandung {', '.join(allergens) if allergens else 'gula sederhana dan minyak jelantah'}."
+            f"\nPERINGATAN PROTOKOL ZERO-ALLERGEN (MUTLAK): DILARANG KERAS menyarankan makanan, resep, atau bahan masakan yang mengandung {', '.join(allergens) if allergens else 'gula sederhana dan minyak jelantah'}. Jangan sekali-kali menambahkan santan, kacang, kacang panjang, atau seafood jika tercantum dalam pantangan di atas!"
         )
 
         dossier_text = "\n".join(dossier_lines)

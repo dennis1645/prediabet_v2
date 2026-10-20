@@ -4,10 +4,10 @@ from typing import List, Dict, Tuple, Any
 ALLERGEN_SYNONYMS = {
     "seafood": [
         "seafood", "udang", "cumi", "cumi-cumi", "kepiting", "kerang", "lobster", 
-        "rajungan", "gurita", "tiram", "oyster", "prawn", "shrimp", "ikan teri asin", "saus tiram"
+        "rajungan", "gurita", "tiram", "oyster", "prawn", "shrimp", "ikan teri asin", "saus tiram", "terasi"
     ],
     "kacang": [
-        "kacang", "kacang tanah", "kacang mede", "selai kacang", "bumbu kacang", 
+        "kacang", "kacang tanah", "kacang panjang", "kacang mede", "selai kacang", "bumbu kacang", 
         "saus kacang", "sambal kacang", "peanut", "rempeyek kacang"
     ],
     "susu": [
@@ -15,7 +15,7 @@ ALLERGEN_SYNONYMS = {
         "butter", "mentega", "cream", "krim", "dairy"
     ],
     "santan": [
-        "santan", "santan kental", "santan encer", "kuah gulai", "opor", "rendang santan", "kelapa parut santan"
+        "santan", "santan kental", "santan encer", "kuah gulai", "opor", "rendang santan", "kelapa parut santan", "minyak kelapa santan"
     ],
     "telur": [
         "telur", "telur ayam", "telur bebek", "telur asin", "telur puyuh", "mayones", "mayonnaise"
@@ -56,7 +56,6 @@ class ClinicalAllergenGuardrail:
         """Memeriksa apakah satu item makanan bebas dari seluruh pantangan."""
         food_lower = food_name.lower()
         for allergen in expanded_allergens:
-            # Gunakan regex boundary atau substring check
             pattern = r'\b' + re.escape(allergen) + r'\b'
             if re.search(pattern, food_lower) or allergen in food_lower:
                 return False
@@ -77,8 +76,8 @@ class ClinicalAllergenGuardrail:
 
     def inspect_and_sanitize_response(self, text: str, user_allergens: List[str]) -> Tuple[str, List[str]]:
         """
-        Lapisan 2 (Post-Filter): Memeriksa respon LLM.
-        Jika LLM berhalusinasi merekomendasikan bahan terlarang, respon disterilkan secara otomatis.
+        Lapisan 2 (Post-Filter): Memeriksa respon LLM secara menyeluruh.
+        Mendeteksi jika ada bahan pantangan disarankan dalam resep (misal: 'tambahkan santan', 'kacang panjang').
         Mengecualikan konteks keselamatan seperti 'bebas dari [alergen]', 'hindari [alergen]', atau 'pantangan: [alergen]'.
         """
         if not user_allergens:
@@ -87,24 +86,24 @@ class ClinicalAllergenGuardrail:
         expanded = self.expand_allergen_keywords(user_allergens)
         detected_violations = []
 
-        # Deteksi apakah ada rekomendasi yang memuat kata kunci alergen
+        # Deteksi keberadaan bahan pantangan dalam teks
         for allergen in expanded:
-            rec_pattern = re.compile(
-                rf'(?:rekomendasi|anjuran|konsumsi|menu|makan|sajikan|masak|gunakan|pilihan)\s+[^\.\n]*?({re.escape(allergen)})',
-                re.IGNORECASE
-            )
-            matches = rec_pattern.findall(text)
-            for match in matches:
-                # Periksa apakah kalimat tersebut sebenarnya adalah pernyataan keselamatan / negasi
-                exclusion_pattern = re.compile(
-                    rf'(?:bebas|bebas dari|hindari|pantangan|pantang|dilarang|jangan|tanpa|bukan|alergi)\s+[^.\n]*?{re.escape(match)}',
+            for m in re.finditer(rf'\b{re.escape(allergen)}[a-zA-Z]*\b', text, re.IGNORECASE):
+                matched_word = m.group(0)
+                start_ctx = max(0, m.start() - 45)
+                prefix = text[start_ctx:m.start()]
+
+                # Periksa apakah kalimat tersebut adalah negasi keselamatan / edukasi pantangan
+                is_safe_negation = bool(re.search(
+                    r'(?:bebas|bebas dari|hindari|pantangan|pantang|dilarang|jangan|jangan pakai|tanpa|bukan|alergi|tidak mengandung|tidak memakai)\s+[^.\n]*?$',
+                    prefix,
                     re.IGNORECASE
-                )
-                if not exclusion_pattern.search(text):
-                    detected_violations.append(match)
+                ))
+                if not is_safe_negation:
+                    detected_violations.append(matched_word.lower())
 
         if detected_violations:
-            unique_violations = list(set(detected_violations))
+            unique_violations = list(dict.fromkeys(detected_violations))
             # Tambahkan peringatan keamanan tegas di akhir respon
             warning_box = (
                 f"\n\n> 🛡️ **PERINGATAN SISTEM KEAMANAN MEDIS (GUARDRAIL PREDIABEAT):**\n"

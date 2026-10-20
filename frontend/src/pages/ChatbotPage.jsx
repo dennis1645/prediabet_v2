@@ -111,19 +111,54 @@ export default function ChatbotPage() {
       // 1. Panggil Endpoint AI lewat Express Backend (Membawa Konteks Pasien Terisolasi)
       const res = await api.sendChatMessage(query);
       if (res && res.response) {
+        setIsTyping(false);
+        const fullResponse = res.response;
+        const source = res.telemetry?.vllm_connected 
+          ? "vLLM Engine RTX 5070 Ti (Qwen 2.5 7B)" 
+          : "Dr. Predi Hybrid GraphRAG";
+        const guardrail = res.guardrail?.safety_message || "100% Bebas Alergen & Aman Secara Klinis";
+        const telemetry = res.telemetry;
+
+        // Inisialisasi bubble assistant dengan status streaming aktif
         setMessages((prev) => [
           ...prev,
           {
             role: "assistant",
-            content: res.response,
-            source: res.telemetry?.vllm_connected 
-              ? "vLLM Engine RTX 5070 Ti (Qwen 2.5 7B)" 
-              : "Dr. Predi Hybrid GraphRAG",
-            guardrail: res.guardrail?.safety_message || "100% Bebas Alergen & Aman Secara Klinis",
-            telemetry: res.telemetry,
+            content: "",
+            isTypingStream: true,
+            source,
+            guardrail,
+            telemetry,
           },
         ]);
-        setIsTyping(false);
+
+        // Animasi efek mengetik realtime per kata/chunk
+        const chunks = fullResponse.split(/(?<=\s+)/);
+        let accumulated = "";
+        for (let i = 0; i < chunks.length; i++) {
+          accumulated += chunks[i];
+          setMessages((prev) => {
+            const next = [...prev];
+            const lastIdx = next.length - 1;
+            next[lastIdx] = {
+              ...next[lastIdx],
+              content: accumulated,
+            };
+            return next;
+          });
+          await new Promise((r) => setTimeout(r, 14));
+        }
+
+        // Tandai streaming selesai
+        setMessages((prev) => {
+          const next = [...prev];
+          const lastIdx = next.length - 1;
+          next[lastIdx] = {
+            ...next[lastIdx],
+            isTypingStream: false,
+          };
+          return next;
+        });
         return;
       }
     } catch (err) {
@@ -234,12 +269,17 @@ export default function ChatbotPage() {
                       : "bg-white border border-slate-100 text-slate-700 rounded-tl-none font-normal"
                   }`}
                 >
-                  {/* Markdown Renderer for Assistant */}
+                  {/* Markdown Renderer for Assistant dengan Efek Realtime Cursor */}
                   {msg.role === "assistant" ? (
-                    <div
-                      className="prose prose-slate prose-sm max-w-none prose-p:my-1.5 prose-strong:text-slate-900 prose-ul:my-1.5 prose-li:my-0.5"
-                      dangerouslySetInnerHTML={{ __html: marked.parse(msg.content) }}
-                    />
+                    <div>
+                      <div
+                        className="prose prose-slate prose-sm max-w-none prose-p:my-1.5 prose-strong:text-slate-900 prose-ul:my-1.5 prose-li:my-0.5"
+                        dangerouslySetInnerHTML={{ __html: marked.parse(msg.content || "") }}
+                      />
+                      {msg.isTypingStream && (
+                        <span className="inline-block w-2 h-4 ml-1 bg-emerald-600 animate-pulse align-middle rounded-xs"></span>
+                      )}
+                    </div>
                   ) : (
                     <p className="whitespace-pre-wrap">{msg.content}</p>
                   )}

@@ -36,7 +36,18 @@ export function getUserAIContext(req, res) {
           kategori_risiko: analysis.kategori_risiko || "Prediabetes",
           gula_darah_puasa: profile.gula_darah_puasa || profile.hasil_lab || "Belum ada tes lab",
           hba1c: profile.hba1c || "Belum ada tes lab",
-          pantangan_alergi: profile.pantangan_alergi || [],
+          pantangan_alergi: Array.from(
+            new Set(
+              (Array.isArray(profile.pantangan_alergi)
+                ? profile.pantangan_alergi
+                : typeof profile.pantangan_alergi === "string"
+                ? profile.pantangan_alergi.split(",")
+                : []
+              )
+                .map((s) => s.trim())
+                .filter(Boolean)
+            )
+          ),
           komorbiditas: profile.komorbiditas || "-",
           active_diet: analysis.active_diet_label || "Diet Mediterania",
           target_kalori: analysis.target_kalori || 1850,
@@ -175,11 +186,18 @@ export async function forwardChatToAI(req, res) {
       kategori_risiko: analysis.kategori_risiko || "Sedang",
       gula_darah_puasa: profile.gula_darah_puasa || "100",
       hba1c: profile.hba1c || "5.7",
-      pantangan_alergi: Array.isArray(profile.pantangan_alergi)
-        ? profile.pantangan_alergi
-        : typeof profile.pantangan_alergi === "string"
-        ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-        : [],
+      pantangan_alergi: Array.from(
+        new Set(
+          (Array.isArray(profile.pantangan_alergi)
+            ? profile.pantangan_alergi
+            : typeof profile.pantangan_alergi === "string"
+            ? profile.pantangan_alergi.split(",")
+            : []
+          )
+            .map((s) => s.trim())
+            .filter(Boolean)
+        )
+      ),
       komorbiditas: profile.komorbiditas || [],
       active_diet: analysis.active_diet_label || "Diet Mediterania",
       target_kalori: analysis.target_kalori || 1850,
