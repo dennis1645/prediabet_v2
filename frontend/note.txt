@@ -1,0 +1,1 @@
+sudo chown -R $USER:$USER /home/prediabeat/Documents/prediabet_app/prediabet_v2/server_ai/knowledge_base/neo4j

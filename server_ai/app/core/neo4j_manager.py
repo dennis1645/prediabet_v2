@@ -113,7 +113,7 @@ class Neo4jClinicalGraphManager:
                    m.lemak_g AS lemak, 
                    m.serat_g AS serat,
                    m.sodium_mg AS sodium_mg, 
-                   COALESCE(m.glikemik_indeks, m.estimated_gi, 35) AS gi,
+                   COALESCE(m.glikemik_indeks, 35) AS gi,
                    m.kategori_spesifik AS kategori,
                    m.cara_olah AS cara_olah
             ORDER BY gi ASC, kalori ASC

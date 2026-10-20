@@ -16,8 +16,8 @@ class Settings(BaseSettings):
     VLLM_GPU_MEMORY_UTILIZATION: float = 0.85  # ~13.6 GB allocated out of 16 GB
     VLLM_MAX_MODEL_LEN: int = 4096
     VLLM_DTYPE: str = "auto"
-    VLLM_TEMPERATURE: float = 0.2
-    VLLM_TOP_P: float = 0.85
+    VLLM_TEMPERATURE: float = 0.6
+    VLLM_TOP_P: float = 0.9
     VLLM_MAX_TOKENS: int = 768
 
     # Neo4j Enterprise / Community Graph Database
