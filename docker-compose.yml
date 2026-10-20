@@ -1,0 +1,81 @@
+# ==============================================================================
+# PrediaBeat Multi-Container Architecture (Docker Compose)
+# 1. prediabeat-web : Combined React Frontend + Express Backend (Port 5000)
+# 2. server_ai      : Hybrid GraphRAG + FastAPI + vLLM Client (Port 8000)
+# Network           : prediabeat-network (Docker Bridge)
+# ==============================================================================
+
+version: "3.8"
+
+services:
+  # ----------------------------------------------------------------------------
+  # SERVICE 1: Frontend + Backend (Combined Single Image)
+  # ----------------------------------------------------------------------------
+  prediabeat-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: prediabeat-web:latest
+    container_name: prediabeat-web
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - JWT_SECRET=prediabeat_super_secure_jwt_token_key_2026!
+      - JWT_EXPIRES_IN=7d
+      - DATABASE_FILE=./data/prediabeat.db
+      - CLIENT_ORIGIN=http://localhost:5000
+      - AI_SERVER_URL=http://server_ai:8000/api/chat
+    volumes:
+      - prediabeat-db-data:/app/backend/data
+    networks:
+      - prediabeat-network
+    depends_on:
+      - server_ai
+
+  # ----------------------------------------------------------------------------
+  # SERVICE 2: Server AI (FastAPI + Hybrid GraphRAG + vLLM Client)
+  # ----------------------------------------------------------------------------
+  server_ai:
+    build:
+      context: ./server_ai
+      dockerfile: Dockerfile
+    image: prediabeat-server-ai:latest
+    container_name: prediabeat-server-ai
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - MODEL_ID=Qwen/Qwen2.5-7B-Instruct-GPTQ-Int8
+      - VLLM_API_BASE=http://host.docker.internal:8000/v1
+      - EXPRESS_BACKEND_URL=http://prediabeat-web:5000/api
+      - NEO4J_URI=bolt://host.docker.internal:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=prediabeat2026
+    volumes:
+      - server-ai-knowledge:/app/knowledge_base
+    networks:
+      - prediabeat-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+# ------------------------------------------------------------------------------
+# Isolated Bridge Network for Safe Inter-Service Communication
+# ------------------------------------------------------------------------------
+networks:
+  prediabeat-network:
+    name: prediabeat-network
+    driver: bridge
+
+# ------------------------------------------------------------------------------
+# Persistent Storage Volumes
+# ------------------------------------------------------------------------------
+volumes:
+  prediabeat-db-data:
+    name: prediabeat-db-data
+  server-ai-knowledge:
+    name: server-ai-knowledge

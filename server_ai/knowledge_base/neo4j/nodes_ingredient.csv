@@ -1,0 +1,888 @@
+:ID,:LABEL,ingredient_id,nama_bahan,source_dataset
+ingr_00000,Ingredient,ingr_00000,Bihun goreng Rose Brand,New_Ingredients_category.xlsx
+ingr_00001,Ingredient,ingr_00001,bawang putih,New_Ingredients_category.xlsx
+ingr_00002,Ingredient,ingr_00002,wortel kecil,New_Ingredients_category.xlsx
+ingr_00003,Ingredient,ingr_00003,kubis,New_Ingredients_category.xlsx
+ingr_00004,Ingredient,ingr_00004,telur,New_Ingredients_category.xlsx
+ingr_00005,Ingredient,ingr_00005,saus tiram,New_Ingredients_category.xlsx
+ingr_00006,Ingredient,ingr_00006,cabe rawit,New_Ingredients_category.xlsx
+ingr_00007,Ingredient,ingr_00007,kecap manis,New_Ingredients_category.xlsx
+ingr_00008,Ingredient,ingr_00008,kecap ikan,New_Ingredients_category.xlsx
+ingr_00009,Ingredient,ingr_00009,kecap asin,New_Ingredients_category.xlsx
+ingr_00010,Ingredient,ingr_00010,lada bubuk,New_Ingredients_category.xlsx
+ingr_00011,Ingredient,ingr_00011,Putih Telur Rebus,New_Ingredients_category.xlsx
+ingr_00012,Ingredient,ingr_00012,jagung muda,New_Ingredients_category.xlsx
+ingr_00013,Ingredient,ingr_00013,bawang merah,New_Ingredients_category.xlsx
+ingr_00014,Ingredient,ingr_00014,cabe hijau besar,New_Ingredients_category.xlsx
+ingr_00015,Ingredient,ingr_00015,cabe rawit merah,New_Ingredients_category.xlsx
+ingr_00016,Ingredient,ingr_00016,Laos,New_Ingredients_category.xlsx
+ingr_00017,Ingredient,ingr_00017,daun salam,New_Ingredients_category.xlsx
+ingr_00018,Ingredient,ingr_00018,Garam,New_Ingredients_category.xlsx
+ingr_00019,Ingredient,ingr_00019,Kaldu jamur Totole,New_Ingredients_category.xlsx
+ingr_00020,Ingredient,ingr_00020,gula jawa,New_Ingredients_category.xlsx
+ingr_00021,Ingredient,ingr_00021,Minyak Makan,New_Ingredients_category.xlsx
+ingr_00022,Ingredient,ingr_00022,ketan putih,New_Ingredients_category.xlsx
+ingr_00023,Ingredient,ingr_00023,ragi tape,New_Ingredients_category.xlsx
+ingr_00024,Ingredient,ingr_00024,air panas,New_Ingredients_category.xlsx
+ingr_00025,Ingredient,ingr_00025,daun pisang,New_Ingredients_category.xlsx
+ingr_00026,Ingredient,ingr_00026,mie telur kering,New_Ingredients_category.xlsx
+ingr_00027,Ingredient,ingr_00027,bawang Bombay,New_Ingredients_category.xlsx
+ingr_00028,Ingredient,ingr_00028,Dark soy sauce,New_Ingredients_category.xlsx
+ingr_00029,Ingredient,ingr_00029,Soy sauce,New_Ingredients_category.xlsx
+ingr_00030,Ingredient,ingr_00030,Gula,New_Ingredients_category.xlsx
+ingr_00031,Ingredient,ingr_00031,Minyak goreng,New_Ingredients_category.xlsx
+ingr_00032,Ingredient,ingr_00032,merica,New_Ingredients_category.xlsx
+ingr_00033,Ingredient,ingr_00033,daging ayam,New_Ingredients_category.xlsx
+ingr_00034,Ingredient,ingr_00034,sayur sop,New_Ingredients_category.xlsx
+ingr_00035,Ingredient,ingr_00035,air,New_Ingredients_category.xlsx
+ingr_00036,Ingredient,ingr_00036,kaldu bubuk,New_Ingredients_category.xlsx
+ingr_00037,Ingredient,ingr_00037,gula pasir,New_Ingredients_category.xlsx
+ingr_00038,Ingredient,ingr_00038,pala bubuk,New_Ingredients_category.xlsx
+ingr_00039,Ingredient,ingr_00039,misoa,New_Ingredients_category.xlsx
+ingr_00040,Ingredient,ingr_00040,tepung terigu protein tinggi,New_Ingredients_category.xlsx
+ingr_00041,Ingredient,ingr_00041,starter,New_Ingredients_category.xlsx
+ingr_00042,Ingredient,ingr_00042,wijen hitam,New_Ingredients_category.xlsx
+ingr_00043,Ingredient,ingr_00043,charcoal bubuk,New_Ingredients_category.xlsx
+ingr_00044,Ingredient,ingr_00044,Santan Rose Brand,New_Ingredients_category.xlsx
+ingr_00045,Ingredient,ingr_00045,Gula Merah,New_Ingredients_category.xlsx
+ingr_00046,Ingredient,ingr_00046,Daun Pandan,New_Ingredients_category.xlsx
+ingr_00047,Ingredient,ingr_00047,Tepung Beras Rose Brand,New_Ingredients_category.xlsx
+ingr_00048,Ingredient,ingr_00048,Tepung Terigu,New_Ingredients_category.xlsx
+ingr_00049,Ingredient,ingr_00049,Ragi,New_Ingredients_category.xlsx
+ingr_00050,Ingredient,ingr_00050,Baking Powder,New_Ingredients_category.xlsx
+ingr_00051,Ingredient,ingr_00051,Vanili cair,New_Ingredients_category.xlsx
+ingr_00052,Ingredient,ingr_00052,margarine,New_Ingredients_category.xlsx
+ingr_00053,Ingredient,ingr_00053,gula halus,New_Ingredients_category.xlsx
+ingr_00054,Ingredient,ingr_00054,SASET SKM putih,New_Ingredients_category.xlsx
+ingr_00055,Ingredient,ingr_00055,Tepung Terigu Segitiga Biru,New_Ingredients_category.xlsx
+ingr_00056,Ingredient,ingr_00056,tepung maizena,New_Ingredients_category.xlsx
+ingr_00057,Ingredient,ingr_00057,"pisang uli, ukuran kecil",New_Ingredients_category.xlsx
+ingr_00058,Ingredient,ingr_00058,Wijen putih,New_Ingredients_category.xlsx
+ingr_00059,Ingredient,ingr_00059,Tepung Protein Sedang,New_Ingredients_category.xlsx
+ingr_00060,Ingredient,ingr_00060,Ragi Instan,New_Ingredients_category.xlsx
+ingr_00061,Ingredient,ingr_00061,Soda Kue,New_Ingredients_category.xlsx
+ingr_00062,Ingredient,ingr_00062,Vanili Bubuk,New_Ingredients_category.xlsx
+ingr_00063,Ingredient,ingr_00063,margarin,New_Ingredients_category.xlsx
+ingr_00064,Ingredient,ingr_00064,air matang,New_Ingredients_category.xlsx
+ingr_00065,Ingredient,ingr_00065,air pandan suji (5 lembar pandan + 10 lembar Suji + air),New_Ingredients_category.xlsx
+ingr_00066,Ingredient,ingr_00066,santan,New_Ingredients_category.xlsx
+ingr_00067,Ingredient,ingr_00067,tepung tapioka cap tani gunung,New_Ingredients_category.xlsx
+ingr_00068,Ingredient,ingr_00068,kental manis,New_Ingredients_category.xlsx
+ingr_00069,Ingredient,ingr_00069,mentega,New_Ingredients_category.xlsx
+ingr_00070,Ingredient,ingr_00070,gula Pasir Rose Brand,New_Ingredients_category.xlsx
+ingr_00071,Ingredient,ingr_00071,Pasta Pandan,New_Ingredients_category.xlsx
+ingr_00072,Ingredient,ingr_00072,Margarin Rose Brand,New_Ingredients_category.xlsx
+ingr_00073,Ingredient,ingr_00073,telur ayam,New_Ingredients_category.xlsx
+ingr_00074,Ingredient,ingr_00074,SP,New_Ingredients_category.xlsx
+ingr_00075,Ingredient,ingr_00075,vanili,New_Ingredients_category.xlsx
+ingr_00076,Ingredient,ingr_00076,gula aren,New_Ingredients_category.xlsx
+ingr_00077,Ingredient,ingr_00077,buah Brem,New_Ingredients_category.xlsx
+ingr_00078,Ingredient,ingr_00078,es Krim,New_Ingredients_category.xlsx
+ingr_00079,Ingredient,ingr_00079,susu,New_Ingredients_category.xlsx
+ingr_00080,Ingredient,ingr_00080,anggur ungu dan hijau,New_Ingredients_category.xlsx
+ingr_00081,Ingredient,ingr_00081,es batu dihancurkan,New_Ingredients_category.xlsx
+ingr_00082,Ingredient,ingr_00082,jeruk,New_Ingredients_category.xlsx
+ingr_00083,Ingredient,ingr_00083,jelly,New_Ingredients_category.xlsx
+ingr_00084,Ingredient,ingr_00084,sirup merah,New_Ingredients_category.xlsx
+ingr_00085,Ingredient,ingr_00085,tape singkong,New_Ingredients_category.xlsx
+ingr_00086,Ingredient,ingr_00086,susu bubuk,New_Ingredients_category.xlsx
+ingr_00087,Ingredient,ingr_00087,Keju cheddar,New_Ingredients_category.xlsx
+ingr_00088,Ingredient,ingr_00088,kelapa parut,New_Ingredients_category.xlsx
+ingr_00089,Ingredient,ingr_00089,daun pandan kecil,New_Ingredients_category.xlsx
+ingr_00090,Ingredient,ingr_00090,tepung ketan,New_Ingredients_category.xlsx
+ingr_00091,Ingredient,ingr_00091,labu kuning dikupas,New_Ingredients_category.xlsx
+ingr_00092,Ingredient,ingr_00092,pelapa daun pisang,New_Ingredients_category.xlsx
+ingr_00093,Ingredient,ingr_00093,minyak,New_Ingredients_category.xlsx
+ingr_00094,Ingredient,ingr_00094,Tepung Injin (Ketan Hitam),New_Ingredients_category.xlsx
+ingr_00095,Ingredient,ingr_00095,Tepung Ketan Putih,New_Ingredients_category.xlsx
+ingr_00096,Ingredient,ingr_00096,Gula Kelapa (gula jawa),New_Ingredients_category.xlsx
+ingr_00097,Ingredient,ingr_00097,Daun Jeruk,New_Ingredients_category.xlsx
+ingr_00098,Ingredient,ingr_00098,kedondong,New_Ingredients_category.xlsx
+ingr_00099,Ingredient,ingr_00099,santan kara,New_Ingredients_category.xlsx
+ingr_00100,Ingredient,ingr_00100,tepung ketan Rose Brand,New_Ingredients_category.xlsx
+ingr_00101,Ingredient,ingr_00101,tepung terigu pro sedang,New_Ingredients_category.xlsx
+ingr_00102,Ingredient,ingr_00102,kelapa parut agak muda,New_Ingredients_category.xlsx
+ingr_00103,Ingredient,ingr_00103,minyak goreng Rose Brand,New_Ingredients_category.xlsx
+ingr_00104,Ingredient,ingr_00104,gula merah sisir halus,New_Ingredients_category.xlsx
+ingr_00105,Ingredient,ingr_00105,jagung,New_Ingredients_category.xlsx
+ingr_00106,Ingredient,ingr_00106,Pandan,New_Ingredients_category.xlsx
+ingr_00107,Ingredient,ingr_00107,tepung kanji,New_Ingredients_category.xlsx
+ingr_00108,Ingredient,ingr_00108,blueband,New_Ingredients_category.xlsx
+ingr_00109,Ingredient,ingr_00109,penyedap jamur,New_Ingredients_category.xlsx
+ingr_00110,Ingredient,ingr_00110,bawang putih bubuk,New_Ingredients_category.xlsx
+ingr_00111,Ingredient,ingr_00111,jus pandan,New_Ingredients_category.xlsx
+ingr_00112,Ingredient,ingr_00112,daging ikan tenggiri,New_Ingredients_category.xlsx
+ingr_00113,Ingredient,ingr_00113,lemak ikan,New_Ingredients_category.xlsx
+ingr_00114,Ingredient,ingr_00114,air es,New_Ingredients_category.xlsx
+ingr_00115,Ingredient,ingr_00115,tepung sagu,New_Ingredients_category.xlsx
+ingr_00116,Ingredient,ingr_00116,Micin,New_Ingredients_category.xlsx
+ingr_00117,Ingredient,ingr_00117,kacang tanah goreng,New_Ingredients_category.xlsx
+ingr_00118,Ingredient,ingr_00118,cabe kering giling/secukupnya,New_Ingredients_category.xlsx
+ingr_00119,Ingredient,ingr_00119,kelapa parut setengah tua (kukus dulu dg daun pandan 20 menitan),New_Ingredients_category.xlsx
+ingr_00120,Ingredient,ingr_00120,gula merah cincang,New_Ingredients_category.xlsx
+ingr_00121,Ingredient,ingr_00121,Brown sugar,New_Ingredients_category.xlsx
+ingr_00122,Ingredient,ingr_00122,Madu original (murni atau kemasan tanpa perasa),New_Ingredients_category.xlsx
+ingr_00123,Ingredient,ingr_00123,Tepung terigu protein sedang,New_Ingredients_category.xlsx
+ingr_00124,Ingredient,ingr_00124,Kayu manis bubuk,New_Ingredients_category.xlsx
+ingr_00125,Ingredient,ingr_00125,Jahe bubuk,New_Ingredients_category.xlsx
+ingr_00126,Ingredient,ingr_00126,telur utuh,New_Ingredients_category.xlsx
+ingr_00127,Ingredient,ingr_00127,kurang 2 jari terigu,New_Ingredients_category.xlsx
+ingr_00128,Ingredient,ingr_00128,Air putih + 1 SDM susu bubuk,New_Ingredients_category.xlsx
+ingr_00129,Ingredient,ingr_00129,Sedikit vanili bubuk,New_Ingredients_category.xlsx
+ingr_00130,Ingredient,ingr_00130,Sedikit Baking Powder,New_Ingredients_category.xlsx
+ingr_00131,Ingredient,ingr_00131,tetes Pewarna kuning,New_Ingredients_category.xlsx
+ingr_00132,Ingredient,ingr_00132,Hiasan : springkel/ chocochip,New_Ingredients_category.xlsx
+ingr_00133,Ingredient,ingr_00133,Beras Ketan putih,New_Ingredients_category.xlsx
+ingr_00134,Ingredient,ingr_00134,Gula Merah aren,New_Ingredients_category.xlsx
+ingr_00135,Ingredient,ingr_00135,kentang,New_Ingredients_category.xlsx
+ingr_00136,Ingredient,ingr_00136,skm,New_Ingredients_category.xlsx
+ingr_00137,Ingredient,ingr_00137,x 65 ml santan,New_Ingredients_category.xlsx
+ingr_00138,Ingredient,ingr_00138,kuning telur,New_Ingredients_category.xlsx
+ingr_00139,Ingredient,ingr_00139,Butter,New_Ingredients_category.xlsx
+ingr_00140,Ingredient,ingr_00140,terigu protein sedang,New_Ingredients_category.xlsx
+ingr_00141,Ingredient,ingr_00141,paha ayam fillet,New_Ingredients_category.xlsx
+ingr_00142,Ingredient,ingr_00142,mie telur,New_Ingredients_category.xlsx
+ingr_00143,Ingredient,ingr_00143,minyak wijen,New_Ingredients_category.xlsx
+ingr_00144,Ingredient,ingr_00144,jamur shiitake,New_Ingredients_category.xlsx
+ingr_00145,Ingredient,ingr_00145,jahe,New_Ingredients_category.xlsx
+ingr_00146,Ingredient,ingr_00146,bunga lawang,New_Ingredients_category.xlsx
+ingr_00147,Ingredient,ingr_00147,kayu manis,New_Ingredients_category.xlsx
+ingr_00148,Ingredient,ingr_00148,bawang daun,New_Ingredients_category.xlsx
+ingr_00149,Ingredient,ingr_00149,air rendaman jamur,New_Ingredients_category.xlsx
+ingr_00150,Ingredient,ingr_00150,bakso,New_Ingredients_category.xlsx
+ingr_00151,Ingredient,ingr_00151,jamur,New_Ingredients_category.xlsx
+ingr_00152,Ingredient,ingr_00152,cabai,New_Ingredients_category.xlsx
+ingr_00153,Ingredient,ingr_00153,mie basah,New_Ingredients_category.xlsx
+ingr_00154,Ingredient,ingr_00154,paha ayam,New_Ingredients_category.xlsx
+ingr_00155,Ingredient,ingr_00155,jamur tiram,New_Ingredients_category.xlsx
+ingr_00156,Ingredient,ingr_00156,daun bawang,New_Ingredients_category.xlsx
+ingr_00157,Ingredient,ingr_00157,kemiri,New_Ingredients_category.xlsx
+ingr_00158,Ingredient,ingr_00158,kunyit,New_Ingredients_category.xlsx
+ingr_00159,Ingredient,ingr_00159,ketumbar,New_Ingredients_category.xlsx
+ingr_00160,Ingredient,ingr_00160,jahe kupas,New_Ingredients_category.xlsx
+ingr_00161,Ingredient,ingr_00161,serai,New_Ingredients_category.xlsx
+ingr_00162,Ingredient,ingr_00162,gula kelapa serut,New_Ingredients_category.xlsx
+ingr_00163,Ingredient,ingr_00163,kaldu rebusan tulang ayam,New_Ingredients_category.xlsx
+ingr_00164,Ingredient,ingr_00164,"daun bawang, iris halus",New_Ingredients_category.xlsx
+ingr_00165,Ingredient,ingr_00165,minyak ayam,New_Ingredients_category.xlsx
+ingr_00166,Ingredient,ingr_00166,sawi putih,New_Ingredients_category.xlsx
+ingr_00167,Ingredient,ingr_00167,bawang goreng,New_Ingredients_category.xlsx
+ingr_00168,Ingredient,ingr_00168,pangsit goreng,New_Ingredients_category.xlsx
+ingr_00169,Ingredient,ingr_00169,tepung beras,New_Ingredients_category.xlsx
+ingr_00170,Ingredient,ingr_00170,kentang kukus,New_Ingredients_category.xlsx
+ingr_00171,Ingredient,ingr_00171,pasta vanila,New_Ingredients_category.xlsx
+ingr_00172,Ingredient,ingr_00172,beras,New_Ingredients_category.xlsx
+ingr_00173,Ingredient,ingr_00173,bunga telang kering,New_Ingredients_category.xlsx
+ingr_00174,Ingredient,ingr_00174,sereh geprek,New_Ingredients_category.xlsx
+ingr_00175,Ingredient,ingr_00175,daun pandan ikat simpul,New_Ingredients_category.xlsx
+ingr_00176,Ingredient,ingr_00176,penyedap rasa,New_Ingredients_category.xlsx
+ingr_00177,Ingredient,ingr_00177,jus pandan suji,New_Ingredients_category.xlsx
+ingr_00178,Ingredient,ingr_00178,"gula merah, sisir",New_Ingredients_category.xlsx
+ingr_00179,Ingredient,ingr_00179,singkong,New_Ingredients_category.xlsx
+ingr_00180,Ingredient,ingr_00180,santan instan,New_Ingredients_category.xlsx
+ingr_00181,Ingredient,ingr_00181,tepung buah sawo mentega,New_Ingredients_category.xlsx
+ingr_00182,Ingredient,ingr_00182,santan hangat,New_Ingredients_category.xlsx
+ingr_00183,Ingredient,ingr_00183,endapan pandan,New_Ingredients_category.xlsx
+ingr_00184,Ingredient,ingr_00184,pasta pandan+1/4 sdt pewarna orange,New_Ingredients_category.xlsx
+ingr_00185,Ingredient,ingr_00185,santan (sy 200 ml santan Rose Brand+ air),New_Ingredients_category.xlsx
+ingr_00186,Ingredient,ingr_00186,telur ukuran besar,New_Ingredients_category.xlsx
+ingr_00187,Ingredient,ingr_00187,pasta vanilla,New_Ingredients_category.xlsx
+ingr_00188,Ingredient,ingr_00188,botol susu fresh (merk apapun sesuai selera),New_Ingredients_category.xlsx
+ingr_00189,Ingredient,ingr_00189,kelapa parut ukuran sedang,New_Ingredients_category.xlsx
+ingr_00190,Ingredient,ingr_00190,kertas roti panggang,New_Ingredients_category.xlsx
+ingr_00191,Ingredient,ingr_00191,vanilla,New_Ingredients_category.xlsx
+ingr_00192,Ingredient,ingr_00192,umbi ganyong (sy 300 ubi),New_Ingredients_category.xlsx
+ingr_00193,Ingredient,ingr_00193,air (disesuaikan),New_Ingredients_category.xlsx
+ingr_00194,Ingredient,ingr_00194,garam laut,New_Ingredients_category.xlsx
+ingr_00195,Ingredient,ingr_00195,daun pandan?,New_Ingredients_category.xlsx
+ingr_00196,Ingredient,ingr_00196,suweg,New_Ingredients_category.xlsx
+ingr_00197,Ingredient,ingr_00197,ubi ungu (1/2kg),New_Ingredients_category.xlsx
+ingr_00198,Ingredient,ingr_00198,lada bubuk putih,New_Ingredients_category.xlsx
+ingr_00199,Ingredient,ingr_00199,"Tepung sagu, sangrai",New_Ingredients_category.xlsx
+ingr_00200,Ingredient,ingr_00200,"Kenari cincang, sangrai",New_Ingredients_category.xlsx
+ingr_00201,Ingredient,ingr_00201,Gula pasir. Diblender sebentar hingga halus,New_Ingredients_category.xlsx
+ingr_00202,Ingredient,ingr_00202,Minyak sayur,New_Ingredients_category.xlsx
+ingr_00203,Ingredient,ingr_00203,kacang tanah,New_Ingredients_category.xlsx
+ingr_00204,Ingredient,ingr_00204,"margarin, lelehkan",New_Ingredients_category.xlsx
+ingr_00205,Ingredient,ingr_00205,bubuk kayu manis,New_Ingredients_category.xlsx
+ingr_00206,Ingredient,ingr_00206,air hangat,New_Ingredients_category.xlsx
+ingr_00207,Ingredient,ingr_00207,Sagu Ambon,New_Ingredients_category.xlsx
+ingr_00208,Ingredient,ingr_00208,"Ubi oranye, potong dadu",New_Ingredients_category.xlsx
+ingr_00209,Ingredient,ingr_00209,Vanila esens,New_Ingredients_category.xlsx
+ingr_00210,Ingredient,ingr_00210,"Daun pandan, ikat simpul",New_Ingredients_category.xlsx
+ingr_00211,Ingredient,ingr_00211,Bawang putih haluskan,New_Ingredients_category.xlsx
+ingr_00212,Ingredient,ingr_00212,gaplek atau singkong kering,New_Ingredients_category.xlsx
+ingr_00213,Ingredient,ingr_00213,Parut kelapa,New_Ingredients_category.xlsx
+ingr_00214,Ingredient,ingr_00214,tepung tapioka Rose Brand,New_Ingredients_category.xlsx
+ingr_00215,Ingredient,ingr_00215,pewarna (hijau dan merah),New_Ingredients_category.xlsx
+ingr_00216,Ingredient,ingr_00216,gula pasir Rose Brand untuk taburan,New_Ingredients_category.xlsx
+ingr_00217,Ingredient,ingr_00217,daun bawang seledri,New_Ingredients_category.xlsx
+ingr_00218,Ingredient,ingr_00218,penyedap,New_Ingredients_category.xlsx
+ingr_00219,Ingredient,ingr_00219,"singkong kupas, iris tipis, cuci",New_Ingredients_category.xlsx
+ingr_00220,Ingredient,ingr_00220,air untuk merendam singkong,New_Ingredients_category.xlsx
+ingr_00221,Ingredient,ingr_00221,air endapan kapur sirih,New_Ingredients_category.xlsx
+ingr_00222,Ingredient,ingr_00222,kerupuk udang,New_Ingredients_category.xlsx
+ingr_00223,Ingredient,ingr_00223,"gula jawa, sisir",New_Ingredients_category.xlsx
+ingr_00224,Ingredient,ingr_00224,Pewarna merah n hijau,New_Ingredients_category.xlsx
+ingr_00225,Ingredient,ingr_00225,singkong yang sudah direbus dan dihaluskan,New_Ingredients_category.xlsx
+ingr_00226,Ingredient,ingr_00226,garam kira kira aja,New_Ingredients_category.xlsx
+ingr_00227,Ingredient,ingr_00227,"mie lethek/bendo, rendam kurleb 10 menit, cuci, tiriskan",New_Ingredients_category.xlsx
+ingr_00228,Ingredient,ingr_00228,"ayam (lbh enak ayam kampung), rebus, suwir2",New_Ingredients_category.xlsx
+ingr_00229,Ingredient,ingr_00229,wortel,New_Ingredients_category.xlsx
+ingr_00230,Ingredient,ingr_00230,air kaldu,New_Ingredients_category.xlsx
+ingr_00231,Ingredient,ingr_00231,tomat,New_Ingredients_category.xlsx
+ingr_00232,Ingredient,ingr_00232,-2 telur,New_Ingredients_category.xlsx
+ingr_00233,Ingredient,ingr_00233,minyak untuk menumis,New_Ingredients_category.xlsx
+ingr_00234,Ingredient,ingr_00234,"kobis, potong2",New_Ingredients_category.xlsx
+ingr_00235,Ingredient,ingr_00235,merica bubuk,New_Ingredients_category.xlsx
+ingr_00236,Ingredient,ingr_00236,garam (menurut selera),New_Ingredients_category.xlsx
+ingr_00237,Ingredient,ingr_00237,singkong segar,New_Ingredients_category.xlsx
+ingr_00238,Ingredient,ingr_00238,sagu basah,New_Ingredients_category.xlsx
+ingr_00239,Ingredient,ingr_00239,tepung tapioka 律両�¢隆 藍料琉僚粒,New_Ingredients_category.xlsx
+ingr_00240,Ingredient,ingr_00240,gula pasir 律両�¢隆 藍料琉僚粒,New_Ingredients_category.xlsx
+ingr_00241,Ingredient,ingr_00241,kelapa untuk campuran sagu,New_Ingredients_category.xlsx
+ingr_00242,Ingredient,ingr_00242,garam halus,New_Ingredients_category.xlsx
+ingr_00243,Ingredient,ingr_00243,gula merah yang telah diserut halus,New_Ingredients_category.xlsx
+ingr_00244,Ingredient,ingr_00244,talas ukuran besar,New_Ingredients_category.xlsx
+ingr_00245,Ingredient,ingr_00245,jamur kering yg sdh direndam sampai lunak trus di potong kecil kecil,New_Ingredients_category.xlsx
+ingr_00246,Ingredient,ingr_00246,scalop kering rendam disuir suir,New_Ingredients_category.xlsx
+ingr_00247,Ingredient,ingr_00247,udang kering,New_Ingredients_category.xlsx
+ingr_00248,Ingredient,ingr_00248,mrica bubuk,New_Ingredients_category.xlsx
+ingr_00249,Ingredient,ingr_00249,tepung jagung,New_Ingredients_category.xlsx
+ingr_00250,Ingredient,ingr_00250,ubi ungu,New_Ingredients_category.xlsx
+ingr_00251,Ingredient,ingr_00251,air untuk merebus ubi ungu,New_Ingredients_category.xlsx
+ingr_00252,Ingredient,ingr_00252,santan instan Rose Brand,New_Ingredients_category.xlsx
+ingr_00253,Ingredient,ingr_00253,kuah santan susu,New_Ingredients_category.xlsx
+ingr_00254,Ingredient,ingr_00254,vanilla butter,New_Ingredients_category.xlsx
+ingr_00255,Ingredient,ingr_00255,Evoo,New_Ingredients_category.xlsx
+ingr_00256,Ingredient,ingr_00256,himalayan salt,New_Ingredients_category.xlsx
+ingr_00257,Ingredient,ingr_00257,air mineral,New_Ingredients_category.xlsx
+ingr_00258,Ingredient,ingr_00258,Kontak,New_Ingredients_category.xlsx
+ingr_00259,Ingredient,ingr_00259,Susu kental manis coklat,New_Ingredients_category.xlsx
+ingr_00260,Ingredient,ingr_00260,cabe merah besar,New_Ingredients_category.xlsx
+ingr_00261,Ingredient,ingr_00261,cabe rawit kecil,New_Ingredients_category.xlsx
+ingr_00262,Ingredient,ingr_00262,belimbing ukuran kecil,New_Ingredients_category.xlsx
+ingr_00263,Ingredient,ingr_00263,kaldu bubuk (optional),New_Ingredients_category.xlsx
+ingr_00264,Ingredient,ingr_00264,/secukupnya gula merah,New_Ingredients_category.xlsx
+ingr_00265,Ingredient,ingr_00265,terasi,New_Ingredients_category.xlsx
+ingr_00266,Ingredient,ingr_00266,Biji Nangka,New_Ingredients_category.xlsx
+ingr_00267,Ingredient,ingr_00267,/Secukupnya air,New_Ingredients_category.xlsx
+ingr_00268,Ingredient,ingr_00268,/secukupnya minyak sayur,New_Ingredients_category.xlsx
+ingr_00269,Ingredient,ingr_00269,Kacang hijau,New_Ingredients_category.xlsx
+ingr_00270,Ingredient,ingr_00270,"kulit ari kacang tanah,cuci bersih",New_Ingredients_category.xlsx
+ingr_00271,Ingredient,ingr_00271,"kurma merah,cuci lalu buang bijinya",New_Ingredients_category.xlsx
+ingr_00272,Ingredient,ingr_00272,Kacang tolo,New_Ingredients_category.xlsx
+ingr_00273,Ingredient,ingr_00273,tepung terigu protein rendah (10.6%),New_Ingredients_category.xlsx
+ingr_00274,Ingredient,ingr_00274,bubuk kakao (Dutch cocoa powder),New_Ingredients_category.xlsx
+ingr_00275,Ingredient,ingr_00275,baking soda,New_Ingredients_category.xlsx
+ingr_00276,Ingredient,ingr_00276,gula kelapa coklat,New_Ingredients_category.xlsx
+ingr_00277,Ingredient,ingr_00277,okara,New_Ingredients_category.xlsx
+ingr_00278,Ingredient,ingr_00278,coklat chips / potong kecil-kecil biar cepat meleleh,New_Ingredients_category.xlsx
+ingr_00279,Ingredient,ingr_00279,minyak kelapa,New_Ingredients_category.xlsx
+ingr_00280,Ingredient,ingr_00280,vanilla cair (sesuai selera),New_Ingredients_category.xlsx
+ingr_00281,Ingredient,ingr_00281,"cuka (saya pakai cuka beras, cuka putih pun bisa. Ini dimasukkannya setelah semua bahan basah tercampur rata ya)",New_Ingredients_category.xlsx
+ingr_00282,Ingredient,ingr_00282,leunca,New_Ingredients_category.xlsx
+ingr_00283,Ingredient,ingr_00283,kemangi,New_Ingredients_category.xlsx
+ingr_00284,Ingredient,ingr_00284,tempe kacang tanah (bungkil),New_Ingredients_category.xlsx
+ingr_00285,Ingredient,ingr_00285,gula jawa sisir,New_Ingredients_category.xlsx
+ingr_00286,Ingredient,ingr_00286,cabe merah keriting,New_Ingredients_category.xlsx
+ingr_00287,Ingredient,ingr_00287,kencur,New_Ingredients_category.xlsx
+ingr_00288,Ingredient,ingr_00288,Sedaer (selada air),New_Ingredients_category.xlsx
+ingr_00289,Ingredient,ingr_00289,kelapa,New_Ingredients_category.xlsx
+ingr_00290,Ingredient,ingr_00290,daun jeruk purut,New_Ingredients_category.xlsx
+ingr_00291,Ingredient,ingr_00291,Lengkuas geprek,New_Ingredients_category.xlsx
+ingr_00292,Ingredient,ingr_00292,jika suka Penyedap,New_Ingredients_category.xlsx
+ingr_00293,Ingredient,ingr_00293,Bumbu halus :,New_Ingredients_category.xlsx
+ingr_00294,Ingredient,ingr_00294,emping melinjo goreng,New_Ingredients_category.xlsx
+ingr_00295,Ingredient,ingr_00295,tepung terigu pro rendah,New_Ingredients_category.xlsx
+ingr_00296,Ingredient,ingr_00296,kacang tanah (tanpa kulit dan sudah disangrai/matang),New_Ingredients_category.xlsx
+ingr_00297,Ingredient,ingr_00297,wijen putih (sudah disangrai),New_Ingredients_category.xlsx
+ingr_00298,Ingredient,ingr_00298,"kelapa sedang, parut",New_Ingredients_category.xlsx
+ingr_00299,Ingredient,ingr_00299,"gula merah, sisir halus",New_Ingredients_category.xlsx
+ingr_00300,Ingredient,ingr_00300,Air bersih,New_Ingredients_category.xlsx
+ingr_00301,Ingredient,ingr_00301,Tepung tapioka,New_Ingredients_category.xlsx
+ingr_00302,Ingredient,ingr_00302,"Bawang putih, haluskan",New_Ingredients_category.xlsx
+ingr_00303,Ingredient,ingr_00303,jari kencur,New_Ingredients_category.xlsx
+ingr_00304,Ingredient,ingr_00304,ketumbar bubuk,New_Ingredients_category.xlsx
+ingr_00305,Ingredient,ingr_00305,Minyak untuk menggoreng,New_Ingredients_category.xlsx
+ingr_00306,Ingredient,ingr_00306,Kacang kedelai,New_Ingredients_category.xlsx
+ingr_00307,Ingredient,ingr_00307,Agar-agar,New_Ingredients_category.xlsx
+ingr_00308,Ingredient,ingr_00308,biji labu,New_Ingredients_category.xlsx
+ingr_00309,Ingredient,ingr_00309,Emping,New_Ingredients_category.xlsx
+ingr_00310,Ingredient,ingr_00310,masako,New_Ingredients_category.xlsx
+ingr_00311,Ingredient,ingr_00311,"fillet ayam, bagian paha",New_Ingredients_category.xlsx
+ingr_00312,Ingredient,ingr_00312,tahu putih,New_Ingredients_category.xlsx
+ingr_00313,Ingredient,ingr_00313,maizena,New_Ingredients_category.xlsx
+ingr_00314,Ingredient,ingr_00314,tepung tapioka cap pak tani gunung,New_Ingredients_category.xlsx
+ingr_00315,Ingredient,ingr_00315,"daun jeruk, buang tulang tengahnya dan iris tipis",New_Ingredients_category.xlsx
+ingr_00316,Ingredient,ingr_00316,irisan daun jeruk,New_Ingredients_category.xlsx
+ingr_00317,Ingredient,ingr_00317,Tomat Merah Kecil,New_Ingredients_category.xlsx
+ingr_00318,Ingredient,ingr_00318,Terasi udang,New_Ingredients_category.xlsx
+ingr_00319,Ingredient,ingr_00319,Air asam (Asam jawa yang di rendam ke dalam air),New_Ingredients_category.xlsx
+ingr_00320,Ingredient,ingr_00320,Petis udang,New_Ingredients_category.xlsx
+ingr_00321,Ingredient,ingr_00321,Cingur Sapi,New_Ingredients_category.xlsx
+ingr_00322,Ingredient,ingr_00322,Mentimun,New_Ingredients_category.xlsx
+ingr_00323,Ingredient,ingr_00323,Tempe Goreng,New_Ingredients_category.xlsx
+ingr_00324,Ingredient,ingr_00324,Tahu Goreng,New_Ingredients_category.xlsx
+ingr_00325,Ingredient,ingr_00325,Nanas,New_Ingredients_category.xlsx
+ingr_00326,Ingredient,ingr_00326,Belimbing,New_Ingredients_category.xlsx
+ingr_00327,Ingredient,ingr_00327,Mangga muda,New_Ingredients_category.xlsx
+ingr_00328,Ingredient,ingr_00328,Lontong,New_Ingredients_category.xlsx
+ingr_00329,Ingredient,ingr_00329,Taoge yang sudah direbus,New_Ingredients_category.xlsx
+ingr_00330,Ingredient,ingr_00330,Kangkung yang sudah direbus,New_Ingredients_category.xlsx
+ingr_00331,Ingredient,ingr_00331,Tempe kedelai,New_Ingredients_category.xlsx
+ingr_00332,Ingredient,ingr_00332,sereh,New_Ingredients_category.xlsx
+ingr_00333,Ingredient,ingr_00333,lengkuas,New_Ingredients_category.xlsx
+ingr_00334,Ingredient,ingr_00334,cabe hijau,New_Ingredients_category.xlsx
+ingr_00335,Ingredient,ingr_00335,kaldu jamur bubuk,New_Ingredients_category.xlsx
+ingr_00336,Ingredient,ingr_00336,bayam,New_Ingredients_category.xlsx
+ingr_00337,Ingredient,ingr_00337,garam sesuaikan dengan rasa masing2,New_Ingredients_category.xlsx
+ingr_00338,Ingredient,ingr_00338,Bawang putih cincang,New_Ingredients_category.xlsx
+ingr_00339,Ingredient,ingr_00339,biji wijen,New_Ingredients_category.xlsx
+ingr_00340,Ingredient,ingr_00340,daun katuk,New_Ingredients_category.xlsx
+ingr_00341,Ingredient,ingr_00341,jagung manis,New_Ingredients_category.xlsx
+ingr_00342,Ingredient,ingr_00342,temu kunci iris tipis (opsional jika ada),New_Ingredients_category.xlsx
+ingr_00343,Ingredient,ingr_00343,daun kemangi,New_Ingredients_category.xlsx
+ingr_00344,Ingredient,ingr_00344,daun singkong muda,New_Ingredients_category.xlsx
+ingr_00345,Ingredient,ingr_00345,air rebusan,New_Ingredients_category.xlsx
+ingr_00346,Ingredient,ingr_00346,daun singkong,New_Ingredients_category.xlsx
+ingr_00347,Ingredient,ingr_00347,air secukupnya,New_Ingredients_category.xlsx
+ingr_00348,Ingredient,ingr_00348,minyak goreng (opsional),New_Ingredients_category.xlsx
+ingr_00349,Ingredient,ingr_00349,kangkung,New_Ingredients_category.xlsx
+ingr_00350,Ingredient,ingr_00350,cabai rawit (sesuaikan tingkat kepedasannya),New_Ingredients_category.xlsx
+ingr_00351,Ingredient,ingr_00351,penyedap jamur (skip juga gak apa-apa),New_Ingredients_category.xlsx
+ingr_00352,Ingredient,ingr_00352,Bunga Pepaya,New_Ingredients_category.xlsx
+ingr_00353,Ingredient,ingr_00353,kelapa setengah tua,New_Ingredients_category.xlsx
+ingr_00354,Ingredient,ingr_00354,cabe merah,New_Ingredients_category.xlsx
+ingr_00355,Ingredient,ingr_00355,cabe rawit hijau,New_Ingredients_category.xlsx
+ingr_00356,Ingredient,ingr_00356,cabe merah keriting (optional),New_Ingredients_category.xlsx
+ingr_00357,Ingredient,ingr_00357,terasi bakar,New_Ingredients_category.xlsx
+ingr_00358,Ingredient,ingr_00358,bawang merah iris,New_Ingredients_category.xlsx
+ingr_00359,Ingredient,ingr_00359,jeruk limau,New_Ingredients_category.xlsx
+ingr_00360,Ingredient,ingr_00360,kacang panjang,New_Ingredients_category.xlsx
+ingr_00361,Ingredient,ingr_00361,terong ijo bulet (terong batik),New_Ingredients_category.xlsx
+ingr_00362,Ingredient,ingr_00362,kecil daun singkong,New_Ingredients_category.xlsx
+ingr_00363,Ingredient,ingr_00363,kelapa parut setengah tua,New_Ingredients_category.xlsx
+ingr_00364,Ingredient,ingr_00364,sere geprek,New_Ingredients_category.xlsx
+ingr_00365,Ingredient,ingr_00365,cabe setan,New_Ingredients_category.xlsx
+ingr_00366,Ingredient,ingr_00366,putren kecil,New_Ingredients_category.xlsx
+ingr_00367,Ingredient,ingr_00367,pok choy,New_Ingredients_category.xlsx
+ingr_00368,Ingredient,ingr_00368,kembang kol kecil,New_Ingredients_category.xlsx
+ingr_00369,Ingredient,ingr_00369,kubis kecil,New_Ingredients_category.xlsx
+ingr_00370,Ingredient,ingr_00370,sosis,New_Ingredients_category.xlsx
+ingr_00371,Ingredient,ingr_00371,bakwan,New_Ingredients_category.xlsx
+ingr_00372,Ingredient,ingr_00372,nangka muda sudah dibersihkan,New_Ingredients_category.xlsx
+ingr_00373,Ingredient,ingr_00373,"telur ayam, rebus",New_Ingredients_category.xlsx
+ingr_00374,Ingredient,ingr_00374,ayam broiler (lebih bagus pakai ayam kampung/ayam petelur),New_Ingredients_category.xlsx
+ingr_00375,Ingredient,ingr_00375,santan kelapa,New_Ingredients_category.xlsx
+ingr_00376,Ingredient,ingr_00376,kemiri sangrai,New_Ingredients_category.xlsx
+ingr_00377,Ingredient,ingr_00377,pada bubuk,New_Ingredients_category.xlsx
+ingr_00378,Ingredient,ingr_00378,"sereh, geprek",New_Ingredients_category.xlsx
+ingr_00379,Ingredient,ingr_00379,"gula jawa/gula aren (secukupnya, sesuai selera aja)",New_Ingredients_category.xlsx
+ingr_00380,Ingredient,ingr_00380,pakis,New_Ingredients_category.xlsx
+ingr_00381,Ingredient,ingr_00381,udang,New_Ingredients_category.xlsx
+ingr_00382,Ingredient,ingr_00382,"serai, geprek",New_Ingredients_category.xlsx
+ingr_00383,Ingredient,ingr_00383,"lengkuas, geprek",New_Ingredients_category.xlsx
+ingr_00384,Ingredient,ingr_00384,daun kunyit,New_Ingredients_category.xlsx
+ingr_00385,Ingredient,ingr_00385,asam kandis,New_Ingredients_category.xlsx
+ingr_00386,Ingredient,ingr_00386,ikan dencis / ikan kembung / ikan kakap/ ikan tongkol,New_Ingredients_category.xlsx
+ingr_00387,Ingredient,ingr_00387,minyak sayur untuk menggoreng ikan,New_Ingredients_category.xlsx
+ingr_00388,Ingredient,ingr_00388,rebung Asam,New_Ingredients_category.xlsx
+ingr_00389,Ingredient,ingr_00389,minyak sayur untuk menumis,New_Ingredients_category.xlsx
+ingr_00390,Ingredient,ingr_00390,"kangkung, siangi daunnya",New_Ingredients_category.xlsx
+ingr_00391,Ingredient,ingr_00391,tauge,New_Ingredients_category.xlsx
+ingr_00392,Ingredient,ingr_00392,minyak goreng panas,New_Ingredients_category.xlsx
+ingr_00393,Ingredient,ingr_00393,Pucuk ubi jalar,New_Ingredients_category.xlsx
+ingr_00394,Ingredient,ingr_00394,"mangga mengkal, iris",New_Ingredients_category.xlsx
+ingr_00395,Ingredient,ingr_00395,"kedondong, iris",New_Ingredients_category.xlsx
+ingr_00396,Ingredient,ingr_00396,cabe rawit/sesuai selera,New_Ingredients_category.xlsx
+ingr_00397,Ingredient,ingr_00397,terasi matang,New_Ingredients_category.xlsx
+ingr_00398,Ingredient,ingr_00398,air asam Jawa (4 sdt asam Jawa),New_Ingredients_category.xlsx
+ingr_00399,Ingredient,ingr_00399,air/secukupnya,New_Ingredients_category.xlsx
+ingr_00400,Ingredient,ingr_00400,"bawang putih, goreng",New_Ingredients_category.xlsx
+ingr_00401,Ingredient,ingr_00401,garam/secukupnya,New_Ingredients_category.xlsx
+ingr_00402,Ingredient,ingr_00402,Micin Asatu Rose Brand,New_Ingredients_category.xlsx
+ingr_00403,Ingredient,ingr_00403,jantung pisang kepok,New_Ingredients_category.xlsx
+ingr_00404,Ingredient,ingr_00404,daun pepaya muda,New_Ingredients_category.xlsx
+ingr_00405,Ingredient,ingr_00405,jari Jahe,New_Ingredients_category.xlsx
+ingr_00406,Ingredient,ingr_00406,cabe keriting,New_Ingredients_category.xlsx
+ingr_00407,Ingredient,ingr_00407,sayur terubuk,New_Ingredients_category.xlsx
+ingr_00408,Ingredient,ingr_00408,"Daun melinjo,potong2",New_Ingredients_category.xlsx
+ingr_00409,Ingredient,ingr_00409,"ikan roa kering,bersihkan dr tulangnya",New_Ingredients_category.xlsx
+ingr_00410,Ingredient,ingr_00410,"Sereh,laos keprek",New_Ingredients_category.xlsx
+ingr_00411,Ingredient,ingr_00411,Santan sedang kurang lebih,New_Ingredients_category.xlsx
+ingr_00412,Ingredient,ingr_00412,Santan kental,New_Ingredients_category.xlsx
+ingr_00413,Ingredient,ingr_00413,cabe rawit/kriting,New_Ingredients_category.xlsx
+ingr_00414,Ingredient,ingr_00414,jari kunyit,New_Ingredients_category.xlsx
+ingr_00415,Ingredient,ingr_00415,Caisim,New_Ingredients_category.xlsx
+ingr_00416,Ingredient,ingr_00416,Aneka bakso seafood,New_Ingredients_category.xlsx
+ingr_00417,Ingredient,ingr_00417,Bakso sapi,New_Ingredients_category.xlsx
+ingr_00418,Ingredient,ingr_00418,Air kaldu ayam (homemade),New_Ingredients_category.xlsx
+ingr_00419,Ingredient,ingr_00419,"Garam,Lada,gula",New_Ingredients_category.xlsx
+ingr_00420,Ingredient,ingr_00420,Pisang raja nangka,New_Ingredients_category.xlsx
+ingr_00421,Ingredient,ingr_00421,Kapur sirih,New_Ingredients_category.xlsx
+ingr_00422,Ingredient,ingr_00422,maizena (disangrai di api kecil di aduk aduk sekitar 5-10menit),New_Ingredients_category.xlsx
+ingr_00423,Ingredient,ingr_00423,coklat bubuk (saya pake roman),New_Ingredients_category.xlsx
+ingr_00424,Ingredient,ingr_00424,gula halus (saya pake claris),New_Ingredients_category.xlsx
+ingr_00425,Ingredient,ingr_00425,beras ketan,New_Ingredients_category.xlsx
+ingr_00426,Ingredient,ingr_00426,Kental Manis Cap Enaak,New_Ingredients_category.xlsx
+ingr_00427,Ingredient,ingr_00427,pisang kepok,New_Ingredients_category.xlsx
+ingr_00428,Ingredient,ingr_00428,daging durian,New_Ingredients_category.xlsx
+ingr_00429,Ingredient,ingr_00429,kesemek(yg berwarnya oranye keseluruhan dan keras),New_Ingredients_category.xlsx
+ingr_00430,Ingredient,ingr_00430,raja ukuran sedang,New_Ingredients_category.xlsx
+ingr_00431,Ingredient,ingr_00431,Margarine/mentega,New_Ingredients_category.xlsx
+ingr_00432,Ingredient,ingr_00432,Kacang tanah (sangrai),New_Ingredients_category.xlsx
+ingr_00433,Ingredient,ingr_00433,urat sapi/ kaki sapi,New_Ingredients_category.xlsx
+ingr_00434,Ingredient,ingr_00434,quot;,New_Ingredients_category.xlsx
+ingr_00435,Ingredient,ingr_00435,kerupuk kulit/krecek..tambahan aja /boleh di skip,New_Ingredients_category.xlsx
+ingr_00436,Ingredient,ingr_00436,ebi,New_Ingredients_category.xlsx
+ingr_00437,Ingredient,ingr_00437,sereh di geprek,New_Ingredients_category.xlsx
+ingr_00438,Ingredient,ingr_00438,lengkuas di geprek,New_Ingredients_category.xlsx
+ingr_00439,Ingredient,ingr_00439,daun jeruk buang tulang nya,New_Ingredients_category.xlsx
+ingr_00440,Ingredient,ingr_00440,cabe rawit merah utuh,New_Ingredients_category.xlsx
+ingr_00441,Ingredient,ingr_00441,daun bawang potong,New_Ingredients_category.xlsx
+ingr_00442,Ingredient,ingr_00442,kaldu bubuk/saya pakai masako,New_Ingredients_category.xlsx
+ingr_00443,Ingredient,ingr_00443,gula aren/gula merah/ gula pasir.. Seadanya aja,New_Ingredients_category.xlsx
+ingr_00444,Ingredient,ingr_00444,amp; msg secukupnya,New_Ingredients_category.xlsx
+ingr_00445,Ingredient,ingr_00445,air asam jawa,New_Ingredients_category.xlsx
+ingr_00446,Ingredient,ingr_00446,nasi putih,New_Ingredients_category.xlsx
+ingr_00447,Ingredient,ingr_00447,"sosis, iris",New_Ingredients_category.xlsx
+ingr_00448,Ingredient,ingr_00448,"smoked beef, iris",New_Ingredients_category.xlsx
+ingr_00449,Ingredient,ingr_00449,"daun bawang, iris",New_Ingredients_category.xlsx
+ingr_00450,Ingredient,ingr_00450,"bawang putih, iris",New_Ingredients_category.xlsx
+ingr_00451,Ingredient,ingr_00451,margarin untuk menumis,New_Ingredients_category.xlsx
+ingr_00452,Ingredient,ingr_00452,kornet sapi,New_Ingredients_category.xlsx
+ingr_00453,Ingredient,ingr_00453,seledri,New_Ingredients_category.xlsx
+ingr_00454,Ingredient,ingr_00454,Paru sapi,New_Ingredients_category.xlsx
+ingr_00455,Ingredient,ingr_00455,(ukuran sedang) Kentang,New_Ingredients_category.xlsx
+ingr_00456,Ingredient,ingr_00456,kaldu jamur,New_Ingredients_category.xlsx
+ingr_00457,Ingredient,ingr_00457,(iris tipis) Bawang merah,New_Ingredients_category.xlsx
+ingr_00458,Ingredient,ingr_00458,(iris tipis) Bawang putih,New_Ingredients_category.xlsx
+ingr_00459,Ingredient,ingr_00459,Cabe merah giling,New_Ingredients_category.xlsx
+ingr_00460,Ingredient,ingr_00460,(iris tipis) Daun bawang,New_Ingredients_category.xlsx
+ingr_00461,Ingredient,ingr_00461,Pete,New_Ingredients_category.xlsx
+ingr_00462,Ingredient,ingr_00462,tepung kunci,New_Ingredients_category.xlsx
+ingr_00463,Ingredient,ingr_00463,margarin palmia,New_Ingredients_category.xlsx
+ingr_00464,Ingredient,ingr_00464,susu kental manis,New_Ingredients_category.xlsx
+ingr_00465,Ingredient,ingr_00465,Keju parut,New_Ingredients_category.xlsx
+ingr_00466,Ingredient,ingr_00466,Pewarna makanan merah,New_Ingredients_category.xlsx
+ingr_00467,Ingredient,ingr_00467,Choco chip sebagai mata ulat,New_Ingredients_category.xlsx
+ingr_00468,Ingredient,ingr_00468,filett paha ayam,New_Ingredients_category.xlsx
+ingr_00469,Ingredient,ingr_00469,cabe bubuk,New_Ingredients_category.xlsx
+ingr_00470,Ingredient,ingr_00470,terigu,New_Ingredients_category.xlsx
+ingr_00471,Ingredient,ingr_00471,tepung cobe,New_Ingredients_category.xlsx
+ingr_00472,Ingredient,ingr_00472,"paha ayam, saya pakai yang ukuran besar",New_Ingredients_category.xlsx
+ingr_00473,Ingredient,ingr_00473,Kobe Tepung Kentucky SuperCrispy (75 gram),New_Ingredients_category.xlsx
+ingr_00474,Ingredient,ingr_00474,minyak goreng (sesuaikan kebutuhan),New_Ingredients_category.xlsx
+ingr_00475,Ingredient,ingr_00475,dada ayam TG,New_Ingredients_category.xlsx
+ingr_00476,Ingredient,ingr_00476,"serai, potong 3 lalu geprek",New_Ingredients_category.xlsx
+ingr_00477,Ingredient,ingr_00477,santan (65ml santan instan + air),New_Ingredients_category.xlsx
+ingr_00478,Ingredient,ingr_00478,air ungkepan ayam,New_Ingredients_category.xlsx
+ingr_00479,Ingredient,ingr_00479,sagu,New_Ingredients_category.xlsx
+ingr_00480,Ingredient,ingr_00480,penuh tepung beras,New_Ingredients_category.xlsx
+ingr_00481,Ingredient,ingr_00481,paha ayam (2 potong),New_Ingredients_category.xlsx
+ingr_00482,Ingredient,ingr_00482,cabe kering,New_Ingredients_category.xlsx
+ingr_00483,Ingredient,ingr_00483,daging babi /babi hutan,New_Ingredients_category.xlsx
+ingr_00484,Ingredient,ingr_00484,cabai merah keriting buang bijinya,New_Ingredients_category.xlsx
+ingr_00485,Ingredient,ingr_00485,lengkuas bubuk,New_Ingredients_category.xlsx
+ingr_00486,Ingredient,ingr_00486,kunyit bubuk,New_Ingredients_category.xlsx
+ingr_00487,Ingredient,ingr_00487,tetelan sapi / daging,New_Ingredients_category.xlsx
+ingr_00488,Ingredient,ingr_00488,kacang tholo,New_Ingredients_category.xlsx
+ingr_00489,Ingredient,ingr_00489,"tahu coklat, potong jadi 2",New_Ingredients_category.xlsx
+ingr_00490,Ingredient,ingr_00490,telur rebus,New_Ingredients_category.xlsx
+ingr_00491,Ingredient,ingr_00491,santan instant,New_Ingredients_category.xlsx
+ingr_00492,Ingredient,ingr_00492,slice Beef,New_Ingredients_category.xlsx
+ingr_00493,Ingredient,ingr_00493,Bumbu instan bulgogi,New_Ingredients_category.xlsx
+ingr_00494,Ingredient,ingr_00494,B. Putih parut,New_Ingredients_category.xlsx
+ingr_00495,Ingredient,ingr_00495,Wortel iris panjang,New_Ingredients_category.xlsx
+ingr_00496,Ingredient,ingr_00496,Bombay iris panjang,New_Ingredients_category.xlsx
+ingr_00497,Ingredient,ingr_00497,ayam filet (aku pakai dada ayam),New_Ingredients_category.xlsx
+ingr_00498,Ingredient,ingr_00498,cabai merah besar,New_Ingredients_category.xlsx
+ingr_00499,Ingredient,ingr_00499,Lada,New_Ingredients_category.xlsx
+ingr_00500,Ingredient,ingr_00500,Ayam (ayamnya sudah direbus duluan),New_Ingredients_category.xlsx
+ingr_00501,Ingredient,ingr_00501,telor,New_Ingredients_category.xlsx
+ingr_00502,Ingredient,ingr_00502,cabe kriting,New_Ingredients_category.xlsx
+ingr_00503,Ingredient,ingr_00503,bamer,New_Ingredients_category.xlsx
+ingr_00504,Ingredient,ingr_00504,kaldu ayam,New_Ingredients_category.xlsx
+ingr_00505,Ingredient,ingr_00505,bumbu pemasak kalio,New_Ingredients_category.xlsx
+ingr_00506,Ingredient,ingr_00506,Hati sapi,New_Ingredients_category.xlsx
+ingr_00507,Ingredient,ingr_00507,Kelapa parut sangrai,New_Ingredients_category.xlsx
+ingr_00508,Ingredient,ingr_00508,Cabai merah,New_Ingredients_category.xlsx
+ingr_00509,Ingredient,ingr_00509,cengkih,New_Ingredients_category.xlsx
+ingr_00510,Ingredient,ingr_00510,kapulaga,New_Ingredients_category.xlsx
+ingr_00511,Ingredient,ingr_00511,kelopak bunga lawang,New_Ingredients_category.xlsx
+ingr_00512,Ingredient,ingr_00512,jengkol kupas rebus,New_Ingredients_category.xlsx
+ingr_00513,Ingredient,ingr_00513,santan kara segitiga,New_Ingredients_category.xlsx
+ingr_00514,Ingredient,ingr_00514,daun kunyit di ikat,New_Ingredients_category.xlsx
+ingr_00515,Ingredient,ingr_00515,kulit sapi potong/kikil,New_Ingredients_category.xlsx
+ingr_00516,Ingredient,ingr_00516,cabai keriting merah,New_Ingredients_category.xlsx
+ingr_00517,Ingredient,ingr_00517,ayam ukuran besar (sekitar 2 kg),New_Ingredients_category.xlsx
+ingr_00518,Ingredient,ingr_00518,besar jahe,New_Ingredients_category.xlsx
+ingr_00519,Ingredient,ingr_00519,"serai, rajang halus",New_Ingredients_category.xlsx
+ingr_00520,Ingredient,ingr_00520,"lengkuas, parut",New_Ingredients_category.xlsx
+ingr_00521,Ingredient,ingr_00521,"kelapa muda parut, sangrai",New_Ingredients_category.xlsx
+ingr_00522,Ingredient,ingr_00522,bawang merah goreng,New_Ingredients_category.xlsx
+ingr_00523,Ingredient,ingr_00523,"ayam, potong sesuai selera",New_Ingredients_category.xlsx
+ingr_00524,Ingredient,ingr_00524,air jeruk nipis,New_Ingredients_category.xlsx
+ingr_00525,Ingredient,ingr_00525,cabai rawit (boleh diskip kalo tidak suka pedas),New_Ingredients_category.xlsx
+ingr_00526,Ingredient,ingr_00526,daging,New_Ingredients_category.xlsx
+ingr_00527,Ingredient,ingr_00527,cabe halus,New_Ingredients_category.xlsx
+ingr_00528,Ingredient,ingr_00528,"Jahe, lengkuas halus",New_Ingredients_category.xlsx
+ingr_00529,Ingredient,ingr_00529,Kunyit halus,New_Ingredients_category.xlsx
+ingr_00530,Ingredient,ingr_00530,bunga pekak,New_Ingredients_category.xlsx
+ingr_00531,Ingredient,ingr_00531,Kayumanis,New_Ingredients_category.xlsx
+ingr_00532,Ingredient,ingr_00532,Pala,New_Ingredients_category.xlsx
+ingr_00533,Ingredient,ingr_00533,Garam dan pemasak kambing,New_Ingredients_category.xlsx
+ingr_00534,Ingredient,ingr_00534,daging sapi,New_Ingredients_category.xlsx
+ingr_00535,Ingredient,ingr_00535,bawang bombay 3 warna,New_Ingredients_category.xlsx
+ingr_00536,Ingredient,ingr_00536,bumbu kaldu,New_Ingredients_category.xlsx
+ingr_00537,Ingredient,ingr_00537,kepala kambing,New_Ingredients_category.xlsx
+ingr_00538,Ingredient,ingr_00538,kaki kambing,New_Ingredients_category.xlsx
+ingr_00539,Ingredient,ingr_00539,seukuran ibu jari jahe,New_Ingredients_category.xlsx
+ingr_00540,Ingredient,ingr_00540,seukuran ibu jari kunyit,New_Ingredients_category.xlsx
+ingr_00541,Ingredient,ingr_00541,daun seledri,New_Ingredients_category.xlsx
+ingr_00542,Ingredient,ingr_00542,garam (sesuaikan),New_Ingredients_category.xlsx
+ingr_00543,Ingredient,ingr_00543,penyedap rasa (kaldu jamur),New_Ingredients_category.xlsx
+ingr_00544,Ingredient,ingr_00544,bawang goreng (pelengkap),New_Ingredients_category.xlsx
+ingr_00545,Ingredient,ingr_00545,jeruk nipis/ lemon/ limau (pelengkap),New_Ingredients_category.xlsx
+ingr_00546,Ingredient,ingr_00546,Ayam,New_Ingredients_category.xlsx
+ingr_00547,Ingredient,ingr_00547,Jintan,New_Ingredients_category.xlsx
+ingr_00548,Ingredient,ingr_00548,Kemiri yang sudah di goreng,New_Ingredients_category.xlsx
+ingr_00549,Ingredient,ingr_00549,Daging sapi slice (tanpa lemak),New_Ingredients_category.xlsx
+ingr_00550,Ingredient,ingr_00550,Sei sapi (daging dengan lemak),New_Ingredients_category.xlsx
+ingr_00551,Ingredient,ingr_00551,Air (rebusan kedua),New_Ingredients_category.xlsx
+ingr_00552,Ingredient,ingr_00552,Air (rebusan pertama),New_Ingredients_category.xlsx
+ingr_00553,Ingredient,ingr_00553,"(3cm), memarkan Jahe",New_Ingredients_category.xlsx
+ingr_00554,Ingredient,ingr_00554,Bawang putih bawang merah halus,New_Ingredients_category.xlsx
+ingr_00555,Ingredient,ingr_00555,Kemiri halus,New_Ingredients_category.xlsx
+ingr_00556,Ingredient,ingr_00556,Daun bawang (iris),New_Ingredients_category.xlsx
+ingr_00557,Ingredient,ingr_00557,Dada Ayam,New_Ingredients_category.xlsx
+ingr_00558,Ingredient,ingr_00558,bumbu Soto instan,New_Ingredients_category.xlsx
+ingr_00559,Ingredient,ingr_00559,Sambal Tauco,New_Ingredients_category.xlsx
+ingr_00560,Ingredient,ingr_00560,ikan bandeng [3-4ekor],New_Ingredients_category.xlsx
+ingr_00561,Ingredient,ingr_00561,kuyit [haluskan],New_Ingredients_category.xlsx
+ingr_00562,Ingredient,ingr_00562,bawang putih [haluskan],New_Ingredients_category.xlsx
+ingr_00563,Ingredient,ingr_00563,"tomat [1bh ukuran sedang, haluskan]",New_Ingredients_category.xlsx
+ingr_00564,Ingredient,ingr_00564,sereh [digeprek],New_Ingredients_category.xlsx
+ingr_00565,Ingredient,ingr_00565,lengkuas [digeprek],New_Ingredients_category.xlsx
+ingr_00566,Ingredient,ingr_00566,bubuk merica,New_Ingredients_category.xlsx
+ingr_00567,Ingredient,ingr_00567,bawang merah [haluskan],New_Ingredients_category.xlsx
+ingr_00568,Ingredient,ingr_00568,cabai merah keriting [haluskan],New_Ingredients_category.xlsx
+ingr_00569,Ingredient,ingr_00569,cabe rawit merah [haluskan],New_Ingredients_category.xlsx
+ingr_00570,Ingredient,ingr_00570,gula merah [diiris],New_Ingredients_category.xlsx
+ingr_00571,Ingredient,ingr_00571,ikan (me : Baung Sungai),New_Ingredients_category.xlsx
+ingr_00572,Ingredient,ingr_00572,-4 sdm Tempoyak,New_Ingredients_category.xlsx
+ingr_00573,Ingredient,ingr_00573,"blimbing wuluh, potong2",New_Ingredients_category.xlsx
+ingr_00574,Ingredient,ingr_00574,amp; Gula pasir,New_Ingredients_category.xlsx
+ingr_00575,Ingredient,ingr_00575,daging ikan hiu,New_Ingredients_category.xlsx
+ingr_00576,Ingredient,ingr_00576,jeruk purut,New_Ingredients_category.xlsx
+ingr_00577,Ingredient,ingr_00577,cabe merah kering,New_Ingredients_category.xlsx
+ingr_00578,Ingredient,ingr_00578,cabe hijau keriting,New_Ingredients_category.xlsx
+ingr_00579,Ingredient,ingr_00579,"asam sunti ukuran kecil (kiraﾂｲ hampir segenggam,)",New_Ingredients_category.xlsx
+ingr_00580,Ingredient,ingr_00580,ketumbar sangrai,New_Ingredients_category.xlsx
+ingr_00581,Ingredient,ingr_00581,kelapa gonseng (sangrai),New_Ingredients_category.xlsx
+ingr_00582,Ingredient,ingr_00582,bunga lawang (pekak),New_Ingredients_category.xlsx
+ingr_00583,Ingredient,ingr_00583,cengkeh,New_Ingredients_category.xlsx
+ingr_00584,Ingredient,ingr_00584,lada (me: lada hitam),New_Ingredients_category.xlsx
+ingr_00585,Ingredient,ingr_00585,adas,New_Ingredients_category.xlsx
+ingr_00586,Ingredient,ingr_00586,kas-kas,New_Ingredients_category.xlsx
+ingr_00587,Ingredient,ingr_00587,daun kari,New_Ingredients_category.xlsx
+ingr_00588,Ingredient,ingr_00588,micin/penyedap/msg,New_Ingredients_category.xlsx
+ingr_00589,Ingredient,ingr_00589,garam (secukupnya),New_Ingredients_category.xlsx
+ingr_00590,Ingredient,ingr_00590,ikan mujaer,New_Ingredients_category.xlsx
+ingr_00591,Ingredient,ingr_00591,"kemangi, petiki",New_Ingredients_category.xlsx
+ingr_00592,Ingredient,ingr_00592,kemiri bakar,New_Ingredients_category.xlsx
+ingr_00593,Ingredient,ingr_00593,jari kunyit bakar,New_Ingredients_category.xlsx
+ingr_00594,Ingredient,ingr_00594,ikan patin,New_Ingredients_category.xlsx
+ingr_00595,Ingredient,ingr_00595,bawang putih parut,New_Ingredients_category.xlsx
+ingr_00596,Ingredient,ingr_00596,saus tomat manis,New_Ingredients_category.xlsx
+ingr_00597,Ingredient,ingr_00597,Cuka makan,New_Ingredients_category.xlsx
+ingr_00598,Ingredient,ingr_00598,perasan jeruk nipis,New_Ingredients_category.xlsx
+ingr_00599,Ingredient,ingr_00599,terong ungu,New_Ingredients_category.xlsx
+ingr_00600,Ingredient,ingr_00600,santan (kekentalan sedang),New_Ingredients_category.xlsx
+ingr_00601,Ingredient,ingr_00601,terong hijau,New_Ingredients_category.xlsx
+ingr_00602,Ingredient,ingr_00602,labu Siam besar,New_Ingredients_category.xlsx
+ingr_00603,Ingredient,ingr_00603,kol,New_Ingredients_category.xlsx
+ingr_00604,Ingredient,ingr_00604,daun mlinjo,New_Ingredients_category.xlsx
+ingr_00605,Ingredient,ingr_00605,ebi sangrai,New_Ingredients_category.xlsx
+ingr_00606,Ingredient,ingr_00606,iris lengkuas,New_Ingredients_category.xlsx
+ingr_00607,Ingredient,ingr_00607,santan (saya pakai 2 santan instan pakai air dan di tambah 2-3 sdm fiber cream),New_Ingredients_category.xlsx
+ingr_00608,Ingredient,ingr_00608,Sambal terasi dan ikan belanak,New_Ingredients_category.xlsx
+ingr_00609,Ingredient,ingr_00609,Teri nasi goreng,New_Ingredients_category.xlsx
+ingr_00610,Ingredient,ingr_00610,Tahu dan tempe,New_Ingredients_category.xlsx
+ingr_00611,Ingredient,ingr_00611,ikan tongkol ukuran besar,New_Ingredients_category.xlsx
+ingr_00612,Ingredient,ingr_00612,cabai besar,New_Ingredients_category.xlsx
+ingr_00613,Ingredient,ingr_00613,"garam, penyedap secukupnya",New_Ingredients_category.xlsx
+ingr_00614,Ingredient,ingr_00614,ikan cakalang asap,New_Ingredients_category.xlsx
+ingr_00615,Ingredient,ingr_00615,Belut yang ukurang besar,New_Ingredients_category.xlsx
+ingr_00616,Ingredient,ingr_00616,Jengkol,New_Ingredients_category.xlsx
+ingr_00617,Ingredient,ingr_00617,ikan patin(potong-potong),New_Ingredients_category.xlsx
+ingr_00618,Ingredient,ingr_00618,cabe keriting merah,New_Ingredients_category.xlsx
+ingr_00619,Ingredient,ingr_00619,serai geprek,New_Ingredients_category.xlsx
+ingr_00620,Ingredient,ingr_00620,daun jeruk sobek buang batang,New_Ingredients_category.xlsx
+ingr_00621,Ingredient,ingr_00621,daun kunyit(saya skip),New_Ingredients_category.xlsx
+ingr_00622,Ingredient,ingr_00622,tomat(potong-potong),New_Ingredients_category.xlsx
+ingr_00623,Ingredient,ingr_00623,"Gula,garam,dan penyedap rasa",New_Ingredients_category.xlsx
+ingr_00624,Ingredient,ingr_00624,Ikan belida giling,New_Ingredients_category.xlsx
+ingr_00625,Ingredient,ingr_00625,Air biasa,New_Ingredients_category.xlsx
+ingr_00626,Ingredient,ingr_00626,kulit ikan Tenggiri,New_Ingredients_category.xlsx
+ingr_00627,Ingredient,ingr_00627,Tepung Tapioka Rose Brand cap pak Tani gunung,New_Ingredients_category.xlsx
+ingr_00628,Ingredient,ingr_00628,penuh Tepung terigu,New_Ingredients_category.xlsx
+ingr_00629,Ingredient,ingr_00629,santan instan + air,New_Ingredients_category.xlsx
+ingr_00630,Ingredient,ingr_00630,"bawang putih, chopped",New_Ingredients_category.xlsx
+ingr_00631,Ingredient,ingr_00631,Daging tenggiri giling setengah beku,New_Ingredients_category.xlsx
+ingr_00632,Ingredient,ingr_00632,Santan kental Rose Brand,New_Ingredients_category.xlsx
+ingr_00633,Ingredient,ingr_00633,Air dingin,New_Ingredients_category.xlsx
+ingr_00634,Ingredient,ingr_00634,(ukuran sedang) Bawang bombay,New_Ingredients_category.xlsx
+ingr_00635,Ingredient,ingr_00635,(ukuran sedang) Telur,New_Ingredients_category.xlsx
+ingr_00636,Ingredient,ingr_00636,MSG Asatu Rose Brand,New_Ingredients_category.xlsx
+ingr_00637,Ingredient,ingr_00637,Kaldu ayam bubuk,New_Ingredients_category.xlsx
+ingr_00638,Ingredient,ingr_00638,Ikan Tenggiri,New_Ingredients_category.xlsx
+ingr_00639,Ingredient,ingr_00639,bandeng (1 ekor) sudah bersih dari tulang dan kulit jadi tinggal 250 g daging bandeng,New_Ingredients_category.xlsx
+ingr_00640,Ingredient,ingr_00640,kelapa setengah tua diparut,New_Ingredients_category.xlsx
+ingr_00641,Ingredient,ingr_00641,tekwan basah,New_Ingredients_category.xlsx
+ingr_00642,Ingredient,ingr_00642,bumbu tekwan kering,New_Ingredients_category.xlsx
+ingr_00643,Ingredient,ingr_00643,bumbu halus tekwan,New_Ingredients_category.xlsx
+ingr_00644,Ingredient,ingr_00644,jeruk nipis,New_Ingredients_category.xlsx
+ingr_00645,Ingredient,ingr_00645,tangkai daun seledri,New_Ingredients_category.xlsx
+ingr_00646,Ingredient,ingr_00646,cabe rawit hijau blender,New_Ingredients_category.xlsx
+ingr_00647,Ingredient,ingr_00647,daun prei,New_Ingredients_category.xlsx
+ingr_00648,Ingredient,ingr_00648,cabe rawit (sesuai selera),New_Ingredients_category.xlsx
+ingr_00649,Ingredient,ingr_00649,tepung bakwan serbaguna,New_Ingredients_category.xlsx
+ingr_00650,Ingredient,ingr_00650,keju parut (bisa diganti dengan kelapa / tahu / daging cincang),New_Ingredients_category.xlsx
+ingr_00651,Ingredient,ingr_00651,telur bebek mentah,New_Ingredients_category.xlsx
+ingr_00652,Ingredient,ingr_00652,garam putih,New_Ingredients_category.xlsx
+ingr_00653,Ingredient,ingr_00653,bawang putih kating parut,New_Ingredients_category.xlsx
+ingr_00654,Ingredient,ingr_00654,Saus Barbeque (BBQ Sauce),New_Ingredients_category.xlsx
+ingr_00655,Ingredient,ingr_00655,Kentang (Potato),New_Ingredients_category.xlsx
+ingr_00656,Ingredient,ingr_00656,Buncis,New_Ingredients_category.xlsx
+ingr_00657,Ingredient,ingr_00657,Wortel (Carrot),New_Ingredients_category.xlsx
+ingr_00658,Ingredient,ingr_00658,Daging Sapi (Beef),New_Ingredients_category.xlsx
+ingr_00659,Ingredient,ingr_00659,Minyak Goreng (Kelapa Sawit),New_Ingredients_category.xlsx
+ingr_00660,Ingredient,ingr_00660,Hati Ayam,New_Ingredients_category.xlsx
+ingr_00661,Ingredient,ingr_00661,Ikan Barakuda,New_Ingredients_category.xlsx
+ingr_00662,Ingredient,ingr_00662,Ikan Cucut,New_Ingredients_category.xlsx
+ingr_00663,Ingredient,ingr_00663,Ikan Dori Fillet,New_Ingredients_category.xlsx
+ingr_00664,Ingredient,ingr_00664,Ikan Ekor Kuning,New_Ingredients_category.xlsx
+ingr_00665,Ingredient,ingr_00665,Ikan Gabus,New_Ingredients_category.xlsx
+ingr_00666,Ingredient,ingr_00666,Garam Meja (Table Salt),New_Ingredients_category.xlsx
+ingr_00667,Ingredient,ingr_00667,Ikan Layang,New_Ingredients_category.xlsx
+ingr_00668,Ingredient,ingr_00668,Ikan Salem,New_Ingredients_category.xlsx
+ingr_00669,Ingredient,ingr_00669,Babat Sapi,New_Ingredients_category.xlsx
+ingr_00670,Ingredient,ingr_00670,Paha Ayam Atas (Tanpa Kulit),New_Ingredients_category.xlsx
+ingr_00671,Ingredient,ingr_00671,Paha Ayam Bawah,New_Ingredients_category.xlsx
+ingr_00672,Ingredient,ingr_00672,Telur Ayam Ras,New_Ingredients_category.xlsx
+ingr_00673,Ingredient,ingr_00673,Kacang Kedelai (Soybeans),New_Ingredients_category.xlsx
+ingr_00674,Ingredient,ingr_00674,Ikan Tongkol,New_Ingredients_category.xlsx
+ingr_00675,Ingredient,ingr_00675,Tomat Merah,New_Ingredients_category.xlsx
+ingr_00676,Ingredient,ingr_00676,Udang Kupas,New_Ingredients_category.xlsx
+ingr_00677,Ingredient,ingr_00677,Alpukat,New_Ingredients_category.xlsx
+ingr_00678,Ingredient,ingr_00678,Anggur Muscat,New_Ingredients_category.xlsx
+ingr_00679,Ingredient,ingr_00679,Apel Fuji,New_Ingredients_category.xlsx
+ingr_00680,Ingredient,ingr_00680,Apel Manalagi,New_Ingredients_category.xlsx
+ingr_00681,Ingredient,ingr_00681,Apel Merah (Red Delicious),New_Ingredients_category.xlsx
+ingr_00682,Ingredient,ingr_00682,Buah Leci,New_Ingredients_category.xlsx
+ingr_00683,Ingredient,ingr_00683,Matoa,New_Ingredients_category.xlsx
+ingr_00684,Ingredient,ingr_00684,Buah Naga Merah,New_Ingredients_category.xlsx
+ingr_00685,Ingredient,ingr_00685,Pisang Uli,New_Ingredients_category.xlsx
+ingr_00686,Ingredient,ingr_00686,Semangka,New_Ingredients_category.xlsx
+ingr_00687,Ingredient,ingr_00687,Melon Hijau,New_Ingredients_category.xlsx
+ingr_00688,Ingredient,ingr_00688,Stroberi,New_Ingredients_category.xlsx
+ingr_00689,Ingredient,ingr_00689,Cokelat Batang (Compound),New_Ingredients_category.xlsx
+ingr_00690,Ingredient,ingr_00690,Jambu Biji Merah,New_Ingredients_category.xlsx
+ingr_00691,Ingredient,ingr_00691,Jambu Biji,New_Ingredients_category.xlsx
+ingr_00692,Ingredient,ingr_00692,Jeruk Manis,New_Ingredients_category.xlsx
+ingr_00693,Ingredient,ingr_00693,Jeruk Sunkist,New_Ingredients_category.xlsx
+ingr_00694,Ingredient,ingr_00694,Apel (Fuji & Manalagi),New_Ingredients_category.xlsx
+ingr_00695,Ingredient,ingr_00695,Mangga Harum Manis,New_Ingredients_category.xlsx
+ingr_00696,Ingredient,ingr_00696,Pepaya California,New_Ingredients_category.xlsx
+ingr_00697,Ingredient,ingr_00697,Pir Hijau,New_Ingredients_category.xlsx
+ingr_00698,Ingredient,ingr_00698,Pisang,New_Ingredients_category.xlsx
+ingr_00699,Ingredient,ingr_00699,Bengkuang,New_Ingredients_category.xlsx
+ingr_00700,Ingredient,ingr_00700,Jambu Air,New_Ingredients_category.xlsx
+ingr_00701,Ingredient,ingr_00701,Gula Merah (Jawa/Aren),New_Ingredients_category.xlsx
+ingr_00702,Ingredient,ingr_00702,Mayonnaise,New_Ingredients_category.xlsx
+ingr_00703,Ingredient,ingr_00703,Tart Cherry,New_Ingredients_category.xlsx
+ingr_00704,Ingredient,ingr_00704,Cumi-Cumi,New_Ingredients_category.xlsx
+ingr_00705,Ingredient,ingr_00705,Brokoli,New_Ingredients_category.xlsx
+ingr_00706,Ingredient,ingr_00706,Kembang Kol,New_Ingredients_category.xlsx
+ingr_00707,Ingredient,ingr_00707,Bubuk Cabai,New_Ingredients_category.xlsx
+ingr_00708,Ingredient,ingr_00708,Selada Keriting,New_Ingredients_category.xlsx
+ingr_00709,Ingredient,ingr_00709,Kol Putih,New_Ingredients_category.xlsx
+ingr_00710,Ingredient,ingr_00710,Bumbu Pecel / Sambal Kacang,New_Ingredients_category.xlsx
+ingr_00711,Ingredient,ingr_00711,Minyak Zaitun,New_Ingredients_category.xlsx
+ingr_00712,Ingredient,ingr_00712,Sawi Hijau,New_Ingredients_category.xlsx
+ingr_00713,Ingredient,ingr_00713,Labu Siam,New_Ingredients_category.xlsx
+ingr_00714,Ingredient,ingr_00714,Asam Jawa,New_Ingredients_category.xlsx
+ingr_00715,Ingredient,ingr_00715,Terong,New_Ingredients_category.xlsx
+ingr_00716,Ingredient,ingr_00716,Kacang Merah,New_Ingredients_category.xlsx
+ingr_00717,Ingredient,ingr_00717,Biji Pala,New_Ingredients_category.xlsx
+ingr_00718,Ingredient,ingr_00718,Minyak Nabati (Vegetable Oil),New_Ingredients_category.xlsx
+ingr_00719,Ingredient,ingr_00719,Tepung Garut,New_Ingredients_category.xlsx
+ingr_00720,Ingredient,ingr_00720,Air Minum,New_Ingredients_category.xlsx
+ingr_00721,Ingredient,ingr_00721,Ketupat,New_Ingredients_category.xlsx
+ingr_00722,Ingredient,ingr_00722,Beras Merah,New_Ingredients_category.xlsx
+ingr_00723,Ingredient,ingr_00723,Konjac / Shirataki,New_Ingredients_category.xlsx
+ingr_00724,Ingredient,ingr_00724,Tepung Terigu (Serbaguna),New_Ingredients_category.xlsx
+ingr_00725,Ingredient,ingr_00725,Toge,New_Ingredients_category.xlsx
+ingr_00726,Ingredient,ingr_00726,Sawi Asin,New_Ingredients_category.xlsx
+ingr_00727,Ingredient,ingr_00727,Cabai Rawit Merah,New_Ingredients_category.xlsx
+ingr_00728,Ingredient,ingr_00728,Tepung Tapioka / Kanji,New_Ingredients_category.xlsx
+ingr_00729,Ingredient,ingr_00729,Ikan Teri (Kering Asin),New_Ingredients_category.xlsx
+ingr_00730,Ingredient,ingr_00730,Gula Pasir (Granulated Sugar),New_Ingredients_category.xlsx
+ingr_00731,Ingredient,ingr_00731,Kopi Hitam Tanpa Gula,New_Ingredients_category.xlsx
+ingr_00732,Ingredient,ingr_00732,Daging Bebek,New_Ingredients_category.xlsx
+ingr_00733,Ingredient,ingr_00733,Bumbu Rempah,New_Ingredients_category.xlsx
+ingr_00734,Ingredient,ingr_00734,Terong Bulat,New_Ingredients_category.xlsx
+ingr_00735,Ingredient,ingr_00735,Bihun Jagung,New_Ingredients_category.xlsx
+ingr_00736,Ingredient,ingr_00736,Beras Putih,New_Ingredients_category.xlsx
+ingr_00737,Ingredient,ingr_00737,Kerupuk (Umum),New_Ingredients_category.xlsx
+ingr_00738,Ingredient,ingr_00738,Daging Ayam Suwir,New_Ingredients_category.xlsx
+ingr_00739,Ingredient,ingr_00739,Cakwe,New_Ingredients_category.xlsx
+ingr_00740,Ingredient,ingr_00740,Kerupuk Aci,New_Ingredients_category.xlsx
+ingr_00741,Ingredient,ingr_00741,Kacang Kedelai Goreng,New_Ingredients_category.xlsx
+ingr_00742,Ingredient,ingr_00742,Labu Kuning,New_Ingredients_category.xlsx
+ingr_00743,Ingredient,ingr_00743,Ubi Jalar,New_Ingredients_category.xlsx
+ingr_00744,Ingredient,ingr_00744,Air Cucian Beras,New_Ingredients_category.xlsx
+ingr_00745,Ingredient,ingr_00745,Jeroan Sapi,New_Ingredients_category.xlsx
+ingr_00746,Ingredient,ingr_00746,Susu Evaporasi,New_Ingredients_category.xlsx
+ingr_00747,Ingredient,ingr_00747,Melinjo,New_Ingredients_category.xlsx
+ingr_00748,Ingredient,ingr_00748,Nangka Muda,New_Ingredients_category.xlsx
+ingr_00749,Ingredient,ingr_00749,Bumbu Gulai,New_Ingredients_category.xlsx
+ingr_00750,Ingredient,ingr_00750,Lengkuas / Laos,New_Ingredients_category.xlsx
+ingr_00751,Ingredient,ingr_00751,Daging Kambing,New_Ingredients_category.xlsx
+ingr_00752,Ingredient,ingr_00752,Otak Sapi,New_Ingredients_category.xlsx
+ingr_00753,Ingredient,ingr_00753,Kikil Sapi,New_Ingredients_category.xlsx
+ingr_00754,Ingredient,ingr_00754,Ikan Laut,New_Ingredients_category.xlsx
+ingr_00755,Ingredient,ingr_00755,Ikan Kembung,New_Ingredients_category.xlsx
+ingr_00756,Ingredient,ingr_00756,Ikan Mubara,New_Ingredients_category.xlsx
+ingr_00757,Ingredient,ingr_00757,Kepiting,New_Ingredients_category.xlsx
+ingr_00758,Ingredient,ingr_00758,Telur Bebek,New_Ingredients_category.xlsx
+ingr_00759,Ingredient,ingr_00759,Iga Sapi,New_Ingredients_category.xlsx
+ingr_00760,Ingredient,ingr_00760,Keluwak,New_Ingredients_category.xlsx
+ingr_00761,Ingredient,ingr_00761,Ikan Lele,New_Ingredients_category.xlsx
+ingr_00762,Ingredient,ingr_00762,Bumbu Dasar Kuning,New_Ingredients_category.xlsx
+ingr_00763,Ingredient,ingr_00763,Lontong Polos,New_Ingredients_category.xlsx
+ingr_00764,Ingredient,ingr_00764,Tauco,New_Ingredients_category.xlsx
+ingr_00765,Ingredient,ingr_00765,Teri Medan,New_Ingredients_category.xlsx
+ingr_00766,Ingredient,ingr_00766,Makaroni (Kering),New_Ingredients_category.xlsx
+ingr_00767,Ingredient,ingr_00767,Susu Segar,New_Ingredients_category.xlsx
+ingr_00768,Ingredient,ingr_00768,Mie Kuning Basah,New_Ingredients_category.xlsx
+ingr_00769,Ingredient,ingr_00769,Daging Ayam Cincang,New_Ingredients_category.xlsx
+ingr_00770,Ingredient,ingr_00770,Jamur Kancing,New_Ingredients_category.xlsx
+ingr_00771,Ingredient,ingr_00771,Kikil,New_Ingredients_category.xlsx
+ingr_00772,Ingredient,ingr_00772,Cabai Bubuk,New_Ingredients_category.xlsx
+ingr_00773,Ingredient,ingr_00773,Minyak Wijen (Sesame Oil),New_Ingredients_category.xlsx
+ingr_00774,Ingredient,ingr_00774,Telur Balado,New_Ingredients_category.xlsx
+ingr_00775,Ingredient,ingr_00775,Tempe Orek,New_Ingredients_category.xlsx
+ingr_00776,Ingredient,ingr_00776,Sayur Lodeh,New_Ingredients_category.xlsx
+ingr_00777,Ingredient,ingr_00777,Sosis Sapi,New_Ingredients_category.xlsx
+ingr_00778,Ingredient,ingr_00778,Ayam Potong (Broiler),New_Ingredients_category.xlsx
+ingr_00779,Ingredient,ingr_00779,Ikan Tuna,New_Ingredients_category.xlsx
+ingr_00780,Ingredient,ingr_00780,Gulai Nangka,New_Ingredients_category.xlsx
+ingr_00781,Ingredient,ingr_00781,Sambal Ijo,New_Ingredients_category.xlsx
+ingr_00782,Ingredient,ingr_00782,Ayam Goreng,New_Ingredients_category.xlsx
+ingr_00783,Ingredient,ingr_00783,Perkedel Kentang,New_Ingredients_category.xlsx
+ingr_00784,Ingredient,ingr_00784,Air Kelapa Muda,New_Ingredients_category.xlsx
+ingr_00785,Ingredient,ingr_00785,Oncom,New_Ingredients_category.xlsx
+ingr_00786,Ingredient,ingr_00786,Bihun Goreng,New_Ingredients_category.xlsx
+ingr_00787,Ingredient,ingr_00787,Bihun Beras,New_Ingredients_category.xlsx
+ingr_00788,Ingredient,ingr_00788,Cuka,New_Ingredients_category.xlsx
+ingr_00789,Ingredient,ingr_00789,Ikan Mas,New_Ingredients_category.xlsx
+ingr_00790,Ingredient,ingr_00790,Bawang Goreng (Original/Polos),New_Ingredients_category.xlsx
+ingr_00791,Ingredient,ingr_00791,Lidah Sapi,New_Ingredients_category.xlsx
+ingr_00792,Ingredient,ingr_00792,Bayam Hijau,New_Ingredients_category.xlsx
+ingr_00793,Ingredient,ingr_00793,Temu Kunci,New_Ingredients_category.xlsx
+ingr_00794,Ingredient,ingr_00794,Kunci,New_Ingredients_category.xlsx
+ingr_00795,Ingredient,ingr_00795,Santan Encer,New_Ingredients_category.xlsx
+ingr_00796,Ingredient,ingr_00796,Bumbu Semur,New_Ingredients_category.xlsx
+ingr_00797,Ingredient,ingr_00797,Kaldu Sapi,New_Ingredients_category.xlsx
+ingr_00798,Ingredient,ingr_00798,Susu Sapi Murni,New_Ingredients_category.xlsx
+ingr_00799,Ingredient,ingr_00799,Ayam Dada,New_Ingredients_category.xlsx
+ingr_00800,Ingredient,ingr_00800,Soun,New_Ingredients_category.xlsx
+ingr_00801,Ingredient,ingr_00801,Risoles Bihun,New_Ingredients_category.xlsx
+ingr_00802,Ingredient,ingr_00802,Sosis Ayam,New_Ingredients_category.xlsx
+ingr_00803,Ingredient,ingr_00803,Selada Air,New_Ingredients_category.xlsx
+ingr_00804,Ingredient,ingr_00804,Bumbu Tabur,New_Ingredients_category.xlsx
+ingr_00805,Ingredient,ingr_00805,Keju Mozzarella,New_Ingredients_category.xlsx
+ingr_00806,Ingredient,ingr_00806,Tepung Panir,New_Ingredients_category.xlsx
+ingr_00807,Ingredient,ingr_00807,Kulit Pangsit,New_Ingredients_category.xlsx
+ingr_00808,Ingredient,ingr_00808,Mayones,New_Ingredients_category.xlsx
+ingr_00809,Ingredient,ingr_00809,Kulit Tahu,New_Ingredients_category.xlsx
+ingr_00810,Ingredient,ingr_00810,Kulit Lumpia,New_Ingredients_category.xlsx
+ingr_00811,Ingredient,ingr_00811,Tahu Goreng (Polos),New_Ingredients_category.xlsx
+ingr_00812,Ingredient,ingr_00812,Bumbu Kacang,New_Ingredients_category.xlsx
+ingr_00813,Ingredient,ingr_00813,Susu Cair,New_Ingredients_category.xlsx
+ingr_00814,Ingredient,ingr_00814,Mentega Tawar (Unsalted Butter),New_Ingredients_category.xlsx
+ingr_00815,Ingredient,ingr_00815,Susu Bubuk (Full Cream),New_Ingredients_category.xlsx
+ingr_00816,Ingredient,ingr_00816,Rebung (Tunas Bambu),New_Ingredients_category.xlsx
+ingr_00817,Ingredient,ingr_00817,Susu Kental Manis (SKM),New_Ingredients_category.xlsx
+ingr_00818,Ingredient,ingr_00818,Daging Sapi Cincang,New_Ingredients_category.xlsx
+ingr_00819,Ingredient,ingr_00819,Susu Sapi Segar,New_Ingredients_category.xlsx
+ingr_00820,Ingredient,ingr_00820,Keju Mozarella,New_Ingredients_category.xlsx
+ingr_00821,Ingredient,ingr_00821,Tepung Roti / Panir,New_Ingredients_category.xlsx
+ingr_00822,Ingredient,ingr_00822,Daging Asap,New_Ingredients_category.xlsx
+ingr_00823,Ingredient,ingr_00823,Roti Tawar Putih,New_Ingredients_category.xlsx
+ingr_00824,Ingredient,ingr_00824,Cokelat Pasta,New_Ingredients_category.xlsx
+ingr_00825,Ingredient,ingr_00825,Kerupuk Mawar (Putih),New_Ingredients_category.xlsx
+ingr_00826,Ingredient,ingr_00826,Cabai Hijau Besar,New_Ingredients_category.xlsx
+ingr_00827,Ingredient,ingr_00827,Tahu Sumedang,New_Ingredients_category.xlsx
+ingr_00828,Ingredient,ingr_00828,Petis,New_Ingredients_category.xlsx
+ingr_00829,Ingredient,ingr_00829,MSG (Monosodium Glutamat),New_Ingredients_category.xlsx
+ingr_00830,Ingredient,ingr_00830,Tepung Bumbu (Secret Blend),New_Ingredients_category.xlsx
+ingr_00831,Ingredient,ingr_00831,Ekstrak Paprika (Oleoresin),New_Ingredients_category.xlsx
+ingr_00832,Ingredient,ingr_00832,Roti Burger,New_Ingredients_category.xlsx
+ingr_00833,Ingredient,ingr_00833,Saus Lada Hitam (Black Pepper Sauce),New_Ingredients_category.xlsx
+ingr_00834,Ingredient,ingr_00834,Paprika,New_Ingredients_category.xlsx
+ingr_00835,Ingredient,ingr_00835,Saus Yakiniku,New_Ingredients_category.xlsx
+ingr_00836,Ingredient,ingr_00836,Acar Timun,New_Ingredients_category.xlsx
+ingr_00837,Ingredient,ingr_00837,Tortilla,New_Ingredients_category.xlsx
+ingr_00838,Ingredient,ingr_00838,Ayam Fillet (Dada),New_Ingredients_category.xlsx
+ingr_00839,Ingredient,ingr_00839,English Muffin,New_Ingredients_category.xlsx
+ingr_00840,Ingredient,ingr_00840,Daging Ayam Asap,New_Ingredients_category.xlsx
+ingr_00841,Ingredient,ingr_00841,Patty Ayam,New_Ingredients_category.xlsx
+ingr_00842,Ingredient,ingr_00842,Dekstrosa,New_Ingredients_category.xlsx
+ingr_00843,Ingredient,ingr_00843,Bumbu Rahasia (Fried Chicken),New_Ingredients_category.xlsx
+ingr_00844,Ingredient,ingr_00844,Spaghetti,New_Ingredients_category.xlsx
+ingr_00845,Ingredient,ingr_00845,Saus Pedas Manis,New_Ingredients_category.xlsx
+ingr_00846,Ingredient,ingr_00846,Kulit Pangsit Goreng,New_Ingredients_category.xlsx
+ingr_00847,Ingredient,ingr_00847,Ayam Goreng Tepung,New_Ingredients_category.xlsx
+ingr_00848,Ingredient,ingr_00848,Minuman Teh Kemasan,New_Ingredients_category.xlsx
+ingr_00849,Ingredient,ingr_00849,Keju Parmesan,New_Ingredients_category.xlsx
+ingr_00850,Ingredient,ingr_00850,Saus Tomat,New_Ingredients_category.xlsx
+ingr_00851,Ingredient,ingr_00851,Saus Keju,New_Ingredients_category.xlsx
+ingr_00852,Ingredient,ingr_00852,Cola,New_Ingredients_category.xlsx
+ingr_00853,Ingredient,ingr_00853,Ayam Kampung,New_Ingredients_category.xlsx
+ingr_00854,Ingredient,ingr_00854,Ikan Nila,New_Ingredients_category.xlsx
+ingr_00855,Ingredient,ingr_00855,Kacang Almond,New_Ingredients_category.xlsx
+ingr_00856,Ingredient,ingr_00856,Beras Shirataki (Konjac Rice),New_Ingredients_category.xlsx
+ingr_00857,Ingredient,ingr_00857,Oat Instan,New_Ingredients_category.xlsx
+ingr_00858,Ingredient,ingr_00858,Susu Almond,New_Ingredients_category.xlsx
+ingr_00859,Ingredient,ingr_00859,Putih Telur,New_Ingredients_category.xlsx
+ingr_00860,Ingredient,ingr_00860,Gandum Oat,New_Ingredients_category.xlsx
+ingr_00861,Ingredient,ingr_00861,Chia Seeds (Biji Chia),New_Ingredients_category.xlsx
+ingr_00862,Ingredient,ingr_00862,Yogurt,New_Ingredients_category.xlsx
+ingr_00863,Ingredient,ingr_00863,Buah Buahan,New_Ingredients_category.xlsx
+ingr_00864,Ingredient,ingr_00864,Susu Oat,New_Ingredients_category.xlsx
+ingr_00865,Ingredient,ingr_00865,Greek Yogurt (Plain/Nonfat),New_Ingredients_category.xlsx
+ingr_00866,Ingredient,ingr_00866,Bubuk Cokelat (Cocoa Powder),New_Ingredients_category.xlsx
+ingr_00867,Ingredient,ingr_00867,Pisang Ambon,New_Ingredients_category.xlsx
+ingr_00868,Ingredient,ingr_00868,Madu Murni,New_Ingredients_category.xlsx
+ingr_00869,Ingredient,ingr_00869,Roti Gandum Utuh,New_Ingredients_category.xlsx
+ingr_00870,Ingredient,ingr_00870,Lada Hitam,New_Ingredients_category.xlsx
+ingr_00871,Ingredient,ingr_00871,Kulit Tortilla (Gandum),New_Ingredients_category.xlsx
+ingr_00872,Ingredient,ingr_00872,Granola (Honey Almond),New_Ingredients_category.xlsx
+ingr_00873,Ingredient,ingr_00873,Greek Yogurt,New_Ingredients_category.xlsx
+ingr_00874,Ingredient,ingr_00874,Biji Chia,New_Ingredients_category.xlsx
+ingr_00875,Ingredient,ingr_00875,Saus Cabai,New_Ingredients_category.xlsx
+ingr_00876,Ingredient,ingr_00876,Bumbu Rasa Ayam (Bubuk),New_Ingredients_category.xlsx
+ingr_00877,Ingredient,ingr_00877,Minyak Bawang,New_Ingredients_category.xlsx
+ingr_00878,Ingredient,ingr_00878,Tepung Mocaf,New_Ingredients_category.xlsx
+ingr_00879,Ingredient,ingr_00879,Indomie Mi Goreng,New_Ingredients_category.xlsx
+ingr_00880,Ingredient,ingr_00880,Telur Ceplok,New_Ingredients_category.xlsx
+ingr_00881,Ingredient,ingr_00881,Mi Tepung Terigu (Mi Telur/Kering),New_Ingredients_category.xlsx
+ingr_00882,Ingredient,ingr_00882,Minyak Bumbu (Seasoning Oil),New_Ingredients_category.xlsx
+ingr_00883,Ingredient,ingr_00883,Bawang Goreng Kriuk,New_Ingredients_category.xlsx
+ingr_00884,Ingredient,ingr_00884,Cokelat Manis,New_Ingredients_category.xlsx
+ingr_00885,Ingredient,ingr_00885,Keju,New_Ingredients_category.xlsx
+ingr_00886,Ingredient,ingr_00886,Cone Waffle,New_Ingredients_category.xlsx

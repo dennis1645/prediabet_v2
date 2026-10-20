@@ -1,0 +1,454 @@
+:ID,:LABEL,recipe_id,kode,nama_masakan,nama_asli_resep,ingredient_count:int,source_dataset
+recipe_00000,Recipe,recipe_00000,AO007,Bihun goreng instan,Bihun Instant Goreng,11,New_Ingredients_category.xlsx
+recipe_00001,Recipe,recipe_00001,AO010,"Jagung muda, rebus",Tumis putihan telur rebus dan jagung muda,13,New_Ingredients_category.xlsx
+recipe_00002,Recipe,recipe_00002,AO018,"Ketan putih, tapai",Tape Ketan Putih,4,New_Ingredients_category.xlsx
+recipe_00003,Recipe,recipe_00003,AO022,Mi kering,Mie goreng khas Hongkong (mi kwantung/mie telur kering),6,New_Ingredients_category.xlsx
+recipe_00004,Recipe,recipe_00004,AO023,Misoa,Sop Misoa,12,New_Ingredients_category.xlsx
+recipe_00005,Recipe,recipe_00005,AO024,Roti putih,Black n White Sourdough Bread,6,New_Ingredients_category.xlsx
+recipe_00006,Recipe,recipe_00006,AO028,"Apem, kue",Apam Gula Merah,10,New_Ingredients_category.xlsx
+recipe_00007,Recipe,recipe_00007,AO030,"Bakpia, kue",\*Kue Kering Bakpia Pisang\*,8,New_Ingredients_category.xlsx
+recipe_00008,Recipe,recipe_00008,AO032,Bantal,Odading Mang Oleh (Roti Bantal),9,New_Ingredients_category.xlsx
+recipe_00009,Recipe,recipe_00009,AO035,Bika ambon,Bika Ambon Pandan,10,New_Ingredients_category.xlsx
+recipe_00010,Recipe,recipe_00010,AO036,Bingka,Bingke Pandan,9,New_Ingredients_category.xlsx
+recipe_00011,Recipe,recipe_00011,AO038,Bolu peca,Bolu Peca Khas Bugis,9,New_Ingredients_category.xlsx
+recipe_00012,Recipe,recipe_00012,AO039,Brem,Es Krim Brem Buah,8,New_Ingredients_category.xlsx
+recipe_00013,Recipe,recipe_00013,AO041,Cake tape,Bolu Tape Singkong,10,New_Ingredients_category.xlsx
+recipe_00014,Recipe,recipe_00014,AO042,Cangkuning,Kue Bugis (Cangkuning),11,New_Ingredients_category.xlsx
+recipe_00015,Recipe,recipe_00015,AO043,Dodol bali,Jaje Dodol Injin Bali / Dodol Ketan Hitam Bali,9,New_Ingredients_category.xlsx
+recipe_00016,Recipe,recipe_00016,AO045,Dodol kedondong,Dodol Kedondong,7,New_Ingredients_category.xlsx
+recipe_00017,Recipe,recipe_00017,AO048,Gemblong,Kue Gemblong Premium,12,New_Ingredients_category.xlsx
+recipe_00018,Recipe,recipe_00018,AO051,Jagung gerontol,Grontol Jagung,5,New_Ingredients_category.xlsx
+recipe_00019,Recipe,recipe_00019,AO053,Japilus,Pilus,7,New_Ingredients_category.xlsx
+recipe_00020,Recipe,recipe_00020,AO054,Kakicak,Kakicak Khas Banjar,9,New_Ingredients_category.xlsx
+recipe_00021,Recipe,recipe_00021,AO056,Kapusa,Kerupuk Basah (Temet Goreng & Rebus) Kapuas Hulu,18,New_Ingredients_category.xlsx
+recipe_00022,Recipe,recipe_00022,AO064,Koyabu,Kue Koyabu,4,New_Ingredients_category.xlsx
+recipe_00023,Recipe,recipe_00023,AO068,Kue jahe,Ginger Cookies,8,New_Ingredients_category.xlsx
+recipe_00024,Recipe,recipe_00024,AO069,Kue kelapa,Bolu Kelapa,11,New_Ingredients_category.xlsx
+recipe_00025,Recipe,recipe_00025,AO070,Kue koa,KUE KOA,2,New_Ingredients_category.xlsx
+recipe_00026,Recipe,recipe_00026,AO072,Kue lumpur,Kue lumpur raksasa,8,New_Ingredients_category.xlsx
+recipe_00027,Recipe,recipe_00027,AO078,Lapis legit,Lapis Legit Prunes Premium,7,New_Ingredients_category.xlsx
+recipe_00028,Recipe,recipe_00028,AO085,Mie ayam,Mie Ayam Kecap,13,New_Ingredients_category.xlsx
+recipe_00029,Recipe,recipe_00029,AO086,Mie bakso,Mie Jamur Bakso,12,New_Ingredients_category.xlsx
+recipe_00030,Recipe,recipe_00030,AO088,Mie pangsit basah,Mie Ayam Jamur Bakso Pangsit,33,New_Ingredients_category.xlsx
+recipe_00031,Recipe,recipe_00031,AO09,onde onde,Onde-Onde,10,New_Ingredients_category.xlsx
+recipe_00032,Recipe,recipe_00032,AO090,Nasi gurih,Nasi gurih bunga telang,8,New_Ingredients_category.xlsx
+recipe_00033,Recipe,recipe_00033,AO095,Padamaran,Padamaran Khas Jambi (1178),6,New_Ingredients_category.xlsx
+recipe_00034,Recipe,recipe_00034,AO097,Kue Pulut,172. Kue tepe / lemet / pulut singkong,8,New_Ingredients_category.xlsx
+recipe_00035,Recipe,recipe_00035,AO104,Roti warna sawo matang,Roti tawar buah sawo mentega(Campoleh),8,New_Ingredients_category.xlsx
+recipe_00036,Recipe,recipe_00036,AO105,Sarimuka,Sarimuka Pandan Gula Merah,16,New_Ingredients_category.xlsx
+recipe_00037,Recipe,recipe_00037,AO113,Wingko babat,Wingko Babat,9,New_Ingredients_category.xlsx
+recipe_00038,Recipe,recipe_00038,BO007,"Ganyong, rebus",Ganyong/Midro/Lembo Rebus,4,New_Ingredients_category.xlsx
+recipe_00039,Recipe,recipe_00039,BO009,"Suweg, talas, kukus",Suweg kukus,3,New_Ingredients_category.xlsx
+recipe_00040,Recipe,recipe_00040,BO011,"Ubi jalar, kuning, kukus",Ubi kukus,3,New_Ingredients_category.xlsx
+recipe_00041,Recipe,recipe_00041,BO015,Bagea kenari asin,Kue Bagea Kenari (kue sagu),7,New_Ingredients_category.xlsx
+recipe_00042,Recipe,recipe_00042,BO016,Bagea kenari manis,Kue Bagea Kenari (kue sagu),7,New_Ingredients_category.xlsx
+recipe_00043,Recipe,recipe_00043,BO017,Bagea kw 1,Kue Bagea,9,New_Ingredients_category.xlsx
+recipe_00044,Recipe,recipe_00044,BO018,Bagea kw 2,Kue Bagea,9,New_Ingredients_category.xlsx
+recipe_00045,Recipe,recipe_00045,BO023,Bubur sagu,Bubur Sagu Ambon,10,New_Ingredients_category.xlsx
+recipe_00046,Recipe,recipe_00046,BO025,Ceriping getuk singkong,Kripik gethuk,5,New_Ingredients_category.xlsx
+recipe_00047,Recipe,recipe_00047,BO026,Gatot,Gatot Getuk (Singkong),3,New_Ingredients_category.xlsx
+recipe_00048,Recipe,recipe_00048,BO029,Getuk singkong,Gatot Getuk (Singkong),3,New_Ingredients_category.xlsx
+recipe_00049,Recipe,recipe_00049,BO030,Gurandil,Gurandil,8,New_Ingredients_category.xlsx
+recipe_00050,Recipe,recipe_00050,BO033,Kecimpring singkong goreng,Kecimpring singkong,5,New_Ingredients_category.xlsx
+recipe_00051,Recipe,recipe_00051,BO035,Keripik gadung,Keripik singkong rasa gadung,5,New_Ingredients_category.xlsx
+recipe_00052,Recipe,recipe_00052,BO045,Kerupuk udang goreng,Kerupuk Udang,2,New_Ingredients_category.xlsx
+recipe_00053,Recipe,recipe_00053,BO047,Kue putu singkong,Kue Putu Singkong,5,New_Ingredients_category.xlsx
+recipe_00054,Recipe,recipe_00054,BO048,Lanting getuk,Lanting getuk /singkong ala nafren,4,New_Ingredients_category.xlsx
+recipe_00055,Recipe,recipe_00055,BO050,Mie Bendo,Mie lethek/mie bendo goreng,14,New_Ingredients_category.xlsx
+recipe_00056,Recipe,recipe_00056,BO053,Oyek,Tiwul / nasi oyek harum tidak pahit,1,New_Ingredients_category.xlsx
+recipe_00057,Recipe,recipe_00057,BO061,Sagu sinole,Sinole manis,7,New_Ingredients_category.xlsx
+recipe_00058,Recipe,recipe_00058,BO062,Serimping talas kebumen,Kue talas,9,New_Ingredients_category.xlsx
+recipe_00059,Recipe,recipe_00059,BO072,Tepung Ubi Ungu,Pasta Ubi Ungu (Isian Bakpao/Roti),10,New_Ingredients_category.xlsx
+recipe_00060,Recipe,recipe_00060,BO075,Ubi Cilembu,Ubi Cilembu,3,New_Ingredients_category.xlsx
+recipe_00061,Recipe,recipe_00061,CO001,"Kacang belimbing, rebus",Sambal Belimbing (pakai Biji Nangka),12,New_Ingredients_category.xlsx
+recipe_00062,Recipe,recipe_00062,CO005,"kacang hijau, rebus",Kacang Hijau Rebus,2,New_Ingredients_category.xlsx
+recipe_00063,Recipe,recipe_00063,CO013,"Kacang tanah, rebus",Air rebusan kulit ari kacang tanah dan kurma merah,3,New_Ingredients_category.xlsx
+recipe_00064,Recipe,recipe_00064,CO014,"Kacang tolo, rebus",Lepet Kacang Tolo,7,New_Ingredients_category.xlsx
+recipe_00065,Recipe,recipe_00065,CO018,"Ampas tahu, kering",Kue coklat #vegan dengan ampas tahu (Okara),11,New_Ingredients_category.xlsx
+recipe_00066,Recipe,recipe_00066,CO021,Bungkil kacang tanah,Tumis Oncom KW (Bungkil Kacang Tanah),13,New_Ingredients_category.xlsx
+recipe_00067,Recipe,recipe_00067,CO022,Bungkil kelapa,Bobor sedaer dan tempe bungkil,13,New_Ingredients_category.xlsx
+recipe_00068,Recipe,recipe_00068,CO024,Emping (kerupuk melinjo),Kue Kering Emping Melinjo,9,New_Ingredients_category.xlsx
+recipe_00069,Recipe,recipe_00069,CO028,Enting-enting wijen,Enting Enting Kacang Wijen,4,New_Ingredients_category.xlsx
+recipe_00070,Recipe,recipe_00070,CO029,Geplak,Geplak betawi,7,New_Ingredients_category.xlsx
+recipe_00071,Recipe,recipe_00071,CO031,Kacang atom,Kacang Atom,10,New_Ingredients_category.xlsx
+recipe_00072,Recipe,recipe_00072,CO032,Kacang goyang,Peyek kacang kembang goyang,13,New_Ingredients_category.xlsx
+recipe_00073,Recipe,recipe_00073,CO034,Kacang sukro,Kacang Atom #Dapur Fitri,10,New_Ingredients_category.xlsx
+recipe_00074,Recipe,recipe_00074,CO037,Kembang tahu,Kembang Tahu,8,New_Ingredients_category.xlsx
+recipe_00075,Recipe,recipe_00075,CO046,Kwaci,Kuaci Biji Labu,3,New_Ingredients_category.xlsx
+recipe_00076,Recipe,recipe_00076,CO047,Melinjo emping tebal goreng manis,Emping Goreng,2,New_Ingredients_category.xlsx
+recipe_00077,Recipe,recipe_00077,CO048,"Melinjo emping tebal, goreng asin",Emping goreng,3,New_Ingredients_category.xlsx
+recipe_00078,Recipe,recipe_00078,CO049,Melinjo emping tipis goreng,Emping goreng,3,New_Ingredients_category.xlsx
+recipe_00079,Recipe,recipe_00079,CO050,Moon tahu,Mun Tahu Ayam,10,New_Ingredients_category.xlsx
+recipe_00080,Recipe,recipe_00080,CO056,Rempeyek kacang tolo,Peyek Kacang Tolo,13,New_Ingredients_category.xlsx
+recipe_00081,Recipe,recipe_00081,CO057,Rempeyek kacang uci,Peyek Kacang,12,New_Ingredients_category.xlsx
+recipe_00082,Recipe,recipe_00082,CO063,Tahu telur,Sup Tahu Telur,11,New_Ingredients_category.xlsx
+recipe_00083,Recipe,recipe_00083,CO074,Tempe kacang belimbing,Rujak Cingur Khas Surabaya,19,New_Ingredients_category.xlsx
+recipe_00084,Recipe,recipe_00084,CO076,"Tempe kedelai murni, goreng",Sambal Goreng Tempe (Lauk Nasi Ponggol Khas Tegal),14,New_Ingredients_category.xlsx
+recipe_00085,Recipe,recipe_00085,DO001,"Bayam, kukus",Side Dish: Sigeumchi Namul / Lalapan Bayam ala Hanamasa,5,New_Ingredients_category.xlsx
+recipe_00086,Recipe,recipe_00086,DO005,"Daun katuk, rebus",Sayur daun katuk,8,New_Ingredients_category.xlsx
+recipe_00087,Recipe,recipe_00087,DO008,"Daun singkong, rebus",Daun Singkong Rebus,5,New_Ingredients_category.xlsx
+recipe_00088,Recipe,recipe_00088,DO009,"Daun talas, rebus",DAUN SINGKONG REBUS / LALAP DAUN SINGKONG笆ｪ�ｸ�,5,New_Ingredients_category.xlsx
+recipe_00089,Recipe,recipe_00089,DO014,"Kangkung, rebus",Kangkung Rebus Siram Bawang Pedas,10,New_Ingredients_category.xlsx
+recipe_00090,Recipe,recipe_00090,DO023,"Anyang, sayur",Anyang Bunga Pepaya,11,New_Ingredients_category.xlsx
+recipe_00091,Recipe,recipe_00091,DO026,Beberuk,Beberuk Terong,11,New_Ingredients_category.xlsx
+recipe_00092,Recipe,recipe_00092,DO029,Cammetutu,551.Sayur Tuttu' (Tettu') khas Makasar,11,New_Ingredients_category.xlsx
+recipe_00093,Recipe,recipe_00093,DO030,"Cap cai, sayur",Cap cai goreng,15,New_Ingredients_category.xlsx
+recipe_00094,Recipe,recipe_00094,DO032,"Gudeg, sayur",Gudeg Jogja Tanpa Daun Jati,16,New_Ingredients_category.xlsx
+recipe_00095,Recipe,recipe_00095,DO033,Gulai pakis,Gulai Pakis Pedas,20,New_Ingredients_category.xlsx
+recipe_00096,Recipe,recipe_00096,DO040,Lema/ Rebung asam,Santan ikan Rebung Asam,19,New_Ingredients_category.xlsx
+recipe_00097,Recipe,recipe_00097,DO044,Pelecing kangkung,Plecing Kangkung,11,New_Ingredients_category.xlsx
+recipe_00098,Recipe,recipe_00098,DO046,Rujak cingur,Rujak Cingur,19,New_Ingredients_category.xlsx
+recipe_00099,Recipe,recipe_00099,DO049,Sayur garu,Sayur Garu,10,New_Ingredients_category.xlsx
+recipe_00100,Recipe,recipe_00100,DO051,Sayur lilin-terubuk,Gulai Terubuk/sayur lilin,12,New_Ingredients_category.xlsx
+recipe_00101,Recipe,recipe_00101,DO056,Shabu-shabu,Shabushabu sederhana,9,New_Ingredients_category.xlsx
+recipe_00102,Recipe,recipe_00102,EO004,Keripik lampung,Keripik Pisang Coklat Khas Lampung,8,New_Ingredients_category.xlsx
+recipe_00103,Recipe,recipe_00103,EO005,Ledre pisang,Ledre Pisang,9,New_Ingredients_category.xlsx
+recipe_00104,Recipe,recipe_00104,EO006,Lempog durian,Lempok Durian,4,New_Ingredients_category.xlsx
+recipe_00105,Recipe,recipe_00105,EO010,Sale kesemek,Dry persimmon/Kesemek kering/Sale kesemek,1,New_Ingredients_category.xlsx
+recipe_00106,Recipe,recipe_00106,EO013,Sanggara belanda,Sanggara Balanda,5,New_Ingredients_category.xlsx
+recipe_00107,Recipe,recipe_00107,FO007,Kerupuk urat,Koyor sapi pedasss.. 幻,21,New_Ingredients_category.xlsx
+recipe_00108,Recipe,recipe_00108,FO013,"Sapi, daging, asap",Nasi Goreng Smoked Beef,17,New_Ingredients_category.xlsx
+recipe_00109,Recipe,recipe_00109,FO015,"Sapi, daging, kornet",Kornet telur,6,New_Ingredients_category.xlsx
+recipe_00110,Recipe,recipe_00110,FO019,"Sapi, paru, goreng",Paru Sapi Goreng Kentang balado,16,New_Ingredients_category.xlsx
+recipe_00111,Recipe,recipe_00111,FO020,"Ulat sagu, panggang",Ulet sagu keju,6,New_Ingredients_category.xlsx
+recipe_00112,Recipe,recipe_00112,FO026,"Ayam goreng Kentucky, paha",Ayam goreng ala KFC,9,New_Ingredients_category.xlsx
+recipe_00113,Recipe,recipe_00113,FO027,"Ayam goreng Kentucky,sayap",Ayam Kentucky Super Crispy,4,New_Ingredients_category.xlsx
+recipe_00114,Recipe,recipe_00114,FO028,Ayam goreng mbok berek dada,Ayam Goreng Kremes Mbok Berek,16,New_Ingredients_category.xlsx
+recipe_00115,Recipe,recipe_00115,FO034,"Ayam taliwang, masakan",Ayam Taliwang,19,New_Ingredients_category.xlsx
+recipe_00116,Recipe,recipe_00116,FO035,"Babi hutan masak rica, masakan",Rica rica babi 盛 Hutan,15,New_Ingredients_category.xlsx
+recipe_00117,Recipe,recipe_00117,FO039,Brongkos,Jangan Brongkos Jogja,18,New_Ingredients_category.xlsx
+recipe_00118,Recipe,recipe_00118,FO040,"Bulgogi, masakan",Beef Bulgogi,7,New_Ingredients_category.xlsx
+recipe_00119,Recipe,recipe_00119,FO042,"Chikiniku, masakan",Chicken yakiniku,10,New_Ingredients_category.xlsx
+recipe_00120,Recipe,recipe_00120,FO049,"Kalio ayam, masakan",Kalio Ayam (Masakan Daerah Padang),18,New_Ingredients_category.xlsx
+recipe_00121,Recipe,recipe_00121,FO050,"Kalio jeroan, masakan",Kalio Hati Sapi,22,New_Ingredients_category.xlsx
+recipe_00122,Recipe,recipe_00122,FO051,"Kalio kikil (tunjang), masakan",Jengkol dan kikil kalio,18,New_Ingredients_category.xlsx
+recipe_00123,Recipe,recipe_00123,FO057,"Nasu likku, masakan",Nasu Likku: Ayam Masak Lengkuas Khas Bugis,15,New_Ingredients_category.xlsx
+recipe_00124,Recipe,recipe_00124,FO059,"Paniki masak santan, masakan",Ayam Panggang Masak Paniki,13,New_Ingredients_category.xlsx
+recipe_00125,Recipe,recipe_00125,FO062,"Rendang sapi, masakan",Kalio daging (masakan sebelum jadi rendang),18,New_Ingredients_category.xlsx
+recipe_00126,Recipe,recipe_00126,FO069,"Sop daging sapi, masakan","Sup daging sapi & sayur,masakan rumahan",8,New_Ingredients_category.xlsx
+recipe_00127,Recipe,recipe_00127,FO071,"Sop kambing, masakan",Sop Kepala & Kaki Kambing Muda,18,New_Ingredients_category.xlsx
+recipe_00128,Recipe,recipe_00128,FO073,"Sop saudara, masakan",Sup Saudara (Sulawesi Selatan),17,New_Ingredients_category.xlsx
+recipe_00129,Recipe,recipe_00129,FO079,"Soto madura, masakan",243. Soto Daging Madura (Tanpa Menumis Bumbu),17,New_Ingredients_category.xlsx
+recipe_00130,Recipe,recipe_00130,FO082,"Soto pemalang, masakan",Soto Tauco Khas Pemalang,7,New_Ingredients_category.xlsx
+recipe_00131,Recipe,recipe_00131,GO005,"Ikan bandeng presto, masakan",Resep Bandeng Presto Tulang Lunak dan Sambal \,21,New_Ingredients_category.xlsx
+recipe_00132,Recipe,recipe_00132,GO006,Ikan baung bakar,2 Versi Pepes Ikan Baung (Brengkes) Bakar,13,New_Ingredients_category.xlsx
+recipe_00133,Recipe,recipe_00133,GO011,"Ikan Gabus asap, mentah",Ikan Hiu masak Aceh,27,New_Ingredients_category.xlsx
+recipe_00134,Recipe,recipe_00134,GO021,Ikan Mujahir pepes,Pepes Mujaer Kemangi,12,New_Ingredients_category.xlsx
+recipe_00135,Recipe,recipe_00135,GO024,"Ikan Patin, bakar","Patin, Terong Bakar Kuah Santan",12,New_Ingredients_category.xlsx
+recipe_00136,Recipe,recipe_00136,GO051,"Udang kering, mentah",Sayur lodeh dan Sambel Terasi mentah,21,New_Ingredients_category.xlsx
+recipe_00137,Recipe,recipe_00137,GO054,Abon ikan,Abon ikan tongkol,11,New_Ingredients_category.xlsx
+recipe_00138,Recipe,recipe_00138,GO058,Cakalang asar (asap),512. Asar Sous Khas Maluku (Ikan Cakalang Asap),9,New_Ingredients_category.xlsx
+recipe_00139,Recipe,recipe_00139,GO059,"Dendeng belut, goreng, masakan",Dendeng belut balado sama goreng jengkol,6,New_Ingredients_category.xlsx
+recipe_00140,Recipe,recipe_00140,GO065,"Gulai ikan, masakan",Gulai kuning ikan patin (masakan padang),20,New_Ingredients_category.xlsx
+recipe_00141,Recipe,recipe_00141,GO078,"Pempek belida, masakan",Pempek Ikan Belida,4,New_Ingredients_category.xlsx
+recipe_00142,Recipe,recipe_00142,GO081,"Pempek kulit, masakan",Pempek Kulit Tenggiri,12,New_Ingredients_category.xlsx
+recipe_00143,Recipe,recipe_00143,GO083,"Pempek tenggiri, masakan",Pempek Tenggiri Adaan (2kg Ikan),14,New_Ingredients_category.xlsx
+recipe_00144,Recipe,recipe_00144,GO090,Sate Bandeng,Sate Lilit Bandeng,2,New_Ingredients_category.xlsx
+recipe_00145,Recipe,recipe_00145,GO092,"Tekwan, masakan",TEKWAN PALEMBANG,10,New_Ingredients_category.xlsx
+recipe_00146,Recipe,recipe_00146,HO001,"Telur ayam, dadar, masakan",Telur dadar masakan padang,12,New_Ingredients_category.xlsx
+recipe_00147,Recipe,recipe_00147,HO002,"Telur bebek, asin, mentah",Telur Bebek Asin Rebus,4,New_Ingredients_category.xlsx
+recipe_00148,Recipe,recipe_00148,,Alpukat Mentega,Alpukat Mentega,1,New_Ingredients_category.xlsx
+recipe_00149,Recipe,recipe_00149,,Anggur Muscat,Anggur Muscat,1,New_Ingredients_category.xlsx
+recipe_00150,Recipe,recipe_00150,,Apel Fuji,Apel Fuji,1,New_Ingredients_category.xlsx
+recipe_00151,Recipe,recipe_00151,,Apel Malang (Manalagi),Apel Malang (Manalagi),1,New_Ingredients_category.xlsx
+recipe_00152,Recipe,recipe_00152,,Apel Potong (Segar),Apel Potong (Segar),1,New_Ingredients_category.xlsx
+recipe_00153,Recipe,recipe_00153,,Asinan Betawi,Asinan Betawi,5,New_Ingredients_category.xlsx
+recipe_00154,Recipe,recipe_00154,,Ayam Bakar (Tanpa Kulit),Ayam Bakar (Tanpa Kulit),8,New_Ingredients_category.xlsx
+recipe_00155,Recipe,recipe_00155,,Ayam Bakar Taliwang,Ayam Bakar Taliwang,5,New_Ingredients_category.xlsx
+recipe_00156,Recipe,recipe_00156,,Ayam Betutu,Ayam Betutu,5,New_Ingredients_category.xlsx
+recipe_00157,Recipe,recipe_00157,,Ayam Geprek,Ayam Geprek,5,New_Ingredients_category.xlsx
+recipe_00158,Recipe,recipe_00158,,Ayam Goreng,Ayam Goreng,1,New_Ingredients_category.xlsx
+recipe_00159,Recipe,recipe_00159,,Ayam Goreng KFC Crispy,Ayam Goreng KFC Crispy,5,New_Ingredients_category.xlsx
+recipe_00160,Recipe,recipe_00160,,Ayam Goreng KFC Original,Ayam Goreng KFC Original,5,New_Ingredients_category.xlsx
+recipe_00161,Recipe,recipe_00161,,Ayam Goreng McD - Paha (Thigh),Ayam Goreng McD - Paha (Thigh),3,New_Ingredients_category.xlsx
+recipe_00162,Recipe,recipe_00162,,Ayam Rebus Jahe (Pek Cam Kee),Ayam Rebus Jahe (Pek Cam Kee),5,New_Ingredients_category.xlsx
+recipe_00163,Recipe,recipe_00163,,Ayam Sisit Bali,Ayam Sisit Bali,5,New_Ingredients_category.xlsx
+recipe_00164,Recipe,recipe_00164,,Ayam Spicy McD,Ayam Spicy McD,5,New_Ingredients_category.xlsx
+recipe_00165,Recipe,recipe_00165,,Bakso Aci,Bakso Aci,4,New_Ingredients_category.xlsx
+recipe_00166,Recipe,recipe_00166,,Bakso Sapi Kuah (Tanpa Mie),Bakso Sapi Kuah (Tanpa Mie),5,New_Ingredients_category.xlsx
+recipe_00167,Recipe,recipe_00167,,Bakwan Sayur,Bakwan Sayur,4,New_Ingredients_category.xlsx
+recipe_00168,Recipe,recipe_00168,,Balado Teri Kacang,Balado Teri Kacang,4,New_Ingredients_category.xlsx
+recipe_00169,Recipe,recipe_00169,,Bapmericano (Nasi Kopi Viral),Bapmericano (Nasi Kopi Viral),3,New_Ingredients_category.xlsx
+recipe_00170,Recipe,recipe_00170,,Batagor,Batagor,4,New_Ingredients_category.xlsx
+recipe_00171,Recipe,recipe_00171,,Bebek Goreng,Bebek Goreng,3,New_Ingredients_category.xlsx
+recipe_00172,Recipe,recipe_00172,,Beberuk Terong,Beberuk Terong,5,New_Ingredients_category.xlsx
+recipe_00173,Recipe,recipe_00173,,Beef Prosperity Burger,Beef Prosperity Burger,4,New_Ingredients_category.xlsx
+recipe_00174,Recipe,recipe_00174,,Beef Yakiniku,Beef Yakiniku,4,New_Ingredients_category.xlsx
+recipe_00175,Recipe,recipe_00175,,Bento Special 4,Bento Special 4,5,New_Ingredients_category.xlsx
+recipe_00176,Recipe,recipe_00176,,Big Mac,Big Mac,5,New_Ingredients_category.xlsx
+recipe_00177,Recipe,recipe_00177,,Bihun Goreng Sayur,Bihun Goreng Sayur,5,New_Ingredients_category.xlsx
+recipe_00178,Recipe,recipe_00178,,Bolu Kukus,Bolu Kukus,4,New_Ingredients_category.xlsx
+recipe_00179,Recipe,recipe_00179,,Buah Leci,Buah Leci,1,New_Ingredients_category.xlsx
+recipe_00180,Recipe,recipe_00180,,Buah Matoa,Buah Matoa,1,New_Ingredients_category.xlsx
+recipe_00181,Recipe,recipe_00181,,Buah Naga Merah,Buah Naga Merah,1,New_Ingredients_category.xlsx
+recipe_00182,Recipe,recipe_00182,,Bubur Ayam,Bubur Ayam,5,New_Ingredients_category.xlsx
+recipe_00183,Recipe,recipe_00183,,Bubur Ayam Cirebon,Bubur Ayam Cirebon,5,New_Ingredients_category.xlsx
+recipe_00184,Recipe,recipe_00184,,Bubur Ayam Jakarta,Bubur Ayam Jakarta,5,New_Ingredients_category.xlsx
+recipe_00185,Recipe,recipe_00185,,Bubur Ayam McD,Bubur Ayam McD,5,New_Ingredients_category.xlsx
+recipe_00186,Recipe,recipe_00186,,Bubur Kacang Hijau,Bubur Kacang Hijau,4,New_Ingredients_category.xlsx
+recipe_00187,Recipe,recipe_00187,,Bubur Manado (Tinutuan),Bubur Manado (Tinutuan),5,New_Ingredients_category.xlsx
+recipe_00188,Recipe,recipe_00188,,Bubur Pati Garut,Bubur Pati Garut,3,New_Ingredients_category.xlsx
+recipe_00189,Recipe,recipe_00189,,Bubur Sumsum,Bubur Sumsum,5,New_Ingredients_category.xlsx
+recipe_00190,Recipe,recipe_00190,,Butter Croissant,Butter Croissant,4,New_Ingredients_category.xlsx
+recipe_00191,Recipe,recipe_00191,,Capcay Goreng / Kuah (Ayam),Capcay Goreng / Kuah (Ayam),8,New_Ingredients_category.xlsx
+recipe_00192,Recipe,recipe_00192,,Capcay Seafood Kuah,Capcay Seafood Kuah,10,New_Ingredients_category.xlsx
+recipe_00193,Recipe,recipe_00193,,Chicken Snack Wrap,Chicken Snack Wrap,5,New_Ingredients_category.xlsx
+recipe_00194,Recipe,recipe_00194,,Chicken Steak Grill,Chicken Steak Grill,5,New_Ingredients_category.xlsx
+recipe_00195,Recipe,recipe_00195,,Chiffon Cake,Chiffon Cake,5,New_Ingredients_category.xlsx
+recipe_00196,Recipe,recipe_00196,,Cilok,Cilok,5,New_Ingredients_category.xlsx
+recipe_00197,Recipe,recipe_00197,,Cimol (Aci Digemol),Cimol (Aci Digemol),4,New_Ingredients_category.xlsx
+recipe_00198,Recipe,recipe_00198,,Cireng (Aci Goreng),Cireng (Aci Goreng),5,New_Ingredients_category.xlsx
+recipe_00199,Recipe,recipe_00199,,Coto Makassar,Coto Makassar,3,New_Ingredients_category.xlsx
+recipe_00200,Recipe,recipe_00200,,Crispy Cheese Bombs,Crispy Cheese Bombs,4,New_Ingredients_category.xlsx
+recipe_00201,Recipe,recipe_00201,,Cuanki Mini (Viral),Cuanki Mini (Viral),4,New_Ingredients_category.xlsx
+recipe_00202,Recipe,recipe_00202,,Dada Ayam,Dada Ayam,1,New_Ingredients_category.xlsx
+recipe_00203,Recipe,recipe_00203,,Dadar Gulung,Dadar Gulung,5,New_Ingredients_category.xlsx
+recipe_00204,Recipe,recipe_00204,,Daging Sapi Panggang,Daging Sapi Panggang,1,New_Ingredients_category.xlsx
+recipe_00205,Recipe,recipe_00205,,Dendeng Balado Basah,Dendeng Balado Basah,5,New_Ingredients_category.xlsx
+recipe_00206,Recipe,recipe_00206,,Dimsum Ayam Kukus,Dimsum Ayam Kukus,5,New_Ingredients_category.xlsx
+recipe_00207,Recipe,recipe_00207,,Dimsum Goreng Mentai,Dimsum Goreng Mentai,5,New_Ingredients_category.xlsx
+recipe_00208,Recipe,recipe_00208,,Dimsum Mie Gacoan,Dimsum Mie Gacoan,4,New_Ingredients_category.xlsx
+recipe_00209,Recipe,recipe_00209,,Donat Gula Halus,Donat Gula Halus,4,New_Ingredients_category.xlsx
+recipe_00210,Recipe,recipe_00210,,Egg McMuffin,Egg McMuffin,5,New_Ingredients_category.xlsx
+recipe_00211,Recipe,recipe_00211,,Empal Gentong,Empal Gentong,4,New_Ingredients_category.xlsx
+recipe_00212,Recipe,recipe_00212,,Emping Melinjo,Emping Melinjo,3,New_Ingredients_category.xlsx
+recipe_00213,Recipe,recipe_00213,,Es Kul-Kul Buah Viral,Es Kul-Kul Buah Viral,5,New_Ingredients_category.xlsx
+recipe_00214,Recipe,recipe_00214,,Gohyong Ayam Viral,Gohyong Ayam Viral,5,New_Ingredients_category.xlsx
+recipe_00215,Recipe,recipe_00215,,Gudeg Jogja,Gudeg Jogja,5,New_Ingredients_category.xlsx
+recipe_00216,Recipe,recipe_00216,,Gulai Ayam,Gulai Ayam,3,New_Ingredients_category.xlsx
+recipe_00217,Recipe,recipe_00217,,Gulai Daun Singkong,Gulai Daun Singkong,5,New_Ingredients_category.xlsx
+recipe_00218,Recipe,recipe_00218,,Gulai Kambing,Gulai Kambing,3,New_Ingredients_category.xlsx
+recipe_00219,Recipe,recipe_00219,,Gulai Otak Sapi,Gulai Otak Sapi,3,New_Ingredients_category.xlsx
+recipe_00220,Recipe,recipe_00220,,Gulai Tunjang,Gulai Tunjang,5,New_Ingredients_category.xlsx
+recipe_00221,Recipe,recipe_00221,,Hati Ayam Rebus,Hati Ayam Rebus,1,New_Ingredients_category.xlsx
+recipe_00222,Recipe,recipe_00222,,Hoka Hemat 3,Hoka Hemat 3,4,New_Ingredients_category.xlsx
+recipe_00223,Recipe,recipe_00223,,Ikan Asin (Goreng),Ikan Asin (Goreng),2,New_Ingredients_category.xlsx
+recipe_00224,Recipe,recipe_00224,,Ikan Bakar Teflon (Diet Friendly),Ikan Bakar Teflon (Diet Friendly),5,New_Ingredients_category.xlsx
+recipe_00225,Recipe,recipe_00225,,Ikan Barakuda,Ikan Barakuda,1,New_Ingredients_category.xlsx
+recipe_00226,Recipe,recipe_00226,,Ikan Cucut,Ikan Cucut,1,New_Ingredients_category.xlsx
+recipe_00227,Recipe,recipe_00227,,Ikan Dori,Ikan Dori,1,New_Ingredients_category.xlsx
+recipe_00228,Recipe,recipe_00228,,Ikan Ekor Kuning,Ikan Ekor Kuning,1,New_Ingredients_category.xlsx
+recipe_00229,Recipe,recipe_00229,,Ikan Gabus,Ikan Gabus,4,New_Ingredients_category.xlsx
+recipe_00230,Recipe,recipe_00230,,Ikan Kembung Goreng,Ikan Kembung Goreng,5,New_Ingredients_category.xlsx
+recipe_00231,Recipe,recipe_00231,,Ikan Kuah Kuning,Ikan Kuah Kuning,4,New_Ingredients_category.xlsx
+recipe_00232,Recipe,recipe_00232,,Ikan Layang,Ikan Layang,1,New_Ingredients_category.xlsx
+recipe_00233,Recipe,recipe_00233,,Ikan Pesmol (Bumbu Kuning),Ikan Pesmol (Bumbu Kuning),5,New_Ingredients_category.xlsx
+recipe_00234,Recipe,recipe_00234,,Ikan Salem,Ikan Salem,1,New_Ingredients_category.xlsx
+recipe_00235,Recipe,recipe_00235,,Ikan Sarden (Kaleng),Ikan Sarden (Kaleng),2,New_Ingredients_category.xlsx
+recipe_00236,Recipe,recipe_00236,,Indomie Mi Goreng,Indomie Mi Goreng,5,New_Ingredients_category.xlsx
+recipe_00237,Recipe,recipe_00237,,Indomie Mi Goreng Jumbo,Indomie Mi Goreng Jumbo,5,New_Ingredients_category.xlsx
+recipe_00238,Recipe,recipe_00238,,Indomie Mi Nyemek,Indomie Mi Nyemek,10,New_Ingredients_category.xlsx
+recipe_00239,Recipe,recipe_00239,,Indomie Rasa Ayam Bawang,Indomie Rasa Ayam Bawang,5,New_Ingredients_category.xlsx
+recipe_00240,Recipe,recipe_00240,,Jambu Biji Merah,Jambu Biji Merah,1,New_Ingredients_category.xlsx
+recipe_00241,Recipe,recipe_00241,,Jambu Kristal (Tanpa Biji),Jambu Kristal (Tanpa Biji),1,New_Ingredients_category.xlsx
+recipe_00242,Recipe,recipe_00242,,"Jeroan Sapi (Hati, Paru, Babat)","Jeroan Sapi (Hati, Paru, Babat)",6,New_Ingredients_category.xlsx
+recipe_00243,Recipe,recipe_00243,,Jeruk Manis,Jeruk Manis,1,New_Ingredients_category.xlsx
+recipe_00244,Recipe,recipe_00244,,Jeruk Nipis,Jeruk Nipis,2,New_Ingredients_category.xlsx
+recipe_00245,Recipe,recipe_00245,,Jeruk Sunkist,Jeruk Sunkist,1,New_Ingredients_category.xlsx
+recipe_00246,Recipe,recipe_00246,,KFC Colonel Burger,KFC Colonel Burger,5,New_Ingredients_category.xlsx
+recipe_00247,Recipe,recipe_00247,,KFC Cream Soup,KFC Cream Soup,5,New_Ingredients_category.xlsx
+recipe_00248,Recipe,recipe_00248,,KFC French Fries (Large),KFC French Fries (Large),4,New_Ingredients_category.xlsx
+recipe_00249,Recipe,recipe_00249,,KFC Perkedel,KFC Perkedel,5,New_Ingredients_category.xlsx
+recipe_00250,Recipe,recipe_00250,,Kacang Almond Panggang (Roasted Almond),Kacang Almond Panggang (Roasted Almond),1,New_Ingredients_category.xlsx
+recipe_00251,Recipe,recipe_00251,,Kebab Turki (Doner Kebab),Kebab Turki (Doner Kebab),5,New_Ingredients_category.xlsx
+recipe_00252,Recipe,recipe_00252,,Keju Aroma,Keju Aroma,3,New_Ingredients_category.xlsx
+recipe_00253,Recipe,recipe_00253,,Kentang Rebus,Kentang Rebus,1,New_Ingredients_category.xlsx
+recipe_00254,Recipe,recipe_00254,,Kepiting Saus Padang,Kepiting Saus Padang,5,New_Ingredients_category.xlsx
+recipe_00255,Recipe,recipe_00255,,Kerak Telor,Kerak Telor,8,New_Ingredients_category.xlsx
+recipe_00256,Recipe,recipe_00256,,Keripik Apel Malang,Keripik Apel Malang,2,New_Ingredients_category.xlsx
+recipe_00257,Recipe,recipe_00257,,Ketoprak Jakarta,Ketoprak Jakarta,5,New_Ingredients_category.xlsx
+recipe_00258,Recipe,recipe_00258,,Ketupat,Ketupat,1,New_Ingredients_category.xlsx
+recipe_00259,Recipe,recipe_00259,,Kimchi,Kimchi,5,New_Ingredients_category.xlsx
+recipe_00260,Recipe,recipe_00260,,Klepon,Klepon,5,New_Ingredients_category.xlsx
+recipe_00261,Recipe,recipe_00261,,Kolak Pisang,Kolak Pisang,5,New_Ingredients_category.xlsx
+recipe_00262,Recipe,recipe_00262,,Konro Bakar,Konro Bakar,5,New_Ingredients_category.xlsx
+recipe_00263,Recipe,recipe_00263,,Kopi Kenangan - Cerita Roti Coklat Klasik,Kopi Kenangan - Cerita Roti Coklat Klasik,3,New_Ingredients_category.xlsx
+recipe_00264,Recipe,recipe_00264,,Kopi Kenangan - Cerita Roti Daging Asap Keju,Kopi Kenangan - Cerita Roti Daging Asap Keju,4,New_Ingredients_category.xlsx
+recipe_00265,Recipe,recipe_00265,,Kopi Kenangan - Cerita Roti Keju Manis,Kopi Kenangan - Cerita Roti Keju Manis,4,New_Ingredients_category.xlsx
+recipe_00266,Recipe,recipe_00266,,Kue Lumpur Kentang,Kue Lumpur Kentang,5,New_Ingredients_category.xlsx
+recipe_00267,Recipe,recipe_00267,,Kue Sus,Kue Sus,5,New_Ingredients_category.xlsx
+recipe_00268,Recipe,recipe_00268,,Kulit Ayam,Kulit Ayam,1,New_Ingredients_category.xlsx
+recipe_00269,Recipe,recipe_00269,,Kuning Telur Rebus,Kuning Telur Rebus,1,New_Ingredients_category.xlsx
+recipe_00270,Recipe,recipe_00270,,Lalapan Sayur Segar (Fresh Vegetables Platter),Lalapan Sayur Segar (Fresh Vegetables Platter),10,New_Ingredients_category.xlsx
+recipe_00271,Recipe,recipe_00271,,Lapis Legit,Lapis Legit,5,New_Ingredients_category.xlsx
+recipe_00272,Recipe,recipe_00272,,Lele Goreng (Tanpa Tepung),Lele Goreng (Tanpa Tepung),3,New_Ingredients_category.xlsx
+recipe_00273,Recipe,recipe_00273,,Lemonilo Mie Goreng,Lemonilo Mie Goreng,4,New_Ingredients_category.xlsx
+recipe_00274,Recipe,recipe_00274,,Lemper Ayam,Lemper Ayam,4,New_Ingredients_category.xlsx
+recipe_00275,Recipe,recipe_00275,,Lentho Kacang Tolo,Lentho Kacang Tolo,5,New_Ingredients_category.xlsx
+recipe_00276,Recipe,recipe_00276,,Lontong,Lontong,1,New_Ingredients_category.xlsx
+recipe_00277,Recipe,recipe_00277,,Lontong Balap Surabaya,Lontong Balap Surabaya,5,New_Ingredients_category.xlsx
+recipe_00278,Recipe,recipe_00278,,Lontong Sayur,Lontong Sayur,5,New_Ingredients_category.xlsx
+recipe_00279,Recipe,recipe_00279,,Lontong Sayur Medan,Lontong Sayur Medan,5,New_Ingredients_category.xlsx
+recipe_00280,Recipe,recipe_00280,,Lumpia Basah,Lumpia Basah,5,New_Ingredients_category.xlsx
+recipe_00281,Recipe,recipe_00281,,Macaroni Schotel (Panggang),Macaroni Schotel (Panggang),5,New_Ingredients_category.xlsx
+recipe_00282,Recipe,recipe_00282,,Mangga,Mangga,1,New_Ingredients_category.xlsx
+recipe_00283,Recipe,recipe_00283,,Martabak Manis Cokelat Keju,Martabak Manis Cokelat Keju,5,New_Ingredients_category.xlsx
+recipe_00284,Recipe,recipe_00284,,Martabak Telur Bebek Spesial,Martabak Telur Bebek Spesial,5,New_Ingredients_category.xlsx
+recipe_00285,Recipe,recipe_00285,,McDonalds Ayam Krispy (Original),McDonalds Ayam Krispy (Original),5,New_Ingredients_category.xlsx
+recipe_00286,Recipe,recipe_00286,,McSpaghetti Pedas Manis,McSpaghetti Pedas Manis,5,New_Ingredients_category.xlsx
+recipe_00287,Recipe,recipe_00287,,Mie Aceh,Mie Aceh,5,New_Ingredients_category.xlsx
+recipe_00288,Recipe,recipe_00288,,Mie Ayam,Mie Ayam,5,New_Ingredients_category.xlsx
+recipe_00289,Recipe,recipe_00289,,Mie Ayam Jamur,Mie Ayam Jamur,5,New_Ingredients_category.xlsx
+recipe_00290,Recipe,recipe_00290,,Mie Gacoan (Mie Iblis/Setan),Mie Gacoan (Mie Iblis/Setan),5,New_Ingredients_category.xlsx
+recipe_00291,Recipe,recipe_00291,,Mie Goreng Jawa,Mie Goreng Jawa,10,New_Ingredients_category.xlsx
+recipe_00292,Recipe,recipe_00292,,Mie Instan Goreng + Telur,Mie Instan Goreng + Telur,2,New_Ingredients_category.xlsx
+recipe_00293,Recipe,recipe_00293,,Mie Kocok Bandung,Mie Kocok Bandung,4,New_Ingredients_category.xlsx
+recipe_00294,Recipe,recipe_00294,,Mie Sedaap Goreng,Mie Sedaap Goreng,3,New_Ingredients_category.xlsx
+recipe_00295,Recipe,recipe_00295,,Mie Soobek (Biang Mie),Mie Soobek (Biang Mie),4,New_Ingredients_category.xlsx
+recipe_00296,Recipe,recipe_00296,,Mie Tek-Tek (Goreng/Kuah),Mie Tek-Tek (Goreng/Kuah),10,New_Ingredients_category.xlsx
+recipe_00297,Recipe,recipe_00297,,Mixue Ice Cream Cone,Mixue Ice Cream Cone,4,New_Ingredients_category.xlsx
+recipe_00298,Recipe,recipe_00298,,Nagasari (Kue Pisang),Nagasari (Kue Pisang),5,New_Ingredients_category.xlsx
+recipe_00299,Recipe,recipe_00299,,Nasi Campur,Nasi Campur,5,New_Ingredients_category.xlsx
+recipe_00300,Recipe,recipe_00300,,Nasi Campur Bali,Nasi Campur Bali,5,New_Ingredients_category.xlsx
+recipe_00301,Recipe,recipe_00301,,Nasi Gila,Nasi Gila,5,New_Ingredients_category.xlsx
+recipe_00302,Recipe,recipe_00302,,Nasi Goreng,Nasi Goreng,4,New_Ingredients_category.xlsx
+recipe_00303,Recipe,recipe_00303,,Nasi Goreng Shirataki (Diet),Nasi Goreng Shirataki (Diet),5,New_Ingredients_category.xlsx
+recipe_00304,Recipe,recipe_00304,,Nasi Goreng Spesial (Telur + Ayam),Nasi Goreng Spesial (Telur + Ayam),5,New_Ingredients_category.xlsx
+recipe_00305,Recipe,recipe_00305,,Nasi Goreng Tuna,Nasi Goreng Tuna,5,New_Ingredients_category.xlsx
+recipe_00306,Recipe,recipe_00306,,Nasi Jagung,Nasi Jagung,2,New_Ingredients_category.xlsx
+recipe_00307,Recipe,recipe_00307,,Nasi Kapau Ikan Bakar,Nasi Kapau Ikan Bakar,5,New_Ingredients_category.xlsx
+recipe_00308,Recipe,recipe_00308,,Nasi Kuning Komplit,Nasi Kuning Komplit,5,New_Ingredients_category.xlsx
+recipe_00309,Recipe,recipe_00309,,Nasi Merah,Nasi Merah,2,New_Ingredients_category.xlsx
+recipe_00310,Recipe,recipe_00310,,Nasi Padang Ayam Pop,Nasi Padang Ayam Pop,5,New_Ingredients_category.xlsx
+recipe_00311,Recipe,recipe_00311,,Nasi Padang Keliling (Porsi),Nasi Padang Keliling (Porsi),5,New_Ingredients_category.xlsx
+recipe_00312,Recipe,recipe_00312,,Nasi Padang Lauk Rendang,Nasi Padang Lauk Rendang,5,New_Ingredients_category.xlsx
+recipe_00313,Recipe,recipe_00313,,Nasi Pecel,Nasi Pecel,10,New_Ingredients_category.xlsx
+recipe_00314,Recipe,recipe_00314,,Nasi Putih,Nasi Putih,1,New_Ingredients_category.xlsx
+recipe_00315,Recipe,recipe_00315,,Nasi Putih KFC,Nasi Putih KFC,1,New_Ingredients_category.xlsx
+recipe_00316,Recipe,recipe_00316,,Nasi Rames (Warteg),Nasi Rames (Warteg),2,New_Ingredients_category.xlsx
+recipe_00317,Recipe,recipe_00317,,Nasi Shirataki (Konjac),Nasi Shirataki (Konjac),2,New_Ingredients_category.xlsx
+recipe_00318,Recipe,recipe_00318,,Nasi Tiwul,Nasi Tiwul,3,New_Ingredients_category.xlsx
+recipe_00319,Recipe,recipe_00319,,Nasi Tutug Oncom,Nasi Tutug Oncom,4,New_Ingredients_category.xlsx
+recipe_00320,Recipe,recipe_00320,,Nasi Uduk (Porsi Standar),Nasi Uduk (Porsi Standar),5,New_Ingredients_category.xlsx
+recipe_00321,Recipe,recipe_00321,,Nasi Uduk Betawi,Nasi Uduk Betawi,5,New_Ingredients_category.xlsx
+recipe_00322,Recipe,recipe_00322,,Nasi Uduk Kebon Kacang,Nasi Uduk Kebon Kacang,5,New_Ingredients_category.xlsx
+recipe_00323,Recipe,recipe_00323,,Nasi Uduk Komplit,Nasi Uduk Komplit,5,New_Ingredients_category.xlsx
+recipe_00324,Recipe,recipe_00324,,Oatmeal Gurih Telur Rebus,Oatmeal Gurih Telur Rebus,4,New_Ingredients_category.xlsx
+recipe_00325,Recipe,recipe_00325,,Oatmeal Pisang (Vegan),Oatmeal Pisang (Vegan),4,New_Ingredients_category.xlsx
+recipe_00326,Recipe,recipe_00326,,Onde-onde Kacang Hijau,Onde-onde Kacang Hijau,5,New_Ingredients_category.xlsx
+recipe_00327,Recipe,recipe_00327,,Opor Ayam,Opor Ayam,5,New_Ingredients_category.xlsx
+recipe_00328,Recipe,recipe_00328,,Orak-Arik Tempe Telur,Orak-Arik Tempe Telur,5,New_Ingredients_category.xlsx
+recipe_00329,Recipe,recipe_00329,,Orek Tempe Basah (Kecap),Orek Tempe Basah (Kecap),5,New_Ingredients_category.xlsx
+recipe_00330,Recipe,recipe_00330,,Otak-Otak Ikan Tenggiri Bakar,Otak-Otak Ikan Tenggiri Bakar,10,New_Ingredients_category.xlsx
+recipe_00331,Recipe,recipe_00331,,Overnight Oats,Overnight Oats,5,New_Ingredients_category.xlsx
+recipe_00332,Recipe,recipe_00332,,Overnight Oats Cokelat,Overnight Oats Cokelat,5,New_Ingredients_category.xlsx
+recipe_00333,Recipe,recipe_00333,,PaNas 1 (Ayam Goreng McD),PaNas 1 (Ayam Goreng McD),4,New_Ingredients_category.xlsx
+recipe_00334,Recipe,recipe_00334,,Paha Atas Ayam,Paha Atas Ayam,1,New_Ingredients_category.xlsx
+recipe_00335,Recipe,recipe_00335,,Paha Bawah Ayam,Paha Bawah Ayam,1,New_Ingredients_category.xlsx
+recipe_00336,Recipe,recipe_00336,,Pancake Pisang Telur (2 Bahan),Pancake Pisang Telur (2 Bahan),4,New_Ingredients_category.xlsx
+recipe_00337,Recipe,recipe_00337,,Pastel Ayam Sayur,Pastel Ayam Sayur,10,New_Ingredients_category.xlsx
+recipe_00338,Recipe,recipe_00338,,Pecel Lele,Pecel Lele,2,New_Ingredients_category.xlsx
+recipe_00339,Recipe,recipe_00339,,Pempek Kapal Selam,Pempek Kapal Selam,5,New_Ingredients_category.xlsx
+recipe_00340,Recipe,recipe_00340,,Pepaya Potong,Pepaya Potong,2,New_Ingredients_category.xlsx
+recipe_00341,Recipe,recipe_00341,,Pepes Ayam,Pepes Ayam,5,New_Ingredients_category.xlsx
+recipe_00342,Recipe,recipe_00342,,Pepes Ikan Mas,Pepes Ikan Mas,5,New_Ingredients_category.xlsx
+recipe_00343,Recipe,recipe_00343,,Pepes Tahu Kemangi,Pepes Tahu Kemangi,5,New_Ingredients_category.xlsx
+recipe_00344,Recipe,recipe_00344,,Perkedel Jagung,Perkedel Jagung,5,New_Ingredients_category.xlsx
+recipe_00345,Recipe,recipe_00345,,Perkedel Kentang,Perkedel Kentang,5,New_Ingredients_category.xlsx
+recipe_00346,Recipe,recipe_00346,,Perkedel Singkong (Lentho Singkong),Perkedel Singkong (Lentho Singkong),5,New_Ingredients_category.xlsx
+recipe_00347,Recipe,recipe_00347,,Pie Susu Bali,Pie Susu Bali,4,New_Ingredients_category.xlsx
+recipe_00348,Recipe,recipe_00348,,Pir Hijau,Pir Hijau,1,New_Ingredients_category.xlsx
+recipe_00349,Recipe,recipe_00349,,Pisang Ambon,Pisang Ambon,1,New_Ingredients_category.xlsx
+recipe_00350,Recipe,recipe_00350,,Pisang Goreng Tepung,Pisang Goreng Tepung,5,New_Ingredients_category.xlsx
+recipe_00351,Recipe,recipe_00351,,Pizza Hut Cheese Deluxe,Pizza Hut Cheese Deluxe,4,New_Ingredients_category.xlsx
+recipe_00352,Recipe,recipe_00352,,Pizza Hut Meat Lovers (Pan Pizza),Pizza Hut Meat Lovers (Pan Pizza),5,New_Ingredients_category.xlsx
+recipe_00353,Recipe,recipe_00353,,Plecing Kangkung,Plecing Kangkung,5,New_Ingredients_category.xlsx
+recipe_00354,Recipe,recipe_00354,,Poffertjes,Poffertjes,4,New_Ingredients_category.xlsx
+recipe_00355,Recipe,recipe_00355,,Potongan Buah Segar Campur,Potongan Buah Segar Campur,4,New_Ingredients_category.xlsx
+recipe_00356,Recipe,recipe_00356,,Potongan Nanas,Potongan Nanas,1,New_Ingredients_category.xlsx
+recipe_00357,Recipe,recipe_00357,,Putih Telur Rebus,Putih Telur Rebus,1,New_Ingredients_category.xlsx
+recipe_00358,Recipe,recipe_00358,,Rawon Daging Sapi,Rawon Daging Sapi,5,New_Ingredients_category.xlsx
+recipe_00359,Recipe,recipe_00359,,Rendang Sapi,Rendang Sapi,5,New_Ingredients_category.xlsx
+recipe_00360,Recipe,recipe_00360,,Richeese Fire Chicken,Richeese Fire Chicken,5,New_Ingredients_category.xlsx
+recipe_00361,Recipe,recipe_00361,,Risol Lumer,Risol Lumer,5,New_Ingredients_category.xlsx
+recipe_00362,Recipe,recipe_00362,,Risol Matcha Isi Keju,Risol Matcha Isi Keju,5,New_Ingredients_category.xlsx
+recipe_00363,Recipe,recipe_00363,,Risoles Bihun,Risoles Bihun,5,New_Ingredients_category.xlsx
+recipe_00364,Recipe,recipe_00364,,Risoles Mayo (American Risol),Risoles Mayo (American Risol),5,New_Ingredients_category.xlsx
+recipe_00365,Recipe,recipe_00365,,Risoles Ragout Ayam,Risoles Ragout Ayam,5,New_Ingredients_category.xlsx
+recipe_00366,Recipe,recipe_00366,,Risoles Sayur,Risoles Sayur,5,New_Ingredients_category.xlsx
+recipe_00367,Recipe,recipe_00367,,Roti Bakar (Cokelat Keju),Roti Bakar (Cokelat Keju),5,New_Ingredients_category.xlsx
+recipe_00368,Recipe,recipe_00368,,Roti Gandum Alpukat (Avocado Toast),Roti Gandum Alpukat (Avocado Toast),5,New_Ingredients_category.xlsx
+recipe_00369,Recipe,recipe_00369,,Roti Tawar Putih,Roti Tawar Putih,2,New_Ingredients_category.xlsx
+recipe_00370,Recipe,recipe_00370,,Rujak Buah Potong,Rujak Buah Potong,5,New_Ingredients_category.xlsx
+recipe_00371,Recipe,recipe_00371,,Rujak Cingur,Rujak Cingur,5,New_Ingredients_category.xlsx
+recipe_00372,Recipe,recipe_00372,,Salad Buah Mayo,Salad Buah Mayo,5,New_Ingredients_category.xlsx
+recipe_00373,Recipe,recipe_00373,,Salad Sayur Segar,Salad Sayur Segar,5,New_Ingredients_category.xlsx
+recipe_00374,Recipe,recipe_00374,,Salad Timun Tomat (Cucumber Tomato Salad),Salad Timun Tomat (Cucumber Tomato Salad),5,New_Ingredients_category.xlsx
+recipe_00375,Recipe,recipe_00375,,Salad Wrap (Chicken),Salad Wrap (Chicken),5,New_Ingredients_category.xlsx
+recipe_00376,Recipe,recipe_00376,,Salad Wrap Ayam (Chicken Caesar Wrap),Salad Wrap Ayam (Chicken Caesar Wrap),5,New_Ingredients_category.xlsx
+recipe_00377,Recipe,recipe_00377,,Sambal Goreng Hati Sapi,Sambal Goreng Hati Sapi,4,New_Ingredients_category.xlsx
+recipe_00378,Recipe,recipe_00378,,Sambal Terasi,Sambal Terasi,5,New_Ingredients_category.xlsx
+recipe_00379,Recipe,recipe_00379,,Sate Ayam,Sate Ayam,3,New_Ingredients_category.xlsx
+recipe_00380,Recipe,recipe_00380,,Sate Ayam + Lontong,Sate Ayam + Lontong,4,New_Ingredients_category.xlsx
+recipe_00381,Recipe,recipe_00381,,Sate Kambing,Sate Kambing,5,New_Ingredients_category.xlsx
+recipe_00382,Recipe,recipe_00382,,Sate Lilit,Sate Lilit,4,New_Ingredients_category.xlsx
+recipe_00383,Recipe,recipe_00383,,Sate Lilit Ayam,Sate Lilit Ayam,5,New_Ingredients_category.xlsx
+recipe_00384,Recipe,recipe_00384,,Sate Maranggi,Sate Maranggi,3,New_Ingredients_category.xlsx
+recipe_00385,Recipe,recipe_00385,,Sate Padang (Daging & Lidah),Sate Padang (Daging & Lidah),5,New_Ingredients_category.xlsx
+recipe_00386,Recipe,recipe_00386,,Sate Ratu (Sate Merah),Sate Ratu (Sate Merah),4,New_Ingredients_category.xlsx
+recipe_00387,Recipe,recipe_00387,,Sate Rembiga,Sate Rembiga,5,New_Ingredients_category.xlsx
+recipe_00388,Recipe,recipe_00388,,Sate Taichan,Sate Taichan,5,New_Ingredients_category.xlsx
+recipe_00389,Recipe,recipe_00389,,Sate Tempe (Viral Beef Flavored),Sate Tempe (Viral Beef Flavored),4,New_Ingredients_category.xlsx
+recipe_00390,Recipe,recipe_00390,,Sawi Hijau,Sawi Hijau,1,New_Ingredients_category.xlsx
+recipe_00391,Recipe,recipe_00391,,Sayap Ayam,Sayap Ayam,1,New_Ingredients_category.xlsx
+recipe_00392,Recipe,recipe_00392,,Sayur Asem,Sayur Asem,5,New_Ingredients_category.xlsx
+recipe_00393,Recipe,recipe_00393,,Sayur Bening Bayam,Sayur Bening Bayam,5,New_Ingredients_category.xlsx
+recipe_00394,Recipe,recipe_00394,,Sayur Bening Labu Siam,Sayur Bening Labu Siam,3,New_Ingredients_category.xlsx
+recipe_00395,Recipe,recipe_00395,,Sayur Bobor Bayam,Sayur Bobor Bayam,5,New_Ingredients_category.xlsx
+recipe_00396,Recipe,recipe_00396,,Sayur Lodeh,Sayur Lodeh,5,New_Ingredients_category.xlsx
+recipe_00397,Recipe,recipe_00397,,Sayur Lodeh (Keto Friendly),Sayur Lodeh (Keto Friendly),4,New_Ingredients_category.xlsx
+recipe_00398,Recipe,recipe_00398,,Sayur Sop,Sayur Sop,5,New_Ingredients_category.xlsx
+recipe_00399,Recipe,recipe_00399,,Seblak,Seblak,5,New_Ingredients_category.xlsx
+recipe_00400,Recipe,recipe_00400,,Seblak Coet (Rafael),Seblak Coet (Rafael),5,New_Ingredients_category.xlsx
+recipe_00401,Recipe,recipe_00401,,Semangka Potong,Semangka Potong,1,New_Ingredients_category.xlsx
+recipe_00402,Recipe,recipe_00402,,Semur Jengkol,Semur Jengkol,3,New_Ingredients_category.xlsx
+recipe_00403,Recipe,recipe_00403,,Semur Tahu,Semur Tahu,5,New_Ingredients_category.xlsx
+recipe_00404,Recipe,recipe_00404,,Singkong Rebus,Singkong Rebus,2,New_Ingredients_category.xlsx
+recipe_00405,Recipe,recipe_00405,,Siomay Bandung (Ikan),Siomay Bandung (Ikan),5,New_Ingredients_category.xlsx
+recipe_00406,Recipe,recipe_00406,,Smoothie Bowl Naga (Dragon Fruit),Smoothie Bowl Naga (Dragon Fruit),5,New_Ingredients_category.xlsx
+recipe_00407,Recipe,recipe_00407,,Sop Buntut,Sop Buntut,3,New_Ingredients_category.xlsx
+recipe_00408,Recipe,recipe_00408,,Sop Iga Sapi (Bening),Sop Iga Sapi (Bening),4,New_Ingredients_category.xlsx
+recipe_00409,Recipe,recipe_00409,,Sop Konro,Sop Konro,5,New_Ingredients_category.xlsx
+recipe_00410,Recipe,recipe_00410,,Sop Sapi (Kuah Bening),Sop Sapi (Kuah Bening),5,New_Ingredients_category.xlsx
+recipe_00411,Recipe,recipe_00411,,Sosis Solo,Sosis Solo,5,New_Ingredients_category.xlsx
+recipe_00412,Recipe,recipe_00412,,Soto Ayam (Lamongan/Kuning),Soto Ayam (Lamongan/Kuning),4,New_Ingredients_category.xlsx
+recipe_00413,Recipe,recipe_00413,,Soto Ayam Bening,Soto Ayam Bening,5,New_Ingredients_category.xlsx
+recipe_00414,Recipe,recipe_00414,,Soto Betawi,Soto Betawi,5,New_Ingredients_category.xlsx
+recipe_00415,Recipe,recipe_00415,,Soto Lamongan,Soto Lamongan,5,New_Ingredients_category.xlsx
+recipe_00416,Recipe,recipe_00416,,Soto Mie Bogor,Soto Mie Bogor,5,New_Ingredients_category.xlsx
+recipe_00417,Recipe,recipe_00417,,Steak Tempe Saus Lada Hitam,Steak Tempe Saus Lada Hitam,5,New_Ingredients_category.xlsx
+recipe_00418,Recipe,recipe_00418,,Sup Brenebon,Sup Brenebon,5,New_Ingredients_category.xlsx
+recipe_00419,Recipe,recipe_00419,,Sup Kimlo,Sup Kimlo,5,New_Ingredients_category.xlsx
+recipe_00420,Recipe,recipe_00420,,Sup Tahu Telur (Egg Drop Soup),Sup Tahu Telur (Egg Drop Soup),10,New_Ingredients_category.xlsx
+recipe_00421,Recipe,recipe_00421,,Super Besar 1 (Nasi + Ayam + Minum),Super Besar 1 (Nasi + Ayam + Minum),4,New_Ingredients_category.xlsx
+recipe_00422,Recipe,recipe_00422,,Super Bubur Ayam,Super Bubur Ayam,3,New_Ingredients_category.xlsx
+recipe_00423,Recipe,recipe_00423,,Tahu Bacem,Tahu Bacem,5,New_Ingredients_category.xlsx
+recipe_00424,Recipe,recipe_00424,,Tahu Campur Lamongan,Tahu Campur Lamongan,5,New_Ingredients_category.xlsx
+recipe_00425,Recipe,recipe_00425,,Tahu Gejrot,Tahu Gejrot,5,New_Ingredients_category.xlsx
+recipe_00426,Recipe,recipe_00426,,Tahu Goreng,Tahu Goreng,2,New_Ingredients_category.xlsx
+recipe_00427,Recipe,recipe_00427,,Tahu Kocek,Tahu Kocek,5,New_Ingredients_category.xlsx
+recipe_00428,Recipe,recipe_00428,,Tahu Kukus,Tahu Kukus,3,New_Ingredients_category.xlsx
+recipe_00429,Recipe,recipe_00429,,Tahu Petis Semarang,Tahu Petis Semarang,5,New_Ingredients_category.xlsx
+recipe_00430,Recipe,recipe_00430,,Tahu Rebus,Tahu Rebus,2,New_Ingredients_category.xlsx
+recipe_00431,Recipe,recipe_00431,,Tahu Tek Surabaya,Tahu Tek Surabaya,10,New_Ingredients_category.xlsx
+recipe_00432,Recipe,recipe_00432,,Tart Cherry (Ceri Asam),Tart Cherry (Ceri Asam),1,New_Ingredients_category.xlsx
+recipe_00433,Recipe,recipe_00433,,Telur Balado,Telur Balado,5,New_Ingredients_category.xlsx
+recipe_00434,Recipe,recipe_00434,,Telur Rebus,Telur Rebus,1,New_Ingredients_category.xlsx
+recipe_00435,Recipe,recipe_00435,,Tempe Bakar Kecap,Tempe Bakar Kecap,5,New_Ingredients_category.xlsx
+recipe_00436,Recipe,recipe_00436,,Tempe Goreng,Tempe Goreng,1,New_Ingredients_category.xlsx
+recipe_00437,Recipe,recipe_00437,,Tempe Goreng Tepung,Tempe Goreng Tepung,5,New_Ingredients_category.xlsx
+recipe_00438,Recipe,recipe_00438,,Tempe Kecap,Tempe Kecap,5,New_Ingredients_category.xlsx
+recipe_00439,Recipe,recipe_00439,,Tempe Kukus,Tempe Kukus,1,New_Ingredients_category.xlsx
+recipe_00440,Recipe,recipe_00440,,Tempe Mendoan,Tempe Mendoan,5,New_Ingredients_category.xlsx
+recipe_00441,Recipe,recipe_00441,,Timun (Lalap),Timun (Lalap),1,New_Ingredients_category.xlsx
+recipe_00442,Recipe,recipe_00442,,Tongkol Balado,Tongkol Balado,10,New_Ingredients_category.xlsx
+recipe_00443,Recipe,recipe_00443,,Tongseng Kambing,Tongseng Kambing,5,New_Ingredients_category.xlsx
+recipe_00444,Recipe,recipe_00444,,Triple Cheeseburger,Triple Cheeseburger,5,New_Ingredients_category.xlsx
+recipe_00445,Recipe,recipe_00445,,Tumis Buncis Jagung Muda,Tumis Buncis Jagung Muda,5,New_Ingredients_category.xlsx
+recipe_00446,Recipe,recipe_00446,,Tumis Kangkung,Tumis Kangkung,5,New_Ingredients_category.xlsx
+recipe_00447,Recipe,recipe_00447,,Tumis Kol (Kubis),Tumis Kol (Kubis),3,New_Ingredients_category.xlsx
+recipe_00448,Recipe,recipe_00448,,Tumis Wortel Buncis,Tumis Wortel Buncis,5,New_Ingredients_category.xlsx
+recipe_00449,Recipe,recipe_00449,,Tuna Salad,Tuna Salad,5,New_Ingredients_category.xlsx
+recipe_00450,Recipe,recipe_00450,,Udang,Udang,1,New_Ingredients_category.xlsx
+recipe_00451,Recipe,recipe_00451,,Urap Sayur,Urap Sayur,10,New_Ingredients_category.xlsx
+recipe_00452,Recipe,recipe_00452,,Yogurt Buah (Yogurt Bowl),Yogurt Buah (Yogurt Bowl),5,New_Ingredients_category.xlsx

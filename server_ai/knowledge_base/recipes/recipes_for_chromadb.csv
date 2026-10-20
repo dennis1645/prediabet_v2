@@ -1,0 +1,4568 @@
+doc_id,recipe_key,kode,nama_masakan,nama_asli_resep,ingredient_categories,document_text
+recipe_00000,AO007,AO007,Bihun goreng instan,Bihun Instant Goreng,"Biji-bijian,Bumbu Rempah,Sayur,Umbi-umbian,Bumbu Olahan,Daging Putih,Seafood","Nama Masakan: Bihun goreng instan
+Nama Asli Resep: Bihun Instant Goreng
+Bahan-bahan:
+  - 2 bungkus Bihun goreng Rose Brand
+  - 2 siung bawang putih
+  - 1 buah wortel kecil
+  - 1 lembar kubis
+  - 2 butir telur
+  - 2 sdt saus tiram
+  - 1 pcs cabe rawit
+  - 3 sdt kecap manis
+  - 2 sdt kecap ikan
+  - 2 sdt kecap asin
+  - 1 sdt lada bubuk
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Sayur, Umbi-umbian, Bumbu Olahan, Daging Putih, Seafood"
+recipe_00001,AO010,AO010,"Jagung muda, rebus",Tumis putihan telur rebus dan jagung muda,"Biji-bijian,Bumbu Rempah,Bumbu Olahan,Sayur","Nama Masakan: Jagung muda, rebus
+Nama Asli Resep: Tumis putihan telur rebus dan jagung muda
+Bahan-bahan:
+  - 6 bungkus Putih Telur Rebus
+  - 100 gr jagung muda
+  - 8 siung bawang merah
+  - 7 siung bawang putih
+  - 5 buah cabe hijau besar
+  - 7 buah cabe rawit merah
+  - 1 ruas Laos
+  - 1 daun salam
+  - Garam
+  - Kaldu jamur Totole
+  - 1 butir gula jawa
+  - Kecap manis
+  - Minyak Makan
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Bumbu Olahan, Sayur"
+recipe_00002,AO018,AO018,"Ketan putih, tapai",Tape Ketan Putih,Biji-bijian,"Nama Masakan: Ketan putih, tapai
+Nama Asli Resep: Tape Ketan Putih
+Bahan-bahan:
+  - 0.5 kg ketan putih
+  - 1.5 ragi tape
+  - 250 ml air panas
+  - daun pisang
+Kategori Bahan: Biji-bijian"
+recipe_00003,AO022,AO022,Mi kering,Mie goreng khas Hongkong (mi kwantung/mie telur kering),"Bumbu Rempah,Bumbu Olahan","Nama Masakan: Mi kering
+Nama Asli Resep: Mie goreng khas Hongkong (mi kwantung/mie telur kering)
+Bahan-bahan:
+  - 1 biji mie telur kering
+  - 1 buah bawang Bombay
+  - Dark soy sauce
+  - 1 sdm Soy sauce
+  - 0.25 sdt Gula
+  - Minyak goreng
+Kategori Bahan: Bumbu Rempah, Bumbu Olahan"
+recipe_00004,AO023,AO023,Misoa,Sop Misoa,"Bumbu Rempah,Daging Putih,Unggas,Sayur,Bumbu Olahan,Biji-bijian","Nama Masakan: Misoa
+Nama Asli Resep: Sop Misoa
+Bahan-bahan:
+  - 4 siung bawang putih
+  - 0.5 sdt merica
+  - 5 siung bawang merah
+  - 5 sdm minyak goreng
+  - 150 gr daging ayam
+  - 2 bungkus sayur sop
+  - 1 liter air
+  - 2 sdt garam
+  - 1 sdt kaldu bubuk
+  - 1 sdt gula pasir
+  - 0.5 sdt pala bubuk
+  - 1 bungkus misoa
+Kategori Bahan: Bumbu Rempah, Daging Putih, Unggas, Sayur, Bumbu Olahan, Biji-bijian"
+recipe_00005,AO024,AO024,Roti putih,Black n White Sourdough Bread,"Biji-bijian,Seafood,Bumbu Olahan","Nama Masakan: Roti putih
+Nama Asli Resep: Black n White Sourdough Bread
+Bahan-bahan:
+  - 75 gr tepung terigu protein tinggi
+  - 57 gr air
+  - 15 gr starter
+  - 1.5 gr garam
+  - 3 gr wijen hitam
+  - 0.25 sdt charcoal bubuk
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan"
+recipe_00006,AO028,AO028,"Apem, kue",Apam Gula Merah,"Santan,Bumbu Olahan,Biji-bijian,Seafood","Nama Masakan: Apem, kue
+Nama Asli Resep: Apam Gula Merah
+Bahan-bahan:
+  - 600 ml Santan Rose Brand
+  - 400 ml Air
+  - 250 gr Gula Merah
+  - 1 sdt Garam
+  - 1 lembar Daun Pandan
+  - 250 gr Tepung Beras Rose Brand
+  - 150 gr Tepung Terigu
+  - 0.5 sdm Ragi
+  - 1 sdt Baking Powder
+  - 1 sdt Vanili cair
+Kategori Bahan: Santan, Bumbu Olahan, Biji-bijian, Seafood"
+recipe_00007,AO030,AO030,"Bakpia, kue",\*Kue Kering Bakpia Pisang\*,"Susu,Bumbu Olahan,Biji-bijian,Seafood,Buah","Nama Masakan: Bakpia, kue
+Nama Asli Resep: \*Kue Kering Bakpia Pisang\*
+Bahan-bahan:
+  - 200 gr margarine
+  - 1 sdm gula halus
+  - 1 sachet SASET SKM putih
+  - 250 gr Tepung Terigu Segitiga Biru
+  - 4 sdm tepung maizena
+  - 5 buah pisang uli, ukuran kecil
+  - 0.5 sdm margarine
+  - Wijen putih
+Kategori Bahan: Susu, Bumbu Olahan, Biji-bijian, Seafood, Buah"
+recipe_00008,AO032,AO032,Bantal,Odading Mang Oleh (Roti Bantal),"Biji-bijian,Bumbu Olahan,Susu","Nama Masakan: Bantal
+Nama Asli Resep: Odading Mang Oleh (Roti Bantal)
+Bahan-bahan:
+  - 500 gr Tepung Protein Sedang
+  - 120 gr Gula Pasir
+  - 0.5 sdt Ragi Instan
+  - 1 butir Telur
+  - 1 sdt Soda Kue
+  - 1 sdt Vanili Bubuk
+  - 70 gr margarin
+  - 0.5 sdt Garam
+  - 200 ml air matang
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Susu"
+recipe_00009,AO035,AO035,Bika ambon,Bika Ambon Pandan,"Santan,Bumbu Olahan,Biji-bijian,Seafood,Susu","Nama Masakan: Bika ambon
+Nama Asli Resep: Bika Ambon Pandan
+Bahan-bahan:
+  - 200 ml air pandan suji (5 lembar pandan + 10 lembar Suji + air)
+  - 150 ml santan
+  - 0.25 sdt garam
+  - 75 gr tepung terigu
+  - 150 gr tepung tapioka cap tani gunung
+  - 1 sdt ragi instan
+  - 3 butir telur
+  - 180 gr gula pasir
+  - 40 gr kental manis
+  - 60 gr mentega
+Kategori Bahan: Santan, Bumbu Olahan, Biji-bijian, Seafood, Susu"
+recipe_00010,AO036,AO036,Bingka,Bingke Pandan,"Bumbu Olahan,Susu,Santan,Biji-bijian,Seafood","Nama Masakan: Bingka
+Nama Asli Resep: Bingke Pandan
+Bahan-bahan:
+  - 2 butir telur
+  - 50 gr gula Pasir Rose Brand
+  - 40 gr Kental Manis
+  - 65 ml Santan Rose Brand
+  - 135 ml Air
+  - 40 gr Tepung Terigu
+  - 0.25 sdt garam
+  - 0.5 sdt Pasta Pandan
+  - 1 sdt Margarin Rose Brand
+Kategori Bahan: Bumbu Olahan, Susu, Santan, Biji-bijian, Seafood"
+recipe_00011,AO038,AO038,Bolu peca,Bolu Peca Khas Bugis,"Bumbu Olahan,Biji-bijian,Seafood","Nama Masakan: Bolu peca
+Nama Asli Resep: Bolu Peca Khas Bugis
+Bahan-bahan:
+  - 5 butir telur ayam
+  - 1 sdm gula pasir
+  - 0.5 sdt SP
+  - 80 gr tepung beras Rose Brand
+  - 20 gr tepung terigu
+  - 0.333333 sdt vanili
+  - 350 gr gula aren
+  - 700 ml air
+  - 1 lembar daun pandan
+Kategori Bahan: Bumbu Olahan, Biji-bijian, Seafood"
+recipe_00012,AO039,AO039,Brem,Es Krim Brem Buah,"Buah,Susu,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Brem
+Nama Asli Resep: Es Krim Brem Buah
+Bahan-bahan:
+  - buah Brem
+  - 1 sdm es Krim
+  - 0.25 gelas susu
+  - 2 buah anggur ungu dan hijau
+  - 0.25 es batu dihancurkan
+  - 2 buah jeruk
+  - jelly
+  - 1 sdm sirup merah
+Kategori Bahan: Buah, Susu, Bumbu Rempah, Bumbu Olahan"
+recipe_00013,AO041,AO041,Cake tape,Bolu Tape Singkong,"Umbi-umbian,Biji-bijian,Seafood,Bumbu Olahan,Susu","Nama Masakan: Cake tape
+Nama Asli Resep: Bolu Tape Singkong
+Bahan-bahan:
+  - 300 gr tape singkong
+  - 5 butir telur
+  - 200 gr tepung terigu
+  - 150 gr gula pasir
+  - 200 gr mentega
+  - 1 sachet susu bubuk
+  - 1 sdt SP
+  - 0.5 sdt Baking Powder
+  - 0.5 sdt vanili
+  - 50 gr Keju cheddar
+Kategori Bahan: Umbi-umbian, Biji-bijian, Seafood, Bumbu Olahan, Susu"
+recipe_00014,AO042,AO042,Cangkuning,Kue Bugis (Cangkuning),"Buah,Bumbu Olahan,Biji-bijian","Nama Masakan: Cangkuning
+Nama Asli Resep: Kue Bugis (Cangkuning)
+Bahan-bahan:
+  - 250 gr kelapa parut
+  - 150 gr gula aren
+  - 0.5 sdt garam
+  - 1 lembar daun pandan kecil
+  - 2 sdm tepung ketan
+  - 150 ml air
+  - 500 gr tepung ketan
+  - 250 gr labu kuning dikupas
+  - 200 ml air
+  - 2 buah pelapa daun pisang
+  - 1 sdt minyak
+Kategori Bahan: Buah, Bumbu Olahan, Biji-bijian"
+recipe_00015,AO043,AO043,Dodol bali,Jaje Dodol Injin Bali / Dodol Ketan Hitam Bali,"Biji-bijian,Buah,Bumbu Olahan,Santan,Bumbu Rempah","Nama Masakan: Dodol bali
+Nama Asli Resep: Jaje Dodol Injin Bali / Dodol Ketan Hitam Bali
+Bahan-bahan:
+  - 250 gr Tepung Injin (Ketan Hitam)
+  - 250 gr Tepung Ketan Putih
+  - 150 gr Gula Kelapa (gula jawa)
+  - 250 gr Gula Pasir
+  - 200 gr Santan
+  - 1000 ml Air
+  - 5 lembar daun Pandan
+  - 5 lembar Daun Jeruk
+  - 2 sdt Garam
+Kategori Bahan: Biji-bijian, Buah, Bumbu Olahan, Santan, Bumbu Rempah"
+recipe_00016,AO045,AO045,Dodol kedondong,Dodol Kedondong,"Buah,Bumbu Olahan,Biji-bijian,Santan","Nama Masakan: Dodol kedondong
+Nama Asli Resep: Dodol Kedondong
+Bahan-bahan:
+  - 500 gr kedondong
+  - 4 sdm gula pasir
+  - 750 gr gula merah
+  - 250 gr tepung ketan putih
+  - 2 bungkus santan kara
+  - 1 sdt garam
+  - 250 ml Air
+Kategori Bahan: Buah, Bumbu Olahan, Biji-bijian, Santan"
+recipe_00017,AO048,AO048,Gemblong,Kue Gemblong Premium,"Biji-bijian,Seafood,Buah,Susu,Bumbu Olahan","Nama Masakan: Gemblong
+Nama Asli Resep: Kue Gemblong Premium
+Bahan-bahan:
+  - 300 gr tepung ketan Rose Brand
+  - 80 gr tepung terigu pro sedang
+  - 3 gr baking powder
+  - 500 gr kelapa parut agak muda
+  - 30 gr margarin Rose Brand
+  - air
+  - 10 gr garam
+  - 2 lembar daun pandan
+  - 500 gr minyak goreng Rose Brand
+  - 150 gr gula pasir Rose Brand
+  - 150 gr gula merah sisir halus
+  - 50 gr air
+Kategori Bahan: Biji-bijian, Seafood, Buah, Susu, Bumbu Olahan"
+recipe_00018,AO051,AO051,Jagung gerontol,Grontol Jagung,"Biji-bijian,Buah,Bumbu Olahan","Nama Masakan: Jagung gerontol
+Nama Asli Resep: Grontol Jagung
+Bahan-bahan:
+  - 2 bonggol jagung
+  - 150 gr Kelapa parut
+  - 0.5 sdt garam
+  - 2 helai Pandan
+  - 2 sdm Gula pasir
+Kategori Bahan: Biji-bijian, Buah, Bumbu Olahan"
+recipe_00019,AO053,AO053,Japilus,Pilus,"Biji-bijian,Susu,Bumbu Olahan,Sayur,Bumbu Rempah","Nama Masakan: Japilus
+Nama Asli Resep: Pilus
+Bahan-bahan:
+  - 250 gr tepung kanji
+  - 50 gr blueband
+  - 250 ml air panas
+  - 0.5 sdt baking powder
+  - 0.5 sdm garam
+  - 0.5 sdm penyedap jamur
+  - 0.5 sdm bawang putih bubuk
+Kategori Bahan: Biji-bijian, Susu, Bumbu Olahan, Sayur, Bumbu Rempah"
+recipe_00020,AO054,AO054,Kakicak,Kakicak Khas Banjar,"Biji-bijian,Bumbu Olahan,Buah","Nama Masakan: Kakicak
+Nama Asli Resep: Kakicak Khas Banjar
+Bahan-bahan:
+  - 100 gr tepung ketan Rose Brand
+  - 0.25 sdt garam
+  - 70 ml jus pandan
+  - 1 tetes pasta pandan
+  - 100 gr kelapa parut
+  - 100 gr gula merah
+  - 1 sdm gula pasir Rose Brand
+  - 50 ml air
+  - 1 lembar daun pandan
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Buah"
+recipe_00021,AO056,AO056,Kapusa,Kerupuk Basah (Temet Goreng & Rebus) Kapuas Hulu,"Daging Putih,Seafood,Bumbu Rempah,Biji-bijian,Bumbu Olahan,Kacang-kacangan,Buah","Nama Masakan: Kapusa
+Nama Asli Resep: Kerupuk Basah (Temet Goreng & Rebus) Kapuas Hulu
+Bahan-bahan:
+  - 500 gr daging ikan tenggiri
+  - 100 gr lemak ikan
+  - 6 siung bawang putih
+  - 200 ml air es
+  - 250 ml tepung sagu
+  - 25 gr tepung terigu
+  - 1.5 sdm garam
+  - 1 sdt Micin
+  - 1 sdt lada bubuk
+  - 100 gr kacang tanah goreng
+  - 3 siung bawang merah
+  - 3 siung bawang putih
+  - 1 sdm cabe kering giling/secukupnya
+  - 300 ml air
+  - 50 gr gula merah
+  - 1 sdt garam
+  - daun jeruk
+  - Minyak
+Kategori Bahan: Daging Putih, Seafood, Bumbu Rempah, Biji-bijian, Bumbu Olahan, Kacang-kacangan, Buah"
+recipe_00022,AO064,AO064,Koyabu,Kue Koyabu,"Biji-bijian,Bumbu Olahan","Nama Masakan: Koyabu
+Nama Asli Resep: Kue Koyabu
+Bahan-bahan:
+  - 200 gr tepung ketan putih
+  - 150 gr kelapa parut setengah tua (kukus dulu dg daun pandan 20 menitan)
+  - 100 gr gula merah cincang
+  - 0.25 sdt garam
+Kategori Bahan: Biji-bijian, Bumbu Olahan"
+recipe_00023,AO068,AO068,Kue jahe,Ginger Cookies,"Susu,Bumbu Olahan,Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Kue jahe
+Nama Asli Resep: Ginger Cookies
+Bahan-bahan:
+  - 75 gr Margarin
+  - 75 gr Brown sugar
+  - 50 gr Madu original (murni atau kemasan tanpa perasa)
+  - 0.5 butir Telur
+  - 200 gr Tepung terigu protein sedang
+  - 0.75 sdt Soda kue
+  - 1 sdt Kayu manis bubuk
+  - 1 sdt Jahe bubuk
+Kategori Bahan: Susu, Bumbu Olahan, Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00024,AO069,AO069,Kue kelapa,Bolu Kelapa,"Bumbu Olahan,Buah,Seafood","Nama Masakan: Kue kelapa
+Nama Asli Resep: Bolu Kelapa
+Bahan-bahan:
+  - 0.5 gelas gula pasir
+  - 0.5 gelas kelapa parut
+  - 1 butir telur utuh
+  - 0.5 sdt SP
+  - 1 gelas kurang 2 jari terigu
+  - 0.25 gelas Air putih + 1 SDM susu bubuk
+  - Sedikit vanili bubuk
+  - Sedikit Baking Powder
+  - 3 sdm Minyak goreng
+  - 2 tetes Pewarna kuning
+  - Hiasan : springkel/ chocochip
+Kategori Bahan: Bumbu Olahan, Buah, Seafood"
+recipe_00025,AO070,AO070,Kue koa,KUE KOA,"Biji-bijian,Bumbu Olahan","Nama Masakan: Kue koa
+Nama Asli Resep: KUE KOA
+Bahan-bahan:
+  - 300 gr Beras Ketan putih
+  - 300 gr Gula Merah aren
+Kategori Bahan: Biji-bijian, Bumbu Olahan"
+recipe_00026,AO072,AO072,Kue lumpur,Kue lumpur raksasa,"Biji-bijian,Seafood,Umbi-umbian,Bumbu Olahan,Susu,Santan","Nama Masakan: Kue lumpur
+Nama Asli Resep: Kue lumpur raksasa
+Bahan-bahan:
+  - 200 gr tepung terigu
+  - 3 kentang
+  - 3 telur
+  - 150 gr gula pasir
+  - 1 sdt vanili
+  - 3 sdm margarin
+  - 2 sdm skm
+  - 2 x 65 ml santan
+Kategori Bahan: Biji-bijian, Seafood, Umbi-umbian, Bumbu Olahan, Susu, Santan"
+recipe_00027,AO078,AO078,Lapis legit,Lapis Legit Prunes Premium,"Susu,Bumbu Olahan,Seafood","Nama Masakan: Lapis legit
+Nama Asli Resep: Lapis Legit Prunes Premium
+Bahan-bahan:
+  - 50 buah kuning telur
+  - 500 gr Butter
+  - 400 gr gula halus
+  - 100 gr terigu protein sedang
+  - 0.5 sdt vanili bubuk
+  - 2 sdm susu bubuk
+  - 40 gr SKM
+Kategori Bahan: Susu, Bumbu Olahan, Seafood"
+recipe_00028,AO085,AO085,Mie ayam,Mie Ayam Kecap,"Daging Putih,Unggas,Sayur,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Mie ayam
+Nama Asli Resep: Mie Ayam Kecap
+Bahan-bahan:
+  - 2 potong paha ayam fillet
+  - 2 porsi mie telur
+  - 1 sdt minyak wijen
+  - 2 buah jamur shiitake
+  - 0.5 sdm minyak
+  - 0.5 cm jahe
+  - 3 siung bawang putih
+  - 1 buah bunga lawang
+  - 1 batang kayu manis
+  - 2 sdm kecap asin
+  - 1 sdm kecap manis
+  - 2 batang bawang daun
+  - 150 ml air rendaman jamur
+Kategori Bahan: Daging Putih, Unggas, Sayur, Bumbu Rempah, Bumbu Olahan"
+recipe_00029,AO086,AO086,Mie bakso,Mie Jamur Bakso,"Bumbu Rempah,Daging Merah,Sayur,Biji-bijian,Bumbu Olahan,Daging Putih,Seafood","Nama Masakan: Mie bakso
+Nama Asli Resep: Mie Jamur Bakso
+Bahan-bahan:
+  - 4 siung bawang putih
+  - 4 buah bakso
+  - 5 buah jamur
+  - 3 buah cabai
+  - 1 porsi mie basah
+  - 200 ml air
+  - 1 butir telur
+  - 1 sdm kecap asin
+  - 1 sdm kecap manis
+  - 1 sdm saus tiram
+  - 1 sdm kecap ikan
+  - 1 sdm gula pasir
+Kategori Bahan: Bumbu Rempah, Daging Merah, Sayur, Biji-bijian, Bumbu Olahan, Daging Putih, Seafood"
+recipe_00030,AO088,AO088,Mie pangsit basah,Mie Ayam Jamur Bakso Pangsit,"Daging Putih,Unggas,Sayur,Bumbu Rempah,Biji-bijian,Buah,Bumbu Olahan,Seafood,Daging Merah","Nama Masakan: Mie pangsit basah
+Nama Asli Resep: Mie Ayam Jamur Bakso Pangsit
+Bahan-bahan:
+  - 5 buah paha ayam
+  - 200 gr jamur tiram
+  - 2 batang daun bawang
+  - 3 sdm minyak
+  - 5 siung bawang putih
+  - 2 buah kemiri
+  - kunyit
+  - 1 sdt ketumbar
+  - jahe kupas
+  - 2 lembar daun salam
+  - 4 lembar daun jeruk
+  - 2 batang serai
+  - 1 sdm saus tiram
+  - 1.5 sdm kecap asin
+  - 4 sdm kecap manis
+  - 1 sdm gula kelapa serut
+  - 1 sdt garam
+  - 0.25 sdt lada bubuk
+  - 1500 ml kaldu rebusan tulang ayam
+  - 2 batang daun bawang, iris halus
+  - garam
+  - 1 sdt kaldu bubuk
+  - 250 gr mie telur kering
+  - kecap ikan
+  - kecap asin
+  - minyak ayam
+  - 15 butir bakso
+  - 1 ikat sawi putih
+  - daun bawang
+  - 2 sdm bawang goreng
+  - 15 buah pangsit goreng
+  - 10 siung bawang putih
+  - 100 ml minyak goreng
+Kategori Bahan: Daging Putih, Unggas, Sayur, Bumbu Rempah, Biji-bijian, Buah, Bumbu Olahan, Seafood, Daging Merah"
+recipe_00031,AO09,AO09,onde onde,Onde-Onde,"Biji-bijian,Umbi-umbian,Bumbu Olahan,Seafood","Nama Masakan: onde onde
+Nama Asli Resep: Onde-Onde
+Bahan-bahan:
+  - 500 gr tepung ketan
+  - 20 gr tepung beras
+  - 150 gr kentang kukus
+  - 125 gr gula pasir
+  - 0.25 sdt pasta vanila
+  - 0.25 sdt garam
+  - air panas
+  - 125 gr wijen putih
+  - 1 sdm wijen hitam
+  - 1000 ml minyak goreng
+Kategori Bahan: Biji-bijian, Umbi-umbian, Bumbu Olahan, Seafood"
+recipe_00032,AO090,AO090,Nasi gurih,Nasi gurih bunga telang,"Biji-bijian,Bumbu Rempah,Buah,Bumbu Olahan","Nama Masakan: Nasi gurih
+Nama Asli Resep: Nasi gurih bunga telang
+Bahan-bahan:
+  - 500 gr beras
+  - 8 buah bunga telang kering
+  - 2 buah sereh geprek
+  - 2 lembar daun pandan ikat simpul
+  - 4 lembar daun jeruk
+  - 2 lembar daun salam
+  - 1.5 sdt garam
+  - 1 sdt penyedap rasa
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Buah, Bumbu Olahan"
+recipe_00033,AO095,AO095,Padamaran,Padamaran Khas Jambi (1178),"Biji-bijian,Bumbu Olahan,Santan","Nama Masakan: Padamaran
+Nama Asli Resep: Padamaran Khas Jambi (1178)
+Bahan-bahan:
+  - 100 gr tepung beras
+  - 2 sdm gula pasir
+  - 0.5 sdt garam
+  - 200 ml jus pandan suji
+  - 600 ml santan
+  - 100 gr gula merah, sisir
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Santan"
+recipe_00034,AO097,AO097,Kue Pulut,172. Kue tepe / lemet / pulut singkong,"Umbi-umbian,Bumbu Olahan,Santan","Nama Masakan: Kue Pulut
+Nama Asli Resep: 172. Kue tepe / lemet / pulut singkong
+Bahan-bahan:
+  - 2 kg singkong
+  - 120 gr gula merah
+  - 2 sdm gula pasir
+  - 65 ml santan instan
+  - 1 sdt vanili
+  - 1 sdt garam
+  - 4 lembar Daun pisang
+  - 5 lembar Daun pandan
+Kategori Bahan: Umbi-umbian, Bumbu Olahan, Santan"
+recipe_00035,AO104,AO104,Roti warna sawo matang,Roti tawar buah sawo mentega(Campoleh),"Biji-bijian,Seafood,Susu,Bumbu Olahan","Nama Masakan: Roti warna sawo matang
+Nama Asli Resep: Roti tawar buah sawo mentega(Campoleh)
+Bahan-bahan:
+  - 190 gr tepung terigu
+  - 10 gr tepung buah sawo mentega
+  - 10 gr gula
+  - 8 gr mentega
+  - 4 gr susu bubuk
+  - 3 gr ragi instan
+  - 3 gr garam
+  - 120 ml air es
+Kategori Bahan: Biji-bijian, Seafood, Susu, Bumbu Olahan"
+recipe_00036,AO105,AO105,Sarimuka,Sarimuka Pandan Gula Merah,"Santan,Biji-bijian,Seafood,Susu,Bumbu Olahan","Nama Masakan: Sarimuka
+Nama Asli Resep: Sarimuka Pandan Gula Merah
+Bahan-bahan:
+  - 150 ml santan hangat
+  - 350 ml air
+  - 100 ml endapan pandan
+  - 0.25 sdt pasta pandan+1/4 sdt pewarna orange
+  - 2 butir telur
+  - 50 gr tepung beras Rose Brand
+  - 50 gr tepung terigu
+  - 50 ml SKM
+  - 75 gr gula pasir
+  - 0.5 sdt garam
+  - 600 ml santan (sy 200 ml santan Rose Brand+ air)
+  - 100 gr gula merah
+  - gula pasir
+  - 2 sdm tepung terigu
+  - 4 butir telur ukuran besar
+  - 0.5 sdt pasta vanilla
+Kategori Bahan: Santan, Biji-bijian, Seafood, Susu, Bumbu Olahan"
+recipe_00037,AO113,AO113,Wingko babat,Wingko Babat,"Biji-bijian,Susu,Bumbu Olahan,Buah,Santan","Nama Masakan: Wingko babat
+Nama Asli Resep: Wingko Babat
+Bahan-bahan:
+  - 500 gr tepung ketan
+  - 1 botol susu fresh (merk apapun sesuai selera)
+  - 350 gr gula pasir
+  - 2 bungkus kelapa parut ukuran sedang
+  - 200 gr butter
+  - 1 kaleng santan
+  - 0.2 sdt garam
+  - 1 lembar kertas roti panggang
+  - 1 sachet vanilla
+Kategori Bahan: Biji-bijian, Susu, Bumbu Olahan, Buah, Santan"
+recipe_00038,BO007,BO007,"Ganyong, rebus",Ganyong/Midro/Lembo Rebus,"Umbi-umbian,Bumbu Olahan","Nama Masakan: Ganyong, rebus
+Nama Asli Resep: Ganyong/Midro/Lembo Rebus
+Bahan-bahan:
+  - 250 gr umbi ganyong (sy 300 ubi)
+  - 500 ml air (disesuaikan)
+  - 1 sdt garam laut
+  - 1 lembar daun pandan?
+Kategori Bahan: Umbi-umbian, Bumbu Olahan"
+recipe_00039,BO009,BO009,"Suweg, talas, kukus",Suweg kukus,"Umbi-umbian,Buah,Bumbu Olahan","Nama Masakan: Suweg, talas, kukus
+Nama Asli Resep: Suweg kukus
+Bahan-bahan:
+  - 1 kg suweg
+  - 0.5 butir kelapa parut
+  - 1 sdt garam
+Kategori Bahan: Umbi-umbian, Buah, Bumbu Olahan"
+recipe_00040,BO011,BO011,"Ubi jalar, kuning, kukus",Ubi kukus,"Umbi-umbian,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Ubi jalar, kuning, kukus
+Nama Asli Resep: Ubi kukus
+Bahan-bahan:
+  - 1 buah ubi ungu (1/2kg)
+  - 1 sdt garam
+  - 0.5 sdt lada bubuk putih
+Kategori Bahan: Umbi-umbian, Bumbu Olahan, Bumbu Rempah"
+recipe_00041,BO015,BO015,Bagea kenari asin,Kue Bagea Kenari (kue sagu),"Biji-bijian,Bumbu Rempah,Kacang-kacangan,Bumbu Olahan","Nama Masakan: Bagea kenari asin
+Nama Asli Resep: Kue Bagea Kenari (kue sagu)
+Bahan-bahan:
+  - 400 gr Tepung sagu, sangrai
+  - 1 sdt Kayu manis bubuk
+  - 50 gr Kenari cincang, sangrai
+  - 150 gr Gula pasir. Diblender sebentar hingga halus
+  - 0.5 sdt Soda kue
+  - 100 ml Minyak sayur
+  - 2 butir Telur ayam
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Kacang-kacangan, Bumbu Olahan"
+recipe_00042,BO016,BO016,Bagea kenari manis,Kue Bagea Kenari (kue sagu),"Biji-bijian,Bumbu Rempah,Kacang-kacangan,Bumbu Olahan","Nama Masakan: Bagea kenari manis
+Nama Asli Resep: Kue Bagea Kenari (kue sagu)
+Bahan-bahan:
+  - 400 gr Tepung sagu, sangrai
+  - 1 sdt Kayu manis bubuk
+  - 50 gr Kenari cincang, sangrai
+  - 150 gr Gula pasir. Diblender sebentar hingga halus
+  - 0.5 sdt Soda kue
+  - 100 ml Minyak sayur
+  - 2 butir Telur ayam
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Kacang-kacangan, Bumbu Olahan"
+recipe_00043,BO017,BO017,Bagea kw 1,Kue Bagea,"Biji-bijian,Bumbu Olahan,Kacang-kacangan,Susu,Seafood,Bumbu Rempah","Nama Masakan: Bagea kw 1
+Nama Asli Resep: Kue Bagea
+Bahan-bahan:
+  - 500 gr tepung sagu
+  - 150 gr gula pasir
+  - 100 gr kacang tanah
+  - 50 gr margarin, lelehkan
+  - 1 sdt vanili bubuk
+  - 1 sdm bubuk kayu manis
+  - 0.5 sdt garam
+  - 1 butir telur
+  - 100 ml air hangat
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Kacang-kacangan, Susu, Seafood, Bumbu Rempah"
+recipe_00044,BO018,BO018,Bagea kw 2,Kue Bagea,"Biji-bijian,Bumbu Olahan,Kacang-kacangan,Susu,Bumbu Rempah","Nama Masakan: Bagea kw 2
+Nama Asli Resep: Kue Bagea
+Bahan-bahan:
+  - 500 gr tepung sagu
+  - 150 gr gula pasir
+  - 100 gr kacang tanah
+  - 50 gr margarin
+  - 1 sdt vanili bubuk
+  - 1 sdm bubuk kayu manis
+  - 0.5 sdt garam
+  - 1 butir telur
+  - 100 ml air hangat
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Kacang-kacangan, Susu, Bumbu Rempah"
+recipe_00045,BO023,BO023,Bubur sagu,Bubur Sagu Ambon,"Umbi-umbian,Bumbu Olahan,Seafood,Santan","Nama Masakan: Bubur sagu
+Nama Asli Resep: Bubur Sagu Ambon
+Bahan-bahan:
+  - 4 keping Sagu Ambon
+  - 1 buah Ubi oranye, potong dadu
+  - 0.5 keping Gula jawa
+  - 100 gr Gula pasir
+  - 0.25 sdt Vanila esens
+  - 1 lembar Daun pandan, ikat simpul
+  - Air
+  - 65 ml Santan Rose Brand
+  - 500 ml Air
+  - 0.5 sdt Garam
+Kategori Bahan: Umbi-umbian, Bumbu Olahan, Seafood, Santan"
+recipe_00046,BO025,BO025,Ceriping getuk singkong,Kripik gethuk,"Umbi-umbian,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Ceriping getuk singkong
+Nama Asli Resep: Kripik gethuk
+Bahan-bahan:
+  - 1 kg Singkong
+  - 0.5 kg Gula pasir
+  - 0.25 sdt Garam
+  - 5 siung Bawang putih haluskan
+  - Minyak goreng
+Kategori Bahan: Umbi-umbian, Bumbu Olahan, Bumbu Rempah"
+recipe_00047,BO026,BO026,Gatot,Gatot Getuk (Singkong),"Umbi-umbian,Buah,Bumbu Olahan","Nama Masakan: Gatot
+Nama Asli Resep: Gatot Getuk (Singkong)
+Bahan-bahan:
+  - 750 gr gaplek atau singkong kering
+  - 1 butir Parut kelapa
+  - 1 sdm garam
+Kategori Bahan: Umbi-umbian, Buah, Bumbu Olahan"
+recipe_00048,BO029,BO029,Getuk singkong,Gatot Getuk (Singkong),"Umbi-umbian,Buah,Bumbu Olahan","Nama Masakan: Getuk singkong
+Nama Asli Resep: Gatot Getuk (Singkong)
+Bahan-bahan:
+  - 750 gr gaplek atau singkong kering
+  - 1 butir Parut kelapa
+  - 1 sdm garam
+Kategori Bahan: Umbi-umbian, Buah, Bumbu Olahan"
+recipe_00049,BO030,BO030,Gurandil,Gurandil,"Biji-bijian,Seafood,Buah,Bumbu Olahan","Nama Masakan: Gurandil
+Nama Asli Resep: Gurandil
+Bahan-bahan:
+  - 100 gr tepung tapioka Rose Brand
+  - 50 gr tepung terigu
+  - 4 tetes pewarna (hijau dan merah)
+  - 150 ml air
+  - 1 lembar daun pandan
+  - 0.25 buah kelapa parut
+  - 0.25 sdt garam
+  - 0.5 sdt gula pasir Rose Brand untuk taburan
+Kategori Bahan: Biji-bijian, Seafood, Buah, Bumbu Olahan"
+recipe_00050,BO033,BO033,Kecimpring singkong goreng,Kecimpring singkong,"Umbi-umbian,Sayur,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Kecimpring singkong goreng
+Nama Asli Resep: Kecimpring singkong
+Bahan-bahan:
+  - 1 kg singkong
+  - 4 batang daun bawang seledri
+  - 1 sdm garam
+  - 1 sdm gula pasir
+  - 1 sdt penyedap
+Kategori Bahan: Umbi-umbian, Sayur, Bumbu Rempah, Bumbu Olahan"
+recipe_00051,BO035,BO035,Keripik gadung,Keripik singkong rasa gadung,"Umbi-umbian,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Keripik gadung
+Nama Asli Resep: Keripik singkong rasa gadung
+Bahan-bahan:
+  - 3 kg singkong kupas, iris tipis, cuci
+  - 3 sdm garam
+  - 4 siung bawang putih
+  - 3 air untuk merendam singkong
+  - 250 ml air endapan kapur sirih
+Kategori Bahan: Umbi-umbian, Bumbu Olahan, Bumbu Rempah"
+recipe_00052,BO045,BO045,Kerupuk udang goreng,Kerupuk Udang,,"Nama Masakan: Kerupuk udang goreng
+Nama Asli Resep: Kerupuk Udang
+Bahan-bahan:
+  - 0.25 kg kerupuk udang
+  - Minyak goreng"
+recipe_00053,BO047,BO047,Kue putu singkong,Kue Putu Singkong,"Umbi-umbian,Buah,Bumbu Olahan","Nama Masakan: Kue putu singkong
+Nama Asli Resep: Kue Putu Singkong
+Bahan-bahan:
+  - 1 kg singkong
+  - 200 gr kelapa parut
+  - 1 sdm garam
+  - 100 gr gula jawa, sisir
+  - Pewarna merah n hijau
+Kategori Bahan: Umbi-umbian, Buah, Bumbu Olahan"
+recipe_00054,BO048,BO048,Lanting getuk,Lanting getuk /singkong ala nafren,"Umbi-umbian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Lanting getuk
+Nama Asli Resep: Lanting getuk /singkong ala nafren
+Bahan-bahan:
+  - 3 potong singkong yang sudah direbus dan dihaluskan
+  - 3 siung Bawang putih
+  - 1 sdt ketumbar
+  - 1 sdt garam kira kira aja
+Kategori Bahan: Umbi-umbian, Bumbu Rempah, Bumbu Olahan"
+recipe_00055,BO050,BO050,Mie Bendo,Mie lethek/mie bendo goreng,"Biji-bijian,Daging Putih,Unggas,Bumbu Rempah,Sayur,Buah,Bumbu Olahan","Nama Masakan: Mie Bendo
+Nama Asli Resep: Mie lethek/mie bendo goreng
+Bahan-bahan:
+  - 250 gr mie lethek/bendo, rendam kurleb 10 menit, cuci, tiriskan
+  - 150 gr ayam (lbh enak ayam kampung), rebus, suwir2
+  - 2 batang daun bawang
+  - 1 buah wortel
+  - 50 ml air kaldu
+  - 1 buah tomat
+  - -2 telur
+  - 4 sdm minyak untuk menumis
+  - 1 sdm bawang goreng
+  - 6 lembar kobis, potong2
+  - 0.5 sdt merica bubuk
+  - 4 siung bawang putih
+  - 2 butir kemiri
+  - 1 sdm garam (menurut selera)
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Bumbu Rempah, Sayur, Buah, Bumbu Olahan"
+recipe_00056,BO053,BO053,Oyek,Tiwul / nasi oyek harum tidak pahit,Umbi-umbian,"Nama Masakan: Oyek
+Nama Asli Resep: Tiwul / nasi oyek harum tidak pahit
+Bahan-bahan:
+  - 1 kg singkong segar
+Kategori Bahan: Umbi-umbian"
+recipe_00057,BO061,BO061,Sagu sinole,Sinole manis,"Umbi-umbian,Biji-bijian,Bumbu Olahan,Buah","Nama Masakan: Sagu sinole
+Nama Asli Resep: Sinole manis
+Bahan-bahan:
+  - 160 gr sagu basah
+  - 14 gr tepung tapioka 律両�¢隆 藍料琉僚粒
+  - 1 sdm gula pasir 律両�¢隆 藍料琉僚粒
+  - 1 mangkok kecil kelapa untuk campuran sagu
+  - 0.5 sdt garam halus
+  - 0.5 mangkok kecil kelapa parut
+  - 3 sdm gula merah yang telah diserut halus
+Kategori Bahan: Umbi-umbian, Biji-bijian, Bumbu Olahan, Buah"
+recipe_00058,BO062,BO062,Serimping talas kebumen,Kue talas,"Umbi-umbian,Sayur,Seafood,Daging Putih,Bumbu Olahan,Bumbu Rempah,Biji-bijian","Nama Masakan: Serimping talas kebumen
+Nama Asli Resep: Kue talas
+Bahan-bahan:
+  - 1 buah talas ukuran besar
+  - 5 buah jamur kering yg sdh direndam sampai lunak trus di potong kecil kecil
+  - 5 buah scalop kering rendam disuir suir
+  - 1 ons udang kering
+  - garam
+  - penyedap rasa
+  - mrica bubuk
+  - 1 gelas tepung beras
+  - 1 gelas tepung jagung
+Kategori Bahan: Umbi-umbian, Sayur, Seafood, Daging Putih, Bumbu Olahan, Bumbu Rempah, Biji-bijian"
+recipe_00059,BO072,BO072,Tepung Ubi Ungu,Pasta Ubi Ungu (Isian Bakpao/Roti),"Umbi-umbian,Santan,Susu,Bumbu Olahan,Biji-bijian","Nama Masakan: Tepung Ubi Ungu
+Nama Asli Resep: Pasta Ubi Ungu (Isian Bakpao/Roti)
+Bahan-bahan:
+  - 596 gr ubi ungu
+  - 120 ml air untuk merebus ubi ungu
+  - 65 ml santan instan Rose Brand
+  - 58 gr kuah santan susu
+  - 0.25 sdt vanilla butter
+  - 30 gr gula pasir Rose Brand
+  - 20 gr tepung ketan putih
+  - 10 gr Evoo
+  - 1 gr himalayan salt
+  - 45 gr air mineral
+Kategori Bahan: Umbi-umbian, Santan, Susu, Bumbu Olahan, Biji-bijian"
+recipe_00060,BO075,BO075,Ubi Cilembu,Ubi Cilembu,Susu,"Nama Masakan: Ubi Cilembu
+Nama Asli Resep: Ubi Cilembu
+Bahan-bahan:
+  - Kontak
+  - 150 ml Minyak goreng
+  - 1 sachet Susu kental manis coklat
+Kategori Bahan: Susu"
+recipe_00061,CO001,CO001,"Kacang belimbing, rebus",Sambal Belimbing (pakai Biji Nangka),"Bumbu Rempah,Buah,Bumbu Olahan,Seafood,Sayur","Nama Masakan: Kacang belimbing, rebus
+Nama Asli Resep: Sambal Belimbing (pakai Biji Nangka)
+Bahan-bahan:
+  - 5 buah cabe merah besar
+  - 5 buah cabe rawit kecil
+  - 4 siung bawang merah
+  - 1 siung bawang putih
+  - 6 buah belimbing ukuran kecil
+  - 0.5 sdt garam
+  - 0.5 sdt kaldu bubuk (optional)
+  - 1 sdt /secukupnya gula merah
+  - 1 sdt terasi
+  - 20 biji Biji Nangka
+  - 100 ml /Secukupnya air
+  - 2 sdm /secukupnya minyak sayur
+Kategori Bahan: Bumbu Rempah, Buah, Bumbu Olahan, Seafood, Sayur"
+recipe_00062,CO005,CO005,"kacang hijau, rebus",Kacang Hijau Rebus,Kacang-kacangan,"Nama Masakan: kacang hijau, rebus
+Nama Asli Resep: Kacang Hijau Rebus
+Bahan-bahan:
+  - 250 gr Kacang hijau
+  - Air
+Kategori Bahan: Kacang-kacangan"
+recipe_00063,CO013,CO013,"Kacang tanah, rebus",Air rebusan kulit ari kacang tanah dan kurma merah,"Kacang-kacangan,Buah","Nama Masakan: Kacang tanah, rebus
+Nama Asli Resep: Air rebusan kulit ari kacang tanah dan kurma merah
+Bahan-bahan:
+  - 2 sdm kulit ari kacang tanah,cuci bersih
+  - 2 butir kurma merah,cuci lalu buang bijinya
+  - 500 ml air
+Kategori Bahan: Kacang-kacangan, Buah"
+recipe_00064,CO014,CO014,"Kacang tolo, rebus",Lepet Kacang Tolo,"Biji-bijian,Santan,Buah,Bumbu Olahan,Kacang-kacangan","Nama Masakan: Kacang tolo, rebus
+Nama Asli Resep: Lepet Kacang Tolo
+Bahan-bahan:
+  - 250 gr Beras ketan putih
+  - 65 ml Santan instan
+  - 225 ml Air
+  - 2 lembar Daun pandan
+  - 80 gr Kelapa parut
+  - 0.5 sdm Garam
+  - 100 gr Kacang tolo
+Kategori Bahan: Biji-bijian, Santan, Buah, Bumbu Olahan, Kacang-kacangan"
+recipe_00065,CO018,CO018,"Ampas tahu, kering",Kue coklat #vegan dengan ampas tahu (Okara),"Biji-bijian,Seafood,Buah,Bumbu Olahan,Kacang-kacangan,Santan","Nama Masakan: Ampas tahu, kering
+Nama Asli Resep: Kue coklat #vegan dengan ampas tahu (Okara)
+Bahan-bahan:
+  - 170 gr tepung terigu protein rendah (10.6%)
+  - 30 gr bubuk kakao (Dutch cocoa powder)
+  - 1 sdt baking powder
+  - 0.5 sdt baking soda
+  - 125 gr gula kelapa coklat
+  - 175 gr okara
+  - 60 gr coklat chips / potong kecil-kecil biar cepat meleleh
+  - 200 ml santan
+  - 90 ml minyak kelapa
+  - 0.5 sdm vanilla cair (sesuai selera)
+  - 0.5 sdm cuka (saya pakai cuka beras, cuka putih pun bisa. Ini dimasukkannya setelah semua bahan basah tercampur rata ya)
+Kategori Bahan: Biji-bijian, Seafood, Buah, Bumbu Olahan, Kacang-kacangan, Santan"
+recipe_00066,CO021,CO021,Bungkil kacang tanah,Tumis Oncom KW (Bungkil Kacang Tanah),"Sayur,Kacang-kacangan,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Bungkil kacang tanah
+Nama Asli Resep: Tumis Oncom KW (Bungkil Kacang Tanah)
+Bahan-bahan:
+  - 100 gr leunca
+  - 1 ikat kemangi
+  - 2 papan tempe kacang tanah (bungkil)
+  - 3 sdm minyak untuk menumis
+  - 1 batang serai
+  - 1 sdt gula jawa sisir
+  - 1 sdt garam
+  - 100 ml air
+  - 4 buah cabe merah keriting
+  - 25 buah cabe rawit
+  - 4 siung bawang putih
+  - 8 butir bawang merah
+  - 2 cm kencur
+Kategori Bahan: Sayur, Kacang-kacangan, Bumbu Rempah, Bumbu Olahan"
+recipe_00067,CO022,CO022,Bungkil kelapa,Bobor sedaer dan tempe bungkil,"Buah,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Bungkil kelapa
+Nama Asli Resep: Bobor sedaer dan tempe bungkil
+Bahan-bahan:
+  - 2 ikat Sedaer (selada air)
+  - 0.25 bagian kelapa
+  - 3 lembar daun jeruk purut
+  - 3 cm Lengkuas geprek
+  - Garam
+  - jika suka Penyedap
+  - Bumbu halus :
+  - 5 buah bawang merah
+  - 3 siung bawang putih
+  - 10 Cabe rawit
+  - 2 sdm ketumbar
+  - 3 cm kencur
+  - 3 cm kunyit
+Kategori Bahan: Buah, Bumbu Rempah, Bumbu Olahan"
+recipe_00068,CO024,CO024,Emping (kerupuk melinjo),Kue Kering Emping Melinjo,"Susu,Bumbu Olahan,Biji-bijian,Seafood","Nama Masakan: Emping (kerupuk melinjo)
+Nama Asli Resep: Kue Kering Emping Melinjo
+Bahan-bahan:
+  - 125 gr emping melinjo goreng
+  - 200 gr mentega
+  - 100 gr gula pasir
+  - 2 butir kuning telur
+  - 1 sdt vanili
+  - 0.333333 sdt garam
+  - 180 gr tepung terigu pro rendah
+  - 20 gr susu bubuk
+  - 30 gr tepung maizena
+Kategori Bahan: Susu, Bumbu Olahan, Biji-bijian, Seafood"
+recipe_00069,CO028,CO028,Enting-enting wijen,Enting Enting Kacang Wijen,"Kacang-kacangan,Biji-bijian,Bumbu Olahan,Susu","Nama Masakan: Enting-enting wijen
+Nama Asli Resep: Enting Enting Kacang Wijen
+Bahan-bahan:
+  - 175 gr kacang tanah (tanpa kulit dan sudah disangrai/matang)
+  - 25 gr wijen putih (sudah disangrai)
+  - 185 gr gula
+  - 15 gr margarin
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Olahan, Susu"
+recipe_00070,CO029,CO029,Geplak,Geplak betawi,"Biji-bijian,Buah,Bumbu Olahan,Santan","Nama Masakan: Geplak
+Nama Asli Resep: Geplak betawi
+Bahan-bahan:
+  - 750 gr tepung beras
+  - 2 lembar daun pandan
+  - 1 butir kelapa sedang, parut
+  - 300 gr gula merah, sisir halus
+  - 0.5 sdt garam
+  - 200 ml santan
+  - 200 ml air matang
+Kategori Bahan: Biji-bijian, Buah, Bumbu Olahan, Santan"
+recipe_00071,CO031,CO031,Kacang atom,Kacang Atom,"Kacang-kacangan,Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Kacang atom
+Nama Asli Resep: Kacang Atom
+Bahan-bahan:
+  - 1 kg Kacang Tanah
+  - 1 liter Minyak
+  - 900 ml Air bersih
+  - 4 sdm Tepung tapioka
+  - 2 sachet Bawang putih bubuk
+  - 5 siung Bawang putih, haluskan
+  - 2 sachet Kaldu bubuk
+  - 1 sdt Garam halus
+  - 1 kg Tepung ketan putih
+  - 250 gr Tepung tapioka
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00072,CO032,CO032,Kacang goyang,Peyek kacang kembang goyang,"Bumbu Rempah,Biji-bijian,Bumbu Olahan,Kacang-kacangan,Buah","Nama Masakan: Kacang goyang
+Nama Asli Resep: Peyek kacang kembang goyang
+Bahan-bahan:
+  - 4 butir bawang putih
+  - 4 butir kemiri
+  - 2 ruas jari kencur
+  - 1 butir telur
+  - 100 gr tepung beras
+  - 100 gr tepung ketan putih
+  - 15 gr tepung tapioka
+  - 300 ml air
+  - 0.5 sdm ketumbar bubuk
+  - 1 sdm kaldu bubuk
+  - 1 sdt garam
+  - 100 gr kacang tanah
+  - 10 lembar daun jeruk
+Kategori Bahan: Bumbu Rempah, Biji-bijian, Bumbu Olahan, Kacang-kacangan, Buah"
+recipe_00073,CO034,CO034,Kacang sukro,Kacang Atom #Dapur Fitri,"Kacang-kacangan,Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Kacang sukro
+Nama Asli Resep: Kacang Atom #Dapur Fitri
+Bahan-bahan:
+  - 1 kg Kacang Tanah
+  - 1 liter Minyak untuk menggoreng
+  - 900 ml Air bersih
+  - 4 sdm Tepung tapioka
+  - 2 sachet Bawang putih bubuk
+  - 5 siung Bawang putih, haluskan
+  - 2 sachet Kaldu bubuk
+  - 1 sdt Garam halus
+  - 1 kg Tepung ketan putih
+  - 250 gr Tepung tapioka
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00074,CO037,CO037,Kembang tahu,Kembang Tahu,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Kembang tahu
+Nama Asli Resep: Kembang Tahu
+Bahan-bahan:
+  - 250 gr Kacang kedelai
+  - 500 ml Air
+  - 3 sdm Gula Pasir ROSE BRAND
+  - 1 sdt Agar-agar
+  - 750 ml Air
+  - 150 gr Gula jawa
+  - 50 gr Jahe
+  - 1 lembar Daun pandan
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00075,CO046,CO046,Kwaci,Kuaci Biji Labu,Bumbu Olahan,"Nama Masakan: Kwaci
+Nama Asli Resep: Kuaci Biji Labu
+Bahan-bahan:
+  - 75 gr biji labu
+  - 0.5 sdt garam
+  - 300 ml air
+Kategori Bahan: Bumbu Olahan"
+recipe_00076,CO047,CO047,Melinjo emping tebal goreng manis,Emping Goreng,,"Nama Masakan: Melinjo emping tebal goreng manis
+Nama Asli Resep: Emping Goreng
+Bahan-bahan:
+  - 200 gr Emping
+  - 200 ml Minyak Goreng"
+recipe_00077,CO048,CO048,"Melinjo emping tebal, goreng asin",Emping goreng,Bumbu Olahan,"Nama Masakan: Melinjo emping tebal, goreng asin
+Nama Asli Resep: Emping goreng
+Bahan-bahan:
+  - emping
+  - masako
+  - minyak goreng
+Kategori Bahan: Bumbu Olahan"
+recipe_00078,CO049,CO049,Melinjo emping tipis goreng,Emping goreng,Bumbu Olahan,"Nama Masakan: Melinjo emping tipis goreng
+Nama Asli Resep: Emping goreng
+Bahan-bahan:
+  - emping
+  - masako
+  - minyak goreng
+Kategori Bahan: Bumbu Olahan"
+recipe_00079,CO050,CO050,Moon tahu,Mun Tahu Ayam,"Daging Putih,Unggas,Kacang-kacangan,Bumbu Rempah,Bumbu Olahan,Biji-bijian","Nama Masakan: Moon tahu
+Nama Asli Resep: Mun Tahu Ayam
+Bahan-bahan:
+  - 100 gr fillet ayam, bagian paha
+  - 3 kotak tahu putih
+  - 100 ml air
+  - 1 siung bawang putih
+  - 2 batang daun bawang
+  - 0.25 sdt lada bubuk
+  - 1 sdt garam
+  - 1 sdm kecap asin
+  - 1 sdm saus tiram
+  - 0.5 sdt maizena
+Kategori Bahan: Daging Putih, Unggas, Kacang-kacangan, Bumbu Rempah, Bumbu Olahan, Biji-bijian"
+recipe_00080,CO056,CO056,Rempeyek kacang tolo,Peyek Kacang Tolo,"Kacang-kacangan,Biji-bijian,Bumbu Rempah,Buah,Bumbu Olahan","Nama Masakan: Rempeyek kacang tolo
+Nama Asli Resep: Peyek Kacang Tolo
+Bahan-bahan:
+  - 100 gr kacang tolo
+  - 200 gr tepung beras Rose Brand
+  - 1 sdm tepung tapioka cap pak tani gunung
+  - 300 ml air
+  - 1 butir telur
+  - 8 lembar daun jeruk, buang tulang tengahnya dan iris tipis
+  - 500 ml minyak goreng Rose Brand
+  - 5 siung bawang putih
+  - 4 butir kemiri
+  - 3 cm kencur
+  - 2 sdt ketumbar bubuk
+  - 1 sdt kaldu bubuk
+  - 0.5 sdt garam
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Rempah, Buah, Bumbu Olahan"
+recipe_00081,CO057,CO057,Rempeyek kacang uci,Peyek Kacang,"Kacang-kacangan,Biji-bijian,Bumbu Rempah,Bumbu Olahan,Buah","Nama Masakan: Rempeyek kacang uci
+Nama Asli Resep: Peyek Kacang
+Bahan-bahan:
+  - 100 gr kacang tanah
+  - 200 gr tepung beras
+  - 1 butir telur
+  - 1 sdm tepung tapioka
+  - 2 cm kencur
+  - 3 siung bawang putih
+  - 1.5 sdt garam
+  - 1 sdt kaldu bubuk
+  - 1 sdt ketumbar
+  - 6 lembar irisan daun jeruk
+  - air
+  - 1000 ml minyak sayur
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Rempah, Bumbu Olahan, Buah"
+recipe_00082,CO063,CO063,Tahu telur,Sup Tahu Telur,"Kacang-kacangan,Buah,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Tahu telur
+Nama Asli Resep: Sup Tahu Telur
+Bahan-bahan:
+  - 4 buah Tahu putih
+  - 1 butir Telur
+  - 2 buah Tomat Merah Kecil
+  - 2 butir Bawang Putih
+  - 0.25 bagian Bawang Bombay
+  - Daun Bawang
+  - Kecap Asin
+  - Saus Tiram
+  - Penyedap Rasa
+  - Garam
+  - Air
+Kategori Bahan: Kacang-kacangan, Buah, Bumbu Rempah, Bumbu Olahan"
+recipe_00083,CO074,CO074,Tempe kacang belimbing,Rujak Cingur Khas Surabaya,"Kacang-kacangan,Bumbu Rempah,Bumbu Olahan,Daging Putih,Seafood,Daging Merah,Buah,Biji-bijian,Sayur","Nama Masakan: Tempe kacang belimbing
+Nama Asli Resep: Rujak Cingur Khas Surabaya
+Bahan-bahan:
+  - 100 gr Kacang Tanah
+  - 2 siung Bawang Putih
+  - 10 buah Cabe rawit
+  - 2 sdm Gula Merah
+  - 0.5 sdt Terasi udang
+  - 0.5 sdt Garam
+  - 5 sdm Air asam (Asam jawa yang di rendam ke dalam air)
+  - 3 sdm Petis udang
+  - 100 ml Air
+  - 200 gr Cingur Sapi
+  - 1 buah Mentimun
+  - 4 buah Tempe Goreng
+  - 3 buah Tahu Goreng
+  - 0.5 buah Nanas
+  - 1 buah Belimbing
+  - 1 buah Mangga muda
+  - 4 buah Lontong
+  - 100 gr Taoge yang sudah direbus
+  - 1 ikat Kangkung yang sudah direbus
+Kategori Bahan: Kacang-kacangan, Bumbu Rempah, Bumbu Olahan, Daging Putih, Seafood, Daging Merah, Buah, Biji-bijian, Sayur"
+recipe_00084,CO076,CO076,"Tempe kedelai murni, goreng",Sambal Goreng Tempe (Lauk Nasi Ponggol Khas Tegal),"Kacang-kacangan,Bumbu Rempah,Bumbu Olahan,Sayur","Nama Masakan: Tempe kedelai murni, goreng
+Nama Asli Resep: Sambal Goreng Tempe (Lauk Nasi Ponggol Khas Tegal)
+Bahan-bahan:
+  - 200 gr Tempe kedelai
+  - 1 batang sereh
+  - 1 lembar daun salam
+  - 1 ruas lengkuas
+  - 2 sdm minyak goreng
+  - air
+  - 5 butir bawang merah
+  - 2 siung bawang putih
+  - 2 buah cabe hijau
+  - 2 buah cabe rawit
+  - 2 sdm kecap manis
+  - 0.5 sdt garam
+  - 0.25 sdt gula aren
+  - 0.25 sdt kaldu jamur bubuk
+Kategori Bahan: Kacang-kacangan, Bumbu Rempah, Bumbu Olahan, Sayur"
+recipe_00085,DO001,DO001,"Bayam, kukus",Side Dish: Sigeumchi Namul / Lalapan Bayam ala Hanamasa,"Sayur,Daging Putih,Unggas,Seafood,Bumbu Olahan,Bumbu Rempah,Biji-bijian","Nama Masakan: Bayam, kukus
+Nama Asli Resep: Side Dish: Sigeumchi Namul / Lalapan Bayam ala Hanamasa
+Bahan-bahan:
+  - 2 ikat bayam
+  - 1 sdt garam sesuaikan dengan rasa masing2
+  - 1 sdt Bawang putih cincang
+  - 1 sdm minyak wijen
+  - 1 sdm biji wijen
+Kategori Bahan: Sayur, Daging Putih, Unggas, Seafood, Bumbu Olahan, Bumbu Rempah, Biji-bijian"
+recipe_00086,DO005,DO005,"Daun katuk, rebus",Sayur daun katuk,"Sayur,Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Daun katuk, rebus
+Nama Asli Resep: Sayur daun katuk
+Bahan-bahan:
+  - 1 ikat daun katuk
+  - 1 buah jagung manis
+  - 3 siung bawang merah
+  - 1 ruas temu kunci iris tipis (opsional jika ada)
+  - 2 batang daun kemangi
+  - 1000 ml air
+  - 0.5 sdt garam
+  - 1 sdt gula pasir
+Kategori Bahan: Sayur, Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00087,DO008,DO008,"Daun singkong, rebus",Daun Singkong Rebus,"Umbi-umbian,Bumbu Rempah,Buah,Bumbu Olahan","Nama Masakan: Daun singkong, rebus
+Nama Asli Resep: Daun Singkong Rebus
+Bahan-bahan:
+  - 200 gr daun singkong muda
+  - 2 lembar daun jeruk
+  - 1 sdt garam
+  - 1 sdm minyak goreng
+  - 1 liter air rebusan
+Kategori Bahan: Umbi-umbian, Bumbu Rempah, Buah, Bumbu Olahan"
+recipe_00088,DO009,DO009,"Daun talas, rebus",DAUN SINGKONG REBUS / LALAP DAUN SINGKONG笆ｪ�ｸ�,"Umbi-umbian,Bumbu Olahan","Nama Masakan: Daun talas, rebus
+Nama Asli Resep: DAUN SINGKONG REBUS / LALAP DAUN SINGKONG笆ｪ�ｸ�
+Bahan-bahan:
+  - 3 ikat daun singkong
+  - 1 liter air secukupnya
+  - 1 sdt garam
+  - 1 sdt baking soda
+  - 1 sdm minyak goreng (opsional)
+Kategori Bahan: Umbi-umbian, Bumbu Olahan"
+recipe_00089,DO014,DO014,"Kangkung, rebus",Kangkung Rebus Siram Bawang Pedas,"Sayur,Bumbu Rempah,Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Kangkung, rebus
+Nama Asli Resep: Kangkung Rebus Siram Bawang Pedas
+Bahan-bahan:
+  - 1 ikat kangkung
+  - 2 siung bawang putih
+  - 5 buah cabai rawit (sesuaikan tingkat kepedasannya)
+  - 1 sdm minyak wijen
+  - 1 sdt kecap asin
+  - 0.25 sdt garam
+  - 0.5 sdt penyedap jamur (skip juga gak apa-apa)
+  - 0.25 sdt gula pasir
+  - 0.5 sdt merica bubuk
+  - 2 sdm minyak goreng
+Kategori Bahan: Sayur, Bumbu Rempah, Daging Putih, Seafood, Bumbu Olahan"
+recipe_00090,DO023,DO023,"Anyang, sayur",Anyang Bunga Pepaya,"Buah,Bumbu Rempah,Bumbu Olahan,Seafood","Nama Masakan: Anyang, sayur
+Nama Asli Resep: Anyang Bunga Pepaya
+Bahan-bahan:
+  - 0.25 kg Bunga Pepaya
+  - 0.25 butir kelapa setengah tua
+  - 1 siung bawang putih
+  - 5 siung bawang merah
+  - 1 buah cabe merah
+  - 5 buah cabe rawit hijau
+  - 0.5 sdt gula pasir
+  - 1 sdt garam
+  - 1 lembar daun salam
+  - 1 lembar daun jeruk
+  - 0.5 sdt terasi
+Kategori Bahan: Buah, Bumbu Rempah, Bumbu Olahan, Seafood"
+recipe_00091,DO026,DO026,Beberuk,Beberuk Terong,"Bumbu Rempah,Seafood,Bumbu Olahan,Buah,Kacang-kacangan,Sayur","Nama Masakan: Beberuk
+Nama Asli Resep: Beberuk Terong
+Bahan-bahan:
+  - 5 butir cabe rawit
+  - 3 butir cabe merah keriting (optional)
+  - 1 sdt terasi bakar
+  - 3 butir bawang merah iris
+  - 1 buah tomat
+  - 0.5 sdt garam
+  - 1 sdt gula
+  - 0.5 sdt penyedap
+  - 1 buah jeruk limau
+  - 3 batang kacang panjang
+  - 3 buah terong ijo bulet (terong batik)
+Kategori Bahan: Bumbu Rempah, Seafood, Bumbu Olahan, Buah, Kacang-kacangan, Sayur"
+recipe_00092,DO029,DO029,Cammetutu,551.Sayur Tuttu' (Tettu') khas Makasar,"Umbi-umbian,Bumbu Rempah,Biji-bijian,Buah,Bumbu Olahan","Nama Masakan: Cammetutu
+Nama Asli Resep: 551.Sayur Tuttu' (Tettu') khas Makasar
+Bahan-bahan:
+  - 1 ikat kecil daun singkong
+  - 5 siung bawang merah
+  - 2 siung bawang putih
+  - 2 butir kemiri
+  - 100 gr kelapa parut setengah tua
+  - 1 batang sere geprek
+  - 2 lembar daun salam
+  - 5 buah cabe setan
+  - 0.25 sdt garam
+  - 0.25 sdt kaldu bubuk
+  - 200 ml air
+Kategori Bahan: Umbi-umbian, Bumbu Rempah, Biji-bijian, Buah, Bumbu Olahan"
+recipe_00093,DO030,DO030,"Cap cai, sayur",Cap cai goreng,"Bumbu Rempah,Biji-bijian,Sayur,Umbi-umbian,Daging Merah,Bumbu Olahan","Nama Masakan: Cap cai, sayur
+Nama Asli Resep: Cap cai goreng
+Bahan-bahan:
+  - 2 siung bawang putih
+  - 2 butir kemiri
+  - 0.5 siung bawang bombay
+  - 1 buah wortel
+  - 4 buah putren kecil
+  - 1 bonggol pok choy
+  - 1 bonggol kembang kol kecil
+  - 0.25 buah kubis kecil
+  - 3 buah sosis
+  - 4 buah bakwan
+  - 0.5 sdt garam
+  - 1 sdt gula
+  - 1 sdm kecap asin
+  - 1 sdm saus tiram
+  - 1 sdm kecap manis
+Kategori Bahan: Bumbu Rempah, Biji-bijian, Sayur, Umbi-umbian, Daging Merah, Bumbu Olahan"
+recipe_00094,DO032,DO032,"Gudeg, sayur",Gudeg Jogja Tanpa Daun Jati,"Sayur,Buah,Umbi-umbian,Santan,Bumbu Rempah,Biji-bijian,Bumbu Olahan","Nama Masakan: Gudeg, sayur
+Nama Asli Resep: Gudeg Jogja Tanpa Daun Jati
+Bahan-bahan:
+  - 750 gr nangka muda sudah dibersihkan
+  - 6 butir telur ayam, rebus
+  - 1 ikat daun singkong
+  - 0.5 kg ayam broiler (lebih bagus pakai ayam kampung/ayam petelur)
+  - santan kelapa
+  - 10 butir bawang merah
+  - 10 siung bawang putih
+  - 8 buah kemiri sangrai
+  - 1 sdm ketumbar bubuk
+  - 1 sdt pada bubuk
+  - 2 buah sereh, geprek
+  - daun salam
+  - 100 gr lengkuas
+  - 2 ruas jahe
+  - 0.5 keping gula jawa/gula aren (secukupnya, sesuai selera aja)
+  - garam
+Kategori Bahan: Sayur, Buah, Umbi-umbian, Santan, Bumbu Rempah, Biji-bijian, Bumbu Olahan"
+recipe_00095,DO033,DO033,Gulai pakis,Gulai Pakis Pedas,"Sayur,Daging Putih,Seafood,Santan,Bumbu Rempah,Buah,Biji-bijian,Bumbu Olahan","Nama Masakan: Gulai pakis
+Nama Asli Resep: Gulai Pakis Pedas
+Bahan-bahan:
+  - 2 ikat pakis
+  - 300 gr udang
+  - 3 sdm minyak untuk menumis
+  - 100 ml santan instan
+  - 400 ml air
+  - 1 batang serai, geprek
+  - 1 ruas lengkuas, geprek
+  - 1 lembar daun kunyit
+  - 3 lembar daun jeruk
+  - 2 buah asam kandis
+  - 7 butir bawang merah
+  - 2 siung bawang putih
+  - 2 butir kemiri
+  - 10 buah cabe rawit
+  - 1 sdm ketumbar
+  - 2 cm kunyit
+  - 1 cm jahe
+  - 1 sdt garam
+  - 0.5 sdt kaldu bubuk
+  - 0.25 sdt gula
+Kategori Bahan: Sayur, Daging Putih, Seafood, Santan, Bumbu Rempah, Buah, Biji-bijian, Bumbu Olahan"
+recipe_00096,DO040,DO040,Lema/ Rebung asam,Santan ikan Rebung Asam,"Sayur,Daging Putih,Seafood,Santan,Bumbu Rempah,Biji-bijian,Bumbu Olahan","Nama Masakan: Lema/ Rebung asam
+Nama Asli Resep: Santan ikan Rebung Asam
+Bahan-bahan:
+  - 1 kg ikan dencis / ikan kembung / ikan kakap/ ikan tongkol
+  - 0.25 kg minyak sayur untuk menggoreng ikan
+  - 0.5 kg rebung Asam
+  - 2 bungkus santan kara
+  - 500 ml Air
+  - 5 buah bawang merah
+  - 7 buah Bawang putih
+  - 100 gr cabe merah
+  - 100 gr cabe rawit
+  - 50 gr kunyit
+  - 20 gr jahe
+  - 0.5 sdt merica
+  - 0.5 sdt ketumbar
+  - 3 buah kemiri
+  - 10 sdm minyak sayur untuk menumis
+  - 1 sdm garam
+  - 1 sdt micin
+  - 1 sdt kaldu bubuk
+  - 1 sdm gula pasir
+Kategori Bahan: Sayur, Daging Putih, Seafood, Santan, Bumbu Rempah, Biji-bijian, Bumbu Olahan"
+recipe_00097,DO044,DO044,Pelecing kangkung,Plecing Kangkung,"Sayur,Kacang-kacangan,Bumbu Rempah,Bumbu Olahan,Seafood,Buah","Nama Masakan: Pelecing kangkung
+Nama Asli Resep: Plecing Kangkung
+Bahan-bahan:
+  - 2 ikat kangkung, siangi daunnya
+  - 1 mangkok tauge
+  - 1 cangkir kacang tanah goreng
+  - 4 buah cabe merah besar
+  - 5 buah cabe rawit
+  - 0.25 sdt garam
+  - 0.25 sdt gula pasir
+  - 1 sdt terasi bakar
+  - 2 sdm minyak goreng panas
+  - 1 buah tomat
+  - 0.5 buah jeruk limau
+Kategori Bahan: Sayur, Kacang-kacangan, Bumbu Rempah, Bumbu Olahan, Seafood, Buah"
+recipe_00098,DO046,DO046,Rujak cingur,Rujak Cingur,"Daging Merah,Sayur,Umbi-umbian,Buah,Bumbu Rempah,Kacang-kacangan,Bumbu Olahan,Daging Putih,Seafood","Nama Masakan: Rujak cingur
+Nama Asli Resep: Rujak Cingur
+Bahan-bahan:
+  - 150 gr Cingur sapi
+  - 100 gr sawi putih
+  - 100 gr kangkung
+  - 100 gr Pucuk ubi jalar
+  - 100 gr nanas
+  - 1 buah mangga mengkal, iris
+  - 4 buah kedondong, iris
+  - 1 sdm Minyak goreng Rose Brand
+  - 5 buah cabe rawit/sesuai selera
+  - 100 gr kacang tanah goreng
+  - 50 gr gula merah
+  - petis udang
+  - 1 sdt terasi matang
+  - 8 sdm air asam Jawa (4 sdt asam Jawa)
+  - 100 ml air/secukupnya
+  - 3 siung bawang putih, goreng
+  - 1 sdt garam/secukupnya
+  - 0.5 sdt Gula Pasir Rose Brand
+  - 0.125 sdt Micin Asatu Rose Brand
+Kategori Bahan: Daging Merah, Sayur, Umbi-umbian, Buah, Bumbu Rempah, Kacang-kacangan, Bumbu Olahan, Daging Putih, Seafood"
+recipe_00099,DO049,DO049,Sayur garu,Sayur Garu,"Buah,Bumbu Rempah,Seafood,Bumbu Olahan","Nama Masakan: Sayur garu
+Nama Asli Resep: Sayur Garu
+Bahan-bahan:
+  - 1 buah jantung pisang kepok
+  - 5 lembar daun pepaya muda
+  - 1 lembar daun salam
+  - 2 buah sereh
+  - 1 lembar daun pandan kecil
+  - 1 ruas jari Jahe
+  - 4 siung bawang merah
+  - 6 siung bawang putih
+  - 4 buah cabe keriting
+  - 1 buah terasi
+Kategori Bahan: Buah, Bumbu Rempah, Seafood, Bumbu Olahan"
+recipe_00100,DO051,DO051,Sayur lilin-terubuk,Gulai Terubuk/sayur lilin,"Sayur,Daging Putih,Seafood,Bumbu Rempah,Santan","Nama Masakan: Sayur lilin-terubuk
+Nama Asli Resep: Gulai Terubuk/sayur lilin
+Bahan-bahan:
+  - 6 batang sayur terubuk
+  - 1 ikat Daun melinjo,potong2
+  - 1 ekor ikan roa kering,bersihkan dr tulangnya
+  - 1 batang Sereh,laos keprek
+  - 1 batang daun bawang
+  - 500 ml Santan sedang kurang lebih
+  - 200 ml Santan kental
+  - 7 buah cabe rawit/kriting
+  - 1 ruas jari kunyit
+  - 1 ruas jari jahe
+  - 8 siung bawang merah
+  - 1 siung bawang putih
+Kategori Bahan: Sayur, Daging Putih, Seafood, Bumbu Rempah, Santan"
+recipe_00101,DO056,DO056,Shabu-shabu,Shabushabu sederhana,"Sayur,Daging Merah,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Shabu-shabu
+Nama Asli Resep: Shabushabu sederhana
+Bahan-bahan:
+  - Caisim
+  - Sawi putih
+  - Aneka bakso seafood
+  - Bakso sapi
+  - Air kaldu ayam (homemade)
+  - Bawang putih
+  - Daun bawang
+  - Garam,Lada,gula
+  - Air
+Kategori Bahan: Sayur, Daging Merah, Bumbu Rempah, Bumbu Olahan"
+recipe_00102,EO004,EO004,Keripik lampung,Keripik Pisang Coklat Khas Lampung,"Sayur,Buah,Bumbu Olahan,Biji-bijian","Nama Masakan: Keripik lampung
+Nama Asli Resep: Keripik Pisang Coklat Khas Lampung
+Bahan-bahan:
+  - 2 sisir Pisang raja nangka
+  - 1 sdm Kapur sirih
+  - 4 sdm garam
+  - 500 gr minyak untuk menggoreng
+  - 250 gr maizena (disangrai di api kecil di aduk aduk sekitar 5-10menit)
+  - 250 gr coklat bubuk (saya pake roman)
+  - 500 gr gula halus (saya pake claris)
+  - 250 ml minyak goreng
+Kategori Bahan: Sayur, Buah, Bumbu Olahan, Biji-bijian"
+recipe_00103,EO005,EO005,Ledre pisang,Ledre Pisang,"Biji-bijian,Buah,Susu,Santan,Bumbu Olahan","Nama Masakan: Ledre pisang
+Nama Asli Resep: Ledre Pisang
+Bahan-bahan:
+  - 250 gr beras ketan
+  - 100 gr kelapa parut
+  - 115 gr Kental Manis Cap Enaak
+  - 200 ml santan
+  - 1 lembar daun pandan
+  - 0.5 sdt garam
+  - 5 buah pisang kepok
+  - 2 sdm margarin
+  - 2 sdm gula pasir
+Kategori Bahan: Biji-bijian, Buah, Susu, Santan, Bumbu Olahan"
+recipe_00104,EO006,EO006,Lempog durian,Lempok Durian,"Buah,Bumbu Olahan","Nama Masakan: Lempog durian
+Nama Asli Resep: Lempok Durian
+Bahan-bahan:
+  - 1 kg daging durian
+  - 200 gr gula aren
+  - 100 gr gula pasir
+  - 0.5 sdt garam
+Kategori Bahan: Buah, Bumbu Olahan"
+recipe_00105,EO010,EO010,Sale kesemek,Dry persimmon/Kesemek kering/Sale kesemek,Buah,"Nama Masakan: Sale kesemek
+Nama Asli Resep: Dry persimmon/Kesemek kering/Sale kesemek
+Bahan-bahan:
+  - 10 buah kesemek(yg berwarnya oranye keseluruhan dan keras)
+Kategori Bahan: Buah"
+recipe_00106,EO013,EO013,Sanggara belanda,Sanggara Balanda,"Buah,Susu,Bumbu Olahan,Kacang-kacangan","Nama Masakan: Sanggara belanda
+Nama Asli Resep: Sanggara Balanda
+Bahan-bahan:
+  - 3 sisir raja ukuran sedang
+  - 4 sdm Margarine/mentega
+  - 4 sdm Gula
+  - 500 gr Kacang tanah (sangrai)
+  - 2 butir telur ayam
+Kategori Bahan: Buah, Susu, Bumbu Olahan, Kacang-kacangan"
+recipe_00107,FO007,FO007,Kerupuk urat,Koyor sapi pedasss.. 幻,"Daging Merah,Bumbu Rempah,Seafood,Buah,Bumbu Olahan,Santan","Nama Masakan: Kerupuk urat
+Nama Asli Resep: Koyor sapi pedasss.. 幻
+Bahan-bahan:
+  - 1 kg urat sapi/ kaki sapi
+  - 1 kg quot;
+  - 1 bungkus kerupuk kulit/krecek..tambahan aja /boleh di skip
+  - 15 buah cabe merah keriting
+  - 4 siung bawang putih
+  - 4 siung bawang merah
+  - 1 cm kunyit
+  - 1 sdm ebi
+  - 2 lembar daun salam
+  - 1 batang sereh di geprek
+  - 1 potong lengkuas di geprek
+  - 3 lembar daun jeruk buang tulang nya
+  - 15 buah cabe rawit merah utuh
+  - 2 batang daun bawang potong
+  - 2 batang quot;
+  - 1 sdt kaldu bubuk/saya pakai masako
+  - 1 sdt gula aren/gula merah/ gula pasir.. Seadanya aja
+  - 0.5 sdt Garam
+  - 0.5 sdt amp; msg secukupnya
+  - 2 sdm air asam jawa
+  - 500 ml santan
+Kategori Bahan: Daging Merah, Bumbu Rempah, Seafood, Buah, Bumbu Olahan, Santan"
+recipe_00108,FO013,FO013,"Sapi, daging, asap",Nasi Goreng Smoked Beef,"Biji-bijian,Daging Merah,Bumbu Rempah,Susu,Bumbu Olahan,Daging Putih,Seafood","Nama Masakan: Sapi, daging, asap
+Nama Asli Resep: Nasi Goreng Smoked Beef
+Bahan-bahan:
+  - 600 gr nasi putih
+  - 2 butir telur ayam
+  - 2 buah sosis, iris
+  - 3 lembar smoked beef, iris
+  - 1 batang daun bawang, iris
+  - 4 siung bawang putih, iris
+  - 3 siung bawang putih, iris
+  - 3 sdm margarin untuk menumis
+  - 1.5 sdm saus tiram
+  - 1.5 sdm kecap asin
+  - 1 sdm kecap ikan
+  - 1 sdm kecap manis
+  - 1 sdt minyak wijen
+  - 1 sdt kaldu bubuk
+  - 0.5 sdt merica bubuk
+  - 0.25 sdt garam
+  - 0.5 sdt gula pasir
+Kategori Bahan: Biji-bijian, Daging Merah, Bumbu Rempah, Susu, Bumbu Olahan, Daging Putih, Seafood"
+recipe_00109,FO015,FO015,"Sapi, daging, kornet",Kornet telur,"Daging Merah,Biji-bijian,Bumbu Rempah,Sayur","Nama Masakan: Sapi, daging, kornet
+Nama Asli Resep: Kornet telur
+Bahan-bahan:
+  - 1 kaleng kornet sapi
+  - 1 butir telur
+  - 1 sdm maizena
+  - 1 daun bawang
+  - 1 seledri
+  - 0.5 sdt lada bubuk
+Kategori Bahan: Daging Merah, Biji-bijian, Bumbu Rempah, Sayur"
+recipe_00110,FO019,FO019,"Sapi, paru, goreng",Paru Sapi Goreng Kentang balado,"Daging Merah,Umbi-umbian,Bumbu Rempah,Buah,Bumbu Olahan,Sayur","Nama Masakan: Sapi, paru, goreng
+Nama Asli Resep: Paru Sapi Goreng Kentang balado
+Bahan-bahan:
+  - 500 gr Paru sapi
+  - 2 buah (ukuran sedang) Kentang
+  - 5 lembar Daun salam
+  - 5 lembar Daun jeruk
+  - 1 sdt Garam
+  - 0.5 sdt kaldu jamur
+  - 0.5 sdt gula pasir
+  - 500 ml Minyak goreng
+  - 5 siung (iris tipis) Bawang merah
+  - 3 siung (iris tipis) Bawang putih
+  - 2 sdm Cabe merah giling
+  - 1 batang (iris tipis) Daun bawang
+  - 1 papan Pete
+  - 1 batang daun bawang
+  - 4 iris lengkuas
+  - 100 ml air
+Kategori Bahan: Daging Merah, Umbi-umbian, Bumbu Rempah, Buah, Bumbu Olahan, Sayur"
+recipe_00111,FO020,FO020,"Ulat sagu, panggang",Ulet sagu keju,"Biji-bijian,Susu","Nama Masakan: Ulat sagu, panggang
+Nama Asli Resep: Ulet sagu keju
+Bahan-bahan:
+  - 150 gr tepung kunci
+  - 80 gr margarin palmia
+  - 1 bungkus susu kental manis
+  - 3 sdm Keju parut
+  - Pewarna makanan merah
+  - Choco chip sebagai mata ulat
+Kategori Bahan: Biji-bijian, Susu"
+recipe_00112,FO026,FO026,"Ayam goreng Kentucky, paha",Ayam goreng ala KFC,"Daging Putih,Unggas,Bumbu Rempah,Bumbu Olahan,Seafood,Biji-bijian","Nama Masakan: Ayam goreng Kentucky, paha
+Nama Asli Resep: Ayam goreng ala KFC
+Bahan-bahan:
+  - 4 filett paha ayam
+  - 0.5 sdt cabe bubuk
+  - 0.5 sdt kaldu bubuk
+  - 5 sdm air
+  - 2 sdm terigu
+  - 1 bungkus tepung cobe
+  - 0.25 sdt cabe bubuk
+  - 0.25 sdt lada bubuk
+  - 1 sdt bawang putih bubuk
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah, Bumbu Olahan, Seafood, Biji-bijian"
+recipe_00113,FO027,FO027,"Ayam goreng Kentucky,sayap",Ayam Kentucky Super Crispy,"Daging Putih,Unggas","Nama Masakan: Ayam goreng Kentucky,sayap
+Nama Asli Resep: Ayam Kentucky Super Crispy
+Bahan-bahan:
+  - 3 potong paha ayam, saya pakai yang ukuran besar
+  - 3 bungkus Kobe Tepung Kentucky SuperCrispy (75 gram)
+  - 4 sdm air
+  - 500 ml minyak goreng (sesuaikan kebutuhan)
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00114,FO028,FO028,Ayam goreng mbok berek dada,Ayam Goreng Kremes Mbok Berek,"Daging Putih,Unggas,Bumbu Rempah,Bumbu Olahan,Biji-bijian,Umbi-umbian","Nama Masakan: Ayam goreng mbok berek dada
+Nama Asli Resep: Ayam Goreng Kremes Mbok Berek
+Bahan-bahan:
+  - 600 gr dada ayam TG
+  - 2 lembar daun salam
+  - 1 batang serai, potong 3 lalu geprek
+  - 1.5 sdt garam
+  - 0.5 sdt gula pasir
+  - 400 ml santan (65ml santan instan + air)
+  - 6 butir bawang merah
+  - 4 siung bawang putih
+  - 4 butir kemiri
+  - 0.5 sdm ketumbar bubuk
+  - 1 cm kunyit
+  - 300 ml air ungkepan ayam
+  - 125 gr sagu
+  - 2 sdm penuh tepung beras
+  - 1 butir kuning telur
+  - 0.5 sdt baking powder
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah, Bumbu Olahan, Biji-bijian, Umbi-umbian"
+recipe_00115,FO034,FO034,"Ayam taliwang, masakan",Ayam Taliwang,"Daging Putih,Unggas,Santan,Bumbu Rempah,Buah,Bumbu Olahan,Biji-bijian,Seafood","Nama Masakan: Ayam taliwang, masakan
+Nama Asli Resep: Ayam Taliwang
+Bahan-bahan:
+  - 500 gr paha ayam (2 potong)
+  - 40 gr santan Rose Brand
+  - 2 buah jeruk limau
+  - 0.5 sdt garam
+  - 0.5 sdt merica bubuk
+  - 5 siung bawang putih
+  - 8 siung bawang merah
+  - 5 butir kemiri
+  - 15 gr cabe kering
+  - 10 buah cabe rawit
+  - 1 sachet terasi
+  - 1 buah tomat
+  - 2 cm kencur
+  - 50 ml minyak goreng Rose Brand
+  - 50 ml santan Rose Brand
+  - 250 ml air
+  - 1 sdt garam
+  - 1 sdt penyedap
+  - 1 sdm gula pasir Rose Brand
+Kategori Bahan: Daging Putih, Unggas, Santan, Bumbu Rempah, Buah, Bumbu Olahan, Biji-bijian, Seafood"
+recipe_00116,FO035,FO035,"Babi hutan masak rica, masakan",Rica rica babi 盛 Hutan,"Daging Merah,Bumbu Rempah,Buah,Bumbu Olahan,Sayur","Nama Masakan: Babi hutan masak rica, masakan
+Nama Asli Resep: Rica rica babi 盛 Hutan
+Bahan-bahan:
+  - 0.5 kg daging babi /babi hutan
+  - 4 lembar daun salam
+  - 2 batang serai
+  - 1 ruas jahe
+  - 1 ikat daun bawang
+  - 2 lembar daun jeruk
+  - 8 siung bawang merah
+  - 4 siung bawang putih
+  - 3 buah cabai merah keriting buang bijinya
+  - 1 sdt lengkuas bubuk
+  - 1 sdt jahe bubuk
+  - 1 sdt kunyit bubuk
+  - 1 sdt garam
+  - 1 sdm gula pasir
+  - 1 sdt kaldu jamur
+Kategori Bahan: Daging Merah, Bumbu Rempah, Buah, Bumbu Olahan, Sayur"
+recipe_00117,FO039,FO039,Brongkos,Jangan Brongkos Jogja,"Daging Merah,Kacang-kacangan,Santan,Bumbu Olahan,Bumbu Rempah,Biji-bijian,Buah","Nama Masakan: Brongkos
+Nama Asli Resep: Jangan Brongkos Jogja
+Bahan-bahan:
+  - 150 gr tetelan sapi / daging
+  - 50 gr kacang tholo
+  - 5 buah tahu coklat, potong jadi 2
+  - 5 buah telur rebus
+  - 1.5 liter air
+  - 65 ml santan instant
+  - 1 sdm gula merah
+  - 2 sdt kaldu bubuk
+  - 1 sdt garam
+  - 8 siung bawang merah
+  - 4 siung bawang putih
+  - 4 butir kemiri
+  - 1 sdt ketumbar bubuk
+  - 1 ruas kunyit
+  - 1 ruas jahe
+  - 2 ruas lengkuas, geprek
+  - 3 lembar daun salam
+  - 3 lembar daun jeruk
+Kategori Bahan: Daging Merah, Kacang-kacangan, Santan, Bumbu Olahan, Bumbu Rempah, Biji-bijian, Buah"
+recipe_00118,FO040,FO040,"Bulgogi, masakan",Beef Bulgogi,"Daging Merah,Bumbu Olahan,Bumbu Rempah,Sayur,Kacang-kacangan","Nama Masakan: Bulgogi, masakan
+Nama Asli Resep: Beef Bulgogi
+Bahan-bahan:
+  - slice Beef
+  - Bumbu instan bulgogi
+  - B. Putih parut
+  - Wortel iris panjang
+  - Bombay iris panjang
+  - Tauge
+  - Daun bawang
+Kategori Bahan: Daging Merah, Bumbu Olahan, Bumbu Rempah, Sayur, Kacang-kacangan"
+recipe_00119,FO042,FO042,"Chikiniku, masakan",Chicken yakiniku,"Daging Putih,Unggas,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Chikiniku, masakan
+Nama Asli Resep: Chicken yakiniku
+Bahan-bahan:
+  - 0.5 kg ayam filet (aku pakai dada ayam)
+  - 1 sdt penyedap
+  - 0.5 sdt Garam
+  - 2 sdm saus tiram
+  - 2 sdm kecap asin
+  - 1 buah bawang bombay
+  - 1 butir bawang putih
+  - 1 buah cabai merah besar
+  - 1 lembar daun bawang
+  - 0.5 sdt Lada
+Kategori Bahan: Daging Putih, Unggas, Bumbu Olahan, Bumbu Rempah"
+recipe_00120,FO049,FO049,"Kalio ayam, masakan",Kalio Ayam (Masakan Daerah Padang),"Daging Putih,Unggas,Umbi-umbian,Bumbu Rempah,Buah,Bumbu Olahan,Santan","Nama Masakan: Kalio ayam, masakan
+Nama Asli Resep: Kalio Ayam (Masakan Daerah Padang)
+Bahan-bahan:
+  - 0.5 kg Ayam (ayamnya sudah direbus duluan)
+  - 2 buah kentang
+  - 3 butir telor
+  - 15 buah cabe kriting
+  - 6 siung bamer
+  - 2 siung bawang putih
+  - 1 ruas kunyit
+  - 2 ruas jahe
+  - 4 ruas lengkuas
+  - 1 lembar daun kunyit
+  - 1 batang sereh
+  - 1 lembar daun jeruk
+  - 2 lembar daun salam
+  - 1 sdm garam
+  - 0.5 sdt gula
+  - 1 sdt kaldu ayam
+  - santan
+  - 0.333333 sdm bumbu pemasak kalio
+Kategori Bahan: Daging Putih, Unggas, Umbi-umbian, Bumbu Rempah, Buah, Bumbu Olahan, Santan"
+recipe_00121,FO050,FO050,"Kalio jeroan, masakan",Kalio Hati Sapi,"Daging Merah,Buah,Santan,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Kalio jeroan, masakan
+Nama Asli Resep: Kalio Hati Sapi
+Bahan-bahan:
+  - 300 gr Hati sapi
+  - 300 ml Air
+  - 2 sdm Kelapa parut sangrai
+  - 200 ml Santan
+  - 4 siung Bawang merah
+  - 2 siung Bawang putih
+  - 5 buah Cabai merah
+  - 2 cm Lengkuas
+  - 2 cm jahe
+  - 2 cm kunyit
+  - 0.5 sdt ketumbar bubuk
+  - 0.25 sdt pala bubuk
+  - 0.5 sdt Garam
+  - 0.5 sdt Gula
+  - 1 lembar daun salam
+  - 1 batang sereh
+  - 3 lembar daun jeruk
+  - 1 ruas daun kunyit
+  - 1 buah cengkih
+  - 3 cm kayu manis
+  - 3 buah kapulaga
+  - 1 buah kelopak bunga lawang
+Kategori Bahan: Daging Merah, Buah, Santan, Bumbu Rempah, Bumbu Olahan"
+recipe_00122,FO051,FO051,"Kalio kikil (tunjang), masakan",Jengkol dan kikil kalio,"Sayur,Santan,Bumbu Rempah,Buah,Daging Merah,Biji-bijian,Bumbu Olahan","Nama Masakan: Kalio kikil (tunjang), masakan
+Nama Asli Resep: Jengkol dan kikil kalio
+Bahan-bahan:
+  - 0.25 kg jengkol kupas rebus
+  - 3 bungkus santan kara segitiga
+  - 1 lembar daun salam
+  - 2 lembar daun jeruk
+  - 1 lembar daun kunyit di ikat
+  - 1 batang serai
+  - 0.5 kg kulit sapi potong/kikil
+  - 5 siung bawang merah
+  - 3 siung bawang putih
+  - 10 buah cabai keriting merah
+  - 2 butir kemiri
+  - 1 sdt lengkuas bubuk
+  - 1 sdt kunyit bubuk
+  - 1 sdt ketumbar bubuk
+  - 1 sdt jahe bubuk
+  - 1 sdt garam
+  - 1 sdt gula pasir
+  - 1 sdt kaldu jamur
+Kategori Bahan: Sayur, Santan, Bumbu Rempah, Buah, Daging Merah, Biji-bijian, Bumbu Olahan"
+recipe_00123,FO057,FO057,"Nasu likku, masakan",Nasu Likku: Ayam Masak Lengkuas Khas Bugis,"Daging Putih,Unggas,Bumbu Rempah,Biji-bijian,Buah,Santan,Bumbu Olahan","Nama Masakan: Nasu likku, masakan
+Nama Asli Resep: Nasu Likku: Ayam Masak Lengkuas Khas Bugis
+Bahan-bahan:
+  - 1 ekor ayam ukuran besar (sekitar 2 kg)
+  - 15 siung bawang merah
+  - 8 siung bawang putih
+  - 3 ruas kunyit
+  - 1 ruas besar jahe
+  - 2 butir kemiri
+  - 100 ml air
+  - 5 batang serai, rajang halus
+  - 200 gr lengkuas, parut
+  - 200 gr kelapa muda parut, sangrai
+  - 1 liter santan
+  - 1.5 sdm garam
+  - 1 sdm gula
+  - 1 sdt penyedap rasa
+  - 2 sachet bawang merah goreng
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah, Biji-bijian, Buah, Santan, Bumbu Olahan"
+recipe_00124,FO059,FO059,"Paniki masak santan, masakan",Ayam Panggang Masak Paniki,"Daging Putih,Unggas,Bumbu Rempah,Buah,Santan,Biji-bijian","Nama Masakan: Paniki masak santan, masakan
+Nama Asli Resep: Ayam Panggang Masak Paniki
+Bahan-bahan:
+  - 400 gr ayam, potong sesuai selera
+  - 1 sdt air jeruk nipis
+  - 1 lembar daun jeruk
+  - 1 lembar daun pandan
+  - 1 bungkus santan
+  - 1 batang daun bawang
+  - 1 batang serai
+  - 6 buah bawang merah
+  - 3 buah cabai rawit (boleh diskip kalo tidak suka pedas)
+  - 5 buah cabai merah
+  - 2 cm kunyit
+  - 2 cm jahe
+  - 3 buah kemiri
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah, Buah, Santan, Biji-bijian"
+recipe_00125,FO062,FO062,"Rendang sapi, masakan",Kalio daging (masakan sebelum jadi rendang),"Daging Merah,Santan,Bumbu Rempah,Biji-bijian,Buah,Bumbu Olahan","Nama Masakan: Rendang sapi, masakan
+Nama Asli Resep: Kalio daging (masakan sebelum jadi rendang)
+Bahan-bahan:
+  - 0.5 kg daging
+  - 0.5 kg santan kental
+  - 1 ons cabe halus
+  - 1 sdm Jahe, lengkuas halus
+  - 1 sdt Kunyit halus
+  - 2 buah Kemiri
+  - 5 siung Bawang putih
+  - 8 buah Bawang merah
+  - Kapulaga
+  - asam kandis
+  - 2 buah bunga pekak
+  - 2 cm Kayumanis
+  - 0.5 bulat Pala
+  - Daun salam
+  - kunyit
+  - daun jeruk
+  - serai
+  - 1 sdm Garam dan pemasak kambing
+Kategori Bahan: Daging Merah, Santan, Bumbu Rempah, Biji-bijian, Buah, Bumbu Olahan"
+recipe_00126,FO069,FO069,"Sop daging sapi, masakan","Sup daging sapi & sayur,masakan rumahan","Daging Merah,Bumbu Rempah,Buah,Sayur,Bumbu Olahan","Nama Masakan: Sop daging sapi, masakan
+Nama Asli Resep: Sup daging sapi & sayur,masakan rumahan
+Bahan-bahan:
+  - 400 gr daging sapi
+  - 3 buah bawang bombay 3 warna
+  - 1 buah tomat
+  - 1 buah wortel
+  - 1 liter air
+  - 2 sdm minyak goreng
+  - 2 sdm Garam
+  - 2 sdm bumbu kaldu
+Kategori Bahan: Daging Merah, Bumbu Rempah, Buah, Sayur, Bumbu Olahan"
+recipe_00127,FO071,FO071,"Sop kambing, masakan",Sop Kepala & Kaki Kambing Muda,"Daging Merah,Bumbu Rempah,Buah,Sayur,Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Sop kambing, masakan
+Nama Asli Resep: Sop Kepala & Kaki Kambing Muda
+Bahan-bahan:
+  - 1 buah kepala kambing
+  - 4 buah kaki kambing
+  - 7 siung bawang putih
+  - 5 biji kapulaga
+  - 5 biji bunga lawang
+  - 2 buah seukuran ibu jari jahe
+  - 2 buah seukuran ibu jari kunyit
+  - 6 lembar daun salam
+  - 6 lembar daun jeruk
+  - 2 batang serai
+  - 2 batang daun bawang
+  - 2 helai daun seledri
+  - 1 sdm garam (sesuaikan)
+  - 1 sdt penyedap rasa (kaldu jamur)
+  - 1 sdt lada bubuk
+  - air
+  - bawang goreng (pelengkap)
+  - jeruk nipis/ lemon/ limau (pelengkap)
+Kategori Bahan: Daging Merah, Bumbu Rempah, Buah, Sayur, Daging Putih, Seafood, Bumbu Olahan"
+recipe_00128,FO073,FO073,"Sop saudara, masakan",Sup Saudara (Sulawesi Selatan),"Bumbu Rempah,Sayur,Bumbu Olahan,Buah,Daging Putih,Unggas,Biji-bijian","Nama Masakan: Sop saudara, masakan
+Nama Asli Resep: Sup Saudara (Sulawesi Selatan)
+Bahan-bahan:
+  - 2 cm Jahe
+  - 2 sdm Minyak goreng
+  - 1 liter Air
+  - 1 sdt Kaldu jamur
+  - 1 sdt Gula pasir
+  - 3 cm Kayu manis
+  - 5 lembar Daun jeruk
+  - 1 batang Serai
+  - 2 cm Lengkuas
+  - 400 gr Ayam
+  - 0.25 butir Pala
+  - 0.5 sdt Jintan
+  - 1 sdt Ketumbar
+  - 3 butir Kemiri yang sudah di goreng
+  - 2 cm Kunyit
+  - 4 siung Bawang putih
+  - 6 siung Bawang merah
+Kategori Bahan: Bumbu Rempah, Sayur, Bumbu Olahan, Buah, Daging Putih, Unggas, Biji-bijian"
+recipe_00129,FO079,FO079,"Soto madura, masakan",243. Soto Daging Madura (Tanpa Menumis Bumbu),"Daging Merah,Bumbu Rempah,Buah,Biji-bijian,Bumbu Olahan","Nama Masakan: Soto madura, masakan
+Nama Asli Resep: 243. Soto Daging Madura (Tanpa Menumis Bumbu)
+Bahan-bahan:
+  - 400 gr Daging sapi slice (tanpa lemak)
+  - 100 gr Sei sapi (daging dengan lemak)
+  - 1.5 liter Air (rebusan kedua)
+  - 1 liter Air (rebusan pertama)
+  - 1 lembar Daun salam
+  - 1 lembar Daun jeruk
+  - 1 batang Serai
+  - 1 ruas (3cm), memarkan Jahe
+  - 2 sdm Bawang putih bawang merah halus
+  - 1 sdt Kunyit bubuk
+  - 0.5 sdt Lada bubuk
+  - 0.5 sdt Ketumbar bubuk
+  - 1 sdt Kemiri halus
+  - 0.5 batang Daun bawang (iris)
+  - 1 sdt Garam
+  - 0.5 sdm Bawang merah goreng
+  - 0.5 potong Telur rebus
+Kategori Bahan: Daging Merah, Bumbu Rempah, Buah, Biji-bijian, Bumbu Olahan"
+recipe_00130,FO082,FO082,"Soto pemalang, masakan",Soto Tauco Khas Pemalang,"Daging Putih,Unggas,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Soto pemalang, masakan
+Nama Asli Resep: Soto Tauco Khas Pemalang
+Bahan-bahan:
+  - 500 gr Dada Ayam
+  - 1 sachet bumbu Soto instan
+  - 1 centong minyak goreng
+  - 1 liter Air
+  - 2 sdt kaldu bubuk
+  - 1 batang daun bawang
+  - 1 sdm Sambal Tauco
+Kategori Bahan: Daging Putih, Unggas, Bumbu Olahan, Bumbu Rempah"
+recipe_00131,GO005,GO005,"Ikan bandeng presto, masakan",Resep Bandeng Presto Tulang Lunak dan Sambal \,"Daging Putih,Seafood,Bumbu Rempah,Buah,Bumbu Olahan","Nama Masakan: Ikan bandeng presto, masakan
+Nama Asli Resep: Resep Bandeng Presto Tulang Lunak dan Sambal \
+Bahan-bahan:
+  - 1 kg ikan bandeng [3-4ekor]
+  - 40 gr kuyit [haluskan]
+  - 40 gr bawang putih [haluskan]
+  - 10 gr tomat [1bh ukuran sedang, haluskan]
+  - 3 batang sereh [digeprek]
+  - 3 cm lengkuas [digeprek]
+  - 1 sdt bubuk merica
+  - 35 gr garam
+  - 1.5 liter air
+  - 1 butir telur
+  - 75 gr minyak sayur
+  - 20 gr bawang merah [haluskan]
+  - 7 gr bawang putih [haluskan]
+  - 125 gr cabai merah keriting [haluskan]
+  - 50 gr cabe rawit merah [haluskan]
+  - 35 gr gula merah [diiris]
+  - 10 gr terasi
+  - 1 cm lengkuas [digeprek]
+  - 1 batang sereh [digeprek]
+  - 1 sdm garam
+  - 30 ml air
+Kategori Bahan: Daging Putih, Seafood, Bumbu Rempah, Buah, Bumbu Olahan"
+recipe_00132,GO006,GO006,Ikan baung bakar,2 Versi Pepes Ikan Baung (Brengkes) Bakar,"Daging Putih,Seafood,Bumbu Olahan,Buah,Bumbu Rempah,Biji-bijian","Nama Masakan: Ikan baung bakar
+Nama Asli Resep: 2 Versi Pepes Ikan Baung (Brengkes) Bakar
+Bahan-bahan:
+  - 6 potong ikan (me : Baung Sungai)
+  - 3 -4 sdm Tempoyak
+  - 2 buah blimbing wuluh, potong2
+  - 2 buah Garam
+  - 2 buah amp; Gula pasir
+  - cabe kriting
+  - 2 cm kunyit
+  - 1 batang serai
+  - 7 buah bawang merah
+  - 1 buah bawang putih
+  - 1 buah kemiri
+  - 2 cm lengkuas
+  - 2 pelepah Daun Pisang
+Kategori Bahan: Daging Putih, Seafood, Bumbu Olahan, Buah, Bumbu Rempah, Biji-bijian"
+recipe_00133,GO011,GO011,"Ikan Gabus asap, mentah",Ikan Hiu masak Aceh,"Daging Putih,Seafood,Bumbu Rempah,Buah,Bumbu Olahan","Nama Masakan: Ikan Gabus asap, mentah
+Nama Asli Resep: Ikan Hiu masak Aceh
+Bahan-bahan:
+  - 0.5 kg daging ikan hiu
+  - 3 buah jeruk purut
+  - 9 buah cabe merah keriting
+  - 10 buah cabe rawit
+  - 5 buah cabe merah kering
+  - 7 buah cabe hijau keriting
+  - 7 buah bawang merah
+  - 3 siung bawang putih
+  - 0.5 cm jahe
+  - 20 buah asam sunti ukuran kecil (kiraﾂｲ hampir segenggam,)
+  - 3 sdm ketumbar sangrai
+  - 5 sdm kelapa gonseng (sangrai)
+  - 7 gr kunyit bubuk
+  - 3 butir kapulaga
+  - 1 buah bunga lawang (pekak)
+  - 3 buah cengkeh
+  - 0.5 sdt lada (me: lada hitam)
+  - 0.5 sdt jintan
+  - 0.5 sdt adas
+  - 0.5 sdt kas-kas
+  - 1 lembar daun pandan
+  - 1 batang serai
+  - 5 lembar daun jeruk purut
+  - 3 tangkai daun kari
+  - 0.5 sdt micin/penyedap/msg
+  - 2 sdm garam (secukupnya)
+  - 1500 ml air
+Kategori Bahan: Daging Putih, Seafood, Bumbu Rempah, Buah, Bumbu Olahan"
+recipe_00134,GO021,GO021,Ikan Mujahir pepes,Pepes Mujaer Kemangi,"Daging Putih,Seafood,Sayur,Bumbu Rempah,Bumbu Olahan,Biji-bijian","Nama Masakan: Ikan Mujahir pepes
+Nama Asli Resep: Pepes Mujaer Kemangi
+Bahan-bahan:
+  - 4 ekor ikan mujaer
+  - 100 gr kemangi, petiki
+  - 2 lembar daun salam
+  - 2 batang sereh
+  - 1 potong lengkuas
+  - 1 sdt garam
+  - 1 sdt kaldu bubuk
+  - 6 buah cabe merah keriting
+  - 4 siung bawang putih
+  - 6 butir bawang merah
+  - 2 butir kemiri bakar
+  - 2 ruas jari kunyit bakar
+Kategori Bahan: Daging Putih, Seafood, Sayur, Bumbu Rempah, Bumbu Olahan, Biji-bijian"
+recipe_00135,GO024,GO024,"Ikan Patin, bakar","Patin, Terong Bakar Kuah Santan","Daging Putih,Seafood,Bumbu Olahan,Bumbu Rempah,Buah,Sayur,Santan","Nama Masakan: Ikan Patin, bakar
+Nama Asli Resep: Patin, Terong Bakar Kuah Santan
+Bahan-bahan:
+  - 600 gr ikan patin
+  - 50 gr gula merah
+  - 1 sdt garam
+  - 2 siung bawang putih parut
+  - 2 sdm saus tomat manis
+  - 0.5 sdt Cuka makan
+  - 5 buah cabe rawit
+  - 5 butir bawang merah
+  - 4 gr terasi
+  - perasan jeruk nipis
+  - 2 buah terong ungu
+  - 300 ml santan (kekentalan sedang)
+Kategori Bahan: Daging Putih, Seafood, Bumbu Olahan, Bumbu Rempah, Buah, Sayur, Santan"
+recipe_00136,GO051,GO051,"Udang kering, mentah",Sayur lodeh dan Sambel Terasi mentah,"Sayur,Kacang-kacangan,Bumbu Rempah,Biji-bijian,Seafood,Bumbu Olahan,Daging Putih","Nama Masakan: Udang kering, mentah
+Nama Asli Resep: Sayur lodeh dan Sambel Terasi mentah
+Bahan-bahan:
+  - 2 buah wortel
+  - 3 buah terong hijau
+  - 1 buah labu Siam besar
+  - 0.5 buah kol
+  - 7 lembar daun mlinjo
+  - kacang panjang
+  - 7 siung bawang merah
+  - 0.5 sdt ketumbar
+  - 7 siung bawang putih
+  - 4 butir kemiri sangrai
+  - 1 sdm ebi sangrai
+  - 3 lembar daun salam
+  - 2 iris iris lengkuas
+  - 2 sdm garam
+  - 1 sdm gula
+  - 1 sdt kaldu bubuk
+  - 1.5 liter air
+  - 500 ml santan (saya pakai 2 santan instan pakai air dan di tambah 2-3 sdm fiber cream)
+  - Sambal terasi dan ikan belanak
+  - Teri nasi goreng
+  - Tahu dan tempe
+Kategori Bahan: Sayur, Kacang-kacangan, Bumbu Rempah, Biji-bijian, Seafood, Bumbu Olahan, Daging Putih"
+recipe_00137,GO054,GO054,Abon ikan,Abon ikan tongkol,"Sayur,Daging Putih,Seafood,Bumbu Rempah,Bumbu Olahan,Buah","Nama Masakan: Abon ikan
+Nama Asli Resep: Abon ikan tongkol
+Bahan-bahan:
+  - 1 buah ikan tongkol ukuran besar
+  - 7 buah bawang merah
+  - 4 siung bawang putih
+  - 2 buah cabai besar
+  - 4 buah cabe kriting
+  - 7 buah cabe rawit
+  - 10 butir lada
+  - 1 sdt ketumbar
+  - 1 sdm gula jawa
+  - 1 sdt garam, penyedap secukupnya
+  - 2 lembar daun jeruk
+Kategori Bahan: Sayur, Daging Putih, Seafood, Bumbu Rempah, Bumbu Olahan, Buah"
+recipe_00138,GO058,GO058,Cakalang asar (asap),512. Asar Sous Khas Maluku (Ikan Cakalang Asap),"Daging Putih,Seafood,Buah,Bumbu Rempah,Bumbu Olahan,Sayur","Nama Masakan: Cakalang asar (asap)
+Nama Asli Resep: 512. Asar Sous Khas Maluku (Ikan Cakalang Asap)
+Bahan-bahan:
+  - 250 gr ikan cakalang asap
+  - 3 buah tomat
+  - 3 cm jahe
+  - 7 siung bawang merah
+  - 1 batang sereh
+  - 1 sdt garam
+  - 2 sdt gula pasir
+  - 1 sdt kaldu jamur
+  - 3 sdm minyak
+Kategori Bahan: Daging Putih, Seafood, Buah, Bumbu Rempah, Bumbu Olahan, Sayur"
+recipe_00139,GO059,GO059,"Dendeng belut, goreng, masakan",Dendeng belut balado sama goreng jengkol,"Seafood,Daging Putih,Sayur,Bumbu Rempah,Buah","Nama Masakan: Dendeng belut, goreng, masakan
+Nama Asli Resep: Dendeng belut balado sama goreng jengkol
+Bahan-bahan:
+  - 3 ekor Belut yang ukurang besar
+  - Jengkol
+  - 250 gr cabe merah
+  - bawang merah
+  - 5 biji bawang putih
+  - 1 biji tomat
+Kategori Bahan: Seafood, Daging Putih, Sayur, Bumbu Rempah, Buah"
+recipe_00140,GO065,GO065,"Gulai ikan, masakan",Gulai kuning ikan patin (masakan padang),"Daging Putih,Seafood,Santan,Bumbu Rempah,Biji-bijian,Buah,Bumbu Olahan","Nama Masakan: Gulai ikan, masakan
+Nama Asli Resep: Gulai kuning ikan patin (masakan padang)
+Bahan-bahan:
+  - 1 ekor ikan patin(potong-potong)
+  - 500 ml santan kental
+  - 3 buah cabe keriting merah
+  - 1 sdt ketumbar bubuk
+  - 0.5 sdt merica bubuk
+  - 4 siung bawang putih
+  - 5 siung bawang merah
+  - 1 ruas jahe
+  - 2 ruas lengkuas
+  - 2 ruas kunyit
+  - 4 butir kemiri
+  - 1 batang serai geprek
+  - 2 lembar daun salam
+  - 2 lembar daun jeruk sobek buang batang
+  - 1 lembar daun kunyit(saya skip)
+  - 6 buah cabe rawit merah
+  - 0.5 buah tomat(potong-potong)
+  - Bawang goreng
+  - Minyak goreng
+  - Gula,garam,dan penyedap rasa
+Kategori Bahan: Daging Putih, Seafood, Santan, Bumbu Rempah, Biji-bijian, Buah, Bumbu Olahan"
+recipe_00141,GO078,GO078,"Pempek belida, masakan",Pempek Ikan Belida,"Daging Putih,Seafood,Bumbu Olahan,Biji-bijian","Nama Masakan: Pempek belida, masakan
+Nama Asli Resep: Pempek Ikan Belida
+Bahan-bahan:
+  - 500 gr Ikan belida giling
+  - 250 ml Air biasa
+  - 1 sdm Garam
+  - 500 gr Tepung tapioka
+Kategori Bahan: Daging Putih, Seafood, Bumbu Olahan, Biji-bijian"
+recipe_00142,GO081,GO081,"Pempek kulit, masakan",Pempek Kulit Tenggiri,"Daging Putih,Seafood,Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Pempek kulit, masakan
+Nama Asli Resep: Pempek Kulit Tenggiri
+Bahan-bahan:
+  - 250 gr kulit ikan Tenggiri
+  - 250 gr daging ikan tenggiri
+  - 1 butir telur
+  - 250 gr Tepung Tapioka Rose Brand cap pak Tani gunung
+  - 1 sdm penuh Tepung terigu
+  - 100 ml santan instan + air
+  - 5 siung bawang merah iris
+  - 3 siung bawang putih, chopped
+  - 0.75 sdm garam
+  - 2 sdt gula
+  - 0.5 sdt lada
+  - 2 batang daun bawang
+Kategori Bahan: Daging Putih, Seafood, Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00143,GO083,GO083,"Pempek tenggiri, masakan",Pempek Tenggiri Adaan (2kg Ikan),"Seafood,Santan,Bumbu Rempah,Bumbu Olahan,Daging Putih,Unggas,Biji-bijian","Nama Masakan: Pempek tenggiri, masakan
+Nama Asli Resep: Pempek Tenggiri Adaan (2kg Ikan)
+Bahan-bahan:
+  - 2 kg Daging tenggiri giling setengah beku
+  - 200 ml Santan kental Rose Brand
+  - 700 ml Air dingin
+  - 2 siung (ukuran sedang) Bawang bombay
+  - 6 butir (ukuran sedang) Telur
+  - 45 gr Bawang putih bubuk
+  - 4.5 sdm Garam
+  - 2.5 sdm MSG Asatu Rose Brand
+  - 0.5 sdm Kaldu ayam bubuk
+  - 4 sdm Gula pasir
+  - 6 sdm Tepung terigu
+  - 8 sdm Minyak sayur
+  - 1 kg Tepung tapioka
+  - 2 kg Ikan Tenggiri
+Kategori Bahan: Seafood, Santan, Bumbu Rempah, Bumbu Olahan, Daging Putih, Unggas, Biji-bijian"
+recipe_00144,GO090,GO090,Sate Bandeng,Sate Lilit Bandeng,"Seafood,Buah","Nama Masakan: Sate Bandeng
+Nama Asli Resep: Sate Lilit Bandeng
+Bahan-bahan:
+  - 450 gr bandeng (1 ekor) sudah bersih dari tulang dan kulit jadi tinggal 250 g daging bandeng
+  - 60 gr kelapa setengah tua diparut
+Kategori Bahan: Seafood, Buah"
+recipe_00145,GO092,GO092,"Tekwan, masakan",TEKWAN PALEMBANG,"Seafood,Biji-bijian,Bumbu Olahan,Sayur,Bumbu Rempah,Buah,Daging Putih","Nama Masakan: Tekwan, masakan
+Nama Asli Resep: TEKWAN PALEMBANG
+Bahan-bahan:
+  - 0.75 kg tekwan basah
+  - 1 sachet bumbu tekwan kering
+  - 5 keping jamur
+  - 0.5 ons bumbu halus tekwan
+  - 3 buah jeruk nipis
+  - 3 sdm udang kering
+  - 1 sdm bawang goreng
+  - 1 tangkai daun seledri
+  - 750 air
+  - 3 sdm cabe rawit hijau blender
+Kategori Bahan: Seafood, Biji-bijian, Bumbu Olahan, Sayur, Bumbu Rempah, Buah, Daging Putih"
+recipe_00146,HO001,HO001,"Telur ayam, dadar, masakan",Telur dadar masakan padang,"Bumbu Rempah,Sayur,Biji-bijian,Buah,Susu,Kacang-kacangan,Bumbu Olahan","Nama Masakan: Telur ayam, dadar, masakan
+Nama Asli Resep: Telur dadar masakan padang
+Bahan-bahan:
+  - 6 butir telur ayam
+  - 1 batang daun prei
+  - 1 ikat daun bawang
+  - 1 ikat daun seledri
+  - 5 butir bawang merah
+  - 2 butir bawang putih
+  - 30 buah cabe rawit (sesuai selera)
+  - 3 butir kemiri
+  - 5 sdm tepung bakwan serbaguna
+  - 0.5 ons keju parut (bisa diganti dengan kelapa / tahu / daging cincang)
+  - Garam
+  - Penyedap rasa
+Kategori Bahan: Bumbu Rempah, Sayur, Biji-bijian, Buah, Susu, Kacang-kacangan, Bumbu Olahan"
+recipe_00147,HO002,HO002,"Telur bebek, asin, mentah",Telur Bebek Asin Rebus,"Bumbu Olahan,Bumbu Rempah","Nama Masakan: Telur bebek, asin, mentah
+Nama Asli Resep: Telur Bebek Asin Rebus
+Bahan-bahan:
+  - 5 butir telur bebek mentah
+  - 110 gr garam putih
+  - 2 siung bawang putih kating parut
+  - 600 ml air mineral
+Kategori Bahan: Bumbu Olahan, Bumbu Rempah"
+recipe_00148,NOCODE_Ayam Bakar (Tanpa Kulit),,Ayam Bakar (Tanpa Kulit),Ayam Bakar (Tanpa Kulit),"Daging Putih,Unggas,Bumbu Olahan,Bumbu Rempah,Buah","Nama Masakan: Ayam Bakar (Tanpa Kulit)
+Nama Asli Resep: Ayam Bakar (Tanpa Kulit)
+Bahan-bahan:
+  - 172 Dada Ayam
+  - 320 Kecap Manis
+  - 112 Bawang Putih
+  - 30 Jeruk Nipis
+  - 172 Dada Ayam
+  - 320 Kecap Manis
+  - 112 Bawang Putih
+  - 30 Jeruk Nipis
+Kategori Bahan: Daging Putih, Unggas, Bumbu Olahan, Bumbu Rempah, Buah"
+recipe_00149,NOCODE_Ayam Goreng,,Ayam Goreng,Ayam Goreng,"Daging Putih,Unggas","Nama Masakan: Ayam Goreng
+Nama Asli Resep: Ayam Goreng
+Bahan-bahan:
+  - 239 Daging Ayam
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00150,NOCODE_Chicken Steak Grill,,Chicken Steak Grill,Chicken Steak Grill,"Daging Putih,Unggas,Bumbu Olahan,Umbi-umbian,Sayur,Kacang-kacangan","Nama Masakan: Chicken Steak Grill
+Nama Asli Resep: Chicken Steak Grill
+Bahan-bahan:
+  - 172 Dada Ayam
+  - 120 Saus Barbeque (BBQ Sauce)
+  - 77 Kentang (Potato)
+  - 35 Buncis
+  - 41 Wortel (Carrot)
+Kategori Bahan: Daging Putih, Unggas, Bumbu Olahan, Umbi-umbian, Sayur, Kacang-kacangan"
+recipe_00151,NOCODE_Dada Ayam,,Dada Ayam,Dada Ayam,"Daging Putih,Unggas","Nama Masakan: Dada Ayam
+Nama Asli Resep: Dada Ayam
+Bahan-bahan:
+  - 172 Dada Ayam
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00152,NOCODE_Daging Sapi Panggang,,Daging Sapi Panggang,Daging Sapi Panggang,Daging Merah,"Nama Masakan: Daging Sapi Panggang
+Nama Asli Resep: Daging Sapi Panggang
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+Kategori Bahan: Daging Merah"
+recipe_00153,NOCODE_Dendeng Balado Basah,,Dendeng Balado Basah,Dendeng Balado Basah,"Daging Merah,Bumbu Rempah,Buah","Nama Masakan: Dendeng Balado Basah
+Nama Asli Resep: Dendeng Balado Basah
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 36 Cabai Merah Besar
+  - 44 Bawang Merah
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 30 Jeruk Nipis
+Kategori Bahan: Daging Merah, Bumbu Rempah, Buah"
+recipe_00154,NOCODE_Hati Ayam Rebus,,Hati Ayam Rebus,Hati Ayam Rebus,"Daging Putih,Unggas","Nama Masakan: Hati Ayam Rebus
+Nama Asli Resep: Hati Ayam Rebus
+Bahan-bahan:
+  - 119 Hati Ayam
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00155,NOCODE_Ikan Barakuda,,Ikan Barakuda,Ikan Barakuda,"Daging Putih,Seafood","Nama Masakan: Ikan Barakuda
+Nama Asli Resep: Ikan Barakuda
+Bahan-bahan:
+  - Ikan Barakuda
+Kategori Bahan: Daging Putih, Seafood"
+recipe_00156,NOCODE_Ikan Cucut,,Ikan Cucut,Ikan Cucut,"Daging Putih,Seafood","Nama Masakan: Ikan Cucut
+Nama Asli Resep: Ikan Cucut
+Bahan-bahan:
+  - Ikan Cucut
+Kategori Bahan: Daging Putih, Seafood"
+recipe_00157,NOCODE_Ikan Dori,,Ikan Dori,Ikan Dori,"Daging Putih,Seafood","Nama Masakan: Ikan Dori
+Nama Asli Resep: Ikan Dori
+Bahan-bahan:
+  - 90 Ikan Dori Fillet
+Kategori Bahan: Daging Putih, Seafood"
+recipe_00158,NOCODE_Ikan Ekor Kuning,,Ikan Ekor Kuning,Ikan Ekor Kuning,"Daging Putih,Seafood","Nama Masakan: Ikan Ekor Kuning
+Nama Asli Resep: Ikan Ekor Kuning
+Bahan-bahan:
+  - Ikan Ekor Kuning
+Kategori Bahan: Daging Putih, Seafood"
+recipe_00159,NOCODE_Ikan Gabus,,Ikan Gabus,Ikan Gabus,"Bumbu Rempah,Bumbu Olahan","Nama Masakan: Ikan Gabus
+Nama Asli Resep: Ikan Gabus
+Bahan-bahan:
+  - Ikan Gabus
+  - 112 Bawang Putih
+  - 80 Jahe
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Bumbu Rempah, Bumbu Olahan"
+recipe_00160,NOCODE_Ikan Layang,,Ikan Layang,Ikan Layang,"Daging Putih,Seafood","Nama Masakan: Ikan Layang
+Nama Asli Resep: Ikan Layang
+Bahan-bahan:
+  - Ikan Layang
+Kategori Bahan: Daging Putih, Seafood"
+recipe_00161,NOCODE_Ikan Salem,,Ikan Salem,Ikan Salem,"Daging Putih,Seafood","Nama Masakan: Ikan Salem
+Nama Asli Resep: Ikan Salem
+Bahan-bahan:
+  - Ikan Salem
+Kategori Bahan: Daging Putih, Seafood"
+recipe_00162,"NOCODE_Jeroan Sapi (Hati, Paru, Babat)",,"Jeroan Sapi (Hati, Paru, Babat)","Jeroan Sapi (Hati, Paru, Babat)",Daging Merah,"Nama Masakan: Jeroan Sapi (Hati, Paru, Babat)
+Nama Asli Resep: Jeroan Sapi (Hati, Paru, Babat)
+Bahan-bahan:
+  - 135 Hati Sapi
+  - 92 Paru Sapi
+  - 85 Babat Sapi
+  - 135 Hati Sapi
+  - 92 Paru Sapi
+  - 85 Babat Sapi
+Kategori Bahan: Daging Merah"
+recipe_00163,NOCODE_Kulit Ayam,,Kulit Ayam,Kulit Ayam,"Daging Putih,Unggas","Nama Masakan: Kulit Ayam
+Nama Asli Resep: Kulit Ayam
+Bahan-bahan:
+  - 239 Daging Ayam
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00164,NOCODE_Kuning Telur Rebus,,Kuning Telur Rebus,Kuning Telur Rebus,,"Nama Masakan: Kuning Telur Rebus
+Nama Asli Resep: Kuning Telur Rebus
+Bahan-bahan:
+  - 322 Kuning Telur"
+recipe_00165,NOCODE_Paha Atas Ayam,,Paha Atas Ayam,Paha Atas Ayam,"Daging Putih,Unggas","Nama Masakan: Paha Atas Ayam
+Nama Asli Resep: Paha Atas Ayam
+Bahan-bahan:
+  - 119 Paha Ayam Atas (Tanpa Kulit)
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00166,NOCODE_Paha Bawah Ayam,,Paha Bawah Ayam,Paha Bawah Ayam,"Daging Putih,Unggas","Nama Masakan: Paha Bawah Ayam
+Nama Asli Resep: Paha Bawah Ayam
+Bahan-bahan:
+  - 170 Paha Ayam Bawah
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00167,NOCODE_Putih Telur Rebus,,Putih Telur Rebus,Putih Telur Rebus,,"Nama Masakan: Putih Telur Rebus
+Nama Asli Resep: Putih Telur Rebus
+Bahan-bahan:
+  - 143 Telur Ayam Ras"
+recipe_00168,NOCODE_Rendang Sapi,,Rendang Sapi,Rendang Sapi,"Daging Merah,Buah,Santan,Bumbu Rempah","Nama Masakan: Rendang Sapi
+Nama Asli Resep: Rendang Sapi
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 324 Santan Kelapa
+  - 36 Cabai Merah Besar
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+Kategori Bahan: Daging Merah, Buah, Santan, Bumbu Rempah"
+recipe_00169,NOCODE_Sate Ayam,,Sate Ayam,Sate Ayam,"Daging Putih,Unggas","Nama Masakan: Sate Ayam
+Nama Asli Resep: Sate Ayam
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 239 Daging Ayam
+  - 239 Daging Ayam
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00170,NOCODE_Sayap Ayam,,Sayap Ayam,Sayap Ayam,"Daging Putih,Unggas","Nama Masakan: Sayap Ayam
+Nama Asli Resep: Sayap Ayam
+Bahan-bahan:
+  - 239 Daging Ayam
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00171,NOCODE_Tahu Kukus,,Tahu Kukus,Tahu Kukus,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Tahu Kukus
+Nama Asli Resep: Tahu Kukus
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 0 Garam Meja (Table Salt)
+  - 112 Bawang Putih
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00172,NOCODE_Tahu Rebus,,Tahu Rebus,Tahu Rebus,Kacang-kacangan,"Nama Masakan: Tahu Rebus
+Nama Asli Resep: Tahu Rebus
+Bahan-bahan:
+  - 173 Kacang Kedelai (Soybeans)
+  - 0 Air Mineral
+Kategori Bahan: Kacang-kacangan"
+recipe_00173,NOCODE_Telur Rebus,,Telur Rebus,Telur Rebus,,"Nama Masakan: Telur Rebus
+Nama Asli Resep: Telur Rebus
+Bahan-bahan:
+  - 143 Telur Ayam Ras"
+recipe_00174,NOCODE_Tempe Goreng,,Tempe Goreng,Tempe Goreng,Kacang-kacangan,"Nama Masakan: Tempe Goreng
+Nama Asli Resep: Tempe Goreng
+Bahan-bahan:
+  - 193 Tempe Kedelai
+Kategori Bahan: Kacang-kacangan"
+recipe_00175,NOCODE_Tempe Kukus,,Tempe Kukus,Tempe Kukus,Kacang-kacangan,"Nama Masakan: Tempe Kukus
+Nama Asli Resep: Tempe Kukus
+Bahan-bahan:
+  - 193 Tempe Kedelai
+Kategori Bahan: Kacang-kacangan"
+recipe_00176,NOCODE_Tongkol Balado,,Tongkol Balado,Tongkol Balado,"Sayur,Daging Putih,Seafood,Bumbu Rempah,Buah","Nama Masakan: Tongkol Balado
+Nama Asli Resep: Tongkol Balado
+Bahan-bahan:
+  - 110 Ikan Tongkol
+  - 36 Cabai Merah Besar
+  - 44 Bawang Merah
+  - 18 Tomat Merah
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 110 Ikan Tongkol
+  - 36 Cabai Merah Besar
+  - 44 Bawang Merah
+  - 18 Tomat Merah
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Sayur, Daging Putih, Seafood, Bumbu Rempah, Buah"
+recipe_00177,NOCODE_Udang,,Udang,Udang,"Daging Putih,Seafood","Nama Masakan: Udang
+Nama Asli Resep: Udang
+Bahan-bahan:
+  - 85 Udang Kupas
+Kategori Bahan: Daging Putih, Seafood"
+recipe_00178,NOCODE_Alpukat Mentega,,Alpukat Mentega,Alpukat Mentega,Buah,"Nama Masakan: Alpukat Mentega
+Nama Asli Resep: Alpukat Mentega
+Bahan-bahan:
+  - 85 Alpukat
+Kategori Bahan: Buah"
+recipe_00179,NOCODE_Anggur Muscat,,Anggur Muscat,Anggur Muscat,Buah,"Nama Masakan: Anggur Muscat
+Nama Asli Resep: Anggur Muscat
+Bahan-bahan:
+  - Anggur Muscat
+Kategori Bahan: Buah"
+recipe_00180,NOCODE_Apel Fuji,,Apel Fuji,Apel Fuji,Buah,"Nama Masakan: Apel Fuji
+Nama Asli Resep: Apel Fuji
+Bahan-bahan:
+  - 52 Apel Fuji
+Kategori Bahan: Buah"
+recipe_00181,NOCODE_Apel Malang (Manalagi),,Apel Malang (Manalagi),Apel Malang (Manalagi),Buah,"Nama Masakan: Apel Malang (Manalagi)
+Nama Asli Resep: Apel Malang (Manalagi)
+Bahan-bahan:
+  - Apel Manalagi
+Kategori Bahan: Buah"
+recipe_00182,NOCODE_Apel Potong (Segar),,Apel Potong (Segar),Apel Potong (Segar),Buah,"Nama Masakan: Apel Potong (Segar)
+Nama Asli Resep: Apel Potong (Segar)
+Bahan-bahan:
+  - 52 Apel Merah (Red Delicious)
+Kategori Bahan: Buah"
+recipe_00183,NOCODE_Buah Leci,,Buah Leci,Buah Leci,Buah,"Nama Masakan: Buah Leci
+Nama Asli Resep: Buah Leci
+Bahan-bahan:
+  - Buah Leci
+Kategori Bahan: Buah"
+recipe_00184,NOCODE_Buah Matoa,,Buah Matoa,Buah Matoa,Buah,"Nama Masakan: Buah Matoa
+Nama Asli Resep: Buah Matoa
+Bahan-bahan:
+  - 90 Matoa
+Kategori Bahan: Buah"
+recipe_00185,NOCODE_Buah Naga Merah,,Buah Naga Merah,Buah Naga Merah,Buah,"Nama Masakan: Buah Naga Merah
+Nama Asli Resep: Buah Naga Merah
+Bahan-bahan:
+  - 60 Buah Naga Merah
+Kategori Bahan: Buah"
+recipe_00186,NOCODE_Es Kul-Kul Buah Viral,,Es Kul-Kul Buah Viral,Es Kul-Kul Buah Viral,Buah,"Nama Masakan: Es Kul-Kul Buah Viral
+Nama Asli Resep: Es Kul-Kul Buah Viral
+Bahan-bahan:
+  - 95 Pisang Uli
+  - 30 Semangka
+  - 36 Melon Hijau
+  - 32 Stroberi
+  - 550 Cokelat Batang (Compound)
+Kategori Bahan: Buah"
+recipe_00187,NOCODE_Jambu Biji Merah,,Jambu Biji Merah,Jambu Biji Merah,Buah,"Nama Masakan: Jambu Biji Merah
+Nama Asli Resep: Jambu Biji Merah
+Bahan-bahan:
+  - 68 Jambu Biji Merah
+Kategori Bahan: Buah"
+recipe_00188,NOCODE_Jambu Kristal (Tanpa Biji),,Jambu Kristal (Tanpa Biji),Jambu Kristal (Tanpa Biji),Buah,"Nama Masakan: Jambu Kristal (Tanpa Biji)
+Nama Asli Resep: Jambu Kristal (Tanpa Biji)
+Bahan-bahan:
+  - 68 Jambu Biji
+Kategori Bahan: Buah"
+recipe_00189,NOCODE_Jeruk Manis,,Jeruk Manis,Jeruk Manis,"Bumbu Rempah,Buah","Nama Masakan: Jeruk Manis
+Nama Asli Resep: Jeruk Manis
+Bahan-bahan:
+  - Jeruk Manis
+Kategori Bahan: Bumbu Rempah, Buah"
+recipe_00190,NOCODE_Jeruk Nipis,,Jeruk Nipis,Jeruk Nipis,"Bumbu Rempah,Buah","Nama Masakan: Jeruk Nipis
+Nama Asli Resep: Jeruk Nipis
+Bahan-bahan:
+  - 30 Jeruk Nipis
+  - 30 Jeruk Nipis
+Kategori Bahan: Bumbu Rempah, Buah"
+recipe_00191,NOCODE_Jeruk Sunkist,,Jeruk Sunkist,Jeruk Sunkist,"Bumbu Rempah,Buah","Nama Masakan: Jeruk Sunkist
+Nama Asli Resep: Jeruk Sunkist
+Bahan-bahan:
+  - Jeruk Sunkist
+Kategori Bahan: Bumbu Rempah, Buah"
+recipe_00192,NOCODE_Keripik Apel Malang,,Keripik Apel Malang,Keripik Apel Malang,Buah,"Nama Masakan: Keripik Apel Malang
+Nama Asli Resep: Keripik Apel Malang
+Bahan-bahan:
+  - 52 Apel (Fuji & Manalagi)
+  - 892 Minyak Kelapa
+Kategori Bahan: Buah"
+recipe_00193,NOCODE_Mangga,,Mangga,Mangga,Buah,"Nama Masakan: Mangga
+Nama Asli Resep: Mangga
+Bahan-bahan:
+  - 60 Mangga Harum Manis
+Kategori Bahan: Buah"
+recipe_00194,NOCODE_Pepaya Potong,,Pepaya Potong,Pepaya Potong,"Buah,Bumbu Rempah","Nama Masakan: Pepaya Potong
+Nama Asli Resep: Pepaya Potong
+Bahan-bahan:
+  - Pepaya California
+  - 30 Jeruk Nipis
+Kategori Bahan: Buah, Bumbu Rempah"
+recipe_00195,NOCODE_Pir Hijau,,Pir Hijau,Pir Hijau,Buah,"Nama Masakan: Pir Hijau
+Nama Asli Resep: Pir Hijau
+Bahan-bahan:
+  - 57 Pir Hijau
+Kategori Bahan: Buah"
+recipe_00196,NOCODE_Pisang Ambon,,Pisang Ambon,Pisang Ambon,Buah,"Nama Masakan: Pisang Ambon
+Nama Asli Resep: Pisang Ambon
+Bahan-bahan:
+  - 89 Pisang
+Kategori Bahan: Buah"
+recipe_00197,NOCODE_Potongan Buah Segar Campur,,Potongan Buah Segar Campur,Potongan Buah Segar Campur,Buah,"Nama Masakan: Potongan Buah Segar Campur
+Nama Asli Resep: Potongan Buah Segar Campur
+Bahan-bahan:
+  - 30 Semangka
+  - 36 Melon Hijau
+  - 43 Pepaya California
+  - 50 Nanas
+Kategori Bahan: Buah"
+recipe_00198,NOCODE_Potongan Nanas,,Potongan Nanas,Potongan Nanas,Buah,"Nama Masakan: Potongan Nanas
+Nama Asli Resep: Potongan Nanas
+Bahan-bahan:
+  - 50 Nanas
+Kategori Bahan: Buah"
+recipe_00199,NOCODE_Rujak Buah Potong,,Rujak Buah Potong,Rujak Buah Potong,"Buah,Umbi-umbian,Bumbu Olahan","Nama Masakan: Rujak Buah Potong
+Nama Asli Resep: Rujak Buah Potong
+Bahan-bahan:
+  - 50 Nanas
+  - 38 Bengkuang
+  - 60 Mangga Harum Manis
+  - Jambu Air
+  - 377 Gula Merah (Jawa/Aren)
+Kategori Bahan: Buah, Umbi-umbian, Bumbu Olahan"
+recipe_00200,NOCODE_Salad Buah Mayo,,Salad Buah Mayo,Salad Buah Mayo,"Buah,Bumbu Olahan","Nama Masakan: Salad Buah Mayo
+Nama Asli Resep: Salad Buah Mayo
+Bahan-bahan:
+  - 52 Apel Fuji
+  - 57 Pir Hijau
+  - 30 Semangka
+  - 36 Melon Hijau
+  - Mayonnaise
+Kategori Bahan: Buah, Bumbu Olahan"
+recipe_00201,NOCODE_Semangka Potong,,Semangka Potong,Semangka Potong,Buah,"Nama Masakan: Semangka Potong
+Nama Asli Resep: Semangka Potong
+Bahan-bahan:
+  - 30 Semangka
+Kategori Bahan: Buah"
+recipe_00202,NOCODE_Tart Cherry (Ceri Asam),,Tart Cherry (Ceri Asam),Tart Cherry (Ceri Asam),Buah,"Nama Masakan: Tart Cherry (Ceri Asam)
+Nama Asli Resep: Tart Cherry (Ceri Asam)
+Bahan-bahan:
+  - Tart Cherry
+Kategori Bahan: Buah"
+recipe_00203,NOCODE_Capcay Goreng / Kuah (Ayam),,Capcay Goreng / Kuah (Ayam),Capcay Goreng / Kuah (Ayam),"Daging Putih,Unggas,Sayur,Biji-bijian","Nama Masakan: Capcay Goreng / Kuah (Ayam)
+Nama Asli Resep: Capcay Goreng / Kuah (Ayam)
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 41 Wortel (Carrot)
+  - 16 Sawi Putih
+  - 26 Jagung Muda
+  - 239 Daging Ayam
+  - 41 Wortel (Carrot)
+  - 16 Sawi Putih
+  - 26 Jagung Muda
+Kategori Bahan: Daging Putih, Unggas, Sayur, Biji-bijian"
+recipe_00204,NOCODE_Capcay Seafood Kuah,,Capcay Seafood Kuah,Capcay Seafood Kuah,"Daging Putih,Seafood,Sayur","Nama Masakan: Capcay Seafood Kuah
+Nama Asli Resep: Capcay Seafood Kuah
+Bahan-bahan:
+  - Udang
+  - 92 Cumi-Cumi
+  - 34 Brokoli
+  - Kembang Kol
+  - 41 Wortel (Carrot)
+  - Udang
+  - 92 Cumi-Cumi
+  - 34 Brokoli
+  - Kembang Kol
+  - 41 Wortel (Carrot)
+Kategori Bahan: Daging Putih, Seafood, Sayur"
+recipe_00205,NOCODE_Kimchi,,Kimchi,Kimchi,"Sayur,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Kimchi
+Nama Asli Resep: Kimchi
+Bahan-bahan:
+  - 16 Sawi Putih
+  - 282 Bubuk Cabai
+  - 112 Bawang Putih
+  - 80 Jahe
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Sayur, Bumbu Rempah, Bumbu Olahan"
+recipe_00206,NOCODE_Lalapan Sayur Segar (Fresh Vegetables Platter),,Lalapan Sayur Segar (Fresh Vegetables Platter),Lalapan Sayur Segar (Fresh Vegetables Platter),"Buah,Sayur,Bumbu Rempah,Kacang-kacangan","Nama Masakan: Lalapan Sayur Segar (Fresh Vegetables Platter)
+Nama Asli Resep: Lalapan Sayur Segar (Fresh Vegetables Platter)
+Bahan-bahan:
+  - 15 Mentimun
+  - 15 Selada Keriting
+  - 22 Daun Kemangi
+  - 47 Kacang Panjang
+  - 25 Kol Putih
+  - 15 Mentimun
+  - 15 Selada Keriting
+  - 22 Daun Kemangi
+  - 47 Kacang Panjang
+  - 25 Kol Putih
+Kategori Bahan: Buah, Sayur, Bumbu Rempah, Kacang-kacangan"
+recipe_00207,NOCODE_Nasi Pecel,,Nasi Pecel,Nasi Pecel,"Biji-bijian,Kacang-kacangan,Bumbu Olahan,Sayur","Nama Masakan: Nasi Pecel
+Nama Asli Resep: Nasi Pecel
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 475 Bumbu Pecel / Sambal Kacang
+  - 19 Kangkung
+  - 34 Tauge
+  - 47 Kacang Panjang
+  - 130 Nasi Putih
+  - 475 Bumbu Pecel / Sambal Kacang
+  - 19 Kangkung
+  - 34 Tauge
+  - 47 Kacang Panjang
+Kategori Bahan: Biji-bijian, Kacang-kacangan, Bumbu Olahan, Sayur"
+recipe_00208,NOCODE_Salad Sayur Segar,,Salad Sayur Segar,Salad Sayur Segar,"Sayur,Bumbu Rempah,Buah,Biji-bijian","Nama Masakan: Salad Sayur Segar
+Nama Asli Resep: Salad Sayur Segar
+Bahan-bahan:
+  - 15 Selada Keriting
+  - 18 Tomat Merah
+  - 15 Mentimun
+  - 86 Jagung Manis
+  - 41 Wortel (Carrot)
+Kategori Bahan: Sayur, Bumbu Rempah, Buah, Biji-bijian"
+recipe_00209,NOCODE_Salad Timun Tomat (Cucumber Tomato Salad),,Salad Timun Tomat (Cucumber Tomato Salad),Salad Timun Tomat (Cucumber Tomato Salad),"Buah,Bumbu Rempah","Nama Masakan: Salad Timun Tomat (Cucumber Tomato Salad)
+Nama Asli Resep: Salad Timun Tomat (Cucumber Tomato Salad)
+Bahan-bahan:
+  - 15 Mentimun
+  - Tomat
+  - 44 Bawang Merah
+  - 884 Minyak Zaitun
+  - 30 Jeruk Nipis
+Kategori Bahan: Buah, Bumbu Rempah"
+recipe_00210,NOCODE_Sawi Hijau,,Sawi Hijau,Sawi Hijau,Sayur,"Nama Masakan: Sawi Hijau
+Nama Asli Resep: Sawi Hijau
+Bahan-bahan:
+  - 27 Sawi Hijau
+Kategori Bahan: Sayur"
+recipe_00211,NOCODE_Sayur Asem,,Sayur Asem,Sayur Asem,"Kacang-kacangan,Biji-bijian,Bumbu Rempah","Nama Masakan: Sayur Asem
+Nama Asli Resep: Sayur Asem
+Bahan-bahan:
+  - 19 Labu Siam
+  - 47 Kacang Panjang
+  - 86 Jagung Manis
+  - 525 Kacang Tanah
+  - 239 Asam Jawa
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Rempah"
+recipe_00212,NOCODE_Sayur Lodeh (Keto Friendly),,Sayur Lodeh (Keto Friendly),Sayur Lodeh (Keto Friendly),"Buah,Santan,Kacang-kacangan,Sayur","Nama Masakan: Sayur Lodeh (Keto Friendly)
+Nama Asli Resep: Sayur Lodeh (Keto Friendly)
+Bahan-bahan:
+  - 324 Santan Kelapa
+  - 19 Labu Siam
+  - 47 Kacang Panjang
+  - Terong
+Kategori Bahan: Buah, Santan, Kacang-kacangan, Sayur"
+recipe_00213,NOCODE_Sayur Sop,,Sayur Sop,Sayur Sop,"Sayur,Kacang-kacangan,Umbi-umbian,Bumbu Rempah","Nama Masakan: Sayur Sop
+Nama Asli Resep: Sayur Sop
+Bahan-bahan:
+  - 41 Wortel (Carrot)
+  - 35 Buncis
+  - 77 Kentang (Potato)
+  - 25 Kol Putih
+  - 32 Bawang Daun
+Kategori Bahan: Sayur, Kacang-kacangan, Umbi-umbian, Bumbu Rempah"
+recipe_00214,NOCODE_Sup Brenebon,,Sup Brenebon,Sup Brenebon,"Kacang-kacangan,Daging Merah,Bumbu Rempah","Nama Masakan: Sup Brenebon
+Nama Asli Resep: Sup Brenebon
+Bahan-bahan:
+  - 127 Kacang Merah
+  - 250 Daging Sapi (Beef)
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 525 Biji Pala
+Kategori Bahan: Kacang-kacangan, Daging Merah, Bumbu Rempah"
+recipe_00215,NOCODE_Sup Tahu Telur (Egg Drop Soup),,Sup Tahu Telur (Egg Drop Soup),Sup Tahu Telur (Egg Drop Soup),"Kacang-kacangan,Bumbu Rempah,Biji-bijian","Nama Masakan: Sup Tahu Telur (Egg Drop Soup)
+Nama Asli Resep: Sup Tahu Telur (Egg Drop Soup)
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 143 Telur Ayam
+  - Daun Bawang
+  - 112 Bawang Putih
+  - 360 Tepung Maizena
+  - 78 Tahu Putih
+  - 143 Telur Ayam
+  - Daun Bawang
+  - 112 Bawang Putih
+  - 360 Tepung Maizena
+Kategori Bahan: Kacang-kacangan, Bumbu Rempah, Biji-bijian"
+recipe_00216,NOCODE_Timun (Lalap),,Timun (Lalap),Timun (Lalap),Buah,"Nama Masakan: Timun (Lalap)
+Nama Asli Resep: Timun (Lalap)
+Bahan-bahan:
+  - 15 Mentimun
+Kategori Bahan: Buah"
+recipe_00217,NOCODE_Tumis Buncis Jagung Muda,,Tumis Buncis Jagung Muda,Tumis Buncis Jagung Muda,"Sayur,Kacang-kacangan,Biji-bijian,Bumbu Rempah","Nama Masakan: Tumis Buncis Jagung Muda
+Nama Asli Resep: Tumis Buncis Jagung Muda
+Bahan-bahan:
+  - 35 Buncis
+  - 26 Jagung Muda
+  - 112 Bawang Putih
+  - 44 Bawang Merah
+  - 36 Cabai Merah Besar
+Kategori Bahan: Sayur, Kacang-kacangan, Biji-bijian, Bumbu Rempah"
+recipe_00218,NOCODE_Tumis Kangkung,,Tumis Kangkung,Tumis Kangkung,"Sayur,Bumbu Rempah","Nama Masakan: Tumis Kangkung
+Nama Asli Resep: Tumis Kangkung
+Bahan-bahan:
+  - 19 Kangkung
+  - 112 Bawang Putih
+  - 44 Bawang Merah
+  - 36 Cabai Merah Besar
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Sayur, Bumbu Rempah"
+recipe_00219,NOCODE_Tumis Kol (Kubis),,Tumis Kol (Kubis),Tumis Kol (Kubis),"Sayur,Bumbu Rempah","Nama Masakan: Tumis Kol (Kubis)
+Nama Asli Resep: Tumis Kol (Kubis)
+Bahan-bahan:
+  - 25 Kol Putih
+  - 112 Bawang Putih
+  - 884 Minyak Nabati (Vegetable Oil)
+Kategori Bahan: Sayur, Bumbu Rempah"
+recipe_00220,NOCODE_Tumis Wortel Buncis,,Tumis Wortel Buncis,Tumis Wortel Buncis,"Sayur,Kacang-kacangan,Bumbu Rempah","Nama Masakan: Tumis Wortel Buncis
+Nama Asli Resep: Tumis Wortel Buncis
+Bahan-bahan:
+  - 41 Wortel (Carrot)
+  - 35 Buncis
+  - 112 Bawang Putih
+  - 44 Bawang Merah
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Sayur, Kacang-kacangan, Bumbu Rempah"
+recipe_00221,NOCODE_Bubur Pati Garut,,Bubur Pati Garut,Bubur Pati Garut,"Biji-bijian,Bumbu Olahan","Nama Masakan: Bubur Pati Garut
+Nama Asli Resep: Bubur Pati Garut
+Bahan-bahan:
+  - 355 Tepung Garut
+  - 0 Air Minum
+  - 377 Gula Merah (Jawa/Aren)
+Kategori Bahan: Biji-bijian, Bumbu Olahan"
+recipe_00222,NOCODE_Kentang Rebus,,Kentang Rebus,Kentang Rebus,Umbi-umbian,"Nama Masakan: Kentang Rebus
+Nama Asli Resep: Kentang Rebus
+Bahan-bahan:
+  - 77 Kentang (Potato)
+Kategori Bahan: Umbi-umbian"
+recipe_00223,NOCODE_Ketupat,,Ketupat,Ketupat,Biji-bijian,"Nama Masakan: Ketupat
+Nama Asli Resep: Ketupat
+Bahan-bahan:
+  - 160 Ketupat
+Kategori Bahan: Biji-bijian"
+recipe_00224,NOCODE_Lontong,,Lontong,Lontong,Biji-bijian,"Nama Masakan: Lontong
+Nama Asli Resep: Lontong
+Bahan-bahan:
+  - 144 Lontong
+Kategori Bahan: Biji-bijian"
+recipe_00225,NOCODE_Nasi Goreng,,Nasi Goreng,Nasi Goreng,Biji-bijian,"Nama Masakan: Nasi Goreng
+Nama Asli Resep: Nasi Goreng
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 143 Telur Ayam
+  - 130 Nasi Putih
+  - 143 Telur Ayam
+Kategori Bahan: Biji-bijian"
+recipe_00226,NOCODE_Nasi Merah,,Nasi Merah,Nasi Merah,Biji-bijian,"Nama Masakan: Nasi Merah
+Nama Asli Resep: Nasi Merah
+Bahan-bahan:
+  - 360 Beras Merah
+  - 0 Air Mineral
+Kategori Bahan: Biji-bijian"
+recipe_00227,NOCODE_Nasi Shirataki (Konjac),,Nasi Shirataki (Konjac),Nasi Shirataki (Konjac),Umbi-umbian,"Nama Masakan: Nasi Shirataki (Konjac)
+Nama Asli Resep: Nasi Shirataki (Konjac)
+Bahan-bahan:
+  - 28 Konjac / Shirataki
+  - 0 Air Mineral
+Kategori Bahan: Umbi-umbian"
+recipe_00228,NOCODE_Roti Tawar Putih,,Roti Tawar Putih,Roti Tawar Putih,"Biji-bijian,Seafood,Bumbu Olahan","Nama Masakan: Roti Tawar Putih
+Nama Asli Resep: Roti Tawar Putih
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 387 Gula Pasir
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan"
+recipe_00229,NOCODE_Singkong Rebus,,Singkong Rebus,Singkong Rebus,"Umbi-umbian,Bumbu Olahan","Nama Masakan: Singkong Rebus
+Nama Asli Resep: Singkong Rebus
+Bahan-bahan:
+  - 130 Singkong
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Umbi-umbian, Bumbu Olahan"
+recipe_00230,NOCODE_Asinan Betawi,,Asinan Betawi,Asinan Betawi,"Sayur,Kacang-kacangan","Nama Masakan: Asinan Betawi
+Nama Asli Resep: Asinan Betawi
+Bahan-bahan:
+  - 25 Kol Putih
+  - 37 Toge
+  - 25 Sawi Asin
+  - 78 Tahu Putih
+  - 525 Kacang Tanah
+Kategori Bahan: Sayur, Kacang-kacangan"
+recipe_00231,NOCODE_Ayam Bakar Taliwang,,Ayam Bakar Taliwang,Ayam Bakar Taliwang,"Daging Putih,Unggas,Bumbu Rempah,Seafood,Bumbu Olahan","Nama Masakan: Ayam Bakar Taliwang
+Nama Asli Resep: Ayam Bakar Taliwang
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 36 Cabai Merah Besar
+  - 155 Terasi Udang
+  - 44 Bawang Merah
+  - 205 Kencur
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah, Seafood, Bumbu Olahan"
+recipe_00232,NOCODE_Ayam Betutu,,Ayam Betutu,Ayam Betutu,"Daging Putih,Unggas,Bumbu Rempah","Nama Masakan: Ayam Betutu
+Nama Asli Resep: Ayam Betutu
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 892 Minyak Kelapa
+  - 36 Cabai Rawit Merah
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah"
+recipe_00233,NOCODE_Ayam Geprek,,Ayam Geprek,Ayam Geprek,"Daging Putih,Unggas,Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Ayam Geprek
+Nama Asli Resep: Ayam Geprek
+Bahan-bahan:
+  - 172 Dada Ayam
+  - 350 Tepung Terigu (Serbaguna)
+  - 36 Cabai Rawit Merah
+  - 112 Bawang Putih
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00234,NOCODE_Ayam Sisit Bali,,Ayam Sisit Bali,Ayam Sisit Bali,"Daging Putih,Unggas,Bumbu Rempah","Nama Masakan: Ayam Sisit Bali
+Nama Asli Resep: Ayam Sisit Bali
+Bahan-bahan:
+  - 172 Dada Ayam
+  - 36 Cabai Rawit Merah
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 99 Serai
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah"
+recipe_00235,NOCODE_Bakso Aci,,Bakso Aci,Bakso Aci,"Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Bakso Aci
+Nama Asli Resep: Bakso Aci
+Bahan-bahan:
+  - 360 Tepung Tapioka / Kanji
+  - 112 Bawang Putih
+  - 0 Garam Meja (Table Salt)
+  - 36 Cabai Rawit Merah
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00236,NOCODE_Bakso Sapi Kuah (Tanpa Mie),,Bakso Sapi Kuah (Tanpa Mie),Bakso Sapi Kuah (Tanpa Mie),"Daging Merah,Biji-bijian,Bumbu Rempah,Sayur","Nama Masakan: Bakso Sapi Kuah (Tanpa Mie)
+Nama Asli Resep: Bakso Sapi Kuah (Tanpa Mie)
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 360 Tepung Tapioka / Kanji
+  - 112 Bawang Putih
+  - 27 Sawi Hijau
+  - 14 Seledri
+Kategori Bahan: Daging Merah, Biji-bijian, Bumbu Rempah, Sayur"
+recipe_00237,NOCODE_Balado Teri Kacang,,Balado Teri Kacang,Balado Teri Kacang,"Daging Putih,Seafood,Kacang-kacangan,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Balado Teri Kacang
+Nama Asli Resep: Balado Teri Kacang
+Bahan-bahan:
+  - 170 Ikan Teri (Kering Asin)
+  - 525 Kacang Tanah
+  - 36 Cabai Merah Besar
+  - 387 Gula Pasir (Granulated Sugar)
+Kategori Bahan: Daging Putih, Seafood, Kacang-kacangan, Bumbu Rempah, Bumbu Olahan"
+recipe_00238,NOCODE_Bapmericano (Nasi Kopi Viral),,Bapmericano (Nasi Kopi Viral),Bapmericano (Nasi Kopi Viral),"Biji-bijian,Bumbu Olahan,Daging Merah","Nama Masakan: Bapmericano (Nasi Kopi Viral)
+Nama Asli Resep: Bapmericano (Nasi Kopi Viral)
+Bahan-bahan:
+  - 130 Nasi Putih
+  - Kopi Hitam Tanpa Gula
+  - 250 Daging Sapi (Beef)
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Daging Merah"
+recipe_00239,NOCODE_Bebek Goreng,,Bebek Goreng,Bebek Goreng,"Daging Putih,Unggas","Nama Masakan: Bebek Goreng
+Nama Asli Resep: Bebek Goreng
+Bahan-bahan:
+  - 337 Daging Bebek
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - Bumbu Rempah
+Kategori Bahan: Daging Putih, Unggas"
+recipe_00240,NOCODE_Beberuk Terong,,Beberuk Terong,Beberuk Terong,"Sayur,Kacang-kacangan,Bumbu Rempah,Buah,Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Beberuk Terong
+Nama Asli Resep: Beberuk Terong
+Bahan-bahan:
+  - 25 Terong Bulat
+  - 47 Kacang Panjang
+  - 36 Cabai Rawit Merah
+  - Tomat
+  - 155 Terasi Udang
+Kategori Bahan: Sayur, Kacang-kacangan, Bumbu Rempah, Buah, Daging Putih, Seafood, Bumbu Olahan"
+recipe_00241,NOCODE_Bihun Goreng Sayur,,Bihun Goreng Sayur,Bihun Goreng Sayur,"Biji-bijian,Sayur,Bumbu Olahan","Nama Masakan: Bihun Goreng Sayur
+Nama Asli Resep: Bihun Goreng Sayur
+Bahan-bahan:
+  - 360 Bihun Jagung
+  - 27 Sawi Hijau
+  - 41 Wortel (Carrot)
+  - 143 Telur Ayam
+  - 320 Kecap Manis
+Kategori Bahan: Biji-bijian, Sayur, Bumbu Olahan"
+recipe_00242,NOCODE_Bolu Kukus,,Bolu Kukus,Bolu Kukus,"Biji-bijian,Seafood,Bumbu Olahan,Buah,Santan","Nama Masakan: Bolu Kukus
+Nama Asli Resep: Bolu Kukus
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam Ras
+  - 387 Gula Pasir
+  - 324 Santan Kelapa
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan, Buah, Santan"
+recipe_00243,NOCODE_Bubur Ayam,,Bubur Ayam,Bubur Ayam,"Biji-bijian,Daging Putih,Unggas,Bumbu Rempah,Kacang-kacangan","Nama Masakan: Bubur Ayam
+Nama Asli Resep: Bubur Ayam
+Bahan-bahan:
+  - 357 Beras Putih
+  - 239 Daging Ayam
+  - 32 Bawang Daun
+  - 476 Kerupuk (Umum)
+  - 525 Kacang Tanah
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Bumbu Rempah, Kacang-kacangan"
+recipe_00244,NOCODE_Bubur Ayam Cirebon,,Bubur Ayam Cirebon,Bubur Ayam Cirebon,"Biji-bijian,Daging Putih,Unggas,Bumbu Rempah,Kacang-kacangan","Nama Masakan: Bubur Ayam Cirebon
+Nama Asli Resep: Bubur Ayam Cirebon
+Bahan-bahan:
+  - Beras
+  - 239 Daging Ayam
+  - 69 Kunyit
+  - 173 Kacang Kedelai (Soybeans)
+  - 476 Kerupuk (Umum)
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Bumbu Rempah, Kacang-kacangan"
+recipe_00245,NOCODE_Bubur Ayam Jakarta,,Bubur Ayam Jakarta,Bubur Ayam Jakarta,"Biji-bijian,Daging Putih,Unggas,Kacang-kacangan","Nama Masakan: Bubur Ayam Jakarta
+Nama Asli Resep: Bubur Ayam Jakarta
+Bahan-bahan:
+  - 357 Beras Putih
+  - 165 Daging Ayam Suwir
+  - Cakwe
+  - Kerupuk Aci
+  - Kacang Kedelai Goreng
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Kacang-kacangan"
+recipe_00246,NOCODE_Bubur Manado (Tinutuan),,Bubur Manado (Tinutuan),Bubur Manado (Tinutuan),"Biji-bijian,Umbi-umbian,Sayur","Nama Masakan: Bubur Manado (Tinutuan)
+Nama Asli Resep: Bubur Manado (Tinutuan)
+Bahan-bahan:
+  - 357 Beras Putih
+  - 35 Labu Kuning
+  - 86 Ubi Jalar
+  - 86 Jagung Manis
+  - 19 Kangkung
+Kategori Bahan: Biji-bijian, Umbi-umbian, Sayur"
+recipe_00247,NOCODE_Coto Makassar,,Coto Makassar,Coto Makassar,"Daging Merah,Kacang-kacangan","Nama Masakan: Coto Makassar
+Nama Asli Resep: Coto Makassar
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 525 Kacang Tanah
+  - Air Cucian Beras
+Kategori Bahan: Daging Merah, Kacang-kacangan"
+recipe_00248,NOCODE_Empal Gentong,,Empal Gentong,Empal Gentong,"Daging Merah,Buah,Santan,Susu","Nama Masakan: Empal Gentong
+Nama Asli Resep: Empal Gentong
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - Jeroan Sapi
+  - 324 Santan Kelapa
+  - 134 Susu Evaporasi
+Kategori Bahan: Daging Merah, Buah, Santan, Susu"
+recipe_00249,NOCODE_Emping Melinjo,,Emping Melinjo,Emping Melinjo,"Kacang-kacangan,Bumbu Olahan","Nama Masakan: Emping Melinjo
+Nama Asli Resep: Emping Melinjo
+Bahan-bahan:
+  - 66 Melinjo
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan"
+recipe_00250,NOCODE_Gudeg Jogja,,Gudeg Jogja,Gudeg Jogja,"Sayur,Buah,Santan,Bumbu Olahan,Daging Putih,Unggas","Nama Masakan: Gudeg Jogja
+Nama Asli Resep: Gudeg Jogja
+Bahan-bahan:
+  - Nangka Muda
+  - 324 Santan Kelapa
+  - 377 Gula Merah (Jawa/Aren)
+  - 143 Telur Ayam
+  - 239 Daging Ayam
+Kategori Bahan: Sayur, Buah, Santan, Bumbu Olahan, Daging Putih, Unggas"
+recipe_00251,NOCODE_Gulai Ayam,,Gulai Ayam,Gulai Ayam,"Daging Putih,Unggas,Buah,Santan,Bumbu Olahan","Nama Masakan: Gulai Ayam
+Nama Asli Resep: Gulai Ayam
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 324 Santan Kelapa
+  - 210 Bumbu Gulai
+Kategori Bahan: Daging Putih, Unggas, Buah, Santan, Bumbu Olahan"
+recipe_00252,NOCODE_Gulai Daun Singkong,,Gulai Daun Singkong,Gulai Daun Singkong,"Umbi-umbian,Buah,Santan,Daging Putih,Seafood,Bumbu Rempah","Nama Masakan: Gulai Daun Singkong
+Nama Asli Resep: Gulai Daun Singkong
+Bahan-bahan:
+  - 37 Daun Singkong
+  - 324 Santan Kelapa
+  - 170 Ikan Teri (Kering Asin)
+  - 69 Kunyit
+  - 71 Lengkuas / Laos
+Kategori Bahan: Umbi-umbian, Buah, Santan, Daging Putih, Seafood, Bumbu Rempah"
+recipe_00253,NOCODE_Gulai Kambing,,Gulai Kambing,Gulai Kambing,"Daging Merah,Buah,Santan,Bumbu Olahan","Nama Masakan: Gulai Kambing
+Nama Asli Resep: Gulai Kambing
+Bahan-bahan:
+  - 143 Daging Kambing
+  - 324 Santan Kelapa
+  - 210 Bumbu Gulai
+Kategori Bahan: Daging Merah, Buah, Santan, Bumbu Olahan"
+recipe_00254,NOCODE_Gulai Otak Sapi,,Gulai Otak Sapi,Gulai Otak Sapi,"Daging Merah,Buah,Santan,Bumbu Olahan","Nama Masakan: Gulai Otak Sapi
+Nama Asli Resep: Gulai Otak Sapi
+Bahan-bahan:
+  - 143 Otak Sapi
+  - 324 Santan Kelapa
+  - 210 Bumbu Gulai
+Kategori Bahan: Daging Merah, Buah, Santan, Bumbu Olahan"
+recipe_00255,NOCODE_Gulai Tunjang,,Gulai Tunjang,Gulai Tunjang,"Daging Merah,Buah,Santan,Bumbu Rempah","Nama Masakan: Gulai Tunjang
+Nama Asli Resep: Gulai Tunjang
+Bahan-bahan:
+  - 150 Kikil Sapi
+  - 324 Santan Kelapa
+  - 36 Cabai Merah Besar
+  - 71 Lengkuas / Laos
+  - 10 Daun Kunyit
+Kategori Bahan: Daging Merah, Buah, Santan, Bumbu Rempah"
+recipe_00256,NOCODE_Ikan Asin (Goreng),,Ikan Asin (Goreng),Ikan Asin (Goreng),"Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Ikan Asin (Goreng)
+Nama Asli Resep: Ikan Asin (Goreng)
+Bahan-bahan:
+  - 100 Ikan Laut
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Daging Putih, Seafood, Bumbu Olahan"
+recipe_00257,NOCODE_Ikan Kembung Goreng,,Ikan Kembung Goreng,Ikan Kembung Goreng,"Daging Putih,Seafood,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Ikan Kembung Goreng
+Nama Asli Resep: Ikan Kembung Goreng
+Bahan-bahan:
+  - 112 Ikan Kembung
+  - 69 Kunyit
+  - 298 Ketumbar
+  - 0 Garam Meja (Table Salt)
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Daging Putih, Seafood, Bumbu Rempah, Bumbu Olahan"
+recipe_00258,NOCODE_Ikan Kuah Kuning,,Ikan Kuah Kuning,Ikan Kuah Kuning,"Sayur,Daging Putih,Seafood,Bumbu Rempah","Nama Masakan: Ikan Kuah Kuning
+Nama Asli Resep: Ikan Kuah Kuning
+Bahan-bahan:
+  - 110 Ikan Tongkol
+  - Ikan Mubara
+  - 69 Kunyit
+  - 22 Daun Kemangi
+Kategori Bahan: Sayur, Daging Putih, Seafood, Bumbu Rempah"
+recipe_00259,NOCODE_Ikan Pesmol (Bumbu Kuning),,Ikan Pesmol (Bumbu Kuning),Ikan Pesmol (Bumbu Kuning),"Daging Putih,Seafood,Bumbu Rempah,Biji-bijian,Sayur,Buah","Nama Masakan: Ikan Pesmol (Bumbu Kuning)
+Nama Asli Resep: Ikan Pesmol (Bumbu Kuning)
+Bahan-bahan:
+  - 112 Ikan Kembung
+  - 69 Kunyit
+  - 675 Kemiri
+  - 41 Wortel (Carrot)
+  - 15 Mentimun
+Kategori Bahan: Daging Putih, Seafood, Bumbu Rempah, Biji-bijian, Sayur, Buah"
+recipe_00260,NOCODE_Ikan Sarden (Kaleng),,Ikan Sarden (Kaleng),Ikan Sarden (Kaleng),"Daging Putih,Seafood,Buah","Nama Masakan: Ikan Sarden (Kaleng)
+Nama Asli Resep: Ikan Sarden (Kaleng)
+Bahan-bahan:
+  - 100 Ikan Laut
+  - 18 Tomat Merah
+Kategori Bahan: Daging Putih, Seafood, Buah"
+recipe_00261,NOCODE_Indomie Mi Nyemek,,Indomie Mi Nyemek,Indomie Mi Nyemek,"Bumbu Rempah,Bumbu Olahan","Nama Masakan: Indomie Mi Nyemek
+Nama Asli Resep: Indomie Mi Nyemek
+Bahan-bahan:
+  - 384 Mie Telur
+  - 143 Telur Ayam
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 320 Kecap Manis
+  - 384 Mie Telur
+  - 143 Telur Ayam
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 320 Kecap Manis
+Kategori Bahan: Bumbu Rempah, Bumbu Olahan"
+recipe_00262,NOCODE_Kepiting Saus Padang,,Kepiting Saus Padang,Kepiting Saus Padang,"Seafood,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Kepiting Saus Padang
+Nama Asli Resep: Kepiting Saus Padang
+Bahan-bahan:
+  - 151 Kepiting
+  - 36 Cabai Merah Besar
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 120 Saus Tiram
+Kategori Bahan: Seafood, Bumbu Rempah, Bumbu Olahan"
+recipe_00263,NOCODE_Kerak Telor,,Kerak Telor,Kerak Telor,"Biji-bijian,Buah,Seafood","Nama Masakan: Kerak Telor
+Nama Asli Resep: Kerak Telor
+Bahan-bahan:
+  - Beras Ketan
+  - 185 Telur Bebek
+  - Kelapa Parut
+  - 259 Ebi
+  - Beras Ketan
+  - 185 Telur Bebek
+  - Kelapa Parut
+  - 259 Ebi
+Kategori Bahan: Biji-bijian, Buah, Seafood"
+recipe_00264,NOCODE_Konro Bakar,,Konro Bakar,Konro Bakar,"Daging Merah,Kacang-kacangan,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Konro Bakar
+Nama Asli Resep: Konro Bakar
+Bahan-bahan:
+  - 280 Iga Sapi
+  - 525 Kacang Tanah
+  - 273 Keluwak
+  - 320 Kecap Manis
+  - 44 Bawang Merah
+Kategori Bahan: Daging Merah, Kacang-kacangan, Bumbu Rempah, Bumbu Olahan"
+recipe_00265,NOCODE_Lele Goreng (Tanpa Tepung),,Lele Goreng (Tanpa Tepung),Lele Goreng (Tanpa Tepung),"Daging Putih,Seafood,Bumbu Rempah","Nama Masakan: Lele Goreng (Tanpa Tepung)
+Nama Asli Resep: Lele Goreng (Tanpa Tepung)
+Bahan-bahan:
+  - 105 Ikan Lele
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 367 Bumbu Dasar Kuning
+Kategori Bahan: Daging Putih, Seafood, Bumbu Rempah"
+recipe_00266,NOCODE_Lontong Balap Surabaya,,Lontong Balap Surabaya,Lontong Balap Surabaya,"Biji-bijian,Sayur,Kacang-kacangan,Seafood","Nama Masakan: Lontong Balap Surabaya
+Nama Asli Resep: Lontong Balap Surabaya
+Bahan-bahan:
+  - 144 Lontong Polos
+  - 34 Tauge
+  - 78 Tahu Putih
+  - 116 Kacang Tolo
+  - 350 Tepung Terigu (Serbaguna)
+Kategori Bahan: Biji-bijian, Sayur, Kacang-kacangan, Seafood"
+recipe_00267,NOCODE_Lontong Sayur,,Lontong Sayur,Lontong Sayur,"Biji-bijian,Buah,Santan,Sayur","Nama Masakan: Lontong Sayur
+Nama Asli Resep: Lontong Sayur
+Bahan-bahan:
+  - 144 Lontong
+  - 324 Santan Kelapa
+  - 19 Labu Siam
+  - Nangka Muda
+  - 77 Telur Rebus
+Kategori Bahan: Biji-bijian, Buah, Santan, Sayur"
+recipe_00268,NOCODE_Lontong Sayur Medan,,Lontong Sayur Medan,Lontong Sayur Medan,"Biji-bijian,Buah,Santan,Bumbu Olahan,Seafood","Nama Masakan: Lontong Sayur Medan
+Nama Asli Resep: Lontong Sayur Medan
+Bahan-bahan:
+  - 144 Lontong
+  - 324 Santan Kelapa
+  - 166 Tauco
+  - 19 Labu Siam
+  - Teri Medan
+Kategori Bahan: Biji-bijian, Buah, Santan, Bumbu Olahan, Seafood"
+recipe_00269,NOCODE_Macaroni Schotel (Panggang),,Macaroni Schotel (Panggang),Macaroni Schotel (Panggang),"Biji-bijian,Susu,Daging Merah","Nama Masakan: Macaroni Schotel (Panggang)
+Nama Asli Resep: Macaroni Schotel (Panggang)
+Bahan-bahan:
+  - 371 Makaroni (Kering)
+  - 65 Susu Segar
+  - 320 Keju Cheddar
+  - 250 Daging Sapi (Beef)
+  - 143 Telur Ayam Ras
+Kategori Bahan: Biji-bijian, Susu, Daging Merah"
+recipe_00270,NOCODE_Mie Aceh,,Mie Aceh,Mie Aceh,"Biji-bijian,Daging Merah,Daging Putih,Seafood,Sayur,Kacang-kacangan","Nama Masakan: Mie Aceh
+Nama Asli Resep: Mie Aceh
+Bahan-bahan:
+  - 140 Mie Kuning Basah
+  - 250 Daging Sapi (Beef)
+  - Udang
+  - 37 Toge
+  - Kol
+Kategori Bahan: Biji-bijian, Daging Merah, Daging Putih, Seafood, Sayur, Kacang-kacangan"
+recipe_00271,NOCODE_Mie Ayam,,Mie Ayam,Mie Ayam,"Biji-bijian,Daging Putih,Unggas,Sayur,Bumbu Olahan","Nama Masakan: Mie Ayam
+Nama Asli Resep: Mie Ayam
+Bahan-bahan:
+  - Mie Basah
+  - 239 Daging Ayam
+  - 27 Sawi Hijau
+  - Minyak Ayam
+  - 320 Kecap Manis
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Sayur, Bumbu Olahan"
+recipe_00272,NOCODE_Mie Ayam Jamur,,Mie Ayam Jamur,Mie Ayam Jamur,"Daging Putih,Unggas,Sayur,Bumbu Olahan","Nama Masakan: Mie Ayam Jamur
+Nama Asli Resep: Mie Ayam Jamur
+Bahan-bahan:
+  - 384 Mie Telur
+  - 143 Daging Ayam Cincang
+  - 22 Jamur Kancing
+  - 27 Sawi Hijau
+  - 320 Kecap Manis
+Kategori Bahan: Daging Putih, Unggas, Sayur, Bumbu Olahan"
+recipe_00273,NOCODE_Mie Gacoan (Mie Iblis/Setan),,Mie Gacoan (Mie Iblis/Setan),Mie Gacoan (Mie Iblis/Setan),"Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Mie Gacoan (Mie Iblis/Setan)
+Nama Asli Resep: Mie Gacoan (Mie Iblis/Setan)
+Bahan-bahan:
+  - Mie Basah
+  - Minyak Ayam
+  - 36 Cabai Rawit Merah
+  - 320 Kecap Manis
+  - Pangsit Goreng
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00274,NOCODE_Mie Goreng Jawa,,Mie Goreng Jawa,Mie Goreng Jawa,"Daging Putih,Unggas,Sayur","Nama Masakan: Mie Goreng Jawa
+Nama Asli Resep: Mie Goreng Jawa
+Bahan-bahan:
+  - 384 Mie Telur
+  - 143 Telur Ayam
+  - 165 Daging Ayam Suwir
+  - 27 Sawi Hijau
+  - 25 Kol Putih
+  - 384 Mie Telur
+  - 143 Telur Ayam
+  - 165 Daging Ayam Suwir
+  - 27 Sawi Hijau
+  - 25 Kol Putih
+Kategori Bahan: Daging Putih, Unggas, Sayur"
+recipe_00275,NOCODE_Mie Kocok Bandung,,Mie Kocok Bandung,Mie Kocok Bandung,"Biji-bijian,Sayur,Kacang-kacangan,Daging Merah","Nama Masakan: Mie Kocok Bandung
+Nama Asli Resep: Mie Kocok Bandung
+Bahan-bahan:
+  - 140 Mie Kuning Basah
+  - Kikil
+  - 37 Toge
+  - 218 Bakso Sapi
+Kategori Bahan: Biji-bijian, Sayur, Kacang-kacangan, Daging Merah"
+recipe_00276,NOCODE_Mie Soobek (Biang Mie),,Mie Soobek (Biang Mie),Mie Soobek (Biang Mie),"Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Mie Soobek (Biang Mie)
+Nama Asli Resep: Mie Soobek (Biang Mie)
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - Cabai Bubuk
+  - 884 Minyak Wijen (Sesame Oil)
+  - 112 Bawang Putih
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00277,NOCODE_Mie Tek-Tek (Goreng/Kuah),,Mie Tek-Tek (Goreng/Kuah),Mie Tek-Tek (Goreng/Kuah),"Daging Putih,Unggas,Sayur","Nama Masakan: Mie Tek-Tek (Goreng/Kuah)
+Nama Asli Resep: Mie Tek-Tek (Goreng/Kuah)
+Bahan-bahan:
+  - 384 Mie Telur
+  - 143 Telur Ayam
+  - 239 Daging Ayam
+  - 27 Sawi Hijau
+  - Kol
+  - 384 Mie Telur
+  - 143 Telur Ayam
+  - 239 Daging Ayam
+  - 27 Sawi Hijau
+  - Kol
+Kategori Bahan: Daging Putih, Unggas, Sayur"
+recipe_00278,NOCODE_Nasi Campur,,Nasi Campur,Nasi Campur,"Biji-bijian,Daging Putih,Unggas,Kacang-kacangan,Sayur","Nama Masakan: Nasi Campur
+Nama Asli Resep: Nasi Campur
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 239 Daging Ayam
+  - Telur Balado
+  - Tempe Orek
+  - Sayur Lodeh
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Kacang-kacangan, Sayur"
+recipe_00279,NOCODE_Nasi Campur Bali,,Nasi Campur Bali,Nasi Campur Bali,"Biji-bijian,Daging Putih,Unggas,Kacang-kacangan,Buah","Nama Masakan: Nasi Campur Bali
+Nama Asli Resep: Nasi Campur Bali
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 239 Daging Ayam
+  - 47 Kacang Panjang
+  - Kelapa Parut
+  - 525 Kacang Tanah
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Kacang-kacangan, Buah"
+recipe_00280,NOCODE_Nasi Gila,,Nasi Gila,Nasi Gila,"Biji-bijian,Daging Merah,Daging Putih,Unggas","Nama Masakan: Nasi Gila
+Nama Asli Resep: Nasi Gila
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 143 Telur Ayam Ras
+  - 300 Sosis Sapi
+  - 218 Bakso Sapi
+  - 239 Ayam Potong (Broiler)
+Kategori Bahan: Biji-bijian, Daging Merah, Daging Putih, Unggas"
+recipe_00281,NOCODE_Nasi Goreng Spesial (Telur + Ayam),,Nasi Goreng Spesial (Telur + Ayam),Nasi Goreng Spesial (Telur + Ayam),"Biji-bijian,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Nasi Goreng Spesial (Telur + Ayam)
+Nama Asli Resep: Nasi Goreng Spesial (Telur + Ayam)
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 320 Kecap Manis
+  - 143 Telur Ayam
+  - 44 Bawang Merah
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Bumbu Rempah"
+recipe_00282,NOCODE_Nasi Goreng Tuna,,Nasi Goreng Tuna,Nasi Goreng Tuna,"Biji-bijian,Daging Putih,Seafood,Bumbu Rempah","Nama Masakan: Nasi Goreng Tuna
+Nama Asli Resep: Nasi Goreng Tuna
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 130 Ikan Tuna
+  - 143 Telur Ayam Ras
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+Kategori Bahan: Biji-bijian, Daging Putih, Seafood, Bumbu Rempah"
+recipe_00283,NOCODE_Nasi Jagung,,Nasi Jagung,Nasi Jagung,Biji-bijian,"Nama Masakan: Nasi Jagung
+Nama Asli Resep: Nasi Jagung
+Bahan-bahan:
+  - Jagung
+  - 130 Nasi Putih
+Kategori Bahan: Biji-bijian"
+recipe_00284,NOCODE_Nasi Kapau Ikan Bakar,,Nasi Kapau Ikan Bakar,Nasi Kapau Ikan Bakar,"Biji-bijian,Daging Putih,Seafood,Sayur,Buah,Bumbu Olahan,Umbi-umbian","Nama Masakan: Nasi Kapau Ikan Bakar
+Nama Asli Resep: Nasi Kapau Ikan Bakar
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 112 Ikan Kembung
+  - Gulai Nangka
+  - 37 Daun Singkong
+  - 238 Sambal Ijo
+Kategori Bahan: Biji-bijian, Daging Putih, Seafood, Sayur, Buah, Bumbu Olahan, Umbi-umbian"
+recipe_00285,NOCODE_Nasi Kuning Komplit,,Nasi Kuning Komplit,Nasi Kuning Komplit,"Biji-bijian,Buah,Santan,Bumbu Rempah,Daging Putih,Unggas,Umbi-umbian","Nama Masakan: Nasi Kuning Komplit
+Nama Asli Resep: Nasi Kuning Komplit
+Bahan-bahan:
+  - 357 Beras Putih
+  - 324 Santan Kelapa
+  - 69 Kunyit
+  - Ayam Goreng
+  - Perkedel Kentang
+Kategori Bahan: Biji-bijian, Buah, Santan, Bumbu Rempah, Daging Putih, Unggas, Umbi-umbian"
+recipe_00286,NOCODE_Nasi Padang Ayam Pop,,Nasi Padang Ayam Pop,Nasi Padang Ayam Pop,"Biji-bijian,Daging Putih,Unggas,Buah,Santan,Umbi-umbian","Nama Masakan: Nasi Padang Ayam Pop
+Nama Asli Resep: Nasi Padang Ayam Pop
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 239 Daging Ayam
+  - Air Kelapa Muda
+  - 324 Santan Kelapa
+  - 37 Daun Singkong
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Buah, Santan, Umbi-umbian"
+recipe_00287,NOCODE_Nasi Padang Keliling (Porsi),,Nasi Padang Keliling (Porsi),Nasi Padang Keliling (Porsi),"Biji-bijian,Daging Putih,Unggas,Buah,Santan,Umbi-umbian,Bumbu Rempah","Nama Masakan: Nasi Padang Keliling (Porsi)
+Nama Asli Resep: Nasi Padang Keliling (Porsi)
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 239 Daging Ayam
+  - 324 Santan Kelapa
+  - 130 Singkong
+  - 36 Cabai Merah Besar
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Buah, Santan, Umbi-umbian, Bumbu Rempah"
+recipe_00288,NOCODE_Nasi Padang Lauk Rendang,,Nasi Padang Lauk Rendang,Nasi Padang Lauk Rendang,"Biji-bijian,Daging Merah,Buah,Santan,Bumbu Rempah","Nama Masakan: Nasi Padang Lauk Rendang
+Nama Asli Resep: Nasi Padang Lauk Rendang
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 250 Daging Sapi (Beef)
+  - 324 Santan Kelapa
+  - 36 Cabai Merah Besar
+  - 71 Lengkuas / Laos
+Kategori Bahan: Biji-bijian, Daging Merah, Buah, Santan, Bumbu Rempah"
+recipe_00289,NOCODE_Nasi Putih,,Nasi Putih,Nasi Putih,Biji-bijian,"Nama Masakan: Nasi Putih
+Nama Asli Resep: Nasi Putih
+Bahan-bahan:
+  - 357 Beras Putih
+Kategori Bahan: Biji-bijian"
+recipe_00290,NOCODE_Nasi Rames (Warteg),,Nasi Rames (Warteg),Nasi Rames (Warteg),Biji-bijian,"Nama Masakan: Nasi Rames (Warteg)
+Nama Asli Resep: Nasi Rames (Warteg)
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 143 Telur Ayam
+Kategori Bahan: Biji-bijian"
+recipe_00291,NOCODE_Nasi Tiwul,,Nasi Tiwul,Nasi Tiwul,"Umbi-umbian,Bumbu Olahan,Buah","Nama Masakan: Nasi Tiwul
+Nama Asli Resep: Nasi Tiwul
+Bahan-bahan:
+  - 130 Singkong
+  - 377 Gula Merah (Jawa/Aren)
+  - Kelapa Parut
+Kategori Bahan: Umbi-umbian, Bumbu Olahan, Buah"
+recipe_00292,NOCODE_Nasi Tutug Oncom,,Nasi Tutug Oncom,Nasi Tutug Oncom,"Biji-bijian,Kacang-kacangan,Bumbu Rempah,Sayur","Nama Masakan: Nasi Tutug Oncom
+Nama Asli Resep: Nasi Tutug Oncom
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 187 Oncom
+  - 205 Kencur
+  - 22 Daun Kemangi
+Kategori Bahan: Biji-bijian, Kacang-kacangan, Bumbu Rempah, Sayur"
+recipe_00293,NOCODE_Nasi Uduk (Porsi Standar),,Nasi Uduk (Porsi Standar),Nasi Uduk (Porsi Standar),"Biji-bijian,Buah,Santan,Bumbu Rempah,Kacang-kacangan","Nama Masakan: Nasi Uduk (Porsi Standar)
+Nama Asli Resep: Nasi Uduk (Porsi Standar)
+Bahan-bahan:
+  - 357 Beras Putih
+  - 324 Santan Kelapa
+  - 44 Bawang Merah
+  - 143 Telur Ayam
+  - 193 Tempe Kedelai
+Kategori Bahan: Biji-bijian, Buah, Santan, Bumbu Rempah, Kacang-kacangan"
+recipe_00294,NOCODE_Nasi Uduk Betawi,,Nasi Uduk Betawi,Nasi Uduk Betawi,"Biji-bijian,Buah,Santan,Bumbu Rempah","Nama Masakan: Nasi Uduk Betawi
+Nama Asli Resep: Nasi Uduk Betawi
+Bahan-bahan:
+  - 357 Beras Putih
+  - 324 Santan Kelapa
+  - 99 Serai
+  - 313 Daun Salam
+  - Bihun Goreng
+Kategori Bahan: Biji-bijian, Buah, Santan, Bumbu Rempah"
+recipe_00295,NOCODE_Nasi Uduk Kebon Kacang,,Nasi Uduk Kebon Kacang,Nasi Uduk Kebon Kacang,"Biji-bijian,Buah,Santan,Bumbu Rempah,Kacang-kacangan","Nama Masakan: Nasi Uduk Kebon Kacang
+Nama Asli Resep: Nasi Uduk Kebon Kacang
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 324 Santan Kelapa
+  - 99 Serai
+  - 313 Daun Salam
+  - 525 Kacang Tanah
+Kategori Bahan: Biji-bijian, Buah, Santan, Bumbu Rempah, Kacang-kacangan"
+recipe_00296,NOCODE_Nasi Uduk Komplit,,Nasi Uduk Komplit,Nasi Uduk Komplit,"Biji-bijian,Buah,Santan,Daging Putih,Unggas,Kacang-kacangan","Nama Masakan: Nasi Uduk Komplit
+Nama Asli Resep: Nasi Uduk Komplit
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 324 Santan Kelapa
+  - Ayam Goreng
+  - 193 Tempe Kedelai
+  - 143 Telur Ayam Ras
+Kategori Bahan: Biji-bijian, Buah, Santan, Daging Putih, Unggas, Kacang-kacangan"
+recipe_00297,NOCODE_Opor Ayam,,Opor Ayam,Opor Ayam,"Daging Putih,Unggas,Buah,Santan,Bumbu Rempah","Nama Masakan: Opor Ayam
+Nama Asli Resep: Opor Ayam
+Bahan-bahan:
+  - 239 Ayam Potong (Broiler)
+  - 324 Santan Kelapa
+  - 367 Bumbu Dasar Kuning
+  - 99 Serai
+  - 20 Daun Jeruk Purut
+Kategori Bahan: Daging Putih, Unggas, Buah, Santan, Bumbu Rempah"
+recipe_00298,NOCODE_Orek Tempe Basah (Kecap),,Orek Tempe Basah (Kecap),Orek Tempe Basah (Kecap),"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Orek Tempe Basah (Kecap)
+Nama Asli Resep: Orek Tempe Basah (Kecap)
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 320 Kecap Manis
+  - 377 Gula Merah (Jawa/Aren)
+  - 71 Lengkuas / Laos
+  - 313 Daun Salam
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00299,NOCODE_Otak-Otak Ikan Tenggiri Bakar,,Otak-Otak Ikan Tenggiri Bakar,Otak-Otak Ikan Tenggiri Bakar,"Daging Putih,Seafood,Biji-bijian,Buah,Santan,Bumbu Rempah","Nama Masakan: Otak-Otak Ikan Tenggiri Bakar
+Nama Asli Resep: Otak-Otak Ikan Tenggiri Bakar
+Bahan-bahan:
+  - 139 Ikan Tenggiri
+  - 360 Tepung Tapioka / Kanji
+  - 324 Santan Kelapa
+  - Daun Bawang
+  - 112 Bawang Putih
+  - 139 Ikan Tenggiri
+  - 360 Tepung Tapioka / Kanji
+  - 324 Santan Kelapa
+  - Daun Bawang
+  - 112 Bawang Putih
+Kategori Bahan: Daging Putih, Seafood, Biji-bijian, Buah, Santan, Bumbu Rempah"
+recipe_00300,NOCODE_Pastel Ayam Sayur,,Pastel Ayam Sayur,Pastel Ayam Sayur,"Biji-bijian,Seafood,Daging Putih,Unggas","Nama Masakan: Pastel Ayam Sayur
+Nama Asli Resep: Pastel Ayam Sayur
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 143 Daging Ayam Cincang
+  - 77 Telur Rebus
+  - 364 Bihun Beras
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 143 Daging Ayam Cincang
+  - 77 Telur Rebus
+  - 364 Bihun Beras
+Kategori Bahan: Biji-bijian, Seafood, Daging Putih, Unggas"
+recipe_00301,NOCODE_Pecel Lele,,Pecel Lele,Pecel Lele,"Daging Putih,Seafood,Buah","Nama Masakan: Pecel Lele
+Nama Asli Resep: Pecel Lele
+Bahan-bahan:
+  - 105 Ikan Lele
+  - 15 Mentimun
+Kategori Bahan: Daging Putih, Seafood, Buah"
+recipe_00302,NOCODE_Pempek Kapal Selam,,Pempek Kapal Selam,Pempek Kapal Selam,"Daging Putih,Seafood,Biji-bijian,Bumbu Olahan","Nama Masakan: Pempek Kapal Selam
+Nama Asli Resep: Pempek Kapal Selam
+Bahan-bahan:
+  - 139 Ikan Tenggiri
+  - 360 Tepung Tapioka / Kanji
+  - 143 Telur Ayam
+  - Cuka
+  - 377 Gula Merah (Jawa/Aren)
+Kategori Bahan: Daging Putih, Seafood, Biji-bijian, Bumbu Olahan"
+recipe_00303,NOCODE_Pepes Ayam,,Pepes Ayam,Pepes Ayam,"Daging Putih,Unggas,Sayur,Bumbu Rempah,Biji-bijian","Nama Masakan: Pepes Ayam
+Nama Asli Resep: Pepes Ayam
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 22 Daun Kemangi
+  - 675 Kemiri
+  - 44 Bawang Merah
+  - 69 Kunyit
+Kategori Bahan: Daging Putih, Unggas, Sayur, Bumbu Rempah, Biji-bijian"
+recipe_00304,NOCODE_Pepes Ikan Mas,,Pepes Ikan Mas,Pepes Ikan Mas,"Daging Putih,Seafood,Sayur,Bumbu Rempah,Biji-bijian","Nama Masakan: Pepes Ikan Mas
+Nama Asli Resep: Pepes Ikan Mas
+Bahan-bahan:
+  - 86 Ikan Mas
+  - 22 Daun Kemangi
+  - 69 Kunyit
+  - 675 Kemiri
+  - 0 Daun Pisang
+Kategori Bahan: Daging Putih, Seafood, Sayur, Bumbu Rempah, Biji-bijian"
+recipe_00305,NOCODE_Perkedel Jagung,,Perkedel Jagung,Perkedel Jagung,"Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Perkedel Jagung
+Nama Asli Resep: Perkedel Jagung
+Bahan-bahan:
+  - 86 Jagung Manis
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 32 Bawang Daun
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00306,NOCODE_Perkedel Kentang,,Perkedel Kentang,Perkedel Kentang,"Umbi-umbian,Sayur,Bumbu Rempah","Nama Masakan: Perkedel Kentang
+Nama Asli Resep: Perkedel Kentang
+Bahan-bahan:
+  - 77 Kentang (Potato)
+  - 143 Telur Ayam
+  - Daun Seledri
+  - 570 Bawang Goreng (Original/Polos)
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Umbi-umbian, Sayur, Bumbu Rempah"
+recipe_00307,NOCODE_Plecing Kangkung,,Plecing Kangkung,Plecing Kangkung,"Sayur,Kacang-kacangan,Bumbu Rempah,Buah,Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Plecing Kangkung
+Nama Asli Resep: Plecing Kangkung
+Bahan-bahan:
+  - 19 Kangkung
+  - 34 Tauge
+  - 36 Cabai Rawit Merah
+  - Tomat
+  - 155 Terasi Udang
+Kategori Bahan: Sayur, Kacang-kacangan, Bumbu Rempah, Buah, Daging Putih, Seafood, Bumbu Olahan"
+recipe_00308,NOCODE_Rawon Daging Sapi,,Rawon Daging Sapi,Rawon Daging Sapi,"Daging Merah,Sayur,Kacang-kacangan,Bumbu Rempah","Nama Masakan: Rawon Daging Sapi
+Nama Asli Resep: Rawon Daging Sapi
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 34 Tauge
+  - 185 Telur Bebek
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+Kategori Bahan: Daging Merah, Sayur, Kacang-kacangan, Bumbu Rempah"
+recipe_00309,NOCODE_Rujak Cingur,,Rujak Cingur,Rujak Cingur,"Daging Merah,Kacang-kacangan,Biji-bijian,Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Rujak Cingur
+Nama Asli Resep: Rujak Cingur
+Bahan-bahan:
+  - Cingur Sapi
+  - 193 Tempe Kedelai
+  - 78 Tahu Putih
+  - 144 Lontong
+  - Petis Udang
+Kategori Bahan: Daging Merah, Kacang-kacangan, Biji-bijian, Daging Putih, Seafood, Bumbu Olahan"
+recipe_00310,NOCODE_Sambal Goreng Hati Sapi,,Sambal Goreng Hati Sapi,Sambal Goreng Hati Sapi,"Daging Merah,Umbi-umbian,Bumbu Rempah,Buah,Santan","Nama Masakan: Sambal Goreng Hati Sapi
+Nama Asli Resep: Sambal Goreng Hati Sapi
+Bahan-bahan:
+  - 135 Hati Sapi
+  - 77 Kentang (Potato)
+  - 36 Cabai Merah Besar
+  - 324 Santan Kelapa
+Kategori Bahan: Daging Merah, Umbi-umbian, Bumbu Rempah, Buah, Santan"
+recipe_00311,NOCODE_Sambal Terasi,,Sambal Terasi,Sambal Terasi,"Bumbu Rempah,Daging Putih,Seafood,Bumbu Olahan,Buah","Nama Masakan: Sambal Terasi
+Nama Asli Resep: Sambal Terasi
+Bahan-bahan:
+  - 36 Cabai Rawit Merah
+  - 36 Cabai Merah Besar
+  - 155 Terasi Udang
+  - Tomat
+  - 377 Gula Merah (Jawa/Aren)
+Kategori Bahan: Bumbu Rempah, Daging Putih, Seafood, Bumbu Olahan, Buah"
+recipe_00312,NOCODE_Sate Ayam + Lontong,,Sate Ayam + Lontong,Sate Ayam + Lontong,"Daging Putih,Unggas,Kacang-kacangan,Biji-bijian,Bumbu Olahan","Nama Masakan: Sate Ayam + Lontong
+Nama Asli Resep: Sate Ayam + Lontong
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 525 Kacang Tanah
+  - 144 Lontong
+  - 320 Kecap Manis
+Kategori Bahan: Daging Putih, Unggas, Kacang-kacangan, Biji-bijian, Bumbu Olahan"
+recipe_00313,NOCODE_Sate Kambing,,Sate Kambing,Sate Kambing,"Daging Merah,Bumbu Olahan,Bumbu Rempah,Buah","Nama Masakan: Sate Kambing
+Nama Asli Resep: Sate Kambing
+Bahan-bahan:
+  - 143 Daging Kambing
+  - 320 Kecap Manis
+  - 44 Bawang Merah
+  - 36 Cabai Rawit Merah
+  - 18 Tomat Merah
+Kategori Bahan: Daging Merah, Bumbu Olahan, Bumbu Rempah, Buah"
+recipe_00314,NOCODE_Sate Lilit,,Sate Lilit,Sate Lilit,"Daging Putih,Seafood,Buah,Santan,Bumbu Rempah","Nama Masakan: Sate Lilit
+Nama Asli Resep: Sate Lilit
+Bahan-bahan:
+  - 139 Ikan Tenggiri
+  - Kelapa Parut
+  - 324 Santan Kelapa
+  - 99 Serai
+Kategori Bahan: Daging Putih, Seafood, Buah, Santan, Bumbu Rempah"
+recipe_00315,NOCODE_Sate Lilit Ayam,,Sate Lilit Ayam,Sate Lilit Ayam,"Daging Putih,Unggas,Buah,Santan,Bumbu Rempah","Nama Masakan: Sate Lilit Ayam
+Nama Asli Resep: Sate Lilit Ayam
+Bahan-bahan:
+  - 239 Daging Ayam
+  - Kelapa Parut
+  - 324 Santan Kelapa
+  - 99 Serai
+  - 44 Bawang Merah
+Kategori Bahan: Daging Putih, Unggas, Buah, Santan, Bumbu Rempah"
+recipe_00316,NOCODE_Sate Maranggi,,Sate Maranggi,Sate Maranggi,"Daging Merah,Bumbu Olahan","Nama Masakan: Sate Maranggi
+Nama Asli Resep: Sate Maranggi
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 210 Bumbu Gulai
+  - 320 Kecap Manis
+Kategori Bahan: Daging Merah, Bumbu Olahan"
+recipe_00317,NOCODE_Sate Padang (Daging & Lidah),,Sate Padang (Daging & Lidah),Sate Padang (Daging & Lidah),"Daging Merah,Biji-bijian,Bumbu Rempah","Nama Masakan: Sate Padang (Daging & Lidah)
+Nama Asli Resep: Sate Padang (Daging & Lidah)
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - Lidah Sapi
+  - 365 Tepung Beras
+  - 160 Ketupat
+  - 570 Bawang Goreng (Original/Polos)
+Kategori Bahan: Daging Merah, Biji-bijian, Bumbu Rempah"
+recipe_00318,NOCODE_Sate Ratu (Sate Merah),,Sate Ratu (Sate Merah),Sate Ratu (Sate Merah),"Daging Putih,Unggas,Bumbu Rempah","Nama Masakan: Sate Ratu (Sate Merah)
+Nama Asli Resep: Sate Ratu (Sate Merah)
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 36 Cabai Merah Besar
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah"
+recipe_00319,NOCODE_Sate Rembiga,,Sate Rembiga,Sate Rembiga,"Daging Merah,Bumbu Rempah,Bumbu Olahan,Daging Putih,Seafood","Nama Masakan: Sate Rembiga
+Nama Asli Resep: Sate Rembiga
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 36 Cabai Merah Besar
+  - 377 Gula Merah (Jawa/Aren)
+  - 155 Terasi Udang
+  - 112 Bawang Putih
+Kategori Bahan: Daging Merah, Bumbu Rempah, Bumbu Olahan, Daging Putih, Seafood"
+recipe_00320,NOCODE_Sate Taichan,,Sate Taichan,Sate Taichan,"Daging Putih,Unggas,Bumbu Rempah,Buah,Bumbu Olahan","Nama Masakan: Sate Taichan
+Nama Asli Resep: Sate Taichan
+Bahan-bahan:
+  - 172 Dada Ayam
+  - 30 Jeruk Nipis
+  - 36 Cabai Rawit Merah
+  - 112 Bawang Putih
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah, Buah, Bumbu Olahan"
+recipe_00321,NOCODE_Sayur Bening Bayam,,Sayur Bening Bayam,Sayur Bening Bayam,"Sayur,Daging Putih,Unggas,Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Sayur Bening Bayam
+Nama Asli Resep: Sayur Bening Bayam
+Bahan-bahan:
+  - 23 Bayam Hijau
+  - 86 Jagung Manis
+  - Temu Kunci
+  - 44 Bawang Merah
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Sayur, Daging Putih, Unggas, Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00322,NOCODE_Sayur Bening Labu Siam,,Sayur Bening Labu Siam,Sayur Bening Labu Siam,"Biji-bijian,Bumbu Rempah","Nama Masakan: Sayur Bening Labu Siam
+Nama Asli Resep: Sayur Bening Labu Siam
+Bahan-bahan:
+  - 19 Labu Siam
+  - 86 Jagung Manis
+  - 90 Kunci
+Kategori Bahan: Biji-bijian, Bumbu Rempah"
+recipe_00323,NOCODE_Sayur Bobor Bayam,,Sayur Bobor Bayam,Sayur Bobor Bayam,"Sayur,Daging Putih,Unggas,Santan,Bumbu Rempah","Nama Masakan: Sayur Bobor Bayam
+Nama Asli Resep: Sayur Bobor Bayam
+Bahan-bahan:
+  - 23 Bayam Hijau
+  - 19 Labu Siam
+  - 120 Santan Encer
+  - 205 Kencur
+  - 44 Bawang Merah
+Kategori Bahan: Sayur, Daging Putih, Unggas, Santan, Bumbu Rempah"
+recipe_00324,NOCODE_Sayur Lodeh,,Sayur Lodeh,Sayur Lodeh,"Kacang-kacangan,Buah,Santan","Nama Masakan: Sayur Lodeh
+Nama Asli Resep: Sayur Lodeh
+Bahan-bahan:
+  - 19 Labu Siam
+  - 47 Kacang Panjang
+  - 193 Tempe Kedelai
+  - 78 Tahu Putih
+  - 324 Santan Kelapa
+Kategori Bahan: Kacang-kacangan, Buah, Santan"
+recipe_00325,NOCODE_Semur Jengkol,,Semur Jengkol,Semur Jengkol,"Sayur,Bumbu Olahan","Nama Masakan: Semur Jengkol
+Nama Asli Resep: Semur Jengkol
+Bahan-bahan:
+  - Jengkol
+  - 320 Kecap Manis
+  - Bumbu Semur
+Kategori Bahan: Sayur, Bumbu Olahan"
+recipe_00326,NOCODE_Semur Tahu,,Semur Tahu,Semur Tahu,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Semur Tahu
+Nama Asli Resep: Semur Tahu
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 320 Kecap Manis
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 525 Biji Pala
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00327,NOCODE_Sop Buntut,,Sop Buntut,Sop Buntut,"Daging Merah,Sayur,Umbi-umbian","Nama Masakan: Sop Buntut
+Nama Asli Resep: Sop Buntut
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 41 Wortel (Carrot)
+  - 77 Kentang (Potato)
+Kategori Bahan: Daging Merah, Sayur, Umbi-umbian"
+recipe_00328,NOCODE_Sop Iga Sapi (Bening),,Sop Iga Sapi (Bening),Sop Iga Sapi (Bening),"Daging Merah,Sayur,Umbi-umbian,Bumbu Olahan","Nama Masakan: Sop Iga Sapi (Bening)
+Nama Asli Resep: Sop Iga Sapi (Bening)
+Bahan-bahan:
+  - 280 Iga Sapi
+  - 41 Wortel (Carrot)
+  - 77 Kentang (Potato)
+  - 13 Kaldu Sapi
+Kategori Bahan: Daging Merah, Sayur, Umbi-umbian, Bumbu Olahan"
+recipe_00329,NOCODE_Sop Konro,,Sop Konro,Sop Konro,"Daging Merah,Bumbu Rempah","Nama Masakan: Sop Konro
+Nama Asli Resep: Sop Konro
+Bahan-bahan:
+  - 280 Iga Sapi
+  - 273 Keluwak
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 298 Ketumbar
+Kategori Bahan: Daging Merah, Bumbu Rempah"
+recipe_00330,NOCODE_Sop Sapi (Kuah Bening),,Sop Sapi (Kuah Bening),Sop Sapi (Kuah Bening),"Daging Merah,Sayur,Umbi-umbian,Kacang-kacangan","Nama Masakan: Sop Sapi (Kuah Bening)
+Nama Asli Resep: Sop Sapi (Kuah Bening)
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 41 Wortel (Carrot)
+  - 77 Kentang (Potato)
+  - 35 Buncis
+  - 25 Kol Putih
+Kategori Bahan: Daging Merah, Sayur, Umbi-umbian, Kacang-kacangan"
+recipe_00331,NOCODE_Soto Ayam (Lamongan/Kuning),,Soto Ayam (Lamongan/Kuning),Soto Ayam (Lamongan/Kuning),"Daging Putih,Unggas,Biji-bijian,Sayur","Nama Masakan: Soto Ayam (Lamongan/Kuning)
+Nama Asli Resep: Soto Ayam (Lamongan/Kuning)
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 364 Bihun Beras
+  - 25 Kol Putih
+  - 143 Telur Ayam Ras
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Sayur"
+recipe_00332,NOCODE_Soto Ayam Bening,,Soto Ayam Bening,Soto Ayam Bening,"Daging Putih,Unggas,Bumbu Olahan,Biji-bijian,Sayur,Kacang-kacangan","Nama Masakan: Soto Ayam Bening
+Nama Asli Resep: Soto Ayam Bening
+Bahan-bahan:
+  - 239 Daging Ayam
+  - Kaldu Ayam
+  - 364 Bihun Beras
+  - 34 Tauge
+  - 25 Kol Putih
+Kategori Bahan: Daging Putih, Unggas, Bumbu Olahan, Biji-bijian, Sayur, Kacang-kacangan"
+recipe_00333,NOCODE_Soto Betawi,,Soto Betawi,Soto Betawi,"Daging Merah,Buah,Santan,Susu,Umbi-umbian","Nama Masakan: Soto Betawi
+Nama Asli Resep: Soto Betawi
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - Jeroan Sapi
+  - 324 Santan Kelapa
+  - Susu Sapi Murni
+  - 77 Kentang (Potato)
+Kategori Bahan: Daging Merah, Buah, Santan, Susu, Umbi-umbian"
+recipe_00334,NOCODE_Soto Lamongan,,Soto Lamongan,Soto Lamongan,"Daging Putih,Unggas,Biji-bijian,Sayur,Kacang-kacangan","Nama Masakan: Soto Lamongan
+Nama Asli Resep: Soto Lamongan
+Bahan-bahan:
+  - Ayam Dada
+  - Soun
+  - Kol
+  - 34 Tauge
+  - 77 Telur Rebus
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Sayur, Kacang-kacangan"
+recipe_00335,NOCODE_Soto Mie Bogor,,Soto Mie Bogor,Soto Mie Bogor,"Daging Merah,Biji-bijian,Sayur","Nama Masakan: Soto Mie Bogor
+Nama Asli Resep: Soto Mie Bogor
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 140 Mie Kuning Basah
+  - 360 Bihun Beras
+  - Risoles Bihun
+  - Kol
+Kategori Bahan: Daging Merah, Biji-bijian, Sayur"
+recipe_00336,NOCODE_Sup Kimlo,,Sup Kimlo,Sup Kimlo,"Daging Putih,Unggas,Sayur,Biji-bijian","Nama Masakan: Sup Kimlo
+Nama Asli Resep: Sup Kimlo
+Bahan-bahan:
+  - 250 Sosis Ayam
+  - 239 Daging Ayam
+  - 22 Jamur Kancing
+  - 41 Wortel (Carrot)
+  - 360 Bihun Jagung
+Kategori Bahan: Daging Putih, Unggas, Sayur, Biji-bijian"
+recipe_00337,NOCODE_Tahu Campur Lamongan,,Tahu Campur Lamongan,Tahu Campur Lamongan,"Kacang-kacangan,Daging Merah,Umbi-umbian,Sayur","Nama Masakan: Tahu Campur Lamongan
+Nama Asli Resep: Tahu Campur Lamongan
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 250 Daging Sapi (Beef)
+  - 130 Singkong
+  - 11 Selada Air
+  - 34 Tauge
+Kategori Bahan: Kacang-kacangan, Daging Merah, Umbi-umbian, Sayur"
+recipe_00338,NOCODE_Tahu Goreng,,Tahu Goreng,Tahu Goreng,Kacang-kacangan,"Nama Masakan: Tahu Goreng
+Nama Asli Resep: Tahu Goreng
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Kacang-kacangan"
+recipe_00339,NOCODE_Tahu Tek Surabaya,,Tahu Tek Surabaya,Tahu Tek Surabaya,"Kacang-kacangan,Biji-bijian,Sayur,Buah","Nama Masakan: Tahu Tek Surabaya
+Nama Asli Resep: Tahu Tek Surabaya
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 143 Telur Ayam
+  - 144 Lontong Polos
+  - 34 Tauge
+  - 15 Mentimun
+  - 78 Tahu Putih
+  - 143 Telur Ayam
+  - 144 Lontong Polos
+  - 34 Tauge
+  - 15 Mentimun
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Sayur, Buah"
+recipe_00340,NOCODE_Telur Balado,,Telur Balado,Telur Balado,"Bumbu Rempah,Buah","Nama Masakan: Telur Balado
+Nama Asli Resep: Telur Balado
+Bahan-bahan:
+  - 143 Telur Ayam
+  - 36 Cabai Merah Besar
+  - 44 Bawang Merah
+  - 18 Tomat Merah
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Bumbu Rempah, Buah"
+recipe_00341,NOCODE_Tempe Bakar Kecap,,Tempe Bakar Kecap,Tempe Bakar Kecap,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah,Susu","Nama Masakan: Tempe Bakar Kecap
+Nama Asli Resep: Tempe Bakar Kecap
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 320 Kecap Manis
+  - 112 Bawang Putih
+  - 298 Ketumbar
+  - 720 Margarin
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah, Susu"
+recipe_00342,NOCODE_Tempe Goreng Tepung,,Tempe Goreng Tepung,Tempe Goreng Tepung,"Kacang-kacangan,Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Tempe Goreng Tepung
+Nama Asli Resep: Tempe Goreng Tepung
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 350 Tepung Terigu (Serbaguna)
+  - 365 Tepung Beras
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 112 Bawang Putih
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00343,NOCODE_Tempe Kecap,,Tempe Kecap,Tempe Kecap,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Tempe Kecap
+Nama Asli Resep: Tempe Kecap
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 320 Kecap Manis
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+  - 36 Cabai Merah Besar
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00344,NOCODE_Tempe Mendoan,,Tempe Mendoan,Tempe Mendoan,"Kacang-kacangan,Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Tempe Mendoan
+Nama Asli Resep: Tempe Mendoan
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 350 Tepung Terigu (Serbaguna)
+  - 365 Tepung Beras
+  - 32 Bawang Daun
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00345,NOCODE_Tongseng Kambing,,Tongseng Kambing,Tongseng Kambing,"Daging Merah,Sayur,Buah,Santan,Bumbu Olahan","Nama Masakan: Tongseng Kambing
+Nama Asli Resep: Tongseng Kambing
+Bahan-bahan:
+  - 143 Daging Kambing
+  - 25 Kol Putih
+  - Tomat
+  - 324 Santan Kelapa
+  - 320 Kecap Manis
+Kategori Bahan: Daging Merah, Sayur, Buah, Santan, Bumbu Olahan"
+recipe_00346,NOCODE_Urap Sayur,,Urap Sayur,Urap Sayur,"Buah,Sayur,Daging Putih,Unggas,Kacang-kacangan","Nama Masakan: Urap Sayur
+Nama Asli Resep: Urap Sayur
+Bahan-bahan:
+  - Kelapa Parut
+  - 23 Bayam Hijau
+  - 19 Kangkung
+  - 37 Toge
+  - 47 Kacang Panjang
+  - Kelapa Parut
+  - 23 Bayam Hijau
+  - 19 Kangkung
+  - 37 Toge
+  - 47 Kacang Panjang
+Kategori Bahan: Buah, Sayur, Daging Putih, Unggas, Kacang-kacangan"
+recipe_00347,NOCODE_Bakwan Sayur,,Bakwan Sayur,Bakwan Sayur,"Biji-bijian,Seafood,Sayur","Nama Masakan: Bakwan Sayur
+Nama Asli Resep: Bakwan Sayur
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 25 Kol Putih
+  - 41 Wortel (Carrot)
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Biji-bijian, Seafood, Sayur"
+recipe_00348,NOCODE_Batagor,,Batagor,Batagor,"Daging Putih,Seafood,Kacang-kacangan,Biji-bijian","Nama Masakan: Batagor
+Nama Asli Resep: Batagor
+Bahan-bahan:
+  - 139 Ikan Tenggiri
+  - 78 Tahu Putih
+  - 360 Tepung Tapioka / Kanji
+  - 525 Kacang Tanah
+Kategori Bahan: Daging Putih, Seafood, Kacang-kacangan, Biji-bijian"
+recipe_00349,NOCODE_Bubur Kacang Hijau,,Bubur Kacang Hijau,Bubur Kacang Hijau,"Kacang-kacangan,Bumbu Olahan,Buah,Santan,Bumbu Rempah","Nama Masakan: Bubur Kacang Hijau
+Nama Asli Resep: Bubur Kacang Hijau
+Bahan-bahan:
+  - 347 Kacang Hijau
+  - 377 Gula Merah (Jawa/Aren)
+  - 324 Santan Kelapa
+  - 80 Jahe
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Buah, Santan, Bumbu Rempah"
+recipe_00350,NOCODE_Bubur Sumsum,,Bubur Sumsum,Bubur Sumsum,"Biji-bijian,Buah,Santan,Bumbu Olahan","Nama Masakan: Bubur Sumsum
+Nama Asli Resep: Bubur Sumsum
+Bahan-bahan:
+  - 365 Tepung Beras
+  - 324 Santan Kelapa
+  - 377 Gula Merah (Jawa/Aren)
+  - 0 Daun Pandan
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Biji-bijian, Buah, Santan, Bumbu Olahan"
+recipe_00351,NOCODE_Chiffon Cake,,Chiffon Cake,Chiffon Cake,"Biji-bijian,Seafood,Bumbu Olahan,Buah,Santan","Nama Masakan: Chiffon Cake
+Nama Asli Resep: Chiffon Cake
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam
+  - 387 Gula Pasir
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 324 Santan Kelapa
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan, Buah, Santan"
+recipe_00352,NOCODE_Cilok,,Cilok,Cilok,"Biji-bijian,Seafood,Kacang-kacangan,Bumbu Olahan","Nama Masakan: Cilok
+Nama Asli Resep: Cilok
+Bahan-bahan:
+  - 360 Tepung Tapioka / Kanji
+  - 350 Tepung Terigu (Serbaguna)
+  - 525 Kacang Tanah
+  - 320 Kecap Manis
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Biji-bijian, Seafood, Kacang-kacangan, Bumbu Olahan"
+recipe_00353,NOCODE_Cimol (Aci Digemol),,Cimol (Aci Digemol),Cimol (Aci Digemol),"Biji-bijian,Seafood","Nama Masakan: Cimol (Aci Digemol)
+Nama Asli Resep: Cimol (Aci Digemol)
+Bahan-bahan:
+  - 360 Tepung Tapioka / Kanji
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - Bumbu Tabur
+Kategori Bahan: Biji-bijian, Seafood"
+recipe_00354,NOCODE_Cireng (Aci Goreng),,Cireng (Aci Goreng),Cireng (Aci Goreng),"Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Cireng (Aci Goreng)
+Nama Asli Resep: Cireng (Aci Goreng)
+Bahan-bahan:
+  - 360 Tepung Tapioka / Kanji
+  - 350 Tepung Terigu (Serbaguna)
+  - 112 Bawang Putih
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 32 Bawang Daun
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00355,NOCODE_Crispy Cheese Bombs,,Crispy Cheese Bombs,Crispy Cheese Bombs,"Susu,Biji-bijian,Seafood","Nama Masakan: Crispy Cheese Bombs
+Nama Asli Resep: Crispy Cheese Bombs
+Bahan-bahan:
+  - Keju Mozzarella
+  - 350 Tepung Terigu (Serbaguna)
+  - Tepung Panir
+  - 143 Telur Ayam Ras
+Kategori Bahan: Susu, Biji-bijian, Seafood"
+recipe_00356,NOCODE_Cuanki Mini (Viral),,Cuanki Mini (Viral),Cuanki Mini (Viral),"Biji-bijian,Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Cuanki Mini (Viral)
+Nama Asli Resep: Cuanki Mini (Viral)
+Bahan-bahan:
+  - 360 Tepung Tapioka / Kanji
+  - 139 Ikan Tenggiri
+  - Kulit Pangsit
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Biji-bijian, Daging Putih, Seafood, Bumbu Olahan"
+recipe_00357,NOCODE_Dadar Gulung,,Dadar Gulung,Dadar Gulung,"Biji-bijian,Seafood,Buah,Santan","Nama Masakan: Dadar Gulung
+Nama Asli Resep: Dadar Gulung
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 324 Santan Kelapa
+  - 143 Telur Ayam
+  - 10 Pasta Pandan
+  - Kelapa Parut
+Kategori Bahan: Biji-bijian, Seafood, Buah, Santan"
+recipe_00358,NOCODE_Dimsum Ayam Kukus,,Dimsum Ayam Kukus,Dimsum Ayam Kukus,"Daging Putih,Unggas,Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Dimsum Ayam Kukus
+Nama Asli Resep: Dimsum Ayam Kukus
+Bahan-bahan:
+  - 143 Daging Ayam Cincang
+  - 360 Tepung Tapioka / Kanji
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam
+  - 112 Bawang Putih
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00359,NOCODE_Dimsum Goreng Mentai,,Dimsum Goreng Mentai,Dimsum Goreng Mentai,"Daging Putih,Unggas,Biji-bijian,Bumbu Olahan","Nama Masakan: Dimsum Goreng Mentai
+Nama Asli Resep: Dimsum Goreng Mentai
+Bahan-bahan:
+  - 239 Daging Ayam
+  - 360 Tepung Tapioka / Kanji
+  - 680 Mayones
+  - 143 Telur Ayam
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Bumbu Olahan"
+recipe_00360,NOCODE_Dimsum Mie Gacoan,,Dimsum Mie Gacoan,Dimsum Mie Gacoan,"Daging Putih,Seafood,Unggas,Biji-bijian","Nama Masakan: Dimsum Mie Gacoan
+Nama Asli Resep: Dimsum Mie Gacoan
+Bahan-bahan:
+  - 85 Udang Kupas
+  - 239 Ayam Potong (Broiler)
+  - 360 Tepung Tapioka / Kanji
+  - Kulit Pangsit
+Kategori Bahan: Daging Putih, Seafood, Unggas, Biji-bijian"
+recipe_00361,NOCODE_Donat Gula Halus,,Donat Gula Halus,Donat Gula Halus,"Biji-bijian,Seafood,Umbi-umbian,Bumbu Olahan,Susu","Nama Masakan: Donat Gula Halus
+Nama Asli Resep: Donat Gula Halus
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 77 Kentang (Potato)
+  - 389 Gula Halus
+  - 717 Mentega
+Kategori Bahan: Biji-bijian, Seafood, Umbi-umbian, Bumbu Olahan, Susu"
+recipe_00362,NOCODE_Gohyong Ayam Viral,,Gohyong Ayam Viral,Gohyong Ayam Viral,"Daging Putih,Unggas,Daging Merah,Biji-bijian,Kacang-kacangan,Bumbu Rempah","Nama Masakan: Gohyong Ayam Viral
+Nama Asli Resep: Gohyong Ayam Viral
+Bahan-bahan:
+  - 143 Daging Ayam Cincang
+  - 218 Bakso Sapi
+  - 360 Tepung Tapioka / Kanji
+  - 380 Kulit Tahu
+  - 112 Bawang Putih
+Kategori Bahan: Daging Putih, Unggas, Daging Merah, Biji-bijian, Kacang-kacangan, Bumbu Rempah"
+recipe_00363,NOCODE_Keju Aroma,,Keju Aroma,Keju Aroma,"Biji-bijian,Susu,Bumbu Olahan","Nama Masakan: Keju Aroma
+Nama Asli Resep: Keju Aroma
+Bahan-bahan:
+  - 321 Kulit Lumpia
+  - 320 Keju Cheddar
+  - 387 Gula Pasir
+Kategori Bahan: Biji-bijian, Susu, Bumbu Olahan"
+recipe_00364,NOCODE_Ketoprak Jakarta,,Ketoprak Jakarta,Ketoprak Jakarta,"Biji-bijian,Kacang-kacangan,Sayur","Nama Masakan: Ketoprak Jakarta
+Nama Asli Resep: Ketoprak Jakarta
+Bahan-bahan:
+  - 160 Ketupat
+  - 271 Tahu Goreng (Polos)
+  - 360 Bihun Beras
+  - 34 Tauge
+  - 460 Bumbu Kacang
+Kategori Bahan: Biji-bijian, Kacang-kacangan, Sayur"
+recipe_00365,NOCODE_Klepon,,Klepon,Klepon,"Biji-bijian,Bumbu Olahan,Buah","Nama Masakan: Klepon
+Nama Asli Resep: Klepon
+Bahan-bahan:
+  - 362 Tepung Ketan Putih
+  - 365 Tepung Beras
+  - 377 Gula Merah (Jawa/Aren)
+  - 10 Pasta Pandan
+  - Kelapa Parut
+Kategori Bahan: Biji-bijian, Bumbu Olahan, Buah"
+recipe_00366,NOCODE_Kolak Pisang,,Kolak Pisang,Kolak Pisang,"Buah,Umbi-umbian,Santan,Bumbu Olahan","Nama Masakan: Kolak Pisang
+Nama Asli Resep: Kolak Pisang
+Bahan-bahan:
+  - 120 Pisang Kepok
+  - 86 Ubi Jalar
+  - 324 Santan Kelapa
+  - 377 Gula Merah (Jawa/Aren)
+  - 0 Daun Pandan
+Kategori Bahan: Buah, Umbi-umbian, Santan, Bumbu Olahan"
+recipe_00367,NOCODE_Kue Lumpur Kentang,,Kue Lumpur Kentang,Kue Lumpur Kentang,"Umbi-umbian,Biji-bijian,Seafood,Buah,Santan,Bumbu Olahan","Nama Masakan: Kue Lumpur Kentang
+Nama Asli Resep: Kue Lumpur Kentang
+Bahan-bahan:
+  - 77 Kentang (Potato)
+  - 350 Tepung Terigu (Serbaguna)
+  - 324 Santan Kelapa
+  - 143 Telur Ayam Ras
+  - 387 Gula Pasir
+Kategori Bahan: Umbi-umbian, Biji-bijian, Seafood, Buah, Santan, Bumbu Olahan"
+recipe_00368,NOCODE_Kue Sus,,Kue Sus,Kue Sus,"Biji-bijian,Seafood,Susu,Bumbu Olahan","Nama Masakan: Kue Sus
+Nama Asli Resep: Kue Sus
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam
+  - 717 Mentega
+  - 61 Susu Cair
+  - 387 Gula Pasir
+Kategori Bahan: Biji-bijian, Seafood, Susu, Bumbu Olahan"
+recipe_00369,NOCODE_Lapis Legit,,Lapis Legit,Lapis Legit,"Susu,Bumbu Olahan,Biji-bijian,Seafood","Nama Masakan: Lapis Legit
+Nama Asli Resep: Lapis Legit
+Bahan-bahan:
+  - 322 Kuning Telur
+  - 717 Mentega Tawar (Unsalted Butter)
+  - 389 Gula Halus
+  - 350 Tepung Terigu (Serbaguna)
+  - 496 Susu Bubuk (Full Cream)
+Kategori Bahan: Susu, Bumbu Olahan, Biji-bijian, Seafood"
+recipe_00370,NOCODE_Lemper Ayam,,Lemper Ayam,Lemper Ayam,"Biji-bijian,Buah,Santan,Daging Putih,Unggas","Nama Masakan: Lemper Ayam
+Nama Asli Resep: Lemper Ayam
+Bahan-bahan:
+  - Beras Ketan
+  - 324 Santan Kelapa
+  - 143 Daging Ayam Cincang
+  - 0 Daun Pisang
+Kategori Bahan: Biji-bijian, Buah, Santan, Daging Putih, Unggas"
+recipe_00371,NOCODE_Lentho Kacang Tolo,,Lentho Kacang Tolo,Lentho Kacang Tolo,"Kacang-kacangan,Biji-bijian,Seafood,Umbi-umbian,Bumbu Rempah,Buah","Nama Masakan: Lentho Kacang Tolo
+Nama Asli Resep: Lentho Kacang Tolo
+Bahan-bahan:
+  - 116 Kacang Tolo
+  - 350 Tepung Terigu (Serbaguna)
+  - 130 Singkong
+  - 20 Daun Jeruk Purut
+  - 112 Bawang Putih
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Seafood, Umbi-umbian, Bumbu Rempah, Buah"
+recipe_00372,NOCODE_Lumpia Basah,,Lumpia Basah,Lumpia Basah,"Biji-bijian,Daging Putih,Seafood,Sayur,Kacang-kacangan,Umbi-umbian","Nama Masakan: Lumpia Basah
+Nama Asli Resep: Lumpia Basah
+Bahan-bahan:
+  - 321 Kulit Lumpia
+  - 12 Rebung (Tunas Bambu)
+  - 34 Tauge
+  - 143 Telur Ayam Ras
+  - 38 Bengkuang
+Kategori Bahan: Biji-bijian, Daging Putih, Seafood, Sayur, Kacang-kacangan, Umbi-umbian"
+recipe_00373,NOCODE_Martabak Manis Cokelat Keju,,Martabak Manis Cokelat Keju,Martabak Manis Cokelat Keju,"Biji-bijian,Seafood,Bumbu Olahan,Susu","Nama Masakan: Martabak Manis Cokelat Keju
+Nama Asli Resep: Martabak Manis Cokelat Keju
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 387 Gula Pasir
+  - 143 Telur Ayam Ras
+  - 720 Margarin
+  - 130 Susu Kental Manis (SKM)
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan, Susu"
+recipe_00374,NOCODE_Martabak Telur Bebek Spesial,,Martabak Telur Bebek Spesial,Martabak Telur Bebek Spesial,"Daging Merah,Bumbu Rempah,Biji-bijian,Seafood","Nama Masakan: Martabak Telur Bebek Spesial
+Nama Asli Resep: Martabak Telur Bebek Spesial
+Bahan-bahan:
+  - 185 Telur Bebek
+  - 250 Daging Sapi Cincang
+  - 32 Bawang Daun
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Daging Merah, Bumbu Rempah, Biji-bijian, Seafood"
+recipe_00375,NOCODE_Nagasari (Kue Pisang),,Nagasari (Kue Pisang),Nagasari (Kue Pisang),"Biji-bijian,Buah,Santan,Bumbu Olahan","Nama Masakan: Nagasari (Kue Pisang)
+Nama Asli Resep: Nagasari (Kue Pisang)
+Bahan-bahan:
+  - 365 Tepung Beras
+  - 360 Tepung Tapioka / Kanji
+  - 324 Santan Kelapa
+  - 120 Pisang Kepok
+  - 387 Gula Pasir
+Kategori Bahan: Biji-bijian, Buah, Santan, Bumbu Olahan"
+recipe_00376,NOCODE_Onde-onde Kacang Hijau,,Onde-onde Kacang Hijau,Onde-onde Kacang Hijau,"Biji-bijian,Seafood,Bumbu Olahan,Kacang-kacangan","Nama Masakan: Onde-onde Kacang Hijau
+Nama Asli Resep: Onde-onde Kacang Hijau
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 387 Gula Pasir
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 525 Kacang Tanah
+  - 573 Biji Wijen
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan, Kacang-kacangan"
+recipe_00377,NOCODE_Perkedel Singkong (Lentho Singkong),,Perkedel Singkong (Lentho Singkong),Perkedel Singkong (Lentho Singkong),"Umbi-umbian,Bumbu Rempah,Buah","Nama Masakan: Perkedel Singkong (Lentho Singkong)
+Nama Asli Resep: Perkedel Singkong (Lentho Singkong)
+Bahan-bahan:
+  - 130 Singkong
+  - 112 Bawang Putih
+  - 298 Ketumbar
+  - 69 Kunyit
+  - 20 Daun Jeruk Purut
+Kategori Bahan: Umbi-umbian, Bumbu Rempah, Buah"
+recipe_00378,NOCODE_Pie Susu Bali,,Pie Susu Bali,Pie Susu Bali,"Biji-bijian,Seafood,Susu","Nama Masakan: Pie Susu Bali
+Nama Asli Resep: Pie Susu Bali
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 130 Susu Kental Manis (SKM)
+  - 717 Mentega
+  - 322 Kuning Telur
+Kategori Bahan: Biji-bijian, Seafood, Susu"
+recipe_00379,NOCODE_Pisang Goreng Tepung,,Pisang Goreng Tepung,Pisang Goreng Tepung,"Buah,Biji-bijian,Seafood,Bumbu Olahan","Nama Masakan: Pisang Goreng Tepung
+Nama Asli Resep: Pisang Goreng Tepung
+Bahan-bahan:
+  - 120 Pisang Kepok
+  - 365 Tepung Beras
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 387 Gula Pasir
+Kategori Bahan: Buah, Biji-bijian, Seafood, Bumbu Olahan"
+recipe_00380,NOCODE_Poffertjes,,Poffertjes,Poffertjes,"Biji-bijian,Seafood,Daging Merah,Susu","Nama Masakan: Poffertjes
+Nama Asli Resep: Poffertjes
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam Ras
+  - 61 Susu Sapi Segar
+  - Ragi
+Kategori Bahan: Biji-bijian, Seafood, Daging Merah, Susu"
+recipe_00381,NOCODE_Risol Lumer,,Risol Lumer,Risol Lumer,"Biji-bijian,Seafood,Daging Putih,Unggas,Bumbu Olahan,Susu","Nama Masakan: Risol Lumer
+Nama Asli Resep: Risol Lumer
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam
+  - 239 Daging Ayam
+  - 680 Mayones
+  - 280 Keju Mozarella
+Kategori Bahan: Biji-bijian, Seafood, Daging Putih, Unggas, Bumbu Olahan, Susu"
+recipe_00382,NOCODE_Risol Matcha Isi Keju,,Risol Matcha Isi Keju,Risol Matcha Isi Keju,"Biji-bijian,Seafood,Susu","Nama Masakan: Risol Matcha Isi Keju
+Nama Asli Resep: Risol Matcha Isi Keju
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam
+  - 280 Keju Mozarella
+  - 320 Keju Cheddar
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Biji-bijian, Seafood, Susu"
+recipe_00383,NOCODE_Risoles Bihun,,Risoles Bihun,Risoles Bihun,"Biji-bijian,Seafood,Sayur","Nama Masakan: Risoles Bihun
+Nama Asli Resep: Risoles Bihun
+Bahan-bahan:
+  - 360 Bihun Jagung
+  - 350 Tepung Terigu (Serbaguna)
+  - 41 Wortel (Carrot)
+  - 370 Tepung Roti / Panir
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Biji-bijian, Seafood, Sayur"
+recipe_00384,NOCODE_Risoles Mayo (American Risol),,Risoles Mayo (American Risol),Risoles Mayo (American Risol),"Biji-bijian,Seafood,Bumbu Olahan,Daging Merah","Nama Masakan: Risoles Mayo (American Risol)
+Nama Asli Resep: Risoles Mayo (American Risol)
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 143 Telur Ayam Ras
+  - 370 Tepung Roti / Panir
+  - 680 Mayones
+  - 133 Daging Asap
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan, Daging Merah"
+recipe_00385,NOCODE_Risoles Ragout Ayam,,Risoles Ragout Ayam,Risoles Ragout Ayam,"Biji-bijian,Seafood,Daging Putih,Unggas,Sayur","Nama Masakan: Risoles Ragout Ayam
+Nama Asli Resep: Risoles Ragout Ayam
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 61 Susu Cair
+  - 143 Daging Ayam Cincang
+  - 41 Wortel (Carrot)
+  - Tepung Panir
+Kategori Bahan: Biji-bijian, Seafood, Daging Putih, Unggas, Sayur"
+recipe_00386,NOCODE_Risoles Sayur,,Risoles Sayur,Risoles Sayur,"Biji-bijian,Seafood,Sayur,Umbi-umbian,Kacang-kacangan","Nama Masakan: Risoles Sayur
+Nama Asli Resep: Risoles Sayur
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 41 Wortel (Carrot)
+  - 77 Kentang (Potato)
+  - 35 Buncis
+  - 143 Telur Ayam
+Kategori Bahan: Biji-bijian, Seafood, Sayur, Umbi-umbian, Kacang-kacangan"
+recipe_00387,NOCODE_Roti Bakar (Cokelat Keju),,Roti Bakar (Cokelat Keju),Roti Bakar (Cokelat Keju),"Biji-bijian,Susu","Nama Masakan: Roti Bakar (Cokelat Keju)
+Nama Asli Resep: Roti Bakar (Cokelat Keju)
+Bahan-bahan:
+  - 265 Roti Tawar Putih
+  - 540 Cokelat Pasta
+  - 320 Keju Cheddar
+  - 720 Margarin
+  - 130 Susu Kental Manis (SKM)
+Kategori Bahan: Biji-bijian, Susu"
+recipe_00388,NOCODE_Sate Tempe (Viral Beef Flavored),,Sate Tempe (Viral Beef Flavored),Sate Tempe (Viral Beef Flavored),"Kacang-kacangan,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Sate Tempe (Viral Beef Flavored)
+Nama Asli Resep: Sate Tempe (Viral Beef Flavored)
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 112 Bawang Putih
+  - 298 Ketumbar
+  - 320 Kecap Manis
+Kategori Bahan: Kacang-kacangan, Bumbu Rempah, Bumbu Olahan"
+recipe_00389,NOCODE_Seblak,,Seblak,Seblak,Bumbu Rempah,"Nama Masakan: Seblak
+Nama Asli Resep: Seblak
+Bahan-bahan:
+  - 476 Kerupuk (Umum)
+  - 143 Telur Ayam
+  - 205 Kencur
+  - 36 Cabai Rawit Merah
+  - 112 Bawang Putih
+Kategori Bahan: Bumbu Rempah"
+recipe_00390,NOCODE_Seblak Coet (Rafael),,Seblak Coet (Rafael),Seblak Coet (Rafael),Bumbu Rempah,"Nama Masakan: Seblak Coet (Rafael)
+Nama Asli Resep: Seblak Coet (Rafael)
+Bahan-bahan:
+  - 476 Kerupuk Mawar (Putih)
+  - 205 Kencur
+  - 112 Bawang Putih
+  - 36 Cabai Rawit Merah
+  - 40 Cabai Hijau Besar
+Kategori Bahan: Bumbu Rempah"
+recipe_00391,NOCODE_Siomay Bandung (Ikan),,Siomay Bandung (Ikan),Siomay Bandung (Ikan),"Daging Putih,Seafood,Biji-bijian,Kacang-kacangan,Umbi-umbian","Nama Masakan: Siomay Bandung (Ikan)
+Nama Asli Resep: Siomay Bandung (Ikan)
+Bahan-bahan:
+  - 139 Ikan Tenggiri
+  - 360 Tepung Tapioka / Kanji
+  - 78 Tahu Putih
+  - 77 Kentang (Potato)
+  - 525 Kacang Tanah
+Kategori Bahan: Daging Putih, Seafood, Biji-bijian, Kacang-kacangan, Umbi-umbian"
+recipe_00392,NOCODE_Sosis Solo,,Sosis Solo,Sosis Solo,"Daging Putih,Unggas,Buah,Santan,Bumbu Rempah","Nama Masakan: Sosis Solo
+Nama Asli Resep: Sosis Solo
+Bahan-bahan:
+  - 250 Sosis Ayam
+  - 143 Telur Ayam Ras
+  - 324 Santan Kelapa
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+Kategori Bahan: Daging Putih, Unggas, Buah, Santan, Bumbu Rempah"
+recipe_00393,NOCODE_Tahu Bacem,,Tahu Bacem,Tahu Bacem,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Tahu Bacem
+Nama Asli Resep: Tahu Bacem
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 377 Gula Merah (Jawa/Aren)
+  - Air Kelapa Muda
+  - 298 Ketumbar
+  - 320 Kecap Manis
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00394,NOCODE_Tahu Gejrot,,Tahu Gejrot,Tahu Gejrot,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Tahu Gejrot
+Nama Asli Resep: Tahu Gejrot
+Bahan-bahan:
+  - Tahu Sumedang
+  - 377 Gula Merah (Jawa/Aren)
+  - 36 Cabai Rawit Merah
+  - 44 Bawang Merah
+  - 112 Bawang Putih
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00395,NOCODE_Tahu Kocek,,Tahu Kocek,Tahu Kocek,"Kacang-kacangan,Biji-bijian,Bumbu Rempah","Nama Masakan: Tahu Kocek
+Nama Asli Resep: Tahu Kocek
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 360 Tepung Tapioka / Kanji
+  - 36 Cabai Rawit Merah
+  - 112 Bawang Putih
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Rempah"
+recipe_00396,NOCODE_Tahu Petis Semarang,,Tahu Petis Semarang,Tahu Petis Semarang,"Kacang-kacangan,Bumbu Olahan,Bumbu Rempah","Nama Masakan: Tahu Petis Semarang
+Nama Asli Resep: Tahu Petis Semarang
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 250 Petis
+  - 112 Bawang Putih
+  - Cabe Rawit Hijau
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Kacang-kacangan, Bumbu Olahan, Bumbu Rempah"
+recipe_00397,NOCODE_Ayam Goreng KFC Crispy,,Ayam Goreng KFC Crispy,Ayam Goreng KFC Crispy,"Daging Putih,Unggas,Biji-bijian,Seafood,Bumbu Olahan","Nama Masakan: Ayam Goreng KFC Crispy
+Nama Asli Resep: Ayam Goreng KFC Crispy
+Bahan-bahan:
+  - 239 Ayam Potong (Broiler)
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Nabati (Vegetable Oil)
+  - 0 Garam Meja (Table Salt)
+  - 0 MSG (Monosodium Glutamat)
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Seafood, Bumbu Olahan"
+recipe_00398,NOCODE_Ayam Goreng KFC Original,,Ayam Goreng KFC Original,Ayam Goreng KFC Original,"Daging Putih,Unggas,Biji-bijian,Susu","Nama Masakan: Ayam Goreng KFC Original
+Nama Asli Resep: Ayam Goreng KFC Original
+Bahan-bahan:
+  - 239 Ayam Potong (Broiler)
+  - 350 Tepung Bumbu (Secret Blend)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 496 Susu Bubuk (Full Cream)
+  - 143 Telur Ayam Ras
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Susu"
+recipe_00399,NOCODE_Ayam Goreng McD - Paha (Thigh),,Ayam Goreng McD - Paha (Thigh),Ayam Goreng McD - Paha (Thigh),"Daging Putih,Unggas,Biji-bijian,Seafood","Nama Masakan: Ayam Goreng McD - Paha (Thigh)
+Nama Asli Resep: Ayam Goreng McD - Paha (Thigh)
+Bahan-bahan:
+  - 172 Dada Ayam
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Seafood"
+recipe_00400,NOCODE_Ayam Spicy McD,,Ayam Spicy McD,Ayam Spicy McD,"Daging Putih,Unggas,Biji-bijian,Seafood,Bumbu Rempah","Nama Masakan: Ayam Spicy McD
+Nama Asli Resep: Ayam Spicy McD
+Bahan-bahan:
+  - 239 Ayam Potong (Broiler)
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Nabati (Vegetable Oil)
+  - 282 Bubuk Cabai
+  - 631 Ekstrak Paprika (Oleoresin)
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Seafood, Bumbu Rempah"
+recipe_00401,NOCODE_Beef Prosperity Burger,,Beef Prosperity Burger,Beef Prosperity Burger,"Biji-bijian,Daging Merah,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Beef Prosperity Burger
+Nama Asli Resep: Beef Prosperity Burger
+Bahan-bahan:
+  - 160 Roti Burger
+  - 250 Daging Sapi (Beef)
+  - 40 Bawang Bombay
+  - 130 Saus Lada Hitam (Black Pepper Sauce)
+Kategori Bahan: Biji-bijian, Daging Merah, Bumbu Rempah, Bumbu Olahan"
+recipe_00402,NOCODE_Beef Yakiniku,,Beef Yakiniku,Beef Yakiniku,"Daging Merah,Bumbu Rempah,Sayur,Bumbu Olahan","Nama Masakan: Beef Yakiniku
+Nama Asli Resep: Beef Yakiniku
+Bahan-bahan:
+  - 250 Daging Sapi (Beef)
+  - 40 Bawang Bombay
+  - 26 Paprika
+  - 180 Saus Yakiniku
+Kategori Bahan: Daging Merah, Bumbu Rempah, Sayur, Bumbu Olahan"
+recipe_00403,NOCODE_Bento Special 4,,Bento Special 4,Bento Special 4,"Biji-bijian,Daging Merah,Daging Putih,Seafood,Bumbu Olahan","Nama Masakan: Bento Special 4
+Nama Asli Resep: Bento Special 4
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 250 Daging Sapi (Beef)
+  - Udang
+  - 370 Tepung Roti / Panir
+  - 680 Mayones
+Kategori Bahan: Biji-bijian, Daging Merah, Daging Putih, Seafood, Bumbu Olahan"
+recipe_00404,NOCODE_Big Mac,,Big Mac,Big Mac,"Biji-bijian,Daging Merah,Susu,Sayur,Bumbu Rempah,Buah","Nama Masakan: Big Mac
+Nama Asli Resep: Big Mac
+Bahan-bahan:
+  - 160 Roti Burger
+  - 250 Daging Sapi (Beef)
+  - 320 Keju Cheddar
+  - 15 Selada Keriting
+  - 18 Acar Timun
+Kategori Bahan: Biji-bijian, Daging Merah, Susu, Sayur, Bumbu Rempah, Buah"
+recipe_00405,NOCODE_Bubur Ayam McD,,Bubur Ayam McD,Bubur Ayam McD,"Biji-bijian,Daging Putih,Unggas,Bumbu Rempah,Sayur","Nama Masakan: Bubur Ayam McD
+Nama Asli Resep: Bubur Ayam McD
+Bahan-bahan:
+  - 357 Beras Putih
+  - 165 Daging Ayam Suwir
+  - 32 Bawang Daun
+  - 570 Bawang Goreng (Original/Polos)
+  - 14 Seledri
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Bumbu Rempah, Sayur"
+recipe_00406,NOCODE_Chicken Snack Wrap,,Chicken Snack Wrap,Chicken Snack Wrap,"Biji-bijian,Daging Putih,Unggas,Sayur,Bumbu Rempah,Bumbu Olahan,Susu","Nama Masakan: Chicken Snack Wrap
+Nama Asli Resep: Chicken Snack Wrap
+Bahan-bahan:
+  - 307 Tortilla
+  - 120 Ayam Fillet (Dada)
+  - 15 Selada Keriting
+  - 680 Mayones
+  - 320 Keju Cheddar
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Sayur, Bumbu Rempah, Bumbu Olahan, Susu"
+recipe_00407,NOCODE_Egg McMuffin,,Egg McMuffin,Egg McMuffin,"Biji-bijian,Daging Putih,Unggas,Susu","Nama Masakan: Egg McMuffin
+Nama Asli Resep: Egg McMuffin
+Bahan-bahan:
+  - 235 English Muffin
+  - 143 Telur Ayam
+  - 115 Daging Ayam Asap
+  - 320 Keju Cheddar
+  - 720 Margarin
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Susu"
+recipe_00408,NOCODE_Hoka Hemat 3,,Hoka Hemat 3,Hoka Hemat 3,"Biji-bijian,Daging Putih,Unggas,Sayur,Bumbu Rempah,Kacang-kacangan","Nama Masakan: Hoka Hemat 3
+Nama Asli Resep: Hoka Hemat 3
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 172 Dada Ayam
+  - 15 Selada Keriting
+  - 78 Tahu Putih
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Sayur, Bumbu Rempah, Kacang-kacangan"
+recipe_00409,NOCODE_Kebab Turki (Doner Kebab),,Kebab Turki (Doner Kebab),Kebab Turki (Doner Kebab),"Biji-bijian,Daging Merah,Sayur,Bumbu Rempah,Buah,Bumbu Olahan","Nama Masakan: Kebab Turki (Doner Kebab)
+Nama Asli Resep: Kebab Turki (Doner Kebab)
+Bahan-bahan:
+  - 307 Tortilla
+  - 250 Daging Sapi (Beef)
+  - 15 Selada Keriting
+  - Tomat
+  - 680 Mayones
+Kategori Bahan: Biji-bijian, Daging Merah, Sayur, Bumbu Rempah, Buah, Bumbu Olahan"
+recipe_00410,NOCODE_KFC Colonel Burger,,KFC Colonel Burger,KFC Colonel Burger,"Biji-bijian,Daging Putih,Unggas,Sayur,Bumbu Rempah,Bumbu Olahan","Nama Masakan: KFC Colonel Burger
+Nama Asli Resep: KFC Colonel Burger
+Bahan-bahan:
+  - 160 Roti Burger
+  - 287 Patty Ayam
+  - 15 Selada Keriting
+  - 680 Mayones
+  - 884 Minyak Nabati (Vegetable Oil)
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Sayur, Bumbu Rempah, Bumbu Olahan"
+recipe_00411,NOCODE_KFC Cream Soup,,KFC Cream Soup,KFC Cream Soup,"Susu,Daging Putih,Unggas,Biji-bijian","Nama Masakan: KFC Cream Soup
+Nama Asli Resep: KFC Cream Soup
+Bahan-bahan:
+  - 0 Air Minum
+  - 496 Susu Bubuk (Full Cream)
+  - 143 Daging Ayam Cincang
+  - 86 Jagung Manis
+  - 360 Tepung Maizena
+Kategori Bahan: Susu, Daging Putih, Unggas, Biji-bijian"
+recipe_00412,NOCODE_KFC French Fries (Large),,KFC French Fries (Large),KFC French Fries (Large),"Umbi-umbian,Bumbu Olahan","Nama Masakan: KFC French Fries (Large)
+Nama Asli Resep: KFC French Fries (Large)
+Bahan-bahan:
+  - 77 Kentang (Potato)
+  - 884 Minyak Nabati (Vegetable Oil)
+  - 0 Garam Meja (Table Salt)
+  - 365 Dekstrosa
+Kategori Bahan: Umbi-umbian, Bumbu Olahan"
+recipe_00413,NOCODE_KFC Perkedel,,KFC Perkedel,KFC Perkedel,"Umbi-umbian,Bumbu Rempah,Sayur","Nama Masakan: KFC Perkedel
+Nama Asli Resep: KFC Perkedel
+Bahan-bahan:
+  - 77 Kentang (Potato)
+  - 570 Bawang Goreng (Original/Polos)
+  - 14 Seledri
+  - 143 Telur Ayam Ras
+  - 884 Minyak Nabati (Vegetable Oil)
+Kategori Bahan: Umbi-umbian, Bumbu Rempah, Sayur"
+recipe_00414,NOCODE_McDonalds Ayam Krispy (Original),,McDonalds Ayam Krispy (Original),McDonalds Ayam Krispy (Original),"Daging Putih,Unggas,Biji-bijian,Seafood,Bumbu Olahan","Nama Masakan: McDonalds Ayam Krispy (Original)
+Nama Asli Resep: McDonalds Ayam Krispy (Original)
+Bahan-bahan:
+  - 239 Ayam Potong (Broiler)
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Nabati (Vegetable Oil)
+  - 250 Bumbu Rahasia (Fried Chicken)
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Seafood, Bumbu Olahan"
+recipe_00415,NOCODE_McSpaghetti Pedas Manis,,McSpaghetti Pedas Manis,McSpaghetti Pedas Manis,"Bumbu Olahan,Daging Putih,Unggas,Biji-bijian,Bumbu Rempah","Nama Masakan: McSpaghetti Pedas Manis
+Nama Asli Resep: McSpaghetti Pedas Manis
+Bahan-bahan:
+  - Spaghetti
+  - 200 Saus Pedas Manis
+  - 165 Daging Ayam Suwir
+  - Kulit Pangsit Goreng
+  - 570 Bawang Goreng (Original/Polos)
+Kategori Bahan: Bumbu Olahan, Daging Putih, Unggas, Biji-bijian, Bumbu Rempah"
+recipe_00416,NOCODE_Nasi Putih KFC,,Nasi Putih KFC,Nasi Putih KFC,Biji-bijian,"Nama Masakan: Nasi Putih KFC
+Nama Asli Resep: Nasi Putih KFC
+Bahan-bahan:
+  - 130 Nasi Putih
+Kategori Bahan: Biji-bijian"
+recipe_00417,NOCODE_PaNas 1 (Ayam Goreng McD),,PaNas 1 (Ayam Goreng McD),PaNas 1 (Ayam Goreng McD),"Biji-bijian,Daging Putih,Unggas","Nama Masakan: PaNas 1 (Ayam Goreng McD)
+Nama Asli Resep: PaNas 1 (Ayam Goreng McD)
+Bahan-bahan:
+  - Ayam Goreng Tepung
+  - 130 Nasi Putih
+  - Minuman Teh Kemasan
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas"
+recipe_00418,NOCODE_Pizza Hut Cheese Deluxe,,Pizza Hut Cheese Deluxe,Pizza Hut Cheese Deluxe,"Biji-bijian,Seafood,Susu,Buah,Bumbu Olahan","Nama Masakan: Pizza Hut Cheese Deluxe
+Nama Asli Resep: Pizza Hut Cheese Deluxe
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 280 Keju Mozarella
+  - 431 Keju Parmesan
+  - 20 Saus Tomat
+Kategori Bahan: Biji-bijian, Seafood, Susu, Buah, Bumbu Olahan"
+recipe_00419,NOCODE_Pizza Hut Meat Lovers (Pan Pizza),,Pizza Hut Meat Lovers (Pan Pizza),Pizza Hut Meat Lovers (Pan Pizza),"Biji-bijian,Seafood,Daging Merah,Susu,Buah,Bumbu Olahan","Nama Masakan: Pizza Hut Meat Lovers (Pan Pizza)
+Nama Asli Resep: Pizza Hut Meat Lovers (Pan Pizza)
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 300 Sosis Sapi
+  - 250 Daging Sapi Cincang
+  - 280 Keju Mozarella
+  - 20 Saus Tomat
+Kategori Bahan: Biji-bijian, Seafood, Daging Merah, Susu, Buah, Bumbu Olahan"
+recipe_00420,NOCODE_Richeese Fire Chicken,,Richeese Fire Chicken,Richeese Fire Chicken,"Daging Putih,Unggas,Biji-bijian,Seafood,Bumbu Olahan,Bumbu Rempah,Susu","Nama Masakan: Richeese Fire Chicken
+Nama Asli Resep: Richeese Fire Chicken
+Bahan-bahan:
+  - 239 Ayam Potong (Broiler)
+  - 350 Tepung Terigu (Serbaguna)
+  - 120 Saus Barbeque (BBQ Sauce)
+  - 282 Bubuk Cabai
+  - 174 Saus Keju
+Kategori Bahan: Daging Putih, Unggas, Biji-bijian, Seafood, Bumbu Olahan, Bumbu Rempah, Susu"
+recipe_00421,NOCODE_Super Besar 1 (Nasi + Ayam + Minum),,Super Besar 1 (Nasi + Ayam + Minum),Super Besar 1 (Nasi + Ayam + Minum),"Biji-bijian,Daging Putih,Unggas","Nama Masakan: Super Besar 1 (Nasi + Ayam + Minum)
+Nama Asli Resep: Super Besar 1 (Nasi + Ayam + Minum)
+Bahan-bahan:
+  - 130 Nasi Putih
+  - 239 Ayam Potong (Broiler)
+  - Cola
+  - 884 Minyak Goreng (Kelapa Sawit)
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas"
+recipe_00422,NOCODE_Triple Cheeseburger,,Triple Cheeseburger,Triple Cheeseburger,"Biji-bijian,Daging Merah,Susu,Buah,Bumbu Rempah","Nama Masakan: Triple Cheeseburger
+Nama Asli Resep: Triple Cheeseburger
+Bahan-bahan:
+  - 160 Roti Burger
+  - 250 Daging Sapi (Beef)
+  - 320 Keju Cheddar
+  - 18 Acar Timun
+  - 40 Bawang Bombay
+Kategori Bahan: Biji-bijian, Daging Merah, Susu, Buah, Bumbu Rempah"
+recipe_00423,NOCODE_Ayam Rebus Jahe (Pek Cam Kee),,Ayam Rebus Jahe (Pek Cam Kee),Ayam Rebus Jahe (Pek Cam Kee),"Daging Putih,Unggas,Bumbu Rempah","Nama Masakan: Ayam Rebus Jahe (Pek Cam Kee)
+Nama Asli Resep: Ayam Rebus Jahe (Pek Cam Kee)
+Bahan-bahan:
+  - Ayam Kampung
+  - 80 Jahe
+  - 112 Bawang Putih
+  - 884 Minyak Wijen (Sesame Oil)
+  - 32 Bawang Daun
+Kategori Bahan: Daging Putih, Unggas, Bumbu Rempah"
+recipe_00424,NOCODE_Ikan Bakar Teflon (Diet Friendly),,Ikan Bakar Teflon (Diet Friendly),Ikan Bakar Teflon (Diet Friendly),"Daging Putih,Seafood,Bumbu Rempah,Buah","Nama Masakan: Ikan Bakar Teflon (Diet Friendly)
+Nama Asli Resep: Ikan Bakar Teflon (Diet Friendly)
+Bahan-bahan:
+  - Ikan Nila
+  - 30 Jeruk Nipis
+  - 69 Kunyit
+  - 112 Bawang Putih
+  - 298 Ketumbar
+Kategori Bahan: Daging Putih, Seafood, Bumbu Rempah, Buah"
+recipe_00425,NOCODE_Kacang Almond Panggang (Roasted Almond),,Kacang Almond Panggang (Roasted Almond),Kacang Almond Panggang (Roasted Almond),Kacang-kacangan,"Nama Masakan: Kacang Almond Panggang (Roasted Almond)
+Nama Asli Resep: Kacang Almond Panggang (Roasted Almond)
+Bahan-bahan:
+  - 579 Kacang Almond
+Kategori Bahan: Kacang-kacangan"
+recipe_00426,NOCODE_Nasi Goreng Shirataki (Diet),,Nasi Goreng Shirataki (Diet),Nasi Goreng Shirataki (Diet),"Biji-bijian,Daging Putih,Unggas,Bumbu Rempah","Nama Masakan: Nasi Goreng Shirataki (Diet)
+Nama Asli Resep: Nasi Goreng Shirataki (Diet)
+Bahan-bahan:
+  - 10 Beras Shirataki (Konjac Rice)
+  - 143 Telur Ayam
+  - 172 Dada Ayam
+  - 44 Bawang Merah
+  - 36 Cabai Rawit Merah
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Bumbu Rempah"
+recipe_00427,NOCODE_Oatmeal Gurih Telur Rebus,,Oatmeal Gurih Telur Rebus,Oatmeal Gurih Telur Rebus,"Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Oatmeal Gurih Telur Rebus
+Nama Asli Resep: Oatmeal Gurih Telur Rebus
+Bahan-bahan:
+  - Oat Instan
+  - 143 Telur Ayam
+  - 32 Bawang Daun
+  - 53 Kecap Asin
+Kategori Bahan: Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00428,NOCODE_Oatmeal Pisang (Vegan),,Oatmeal Pisang (Vegan),Oatmeal Pisang (Vegan),"Biji-bijian,Buah,Susu,Bumbu Rempah","Nama Masakan: Oatmeal Pisang (Vegan)
+Nama Asli Resep: Oatmeal Pisang (Vegan)
+Bahan-bahan:
+  - Oat Instan
+  - 89 Pisang
+  - 17 Susu Almond
+  - Kayu Manis Bubuk
+Kategori Bahan: Biji-bijian, Buah, Susu, Bumbu Rempah"
+recipe_00429,NOCODE_Orak-Arik Tempe Telur,,Orak-Arik Tempe Telur,Orak-Arik Tempe Telur,"Kacang-kacangan,Bumbu Rempah","Nama Masakan: Orak-Arik Tempe Telur
+Nama Asli Resep: Orak-Arik Tempe Telur
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 143 Telur Ayam
+  - 52 Putih Telur
+  - 112 Bawang Putih
+  - 44 Bawang Merah
+Kategori Bahan: Kacang-kacangan, Bumbu Rempah"
+recipe_00430,NOCODE_Overnight Oats,,Overnight Oats,Overnight Oats,"Biji-bijian,Susu,Buah","Nama Masakan: Overnight Oats
+Nama Asli Resep: Overnight Oats
+Bahan-bahan:
+  - 389 Gandum Oat
+  - 65 Susu Segar
+  - 486 Chia Seeds (Biji Chia)
+  - Yogurt
+  - Buah Buahan
+Kategori Bahan: Biji-bijian, Susu, Buah"
+recipe_00431,NOCODE_Overnight Oats Cokelat,,Overnight Oats Cokelat,Overnight Oats Cokelat,"Biji-bijian,Susu","Nama Masakan: Overnight Oats Cokelat
+Nama Asli Resep: Overnight Oats Cokelat
+Bahan-bahan:
+  - 389 Gandum Oat
+  - 65 Susu Oat
+  - 486 Chia Seeds (Biji Chia)
+  - 59 Greek Yogurt (Plain/Nonfat)
+  - 12 Bubuk Cokelat (Cocoa Powder)
+Kategori Bahan: Biji-bijian, Susu"
+recipe_00432,NOCODE_Pancake Pisang Telur (2 Bahan),,Pancake Pisang Telur (2 Bahan),Pancake Pisang Telur (2 Bahan),"Buah,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Pancake Pisang Telur (2 Bahan)
+Nama Asli Resep: Pancake Pisang Telur (2 Bahan)
+Bahan-bahan:
+  - 97 Pisang Ambon
+  - 143 Telur Ayam
+  - 247 Kayu Manis
+  - 304 Madu Murni
+Kategori Bahan: Buah, Bumbu Rempah, Bumbu Olahan"
+recipe_00433,NOCODE_Pepes Tahu Kemangi,,Pepes Tahu Kemangi,Pepes Tahu Kemangi,"Kacang-kacangan,Sayur,Bumbu Rempah","Nama Masakan: Pepes Tahu Kemangi
+Nama Asli Resep: Pepes Tahu Kemangi
+Bahan-bahan:
+  - 78 Tahu Putih
+  - 22 Daun Kemangi
+  - 32 Bawang Daun
+  - 36 Cabai Rawit Merah
+  - 143 Telur Ayam Ras
+Kategori Bahan: Kacang-kacangan, Sayur, Bumbu Rempah"
+recipe_00434,NOCODE_Roti Gandum Alpukat (Avocado Toast),,Roti Gandum Alpukat (Avocado Toast),Roti Gandum Alpukat (Avocado Toast),"Biji-bijian,Buah,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Roti Gandum Alpukat (Avocado Toast)
+Nama Asli Resep: Roti Gandum Alpukat (Avocado Toast)
+Bahan-bahan:
+  - Roti Gandum Utuh
+  - 85 Alpukat
+  - 30 Jeruk Nipis
+  - 251 Lada Hitam
+  - 0 Garam Meja (Table Salt)
+Kategori Bahan: Biji-bijian, Buah, Bumbu Rempah, Bumbu Olahan"
+recipe_00435,NOCODE_Salad Wrap (Chicken),,Salad Wrap (Chicken),Salad Wrap (Chicken),"Biji-bijian,Daging Putih,Unggas,Sayur,Bumbu Rempah,Buah","Nama Masakan: Salad Wrap (Chicken)
+Nama Asli Resep: Salad Wrap (Chicken)
+Bahan-bahan:
+  - 307 Tortilla
+  - 172 Dada Ayam
+  - 15 Selada Keriting
+  - Tomat
+  - 15 Mentimun
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Sayur, Bumbu Rempah, Buah"
+recipe_00436,NOCODE_Salad Wrap Ayam (Chicken Caesar Wrap),,Salad Wrap Ayam (Chicken Caesar Wrap),Salad Wrap Ayam (Chicken Caesar Wrap),"Biji-bijian,Daging Putih,Unggas,Buah,Susu","Nama Masakan: Salad Wrap Ayam (Chicken Caesar Wrap)
+Nama Asli Resep: Salad Wrap Ayam (Chicken Caesar Wrap)
+Bahan-bahan:
+  - 140 Kulit Tortilla (Gandum)
+  - 172 Dada Ayam
+  - 11 Selada Air
+  - 18 Tomat Merah
+  - 59 Greek Yogurt (Plain/Nonfat)
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas, Buah, Susu"
+recipe_00437,NOCODE_Smoothie Bowl Naga (Dragon Fruit),,Smoothie Bowl Naga (Dragon Fruit),Smoothie Bowl Naga (Dragon Fruit),"Buah,Susu,Biji-bijian","Nama Masakan: Smoothie Bowl Naga (Dragon Fruit)
+Nama Asli Resep: Smoothie Bowl Naga (Dragon Fruit)
+Bahan-bahan:
+  - 60 Buah Naga Merah
+  - 97 Pisang Ambon
+  - 59 Greek Yogurt (Plain/Nonfat)
+  - 471 Granola (Honey Almond)
+  - 486 Chia Seeds (Biji Chia)
+Kategori Bahan: Buah, Susu, Biji-bijian"
+recipe_00438,NOCODE_Steak Tempe Saus Lada Hitam,,Steak Tempe Saus Lada Hitam,Steak Tempe Saus Lada Hitam,"Kacang-kacangan,Biji-bijian,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Steak Tempe Saus Lada Hitam
+Nama Asli Resep: Steak Tempe Saus Lada Hitam
+Bahan-bahan:
+  - 193 Tempe Kedelai
+  - 143 Telur Ayam
+  - 360 Tepung Maizena
+  - 40 Bawang Bombay
+  - 130 Saus Lada Hitam (Black Pepper Sauce)
+Kategori Bahan: Kacang-kacangan, Biji-bijian, Bumbu Rempah, Bumbu Olahan"
+recipe_00439,NOCODE_Tuna Salad,,Tuna Salad,Tuna Salad,"Daging Putih,Seafood,Bumbu Olahan,Sayur,Bumbu Rempah,Buah","Nama Masakan: Tuna Salad
+Nama Asli Resep: Tuna Salad
+Bahan-bahan:
+  - 130 Ikan Tuna
+  - 680 Mayones
+  - 15 Selada Keriting
+  - Tomat
+  - 15 Mentimun
+Kategori Bahan: Daging Putih, Seafood, Bumbu Olahan, Sayur, Bumbu Rempah, Buah"
+recipe_00440,NOCODE_Yogurt Buah (Yogurt Bowl),,Yogurt Buah (Yogurt Bowl),Yogurt Buah (Yogurt Bowl),"Susu,Buah,Bumbu Olahan,Biji-bijian","Nama Masakan: Yogurt Buah (Yogurt Bowl)
+Nama Asli Resep: Yogurt Buah (Yogurt Bowl)
+Bahan-bahan:
+  - Greek Yogurt
+  - 60 Buah Naga Merah
+  - 89 Pisang
+  - 304 Madu Murni
+  - 486 Biji Chia
+Kategori Bahan: Susu, Buah, Bumbu Olahan, Biji-bijian"
+recipe_00441,NOCODE_Indomie Mi Goreng,,Indomie Mi Goreng,Indomie Mi Goreng,"Biji-bijian,Seafood,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Indomie Mi Goreng
+Nama Asli Resep: Indomie Mi Goreng
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 570 Bawang Goreng (Original/Polos)
+  - 320 Kecap Manis
+  - 15 Saus Cabai
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Rempah, Bumbu Olahan"
+recipe_00442,NOCODE_Indomie Mi Goreng Jumbo,,Indomie Mi Goreng Jumbo,Indomie Mi Goreng Jumbo,"Biji-bijian,Seafood,Bumbu Rempah,Bumbu Olahan","Nama Masakan: Indomie Mi Goreng Jumbo
+Nama Asli Resep: Indomie Mi Goreng Jumbo
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 570 Bawang Goreng (Original/Polos)
+  - 320 Kecap Manis
+  - 15 Saus Cabai
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Rempah, Bumbu Olahan"
+recipe_00443,NOCODE_Indomie Rasa Ayam Bawang,,Indomie Rasa Ayam Bawang,Indomie Rasa Ayam Bawang,"Biji-bijian,Seafood,Bumbu Olahan,Daging Putih,Unggas","Nama Masakan: Indomie Rasa Ayam Bawang
+Nama Asli Resep: Indomie Rasa Ayam Bawang
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 884 Minyak Goreng (Kelapa Sawit)
+  - 0 Garam Meja (Table Salt)
+  - 230 Bumbu Rasa Ayam (Bubuk)
+  - 884 Minyak Bawang
+Kategori Bahan: Biji-bijian, Seafood, Bumbu Olahan, Daging Putih, Unggas"
+recipe_00444,NOCODE_Lemonilo Mie Goreng,,Lemonilo Mie Goreng,Lemonilo Mie Goreng,"Biji-bijian,Seafood,Sayur,Daging Putih,Unggas","Nama Masakan: Lemonilo Mie Goreng
+Nama Asli Resep: Lemonilo Mie Goreng
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 350 Tepung Mocaf
+  - 23 Bayam Hijau
+  - 884 Minyak Nabati (Vegetable Oil)
+Kategori Bahan: Biji-bijian, Seafood, Sayur, Daging Putih, Unggas"
+recipe_00445,NOCODE_Mie Instan Goreng + Telur,,Mie Instan Goreng + Telur,Mie Instan Goreng + Telur,Biji-bijian,"Nama Masakan: Mie Instan Goreng + Telur
+Nama Asli Resep: Mie Instan Goreng + Telur
+Bahan-bahan:
+  - Indomie Mi Goreng
+  - Telur Ceplok
+Kategori Bahan: Biji-bijian"
+recipe_00446,NOCODE_Mie Sedaap Goreng,,Mie Sedaap Goreng,Mie Sedaap Goreng,Bumbu Rempah,"Nama Masakan: Mie Sedaap Goreng
+Nama Asli Resep: Mie Sedaap Goreng
+Bahan-bahan:
+  - 384 Mi Tepung Terigu (Mi Telur/Kering)
+  - 884 Minyak Bumbu (Seasoning Oil)
+  - 500 Bawang Goreng Kriuk
+Kategori Bahan: Bumbu Rempah"
+recipe_00447,NOCODE_Super Bubur Ayam,,Super Bubur Ayam,Super Bubur Ayam,"Biji-bijian,Daging Putih,Unggas","Nama Masakan: Super Bubur Ayam
+Nama Asli Resep: Super Bubur Ayam
+Bahan-bahan:
+  - 357 Beras Putih
+  - 239 Daging Ayam
+  - 476 Kerupuk (Umum)
+Kategori Bahan: Biji-bijian, Daging Putih, Unggas"
+recipe_00448,NOCODE_Butter Croissant,,Butter Croissant,Butter Croissant,"Biji-bijian,Seafood,Susu,Bumbu Olahan","Nama Masakan: Butter Croissant
+Nama Asli Resep: Butter Croissant
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 717 Mentega
+  - 387 Gula Pasir (Granulated Sugar)
+  - Susu
+Kategori Bahan: Biji-bijian, Seafood, Susu, Bumbu Olahan"
+recipe_00449,NOCODE_Kopi Kenangan - Cerita Roti Coklat Klasik,,Kopi Kenangan - Cerita Roti Coklat Klasik,Kopi Kenangan - Cerita Roti Coklat Klasik,"Biji-bijian,Seafood,Susu","Nama Masakan: Kopi Kenangan - Cerita Roti Coklat Klasik
+Nama Asli Resep: Kopi Kenangan - Cerita Roti Coklat Klasik
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - Cokelat Manis
+  - 717 Mentega
+Kategori Bahan: Biji-bijian, Seafood, Susu"
+recipe_00450,NOCODE_Kopi Kenangan - Cerita Roti Daging Asap Keju,,Kopi Kenangan - Cerita Roti Daging Asap Keju,Kopi Kenangan - Cerita Roti Daging Asap Keju,"Biji-bijian,Seafood,Daging Merah,Susu","Nama Masakan: Kopi Kenangan - Cerita Roti Daging Asap Keju
+Nama Asli Resep: Kopi Kenangan - Cerita Roti Daging Asap Keju
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 133 Daging Asap
+  - Keju
+  - 717 Mentega
+Kategori Bahan: Biji-bijian, Seafood, Daging Merah, Susu"
+recipe_00451,NOCODE_Kopi Kenangan - Cerita Roti Keju Manis,,Kopi Kenangan - Cerita Roti Keju Manis,Kopi Kenangan - Cerita Roti Keju Manis,"Biji-bijian,Seafood,Susu","Nama Masakan: Kopi Kenangan - Cerita Roti Keju Manis
+Nama Asli Resep: Kopi Kenangan - Cerita Roti Keju Manis
+Bahan-bahan:
+  - 350 Tepung Terigu (Serbaguna)
+  - 320 Keju Cheddar
+  - 130 Susu Kental Manis (SKM)
+  - 717 Mentega
+Kategori Bahan: Biji-bijian, Seafood, Susu"
+recipe_00452,NOCODE_Mixue Ice Cream Cone,,Mixue Ice Cream Cone,Mixue Ice Cream Cone,"Susu,Bumbu Olahan,Biji-bijian","Nama Masakan: Mixue Ice Cream Cone
+Nama Asli Resep: Mixue Ice Cream Cone
+Bahan-bahan:
+  - 496 Susu Bubuk (Full Cream)
+  - 387 Gula Pasir (Granulated Sugar)
+  - Cone Waffle
+  - 0 Air Minum
+Kategori Bahan: Susu, Bumbu Olahan, Biji-bijian"

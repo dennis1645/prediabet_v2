@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>404 File not Found - Repository Poltekkes Kaltim</title>
+		<link rel="icon" href="/apw_template/images/favicon.png" type="image/x-icon" />
+		<link rel="shortcut icon" href="/apw_template/images/favicon.png" type="image/x-icon" />
+		<script type="36896dc687691fc1c30a6e95-text/javascript">
+// <![CDATA[
+var eprints_http_root = "http:\/\/repository.poltekkes-kaltim.ac.id:443";
+var eprints_http_cgiroot = "http:\/\/repository.poltekkes-kaltim.ac.id:443\/cgi";
+var eprints_oai_archive_id = "repository.poltekkes-kaltim.ac.id";
+var eprints_logged_in = false;
+// ]]></script>
+    <style type="text/css">.ep_logged_in { display: none }</style>
+    <link rel="stylesheet" type="text/css" href="/style/auto-3.3.16.css" />
+    <script type="36896dc687691fc1c30a6e95-text/javascript" src="/javascript/auto-3.3.16.js"><!--padder--></script>
+    <!--[if lte IE 6]>
+        <link rel="stylesheet" type="text/css" href="/style/ie6.css" />
+   <![endif]-->
+    <meta name="Generator" content="EPrints 3.3.16" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <script type="36896dc687691fc1c30a6e95-text/javascript" src="https://www.google.com/jsapi"><!--padder--></script><script type="36896dc687691fc1c30a6e95-text/javascript">
+// <![CDATA[
+google.load("visualization", "1", {packages:["corechart", "geochart"]});
+// ]]></script><link rel="Top" href="https://repository.poltekkes-kaltim.ac.id/" />
+    <link rel="Sword" href="https://repository.poltekkes-kaltim.ac.id/sword-app/servicedocument" />
+    <link rel="SwordDeposit" href="https://repository.poltekkes-kaltim.ac.id/id/contents" />
+    <link rel="Search" type="text/html" href="https://repository.poltekkes-kaltim.ac.id:443/cgi/search" />
+    <link rel="Search" type="application/opensearchdescription+xml" href="https://repository.poltekkes-kaltim.ac.id:443/cgi/opensearchdescription" title="Repository Poltekkes Kaltim" />
+    
+		
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+		
+		<link rel="stylesheet" href="/apw_template/styles/font-awesome.min.css" />
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic" />
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,800" />
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,800,900" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="36896dc687691fc1c30a6e95-text/javascript">// <!-- No script --></script>
+		<link rel="stylesheet" href="/apw_template/styles/base.css" />
+		<link rel="stylesheet" href="/apw_template/styles/site.css" />			
+		<link rel="stylesheet" href="/apw_template/styles/apw_main.css" />
+		
+		<script type="36896dc687691fc1c30a6e95-text/javascript">
+ 
+		// Give $ back to prototype.js; create new alias to jQuery.
+		jQuery.noConflict();
+ 
+		jQuery(document).ready(function( $ ) {
+		
+			//Clones the EP menu to the top menu. 
+			$('#main_page .ep_tm_key_tools').clone().appendTo('#login_status');
+			//Then remove the old class, and add the navbar classes to make it fit in. 
+			$('header .ep_tm_key_tools').removeClass('ep_tm_key_tools').addClass('nav navbar-nav navbar-right').attr('id','ep_menu_top');
+			// remove the first part of the menu if you are already signed in (as the span buggers up the nice navbar menu)
+			$('header #ep_menu_top li:first-child').has("span").remove();
+			
+
+			//left hand side menu. Adds the id, then the needed classes for bootstrap to style the menu 
+			$('#main_page .ep_tm_key_tools').removeClass('ep_tm_key_tools').attr('id','ep_menu').addClass('hidden-xs');
+			$('#main_page ul#ep_menu ').addClass('list-group');
+			$('#main_page ul#ep_menu li').addClass('list-group-item');
+			//$('#main_page ul#ep_menu li:first-child:contains("Logged")').addClass('active');
+			$('#main_page ul#ep_menu li:first-child:contains("Logged")').closest('.list-group-item').addClass('active');
+			$('#main_page ul#ep_menu li:first-child span a').addClass('list-group-item-text');
+
+			// If the user isn't logged in, style it a little
+			//$('#main_page ul#ep_menu li:first-child a[href$="cgi/users/home"]').addClass('list-group-item-heading');
+			var log_in_btn = $('#main_page ul#ep_menu li:first-child a[href$="cgi/users/home"]');
+			var admin_btn = $('#main_page ul#ep_menu li a[href$="cgi/users/home?screen=Admin"]');
+			//log_in_btn.addClass('btn btn-primary');
+			//admin_btn.addClass('btn btn-default');
+			log_in_btn.closest('li').addClass('active');
+			//admin_btn.closest('li').removeClass('list-group-item');
+			//log_in_btn.closest('ul').removeClass('list-group').addClass('list-unstyled');
+				
+		});
+		</script>
+	</head>
+<body>
+
+	
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<header id="header">
+					<!-- Untuk mengganti logo, letakkan file logo di archives/archives_id/cfg/static/images/ dengan ukuran maksimal 449x70 pixel -->
+					<a href="https://repository.poltekkes-kaltim.ac.id" class="logo"><img src="/images/jatayu-logo-repos.png" alt="Logo Universitas" title="Logo Universitas" /></a>
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+					</ul>
+				</header>
+				
+				<h1 class="ep_tm_pagetitle">
+				  404 File not Found
+				</h1>
+				<p>Could not find the file: <code>/1483/1/Buku Pedoman Pengelolaan DM Tipe 2 Dewasa 2021.pdf</code></p><p>The file you are trying to access may be related to this item:</p><p>
+
+
+    <span class="person_name">Dhevi, Kharisma</span>
+  
+
+(2021)
+
+<a href="https://repository.poltekkes-kaltim.ac.id/1483/"><em>ASUHAN KEPERAWATAN KELUARGA PADA KLIEN ANAK DENGAN RIWAYAT KEJANG DEMAM DI WILAYAH KERJA PUSKESMAS BARU ULU.</em></a>
+
+
+    KTI Kelas C Prodi DIII Keperawatan, Perpustakaan Kampus C Poltekkes Kemenkes Kaltim.
+  
+
+
+  
+
+
+</p><p>If you reached this page by following a link within the repository, please contact the <a href="/cdn-cgi/l/email-protection#8cede8e1e5e2ccfce3e0f8e9e7e7e9ffa1e7ede0f8e5e1a2edefa2e5e8">Repository Poltekkes Kaltim administration</a>.  Otherwise, please check that you have typed the URL in correctly, or contact the person or site that supplied you with this URL.</p>
+    
+
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+
+				<section id="part_top" class="alt">
+					<div class="search-box">
+					  <div class="container-4">
+						<form method="get" accept-charset="utf-8" action="https://repository.poltekkes-kaltim.ac.id/cgi/search">
+							<input type="search" name="q" id="search" placeholder="Insert keyword here..." />
+							<button class="icon" value="Search" type="submit" name="_action_search"><i class="fa fa-search"></i></button>
+							<input type="hidden" name="_action_search" value="Search" />
+							<input type="hidden" name="_order" value="bytitle" />
+							<input type="hidden" name="basic_srchtype" value="ALL" />
+							<input type="hidden" name="_satisfyall" value="ALL" />
+						</form>
+					  </div>
+					</div>
+				</section>
+
+				<!-- Menu -->
+					<header class="major" style="margin-top: -20px;">
+						<div style="text-transform: uppercase; font-size: 14px; font-weight: 700;letter-spacing: 0.35em;">USER MENU</div>
+					</header>
+					
+					<div id="main_page">
+						<ul class="ep_tm_key_tools" id="ep_tm_menu_tools"><li><a href="https://repository.poltekkes-kaltim.ac.id/cgi/users/home">Login</a></li><li><a href="/cgi/register">Create Account</a></li></ul>
+					</div>
+						
+					<nav id="menu">
+						<ul>
+							<li><a href="https://repository.poltekkes-kaltim.ac.id:443">home</a></li>
+							<li><a href="https://repository.poltekkes-kaltim.ac.id:443/information.html">about</a></li>
+							<li>
+								<span class="opener">Browse</span>
+								<ul>
+									<li><a href="https://repository.poltekkes-kaltim.ac.id:443/view/year/">browse by years</a></li>
+									<li><a href="https://repository.poltekkes-kaltim.ac.id:443/view/subjects/">browse by subjects</a></li>
+									<li><a href="https://repository.poltekkes-kaltim.ac.id:443/view/divisions/">browse by divisions</a></li>
+									<li><a href="https://repository.poltekkes-kaltim.ac.id:443/view/creators/">browse by authors</a></li>
+								</ul>
+							</li>
+							<li><a href="https://repository.poltekkes-kaltim.ac.id:443/help/index.html">Help</a></li>
+							<li><a href="https://repository.poltekkes-kaltim.ac.id:443/policies.html">Policies</a></li>
+							<!-- <li><a href="{$config{base_url}}/cgi/stats/report">Statistic</a></li> -->
+							<!-- Hilangkan comment diatas jika repo Anda memiliki IRStats -->
+						</ul>
+					</nav>
+
+				
+
+			
+				<!-- Footer -->
+					
+		<footer id="footer">
+			<p class="copyright">© Nov 2017 - Powered by <a href="//bazaar.eprints.org/552/">APW Themes</a> &amp; Theme by <a href="//agungprasetyo.net/" title="Agung Prasetyo Wibowo" alt="Agung Prasetyo Wibowo">Agung Prasetyo Wibowo</a>.</p>
+		</footer>
+    
+
+			</div>
+		</div>
+
+	</div>
+
+		<!-- Scripts -->
+		<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/apw_template/scripts/skel.min.js" type="36896dc687691fc1c30a6e95-text/javascript">// <!-- No script --></script>
+		<script src="/apw_template/scripts/util.js" type="36896dc687691fc1c30a6e95-text/javascript">// <!-- No script --></script>
+		<script src="/apw_template/scripts/main.js" type="36896dc687691fc1c30a6e95-text/javascript">// <!-- No script --></script>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="36896dc687691fc1c30a6e95-|49" defer></script></body>
+</html>

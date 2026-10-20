@@ -1,0 +1,66 @@
+kondisi,kategori_pantangan,nama_makanan_atau_kelompok,status,alasan,sumber
+semua_kondisi,minuman,"Minuman bersoda (Coca-Cola, Sprite, Fanta, dll.)",hindari,"Gula tinggi, menyebabkan lonjakan gula darah drastis","PERKENI 2021, Kemenkes RI"
+semua_kondisi,minuman,Jus buah kemasan berpemanis,hindari,"Tinggi gula, tanpa serat, naik gula sangat cepat","PERKENI 2021, Kemenkes RI"
+semua_kondisi,minuman,Susu kental manis,hindari,Sangat tinggi gula dan lemak,Kemenkes RI
+semua_kondisi,minuman,"Minuman energi berpemanis (ExtraJoss, Red Bull, dll.)",hindari,Tinggi gula dan kafein,Kemenkes RI
+semua_kondisi,minuman,Minuman beralkohol,dilarang,"Mengganggu metabolisme glukosa, risiko hipoglikemia berat, berbahaya bagi pengguna insulin/obat DM","PERKENI 2021, IDAI"
+semua_kondisi,gula_pemanis,Gula pasir berlebih (> 50g/hari),hindari,Sukrosa langsung meningkatkan gula darah; maks. 5% dari total kalori harian (PERKENI),PERKENI 2021
+semua_kondisi,gula_pemanis,Madu dalam jumlah besar,batasi,Mengandung fruktosa + glukosa tinggi. Maks. 1 sdt/hari jika dikonsumsi,Kemenkes RI
+semua_kondisi,kue_jajanan,"Kue manis: donat, cake, muffin, brownies berlebih",batasi,Tinggi gula dan tepung putih (GI tinggi),Kemenkes RI
+semua_kondisi,kue_jajanan,"Permen, cokelat susu manis berlebih",batasi,"Gula sederhana, naik gula cepat",Kemenkes RI
+semua_kondisi,daging_olahan,"Jeroan: hati, otak, paru, usus, babat",hindari,Sangat tinggi kolesterol dan lemak jenuh — risiko kardiovaskular,PERKENI 2021
+semua_kondisi,daging_olahan,"Sosis, kornet, nugget, bacon, ham",batasi,"Tinggi lemak jenuh, sodium, dan bahan pengawet","PERKENI 2021, Kemenkes RI"
+semua_kondisi,lemak,Makanan cepat saji / fast food,batasi,"Tinggi lemak trans, lemak jenuh, kalori, dan sodium","PERKENI 2021, Kemenkes RI"
+prediabetes,minuman,"Sirup, minuman serbuk manis",hindari,"Tinggi gula sederhana, lonjakan gula darah",Kemenkes RI
+prediabetes,karbohidrat,Nasi putih porsi besar,batasi,GI tinggi (72-83). Boleh ½ centong kecil saja,PERKENI 2021
+prediabetes,karbohidrat,Roti tawar putih,batasi,GI tinggi (70-80),PERKENI 2021
+prediabetes,karbohidrat,Mi instan,batasi,GI tinggi + sangat tinggi sodium (1300-1800mg/bungkus),Kemenkes RI
+prediabetes,karbohidrat,"Kentang goreng, keripik kentang",batasi,GI tinggi + tinggi lemak trans,Kemenkes RI
+prediabetes,lemak,"Gorengan berlebih (bakwan, pisang goreng, tahu goreng)",batasi,Tinggi lemak jenuh dan kalori,Kemenkes RI
+prediabetes,lemak,Kulit ayam/bebek,batasi,Sangat tinggi lemak jenuh,Kemenkes RI
+prediabetes,buah,Durian,batasi_ketat,GI dan kalori sangat tinggi,Kemenkes RI
+prediabetes,buah,"Nangka, cempedak berlebih",batasi,Kandungan gula tinggi,Kemenkes RI
+prediabetes,buah,"Tape ubi, tape ketan",batasi,Proses fermentasi menghasilkan alkohol + gula tinggi,Kemenkes RI
+prediabetes,buah,"Manisan buah, buah kalengan dalam sirup",hindari,Gula tambahan sangat tinggi,Kemenkes RI
+prediabetes,susu_dairy,Susu full cream berlebih,batasi,Tinggi lemak jenuh,Kemenkes RI
+prediabetes,susu_dairy,Es krim,batasi,Tinggi gula dan lemak jenuh,Kemenkes RI
+prediabetes,sodium,Mi instan,batasi,1300-1800mg sodium/bungkus — hampir melebihi batas harian,Kemenkes RI
+dm_tipe1,minuman,Jus buah kemasan,hindari,Naik gula sangat cepat tanpa serat. Hanya boleh saat hipoglikemia darurat,IDAI
+dm_tipe1,karbohidrat,Nasi putih porsi besar,batasi_hitung_karbo,Boleh jika disesuaikan dengan dosis insulin (carbohydrate counting),IDAI
+dm_tipe1,karbohidrat,"Roti putih, mi instan",batasi_hitung_karbo,GI tinggi — perlu penyesuaian dosis insulin,IDAI
+dm_tipe1,lemak,"Produk olahan daging (sosis, nugget)",batasi,Risiko kardiovaskular jangka panjang pada penderita DM Tipe 1,IDAI
+dm_tipe1,susu_dairy,Susu full cream berlebih,batasi,Ganti dengan susu skim atau yoghurt rendah lemak,IDAI
+dm_tipe1,kondisi_khusus,Skip makan saat sudah disuntik insulin,dilarang,Menyebabkan hipoglikemia berbahaya,IDAI
+dm_tipe1,kondisi_khusus,Puasa tanpa konsultasi dokter,perhatian_khusus,Diperlukan penyesuaian dosis insulin menyeluruh sebelum berpuasa,IDAI
+dm_tipe2,minuman,"Teh kemasan manis (Teh Botol, Frestea, Ichitan)",hindari,Tinggi gula siap minum,Kemenkes RI
+dm_tipe2,minuman,"Kopi kemasan manis (Good Day, Nescafé RTD manis)",hindari,Tinggi gula + kafein,Kemenkes RI
+dm_tipe2,gula_pemanis,"Dodol, wajik, kolak",hindari,Sangat tinggi gula sederhana,Kemenkes RI
+dm_tipe2,karbohidrat,Nasi putih porsi besar (> 1 centong),batasi,"GI 72-83. Boleh ½ centong kecil, ganti sebagian dengan nasi merah",PERKENI 2021
+dm_tipe2,karbohidrat,"Mi instan (Indomie, Mie Sedaap, dll.)",hindari,GI tinggi + sodium 1300-1800mg — bahaya ganda untuk DM + hipertensi,"PERKENI 2021, Kemenkes RI"
+dm_tipe2,karbohidrat,"Singkong goreng, pisang goreng (gorengan)",batasi,GI naik saat digoreng + tinggi lemak,Kemenkes RI
+dm_tipe2,lemak,"Jeroan (hati, otak, paru, usus, babat)",hindari,Kolesterol sangat tinggi — risiko kardiovaskular. Kolesterol maks. 200mg/hari (PERKENI),PERKENI 2021
+dm_tipe2,lemak,Kulit ayam/bebek/unggas,hindari,Lemak jenuh sangat tinggi,PERKENI 2021
+dm_tipe2,lemak,Gorengan berlebih,batasi,Tinggi lemak trans/jenuh. Cara masak: ganti dengan kukus/rebus/panggang,Kemenkes RI
+dm_tipe2,lemak,Santan kental berlebih,batasi,Tinggi lemak jenuh. Boleh sedikit. Ganti dengan santan encer atau susu rendah lemak,PERKENI 2021
+dm_tipe2,buah,Durian,hindari,GI dan kalori sangat tinggi — tidak disarankan untuk DM Tipe 2,Kemenkes RI
+dm_tipe2,buah,"Nangka, cempedak",batasi_ketat,Kandungan gula tinggi,Kemenkes RI
+dm_tipe2,buah,Kurma kering berlebih (> 2 butir/hari),batasi_ketat,Sangat tinggi gula,Kemenkes RI
+dm_tipe2,buah,"Tape ubi, tape ketan",hindari,Fermentasi menghasilkan alkohol + gula tinggi,Kemenkes RI
+dm_tipe2,buah,"Rambutan, lengkeng, leci berlebih",batasi,Gula cukup tinggi,Kemenkes RI
+dm_tipe2,sodium,Mi instan semua merk,hindari,1300-1800mg sodium per bungkus — hampir 1x batas harian,Kemenkes RI
+dm_tipe2,sodium,"Makanan kaleng (sarden, kornet)",batasi,Tinggi sodium dan pengawet,Kemenkes RI
+dm_tipe2,sodium,"Ikan asin, teri asin berlebih",batasi,Sangat tinggi sodium,Kemenkes RI
+hipertensi_plus_dm,sodium,Mi instan (semua merk),hindari_ketat,Sodium 1300-1800mg/bungkus — terlalu tinggi untuk penderita hipertensi + DM,Kemenkes RI
+hipertensi_plus_dm,sodium,"Ikan asin (teri asin, jambal, dll.)",hindari,"Sodium sangat tinggi, bisa 500-1500mg per porsi",Kemenkes RI
+hipertensi_plus_dm,sodium,Telur asin,batasi_ketat,700-900mg sodium per butir,Kemenkes RI
+hipertensi_plus_dm,sodium,Kecap asin berlebih (> 1 sdt),hindari,900-1100mg sodium per sdm,Kemenkes RI
+hipertensi_plus_dm,sodium,Saus tiram berlebih,batasi,400-600mg sodium per sdm,Kemenkes RI
+hipertensi_plus_dm,sodium,"Terasi, petis, tauco",batasi,Tinggi sodium,Kemenkes RI
+hipertensi_plus_dm,sodium,"Kaldu blok/kubus (Masako, Royco, Maggi) berlebih",batasi,Tinggi sodium + MSG,Kemenkes RI
+hipertensi_plus_dm,sodium,"Keripik, kerupuk kemasan asin",hindari,Tinggi sodium dan lemak trans,Kemenkes RI
+hipertensi_plus_dm,sodium,"Saus sambal kemasan, saus tomat kemasan",batasi,Mengandung garam + gula,Kemenkes RI
+hipertensi_plus_dm,sodium,"Makanan kaleng (sarden, kornet, dll.)",hindari,Tinggi sodium dan pengawet,Kemenkes RI
+hipertensi_plus_dm,sodium,"Dendeng, abon berlebih",batasi,Tinggi sodium dari proses pengawetan,Kemenkes RI
+hipertensi_plus_dm,sodium,"Daging olahan (sosis, ham, bacon)",hindari,Tinggi sodium dan lemak jenuh,Kemenkes RI
+hipertensi_plus_dm,lemak,Santan kental berlebih,batasi,Tinggi lemak jenuh — berisiko meningkatkan tekanan darah,Kemenkes RI
+hipertensi_plus_dm,sodium,Makanan cepat saji / fast food,hindari,Sangat tinggi sodium dan lemak jenuh,Kemenkes RI

@@ -1,0 +1,1112 @@
+# Daftar Bahan-bahan Masakan Indonesia (Master List)
+
+**Sumber:** New_Ingredients_category.xlsx
+**Total Bahan Unik:** 887
+
+> Daftar ini berisi semua bahan unik yang muncul dalam dataset resep masakan Indonesia.
+> Dikelompokkan berdasarkan kategori bahan.
+> **PENTING:** Daftar ini adalah bahan masakan, BUKAN daftar alergen.
+> Informasi alergi harus diinput secara manual oleh pengguna.
+
+---
+
+## Biji-bijian
+
+- Ayam Goreng Tepung
+- Beras Ketan putih
+- Beras Merah
+- Beras Putih
+- Beras Shirataki (Konjac Rice)
+- Bihun Beras
+- Bihun Goreng
+- Bihun Jagung
+- Bihun goreng Rose Brand
+- Biji Chia
+- Cakwe
+- Chia Seeds (Biji Chia)
+- Cone Waffle
+- English Muffin
+- Gandum Oat
+- Granola (Honey Almond)
+- Indomie Mi Goreng
+- Kemiri halus
+- Kemiri yang sudah di goreng
+- Ketupat
+- Kulit Lumpia
+- Kulit Pangsit
+- Kulit Pangsit Goreng
+- Kulit Tortilla (Gandum)
+- Lontong
+- Lontong Polos
+- Makaroni (Kering)
+- Mie Kuning Basah
+- Oat Instan
+- Risoles Bihun
+- Roti Burger
+- Roti Gandum Utuh
+- Roti Tawar Putih
+- Soun
+- Susu Oat
+- Tepung Beras Rose Brand
+- Tepung Bumbu (Secret Blend)
+- Tepung Garut
+- Tepung Injin (Ketan Hitam)
+- Tepung Ketan Putih
+- Tepung Mocaf
+- Tepung Panir
+- Tepung Protein Sedang
+- Tepung Roti / Panir
+- Tepung Tapioka / Kanji
+- Tepung Tapioka Rose Brand cap pak Tani gunung
+- Tepung Terigu
+- Tepung Terigu (Serbaguna)
+- Tepung Terigu Segitiga Biru
+- Tepung sagu, sangrai
+- Tepung tapioka
+- Tepung terigu protein sedang
+- Teri nasi goreng
+- Tortilla
+- Wijen putih
+- beras
+- beras ketan
+- biji wijen
+- cuka (saya pakai cuka beras, cuka putih pun bisa. Ini dimasukkannya setelah semua bahan basah tercampur rata ya)
+- jagung
+- jagung manis
+- jagung muda
+- kemiri
+- kemiri bakar
+- kemiri sangrai
+- kertas roti panggang
+- ketan putih
+- maizena
+- maizena (disangrai di api kecil di aduk aduk sekitar 5-10menit)
+- mie basah
+- mie lethek/bendo, rendam kurleb 10 menit, cuci, tiriskan
+- misoa
+- nasi putih
+- pangsit goreng
+- penuh Tepung terigu
+- penuh tepung beras
+- tekwan basah
+- tepung bakwan serbaguna
+- tepung beras
+- tepung buah sawo mentega
+- tepung cobe
+- tepung jagung
+- tepung kanji
+- tepung ketan
+- tepung ketan Rose Brand
+- tepung kunci
+- tepung maizena
+- tepung sagu
+- tepung tapioka Rose Brand
+- tepung tapioka cap pak tani gunung
+- tepung tapioka cap tani gunung
+- tepung tapioka 律両�¢隆 藍料琉僚粒
+- tepung terigu pro rendah
+- tepung terigu pro sedang
+- tepung terigu protein rendah (10.6%)
+- tepung terigu protein tinggi
+- wijen hitam
+- wijen putih (sudah disangrai)
+
+## Buah
+
+- Acar Timun
+- Alpukat
+- Anggur Muscat
+- Apel (Fuji & Manalagi)
+- Apel Fuji
+- Apel Manalagi
+- Apel Merah (Red Delicious)
+- Belimbing
+- Biji Nangka
+- Buah Buahan
+- Buah Leci
+- Buah Naga Merah
+- Bunga Pepaya
+- Daun Jeruk
+- Gula Kelapa (gula jawa)
+- Gulai Nangka
+- Jambu Biji
+- Jambu Biji Merah
+- Jeruk Manis
+- Jeruk Sunkist
+- Kelapa parut sangrai
+- Mangga Harum Manis
+- Mangga muda
+- Matoa
+- Melon Hijau
+- Mentimun
+- Nanas
+- Nangka Muda
+- Parut kelapa
+- Pepaya California
+- Pir Hijau
+- Pisang
+- Pisang Ambon
+- Pisang Uli
+- Pisang raja nangka
+- Saus Tomat
+- Semangka
+- Stroberi
+- Tart Cherry
+- Tomat Merah
+- Tomat Merah Kecil
+- anggur ungu dan hijau
+- asam sunti ukuran kecil (kiraﾂｲ hampir segenggam,)
+- belimbing ukuran kecil
+- blimbing wuluh, potong2
+- buah Brem
+- daging durian
+- daun jeruk buang tulang nya
+- daun jeruk purut
+- daun jeruk sobek buang batang
+- daun jeruk, buang tulang tengahnya dan iris tipis
+- daun pepaya muda
+- gula kelapa coklat
+- gula kelapa serut
+- irisan daun jeruk
+- jantung pisang kepok
+- jeruk
+- jeruk limau
+- jeruk nipis
+- jeruk nipis/ lemon/ limau (pelengkap)
+- jeruk purut
+- kedondong
+- kedondong, iris
+- keju parut (bisa diganti dengan kelapa / tahu / daging cincang)
+- kelapa
+- kelapa gonseng (sangrai)
+- kelapa muda parut, sangrai
+- kelapa parut
+- kelapa parut agak muda
+- kelapa parut setengah tua
+- kelapa parut ukuran sedang
+- kelapa sedang, parut
+- kelapa setengah tua
+- kelapa setengah tua diparut
+- kelapa untuk campuran sagu
+- kesemek(yg berwarnya oranye keseluruhan dan keras)
+- kurma merah,cuci lalu buang bijinya
+- mangga mengkal, iris
+- nangka muda sudah dibersihkan
+- perasan jeruk nipis
+- pisang kepok
+- pisang uli, ukuran kecil
+- raja ukuran sedang
+- santan kelapa
+- saus tomat manis
+- tomat
+- tomat [1bh ukuran sedang, haluskan]
+- tomat(potong-potong)
+
+## Bumbu Olahan
+
+- -4 sdm Tempoyak
+- /secukupnya gula merah
+- Brown sugar
+- Bumbu Gulai
+- Bumbu Pecel / Sambal Kacang
+- Bumbu Rahasia (Fried Chicken)
+- Bumbu Semur
+- Bumbu instan bulgogi
+- Cuka
+- Cuka makan
+- Dark soy sauce
+- Dekstrosa
+- Garam
+- Garam Meja (Table Salt)
+- Garam dan pemasak kambing
+- Garam,Lada,gula
+- Gula
+- Gula Kelapa (gula jawa)
+- Gula Merah
+- Gula Merah (Jawa/Aren)
+- Gula Merah aren
+- Gula Pasir (Granulated Sugar)
+- Gula pasir. Diblender sebentar hingga halus
+- Gula,garam,dan penyedap rasa
+- Gulai Nangka
+- Kaldu Sapi
+- Kaldu ayam bubuk
+- Kaldu jamur Totole
+- Kopi Hitam Tanpa Gula
+- MSG (Monosodium Glutamat)
+- MSG Asatu Rose Brand
+- Madu Murni
+- Madu original (murni atau kemasan tanpa perasa)
+- Mayones
+- Mayonnaise
+- Micin
+- Micin Asatu Rose Brand
+- Petis
+- Petis udang
+- Sambal Ijo
+- Sambal Tauco
+- Sambal terasi dan ikan belanak
+- Saus Barbeque (BBQ Sauce)
+- Saus Cabai
+- Saus Keju
+- Saus Lada Hitam (Black Pepper Sauce)
+- Saus Pedas Manis
+- Saus Tomat
+- Saus Yakiniku
+- Soy sauce
+- Tauco
+- Terasi udang
+- amp; Gula pasir
+- amp; msg secukupnya
+- bumbu Soto instan
+- bumbu halus tekwan
+- bumbu kaldu
+- bumbu pemasak kalio
+- bumbu tekwan kering
+- garam (menurut selera)
+- garam (secukupnya)
+- garam (sesuaikan)
+- garam halus
+- garam kira kira aja
+- garam laut
+- garam putih
+- garam sesuaikan dengan rasa masing2
+- garam, penyedap secukupnya
+- garam/secukupnya
+- gula Pasir Rose Brand
+- gula aren
+- gula aren/gula merah/ gula pasir.. Seadanya aja
+- gula halus
+- gula halus (saya pake claris)
+- gula jawa
+- gula jawa sisir
+- gula jawa, sisir
+- gula jawa/gula aren (secukupnya, sesuai selera aja)
+- gula kelapa coklat
+- gula kelapa serut
+- gula merah [diiris]
+- gula merah cincang
+- gula merah sisir halus
+- gula merah yang telah diserut halus
+- gula merah, sisir
+- gula merah, sisir halus
+- gula pasir
+- gula pasir 律両�¢隆 藍料琉僚粒
+- himalayan salt
+- jika suka Penyedap
+- kaldu ayam
+- kaldu bubuk
+- kaldu bubuk (optional)
+- kaldu bubuk/saya pakai masako
+- kaldu jamur
+- kaldu jamur bubuk
+- kaldu rebusan tulang ayam
+- kecap asin
+- kecap ikan
+- kecap manis
+- masako
+- micin/penyedap/msg
+- penyedap
+- penyedap jamur
+- penyedap jamur (skip juga gak apa-apa)
+- penyedap rasa
+- penyedap rasa (kaldu jamur)
+- saus tiram
+- saus tomat manis
+- sirup merah
+- terasi
+- terasi bakar
+- terasi matang
+
+## Bumbu Rempah
+
+- (3cm), memarkan Jahe
+- (iris tipis) Bawang merah
+- (iris tipis) Bawang putih
+- (iris tipis) Daun bawang
+- (ukuran sedang) Bawang bombay
+- Asam Jawa
+- B. Putih parut
+- Bawang Goreng (Original/Polos)
+- Bawang Goreng Kriuk
+- Bawang putih bawang merah halus
+- Bawang putih cincang
+- Bawang putih haluskan
+- Bawang putih, haluskan
+- Biji Pala
+- Bombay iris panjang
+- Bubuk Cabai
+- Bumbu Dasar Kuning
+- Cabai Bubuk
+- Cabai Hijau Besar
+- Cabai Rawit Merah
+- Cabai merah
+- Cabe merah giling
+- Daun Jeruk
+- Daun bawang (iris)
+- Garam,Lada,gula
+- Jahe bubuk
+- Jahe, lengkuas halus
+- Jeruk Manis
+- Jeruk Sunkist
+- Jintan
+- Kayu manis bubuk
+- Kayumanis
+- Keluwak
+- Kemiri halus
+- Kemiri yang sudah di goreng
+- Kunci
+- Kunyit halus
+- Lada
+- Lada Hitam
+- Laos
+- Lengkuas / Laos
+- Lengkuas geprek
+- Pala
+- Paprika
+- Saus Cabai
+- Saus Lada Hitam (Black Pepper Sauce)
+- Selada Keriting
+- Sereh,laos keprek
+- Temu Kunci
+- adas
+- asam kandis
+- bamer
+- bawang Bombay
+- bawang bombay 3 warna
+- bawang daun
+- bawang goreng
+- bawang goreng (pelengkap)
+- bawang merah
+- bawang merah [haluskan]
+- bawang merah goreng
+- bawang merah iris
+- bawang putih
+- bawang putih [haluskan]
+- bawang putih bubuk
+- bawang putih kating parut
+- bawang putih parut
+- bawang putih, chopped
+- bawang putih, goreng
+- bawang putih, iris
+- besar jahe
+- bubuk kayu manis
+- bubuk merica
+- bunga lawang
+- bunga lawang (pekak)
+- bunga pekak
+- cabai
+- cabai besar
+- cabai keriting merah
+- cabai merah besar
+- cabai merah keriting [haluskan]
+- cabai merah keriting buang bijinya
+- cabai rawit (boleh diskip kalo tidak suka pedas)
+- cabai rawit (sesuaikan tingkat kepedasannya)
+- cabe bubuk
+- cabe halus
+- cabe hijau
+- cabe hijau besar
+- cabe hijau keriting
+- cabe kering
+- cabe kering giling/secukupnya
+- cabe keriting
+- cabe keriting merah
+- cabe kriting
+- cabe merah
+- cabe merah besar
+- cabe merah kering
+- cabe merah keriting
+- cabe merah keriting (optional)
+- cabe rawit
+- cabe rawit (sesuai selera)
+- cabe rawit hijau
+- cabe rawit hijau blender
+- cabe rawit kecil
+- cabe rawit merah
+- cabe rawit merah [haluskan]
+- cabe rawit merah utuh
+- cabe rawit/kriting
+- cabe rawit/sesuai selera
+- cabe setan
+- cengkeh
+- cengkih
+- daun bawang
+- daun bawang potong
+- daun bawang seledri
+- daun bawang, iris
+- daun bawang, iris halus
+- daun jeruk buang tulang nya
+- daun jeruk purut
+- daun jeruk sobek buang batang
+- daun jeruk, buang tulang tengahnya dan iris tipis
+- daun kari
+- daun kunyit
+- daun kunyit di ikat
+- daun kunyit(saya skip)
+- daun prei
+- daun salam
+- iris lengkuas
+- irisan daun jeruk
+- jahe
+- jahe kupas
+- jari Jahe
+- jari kencur
+- jari kunyit
+- jari kunyit bakar
+- jeruk
+- jeruk limau
+- jeruk nipis
+- jeruk nipis/ lemon/ limau (pelengkap)
+- jeruk purut
+- kapulaga
+- kas-kas
+- kayu manis
+- kelopak bunga lawang
+- kemiri
+- kemiri bakar
+- kemiri sangrai
+- kencur
+- kepala kambing
+- ketumbar
+- ketumbar bubuk
+- ketumbar sangrai
+- kunyit
+- kunyit bubuk
+- kuyit [haluskan]
+- lada (me: lada hitam)
+- lada bubuk
+- lada bubuk putih
+- lengkuas
+- lengkuas [digeprek]
+- lengkuas bubuk
+- lengkuas di geprek
+- lengkuas, geprek
+- lengkuas, parut
+- merica
+- merica bubuk
+- mrica bubuk
+- pala bubuk
+- perasan jeruk nipis
+- serai
+- serai geprek
+- serai, geprek
+- serai, potong 3 lalu geprek
+- serai, rajang halus
+- sere geprek
+- sereh
+- sereh [digeprek]
+- sereh di geprek
+- sereh geprek
+- sereh, geprek
+- seukuran ibu jari jahe
+- seukuran ibu jari kunyit
+- temu kunci iris tipis (opsional jika ada)
+
+## Daging Merah
+
+- Aneka bakso seafood
+- Babat Sapi
+- Bakso sapi
+- Cingur Sapi
+- Daging Asap
+- Daging Kambing
+- Daging Sapi (Beef)
+- Daging Sapi Cincang
+- Daging sapi slice (tanpa lemak)
+- Garam dan pemasak kambing
+- Hati sapi
+- Iga Sapi
+- Jeroan Sapi
+- Kaldu Sapi
+- Kikil Sapi
+- Lidah Sapi
+- Otak Sapi
+- Paru sapi
+- Sei sapi (daging dengan lemak)
+- Sosis Sapi
+- Susu Sapi Murni
+- Susu Sapi Segar
+- bakso
+- daging
+- daging babi /babi hutan
+- daging sapi
+- kaki kambing
+- kepala kambing
+- kornet sapi
+- kulit sapi potong/kikil
+- slice Beef
+- smoked beef, iris
+- sosis
+- sosis, iris
+- tetelan sapi / daging
+- urat sapi/ kaki sapi
+
+## Daging Putih
+
+- Ayam
+- Ayam (ayamnya sudah direbus duluan)
+- Ayam Dada
+- Ayam Fillet (Dada)
+- Ayam Goreng
+- Ayam Goreng Tepung
+- Ayam Kampung
+- Ayam Potong (Broiler)
+- Bayam Hijau
+- Belut yang ukurang besar
+- Bumbu Rasa Ayam (Bubuk)
+- Cumi-Cumi
+- Dada Ayam
+- Daging Ayam Asap
+- Daging Ayam Cincang
+- Daging Ayam Suwir
+- Daging Bebek
+- Hati Ayam
+- Ikan Barakuda
+- Ikan Cucut
+- Ikan Dori Fillet
+- Ikan Ekor Kuning
+- Ikan Kembung
+- Ikan Laut
+- Ikan Layang
+- Ikan Lele
+- Ikan Mas
+- Ikan Mubara
+- Ikan Nila
+- Ikan Salem
+- Ikan Tenggiri
+- Ikan Teri (Kering Asin)
+- Ikan Tongkol
+- Ikan Tuna
+- Ikan belida giling
+- Kaldu ayam bubuk
+- Paha Ayam Atas (Tanpa Kulit)
+- Paha Ayam Bawah
+- Patty Ayam
+- Petis udang
+- Rebung (Tunas Bambu)
+- Sambal terasi dan ikan belanak
+- Sosis Ayam
+- Terasi udang
+- Udang Kupas
+- ayam (lbh enak ayam kampung), rebus, suwir2
+- ayam filet (aku pakai dada ayam)
+- ayam ukuran besar (sekitar 2 kg)
+- ayam, potong sesuai selera
+- bayam
+- cabai rawit (sesuaikan tingkat kepedasannya)
+- dada ayam TG
+- daging ayam
+- daging ikan hiu
+- daging ikan tenggiri
+- filett paha ayam
+- fillet ayam, bagian paha
+- garam (sesuaikan)
+- garam sesuaikan dengan rasa masing2
+- ikan (me : Baung Sungai)
+- ikan bandeng [3-4ekor]
+- ikan cakalang asap
+- ikan dencis / ikan kembung / ikan kakap/ ikan tongkol
+- ikan mujaer
+- ikan patin
+- ikan patin(potong-potong)
+- ikan roa kering,bersihkan dr tulangnya
+- ikan tongkol ukuran besar
+- kaldu ayam
+- kaldu rebusan tulang ayam
+- kecap ikan
+- kulit ikan Tenggiri
+- lemak ikan
+- paha ayam
+- paha ayam (2 potong)
+- paha ayam fillet
+- paha ayam, saya pakai yang ukuran besar
+- udang
+- udang kering
+
+## Kacang-kacangan
+
+- Bumbu Kacang
+- Bumbu Pecel / Sambal Kacang
+- Buncis
+- Kacang Almond
+- Kacang Kedelai (Soybeans)
+- Kacang Kedelai Goreng
+- Kacang Merah
+- Kacang hijau
+- Kacang kedelai
+- Kacang tanah (sangrai)
+- Kacang tolo
+- Kenari cincang, sangrai
+- Kulit Tahu
+- Melinjo
+- Oncom
+- Tahu Goreng
+- Tahu Goreng (Polos)
+- Tahu Sumedang
+- Tahu dan tempe
+- Taoge yang sudah direbus
+- Tempe Goreng
+- Tempe Orek
+- Tempe kedelai
+- Toge
+- kacang panjang
+- kacang tanah
+- kacang tanah (tanpa kulit dan sudah disangrai/matang)
+- kacang tanah goreng
+- kacang tholo
+- keju parut (bisa diganti dengan kelapa / tahu / daging cincang)
+- kulit ari kacang tanah,cuci bersih
+- okara
+- tahu coklat, potong jadi 2
+- tahu putih
+- tauge
+- tempe kacang tanah (bungkil)
+
+## Santan
+
+- Santan Encer
+- Santan Rose Brand
+- Santan kental
+- Santan kental Rose Brand
+- Santan sedang kurang lebih
+- kuah santan susu
+- santan
+- santan (kekentalan sedang)
+- santan hangat
+- santan instan
+- santan instan Rose Brand
+- santan instant
+- santan kara
+- santan kara segitiga
+- santan kelapa
+- x 65 ml santan
+
+## Sayur
+
+- Bayam Hijau
+- Biji Nangka
+- Brokoli
+- Buncis
+- Caisim
+- Daun melinjo,potong2
+- Gulai Nangka
+- Ikan Tongkol
+- Jamur Kancing
+- Jengkol
+- Kaldu jamur Totole
+- Kangkung yang sudah direbus
+- Kembang Kol
+- Kol Putih
+- Nangka Muda
+- Paprika
+- Pete
+- Pisang raja nangka
+- Sawi Asin
+- Sawi Hijau
+- Sayur Lodeh
+- Selada Keriting
+- Taoge yang sudah direbus
+- Terong
+- Terong Bulat
+- Toge
+- Wortel (Carrot)
+- Wortel iris panjang
+- bayam
+- daun bawang seledri
+- daun katuk
+- daun kemangi
+- daun mlinjo
+- daun seledri
+- ikan dencis / ikan kembung / ikan kakap/ ikan tongkol
+- ikan tongkol ukuran besar
+- jamur
+- jamur kering yg sdh direndam sampai lunak trus di potong kecil kecil
+- jamur shiitake
+- jamur tiram
+- jengkol kupas rebus
+- kaldu jamur
+- kaldu jamur bubuk
+- kangkung
+- kangkung, siangi daunnya
+- kemangi
+- kemangi, petiki
+- kembang kol kecil
+- kobis, potong2
+- kol
+- kubis
+- kubis kecil
+- leunca
+- nangka muda sudah dibersihkan
+- pakis
+- penyedap jamur
+- penyedap jamur (skip juga gak apa-apa)
+- penyedap rasa (kaldu jamur)
+- pok choy
+- putren kecil
+- rebung Asam
+- sawi putih
+- sayur sop
+- sayur terubuk
+- seledri
+- tangkai daun seledri
+- tauge
+- terong hijau
+- terong ijo bulet (terong batik)
+- terong ungu
+- wortel
+- wortel kecil
+
+## Seafood
+
+- Belut yang ukurang besar
+- Cumi-Cumi
+- Daging tenggiri giling setengah beku
+- Ikan Barakuda
+- Ikan Cucut
+- Ikan Dori Fillet
+- Ikan Ekor Kuning
+- Ikan Kembung
+- Ikan Laut
+- Ikan Layang
+- Ikan Lele
+- Ikan Mas
+- Ikan Mubara
+- Ikan Nila
+- Ikan Salem
+- Ikan Tenggiri
+- Ikan Teri (Kering Asin)
+- Ikan Tongkol
+- Ikan Tuna
+- Ikan belida giling
+- Kepiting
+- Petis udang
+- Rebung (Tunas Bambu)
+- Sambal terasi dan ikan belanak
+- Santan sedang kurang lebih
+- Tepung Terigu
+- Tepung Terigu (Serbaguna)
+- Tepung Terigu Segitiga Biru
+- Tepung terigu protein sedang
+- Terasi udang
+- Teri Medan
+- Teri nasi goreng
+- Udang Kupas
+- Vanila esens
+- bandeng (1 ekor) sudah bersih dari tulang dan kulit jadi tinggal 250 g daging bandeng
+- cabai rawit (sesuaikan tingkat kepedasannya)
+- coklat chips / potong kecil-kecil biar cepat meleleh
+- daging ikan hiu
+- daging ikan tenggiri
+- ebi
+- ebi sangrai
+- garam (sesuaikan)
+- garam sesuaikan dengan rasa masing2
+- ikan (me : Baung Sungai)
+- ikan bandeng [3-4ekor]
+- ikan cakalang asap
+- ikan dencis / ikan kembung / ikan kakap/ ikan tongkol
+- ikan mujaer
+- ikan patin
+- ikan patin(potong-potong)
+- ikan roa kering,bersihkan dr tulangnya
+- ikan tongkol ukuran besar
+- kecap ikan
+- kulit ikan Tenggiri
+- kurang 2 jari terigu
+- lemak ikan
+- margarin, lelehkan
+- pasta vanila
+- penuh Tepung terigu
+- scalop kering rendam disuir suir
+- tekwan basah
+- tepung terigu pro rendah
+- tepung terigu pro sedang
+- tepung terigu protein rendah (10.6%)
+- tepung terigu protein tinggi
+- terasi
+- terasi bakar
+- terasi matang
+- terigu
+- terigu protein sedang
+- udang
+- udang kering
+
+## Susu
+
+- Butter
+- Greek Yogurt
+- Greek Yogurt (Plain/Nonfat)
+- Keju
+- Keju Mozarella
+- Keju Mozzarella
+- Keju Parmesan
+- Keju cheddar
+- Keju parut
+- Kental Manis Cap Enaak
+- Margarin Rose Brand
+- Margarine/mentega
+- Mentega Tawar (Unsalted Butter)
+- SASET SKM putih
+- Saus Keju
+- Susu Almond
+- Susu Bubuk (Full Cream)
+- Susu Evaporasi
+- Susu Kental Manis (SKM)
+- Susu Oat
+- Susu Sapi Murni
+- Susu Sapi Segar
+- Susu Segar
+- Susu kental manis coklat
+- Yogurt
+- blueband
+- botol susu fresh (merk apapun sesuai selera)
+- es Krim
+- keju parut (bisa diganti dengan kelapa / tahu / daging cincang)
+- kental manis
+- kuah santan susu
+- margarin
+- margarin palmia
+- margarin untuk menumis
+- margarin, lelehkan
+- margarine
+- mentega
+- skm
+- susu
+- susu bubuk
+- susu kental manis
+- tepung buah sawo mentega
+- vanilla butter
+
+## Tidak Terkategori
+
+- (ukuran sedang) Telur
+- -2 telur
+- /Secukupnya air
+- /secukupnya minyak sayur
+- Agar-agar
+- Air (rebusan kedua)
+- Air (rebusan pertama)
+- Air Cucian Beras
+- Air Kelapa Muda
+- Air Minum
+- Air asam (Asam jawa yang di rendam ke dalam air)
+- Air bersih
+- Air biasa
+- Air dingin
+- Air kaldu ayam (homemade)
+- Air putih + 1 SDM susu bubuk
+- Baking Powder
+- Bubuk Cokelat (Cocoa Powder)
+- Bumbu Rempah
+- Bumbu Tabur
+- Bumbu halus :
+- Choco chip sebagai mata ulat
+- Cokelat Batang (Compound)
+- Cokelat Manis
+- Cokelat Pasta
+- Cola
+- Daun Pandan
+- Daun pandan, ikat simpul
+- Ekstrak Paprika (Oleoresin)
+- Emping
+- Evoo
+- Hiasan : springkel/ chocochip
+- Ikan Gabus
+- Jambu Air
+- Kapur sirih
+- Kerupuk (Umum)
+- Kerupuk Aci
+- Kerupuk Mawar (Putih)
+- Kikil
+- Kobe Tepung Kentucky SuperCrispy (75 gram)
+- Kontak
+- Labu Kuning
+- Labu Siam
+- Mi Tepung Terigu (Mi Telur/Kering)
+- Minuman Teh Kemasan
+- Minyak Bawang
+- Minyak Bumbu (Seasoning Oil)
+- Minyak Goreng (Kelapa Sawit)
+- Minyak Makan
+- Minyak Nabati (Vegetable Oil)
+- Minyak Wijen (Sesame Oil)
+- Minyak Zaitun
+- Minyak goreng
+- Minyak sayur
+- Minyak untuk menggoreng
+- Pandan
+- Pasta Pandan
+- Pewarna makanan merah
+- Pewarna merah n hijau
+- Putih Telur
+- Putih Telur Rebus
+- Ragi
+- Ragi Instan
+- SP
+- Sedaer (selada air)
+- Sedikit Baking Powder
+- Sedikit vanili bubuk
+- Selada Air
+- Soda Kue
+- Spaghetti
+- Susu Cair
+- Telur Ayam Ras
+- Telur Balado
+- Telur Bebek
+- Telur Ceplok
+- Vanili Bubuk
+- Vanili cair
+- air
+- air (disesuaikan)
+- air asam Jawa (4 sdt asam Jawa)
+- air asam jawa
+- air endapan kapur sirih
+- air es
+- air hangat
+- air jeruk nipis
+- air kaldu
+- air matang
+- air mineral
+- air panas
+- air pandan suji (5 lembar pandan + 10 lembar Suji + air)
+- air rebusan
+- air rendaman jamur
+- air secukupnya
+- air ungkepan ayam
+- air untuk merebus ubi ungu
+- air untuk merendam singkong
+- air/secukupnya
+- ayam broiler (lebih bagus pakai ayam kampung/ayam petelur)
+- baking soda
+- bakwan
+- biji labu
+- bubuk kakao (Dutch cocoa powder)
+- bunga telang kering
+- charcoal bubuk
+- coklat bubuk (saya pake roman)
+- daun pandan ikat simpul
+- daun pandan kecil
+- daun pandan?
+- daun pisang
+- emping melinjo goreng
+- endapan pandan
+- es batu dihancurkan
+- gula pasir Rose Brand untuk taburan
+- jelly
+- jus pandan
+- jus pandan suji
+- kelapa parut setengah tua (kukus dulu dg daun pandan 20 menitan)
+- kerupuk kulit/krecek..tambahan aja /boleh di skip
+- kerupuk udang
+- kuning telur
+- labu Siam besar
+- labu kuning dikupas
+- mie telur
+- mie telur kering
+- minyak
+- minyak ayam
+- minyak goreng (opsional)
+- minyak goreng (sesuaikan kebutuhan)
+- minyak goreng Rose Brand
+- minyak goreng panas
+- minyak kelapa
+- minyak sayur untuk menggoreng ikan
+- minyak sayur untuk menumis
+- minyak untuk menumis
+- minyak wijen
+- pada bubuk
+- pasta pandan+1/4 sdt pewarna orange
+- pasta vanilla
+- pelapa daun pisang
+- pewarna (hijau dan merah)
+- quot;
+- ragi tape
+- santan (65ml santan instan + air)
+- santan (saya pakai 2 santan instan pakai air dan di tambah 2-3 sdm fiber cream)
+- santan (sy 200 ml santan Rose Brand+ air)
+- santan instan + air
+- starter
+- telor
+- telur
+- telur ayam
+- telur ayam, rebus
+- telur bebek mentah
+- telur rebus
+- telur ukuran besar
+- telur utuh
+- tetes Pewarna kuning
+- vanili
+- vanilla
+- vanilla cair (sesuai selera)
+
+## Umbi-umbian
+
+- (ukuran sedang) Kentang
+- Bengkuang
+- Kentang (Potato)
+- Konjac / Shirataki
+- Perkedel Kentang
+- Pucuk ubi jalar
+- Sagu Ambon
+- Ubi Jalar
+- Ubi oranye, potong dadu
+- daun singkong
+- daun singkong muda
+- gaplek atau singkong kering
+- kecil daun singkong
+- kentang
+- kentang kukus
+- kubis
+- kubis kecil
+- sagu
+- sagu basah
+- singkong
+- singkong kupas, iris tipis, cuci
+- singkong segar
+- singkong yang sudah direbus dan dihaluskan
+- suweg
+- talas ukuran besar
+- tape singkong
+- ubi ungu
+- ubi ungu (1/2kg)
+- umbi ganyong (sy 300 ubi)
+
+## Unggas
+
+- Ayam
+- Ayam (ayamnya sudah direbus duluan)
+- Ayam Dada
+- Ayam Fillet (Dada)
+- Ayam Goreng
+- Ayam Goreng Tepung
+- Ayam Kampung
+- Ayam Potong (Broiler)
+- Bayam Hijau
+- Bumbu Rasa Ayam (Bubuk)
+- Dada Ayam
+- Daging Ayam Asap
+- Daging Ayam Cincang
+- Daging Ayam Suwir
+- Daging Bebek
+- Hati Ayam
+- Kaldu ayam bubuk
+- Paha Ayam Atas (Tanpa Kulit)
+- Paha Ayam Bawah
+- Patty Ayam
+- Sosis Ayam
+- ayam (lbh enak ayam kampung), rebus, suwir2
+- ayam filet (aku pakai dada ayam)
+- ayam ukuran besar (sekitar 2 kg)
+- ayam, potong sesuai selera
+- bayam
+- dada ayam TG
+- daging ayam
+- filett paha ayam
+- fillet ayam, bagian paha
+- kaldu ayam
+- kaldu rebusan tulang ayam
+- paha ayam
+- paha ayam (2 potong)
+- paha ayam fillet
+- paha ayam, saya pakai yang ukuran besar

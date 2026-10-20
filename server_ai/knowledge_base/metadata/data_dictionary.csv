@@ -1,0 +1,61 @@
+source_dataset,source_column,target_database,target_table_or_collection,target_field,transformation,missing_value_behavior,notes
+Primary_Dataset_Cleaned.xlsx,id,SQLite,nutrition,id,None (direct copy),NOT NULL (0 missing),Primary key
+Primary_Dataset_Cleaned.xlsx,kode,SQLite,nutrition,kode,None (direct copy),NULL when missing (6.49%),
+Primary_Dataset_Cleaned.xlsx,Nama Makanan,SQLite,nutrition,Nama Makanan,None (direct copy),NOT NULL (0 missing),
+Primary_Dataset_Cleaned.xlsx,kategori_umum,SQLite,nutrition,kategori_umum,None (direct copy),NULL when missing (0.02%),"Values: Mentah, Olahan, Restaurant, Kemasan, Tidak Diketahui, Western"
+Primary_Dataset_Cleaned.xlsx,siap_konsumsi,SQLite,nutrition,siap_konsumsi,None (direct copy),NULL when missing (67.79%),"0=tidak siap konsumsi, 1=siap konsumsi"
+Primary_Dataset_Cleaned.xlsx,kategori_spesifik,SQLite,nutrition,kategori_spesifik,None (direct copy),NULL when missing (0.23%),"Values: Nasi, Lauk, Snack, Others, Minuman, Buah, Masakan, Sayur, Kemasan"
+Primary_Dataset_Cleaned.xlsx,cara_olah,SQLite,nutrition,cara_olah,None (direct copy),NULL when missing (99.34%),"Values: Kukus, Rebus"
+Primary_Dataset_Cleaned.xlsx,porsi_g,SQLite,nutrition,porsi_g,None (direct copy),NULL when missing (0.02%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,kalori_kal,SQLite,nutrition,kalori_kal,None (direct copy),NULL when missing (0.18%),Unit: kkal
+Primary_Dataset_Cleaned.xlsx,karbohidrat_g,SQLite,nutrition,karbohidrat_g,None (direct copy),NULL when missing (0.18%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,serat_g,SQLite,nutrition,serat_g,None (direct copy),NULL when missing (5.92%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,gula_g,SQLite,nutrition,gula_g,None (direct copy),NULL when missing (24.48%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,starch_g,SQLite,nutrition,starch_g,None (direct copy),NULL when missing (40.21%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,protein_g,SQLite,nutrition,protein_g,None (direct copy),NULL when missing (0.09%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,lemak_g,SQLite,nutrition,lemak_g,None (direct copy),NULL when missing (0.07%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,lemak_jenuh_g,SQLite,nutrition,lemak_jenuh_g,None (direct copy),NULL when missing (23.61%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,lemak_trans_g,SQLite,nutrition,lemak_trans_g,None (direct copy),NULL when missing (32.73%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,(MUFA+PUFA)_lemak_tak_jenuh_g,SQLite,nutrition,mufa_pufa_lemak_tak_jenuh_g,Column renamed (brackets incompatible with SQL),NULL when missing (93.44%),Original col: (MUFA+PUFA)_lemak_tak_jenuh_g; Unit: gram
+Primary_Dataset_Cleaned.xlsx,lemak_tak_jenuh_tunggal_g(MUFA),SQLite,nutrition,lemak_tak_jenuh_tunggal_g_MUFA,Column renamed (brackets in name),NULL when missing (30.4%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,lemak_tak_jenuh_ganda_g(PUFA),SQLite,nutrition,lemak_tak_jenuh_ganda_g_PUFA,Column renamed (brackets in name),NULL when missing (30.4%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,air_g,SQLite,nutrition,air_g,None (direct copy),NULL when missing (22.63%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,abu_g,SQLite,nutrition,abu_g,None (direct copy),NULL when missing (20.85%),Unit: gram
+Primary_Dataset_Cleaned.xlsx,sodium_mg,SQLite,nutrition,sodium_mg,None (direct copy),NULL when missing (12.73%),Unit: mg
+Primary_Dataset_Cleaned.xlsx,glikemik_indeks,SQLite,nutrition,glikemik_indeks,None (direct copy),NULL when missing (98.38%),Actual measured GI
+Primary_Dataset_Cleaned.xlsx,estimated_glikemik_indeks,SQLite,nutrition,estimated_glikemik_indeks,None (direct copy),NULL when missing (93.51%),Estimated/calculated GI
+Primary_Dataset_Cleaned.xlsx,net_karbo,SQLite,nutrition,net_karbo,None (direct copy),NULL when missing (7.57%),Net carbs = karbohidrat_g - serat_g
+Primary_Dataset_Cleaned.xlsx,zinc_mg,SQLite,nutrition,zinc_mg,None (direct copy),NULL when missing (14.06%),Unit: mg
+Primary_Dataset_Cleaned.xlsx,glikemik_risk,SQLite,nutrition,glikemik_risk,None (direct copy; typo documented),NULL when missing (37.49%),"Values: low, moderate, high; TYPO: 1 row contains ""hifh"" — preserved as-is, documented"
+Primary_Dataset_Cleaned.xlsx,kategori_utama,SQLite,nutrition,kategori_utama,None (direct copy),NULL when missing (0.02%),Multiple values comma-separated in some rows
+Primary_Dataset_Cleaned.xlsx,familiar?,SQLite,nutrition,familiar,Column renamed (? removed),NOT NULL (0 missing),"Values: Familiar, Tidak Familiar, none; original col: familiar?"
+Primary_Dataset_Cleaned.xlsx,kategori_daging,SQLite,nutrition,kategori_daging,None (direct copy),NULL when missing (85.19%),
+Primary_Dataset_Cleaned.xlsx,lauk_nabati,SQLite,nutrition,lauk_nabati,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,lauk_hewani,SQLite,nutrition,lauk_hewani,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,seafood,SQLite,nutrition,seafood,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,bumbu,SQLite,nutrition,bumbu,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,snack,SQLite,nutrition,snack,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,dessert,SQLite,nutrition,dessert,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,dairy,SQLite,nutrition,dairy,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,bahan-mentah,SQLite,nutrition,bahan_mentah,Column renamed (hyphen removed),NOT NULL (0 missing),Binary flag: 0 or 1; original col: bahan-mentah
+Primary_Dataset_Cleaned.xlsx,minuman,SQLite,nutrition,minuman,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,buah,SQLite,nutrition,buah,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,ultraproses_kemasan,SQLite,nutrition,ultraproses_kemasan,None (direct copy),NOT NULL (0 missing),Binary flag: 0 or 1
+Primary_Dataset_Cleaned.xlsx,id,Neo4j,Food,food_id,None (direct copy),NOT NULL,Node ID: food_{id}
+Primary_Dataset_Cleaned.xlsx,Nama Makanan,Neo4j,Food,nama_makanan,None (direct copy),NOT NULL,
+Primary_Dataset_Cleaned.xlsx,kategori_umum,Neo4j,Category,nama_kategori,Extracted to separate node,NULL node not created,jenis_kategori=kategori_umum
+Primary_Dataset_Cleaned.xlsx,kategori_utama,Neo4j,Category,nama_kategori,Extracted to separate node,NULL node not created,jenis_kategori=kategori_utama
+New_Ingredients_category.xlsx,kode,ChromaDB,indonesian_recipes,kode (metadata),Used as recipe_key; NOCODE_{nama_masakan} when missing,Empty string when NULL (46.3%),ChromaDB metadata cannot be null; use empty string
+New_Ingredients_category.xlsx,nama_masakan,ChromaDB,indonesian_recipes,recipe_name (metadata),Used as recipe display name,NOT NULL (0 missing),
+New_Ingredients_category.xlsx,nama_asli_resep,ChromaDB,indonesian_recipes,original_recipe_name (metadata),None (direct copy),NOT NULL (0 missing),
+New_Ingredients_category.xlsx,bahan_bahan,ChromaDB,indonesian_recipes,document_text (inline),"Formatted as ""- {jumlah} {satuan} {bahan}""",NOT NULL (0 missing),
+New_Ingredients_category.xlsx,jumlah_satuan_float,ChromaDB,indonesian_recipes,document_text (inline),Formatted with satuan in ingredient text,Omitted from text when missing (8.04%),Unit: float (e.g. 2.0)
+New_Ingredients_category.xlsx,satuan_urt_clean,ChromaDB,indonesian_recipes,document_text (inline),Formatted with jumlah in ingredient text,Omitted from text when missing (49.49%),
+New_Ingredients_category.xlsx,kategori,ChromaDB,indonesian_recipes,ingredient_categories (metadata),Parsed from Python list string; deduplicated per recipe,Empty string when NULL (16.81%),ChromaDB metadata cannot be null; use empty string; ALLERGY NOT INFERRED
+New_Ingredients_category.xlsx,kode,Neo4j,Recipe,kode,None (direct copy),Empty string when NULL,
+New_Ingredients_category.xlsx,nama_masakan,Neo4j,Recipe,nama_masakan,None (direct copy),NOT NULL,
+New_Ingredients_category.xlsx,nama_asli_resep,Neo4j,Recipe,nama_asli_resep,None (direct copy),NOT NULL,
+New_Ingredients_category.xlsx,bahan_bahan,Neo4j,Ingredient,nama_bahan,Lowercased for deduplication; original preserved,NOT NULL,Unique ingredient extracted
+New_Ingredients_category.xlsx,jumlah_satuan_float,Neo4j,CONTAINS,jumlah,Converted to string for CSV,Empty string when NULL,Relationship property
+New_Ingredients_category.xlsx,satuan_urt_clean,Neo4j,CONTAINS,satuan,None (direct copy),Empty string when NULL,Relationship property
+New_Ingredients_category.xlsx,kategori,Neo4j,Category,nama_kategori,Parsed list; each category → Category node,NULL categories not created as nodes,jenis_kategori=ingredient_kategori; ALLERGY NOT INFERRED

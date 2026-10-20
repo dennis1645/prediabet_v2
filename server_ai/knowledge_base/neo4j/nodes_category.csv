@@ -1,0 +1,187 @@
+:ID,:LABEL,category_id,nama_kategori,jenis_kategori,source_dataset
+cat_00000,Category,cat_00000,Mentah,kategori_umum,Primary_Dataset_Cleaned.xlsx
+cat_00001,Category,cat_00001,Olahan,kategori_umum,Primary_Dataset_Cleaned.xlsx
+cat_00002,Category,cat_00002,Restaurant,kategori_umum,Primary_Dataset_Cleaned.xlsx
+cat_00003,Category,cat_00003,Kemasan,kategori_umum,Primary_Dataset_Cleaned.xlsx
+cat_00004,Category,cat_00004,Tidak Diketahui,kategori_umum,Primary_Dataset_Cleaned.xlsx
+cat_00005,Category,cat_00005,Western,kategori_umum,Primary_Dataset_Cleaned.xlsx
+cat_00006,Category,cat_00006,Bahan Mentah,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00007,Category,cat_00007,Makanan Pokok,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00008,Category,cat_00008,"Makanan Pokok, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00009,Category,cat_00009,"Bahan Mentah, Bumbu",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00010,Category,cat_00010,"Makanan Pokok, Bahan Mentah",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00011,Category,cat_00011,"Bahan Mentah, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00012,Category,cat_00012,"Makanan Pokok, Lauk Nabati",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00013,Category,cat_00013,Bumbu,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00014,Category,cat_00014,Olahan,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00015,Category,cat_00015,Dessert,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00016,Category,cat_00016,Snack,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00017,Category,cat_00017,"Snack, Dessert",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00018,Category,cat_00018,"Olahan, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00019,Category,cat_00019,"Olahan, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00020,Category,cat_00020,"Dessert, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00021,Category,cat_00021,Lauk Hewani,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00022,Category,cat_00022,Buah-buahan,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00023,Category,cat_00023,Ultraproses,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00024,Category,cat_00024,"Olahan, snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00025,Category,cat_00025,"Olahan, Sayur",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00026,Category,cat_00026,"Lauk Hewani, Seafood, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00027,Category,cat_00027,"Bahan Mentah, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00028,Category,cat_00028,"Bahan Mentah, Buah-buahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00029,Category,cat_00029,Lauk Nabati,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00030,Category,cat_00030,"Bahan Mentah, Lauk Nabati",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00031,Category,cat_00031,"Olahan, Lauk Nabati",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00032,Category,cat_00032,Olahan Lauk Nabati,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00033,Category,cat_00033,"Snack, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00034,Category,cat_00034,"Bahan Mentah, Diary",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00035,Category,cat_00035,Dairy,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00036,Category,cat_00036,"Lauk Nabati, Bahan Mentah",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00037,Category,cat_00037,"Bumbu, Bahan Mentah",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00038,Category,cat_00038,"Bahan Mentah, Sayur",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00039,Category,cat_00039,Sayur,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00040,Category,cat_00040,"Olahan, Buah-Buahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00041,Category,cat_00041,"Olahan, Lauk Nabati, Lauk Hewani, Sayur",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00042,Category,cat_00042,"Olahan, Sayur, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00043,Category,cat_00043,"Olahan, Sayur, Lauk Nabati",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00044,Category,cat_00044,"Bahan Mentah, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00045,Category,cat_00045,"Bahan Mentah, Buah-buahan, Bumbu",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00046,Category,cat_00046,"Olahan, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00047,Category,cat_00047,"Olahan, Dessert",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00048,Category,cat_00048,"Bahan Mentah, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00049,Category,cat_00049,"Bahan Tabur, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00050,Category,cat_00050,"Bahan mentah, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00051,Category,cat_00051,"Fast Food, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00052,Category,cat_00052,"Olahan, Lauk Hewani, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00053,Category,cat_00053,"Olahan, Makanan Pokok, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00054,Category,cat_00054,"Bahan Mentah, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00055,Category,cat_00055,"Olahan, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00056,Category,cat_00056,"Lauk Hewani, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00057,Category,cat_00057,Bahan tabur,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00058,Category,cat_00058,"Olahan, Lauk Hewani, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00059,Category,cat_00059,"Bahan Mentah, Lauk Hewani, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00060,Category,cat_00060,"Bahan Mentah, Dairy",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00061,Category,cat_00061,"Dairy, Dessert",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00062,Category,cat_00062,Lema dan Minyak,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00063,Category,cat_00063,Bahan Mentah & Lema dan Minyak,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00064,Category,cat_00064,Minuman,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00065,Category,cat_00065,"Bahan Mentah, Bahan tabur",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00066,Category,cat_00066,"ultraproses, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00067,Category,cat_00067,"ultraproses , Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00068,Category,cat_00068,"Bahan Mentah, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00069,Category,cat_00069,"Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00070,Category,cat_00070,"Bahan Mentah, bumbu",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00071,Category,cat_00071,Bahan Mentah: Buah-buahan,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00072,Category,cat_00072,Diary dan es,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00073,Category,cat_00073,Olahan: buah,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00074,Category,cat_00074,"Olahan, Buah",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00075,Category,cat_00075,"Buah-buahan, Dessert",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00076,Category,cat_00076,"Olahan, Lauk nabati",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00077,Category,cat_00077,"Dessert, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00078,Category,cat_00078,"Dessert, Sayur",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00079,Category,cat_00079,"Olahan, Sayur, Lauk Nabati, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00080,Category,cat_00080,"Snack, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00081,Category,cat_00081,"Lauk Nabati, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00082,Category,cat_00082,"Minuman, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00083,Category,cat_00083,Olahan.,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00084,Category,cat_00084,"Ultraproses, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00085,Category,cat_00085,"diam walau dimarahi, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00086,Category,cat_00086,Bahan Tabur,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00087,Category,cat_00087,"Dairy, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00088,Category,cat_00088,"Buah-buahan, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00089,Category,cat_00089,"Lauk Hewani, Fast Food",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00090,Category,cat_00090,"Buah-buahan, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00091,Category,cat_00091,"Dessert, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00092,Category,cat_00092,"Lauk Hewani, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00093,Category,cat_00093,"Minuman, Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00094,Category,cat_00094,"Dairy, Lauk Hewani, Minuman, Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00095,Category,cat_00095,"Dairy, Minuman, Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00096,Category,cat_00096,"Bumbu, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00097,Category,cat_00097,"Ultraproses, Lauk Hewani",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00098,Category,cat_00098,"Minuman, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00099,Category,cat_00099,"Dairy, Minuman, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00100,Category,cat_00100,"Dairy, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00101,Category,cat_00101,"Ultraproses, Diary",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00102,Category,cat_00102,"Dairy, Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00103,Category,cat_00103,"Dessert, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00104,Category,cat_00104,"Buah-buahan, Dessert, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00105,Category,cat_00105,"Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00106,Category,cat_00106,"Ultraproses, Minyak Lemak",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00107,Category,cat_00107,"Dairy, Dessert, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00108,Category,cat_00108,"Ultraproses, Suplemen Nutrisi",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00109,Category,cat_00109,"Ultraproses, Bahan Tabur",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00110,Category,cat_00110,"Lauk Nabati, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00111,Category,cat_00111,"Olahan, Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00112,Category,cat_00112,"Ultraproses, Lauk Hewani, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00113,Category,cat_00113,"Ultraproses, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00114,Category,cat_00114,"Bumbu, Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00115,Category,cat_00115,"Dairy, Ultraproses, Suplemen Nutrisi",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00116,Category,cat_00116,"Dairy, Ultraproses, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00117,Category,cat_00117,"Buah-buahan, Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00118,Category,cat_00118,"Lauk Hewani, Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00119,Category,cat_00119,"Buah-buahan, Dairy, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00120,Category,cat_00120,"Ultraproses, Dessert",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00121,Category,cat_00121,"Dessert, Ultraproses, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00122,Category,cat_00122,Fast Food,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00123,Category,cat_00123,"Fast Food, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00124,Category,cat_00124,"Fast Food, Lauk Hewani, Seafood",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00125,Category,cat_00125,"Lauk Hewani, Seafood, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00126,Category,cat_00126,"Sayur, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00127,Category,cat_00127,"Fast Food, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00128,Category,cat_00128,"Ultraproses, Snack",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00129,Category,cat_00129,"Sayur, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00130,Category,cat_00130,"Bahan Tabur, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00131,Category,cat_00131,"Bumbu, Dairy, Lauk Nabati, Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00132,Category,cat_00132,"Buah-buahan, Dairy, Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00133,Category,cat_00133,"Buah-buahan, Dairy",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00134,Category,cat_00134,"Dessert, Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00135,Category,cat_00135,"Bumbu, Olahan",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00136,Category,cat_00136,"Dairy, Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00137,Category,cat_00137,Bahan Oles,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00138,Category,cat_00138,"Bahan Oles, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00139,Category,cat_00139,"Buah-buahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00140,Category,cat_00140,"Dessert, Minuman, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00141,Category,cat_00141,"Ultraproses, Bahan Oles",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00142,Category,cat_00142,"Makanan Pokok, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00143,Category,cat_00143,Ultraproses dapat melink,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00144,Category,cat_00144,Ultraproses Minuman,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00145,Category,cat_00145,"Bahan Oles, Ultraproses)",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00146,Category,cat_00146,"Suplemen Nutrisi, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00147,Category,cat_00147,"Ultraproses, Diary, Suplemen Nutrisi",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00148,Category,cat_00148,"Diary, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00149,Category,cat_00149,"Minuman Dairy, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00150,Category,cat_00150,"Ultraproses, Makanan Pokok",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00151,Category,cat_00151,"Ultraproses, Bumbu",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00152,Category,cat_00152,"Buah-buahan, Snack, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00153,Category,cat_00153,"Bumbu, Dairy, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00154,Category,cat_00154,"Bumbu, Minuman, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00155,Category,cat_00155,"Buah-buahan, Minuman, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00156,Category,cat_00156,"Minuman, Diary, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00157,Category,cat_00157,"Dessert, Olahan, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00158,Category,cat_00158,"Buah-buahan, Dairy, Ultraproses",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00159,Category,cat_00159,"Dairy, Minuman",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00160,Category,cat_00160,"Bahan Mentah, Minyak Lemak",kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00161,Category,cat_00161,Makanan,kategori_utama,Primary_Dataset_Cleaned.xlsx
+cat_00162,Category,cat_00162,Nasi,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00163,Category,cat_00163,Lauk,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00164,Category,cat_00164,Snack,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00165,Category,cat_00165,Others,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00166,Category,cat_00166,Minuman,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00167,Category,cat_00167,Buah,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00168,Category,cat_00168,Masakan,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00169,Category,cat_00169,Sayur,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00170,Category,cat_00170,Kemasan,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00171,Category,cat_00171,-,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00172,Category,cat_00172,Snack / Lauk,kategori_spesifik,Primary_Dataset_Cleaned.xlsx
+cat_00173,Category,cat_00173,Umbi-umbian,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00174,Category,cat_00174,Unggas,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00175,Category,cat_00175,Kacang-kacangan,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00176,Category,cat_00176,Sayur,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00177,Category,cat_00177,Biji-bijian,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00178,Category,cat_00178,Susu,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00179,Category,cat_00179,Seafood,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00180,Category,cat_00180,Daging Putih,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00181,Category,cat_00181,Santan,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00182,Category,cat_00182,Daging Merah,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00183,Category,cat_00183,Bumbu Rempah,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00184,Category,cat_00184,Buah,ingredient_kategori,New_Ingredients_category.xlsx
+cat_00185,Category,cat_00185,Bumbu Olahan,ingredient_kategori,New_Ingredients_category.xlsx
