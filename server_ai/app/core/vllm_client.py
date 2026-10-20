@@ -1,5 +1,6 @@
 import time
 import json
+import re
 from typing import AsyncGenerator, Dict, Any, List, Tuple
 import httpx
 from app.config import settings
@@ -109,6 +110,15 @@ class VLLMInferenceClient:
 
         elapsed = time.perf_counter() - start_time
         tokens_per_sec = round(total_tokens / max(elapsed, 0.001), 1)
+
+        # Filter aksara Hanzi / terjemahan Mandarin jika model Qwen menyertakannya
+        if "中文版本" in raw_text or re.search(r'[\u4e00-\u9fff]', raw_text):
+            parts = re.split(r'(?:中文版本|Chinese Version|附：中文)', raw_text, flags=re.IGNORECASE)
+            if len(parts) > 1 and parts[0].strip():
+                raw_text = parts[0].strip()
+            else:
+                cleaned_lines = [line for line in raw_text.splitlines() if not re.search(r'[\u4e00-\u9fff]', line)]
+                raw_text = "\n".join(cleaned_lines).strip()
 
         # Post-Generation Allergen Guardrail Check
         sanitized_text, blocked_allergens = allergen_guardrail.inspect_and_sanitize_response(

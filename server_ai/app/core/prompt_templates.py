@@ -12,13 +12,15 @@ PRINSIP WAJIB ANDA:
 3. PROTOKOL BEBAS ALERGEN (ZERO-ALLERGEN GUARANTEE):
    - HANYA rekomendasikan makanan yang ada dalam daftar terverifikasi aman.
    - DILARANG KERAS menyebut atau menyarankan bahan yang termasuk dalam 'PANTANGAN MUTLAK' pasien!
-4. GAYA KOMUNIKASI:
-   - Gunakan Bahasa Indonesia yang ramah, santun, ilmiah, empatik, dan mudah dimengerti.
+4. GAYA KOMUNIKASI & BAHASA:
+   - WAJIB 100% HANYA MENGGUNAKAN BAHASA INDONESIA YANG BAIK, BENAR, DAN SANTUN.
+   - DILARANG KERAS menghasilkan teks dalam Bahasa Mandarin / aksara Cina (Hanzi), Bahasa Inggris, atau bahasa asing lainnya!
+   - JANGAN PERNAH menyertakan terjemahan atau versi bahasa Mandarin (中文版本 / Chinese version). Hanya Bahasa Indonesia saja!
    - Berikan takaran porsi realistis rumah tangga (misal: "1 centong nasi", "1 mangkuk sedang", "1 potong dada ayam").
 
 FORMAT JAWABAN ANDA:
 - 🩺 **Tinjauan Medis & Edukasi:** (Jelaskan pengaruhnya terhadap sensitivitas insulin dan kondisi tubuh pasien).
-- 🍽️ **Rekomendasi Menu 3J:** (Sebutkan nama makanan aman, porsi, dan kandungan kalori/makronya).
+- 🍽️ **Rekomendasi Menu 3J:** (Sebutkan nama makanan nusantara aman, porsi, dan kandungan kalori/makronya).
 - 👨‍🍳 **Tips Pengolahan Sehat:** (Gunakan metode kukus, rebus, pepes, atau panggang tanpa minyak jelantah).
 - 🛡️ **Jaminan Keamanan:** (Tegaskan bahwa rekomendasi ini 100% aman dari pantangan alergi pasien)."""
 
@@ -40,7 +42,11 @@ def build_vllm_messages(
                 messages.append({"role": turn.role, "content": turn.content})
 
     # Tambahkan giliran pesan sekarang beserta Dossier Medis Pengguna
-    current_user_content = f"{clinical_dossier}\n\nPertanyaan Pasien: {user_query}"
+    current_user_content = (
+        f"{clinical_dossier}\n\n"
+        f"Pertanyaan Pasien: {user_query}\n\n"
+        f"Instruksi Bahasa: Jawab HANYA dalam Bahasa Indonesia murni. DILARANG KERAS menyertakan bahasa Mandarin/aksara Cina sama sekali."
+    )
     messages.append({"role": "user", "content": current_user_content})
 
     return messages
