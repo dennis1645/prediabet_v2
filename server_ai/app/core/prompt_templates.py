@@ -58,10 +58,16 @@ def is_short_greeting_or_test(user_query: str) -> bool:
         "halo dokter", "dok", "dokter", "assalamualaikum", "assalamu'alaikum",
         "selamat pagi", "selamat siang", "selamat sore", "selamat malam",
         "halo selamat pagi", "halo selamat siang", "halo selamat sore", "halo selamat malam",
-        "kabar baik", "apa kabar", "bagaimana kabarmu", "lagi apa", "lagi ngapain"
+        "kabar baik", "apa kabar", "bagaimana kabarmu", "lagi apa", "lagi ngapain",
+        "makasih", "terima kasih", "terimakasih", "thanks", "thank you", "ok makasih",
+        "okee makasih", "oke makasih", "sip", "ok", "oke", "siap", "baik", "baiklah", "sama-sama"
     }
 
     if q_clean in greetings:
+        return True
+
+    # Jika mengandung kata terima kasih atau penutup singkat
+    if any(k in q_clean for k in ["makasih", "terima kasih", "terimakasih", "thank you"]) and len(q_clean.split()) <= 5:
         return True
 
     # Jika mengandung kata sapaan dasar dan panjang kalimat <= 4 kata tanpa tanda tanya khusus
@@ -95,32 +101,55 @@ def build_vllm_messages(
     # Ekstrak nama pasien
     patient_name = "Pak Budi"
 
-    # 1. Jika hanya sapaan pendek / test pembuka
+    # 1. Jika hanya sapaan pendek, test, atau ucapan terima kasih
     if is_short_greeting_or_test(user_query):
+        ql = (user_query or "").lower().strip()
+        is_thanks = any(k in ql for k in ["makasih", "terima kasih", "terimakasih", "thanks", "thank you"])
+        if is_thanks:
+            resp_instruction = (
+                f"- Tanggapi ucapan terima kasih dengan ramah dan hangat: \"Sama-sama, {patient_name}! Senang bisa mendampingi pola makan sehat Bapak. Jangan ragu bertanya kembali jika butuh saran nutrisi lainnya ya.\"\n"
+                f"- DILARANG KERAS menyodorkan resep masakan panjang, data rekam medis, atau menu baru jika pasien hanya berterima kasih!\n"
+                f"- Cukup 1-2 kalimat pendek dan ramah."
+            )
+        else:
+            resp_instruction = (
+                f"- Sapa pasien dengan hangat dan ramah: \"Halo {patient_name}, selamat pagi/siang! Semoga kabar Bapak baik hari ini.\"\n"
+                f"- Tanyakan dengan singkat apa yang bisa dibantu seputar nutrisi, takaran makanan ramah prediabetes, atau rekomendasi menu sehat hari ini (cukup 1-2 kalimat pendek).\n"
+                f"- DILARANG KERAS membeberkan rekam medis pasien (berat badan, tinggi badan, kalori) jika pasien hanya menyapa!\n"
+                f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan jika tidak diminta!"
+            )
         current_user_content = (
             f"[Profil Pasien]: Pasien bernama {patient_name}.\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
-            f"[Instruksi Khusus Respon Sapaan]:\n"
-            f"- Sapa pasien dengan hangat dan ramah: \"Halo {patient_name}, selamat pagi/siang! Semoga kabar Bapak baik hari ini.\"\n"
-            f"- Tanyakan dengan singkat apa yang bisa dibantu seputar nutrisi, takaran makanan ramah prediabetes, atau rekomendasi menu sehat hari ini (cukup 1-2 kalimat pendek).\n"
-            f"- DILARANG KERAS membeberkan rekam medis pasien (berat badan, tinggi badan, kalori) jika pasien hanya menyapa!\n"
-            f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan jika tidak diminta!"
+            f"[Instruksi Khusus]:\n"
+            f"{resp_instruction}"
         )
     # 2. Jika pasien menanyakan nilai gizi bahan makanan spesifik
     elif specific_food:
+        ql = (user_query or "").lower()
+        # Periksa apakah pasien menanyakan karbohidrat, protein, lemak, atau kalori
+        if "karbo" in ql:
+            nutrisi_utama = f"kandungan karbohidratnya adalah sekitar {specific_food['karbohidrat']} gram, dengan energi sekitar {specific_food['kalori']} kkal dan serat {specific_food.get('serat', 0)} gram"
+        elif "lemak" in ql:
+            nutrisi_utama = f"kandungan lemaknya adalah sekitar {specific_food['lemak']} gram, dengan energi sekitar {specific_food['kalori']} kkal"
+        elif "kalori" in ql:
+            nutrisi_utama = f"total kalorinya adalah sekitar {specific_food['kalori']} kkal per 100 gram"
+        else:
+            nutrisi_utama = f"kandungan proteinnya adalah sekitar {specific_food['protein']} gram, dengan kalori sekitar {specific_food['kalori']} kkal"
+
         current_user_content = (
             f"Pesan Pasien: \"{user_query}\"\n\n"
             f"[Data Gizi Spesifik dari Graf Database Neo4j]:\n"
             f"- Bahan Makanan: {specific_food['nama']}\n"
             f"- Takaran Acuan: 100 gram\n"
             f"- Protein: {specific_food['protein']} gram\n"
-            f"- Kalori: {specific_food['kalori']} kkal\n"
-            f"- Lemak: {specific_food['lemak']} gram\n"
             f"- Karbohidrat: {specific_food['karbohidrat']} gram\n"
-            f"- Indeks Glikemik: {specific_food['gi']}\n\n"
+            f"- Lemak: {specific_food['lemak']} gram\n"
+            f"- Kalori: {specific_food['kalori']} kkal\n"
+            f"- Indeks Glikemik (GI): {specific_food['gi']}\n\n"
             f"[Instruksi Respon]:\n"
-            f"- Pasien HANYA menanyakan kandungan gizi/protein bahan ini.\n"
-            f"- JAWAB LANGSUNG KANDUNGAN PROTEINNYA: 'Untuk 100 gram {specific_food['nama']}, kandungan proteinnya adalah sekitar {specific_food['protein']} gram, dengan kalori sekitar {specific_food['kalori']} kkal.'\n"
+            f"- Pasien HANYA menanyakan kandungan nutrisi bahan ini.\n"
+            f"- JAWAB LANGSUNG KANDUNGAN NUTRISINYA: 'Untuk 100 gram {specific_food['nama']}, {nutrisi_utama}.'\n"
             f"- DILARANG KERAS membeberkan berat badan pasien, BMI, tinggi badan, atau hasil lab! Pasien TIDAK menanyakan hal itu!\n"
             f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan!\n"
             f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
@@ -154,6 +183,7 @@ def build_vllm_messages(
             f"- DILARANG menyodorkan data berat badan atau hasil lab jika pasien TIDAK menanyakannya (terutama saat pasien bertanya 'selain itu?' atau menanyakan resep)!\n"
             f"- DILARANG menyodorkan resep masakan jika pasien tidak memintanya!\n"
             f"- DILARANG memanggil pasien dengan nama depannya saja (DILARANG memanggil 'Budi'!). Selalu gunakan '{patient_name}'.\n"
+            f"- DILARANG memancing pertanyaan penutup ('Apakah ada resep masakan spesial yang ingin Anda coba hari ini?', 'Adakah menu lain yang ingin Anda coba?'). Cukup jawab inti pertanyaan pasien lalu berhenti secara profesional!\n"
             f"- DILARANG mengulang kalimat penutup klise ('Bagaimana dengan ide tersebut? Semoga bermanfaat...'). Langsung akhiri secara lugas dan profesional.\n"
             f"- Gunakan Bahasa Indonesia murni yang cerdas, hangat, dan bersahabat."
         )
