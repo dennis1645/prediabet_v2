@@ -68,23 +68,29 @@ class HybridGraphVectorFusion:
         # 5. Perakitan Dossier Terisolasi (User-Specific Isolated Context)
         dossier_lines = []
 
-        # Rekam medis pasien HANYA dimasukkan jika query relevan dengan profil/berat badan/alergi/resep
-        profile_keywords = [
-            "berat", "tinggi", "bmi", "usia", "umur", "alergi", "pantangan",
-            "gula", "hba1c", "lab", "profil", "siapa", "kalori", "sehat", "ideal", "normal", "kondisi"
-        ]
-        if user_wants_recipe or any(k in ql for k in profile_keywords):
+        # Rekam medis pasien HANYA dimasukkan sesuai kebutuhan spesifik:
+        dossier_lines = []
+
+        if any(k in ql for k in ["umur", "usia"]):
+            dossier_lines.append(f"• Usia Pasien: {user_context.usia} tahun.")
+        elif any(k in ql for k in ["berat", "bb"]):
+            dossier_lines.append(f"• Berat Badan Pasien: {getattr(user_context, 'berat_badan', 78)} kg.")
+        elif any(k in ql for k in ["tinggi", "tb"]):
+            dossier_lines.append(f"• Tinggi Badan Pasien: {getattr(user_context, 'tinggi_badan', 172)} cm.")
+        elif any(k in ql for k in ["alergi", "pantangan"]):
+            dossier_lines.append(f"• Pantangan Alergi: {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'}.")
+        elif any(k in ql for k in ["sehat", "ideal", "bmi", "kondisi", "gawat", "bahaya", "gimana", "bagaimana"]):
+            dossier_lines.append(
+                f"• Kondisi Klinis & BMI Pasien: Berat badan {getattr(user_context, 'berat_badan', 78)} kg, tinggi {getattr(user_context, 'tinggi_badan', 172)} cm, BMI {user_context.bmi} ({user_context.kategori_bmi}). "
+                f"Tidak perlu panik atau khawatir berlebihan. Dengan perbaikan pola makan 3J dan aktivitas fisik bertahap, kondisi prediabetes ini sangat bisa dikendalikan dan dicegah agar tidak menjadi diabetes."
+            )
+        elif user_wants_recipe or any(k in ql for k in ["gula", "hba1c", "lab", "kalori"]):
             dossier_lines = [
-                f"=== DATA REKAM MEDIS RESMI PASIEN (ACUAN HANYA JIKA DITANYAKAN) ===",
-                f"• Nama Pasien       : {getattr(user_context, 'nama', 'Pak Budi')} (Panggilan: Pak Budi)",
-                f"• Usia Pasien       : {user_context.usia} tahun",
-                f"• Berat Badan       : {getattr(user_context, 'berat_badan', 78)} kg",
-                f"• Tinggi Badan      : {getattr(user_context, 'tinggi_badan', 172)} cm",
-                f"• Indeks Massa Tubuh: BMI {user_context.bmi} ({user_context.kategori_bmi})",
-                f"• Evaluasi Ideal/BB : Berat badan {getattr(user_context, 'berat_badan', 78)} kg dengan tinggi {getattr(user_context, 'tinggi_badan', 172)} cm memiliki BMI {user_context.bmi} ({user_context.kategori_bmi}). Berat badan ideal berada di kisaran 58-65 kg. Kondisi saat ini belum ideal dan perlu diturunkan bertahap demi kestabilan gula darah.",
+                f"=== DATA REKAM MEDIS RESMI PASIEN (ACUAN KLINIS) ===",
+                f"• Nama Pasien       : {getattr(user_context, 'nama', 'Pak Budi')}",
+                f"• Usia Pasien       : {user_context.usia} tahun | BMI: {user_context.bmi} ({user_context.kategori_bmi})",
                 f"• Hasil Lab         : GDP {user_context.gula_darah_puasa} mg/dL | HbA1c {user_context.hba1c}%",
                 f"• Target Energi 3J  : {user_context.target_kalori} kkal/hari",
-                f"• Pola Waktu Makan  : {getattr(user_context, 'pola_waktu_makan', '3 kali makan utama + 2 kali selingan')}",
                 f"• PANTANGAN ALERGI  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'} (MUTLAK DILARANG)",
             ]
 
