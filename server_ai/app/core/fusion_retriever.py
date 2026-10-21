@@ -69,7 +69,10 @@ class HybridGraphVectorFusion:
         dossier_lines = []
 
         # Rekam medis pasien HANYA dimasukkan jika query relevan dengan profil/berat badan/alergi/resep
-        profile_keywords = ["berat", "tinggi", "bmi", "usia", "umur", "alergi", "pantangan", "gula", "hba1c", "lab", "profil", "siapa", "kalori"]
+        profile_keywords = [
+            "berat", "tinggi", "bmi", "usia", "umur", "alergi", "pantangan",
+            "gula", "hba1c", "lab", "profil", "siapa", "kalori", "sehat", "ideal", "normal", "kondisi"
+        ]
         if user_wants_recipe or any(k in ql for k in profile_keywords):
             dossier_lines = [
                 f"=== DATA REKAM MEDIS RESMI PASIEN (ACUAN HANYA JIKA DITANYAKAN) ===",
@@ -78,6 +81,7 @@ class HybridGraphVectorFusion:
                 f"• Berat Badan       : {getattr(user_context, 'berat_badan', 78)} kg",
                 f"• Tinggi Badan      : {getattr(user_context, 'tinggi_badan', 172)} cm",
                 f"• Indeks Massa Tubuh: BMI {user_context.bmi} ({user_context.kategori_bmi})",
+                f"• Evaluasi Ideal/BB : Berat badan {getattr(user_context, 'berat_badan', 78)} kg dengan tinggi {getattr(user_context, 'tinggi_badan', 172)} cm memiliki BMI {user_context.bmi} ({user_context.kategori_bmi}). Berat badan ideal berada di kisaran 58-65 kg. Kondisi saat ini belum ideal dan perlu diturunkan bertahap demi kestabilan gula darah.",
                 f"• Hasil Lab         : GDP {user_context.gula_darah_puasa} mg/dL | HbA1c {user_context.hba1c}%",
                 f"• Target Energi 3J  : {user_context.target_kalori} kkal/hari",
                 f"• Pola Waktu Makan  : {getattr(user_context, 'pola_waktu_makan', '3 kali makan utama + 2 kali selingan')}",

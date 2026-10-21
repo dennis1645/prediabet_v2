@@ -310,9 +310,11 @@ class Neo4jClinicalGraphManager:
             "tahu": ["tahu", "tahu putih", "tahu kukus"],
             "ikan mas": ["ikan mas"],
             "ikan": ["ikan mas", "ikan nila", "ikan kembung", "ikan"],
-            "beras merah": ["beras merah, nasi", "nasi merah"],
-            "nasi merah": ["beras merah, nasi", "nasi merah"],
-            "nasi": ["beras merah, nasi", "nasi"],
+            "nasi merah": ["Beras merah, Nasi", "nasi merah"],
+            "beras merah": ["Beras merah, Nasi", "nasi merah"],
+            "nasi putih": ["Nasi Putih", "Nasi"],
+            "nasi biasa": ["Nasi Putih", "Nasi"],
+            "nasi": ["Nasi Putih", "Nasi"],
             "bayam": ["bayam, segar", "bayam"],
             "oyong": ["gambas (oyong)", "oyong"],
             "gambas": ["gambas (oyong)", "gambas"],
@@ -328,33 +330,35 @@ class Neo4jClinicalGraphManager:
         is_medical_body_query = any(k in q for k in [
             "berat badan", "berat", "tinggi", "bb", "tb", "bmi", "usia", "umur",
             "gula darah", "gula", "hba1c", "kolesterol", "tensi", "tekanan darah",
-            "alergi", "pantangan", "lingkar pinggang", "profil", "makan berapa kali", "jadwal"
+            "alergi", "pantangan", "lingkar pinggang", "profil", "makan berapa kali", "jadwal",
+            "sehat", "ideal", "apakah sehat", "apakah ideal", "normal"
         ])
         if is_medical_body_query:
             return None
 
-        # Deteksi follow-up question HANYA untuk bahan makanan (misal: 'berapa gram?', 'berapa kalori?')
-        food_nutri_keywords = ["protein", "kalori", "gram", "karbo", "lemak", "gi", "gizi", "nutrisi", "takaran"]
-        is_follow_up = (
-            any(q.startswith(k) for k in ["berapa gram", "berapa banyak", "berapa kalori", "berapa protein", "berapa jumlah", "berapa lemak", "berapa karbo", "berapa gi"])
-            or (q.startswith("berapa") and any(w in q for w in food_nutri_keywords))
-            or q in ["berapa?", "berapa gram?", "berapa banyak?", "berapa kalori?", "berapa protein?"]
-        )
-
+        # 1. PRIORITAS UTAMA: Cari kecocokan frasa makanan langsung di query pasien saat ini!
         search_terms = []
-        if is_follow_up and chat_history:
-            for turn in reversed(chat_history):
-                text = (turn.content if hasattr(turn, "content") else turn.get("content", "")).lower()
-                for alias_key in COMMON_FOOD_ALIASES:
-                    if alias_key in text:
-                        search_terms.append(alias_key)
-                        break
-                if search_terms:
-                    break
-
-        for alias_key in COMMON_FOOD_ALIASES:
+        for alias_key in sorted(COMMON_FOOD_ALIASES.keys(), key=len, reverse=True):
             if alias_key in q and alias_key not in search_terms:
                 search_terms.append(alias_key)
+
+        # 2. HANYA JIKA TIDAK ADA MAKANAN DI QUERY, baru periksa apakah ini follow-up murni (misal: 'berapa gram?', 'kalau proteinnya?')
+        if not search_terms:
+            food_nutri_keywords = ["protein", "kalori", "gram", "karbo", "lemak", "gi", "gizi", "nutrisi", "takaran"]
+            is_follow_up = (
+                any(q.startswith(k) for k in ["berapa gram", "berapa banyak", "berapa kalori", "berapa protein", "berapa jumlah", "berapa lemak", "berapa karbo", "berapa gi"])
+                or (q.startswith("berapa") and any(w in q for w in food_nutri_keywords))
+                or q in ["berapa?", "berapa gram?", "berapa banyak?", "berapa kalori?", "berapa protein?"]
+            )
+            if is_follow_up and chat_history:
+                for turn in reversed(chat_history):
+                    text = (turn.content if hasattr(turn, "content") else turn.get("content", "")).lower()
+                    for alias_key in sorted(COMMON_FOOD_ALIASES.keys(), key=len, reverse=True):
+                        if alias_key in text:
+                            search_terms.append(alias_key)
+                            break
+                    if search_terms:
+                        break
 
         if not search_terms:
             return None
@@ -394,7 +398,8 @@ class Neo4jClinicalGraphManager:
         foods = self._load_local_dataset()
         for term in search_terms:
             for target in COMMON_FOOD_ALIASES.get(term, [term]):
-                matches = [f for f in foods if target in f["nama"].lower()]
+                target_lower = target.lower()
+                matches = [f for f in foods if target_lower in f["nama"].lower()]
                 if matches:
                     matches.sort(key=lambda x: (
                         0 if "tanpa kulit" in x["nama"].lower() else 1,
