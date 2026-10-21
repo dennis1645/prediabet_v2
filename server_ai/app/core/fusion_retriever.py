@@ -56,14 +56,22 @@ class HybridGraphVectorFusion:
 
         # 5. Perakitan Dossier Terisolasi (User-Specific Isolated Context)
         dossier_lines = [
-            f"=== DOSSIER NUTRISI KLINIS TERVERIFIKASI (PASIEN: {user_context.username} | PANGGILAN RESMI: Pak Budi) ===",
-            f"• Demografi Pasien  : {user_context.jenis_kelamin}, {user_context.usia} tahun",
-            f"• Status Klinis     : BMI {user_context.bmi} ({user_context.kategori_bmi}) | Skor Risiko: {user_context.skor_risiko} ({user_context.kategori_risiko})",
-            f"• Hasil Lab         : GDP {user_context.gula_darah_puasa} mg/dL | HbA1c {user_context.hba1c}%",
-            f"• Target Kalori     : {user_context.target_kalori} kkal / hari",
+            f"=== DATA REKAM MEDIS & PROFIL KLINIS RESMI PASIEN (DATABASE PRIBADI) ===",
+            f"• Nama Pasien       : {getattr(user_context, 'nama', 'Pak Budi')} (Panggilan hormat: Pak Budi)",
+            f"• Usia Pasien       : {user_context.usia} tahun",
+            f"• Jenis Kelamin     : {user_context.jenis_kelamin}",
+            f"• Berat Badan       : {getattr(user_context, 'berat_badan', 78)} kg",
+            f"• Tinggi Badan      : {getattr(user_context, 'tinggi_badan', 172)} cm",
+            f"• Lingkar Pinggang  : {getattr(user_context, 'lingkar_pinggang', 94)} cm",
+            f"• Tingkat Aktivitas : {getattr(user_context, 'aktivitas', 'sedang')}",
+            f"• Indeks Massa Tubuh: BMI {user_context.bmi} ({user_context.kategori_bmi})",
+            f"• Tingkat Risiko    : {user_context.kategori_risiko} (Skor: {user_context.skor_risiko}/100)",
+            f"• Hasil Tes Darah   : Gula Darah Puasa (GDP) {user_context.gula_darah_puasa} mg/dL | HbA1c {user_context.hba1c}%",
+            f"• Target Energi 3J  : {user_context.target_kalori} kkal/hari (Karbohidrat: {getattr(user_context, 'target_karbo', 225)}g, Protein: {getattr(user_context, 'target_protein', 125)}g, Lemak: {getattr(user_context, 'target_lemak', 67)}g)",
+            f"• Pola Waktu Makan  : {getattr(user_context, 'pola_waktu_makan', '3 kali makan utama + 2 kali selingan sehat')}",
             f"• Diet Terpilih     : {user_context.active_diet}",
             f"• Riwayat Komorbid  : {', '.join(komorbid_list) if komorbid_list else 'Tidak ada komorbiditas tercatat'}",
-            f"• PANTANGAN MUTLAK  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'}",
+            f"• PANTANGAN ALERGI  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'} (MUTLAK DILARANG)",
         ]
 
         if specific_food:

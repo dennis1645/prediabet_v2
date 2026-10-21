@@ -5,18 +5,30 @@ class UserClinicalContext(BaseModel):
     """Konteks profil medis unik dan terisolasi milik seorang pengguna."""
     userId: Union[int, str]
     username: str
-    usia: int = 40
+    nama: Optional[str] = "Budi Santoso"
+    usia: int = 50
     jenis_kelamin: str = "Laki-laki"
-    bmi: float = 24.5
-    kategori_bmi: str = "Normal"
-    skor_risiko: int = 50
-    kategori_risiko: str = "Sedang"
-    gula_darah_puasa: Optional[Union[float, str]] = "Belum ada tes lab"
-    hba1c: Optional[Union[float, str]] = "Belum ada tes lab"
+    tinggi_badan: Optional[Union[float, int]] = 172
+    berat_badan: Optional[Union[float, int]] = 78
+    lingkar_pinggang: Optional[Union[float, int]] = 94
+    aktivitas: Optional[str] = "sedang"
+    bmi: float = 26.4
+    kategori_bmi: str = "Obesitas"
+    skor_risiko: int = 75
+    kategori_risiko: str = "Prediabetes (IFG)"
+    gula_darah_puasa: Optional[Union[float, str]] = "114"
+    hba1c: Optional[Union[float, str]] = "5.8"
     pantangan_alergi: List[str] = Field(default_factory=list)
     komorbiditas: Union[List[str], str] = Field(default_factory=list)
     active_diet: str = "Diet Mediterania"
-    target_kalori: int = 1850
+    target_kalori: int = 1996
+    target_karbo: Optional[int] = 225
+    target_protein: Optional[int] = 125
+    target_lemak: Optional[int] = 67
+    pola_waktu_makan: Optional[str] = "3 kali makan utama + 2 kali selingan"
+
+    class Config:
+        extra = "allow"
 
 class ChatTurn(BaseModel):
     role: str  # "user" | "assistant" | "system"

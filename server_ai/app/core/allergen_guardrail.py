@@ -100,7 +100,10 @@ class ClinicalAllergenGuardrail:
             r'\bbukan\b',
             r'\bjangan\b',
             r'\bcegah\b',
-            r'\bmenjauhi\b'
+            r'\bmenjauhi\b',
+            r'\bhati-hati\b',
+            r'\bwaspada\b',
+            r'\bperlu\s+berhati-hati\b',
         ]
 
         # Pecah teks menjadi kalimat/klausa untuk analisis per kalimat

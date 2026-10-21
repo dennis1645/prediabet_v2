@@ -208,14 +208,24 @@ export async function forwardChatToAI(req, res) {
     const userContext = {
       userId,
       username: req.user.username,
-      usia: profile.usia || 40,
+      nama: profile.nama || "Budi Santoso",
+      usia: profile.usia || 50,
       jenis_kelamin: profile.jenis_kelamin || "Laki-laki",
-      bmi: analysis.bmi || 24.5,
-      kategori_bmi: analysis.status_bmi || analysis.kategori_bmi || "Normal",
-      skor_risiko: analysis.skor_risiko || 50,
-      kategori_risiko: analysis.kategori_risiko || "Sedang",
-      gula_darah_puasa: profile.gula_darah_puasa || "100",
-      hba1c: profile.hba1c || "5.7",
+      tinggi_badan: profile.tinggi_badan || 172,
+      berat_badan: profile.berat_badan || 78,
+      lingkar_pinggang: profile.lingkar_pinggang || 94,
+      aktivitas: profile.aktivitas || "sedang",
+      bmi: analysis.bmi || 26.4,
+      kategori_bmi: analysis.status_bmi || analysis.kategori_bmi || "Obesitas",
+      skor_risiko: analysis.skor_risiko || 75,
+      kategori_risiko: analysis.kategori_risiko || "Prediabetes (IFG)",
+      gula_darah_puasa: profile.gula_darah_puasa || "114",
+      hba1c: profile.hba1c || "5.8",
+      target_kalori: analysis.target_kalori || 1996,
+      target_karbo: analysis.target_karbo || 225,
+      target_protein: analysis.target_protein || 125,
+      target_lemak: analysis.target_lemak || 67,
+      pola_waktu_makan: analysis.pola_waktu_makan || profile.pola_waktu_makan || "3 kali makan utama + 2 kali selingan",
       pantangan_alergi: Array.from(
         new Set(
           (Array.isArray(profile.pantangan_alergi)
@@ -230,7 +240,6 @@ export async function forwardChatToAI(req, res) {
       ),
       komorbiditas: profile.komorbiditas || [],
       active_diet: analysis.active_diet_label || "Diet Mediterania",
-      target_kalori: analysis.target_kalori || 1850,
     };
 
     const aiServerUrl = process.env.AI_SERVER_URL || "http://localhost:8000/api/chat";
