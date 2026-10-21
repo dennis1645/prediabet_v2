@@ -322,6 +322,8 @@ class Neo4jClinicalGraphManager:
             "wortel": ["wortel, segar", "wortel"],
             "apel": ["apel, segar", "apel"],
             "pepaya": ["pepaya muda", "pepaya"],
+            "jambu": ["Jambu biji", "Jambu air", "Jambu Kristal"],
+            "nanas": ["Nanas, segar", "Potongan Nanas"],
             "oatmeal": ["havermut", "oatmeal"],
             "kentang": ["kentang rebus", "kentang"],
         }
