@@ -324,11 +324,22 @@ class Neo4jClinicalGraphManager:
             "kentang": ["kentang rebus", "kentang"],
         }
 
-        # Deteksi follow-up question seperti 'berapa gram?', 'berapa kalori?'
-        is_follow_up = any(q.startswith(k) for k in [
-            "berapa gram", "berapa banyak", "berapa kalori", "berapa protein", 
-            "berapa jumlah", "berapa lemak", "berapa karbo", "berapa gi", "berapa"
-        ]) or q in ["berapa", "berapa gram?", "berapa banyak?", "berapa kalori?", "berapa protein?"]
+        # DILARANG menganggap follow-up jika pertanyaan berkaitan dengan tubuh/profil medis (berat badan, tinggi, umur, dll.)
+        is_medical_body_query = any(k in q for k in [
+            "berat badan", "berat", "tinggi", "bb", "tb", "bmi", "usia", "umur",
+            "gula darah", "gula", "hba1c", "kolesterol", "tensi", "tekanan darah",
+            "alergi", "pantangan", "lingkar pinggang", "profil", "makan berapa kali", "jadwal"
+        ])
+        if is_medical_body_query:
+            return None
+
+        # Deteksi follow-up question HANYA untuk bahan makanan (misal: 'berapa gram?', 'berapa kalori?')
+        food_nutri_keywords = ["protein", "kalori", "gram", "karbo", "lemak", "gi", "gizi", "nutrisi", "takaran"]
+        is_follow_up = (
+            any(q.startswith(k) for k in ["berapa gram", "berapa banyak", "berapa kalori", "berapa protein", "berapa jumlah", "berapa lemak", "berapa karbo", "berapa gi"])
+            or (q.startswith("berapa") and any(w in q for w in food_nutri_keywords))
+            or q in ["berapa?", "berapa gram?", "berapa banyak?", "berapa kalori?", "berapa protein?"]
+        )
 
         search_terms = []
         if is_follow_up and chat_history:

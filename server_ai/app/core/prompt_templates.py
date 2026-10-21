@@ -94,8 +94,10 @@ def build_vllm_messages(
     # Sertakan riwayat percakapan sebelumnya agar percakapan terus mengalir
     if chat_history:
         for turn in chat_history[-6:]:
-            if turn.role in ["user", "assistant"]:
-                messages.append({"role": turn.role, "content": turn.content})
+            role = getattr(turn, "role", None) or (turn.get("role") if isinstance(turn, dict) else None)
+            content = getattr(turn, "content", None) or (turn.get("content") if isinstance(turn, dict) else None)
+            if role in ["user", "assistant"] and content:
+                messages.append({"role": role, "content": content})
                 has_prior_chat = True
 
     # Ekstrak nama pasien
