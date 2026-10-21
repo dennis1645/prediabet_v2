@@ -1,5 +1,12 @@
 import db from "../database/connection.js";
 
+// Ensure metadata column exists for response time & RAG telemetry tracking
+try {
+  db.exec("ALTER TABLE chat_logs ADD COLUMN metadata TEXT;");
+} catch (e) {
+  // Ignored if column already exists
+}
+
 /**
  * Returns isolated medical context for the AI server to prevent multi-user context leakage.
  */
@@ -91,13 +98,36 @@ export function saveChatLog(req, res) {
 export function getChatHistory(req, res) {
   try {
     const userId = req.user.id;
-    const history = db
-      .prepare("SELECT id, role, content, created_at FROM chat_logs WHERE user_id = ? ORDER BY id ASC LIMIT 50")
-      .all(userId);
+    let history;
+    try {
+      history = db
+        .prepare("SELECT id, role, content, metadata, created_at FROM chat_logs WHERE user_id = ? ORDER BY id ASC LIMIT 50")
+        .all(userId);
+    } catch (e) {
+      history = db
+        .prepare("SELECT id, role, content, created_at FROM chat_logs WHERE user_id = ? ORDER BY id ASC LIMIT 50")
+        .all(userId);
+    }
+
+    const mapped = history.map((item) => {
+      let meta = {};
+      if (item.metadata) {
+        try {
+          meta = JSON.parse(item.metadata);
+        } catch (e) {}
+      }
+      return {
+        id: item.id,
+        role: item.role,
+        content: item.content,
+        metadata: meta,
+        created_at: item.created_at,
+      };
+    });
 
     res.json({
       success: true,
-      data: history,
+      data: mapped,
     });
   } catch (error) {
     res.status(500).json({ success: false, message: "Gagal memuat riwayat chat." });
@@ -245,14 +275,35 @@ export async function forwardChatToAI(req, res) {
       };
     }
 
-    // Simpan respons asisten ke database terisolasi
+    // Simpan respons asisten beserta telemetri & bukti graf RAG ke database terisolasi
     if (aiData.response) {
-      db.prepare("INSERT INTO chat_logs (user_id, role, content, created_at) VALUES (?, ?, ?, ?)").run(
-        userId,
-        "assistant",
-        aiData.response,
-        new Date().toISOString()
-      );
+      const meta = {
+        latency_ms: aiData.telemetry?.latency_ms,
+        tokens_per_second: aiData.telemetry?.tokens_per_second,
+        vllm_connected: aiData.telemetry?.vllm_connected,
+        source: aiData.telemetry?.vllm_connected 
+          ? "vLLM Engine RTX 5070 Ti (Qwen 2.5 7B)" 
+          : "Dr. Predi Hybrid GraphRAG",
+        guardrail: aiData.guardrail?.safety_message || "100% Bebas Alergen & Aman Secara Klinis",
+        safe_foods: aiData.safe_foods_recommended || [],
+      };
+
+      try {
+        db.prepare("INSERT INTO chat_logs (user_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?)").run(
+          userId,
+          "assistant",
+          aiData.response,
+          JSON.stringify(meta),
+          new Date().toISOString()
+        );
+      } catch (err) {
+        db.prepare("INSERT INTO chat_logs (user_id, role, content, created_at) VALUES (?, ?, ?, ?)").run(
+          userId,
+          "assistant",
+          aiData.response,
+          new Date().toISOString()
+        );
+      }
     }
 
     res.json(aiData);

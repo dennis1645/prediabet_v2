@@ -17,6 +17,8 @@ import {
   ShieldCheck,
   Trash2,
   Zap,
+  Clock,
+  Database,
 } from "lucide-react";
 
 export default function ChatbotPage() {
@@ -44,8 +46,14 @@ export default function ChatbotPage() {
           const mapped = res.data.map((item) => ({
             role: item.role,
             content: item.content,
-            source: item.role === "assistant" ? "Sesi Konsultasi Riwayat Anda" : undefined,
-            guardrail: item.role === "assistant" ? "100% Bebas Alergen" : undefined,
+            source: item.metadata?.source || (item.role === "assistant" ? "PrediBeat Hybrid GraphRAG" : undefined),
+            guardrail: item.metadata?.guardrail || (item.role === "assistant" ? "100% Bebas Alergen" : undefined),
+            telemetry: item.metadata?.latency_ms ? {
+              latency_ms: item.metadata.latency_ms,
+              tokens_per_second: item.metadata.tokens_per_second,
+              vllm_connected: item.metadata.vllm_connected,
+            } : undefined,
+            safe_foods: item.metadata?.safe_foods || [],
             created_at: item.created_at,
           }));
           setMessages(mapped);
@@ -118,6 +126,7 @@ export default function ChatbotPage() {
           : "Dr. Predi Hybrid GraphRAG";
         const guardrail = res.guardrail?.safety_message || "100% Bebas Alergen & Aman Secara Klinis";
         const telemetry = res.telemetry;
+        const safe_foods = res.safe_foods_recommended || [];
 
         // Inisialisasi bubble assistant dengan status streaming aktif
         setMessages((prev) => [
@@ -129,6 +138,7 @@ export default function ChatbotPage() {
             source,
             guardrail,
             telemetry,
+            safe_foods,
           },
         ]);
 
@@ -308,18 +318,50 @@ export default function ChatbotPage() {
                     </div>
                   )}
 
-                  {/* Sumber & Mode Footer */}
-                  {msg.role === "assistant" && msg.source && (
-                    <div className="mt-3 pt-2.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                      <div className="flex items-center gap-1.5">
-                        <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>Sumber:</span>
-                        <span className="text-emerald-700 normal-case font-bold">{msg.source}</span>
+                  {/* Sumber, Waktu Respon & Mode Footer */}
+                  {msg.role === "assistant" && (msg.source || msg.telemetry) && (
+                    <div className="mt-3 pt-2.5 border-t border-slate-100 flex flex-col gap-2">
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <div className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50/80 border border-emerald-200/60 px-2 py-0.5 rounded-md font-bold normal-case">
+                            <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>{msg.source || "Hybrid GraphRAG"}</span>
+                          </div>
+
+                          {/* Waktu Respon / Telemetri Pengujian */}
+                          {msg.telemetry?.latency_ms && (
+                            <div className="inline-flex items-center gap-1 text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md font-mono normal-case text-[10px]" title="Waktu inferensi sistem">
+                              <Clock className="w-3 h-3 text-slate-500" />
+                              <span>{(msg.telemetry.latency_ms / 1000).toFixed(2)}s</span>
+                              {msg.telemetry.tokens_per_second > 0 && (
+                                <span className="text-slate-400 font-normal">({msg.telemetry.tokens_per_second} tok/s)</span>
+                              )}
+                            </div>
+                          )}
+                        </div>
+
+                        {msg.guardrail && (
+                          <div className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-md font-extrabold normal-case text-[10px]">
+                            <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                            <span>{msg.guardrail}</span>
+                          </div>
+                        )}
                       </div>
-                      {msg.guardrail && (
-                        <div className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-md font-extrabold normal-case text-[10px]">
-                          <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                          <span>{msg.guardrail}</span>
+
+                      {/* Tag Verifikasi Makanan Graf Neo4j */}
+                      {msg.safe_foods && msg.safe_foods.length > 0 && (
+                        <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-slate-500 pt-0.5">
+                          <span className="font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                            <Database className="w-2.5 h-2.5 text-teal-600" /> Neo4j Verified:
+                          </span>
+                          {msg.safe_foods.slice(0, 4).map((food, fIdx) => (
+                            <span
+                              key={fIdx}
+                              className="bg-teal-50/70 border border-teal-200/60 text-teal-800 px-1.5 py-0.5 rounded font-medium"
+                            >
+                              {food}
+                            </span>
+                          ))}
                         </div>
                       )}
                     </div>

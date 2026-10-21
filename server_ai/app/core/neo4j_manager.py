@@ -13,6 +13,31 @@ except ImportError:
     HAS_NEO4J = False
 
 
+EXCLUDE_FOOD_KEYWORDS = [
+    "enteral", "glucerna", "wrp", "bubuk", "formula", "kemasan", "bumbu", 
+    "tepung", "minyak", "margarin", "sirup", "selasih", "suplemen", "dideh", 
+    "darah", "perisa", "pewarna", "snack", "bar", "keripik", "kerupuk", 
+    "asin", "terong asam", "terong hintalo", "terung bengkulu", "terung belanda",
+    "mentah", "abadi", "roti", "bread", "krim", "biskuit", "kue", "permen", 
+    "wafer", "cokelat", "goreng", "instan", "cerelac", "sun bubur"
+]
+
+STAPLE_PATTERNS = {
+    "karbohidrat": [
+        "beras merah, nasi", "kentang rebus", "jagung rebus", "havermut", "oatmeal", "ubi rebus"
+    ],
+    "protein": [
+        "ayam, dada, daging tanpa kulit", "ikan mas, segar", "telur ayam ras, segar", "tahu", "tempe"
+    ],
+    "sayuran": [
+        "bayam, segar", "gambas (oyong), segar", "buncis, segar", "labu siam", "wortel, segar"
+    ],
+    "buah": [
+        "apel, segar", "pepaya muda, segar", "jambu biji, segar", "jeruk manis"
+    ]
+}
+
+
 class Neo4jClinicalGraphManager:
     """Manajer koneksi dan penelusuran graf medis deterministik Neo4j."""
 
@@ -91,6 +116,49 @@ class Neo4jClinicalGraphManager:
             result = session.run(query, params or {})
             return result.data()
 
+    def balance_staples(self, foods: List[Dict[str, Any]], allergens: List[str], limit: int = 8) -> List[Dict[str, Any]]:
+        """Menyusun rekomendasi makanan seimbang 3J (Karbohidrat, Lauk, Sayur, Buah segar)."""
+        safe_candidates = allergen_guardrail.filter_safe_food_candidates(foods, allergens)
+        safe_wholesome = [
+            f for f in safe_candidates 
+            if f["gi"] <= 55 and f["sodium_mg"] <= 350 and f["kalori"] >= 15
+            and not any(bad in f["nama"].lower() for bad in EXCLUDE_FOOD_KEYWORDS)
+        ]
+
+        selected = []
+        selected_names = set()
+        for cat, patterns in STAPLE_PATTERNS.items():
+            cat_count = 0
+            for pat in patterns:
+                for f in safe_wholesome:
+                    if pat in f["nama"].lower() and f["nama"] not in selected_names:
+                        item_copy = dict(f)
+                        if not item_copy.get("cara_olah") or item_copy["cara_olah"] in ["Kukus/Rebus", "", "none"]:
+                            if cat == "karbohidrat":
+                                item_copy["cara_olah"] = "Kukus matang pulen"
+                            elif cat == "protein":
+                                item_copy["cara_olah"] = "Kukus / Rebus rempah alami / Pepes"
+                            elif cat == "sayuran":
+                                item_copy["cara_olah"] = "Rebus sup kaldu bening / Kukus"
+                            elif cat == "buah":
+                                item_copy["cara_olah"] = "Buah potong segar pencuci mulut terpisah"
+                        selected.append(item_copy)
+                        selected_names.add(f["nama"])
+                        cat_count += 1
+                        break
+                if cat_count >= 2:
+                    break
+
+        if len(selected) < limit:
+            for f in safe_wholesome:
+                if f["nama"] not in selected_names:
+                    selected.append(f)
+                    selected_names.add(f["nama"])
+                    if len(selected) >= limit:
+                        break
+
+        return selected[:limit]
+
     def get_safe_foods_by_profile(
         self,
         conditions: List[str],
@@ -99,13 +167,17 @@ class Neo4jClinicalGraphManager:
     ) -> List[Dict[str, Any]]:
         """
         Mencari makanan yang aman untuk kondisi klinis pasien dan 
-        100% TIDAK MENGANDUNG alergen terlarang.
+        100% TIDAK MENGANDUNG alergen terlarang, seimbang sesuai prinsip 3J Kemenkes.
         """
         # 1. Coba lewat Neo4j jika instance aktif
         if self.is_connected():
             cypher_query = """
             MATCH (m:Food)
             WHERE NONE(a IN $allergens WHERE toLower(m.nama_makanan) CONTAINS toLower(a))
+              AND NONE(bad IN $exclude_words WHERE toLower(m.nama_makanan) CONTAINS bad)
+              AND (m.glikemik_indeks IS NULL OR m.glikemik_indeks <= 55)
+              AND (m.sodium_mg IS NULL OR m.sodium_mg <= 350)
+              AND (m.kalori_kal IS NULL OR m.kalori_kal >= 15)
             RETURN m.nama_makanan AS nama, 
                    m.kalori_kal AS kalori, 
                    m.karbohidrat_g AS karbohidrat,
@@ -117,17 +189,23 @@ class Neo4jClinicalGraphManager:
                    m.kategori_spesifik AS kategori,
                    m.cara_olah AS cara_olah
             ORDER BY gi ASC, kalori ASC
-            LIMIT $limit
+            LIMIT 60
             """
             try:
                 with self.driver.session(database=self.database) as session:
-                    records = session.run(cypher_query, allergens=allergens, limit=limit).data()
+                    records = session.run(
+                        cypher_query,
+                        allergens=allergens,
+                        exclude_words=EXCLUDE_FOOD_KEYWORDS
+                    ).data()
                     if records:
-                        return allergen_guardrail.filter_safe_food_candidates(records, allergens)
+                        balanced = self.balance_staples(records, allergens, limit)
+                        if balanced:
+                            return balanced
             except Exception as e:
                 print(f"[Neo4j Manager] Error querying Cypher: {e}")
 
-        # 2. Fallback: Eksekusi mesin deterministik dari CSV 4.375 bahan makanan
+        # 2. Fallback: Eksekusi mesin deterministik dari dataset 4.375 bahan makanan
         return self._get_fallback_foods_from_dataset(conditions, allergens, limit)
 
     def _load_local_dataset(self) -> List[Dict[str, Any]]:
@@ -214,17 +292,6 @@ class Neo4jClinicalGraphManager:
                 }
             ]
 
-        # Saring ketat dengan Guardrail Allergen
-        safe_candidates = allergen_guardrail.filter_safe_food_candidates(foods, allergens)
-
-        # Filter berdasarkan GI rendah (< 55) dan sodium moderat (< 400 mg)
-        filtered = [
-            f for f in safe_candidates 
-            if f["gi"] <= 55 and f["sodium_mg"] <= 400 and f["kalori"] > 20
-        ]
-
-        # Prioritaskan yang tinggi serat dan protein
-        filtered.sort(key=lambda x: (x["gi"], -x["serat"], x["kalori"]))
-        return filtered[:limit]
+        return self.balance_staples(foods, allergens, limit)
 
 neo4j_manager = Neo4jClinicalGraphManager()

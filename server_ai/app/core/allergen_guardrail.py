@@ -80,27 +80,45 @@ class ClinicalAllergenGuardrail:
         Mendeteksi jika ada bahan pantangan disarankan dalam resep (misal: 'tambahkan santan', 'kacang panjang').
         Mengecualikan konteks keselamatan seperti 'bebas dari [alergen]', 'hindari [alergen]', atau 'pantangan: [alergen]'.
         """
-        if not user_allergens:
+        if not user_allergens or not text:
             return text, []
 
         expanded = self.expand_allergen_keywords(user_allergens)
         detected_violations = []
 
-        # Deteksi keberadaan bahan pantangan dalam teks
-        for allergen in expanded:
-            for m in re.finditer(rf'\b{re.escape(allergen)}[a-zA-Z]*\b', text, re.IGNORECASE):
-                matched_word = m.group(0)
-                start_ctx = max(0, m.start() - 45)
-                prefix = text[start_ctx:m.start()]
+        # Pola negasi medis / edukasi pantangan
+        NEGATION_PATTERNS = [
+            r'\bhindar(?:i|kan)?\b',
+            r'\bmenghindar(?:i|kan)?\b',
+            r'\bpantang(?:an)?\b',
+            r'\bdilarang\b',
+            r'\balergi(?:k)?\b',
+            r'\bbebas\b',
+            r'\btanpa\b',
+            r'\btidak\s+(?:boleh|menggunakan|memakai|mengandung|ada)\b',
+            r'\bbukan\b',
+            r'\bjangan\b',
+            r'\bcegah\b',
+            r'\bmenjauhi\b'
+        ]
 
-                # Periksa apakah kalimat tersebut adalah negasi keselamatan / edukasi pantangan
-                is_safe_negation = bool(re.search(
-                    r'(?:bebas|bebas dari|hindari|pantangan|pantang|dilarang|jangan|jangan pakai|tanpa|bukan|alergi|tidak mengandung|tidak memakai)\s+[^.\n]*?$',
-                    prefix,
-                    re.IGNORECASE
-                ))
-                if not is_safe_negation:
-                    detected_violations.append(matched_word.lower())
+        # Pecah teks menjadi kalimat/klausa untuk analisis per kalimat
+        sentences = re.split(r'[\n.!?]+', text)
+        for s in sentences:
+            s_clean = s.strip()
+            if not s_clean:
+                continue
+
+            # Jika kalimat mengandung kata negasi / edukasi pantangan, kalimat ini aman
+            is_negated = any(re.search(pat, s_clean, re.IGNORECASE) for pat in NEGATION_PATTERNS)
+            if is_negated:
+                continue
+
+            # Periksa apakah ada bahan pantangan disarankan dalam kalimat tanpa negasi ini
+            for allergen in expanded:
+                pattern = rf'\b{re.escape(allergen)}[a-zA-Z]*\b'
+                for m in re.finditer(pattern, s_clean, re.IGNORECASE):
+                    detected_violations.append(m.group(0).lower())
 
         if detected_violations:
             unique_violations = list(dict.fromkeys(detected_violations))
