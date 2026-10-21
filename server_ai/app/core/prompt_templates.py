@@ -109,14 +109,21 @@ def build_vllm_messages(
     # 2. Jika pasien menanyakan nilai gizi bahan makanan spesifik
     elif specific_food:
         current_user_content = (
-            f"{clinical_dossier}\n\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
-            f"[Instruksi Khusus Pertanyaan Gizi Spesifik]:\n"
-            f"- Pasien menanyakan data nutrisi/protein/kalori dari {specific_food['nama']}.\n"
-            f"- WAJIB MENJAWAB LANGSUNG ANGKA GIZI PRESISINYA TERLEBIH DAHULU: per 100 gram mengandung sekitar {specific_food['protein']} gram protein, {specific_food['kalori']} kkal energi, dan {specific_food['lemak']}g lemak.\n"
-            f"- JANGAN bertele-tele atau langsung menawarkan resep masakan panjang jika pasien hanya bertanya jumlah protein/gram!\n"
-            f"- DILARANG memanggil pasien 'Budi'! Gunakan 'Pak Budi' atau langsung jawab tanpa mengulang sapaan nama.\n"
-            f"- Hentikan pengulangan salam penutup klise. Jawab to-the-point dan cerdas."
+            f"[Data Gizi Spesifik dari Graf Database Neo4j]:\n"
+            f"- Bahan Makanan: {specific_food['nama']}\n"
+            f"- Takaran Acuan: 100 gram\n"
+            f"- Protein: {specific_food['protein']} gram\n"
+            f"- Kalori: {specific_food['kalori']} kkal\n"
+            f"- Lemak: {specific_food['lemak']} gram\n"
+            f"- Karbohidrat: {specific_food['karbohidrat']} gram\n"
+            f"- Indeks Glikemik: {specific_food['gi']}\n\n"
+            f"[Instruksi Respon]:\n"
+            f"- Pasien HANYA menanyakan kandungan gizi/protein bahan ini.\n"
+            f"- JAWAB LANGSUNG KANDUNGAN PROTEINNYA: 'Untuk 100 gram {specific_food['nama']}, kandungan proteinnya adalah sekitar {specific_food['protein']} gram, dengan kalori sekitar {specific_food['kalori']} kkal.'\n"
+            f"- DILARANG KERAS membeberkan berat badan pasien, BMI, tinggi badan, atau hasil lab! Pasien TIDAK menanyakan hal itu!\n"
+            f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan!\n"
+            f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
         )
     # 3. Pesan konsultasi mengalir umum
     else:
@@ -125,6 +132,16 @@ def build_vllm_messages(
             if has_prior_chat else
             f"- Sapa dengan hormat menggunakan '{patient_name}'. DILARANG memanggil 'Budi' saja!\n"
         )
+        # Periksa apakah pasien menanyakan resep lanjutan seperti "selain itu?", "menu lain?"
+        ql = (user_query or "").lower().strip()
+        is_followup_recipe = any(k in ql for k in ["selain itu", "menu lain", "resep lain", "opsi lain", "yang lain", "pilihan lain"])
+
+        recipe_guidance = (
+            "  * Pasien meminta variasi menu baru / alternatif ('selain itu?'). Buatkan 1 menu masakan Nusantara BERBEDA yang lezat dan bergizi seimbang (misalnya: Pepes Ikan Mas Kemangi, Sayur Bening Bayam Oyong, atau Nasi Merah Tumis Buncis Tahu Kukus). DILARANG mengulang resep gambas atau oatmeal!\n"
+            if is_followup_recipe else
+            "  * HANYA JIKA pasien meminta resep/rekomendasi menu: Buatkan 1 menu masakan Nusantara yang lezat dan bervariasi (DILARANG mengulang resep oatmeal kaldu atau jambu biji rebus!). Gunakan format resep rapi (Judul Menu, Nilai Gizi, Bahan Utama, Langkah Pengolahan, dan Tips Klinis).\n"
+        )
+
         current_user_content = (
             f"{clinical_dossier}\n\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
@@ -133,7 +150,8 @@ def build_vllm_messages(
             f"- PENTING: Periksa intent pertanyaan pasien di atas dan sesuaikan jawaban dengan akurat:\n"
             f"  * Jika pasien menanyakan data pribadinya (alergi, berat badan, tinggi badan, hasil lab): JAWAB HANYA HAL YANG DITANYAKAN secara singkat dan tepat! DILARANG KERAS menyodorkan resep masakan atau jadwal makan jika tidak diminta!\n"
             f"  * Jika pasien menanyakan jadwal/frekuensi makan ('makan berapa kali?'): Jelaskan prinsip 3J (3 kali makan utama + 2 kali selingan dengan jeda 3 jam) secara ringkas tanpa menyodorkan resep masakan panjang!\n"
-            f"  * HANYA JIKA pasien meminta resep/rekomendasi menu: Buatkan 1 menu masakan Nusantara yang lezat dan bervariasi (DILARANG mengulang resep oatmeal kaldu atau jambu biji rebus!). Gunakan format resep rapi (Judul Menu, Nilai Gizi, Bahan Utama, Langkah Pengolahan, dan Tips Klinis).\n"
+            f"{recipe_guidance}"
+            f"- DILARANG menyodorkan data berat badan atau hasil lab jika pasien TIDAK menanyakannya (terutama saat pasien bertanya 'selain itu?' atau menanyakan resep)!\n"
             f"- DILARANG menyodorkan resep masakan jika pasien tidak memintanya!\n"
             f"- DILARANG memanggil pasien dengan nama depannya saja (DILARANG memanggil 'Budi'!). Selalu gunakan '{patient_name}'.\n"
             f"- DILARANG mengulang kalimat penutup klise ('Bagaimana dengan ide tersebut? Semoga bermanfaat...'). Langsung akhiri secara lugas dan profesional.\n"
