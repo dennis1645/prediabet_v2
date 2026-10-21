@@ -50,6 +50,11 @@ class HybridGraphVectorFusion:
         # 3. Penelusuran Bahan Makanan Spesifik dari Query / History (misal: "Berapa protein dada ayam", "berapa gram?")
         specific_food = self.graph.find_specific_food(user_query, chat_history or [])
 
+        # Deteksi apakah pengguna memang meminta resep / menu masakan
+        ql = (user_query or "").lower()
+        recipe_keywords = ["resep", "menu", "masak", "makanan apa", "saran makanan", "rekomendasi makanan", "saranin", "sarapan apa", "makan siang apa", "makan malam apa", "ide makan", "olah"]
+        user_wants_recipe = any(k in ql for k in recipe_keywords)
+
         # 4. Penelusuran Semantik Dokumen Panduan Medis
         semantic_hits = self.vector.query_semantic(user_query, n_results=2)
         guideline_texts = [h["document"] for h in semantic_hits]
@@ -86,18 +91,19 @@ class HybridGraphVectorFusion:
                 f"• Kandungan Lemak      : {specific_food['lemak']} gram",
                 f"• Indeks Glikemik (GI) : {specific_food['gi']} (Kategori Rendah - Sangat Aman bagi Respon Insulin)",
                 f"• Rekomendasi Olah     : {specific_food['cara_olah']} tanpa minyak jelantah",
-                f"[INSTRUKSI KHUSUS GIZI]: Pasien menanyakan kandungan bahan ini. WAJIB MENJAWAB LANGSUNG ANGKA PROTEIN/GIZI PER 100 GRAM DI AWAL KALIMAT! Jangan bertele-tele langsung menawarkan resep jika pasien hanya menanyakan jumlah protein/gram.",
+                f"[INSTRUKSI KHUSUS GIZI]: Pasien menanyakan kandungan bahan ini. WAJIB MENJAWAB LANGSUNG ANGKA PROTEIN/GIZI PER 100 GRAM DI AWAL KALIMAT! DILARANG memberikan resep jika tidak diminta.",
             ])
 
-        dossier_lines.extend([
-            "",
-            "DAFTAR MAKANAN NUSANTARA TERVERIFIKASI AMAN (HASIL FILTER GRAF NEO4J 100% BEBAS ALERGEN):"
-        ])
-
-        for f in safe_foods[:6]:
-            dossier_lines.append(
-                f"- {f['nama']}: {f['kalori']} kkal (Karbo: {f['karbohidrat']}g, Protein: {f['protein']}g, Lemak: {f['lemak']}g, Sodium: {f['sodium_mg']}mg, GI: {f['gi']}). Cara olah: {f['cara_olah']}."
-            )
+        # Hanya injeksikan daftar makanan Neo4j jika pengguna memang meminta menu/resep
+        if user_wants_recipe:
+            dossier_lines.extend([
+                "",
+                "DAFTAR MAKANAN NUSANTARA TERVERIFIKASI AMAN (HASIL FILTER GRAF NEO4J 100% BEBAS ALERGEN):"
+            ])
+            for f in safe_foods[:6]:
+                dossier_lines.append(
+                    f"- {f['nama']}: {f['kalori']} kkal (Karbo: {f['karbohidrat']}g, Protein: {f['protein']}g, Lemak: {f['lemak']}g, Sodium: {f['sodium_mg']}mg, GI: {f['gi']}). Cara olah: {f['cara_olah']}."
+                )
 
         if guideline_texts:
             dossier_lines.append("\nPANDUAN KLINIS RESMI (PERKENI 2021 & KEMENKES 3J):")
@@ -105,7 +111,7 @@ class HybridGraphVectorFusion:
                 dossier_lines.append(doc[:400])
 
         dossier_lines.append(
-            f"\nPERINGATAN PROTOKOL ZERO-ALLERGEN (MUTLAK): DILARANG KERAS menyarankan makanan, resep, atau bahan masakan yang mengandung {', '.join(allergens) if allergens else 'gula sederhana dan minyak jelantah'}. Jangan sekali-kali menambahkan santan, kacang, kacang panjang, atau seafood jika tercantum dalam pantangan di atas!"
+            f"\nPERINGATAN PROTOKOL ZERO-ALLERGEN (MUTLAK): DILARANG KERAS menyarankan makanan atau bahan yang mengandung {', '.join(allergens) if allergens else 'gula sederhana dan minyak jelantah'}. Jangan menyarankan santan, kacang, kacang panjang, atau seafood!"
         )
 
         dossier_text = "\n".join(dossier_lines)

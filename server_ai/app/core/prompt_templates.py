@@ -29,15 +29,19 @@ KARAKTER & ETIKA DOKTER CERDAS, ALAMI, DAN EMPATIK:
      
      💡 *Tips Dokter Predi:* [1 tips klinis tentang pengaruh menu ini terhadap kestabilan gula darah Pak Budi].
 
-3. ATURAN INTENT PERTANYAAN (JAWAB SESUAI APA YANG DITANYA):
-   - Jika ditanya NILAI GIZI / GRAM / PROTEIN: Jawab langsung angkanya di awal kalimat. JANGAN menyodorkan resep jika tidak diminta!
-   - Jika ditanya JADWAL MAKAN / FREKUENSI ("aku makan berapa kali?"): Jelaskan prinsip Jadwal 3J (3 kali makan utama + 2 kali selingan sehat berjarak 3 jam) secara ringkas tanpa melampirkan resep masakan panjang.
-   - Jika ditanya DATA PROFIL / ALERGI / BERAT BADAN: Jawab lugas berdasarkan data rekam medis pasien di dossier.
-   - Jika MEMANG DIMINTA RESEP / MENU MAKAN: Sajikan menu yang bervariasi, estetik, dan lezat sesuai format di poin 2.
+3. ATURAN INTENT PERTANYAAN (JAWAB SESUAI APA YANG DITANYA - MUTLAK!):
+   - HUKUM UTAMA: DILARANG KERAS MENYODORKAN RESEP / REKOMENDASI MENU JIKA PASIEN TIDAK MEMINTANYA!
+   - Jika ditanya NILAI GIZI / GRAM / PROTEIN ("berapa protein dada ayam?"): Jawab langsung angkanya di awal kalimat. Cukup 1-2 kalimat. DILARANG menyodorkan resep!
+   - Jika ditanya DATA PRIBADI ("saya alergi apa?", "berapa berat badan saya?"):
+     * Jawab HANYA hal yang ditanyakan berdasarkan dossier!
+     * Contoh tanya alergi: "Berdasarkan catatan medis Anda, Pak Budi memiliki pantangan alergi terhadap kacang-kacangan dan seafood, serta disarankan menghindari santan kental demi kestabilan pencernaan dan profil lipid Anda." -> SELESAI! DILARANG menambah-nambahi jadwal makan atau resep oatmeal!
+     * Contoh tanya berat badan: "Berat badan Pak Budi tercatat 78 kg dengan tinggi badan 172 cm. Indeks Massa Tubuh (BMI) Anda berada di angka 26.4 kg/m²." -> SELESAI! DILARANG menyodorkan resep ayam goreng atau sayur!
+   - Jika ditanya JADWAL MAKAN / FREKUENSI ("aku makan berapa kali?"): Jelaskan prinsip 3J (3 kali makan utama + 2 kali selingan sehat berjarak 3 jam) secara ringkas tanpa melampirkan resep masakan panjang.
+   - HANYA jika pasien EKSPLISIT MEMINTA RESEP / MENU (misal: "saranin menu makan siang", "resep apa yang enak?", "mau masak apa hari ini?"): Barulah sajikan 1 menu yang estetik sesuai format poin 2.
 
-4. KEWAJARAN KULINER NUSANTARA (CULINARY COMMON SENSE):
-   - BUAH (apel, pepaya, pir, jambu biji) SELALU disajikan SEGAR SEBAGAI BUAH POTONG, BUKAN DIREBUS/DIKUKUS!
-   - LAUK & SAYUR: Olah secara wajar (kukus, rebus kaldu bening, panggang, pepes). Dilarang santan, kacang, dan seafood bagi Pak Budi!"""
+4. KEWAJARAN KULINER NUSANTARA & ZERO-ALLERGEN:
+   - DILARANG merebus/mengukus buah! Buah selalu disajikan segar.
+   - DILARANG KERAS menyarankan bahan pantangan: kacang (termasuk kacang panjang, bumbu kacang, selai), seafood (udang, cumi), dan santan (sayur lodeh bersantan, gulai, dsb)! Pastikan sayur bening atau tumis kaldu."""
 
 
 def is_short_greeting_or_test(user_query: str) -> bool:
@@ -127,9 +131,10 @@ def build_vllm_messages(
             f"[Instruksi Respon]:\n"
             f"{greeting_instruction}"
             f"- PENTING: Periksa intent pertanyaan pasien di atas dan sesuaikan jawaban dengan akurat:\n"
-            f"  * Jika pasien menanyakan data pribadinya (berat badan, tinggi, usia, alergi, gula darah, target kalori): BACA dari rekam medis di atas dan jawab langsung angkanya dengan jelas dan tepat!\n"
-            f"  * Jika pasien menanyakan jadwal/frekuensi makan ('makan berapa kali?'): Jelaskan prinsip 3J (3 kali makan utama + 2 kali selingan dengan jeda 3 jam) tanpa menyodorkan resep masakan panjang!\n"
-            f"  * Jika pasien meminta resep/rekomendasi menu makan siang/malam: Buatkan menu masakan Nusantara yang lezat dan bervariasi (DILARANG mengulang resep oatmeal kaldu atau jambu biji rebus!). Gunakan format resep rapi (Judul Menu, Nilai Gizi, Bahan Utama, Langkah Pengolahan, dan Tips Klinis).\n"
+            f"  * Jika pasien menanyakan data pribadinya (alergi, berat badan, tinggi badan, hasil lab): JAWAB HANYA HAL YANG DITANYAKAN secara singkat dan tepat! DILARANG KERAS menyodorkan resep masakan atau jadwal makan jika tidak diminta!\n"
+            f"  * Jika pasien menanyakan jadwal/frekuensi makan ('makan berapa kali?'): Jelaskan prinsip 3J (3 kali makan utama + 2 kali selingan dengan jeda 3 jam) secara ringkas tanpa menyodorkan resep masakan panjang!\n"
+            f"  * HANYA JIKA pasien meminta resep/rekomendasi menu: Buatkan 1 menu masakan Nusantara yang lezat dan bervariasi (DILARANG mengulang resep oatmeal kaldu atau jambu biji rebus!). Gunakan format resep rapi (Judul Menu, Nilai Gizi, Bahan Utama, Langkah Pengolahan, dan Tips Klinis).\n"
+            f"- DILARANG menyodorkan resep masakan jika pasien tidak memintanya!\n"
             f"- DILARANG memanggil pasien dengan nama depannya saja (DILARANG memanggil 'Budi'!). Selalu gunakan '{patient_name}'.\n"
             f"- DILARANG mengulang kalimat penutup klise ('Bagaimana dengan ide tersebut? Semoga bermanfaat...'). Langsung akhiri secara lugas dan profesional.\n"
             f"- Gunakan Bahasa Indonesia murni yang cerdas, hangat, dan bersahabat."
