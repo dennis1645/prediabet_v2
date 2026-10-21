@@ -315,6 +315,20 @@ export default function ChatbotPage() {
                       </div>
                     </div>
                   )}
+
+                  {/* Telemetri Kecepatan Inferensi & Pengujian */}
+                  {msg.role === "assistant" && msg.telemetry?.latency_ms && (
+                    <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                      <div className="inline-flex items-center gap-1 text-slate-600 bg-slate-100/90 border border-slate-200/70 px-2 py-0.5 rounded-md font-semibold text-[10px]">
+                        <Clock className="w-3 h-3 text-slate-500" />
+                        <span>{(msg.telemetry.latency_ms / 1000).toFixed(2)}s</span>
+                        {msg.telemetry.tokens_per_second > 0 && (
+                          <span className="text-slate-500 font-normal">({msg.telemetry.tokens_per_second} tok/s)</span>
+                        )}
+                      </div>
+                      <span className="text-[10px] text-emerald-600 font-sans font-medium">RTX 5070 Ti</span>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
