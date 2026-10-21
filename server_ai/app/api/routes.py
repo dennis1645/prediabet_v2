@@ -32,17 +32,18 @@ async def resolve_user_context(request: ChatRequest) -> UserClinicalContext:
                         return UserClinicalContext(
                             userId=d.get("userId", request.user_id),
                             username=d.get("username", "Pasien"),
-                            usia=m.get("usia", 40),
+                            nama=m.get("nama") or d.get("username", "Pasien"),
+                            usia=m.get("usia"),
                             jenis_kelamin=m.get("jenis_kelamin", "Laki-laki"),
-                            bmi=m.get("bmi", 24.5),
+                            bmi=m.get("bmi"),
                             kategori_bmi=m.get("kategori_bmi", "Normal"),
-                            skor_risiko=m.get("skor_risiko", 50),
+                            skor_risiko=m.get("skor_risiko"),
                             kategori_risiko=m.get("kategori_risiko", "Sedang"),
-                            gula_darah_puasa=m.get("gula_darah_puasa", "100"),
-                            hba1c=m.get("hba1c", "5.7"),
+                            gula_darah_puasa=m.get("gula_darah_puasa"),
+                            hba1c=m.get("hba1c"),
                             pantangan_alergi=m.get("pantangan_alergi", []),
                             komorbiditas=m.get("komorbiditas", []),
-                            active_diet=m.get("active_diet", "Diet Mediterania"),
+                            active_diet=m.get("active_diet", "Diet Seimbang Ramah Glukosa"),
                             target_kalori=m.get("target_kalori", 1850)
                         )
         except Exception as e:
@@ -52,17 +53,18 @@ async def resolve_user_context(request: ChatRequest) -> UserClinicalContext:
     return UserClinicalContext(
         userId="guest_user",
         username="Sahabat Sehat",
-        usia=40,
+        nama="Sahabat Sehat",
+        usia=None,
         jenis_kelamin="Laki-laki",
-        bmi=24.5,
-        kategori_bmi="Normal",
-        skor_risiko=45,
-        kategori_risiko="Waspada Prediabetes",
-        gula_darah_puasa="105",
-        hba1c="5.8",
+        bmi=None,
+        kategori_bmi=None,
+        skor_risiko=None,
+        kategori_risiko=None,
+        gula_darah_puasa=None,
+        hba1c=None,
         pantangan_alergi=[],
         komorbiditas=[],
-        active_diet="Diet Mediterania",
+        active_diet="Diet Seimbang Ramah Glukosa",
         target_kalori=1850
     )
 
@@ -89,7 +91,7 @@ async def chat_endpoint(request: ChatRequest):
 
     # 3. Format prompt sesuai template resmi Qwen/vLLM
     messages = build_vllm_messages(
-        request.message, dossier_text, request.chat_history or [], specific_food=specific_food
+        request.message, dossier_text, request.chat_history or [], specific_food=specific_food, user_context=user_context
     )
 
     # 4. Generate jawaban lewat vLLM (dengan fallback cerdas jika vLLM offline)

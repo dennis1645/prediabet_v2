@@ -2,23 +2,71 @@ import re
 from typing import List, Optional, Dict, Any
 from app.models.schemas import ChatTurn
 
-CLINICAL_SYSTEM_PROMPT = """Anda adalah Dr. Predi, Dokter Spesialis Nutrisi Klinis Pribadi Pak Budi (PrediaBeat).
+
+def get_patient_display_name(user_context: Optional[Any] = None) -> str:
+    """Mengembalikan sapaan dan nama pasien dinamis berdasarkan user_context."""
+    if not user_context:
+        return "Bapak/Ibu"
+    
+    nama = getattr(user_context, "nama", None) or getattr(user_context, "username", None)
+    if not nama:
+        return "Bapak/Ibu"
+    
+    nama_clean = str(nama).strip()
+    lower = nama_clean.lower()
+    
+    # Jika nama sudah diawali sapaan sopan
+    if lower.startswith(("pak ", "ibu ", "bapak ", "dr. ", "dr ", "mas ", "mbak ")):
+        return nama_clean
+    
+    gender = str(getattr(user_context, "jenis_kelamin", "")).lower()
+    if any(g in gender for g in ["perempuan", "wanita", "female", "p"]):
+        return f"Ibu {nama_clean}"
+    else:
+        return f"Pak {nama_clean}"
+
+
+def get_patient_salutation(user_context: Optional[Any] = None) -> str:
+    """Mengembalikan sapaan kehormatan (Bapak/Ibu) sesuai gender pasien."""
+    gender = str(getattr(user_context, "jenis_kelamin", "")).lower() if user_context else ""
+    if any(g in gender for g in ["perempuan", "wanita", "female", "p"]):
+        return "Ibu"
+    return "Bapak"
+
+
+def get_clinical_system_prompt(user_context: Optional[Any] = None) -> str:
+    """Membangun system prompt klinis dokter nutrisi dinamis per pengguna."""
+    patient_name = get_patient_display_name(user_context)
+    salutation = get_patient_salutation(user_context)
+    
+    raw_allergens = getattr(user_context, "pantangan_alergi", []) if user_context else []
+    if isinstance(raw_allergens, list) and raw_allergens:
+        allergen_str = ", ".join(raw_allergens)
+    elif isinstance(raw_allergens, str) and raw_allergens.strip():
+        allergen_str = raw_allergens.strip()
+    else:
+        allergen_str = "Tidak ada pantangan alergi khusus"
+
+    return f"""Anda adalah Dr. Predi, Dokter Spesialis Nutrisi Klinis Pribadi {patient_name} (PrediaBeat).
 
 PRINSIP KOMUNIKASI DOKTER CERDAS & NATURAL:
 1. PANGGILAN & TONE:
-   - Pasien Anda bernama Pak Budi. Gunakan panggilan "Pak Budi" secara wajar dan sopan.
-   - Bersikaplah cerdas, tenang, to-the-point, dan ramah seperti dokter spesialis asli.
-   - JANGAN mengulang-ulang kalimat klise di setiap pesan! (DILARANG: "Jangan khawatir, Pak Budi. Kondisi prediabetes Anda masih sangat bisa diperbaiki...", "Semoga hari Anda menyenangkan...", "Bagaimana informasi ini membantu Bapak?").
+   - Pasien Anda adalah {patient_name}. Selalu panggil dengan "{patient_name}" atau "{salutation}".
+   - DILARANG memanggil dengan nama pengguna lain (seperti Pak Budi) jika pasien ini bernama {patient_name}!
+   - Bersikaplah cerdas, tenang, to-the-point, dan ramah seperti dokter spesialis nutrisi asli.
+   - JANGAN mengulang-ulang kalimat klise di setiap pesan! (DILARANG: "Jangan khawatir...", "Semoga hari Anda menyenangkan...", "Bagaimana informasi ini membantu Bapak/Ibu?").
    - Jika pasien tidak sedang cemas atau panik, TIDAK PERLU mengucapkan "jangan khawatir" atau "tidak perlu panik"! Jawab langsung substansinya.
 
 2. ATURAN INTENT PERTANYAAN (JAWAB HANYA APA YANG DITANYAKAN):
+   - Pertanyaan Identitas (siapa saya, siapa nama saya, kamu kenal saya?): Sebutkan nama pasien ({patient_name}) dengan ramah dan jelaskan bahwa Anda adalah konsultan nutrisi pribadinya di PrediaBeat.
    - Pertanyaan Gizi (protein/karbo/kalori bahan): Jawab angka gizinya secara presisi dalam 1-2 kalimat. SELESAI.
-   - Pertanyaan Profil (berat badan, tinggi, alergi, umur): Jawab angkanya secara lugas dan akurat. SELESAI.
-   - Obrolan Santai / Opini / Reaksi ("okee enak keknya nasi ayam goreng", "makasih yaa"): Tanggapi secara wajar dan santai layaknya manusia sedang mengobrol. (Contoh: "Pilihan yang lezat, Pak Budi! Nasi putih dengan dada ayam tanpa kulit sangat pas untuk makan siang."). DILARANG membeberkan angka gizi atau resep lagi!
-   - HANYA JIKA PASIEN MEMINTA RESEP / MENU MAKAN: Sajikan 1 rekomendasi menu masakan Nusantara yang lezat, bergizi seimbang, dan ramah prediabetes (bebas kacang, seafood, dan santan).
+   - Pertanyaan Profil (berat badan, tinggi, alergi, umur): Jawab angkanya secara lugas dan akurat sesuai data pasien. Jika belum ada di profil, katakan belum tercatat. SELESAI.
+   - Obrolan Santai / Opini / Reaksi ("okee enak keknya nasi ayam", "makasih yaa"): Tanggapi secara wajar dan santai layaknya manusia sedang mengobrol. DILARANG membeberkan angka gizi atau resep lagi!
+   - HANYA JIKA PASIEN MEMINTA RESEP / MENU MAKAN: Sajikan 1 rekomendasi menu masakan Nusantara yang lezat, bergizi seimbang, dan ramah prediabetes (bebas dari pantangan: {allergen_str}).
 
 3. KEAMANAN MEDIS & ZERO-ALLERGEN:
-   - Pak Budi memiliki pantangan alergi: Kacang-kacangan (termasuk kacang panjang, bumbu kacang), Seafood (udang, cumi), dan Santan kelapa.
+   - Pantangan alergi pasien: {allergen_str}.
+   - Seluruh saran makanan harus 100% bebas dari pantangan alergen tersebut.
    - Buah selalu disajikan segar sebagai buah potong, bukan direbus."""
 
 
@@ -57,15 +105,32 @@ def is_short_greeting_or_test(user_query: str) -> bool:
     return False
 
 
+def is_identity_query(user_query: str) -> bool:
+    """Mendeteksi apakah pertanyaan pasien menanyakan identitas dirinya atau dokter."""
+    ql = (user_query or "").lower().strip()
+    patterns = [
+        "siapa saya", "siapa aku", "nama saya", "nama aku", "siapa namaku",
+        "kenal saya", "kenal aku", "siapakah saya", "tahu nama saya", "tau nama saya",
+        "kamu tahu siapa saya", "kamu tau siapa saya", "apakah kamu tahu siapa saya",
+        "saya siapa", "aku siapa", "apakah kamu kenal saya"
+    ]
+    return any(p in ql for p in patterns)
+
+
 def build_vllm_messages(
     user_query: str,
     clinical_dossier: str,
     chat_history: List[ChatTurn],
-    specific_food: Optional[Dict[str, Any]] = None
+    specific_food: Optional[Dict[str, Any]] = None,
+    user_context: Optional[Any] = None
 ) -> List[dict]:
-    """Menyusun daftar pesan dalam format standar OpenAI/vLLM ChatML."""
+    """Menyusun daftar pesan dalam format standar OpenAI/vLLM ChatML dengan konteks dinamis pengguna."""
+    patient_name = get_patient_display_name(user_context)
+    salutation = get_patient_salutation(user_context)
+    system_prompt = get_clinical_system_prompt(user_context)
+
     messages = [
-        {"role": "system", "content": CLINICAL_SYSTEM_PROMPT}
+        {"role": "system", "content": system_prompt}
     ]
 
     has_prior_chat = False
@@ -78,22 +143,33 @@ def build_vllm_messages(
                 messages.append({"role": role, "content": content})
                 has_prior_chat = True
 
-    # Ekstrak nama pasien
-    patient_name = "Pak Budi"
-
-    # 1. Jika hanya sapaan pendek, test, atau ucapan terima kasih
-    if is_short_greeting_or_test(user_query):
+    # 1. Jika pertanyaan identitas pengguna ("siapa saya?", "nama saya siapa?")
+    if is_identity_query(user_query):
+        raw_name = getattr(user_context, "nama", None) or getattr(user_context, "username", None) or "Sahabat Sehat"
+        username_str = getattr(user_context, "username", "")
+        current_user_content = (
+            f"[Profil Pasien]: Nama {patient_name} (Username: {username_str}).\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Respon]:\n"
+            f"- Pasien menanyakan identitas dirinya.\n"
+            f"- Sapa dengan hangat: sebutkan bahwa pasien adalah {patient_name} (akun username: {username_str}).\n"
+            f"- Sampaikan bahwa Anda adalah Dr. Predi, dokter konsultan nutrisi klinis pribadinya di PrediaBeat yang siap membantu pola makan ramah gula darahnya.\n"
+            f"- DILARANG menyebut nama lain (seperti Pak Budi) jika pasien ini bernama {patient_name}!\n"
+            f"- Cukup 1-2 kalimat ramah dan lugas."
+        )
+    # 2. Jika hanya sapaan pendek, test, atau ucapan terima kasih
+    elif is_short_greeting_or_test(user_query):
         ql = (user_query or "").lower().strip()
         is_thanks = any(k in ql for k in ["makasih", "terima kasih", "terimakasih", "thanks", "thank you"])
         if is_thanks:
             resp_instruction = (
-                f"- Tanggapi ucapan terima kasih dengan ramah dan hangat: \"Sama-sama, {patient_name}! Senang bisa mendampingi pola makan sehat Bapak. Jangan ragu bertanya kembali jika butuh saran nutrisi lainnya ya.\"\n"
+                f"- Tanggapi ucapan terima kasih dengan ramah dan hangat: \"Sama-sama, {patient_name}! Senang bisa mendampingi pola makan sehat {salutation}. Jangan ragu bertanya kembali jika butuh saran nutrisi lainnya ya.\"\n"
                 f"- DILARANG KERAS menyodorkan resep masakan panjang, data rekam medis, atau menu baru jika pasien hanya berterima kasih!\n"
                 f"- Cukup 1-2 kalimat pendek dan ramah."
             )
         else:
             resp_instruction = (
-                f"- Sapa pasien dengan hangat dan ramah: \"Halo {patient_name}, selamat pagi/siang! Semoga kabar Bapak baik hari ini.\"\n"
+                f"- Sapa pasien dengan hangat dan ramah: \"Halo {patient_name}, selamat pagi/siang! Semoga kabar {salutation} baik hari ini.\"\n"
                 f"- Tanyakan dengan singkat apa yang bisa dibantu seputar nutrisi, takaran makanan ramah prediabetes, atau rekomendasi menu sehat hari ini (cukup 1-2 kalimat pendek).\n"
                 f"- DILARANG KERAS membeberkan rekam medis pasien (berat badan, tinggi badan, kalori) jika pasien hanya menyapa!\n"
                 f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan jika tidak diminta!"
@@ -104,10 +180,9 @@ def build_vllm_messages(
             f"[Instruksi Khusus]:\n"
             f"{resp_instruction}"
         )
-    # 2. Jika pasien menanyakan nilai gizi bahan makanan spesifik
+    # 3. Jika pasien menanyakan nilai gizi bahan makanan spesifik
     elif specific_food:
         ql = (user_query or "").lower()
-        # Periksa apakah pasien menanyakan karbohidrat, protein, lemak, atau kalori
         if "karbo" in ql:
             nutrisi_utama = f"kandungan karbohidratnya adalah sekitar {specific_food['karbohidrat']} gram, dengan energi sekitar {specific_food['kalori']} kkal dan serat {specific_food.get('serat', 0)} gram"
         elif "lemak" in ql:
@@ -134,23 +209,20 @@ def build_vllm_messages(
             f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan!\n"
             f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
         )
-    # 3. Pesan konsultasi mengalir umum
+    # 4. Pesan konsultasi mengalir umum
     else:
         greeting_instruction = (
-            "- Percakapan sedang berlangsung. DILARANG mengulang salam seperti 'Halo Pak Budi' atau 'Budi, ...' di awal kalimat. Langsung jawab inti pertanyaan pasien.\n"
+            f"- Percakapan sedang berlangsung. DILARANG mengulang salam seperti 'Halo {patient_name}' di awal kalimat. Langsung jawab inti pertanyaan pasien.\n"
             if has_prior_chat else
-            f"- Sapa dengan hormat menggunakan '{patient_name}'. DILARANG memanggil 'Budi' saja!\n"
+            f"- Sapa dengan hormat menggunakan panggilan '{patient_name}'.\n"
         )
-        # Periksa apakah pasien menanyakan resep lanjutan seperti "selain itu?", "menu lain?"
         ql = (user_query or "").lower().strip()
         is_followup_recipe = any(k in ql for k in ["selain itu", "menu lain", "resep lain", "opsi lain", "yang lain", "pilihan lain"])
-
-        # Periksa apakah pasien hanya memberi reaksi santai terhadap makanan (contoh: "enak keknya nasi ayam goreng", "keliatannya enak ya", "mantap tuh")
         is_casual_reaction = any(k in ql for k in ["enak keknya", "keliatannya enak", "kayaknya enak", "enak ya", "mantap", "boleh juga", "sedap", "menarik"])
 
         if is_casual_reaction:
             recipe_guidance = (
-                "  * Pasien hanya menanggapi atau memuji hidangan yang disarankan sebelumnya ('enak keknya...'). Tanggapi dengan santai, hangat, dan positif (misalnya: 'Betul sekali, Pak Budi! Kombinasi tersebut sangat lezat dan pas untuk makan siang Bapak. Selamat menikmati ya!'). DILARANG membeberkan angka gizi detail, resep baru, atau rekam medis lagi!\n"
+                f"  * Pasien hanya menanggapi atau memuji hidangan yang disarankan sebelumnya ('enak keknya...'). Tanggapi dengan santai, hangat, dan positif (misalnya: 'Pilihan yang sangat baik, {patient_name}! Hidangan tersebut lezat dan cocok untuk menu sehat {salutation}. Selamat menikmati!'). DILARANG membeberkan angka gizi detail, resep baru, atau rekam medis lagi!\n"
             )
         elif is_followup_recipe:
             recipe_guidance = (
@@ -167,17 +239,17 @@ def build_vllm_messages(
             f"[Instruksi Respon]:\n"
             f"{greeting_instruction}"
             f"- PENTING: Periksa intent pesan pasien di atas dan tanggapi secara manusiawi, mengalir, dan empatik layaknya dokter nutrisi asli:\n"
-            f"  * Jika pasien hanya bereaksi santai/curhat (seperti 'wah gawat yaa', 'aduh gimana dong', 'takut saya'): JANGAN mengulang membacakan rekam medis lengkap lagi! Tanggapi dengan empati dan tenangkan: 'Tidak perlu panik atau berkecil hati, Pak Budi. Kondisi prediabetes dan berat badan ini masih sangat bisa diperbaiki dengan langkah bertahap melalui pola makan 3J dan olahraga teratur. Saya siap mendampingi perjalanan sehat Bapak.' Cukup 2-3 kalimat.\n"
-            f"  * Jika pasien menanyakan umur/usia: Jawab umur saja ('Umur Pak Budi saat ini adalah 50 tahun'). DILARANG menambahkan pembahasan berat badan atau obesitas jika hanya ditanya umur!\n"
-            f"  * Jika pasien menanyakan kondisi tubuhnya (seperti 'apakah sehat?', 'apakah ideal?'): Jelaskan evaluasi berat badan secara jujur dan empatik tanpa menyodorkan resep masakan!\n"
+            f"  * Jika pasien hanya bereaksi santai/curhat (seperti 'wah gawat yaa', 'aduh gimana dong', 'takut saya'): JANGAN mengulang membacakan rekam medis lengkap lagi! Tanggapi dengan empati dan tenangkan: 'Tidak perlu panik atau berkecil hati, {patient_name}. Kondisi prediabetes dan berat badan ini masih sangat bisa diperbaiki dengan langkah bertahap melalui pola makan 3J dan olahraga teratur. Saya siap mendampingi perjalanan sehat {salutation}.' Cukup 2-3 kalimat.\n"
+            f"  * Jika pasien menanyakan umur/usia: Jawab umur pasien sesuai data dossier. Jika belum diisi, sampaikan belum ada data usia di profil. DILARANG menambahkan pembahasan berat badan atau obesitas jika hanya ditanya umur!\n"
+            f"  * Jika pasien menanyakan kondisi tubuhnya (seperti 'apakah sehat?', 'apakah ideal?'): Jelaskan evaluasi status gizi secara jujur dan empatik tanpa menyodorkan resep masakan!\n"
             f"  * Jika pasien menanyakan data pribadi spesifik (alergi, berat badan, tinggi badan): JAWAB HANYA HAL YANG DITANYAKAN secara singkat dan tepat! DILARANG menambahkan kalimat klise 'jangan khawatir' jika pasien tidak cemas!\n"
             f"  * Jika pasien menanyakan jadwal/frekuensi makan ('makan berapa kali?'): Jelaskan prinsip 3J secara ringkas tanpa resep masakan panjang!\n"
             f"{recipe_guidance}"
-            f"- DILARANG menambahkan kalimat template klise di setiap jawaban (seperti: 'Jangan khawatir, Pak Budi. Kondisi prediabetes...', 'Kondisi prediabetes dan alergi Anda masih bisa dikelola...'). HAPUS SEMUA KALIMAT KLISE ITU! Jawab langsung intinya saja!\n"
-            f"- DILARANG memuntahkan rekam medis (berat badan, tinggi, hasil lab) jika pasien TIDAK menanyakannya!\n"
+            f"- DILARANG menambahkan kalimat template klise di setiap jawaban (seperti: 'Jangan khawatir, ... Kondisi prediabetes...'). HAPUS SEMUA KALIMAT KLISE ITU! Jawab langsung intinya saja!\n"
+            f"- DILARANG memuntahkan rekam medis jika pasien TIDAK menanyakannya!\n"
             f"- DILARANG menyodorkan resep masakan jika pasien tidak memintanya!\n"
-            f"- DILARANG memanggil pasien dengan nama depannya saja (DILARANG memanggil 'Budi'!). Selalu gunakan '{patient_name}'.\n"
-            f"- DILARANG memancing pertanyaan penutup ('Apakah ada resep masakan spesial yang ingin Anda coba hari ini?', 'Bagaimana informasi ini membantu Bapak?'). Cukup jawab inti pesan pasien secara hangat dan profesional.\n"
+            f"- DILARANG memanggil dengan nama pengguna lain. Selalu gunakan '{patient_name}'.\n"
+            f"- DILARANG memancing pertanyaan penutup klise ('Apakah ada resep masakan spesial yang ingin Anda coba hari ini?'). Cukup jawab inti pesan pasien secara hangat dan profesional.\n"
             f"- Gunakan Bahasa Indonesia murni yang cerdas, hangat, dan mengalir alami."
         )
 

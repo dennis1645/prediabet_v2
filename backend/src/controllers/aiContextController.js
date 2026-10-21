@@ -18,10 +18,16 @@ export function getUserAIContext(req, res) {
 
     let profile = {};
     let analysis = {};
+    let hasProfile = false;
 
     if (profileRow) {
-      profile = JSON.parse(profileRow.full_profile_data);
-      analysis = JSON.parse(profileRow.analysis_result);
+      try {
+        profile = JSON.parse(profileRow.full_profile_data || "{}");
+        analysis = JSON.parse(profileRow.analysis_result || "{}");
+        hasProfile = true;
+      } catch (e) {
+        console.error("Error parsing profile JSON:", e);
+      }
     }
 
     // Ambil 5 riwayat chat terakhir khusus user ini
@@ -35,13 +41,15 @@ export function getUserAIContext(req, res) {
         userId,
         username: req.user.username,
         medicalContext: {
-          usia: profile.usia || 40,
+          nama: profile.nama || req.user.username,
+          has_profile: hasProfile,
+          usia: profile.usia || null,
           jenis_kelamin: profile.jenis_kelamin || "Laki-laki",
-          bmi: analysis.bmi || 25,
-          kategori_bmi: analysis.kategori_bmi || "Normal",
-          skor_risiko: analysis.skor_risiko || 68,
-          kategori_risiko: analysis.kategori_risiko || "Prediabetes",
-          gula_darah_puasa: profile.gula_darah_puasa || profile.hasil_lab || "Belum ada tes lab",
+          bmi: analysis.bmi || null,
+          kategori_bmi: analysis.status_bmi || analysis.kategori_bmi || (hasProfile ? "Normal" : "Belum diisi"),
+          skor_risiko: analysis.skor_risiko || null,
+          kategori_risiko: analysis.kategori_risiko || (hasProfile ? "Normal" : "Belum diisi"),
+          gula_darah_puasa: profile.gula_darah_puasa || "Belum ada tes lab",
           hba1c: profile.hba1c || "Belum ada tes lab",
           pantangan_alergi: Array.from(
             new Set(
@@ -55,9 +63,9 @@ export function getUserAIContext(req, res) {
                 .filter(Boolean)
             )
           ),
-          komorbiditas: profile.komorbiditas || "-",
-          active_diet: analysis.active_diet_label || "Diet Mediterania",
-          target_kalori: analysis.target_kalori || 1850,
+          komorbiditas: profile.komorbiditas || [],
+          active_diet: analysis.active_diet_label || "Diet Seimbang Ramah Glukosa",
+          target_kalori: analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2000),
         },
         chatHistory: chatHistory.reverse(),
       },
@@ -195,9 +203,15 @@ export async function forwardChatToAI(req, res) {
 
     let profile = {};
     let analysis = {};
+    let hasProfile = false;
     if (profileRow) {
-      profile = JSON.parse(profileRow.full_profile_data);
-      analysis = JSON.parse(profileRow.analysis_result);
+      try {
+        profile = JSON.parse(profileRow.full_profile_data || "{}");
+        analysis = JSON.parse(profileRow.analysis_result || "{}");
+        hasProfile = true;
+      } catch (e) {
+        console.error("Error parsing profile JSON in forwardChatToAI:", e);
+      }
     }
 
     // Ambil 6 giliran chat terakhir khusus user ini untuk memori AI yang unik
@@ -205,26 +219,28 @@ export async function forwardChatToAI(req, res) {
       .prepare("SELECT role, content, created_at FROM chat_logs WHERE user_id = ? ORDER BY id DESC LIMIT 6")
       .all(userId);
 
+    const displayName = profile.nama || req.user.username;
     const userContext = {
       userId,
       username: req.user.username,
-      nama: profile.nama || "Budi Santoso",
-      usia: profile.usia || 50,
+      nama: displayName,
+      has_profile: hasProfile,
+      usia: profile.usia || null,
       jenis_kelamin: profile.jenis_kelamin || "Laki-laki",
-      tinggi_badan: profile.tinggi_badan || 172,
-      berat_badan: profile.berat_badan || 78,
-      lingkar_pinggang: profile.lingkar_pinggang || 94,
+      tinggi_badan: profile.tinggi_badan || null,
+      berat_badan: profile.berat_badan || null,
+      lingkar_pinggang: profile.lingkar_pinggang || null,
       aktivitas: profile.aktivitas || "sedang",
-      bmi: analysis.bmi || 26.4,
-      kategori_bmi: analysis.status_bmi || analysis.kategori_bmi || "Obesitas",
-      skor_risiko: analysis.skor_risiko || 75,
-      kategori_risiko: analysis.kategori_risiko || "Prediabetes (IFG)",
-      gula_darah_puasa: profile.gula_darah_puasa || "114",
-      hba1c: profile.hba1c || "5.8",
-      target_kalori: analysis.target_kalori || 1996,
+      bmi: analysis.bmi || null,
+      kategori_bmi: analysis.status_bmi || analysis.kategori_bmi || (hasProfile ? "Normal" : "Belum diisi"),
+      skor_risiko: analysis.skor_risiko || null,
+      kategori_risiko: analysis.kategori_risiko || (hasProfile ? "Prediabetes" : "Belum diisi"),
+      gula_darah_puasa: profile.gula_darah_puasa || null,
+      hba1c: profile.hba1c || null,
+      target_kalori: analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2000),
       target_karbo: analysis.target_karbo || 225,
-      target_protein: analysis.target_protein || 125,
-      target_lemak: analysis.target_lemak || 67,
+      target_protein: analysis.target_protein || 100,
+      target_lemak: analysis.target_lemak || 60,
       pola_waktu_makan: analysis.pola_waktu_makan || profile.pola_waktu_makan || "3 kali makan utama + 2 kali selingan",
       pantangan_alergi: Array.from(
         new Set(
@@ -239,7 +255,7 @@ export async function forwardChatToAI(req, res) {
         )
       ),
       komorbiditas: profile.komorbiditas || [],
-      active_diet: analysis.active_diet_label || "Diet Mediterania",
+      active_diet: analysis.active_diet_label || "Diet Seimbang Ramah Glukosa",
     };
 
     const aiServerUrl = process.env.AI_SERVER_URL || "http://localhost:8000/api/chat";

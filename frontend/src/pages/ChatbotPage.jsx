@@ -24,16 +24,48 @@ import {
 export default function ChatbotPage() {
   const { user, profile, analysis } = useAuth();
   
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content: "Halo Pak Budi! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi Anda. Ada yang ingin Anda tanyakan seputar kandungan gizi makanan, pola makan ramah gula darah, atau rekomendasi menu sehat hari ini?",
-    },
-  ]);
+  const getGreetingName = () => {
+    if (profile?.nama) {
+      const salutation = profile.jenis_kelamin === "Perempuan" ? "Ibu" : "Pak";
+      return `${salutation} ${profile.nama}`;
+    }
+    if (user?.username) {
+      return `Bapak/Ibu ${user.username}`;
+    }
+    return "Sahabat Sehat";
+  };
+
+  const [messages, setMessages] = useState(() => {
+    const greeting = profile?.nama 
+      ? (profile.jenis_kelamin === "Perempuan" ? `Ibu ${profile.nama}` : `Pak ${profile.nama}`)
+      : (user?.username ? `Bapak/Ibu ${user.username}` : "Sahabat Sehat");
+    return [
+      {
+        role: "assistant",
+        content: `Halo ${greeting}! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi Anda. Ada yang ingin Anda tanyakan seputar kandungan gizi makanan, pola makan ramah gula darah, atau rekomendasi menu sehat hari ini?`,
+      },
+    ];
+  });
   
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const chatBottomRef = useRef(null);
+
+  // Perbarui pesan sambutan jika profil atau user terisi setelah auth check
+  useEffect(() => {
+    const greeting = getGreetingName();
+    setMessages((prev) => {
+      if (prev.length === 1 && prev[0].role === "assistant" && prev[0].content.includes("Selamat datang di ruang konsultasi")) {
+        return [
+          {
+            role: "assistant",
+            content: `Halo ${greeting}! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi Anda. Ada yang ingin Anda tanyakan seputar kandungan gizi makanan, pola makan ramah gula darah, atau rekomendasi menu sehat hari ini?`,
+          },
+        ];
+      }
+      return prev;
+    });
+  }, [user, profile]);
 
   // Muat riwayat chat unik pengguna saat halaman dibuka
   useEffect(() => {
@@ -88,10 +120,11 @@ export default function ChatbotPage() {
     if (confirm.isConfirmed) {
       try {
         await api.clearChatHistory();
+        const greeting = getGreetingName();
         setMessages([
           {
             role: "assistant",
-            content: "Riwayat percakapan telah dibersihkan. Ada yang bisa saya bantu kembali seputar nutrisi ramah prediabetes Anda?",
+            content: `Riwayat percakapan telah dibersihkan. Halo ${greeting}, ada yang bisa saya bantu kembali seputar nutrisi ramah prediabetes Anda?`,
             source: "PrediBeat AI",
           },
         ]);

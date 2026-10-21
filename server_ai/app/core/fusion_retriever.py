@@ -2,6 +2,7 @@ from typing import Tuple, List, Dict, Any
 from app.core.neo4j_manager import Neo4jClinicalGraphManager, neo4j_manager
 from app.core.vector_manager import ClinicalVectorStoreManager, vector_manager
 from app.core.allergen_guardrail import allergen_guardrail
+from app.core.prompt_templates import get_patient_display_name, is_identity_query
 from app.models.schemas import UserClinicalContext
 
 class HybridGraphVectorFusion:
@@ -67,30 +68,44 @@ class HybridGraphVectorFusion:
 
         # 5. Perakitan Dossier Terisolasi (User-Specific Isolated Context)
         dossier_lines = []
+        patient_name = get_patient_display_name(user_context)
 
         # Rekam medis pasien HANYA dimasukkan sesuai kebutuhan spesifik:
-        dossier_lines = []
-
-        if any(k in ql for k in ["umur", "usia"]):
-            dossier_lines.append(f"• Usia Pasien: {user_context.usia} tahun.")
+        if is_identity_query(user_query):
+            raw_name = getattr(user_context, "nama", None) or getattr(user_context, "username", "Pasien")
+            dossier_lines.append(f"• Identitas Pasien: Nama {patient_name} (Username: {getattr(user_context, 'username', '-')}).")
+        elif any(k in ql for k in ["umur", "usia"]):
+            if getattr(user_context, "usia", None):
+                dossier_lines.append(f"• Usia Pasien: {user_context.usia} tahun.")
+            else:
+                dossier_lines.append(f"• Usia Pasien: Belum ada data usia yang diisi di profil.")
         elif any(k in ql for k in ["berat", "bb"]):
-            dossier_lines.append(f"• Berat Badan Pasien: {getattr(user_context, 'berat_badan', 78)} kg.")
+            if getattr(user_context, "berat_badan", None):
+                dossier_lines.append(f"• Berat Badan Pasien: {user_context.berat_badan} kg.")
+            else:
+                dossier_lines.append(f"• Berat Badan Pasien: Belum ada data berat badan yang diisi di profil.")
         elif any(k in ql for k in ["tinggi", "tb"]):
-            dossier_lines.append(f"• Tinggi Badan Pasien: {getattr(user_context, 'tinggi_badan', 172)} cm.")
+            if getattr(user_context, "tinggi_badan", None):
+                dossier_lines.append(f"• Tinggi Badan Pasien: {user_context.tinggi_badan} cm.")
+            else:
+                dossier_lines.append(f"• Tinggi Badan Pasien: Belum ada data tinggi badan yang diisi di profil.")
         elif any(k in ql for k in ["alergi", "pantangan"]):
             dossier_lines.append(f"• Pantangan Alergi: {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'}.")
         elif any(k in ql for k in ["sehat", "ideal", "bmi", "kondisi", "gawat", "bahaya", "gimana", "bagaimana"]):
+            bb_val = f"{user_context.berat_badan} kg" if getattr(user_context, "berat_badan", None) else "belum tercatat"
+            tb_val = f"{user_context.tinggi_badan} cm" if getattr(user_context, "tinggi_badan", None) else "belum tercatat"
+            bmi_val = f"{user_context.bmi} ({user_context.kategori_bmi})" if getattr(user_context, "bmi", None) else "belum dihitung"
             dossier_lines.append(
-                f"• Kondisi Klinis & BMI Pasien: Berat badan {getattr(user_context, 'berat_badan', 78)} kg, tinggi {getattr(user_context, 'tinggi_badan', 172)} cm, BMI {user_context.bmi} ({user_context.kategori_bmi}). "
-                f"Tidak perlu panik atau khawatir berlebihan. Dengan perbaikan pola makan 3J dan aktivitas fisik bertahap, kondisi prediabetes ini sangat bisa dikendalikan dan dicegah agar tidak menjadi diabetes."
+                f"• Kondisi Klinis & BMI Pasien: Berat badan {bb_val}, tinggi {tb_val}, BMI {bmi_val}. "
+                f"Tidak perlu panik atau khawatir berlebihan. Dengan perbaikan pola makan 3J dan aktivitas fisik bertahap, kondisi ini sangat bisa dikendalikan dan ditingkatkan kesehatannya."
             )
         elif user_wants_recipe or any(k in ql for k in ["gula", "hba1c", "lab", "kalori"]):
             dossier_lines = [
                 f"=== DATA REKAM MEDIS RESMI PASIEN (ACUAN KLINIS) ===",
-                f"• Nama Pasien       : {getattr(user_context, 'nama', 'Pak Budi')}",
-                f"• Usia Pasien       : {user_context.usia} tahun | BMI: {user_context.bmi} ({user_context.kategori_bmi})",
-                f"• Hasil Lab         : GDP {user_context.gula_darah_puasa} mg/dL | HbA1c {user_context.hba1c}%",
-                f"• Target Energi 3J  : {user_context.target_kalori} kkal/hari",
+                f"• Nama Pasien       : {patient_name}",
+                f"• Usia Pasien       : {getattr(user_context, 'usia', None) or '-'} tahun | BMI: {getattr(user_context, 'bmi', None) or '-'} ({getattr(user_context, 'kategori_bmi', None) or '-'})",
+                f"• Hasil Lab         : GDP {getattr(user_context, 'gula_darah_puasa', None) or '-'} mg/dL | HbA1c {getattr(user_context, 'hba1c', None) or '-'}%",
+                f"• Target Energi 3J  : {getattr(user_context, 'target_kalori', None) or 1900} kkal/hari",
                 f"• PANTANGAN ALERGI  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'} (MUTLAK DILARANG)",
             ]
 
