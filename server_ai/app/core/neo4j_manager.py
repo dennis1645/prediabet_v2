@@ -13,6 +13,45 @@ except ImportError:
     HAS_NEO4J = False
 
 
+CURATED_FOOD_IMAGES = {
+    "dada ayam": "https://images.alodokter.com/dk0z4ums3/image/upload/v1702735992/attached_image/kalori-dada-ayam-dan-tips-mengolahnya-untuk-jadi-menu-diet-sehat.jpg",
+    "ayam": "https://images.alodokter.com/dk0z4ums3/image/upload/v1702735992/attached_image/kalori-dada-ayam-dan-tips-mengolahnya-untuk-jadi-menu-diet-sehat.jpg",
+    "telur": "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600&auto=format&fit=crop",
+    "telur ayam": "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600&auto=format&fit=crop",
+    "telur rebus": "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=600&auto=format&fit=crop",
+    "nasi merah": "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=600&auto=format&fit=crop",
+    "beras merah": "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=600&auto=format&fit=crop",
+    "nasi putih": "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&auto=format&fit=crop",
+    "nasi biasa": "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&auto=format&fit=crop",
+    "nasi uduk": "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&auto=format&fit=crop",
+    "nasi lemak": "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&auto=format&fit=crop",
+    "nasi kuning": "https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&auto=format&fit=crop",
+    "ikan": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&auto=format&fit=crop",
+    "ikan mas": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&auto=format&fit=crop",
+    "tahu": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop",
+    "tahu putih": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop",
+    "tempe": "https://images.unsplash.com/photo-1584365685547-9a5fb6f3a70c?w=600&auto=format&fit=crop",
+    "bayam": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&auto=format&fit=crop",
+    "oyong": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop",
+    "gambas": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop",
+    "oatmeal": "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=600&auto=format&fit=crop",
+    "havermut": "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=600&auto=format&fit=crop",
+    "kentang": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&auto=format&fit=crop",
+    "apel": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=600&auto=format&fit=crop",
+    "pepaya": "https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=600&auto=format&fit=crop",
+    "wortel": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop",
+    "buncis": "https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?w=600&auto=format&fit=crop"
+}
+
+def resolve_food_image(food_name: str) -> str:
+    """Mengembalikan URL gambar HD terbaik untuk makanan tertentu."""
+    fn = (food_name or "").lower()
+    for key, url in CURATED_FOOD_IMAGES.items():
+        if key in fn:
+            return url
+    return "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&auto=format&fit=crop"
+
+
 EXCLUDE_FOOD_KEYWORDS = [
     "enteral", "glucerna", "wrp", "bubuk", "formula", "kemasan", "bumbu", 
     "tepung", "minyak", "margarin", "sirup", "selasih", "suplemen", "dideh", 
@@ -256,7 +295,8 @@ class Neo4jClinicalGraphManager:
                             "sodium_mg": sodium,
                             "gi": gi_val,
                             "kategori": row.get("kategori_spesifik") or row.get("kategori_utama") or "Menu",
-                            "cara_olah": row.get("cara_olah") or "Kukus/Rebus"
+                            "cara_olah": row.get("cara_olah") or "Kukus/Rebus",
+                            "gambar": resolve_food_image(nama)
                         })
             except Exception as e:
                 print(f"[Neo4j Manager] Gagal membaca nodes_food.csv: {e}")
@@ -304,17 +344,32 @@ class Neo4jClinicalGraphManager:
 
         COMMON_FOOD_ALIASES = {
             "dada ayam": ["ayam, dada", "dada ayam"],
+            "dada aym": ["ayam, dada", "dada ayam"],
+            "aym": ["ayam, dada", "dada ayam"],
             "ayam": ["ayam, dada", "dada ayam", "ayam, daging", "ayam"],
             "telur": ["telur ayam", "telur rebus", "telur"],
+            "telor": ["telur ayam", "telur rebus", "telur"],
+            "tlr": ["telur ayam", "telur rebus", "telur"],
             "tempe": ["tempe", "tempe pasar", "tempe kedelai"],
             "tahu": ["tahu", "tahu putih", "tahu kukus"],
             "ikan mas": ["ikan mas"],
             "ikan": ["ikan mas", "ikan nila", "ikan kembung", "ikan"],
+            "ikn": ["ikan mas", "ikan nila", "ikan kembung", "ikan"],
+            "pepes ikan": ["pepes ikan", "ikan mas"],
             "nasi merah": ["Beras merah, Nasi", "nasi merah"],
             "beras merah": ["Beras merah, Nasi", "nasi merah"],
+            "nsi mrh": ["Beras merah, Nasi", "nasi merah"],
             "nasi putih": ["Nasi Putih", "Nasi"],
             "nasi biasa": ["Nasi Putih", "Nasi"],
+            "nsi": ["Nasi Putih", "Nasi"],
             "nasi": ["Nasi Putih", "Nasi"],
+            "nasi uduk": ["Nasi Uduk", "Nasi"],
+            "nsi uduk": ["Nasi Uduk", "Nasi"],
+            "nasi lemak": ["Nasi Uduk", "Nasi Putih"],
+            "nasi kuning": ["Nasi Kuning"],
+            "nasgor": ["Nasi Goreng"],
+            "tahu gejrot": ["Tahu Gejrot", "tahu"],
+            "tahu gjrot": ["Tahu Gejrot", "tahu"],
             "bayam": ["bayam, segar", "bayam"],
             "oyong": ["gambas (oyong)", "oyong"],
             "gambas": ["gambas (oyong)", "gambas"],
@@ -392,7 +447,9 @@ class Neo4jClinicalGraphManager:
                                     0 if "tanpa kulit" in x["nama"].lower() else 1,
                                     len(x["nama"])
                                 ))
-                                return res[0]
+                                matched = res[0]
+                                matched["gambar"] = resolve_food_image(matched["nama"])
+                                return matched
                     except Exception as e:
                         print(f"[Neo4j Manager] Gagal cari makanan spesifik: {e}")
 
@@ -407,7 +464,9 @@ class Neo4jClinicalGraphManager:
                         0 if "tanpa kulit" in x["nama"].lower() else 1,
                         len(x["nama"])
                     ))
-                    return matches[0]
+                    matched = matches[0]
+                    matched["gambar"] = resolve_food_image(matched["nama"])
+                    return matched
 
         return None
 

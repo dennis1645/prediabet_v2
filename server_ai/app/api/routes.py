@@ -84,8 +84,8 @@ async def chat_endpoint(request: ChatRequest):
     # 1. Pastikan konteks user unik & terisolasi
     user_context = await resolve_user_context(request)
 
-    # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik)
-    dossier_text, safe_food_names, user_allergens, specific_food = fusion_engine.build_clinical_dossier(
+    # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik, typo normalizer, & MET kalkulator)
+    dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged = fusion_engine.build_clinical_dossier(
         request.message, user_context, request.chat_history or []
     )
 
@@ -120,7 +120,10 @@ async def chat_endpoint(request: ChatRequest):
         user_id=user_context.userId,
         safe_foods_recommended=safe_food_names,
         guardrail=guardrail_report,
-        telemetry=telemetry
+        telemetry=telemetry,
+        food_card=specific_food,
+        confirmation=confirmation,
+        exercise_logged=exercise_logged,
     )
 
 
@@ -131,7 +134,7 @@ async def chat_stream_endpoint(request: ChatRequest):
         raise HTTPException(status_code=400, detail="Pesan pertanyaan tidak boleh kosong.")
 
     user_context = await resolve_user_context(request)
-    dossier_text, safe_food_names, user_allergens, specific_food = fusion_engine.build_clinical_dossier(
+    dossier_text, safe_food_names, user_allergens, specific_food, _, _ = fusion_engine.build_clinical_dossier(
         request.message, user_context, request.chat_history or []
     )
     messages = build_vllm_messages(

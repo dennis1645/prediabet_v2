@@ -19,6 +19,10 @@ import {
   Menu,
   ChevronRight,
   ShieldAlert,
+  Utensils,
+  Flame,
+  Activity,
+  CheckCircle2,
 } from "lucide-react";
 
 export default function ChatbotPage() {
@@ -51,6 +55,13 @@ export default function ChatbotPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar drawer
   const [loadingHistory, setLoadingHistory] = useState(false);
 
+  // State Modal Catat Makanan ke Menu Harian
+  const [logModalOpen, setLogModalOpen] = useState(false);
+  const [selectedFoodForLog, setSelectedFoodForLog] = useState(null);
+  const [selectedMealTime, setSelectedMealTime] = useState("Makan Siang");
+  const [portionGrams, setPortionGrams] = useState(100);
+  const [isLoggingFood, setIsLoggingFood] = useState(false);
+
   const chatBottomRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -80,21 +91,37 @@ export default function ChatbotPage() {
     try {
       const res = await api.getChatSessionHistory(sessionId);
       if (res.success && Array.isArray(res.data) && res.data.length > 0) {
-        const mapped = res.data.map((item) => ({
-          role: item.role,
-          content: item.content,
-          source: item.metadata?.source || (item.role === "assistant" ? "PrediBeat Hybrid GraphRAG" : undefined),
-          guardrail: item.metadata?.guardrail || (item.role === "assistant" ? "100% Bebas Alergen" : undefined),
-          telemetry: item.metadata?.latency_ms
-            ? {
-                latency_ms: item.metadata.latency_ms,
-                tokens_per_second: item.metadata.tokens_per_second,
-                vllm_connected: item.metadata.vllm_connected,
-              }
-            : undefined,
-          safe_foods: item.metadata?.safe_foods || [],
-          created_at: item.created_at,
-        }));
+        const mapped = res.data.map((item) => {
+          let meta = {};
+          if (typeof item.metadata === "string") {
+            try {
+              meta = JSON.parse(item.metadata);
+            } catch (e) {
+              meta = {};
+            }
+          } else if (item.metadata && typeof item.metadata === "object") {
+            meta = item.metadata;
+          }
+
+          return {
+            role: item.role,
+            content: item.content,
+            source: meta.source || (item.role === "assistant" ? "PrediBeat Hybrid GraphRAG" : undefined),
+            guardrail: meta.guardrail || (item.role === "assistant" ? "100% Bebas Alergen" : undefined),
+            telemetry: meta.latency_ms
+              ? {
+                  latency_ms: meta.latency_ms,
+                  tokens_per_second: meta.tokens_per_second,
+                  vllm_connected: meta.vllm_connected,
+                }
+              : undefined,
+            safe_foods: meta.safe_foods || [],
+            food_card: meta.food_card || null,
+            confirmation: meta.confirmation || null,
+            exercise_logged: meta.exercise_logged || null,
+            created_at: item.created_at,
+          };
+        });
         setMessages(mapped);
       } else {
         setMessages([createInitialWelcomeMessage(getGreetingName())]);
@@ -193,10 +220,9 @@ export default function ChatbotPage() {
     chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // Kirim Pertanyaan
-  const handleSend = async (e) => {
-    e?.preventDefault();
-    const query = input.trim();
+  // Kirim Pertanyaan (bisa dipanggil dari form submit atau action chip konfirmasi)
+  const sendMessage = async (rawQuery) => {
+    const query = (rawQuery !== undefined ? rawQuery : input).trim();
     if (!query || isTyping) return;
 
     // Tambahkan bubble user
@@ -224,6 +250,9 @@ export default function ChatbotPage() {
         const guardrail = res.guardrail?.safety_message || "100% Bebas Alergen & Aman Secara Klinis";
         const telemetry = res.telemetry;
         const safe_foods = res.safe_foods_recommended || [];
+        const food_card = res.food_card || null;
+        const confirmation = res.confirmation || null;
+        const exercise_logged = res.exercise_logged || null;
 
         // Inisialisasi bubble assistant dengan status streaming aktif
         setMessages((prev) => [
@@ -236,6 +265,9 @@ export default function ChatbotPage() {
             guardrail,
             telemetry,
             safe_foods,
+            food_card,
+            confirmation,
+            exercise_logged,
           },
         ]);
 
@@ -289,6 +321,74 @@ export default function ChatbotPage() {
       ]);
       setIsTyping(false);
     }, 600);
+  };
+
+  const handleSend = (e) => {
+    e?.preventDefault();
+    sendMessage();
+  };
+
+  // Interaktif: Konfirmasi bahan / nama makanan yang typo / gaul
+  const handleConfirmFood = (targetFood) => {
+    sendMessage(`Berapa nutrisi dan kandungan ${targetFood}?`);
+  };
+
+  const handleRejectFood = (detectedTerm) => {
+    sendMessage(`Bukan ${detectedTerm}, tolong beri tahu opsi makanan ramah prediabetes lainnya.`);
+  };
+
+  // Modal Action: Buka dialog pencatatan makanan
+  const handleOpenMealModal = (foodCard) => {
+    setSelectedFoodForLog(foodCard);
+    setPortionGrams(100);
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 11) {
+      setSelectedMealTime("Sarapan");
+    } else if (hour >= 11 && hour < 16) {
+      setSelectedMealTime("Makan Siang");
+    } else if (hour >= 16 && hour < 21) {
+      setSelectedMealTime("Makan Malam");
+    } else {
+      setSelectedMealTime("Selingan");
+    }
+    setLogModalOpen(true);
+  };
+
+  // Modal Action: Simpan catatan makanan langsung ke daily_progress_logs
+  const handleConfirmLogFood = async () => {
+    if (!selectedFoodForLog) return;
+    setIsLoggingFood(true);
+    try {
+      const scale = (Number(portionGrams) || 100) / 100;
+      const calVal = Math.round((selectedFoodForLog.kalori || 0) * scale);
+      const protVal = Math.round((selectedFoodForLog.protein || 0) * scale);
+      const carbVal = Math.round((selectedFoodForLog.karbohidrat || 0) * scale);
+      const fatVal = Math.round((selectedFoodForLog.lemak || 0) * scale);
+
+      const res = await api.logFoodDirect({
+        food_name: selectedFoodForLog.nama_makanan,
+        calories: calVal,
+        meal_time: selectedMealTime,
+        protein: protVal,
+        karbo: carbVal,
+        lemak: fatVal,
+      });
+
+      if (res && res.success) {
+        showToast(
+          res.message || `${selectedFoodForLog.nama_makanan} (${portionGrams}g) dicatat ke ${selectedMealTime}!`,
+          "success"
+        );
+        setLogModalOpen(false);
+        setSelectedFoodForLog(null);
+      } else {
+        showToast(res?.message || "Gagal mencatat makanan", "error");
+      }
+    } catch (err) {
+      showToast(err.message || "Gagal mencatat makanan", "error");
+    } finally {
+      setIsLoggingFood(false);
+    }
   };
 
   const activeSessionTitle =
@@ -513,6 +613,167 @@ export default function ChatbotPage() {
                           {msg.isTypingStream && (
                             <span className="inline-block w-2 h-4 ml-1 bg-emerald-600 animate-pulse align-middle rounded-xs"></span>
                           )}
+
+                          {/* Visual Nutrition Card with HD Image & Macro Pills */}
+                          {msg.food_card && !msg.isTypingStream && (
+                            <div className="mt-3.5 bg-gradient-to-br from-emerald-50/80 via-white to-teal-50/40 border border-emerald-200/90 rounded-2xl p-3.5 sm:p-4 shadow-2xs">
+                              <div className="flex flex-col sm:flex-row gap-3.5 items-center sm:items-start">
+                                {/* Food Image with Fallback */}
+                                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-white border border-emerald-200 flex-shrink-0 shadow-xs relative group">
+                                  <img
+                                    src={msg.food_card.gambar || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop&q=80"}
+                                    alt={msg.food_card.nama_makanan}
+                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    onError={(e) => {
+                                      e.currentTarget.onerror = null;
+                                      e.currentTarget.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop&q=80";
+                                    }}
+                                  />
+                                  <div className="absolute top-1.5 left-1.5 bg-emerald-700/90 backdrop-blur-xs text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
+                                    {msg.food_card.kategori || "Bahan Makanan"}
+                                  </div>
+                                </div>
+
+                                {/* Info & Macro Breakdown */}
+                                <div className="flex-1 w-full min-w-0">
+                                  <div className="flex items-start justify-between gap-2">
+                                    <div>
+                                      <h4 className="font-extrabold text-slate-800 text-sm sm:text-base leading-tight">
+                                        {msg.food_card.nama_makanan}
+                                      </h4>
+                                      <p className="text-[11px] text-slate-500 font-medium mt-0.5">
+                                        Nilai gizi baku per 100 gram (Basis Data Kemenkes / PERKENI)
+                                      </p>
+                                    </div>
+                                    {msg.food_card.gi_category && (
+                                      <span
+                                        className={`text-[10px] font-black px-2.5 py-1 rounded-full border whitespace-nowrap shadow-2xs ${
+                                          msg.food_card.gi_category.toLowerCase().includes("rendah") || msg.food_card.gi_category.toLowerCase().includes("aman")
+                                            ? "bg-emerald-100 text-emerald-800 border-emerald-200"
+                                            : msg.food_card.gi_category.toLowerCase().includes("sedang")
+                                            ? "bg-amber-100 text-amber-800 border-amber-200"
+                                            : "bg-rose-100 text-rose-800 border-rose-200"
+                                        }`}
+                                      >
+                                        {msg.food_card.gi_category}
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* 4 Macro Pills */}
+                                  <div className="grid grid-cols-4 gap-1.5 sm:gap-2 mt-3">
+                                    <div className="bg-white border border-slate-200/80 rounded-xl p-2 text-center shadow-2xs">
+                                      <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wide">Kalori</span>
+                                      <span className="text-xs sm:text-sm font-black text-slate-800">
+                                        {msg.food_card.kalori ?? "-"}
+                                      </span>
+                                      <span className="text-[9px] text-slate-400 block -mt-0.5 font-medium">kkal</span>
+                                    </div>
+
+                                    <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-2 text-center shadow-2xs">
+                                      <span className="block text-[10px] font-bold text-emerald-700 uppercase tracking-wide">Protein</span>
+                                      <span className="text-xs sm:text-sm font-black text-emerald-900">
+                                        {msg.food_card.protein ?? "-"}g
+                                      </span>
+                                      <span className="text-[9px] text-emerald-600 block -mt-0.5 font-medium">otot</span>
+                                    </div>
+
+                                    <div className="bg-amber-50/60 border border-amber-200/80 rounded-xl p-2 text-center shadow-2xs">
+                                      <span className="block text-[10px] font-bold text-amber-700 uppercase tracking-wide">Karbo</span>
+                                      <span className="text-xs sm:text-sm font-black text-amber-900">
+                                        {msg.food_card.karbohidrat ?? "-"}g
+                                      </span>
+                                      <span className="text-[9px] text-amber-600 block -mt-0.5 font-medium">energi</span>
+                                    </div>
+
+                                    <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-2 text-center shadow-2xs">
+                                      <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wide">Lemak</span>
+                                      <span className="text-xs sm:text-sm font-black text-slate-800">
+                                        {msg.food_card.lemak ?? "-"}g
+                                      </span>
+                                      <span className="text-[9px] text-slate-400 block -mt-0.5 font-medium">esensial</span>
+                                    </div>
+                                  </div>
+
+                                  {/* Action Button: Catat ke Menu Saya Hari Ini */}
+                                  <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2 pt-2.5 border-t border-emerald-100">
+                                    <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
+                                      <ShieldCheck className="w-3.5 h-3.5" />
+                                      Teruji ramah pola 3J & bebas alergen
+                                    </span>
+                                    <button
+                                      onClick={() => handleOpenMealModal(msg.food_card)}
+                                      className="inline-flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition shadow-xs cursor-pointer active:scale-95"
+                                    >
+                                      <Plus className="w-3.5 h-3.5" />
+                                      <span>+ Catat ke Menu Saya</span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Interactive Confirmation Chips (Anti-Typo & Slang Normalizer) */}
+                          {msg.confirmation?.requires_confirmation && !msg.isTypingStream && (
+                            <div className="mt-3.5 p-3.5 bg-amber-50/90 border border-amber-200/90 rounded-2xl shadow-2xs">
+                              <div className="flex items-center gap-2 text-amber-900 text-xs font-bold mb-1.5">
+                                <Sparkles className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                                <span>Verifikasi Bahan / Istilah:</span>
+                              </div>
+                              <p className="text-xs text-amber-800 mb-3 leading-relaxed">
+                                {msg.confirmation.message || `Apakah yang Anda maksud adalah ${msg.confirmation.target_food}?`}
+                              </p>
+                              <div className="flex flex-wrap items-center gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => handleConfirmFood(msg.confirmation.target_food)}
+                                  className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition shadow-xs cursor-pointer active:scale-95"
+                                >
+                                  <Check className="w-3.5 h-3.5" />
+                                  <span>Ya, Benar ({msg.confirmation.target_food})</span>
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => handleRejectFood(msg.confirmation.detected_term)}
+                                  className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold px-3.5 py-1.5 rounded-xl transition shadow-2xs cursor-pointer active:scale-95"
+                                >
+                                  <X className="w-3.5 h-3.5" />
+                                  <span>Bukan</span>
+                                </button>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Exercise Logged Badge (Scientific MET Calculation) */}
+                          {msg.exercise_logged && !msg.isTypingStream && (
+                            <div className="mt-3.5 p-3 bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200 rounded-2xl shadow-2xs flex items-center justify-between gap-3">
+                              <div className="flex items-center gap-3">
+                                <div className="w-9 h-9 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-base shadow-xs flex-shrink-0">
+                                  🏃‍♂️
+                                </div>
+                                <div>
+                                  <div className="text-xs font-black text-teal-950 flex items-center gap-1.5">
+                                    <span>Aktivitas Fisik Berhasil Dicatat Otomatis!</span>
+                                    <span className="text-[10px] bg-teal-200/80 text-teal-900 font-bold px-1.5 py-0.5 rounded-md">
+                                      MET {msg.exercise_logged.met}
+                                    </span>
+                                  </div>
+                                  <div className="text-[11px] text-teal-700 font-medium mt-0.5">
+                                    {msg.exercise_logged.activity_name} ({msg.exercise_logged.duration_minutes} menit) • Terbakar ~{msg.exercise_logged.activity_calories} kkal
+                                  </div>
+                                  {msg.exercise_logged.glucose_clinical_note && (
+                                    <div className="text-[10px] text-teal-600/90 italic mt-0.5">
+                                      💡 {msg.exercise_logged.glucose_clinical_note}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                              <span className="text-[10px] font-black text-emerald-800 bg-white border border-emerald-200 px-2 py-1 rounded-lg uppercase shadow-2xs flex-shrink-0">
+                                Tersimpan di Progres
+                              </span>
+                            </div>
+                          )}
                         </div>
                       ) : (
                         <p className="whitespace-pre-wrap">{msg.content}</p>
@@ -601,6 +862,191 @@ export default function ChatbotPage() {
           </main>
         </div>
       </div>
+
+      {/* Modal Catat Makanan ke Progres Harian */}
+      {logModalOpen && selectedFoodForLog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
+          <div className="bg-white rounded-[2rem] border border-slate-100 shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            {/* Header */}
+            <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/60">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                  <Utensils className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-slate-800 text-base">
+                    Catat ke Menu Saya
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Sinkronisasi otomatis ke Progress Tracker
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setLogModalOpen(false)}
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="p-5 space-y-4">
+              {/* Selected Food Overview */}
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-emerald-50/60 border border-emerald-100">
+                <img
+                  src={selectedFoodForLog.gambar || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop&q=80"}
+                  alt={selectedFoodForLog.nama_makanan}
+                  className="w-14 h-14 rounded-xl object-cover border border-emerald-200"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop&q=80";
+                  }}
+                />
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-black text-slate-800 truncate">
+                    {selectedFoodForLog.nama_makanan}
+                  </div>
+                  <div className="text-xs text-emerald-700 font-semibold mt-0.5">
+                    Kategori: {selectedFoodForLog.kategori || "Bahan Pangan"}
+                  </div>
+                  {selectedFoodForLog.gi_category && (
+                    <span className="inline-block mt-1 text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md">
+                      {selectedFoodForLog.gi_category}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Waktu Makan */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                  Waktu Makan (Pola 3J - Jadwal)
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {["Sarapan", "Makan Siang", "Makan Malam", "Selingan"].map((time) => (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => setSelectedMealTime(time)}
+                      className={`py-2 px-3 rounded-xl text-xs font-bold transition border cursor-pointer ${
+                        selectedMealTime === time
+                          ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                          : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Takaran Porsi (Gram) */}
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-bold text-slate-700">
+                    Takaran Porsi (Jumlah - gram)
+                  </label>
+                  <span className="text-xs font-mono font-bold text-emerald-700">
+                    {portionGrams} gram
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {[50, 100, 150, 200].map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => setPortionGrams(preset)}
+                      className={`flex-1 py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer ${
+                        portionGrams === preset
+                          ? "bg-emerald-100 text-emerald-800 border-emerald-300"
+                          : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                      }`}
+                    >
+                      {preset}g
+                    </button>
+                  ))}
+                </div>
+                <input
+                  type="number"
+                  min="10"
+                  max="1000"
+                  step="10"
+                  value={portionGrams}
+                  onChange={(e) => setPortionGrams(Math.max(1, Number(e.target.value) || 0))}
+                  className="mt-2 w-full px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500 bg-slate-50"
+                  placeholder="Atau ketik porsi kustom dalam gram..."
+                />
+              </div>
+
+              {/* Realtime Calculated Nutrition Summary */}
+              <div className="bg-slate-50 rounded-2xl p-3 border border-slate-100">
+                <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center justify-between">
+                  <span>Estimasi Gizi ({portionGrams}g):</span>
+                  <span className="text-[10px] text-emerald-600 font-bold lowercase">sesuai takaran</span>
+                </div>
+                <div className="grid grid-cols-4 gap-2 text-center">
+                  <div className="bg-white p-2 rounded-xl border border-slate-100 shadow-2xs">
+                    <span className="block text-[10px] text-slate-400 font-bold uppercase">Kalori</span>
+                    <span className="text-xs font-black text-slate-800">
+                      {Math.round(((selectedFoodForLog.kalori || 0) * portionGrams) / 100)}
+                    </span>
+                    <span className="text-[9px] text-slate-400 block">kkal</span>
+                  </div>
+                  <div className="bg-emerald-50/50 p-2 rounded-xl border border-emerald-100 shadow-2xs">
+                    <span className="block text-[10px] text-emerald-600 font-bold uppercase">Protein</span>
+                    <span className="text-xs font-black text-emerald-800">
+                      {Math.round(((selectedFoodForLog.protein || 0) * portionGrams) / 10) / 10}g
+                    </span>
+                    <span className="text-[9px] text-emerald-500 block">otot</span>
+                  </div>
+                  <div className="bg-amber-50/50 p-2 rounded-xl border border-amber-100 shadow-2xs">
+                    <span className="block text-[10px] text-amber-600 font-bold uppercase">Karbo</span>
+                    <span className="text-xs font-black text-amber-800">
+                      {Math.round(((selectedFoodForLog.karbohidrat || 0) * portionGrams) / 10) / 10}g
+                    </span>
+                    <span className="text-[9px] text-amber-500 block">energi</span>
+                  </div>
+                  <div className="bg-slate-100/50 p-2 rounded-xl border border-slate-200/60 shadow-2xs">
+                    <span className="block text-[10px] text-slate-500 font-bold uppercase">Lemak</span>
+                    <span className="text-xs font-black text-slate-700">
+                      {Math.round(((selectedFoodForLog.lemak || 0) * portionGrams) / 10) / 10}g
+                    </span>
+                    <span className="text-[9px] text-slate-400 block">lemak</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-end gap-2.5">
+              <button
+                type="button"
+                onClick={() => setLogModalOpen(false)}
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-200 transition cursor-pointer"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmLogFood}
+                disabled={isLoggingFood}
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition shadow-sm cursor-pointer disabled:opacity-50"
+              >
+                {isLoggingFood ? (
+                  <span>Menyimpan ke Progres...</span>
+                ) : (
+                  <>
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Simpan ke Progres Hari Ini</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -57,3 +57,7 @@ class ChatResponse(BaseModel):
     safe_foods_recommended: List[str] = Field(default_factory=list)
     guardrail: GuardrailReport
     telemetry: Dict[str, Any] = Field(default_factory=dict)
+    food_card: Optional[Dict[str, Any]] = None
+    confirmation: Optional[Dict[str, Any]] = None
+    exercise_logged: Optional[Dict[str, Any]] = None
+    meal_logged: Optional[Dict[str, Any]] = None

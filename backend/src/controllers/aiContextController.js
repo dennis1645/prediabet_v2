@@ -1,4 +1,5 @@
 import db from "../database/connection.js";
+import { detectAndCalculateExercise } from "../utils/metCalculator.js";
 
 // Inisialisasi skema chat_sessions & pastikan kolom metadata dan session_id tersedia
 try {
@@ -219,6 +220,59 @@ export function deleteChatSession(req, res) {
 }
 
 /**
+ * Direct Log Makanan dari Visual Nutrition Card di Chatbot
+ */
+export function logFoodDirect(req, res) {
+  try {
+    const userId = req.user.id;
+    const { food_name, calories, meal_time, protein, karbo, lemak } = req.body;
+    if (!food_name) {
+      return res.status(400).json({ success: false, message: "Nama makanan wajib diisi." });
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+    const now = new Date().toISOString();
+    const timeLabel = meal_time || "Makan Siang";
+    const calVal = Math.round(parseFloat(calories) || 0);
+    const protVal = Math.round(parseFloat(protein) || 0);
+    const carbVal = Math.round(parseFloat(karbo) || 0);
+    const fatVal = Math.round(parseFloat(lemak) || 0);
+
+    const existing = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, today);
+    const entryNote = `[${timeLabel}] ${food_name} (${calVal} kkal)`;
+
+    if (existing) {
+      const updatedNotes = existing.notes ? `${existing.notes}\n${entryNote}` : entryNote;
+      const updatedKalori = (existing.actual_kalori || 0) + calVal;
+      const updatedProtein = (existing.actual_protein || 0) + protVal;
+      const updatedKarbo = (existing.actual_karbo || 0) + carbVal;
+      const updatedLemak = (existing.actual_lemak || 0) + fatVal;
+
+      db.prepare(`
+        UPDATE daily_progress_logs 
+        SET actual_kalori = ?, actual_protein = ?, actual_karbo = ?, actual_lemak = ?, notes = ?, updated_at = ?
+        WHERE id = ?
+      `).run(updatedKalori, updatedProtein, updatedKarbo, updatedLemak, updatedNotes, now, existing.id);
+    } else {
+      db.prepare(`
+        INSERT INTO daily_progress_logs (
+          user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).run(userId, today, calVal, protVal, carbVal, fatVal, entryNote, now, now);
+    }
+
+    res.json({
+      success: true,
+      message: `Menu ${food_name} (${calVal} kkal) berhasil dicatat ke progres ${timeLabel} hari ini!`,
+      data: { food_name, meal_time: timeLabel, calories: calVal }
+    });
+  } catch (error) {
+    console.error("Error in logFoodDirect:", error);
+    res.status(500).json({ success: false, message: "Gagal mencatat makanan ke database progress." });
+  }
+}
+
+/**
  * Save chat turn to user's isolated history
  */
 export function saveChatLog(req, res) {
@@ -361,6 +415,7 @@ export async function forwardChatToAI(req, res) {
     const displayName = profile.nama || req.user.username;
     const gender = profile.jenis_kelamin || "Laki-laki";
     const salutation = gender === "Perempuan" ? "Ibu" : "Pak";
+    const userWeight = profile.berat_badan || 68;
 
     // 3. Pre-filter Kondisi Kedaruratan Medis Akut (Red Flag Alert)
     const emergencyKeywords = ["tidak sadar", "kejang", "nyeri dada hebat", "koma", "pingsan mendadak", "napas sesak berat"];
@@ -432,6 +487,56 @@ export async function forwardChatToAI(req, res) {
       });
     }
 
+    // 5. Stateful Database Progress Cache (Memeriksa Riwayat Makan / Olahraga Langsung dari SQL)
+    const historyKeywords = ["kemarin", "hari ini", "tadi", "semalam", "sarapan apa", "makan apa", "olahraga apa", "riwayat", "progres"];
+    const asksAboutHistory = historyKeywords.some((k) => lowerMessage.includes(k));
+    let databaseProgressCacheText = "";
+
+    if (asksAboutHistory) {
+      let targetDate = new Date().toISOString().split("T")[0];
+      let dateLabel = "Hari ini";
+      if (lowerMessage.includes("kemarin") || lowerMessage.includes("semalam")) {
+        const yDate = new Date(Date.now() - 86400000);
+        targetDate = yDate.toISOString().split("T")[0];
+        dateLabel = `Kemarin (${targetDate})`;
+      }
+      const progressRow = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, targetDate);
+      if (progressRow) {
+        databaseProgressCacheText = 
+          `\n=== DATA RIWAYAT PROGRESS RESMI DATABASE (${dateLabel.toUpperCase()}) ===\n` +
+          `• Menu Makanan Tercatat: ${progressRow.notes || "Belum ada catatan makanan"}\n` +
+          `• Total Kalori Asupan  : ${progressRow.actual_kalori || 0} kkal\n` +
+          `• Aktivitas Olahraga   : ${progressRow.activity_name || "Belum ada"} (${progressRow.duration_minutes || 0} menit, terbakar ${progressRow.activity_calories || 0} kkal)\n` +
+          `• Gula Darah Puasa     : ${progressRow.fasting_glucose || "Belum tercatat"} mg/dL\n` +
+          `[INSTRUKSI DOKTER PREDI]: Pasien menanyakan riwayat aktivitas/makanan. Berikan laporan dari data resmi database di atas secara santun, akurat, dan apresiatif!`;
+      }
+    }
+
+    // 6. Auto-Log Olahraga Deterministik (MET Science Formula)
+    const detectedExercise = detectAndCalculateExercise(sanitizedMessage, userWeight);
+    if (detectedExercise) {
+      const today = new Date().toISOString().split("T")[0];
+      const existingToday = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, today);
+      if (existingToday) {
+        const updatedActName = existingToday.activity_name 
+          ? `${existingToday.activity_name}, ${detectedExercise.activity_name}`
+          : detectedExercise.activity_name;
+        const updatedDur = (existingToday.duration_minutes || 0) + detectedExercise.duration_minutes;
+        const updatedCal = (existingToday.activity_calories || 0) + detectedExercise.activity_calories;
+        db.prepare(`
+          UPDATE daily_progress_logs 
+          SET activity_name = ?, duration_minutes = ?, activity_calories = ?, updated_at = ?
+          WHERE id = ?
+        `).run(updatedActName, updatedDur, updatedCal, now, existingToday.id);
+      } else {
+        db.prepare(`
+          INSERT INTO daily_progress_logs (
+            user_id, tanggal, activity_name, duration_minutes, activity_calories, created_at, updated_at
+          ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        `).run(userId, today, detectedExercise.activity_name, detectedExercise.duration_minutes, detectedExercise.activity_calories, now, now);
+      }
+    }
+
     // Ambil 6 giliran chat terakhir KHUSUS SESI INI agar konteks tidak bocor antar sesi
     const chatHistory = db
       .prepare(
@@ -475,6 +580,7 @@ export async function forwardChatToAI(req, res) {
       ),
       komorbiditas: profile.komorbiditas || [],
       active_diet: analysis.active_diet_label || "Diet Seimbang Ramah Glukosa",
+      database_progress_cache: databaseProgressCacheText,
     };
 
     const aiServerUrl = process.env.AI_SERVER_URL || "http://localhost:8000/api/chat";
@@ -520,6 +626,9 @@ export async function forwardChatToAI(req, res) {
     }
 
     aiData.session_id = sessionId;
+    if (detectedExercise && !aiData.exercise_logged) {
+      aiData.exercise_logged = detectedExercise;
+    }
 
     // Simpan respons asisten beserta telemetri & bukti graf RAG ke database terisolasi
     if (aiData.response) {
@@ -532,6 +641,9 @@ export async function forwardChatToAI(req, res) {
           : "Dr. Predi Hybrid GraphRAG",
         guardrail: aiData.guardrail?.safety_message || "100% Bebas Alergen & Aman Secara Klinis",
         safe_foods: aiData.safe_foods_recommended || [],
+        food_card: aiData.food_card || null,
+        confirmation: aiData.confirmation || null,
+        exercise_logged: aiData.exercise_logged || null,
       };
 
       try {

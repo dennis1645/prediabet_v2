@@ -1,8 +1,10 @@
-from typing import Tuple, List, Dict, Any
+from typing import Tuple, List, Dict, Any, Optional
 from app.core.neo4j_manager import Neo4jClinicalGraphManager, neo4j_manager
 from app.core.vector_manager import ClinicalVectorStoreManager, vector_manager
 from app.core.allergen_guardrail import allergen_guardrail
 from app.core.prompt_templates import get_patient_display_name, is_identity_query
+from app.core.culinary_normalizer import culinary_normalizer
+from app.core.met_calculator import calculate_exercise_calories
 from app.models.schemas import UserClinicalContext
 
 class HybridGraphVectorFusion:
@@ -17,7 +19,7 @@ class HybridGraphVectorFusion:
         user_query: str,
         user_context: UserClinicalContext,
         chat_history: List[Any] = None
-    ) -> Tuple[str, List[str], List[str], Any]:
+    ) -> Tuple[str, List[str], List[str], Any, Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         """
         Menyusun Dossier Klinis unik untuk satu user tertentu.
         Menghasilkan:
@@ -25,6 +27,8 @@ class HybridGraphVectorFusion:
         - safe_food_names: Daftar nama makanan yang dijamin aman
         - allergens_prevented: Daftar alergen yang dicegah
         - specific_food: Objek makanan spesifik jika pengguna menanyakan kandungan nutrisi bahan tertentu
+        - confirmation_payload: Payload konfirmasi typo interaktif (Ya / Tidak)
+        - exercise_payload: Hasil kalkulasi olahraga deterministik (MET)
         """
         # 1. Parsing Komorbiditas & Alergen Pengguna (Deduplikasi Bersih)
         komorbid_list = []
@@ -40,6 +44,13 @@ class HybridGraphVectorFusion:
         # Bersihkan & hilangkan duplikasi (misal 'kacang' ganda)
         allergens = list(dict.fromkeys([a.strip().capitalize() for a in raw_allergens if a and a.strip()]))
         conditions = [f"Risiko: {user_context.kategori_risiko}"] + komorbid_list
+
+        # Cek Normalisasi Typo & Istilah Kuliner Nusantara
+        _, confirmation_payload = culinary_normalizer.normalize_food_query(user_query)
+
+        # Cek Kalkulator Kalori Olahraga Deterministik (MET)
+        user_weight = getattr(user_context, 'berat_badan', 68.0) or 68.0
+        exercise_payload = calculate_exercise_calories(user_query, user_weight)
 
         # 2. Penelusuran Graf Deterministik (Neo4j / Fallback Engine)
         safe_foods = self.graph.get_safe_foods_by_profile(conditions, allergens, limit=8)
@@ -80,6 +91,11 @@ class HybridGraphVectorFusion:
                 f"• Wajib Modifikasi Aman   : {high_risk_sweet['solusi']}",
                 f"[INSTRUKSI MUTLAK DOKTER PREDI]: Pasien menanyakan hidangan ini. Sesuai panduan PERKENI 2021, DILARANG KERAS memberikan resep tradisional dengan kuah gula merah pekat atau gorengan minyak jelantah! Anda WAJIB menjelaskan risiko lonjakan glukosa darah (glycemic spike) secara lugas, lalu HANYA menyajikan resep MODIFIKASI SEHAT RAMAH PREDIABETES (kuah asam segar + pemanis alami stevia dan tahu kukus/air-fryer).",
             ])
+
+        # Injeksi Data Cache Database Progres (Stateful Query Cache Anti-Ledakan Context)
+        db_cache = getattr(user_context, "database_progress_cache", None)
+        if db_cache and isinstance(db_cache, str) and db_cache.strip():
+            dossier_lines.append(db_cache.strip())
 
         # Rekam medis pasien HANYA dimasukkan sesuai kebutuhan spesifik:
         if is_identity_query(user_query):
@@ -151,11 +167,41 @@ class HybridGraphVectorFusion:
             for doc in guideline_texts:
                 dossier_lines.append(doc[:400])
 
+        # Injeksi Perhitungan Olahraga Deterministik (MET Science Formula)
+        if exercise_payload:
+            dossier_lines.extend([
+                "",
+                f"=== PERHITUNGAN KALORI OLAHRAGA DETERMINISTIK (MET STANDAR MEDIS CDC/ACSM) ===",
+                f"• Jenis Aktivitas   : {exercise_payload['activity_name']}",
+                f"• Durasi Latihan    : {exercise_payload['duration_minutes']} menit",
+                f"• Kalori Terbakar   : {exercise_payload['activity_calories']} kkal (MET: {exercise_payload['met']}, BB: {exercise_payload['weight_used']} kg)",
+                f"• Catatan Klinis    : {exercise_payload['clinical_note']}",
+                f"[INSTRUKSI DOKTER PREDI]: Sebutkan angka pembakaran kalori ini (~{exercise_payload['activity_calories']} kkal) secara lugas dan beri apresiasi positif atas konsistensi pasien!",
+            ])
+
+        # Injeksi Typo / Konfirmasi Kuliner
+        if confirmation_payload and confirmation_payload.get("requires_confirmation"):
+            dossier_lines.extend([
+                "",
+                f"=== DETEKSI TYPO / SINGKATAN KULINER ===",
+                f"• Typo Terdeteksi   : {confirmation_payload['detected_typo']}",
+                f"• Bahan Maksud Resmi: {confirmation_payload['target_food']}",
+                f"[INSTRUKSI DOKTER PREDI]: Awali jawaban dengan konfirmasi ramah: '{confirmation_payload['confirm_prompt']}'. Tampilkan data gizi resminya secara presisi.",
+            ])
+        elif confirmation_payload and confirmation_payload.get("is_culinary_equivalent"):
+            dossier_lines.extend([
+                "",
+                f"=== ANALISIS EKUIVALEN KULINER NUSANTARA ({confirmation_payload['term'].upper()}) ===",
+                f"• Ekuivalen Profil  : {confirmation_payload['target_food']}",
+                f"• Tinjauan Klinis   : {confirmation_payload['penjelasan']}",
+                f"[INSTRUKSI DOKTER PREDI]: Edukasi pasien mengenai kemiripan profil gizi hidangan tersebut dengan bijak dan ramah prediabetes.",
+            ])
+
         dossier_lines.append(
             f"\nPERINGATAN PROTOKOL ZERO-ALLERGEN (MUTLAK): DILARANG KERAS menyarankan makanan atau bahan yang mengandung {', '.join(allergens) if allergens else 'gula sederhana dan minyak jelantah'}. Jangan menyarankan santan, kacang, kacang panjang, atau seafood!"
         )
 
         dossier_text = "\n".join(dossier_lines)
-        return dossier_text, safe_food_names, allergens, specific_food
+        return dossier_text, safe_food_names, allergens, specific_food, confirmation_payload, exercise_payload
 
 fusion_engine = HybridGraphVectorFusion(neo4j_manager, vector_manager)

@@ -9,6 +9,7 @@ import {
   createChatSession,
   getChatSessionHistory,
   deleteChatSession,
+  logFoodDirect,
 } from "../controllers/aiContextController.js";
 import { authenticateJWT } from "../middleware/authMiddleware.js";
 
@@ -21,6 +22,7 @@ router.get("/history", getChatHistory);
 router.delete("/history", clearChatHistory);
 router.post("/chat", forwardChatToAI);
 router.post("/chat-log", saveChatLog);
+router.post("/log-food-direct", logFoodDirect);
 
 // Rute Sesi Percakapan Multi-Thread (mirip ChatGPT / Gemini)
 router.get("/sessions", getChatSessions);

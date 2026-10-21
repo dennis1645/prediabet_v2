@@ -127,6 +127,11 @@ export const api = {
       method: "DELETE",
     }),
   getAIContext: () => request("/ai/context"),
+  logFoodDirect: (data) =>
+    request("/ai/log-food-direct", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
 };
 
 export default api;
