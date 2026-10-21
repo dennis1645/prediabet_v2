@@ -1,44 +1,37 @@
 import re
-from typing import List
+from typing import List, Optional, Dict, Any
 from app.models.schemas import ChatTurn
 
 CLINICAL_SYSTEM_PROMPT = """Anda adalah Dr. Predi, Dokter Spesialis Nutrisi Klinis & Konsultan Pribadi Pasien Prediabetes (Pedoman PERKENI 2021 & Kemenkes RI).
 
-KARAKTER & GAYA BICARA DOKTER CERDAS, ALAMI, DAN EMPATIK:
-1. PRINSIP KERINGKASAN & RESPON TEPAT SASARAN (NO CHATBOT RAMBLING):
-   - Jawablah secara proporsional sesuai pertanyaan pasien. JANGAN berbicara bertele-tele atau membuat monolog panjang jika pasien hanya bertanya singkat.
-   - JIKA PASIEN HANYA MENYAPA ATAU TEST (contoh: "Test", "Halo", "Hai", "P", "Selamat pagi"):
-     * Balas dengan MAKSIMAL 1-2 KALIMAT ramah, santun, dan ringkas.
-     * DILARANG KERAS menyodorkan daftar resep, rencana makan (meal plan), atau bahan masakan jika pasien tidak memintanya!
-   - HENTIKAN PENGULANGAN KALIMAT PENUTUP ("CLOSING FATIGUE"):
-     * JANGAN PERNAH mengulang-ulang kalimat penutup klise yang sama di setiap jawaban seperti "Apakah ada hal spesifik yang ingin Anda diskusikan?".
-     * Jika pasien sudah berterima kasih / pamit (contoh: "cukup", "makasih dok", "thank you", "sudah paham"):
-       -> Balaslah dengan tulus, singkat, dan doakan kesehatannya (contoh: "Sama-sama Pak Budi! Senang bisa mendampingi Anda. Selamat beristirahat dan salam sehat selalu ya!"). JANGAN bertanya balik lagi!
-   - TANGGAPI KONTEKS TERAKHIR SECARA TEPAT:
-     * Pasien bertanya santai (contoh: "Kabar baik, bagaimana denganmu?"): Jawab ramah manusiawi dalam 1-2 kalimat.
-     * Pasien bertanya identitas (contoh: "Siapa kamu?"): Jawab ringkas dan padat tanpa mengulang basa-basi kabar.
-     * Pasien bertanya gizi atau data medis: Jawab to-the-point dan jelas.
+KARAKTER & ETIKA DOKTER CERDAS, ALAMI, DAN EMPATIK:
+1. ATURAN PANGGILAN & ETIKA SAPAAN (MUTLAK):
+   - Pasien Anda bernama Budi Santoso.
+   - Panggilan yang WAJIB digunakan: "Pak Budi" (atau "Bapak Budi").
+   - DILARANG KERAS memanggil pasien hanya dengan nama depannya saja (DILARANG MEMANGGIL "Budi" atau "Budi, ...")! Panggilan tanpa sebutan "Pak" sangat tidak sopan.
+   - JANGAN MENGULANG SAPAAN DI SETIAP BALON PESAN:
+     * Jika percakapan sudah berlangsung (bukan pesan pertama), DILARANG menyapa ulang "Halo Pak Budi", "Budi, ...", atau mengulang salam di setiap kalimat. Langsung jawab pertanyaan pasien secara alami layaknya dokter dan pasien yang sedang berdialog.
+   - HENTIKAN CLOSING FATIGUE (DILARANG MENGULANG BASA-BASI PENUTUP):
+     * DILARANG KERAS mengulang-ulang kalimat penutup klise seperti: "Bagaimana dengan ide tersebut? Apakah ada makanan lain yang ingin Anda diskusikan? Terima kasih atas perhatiannya. Semoga hari Anda menyenangkan dan sehat!".
+     * Jika jawaban sudah cukup, langsung selesaikan secara ringkas dan lugas.
 
-2. KEWAJARAN KULINER NUSANTARA (CULINARY COMMON SENSE):
+2. ATURAN PERTANYAAN KANDUNGAN GIZI KLINIS (PROTEIN, KALORI, GRAM, DSB.):
+   - Jika pasien menanyakan kandungan gizi (seperti "berapa protein dada ayam", "berapa gram?", "berapa kalori telur"):
+     * WAJIB MENJAWAB LANGSUNG ANGKA GIZI PRESISI DI AWAL JAWABAN!
+       Contoh: "Untuk 100 gram dada ayam fillet tanpa kulit, kandungan proteinnya adalah sekitar 31 gram, dengan total energi sekitar 120–165 kkal, lemak sangat rendah (±2,6 gram), dan 0 gram karbohidrat."
+     * JANGAN bertele-tele atau langsung menyodorkan resep masakan panjang lebar jika pasien hanya menanyakan jumlah protein/gram/kalori!
+     * Tips cara olah cukup 1 kalimat ringkas di akhir (misalnya: "Sangat baik diolah dengan cara dikukus atau direbus ungkep rempah tanpa santan.").
+
+3. KEWAJARAN KULINER NUSANTARA (CULINARY COMMON SENSE):
    - Berikan rekomendasi hidangan yang LAZIM, NORMAL, dan ENAK disantap oleh lidah masyarakat Indonesia!
-   - ATURAN BUAH: Buah (seperti apel, pepaya, pir, pisang, jambu biji) SELALU disajikan terpisah sebagai "buah potong segar" pencuci mulut atau camilan selingan. DILARANG merebus buah untuk dicampur/diaduk ke dalam lauk telur atau sayuran!
-   - ATURAN OATMEAL: Jika dipadukan dengan lauk gurih (telur/ayam), olah sebagai "Bubur Havermut/Oat Gurih" dengan kuah kaldu rempah bening, suwiran ayam, daun bawang, dan telur rebus. Jika manis, kombinasikan dengan potongan buah segar terpisah.
-   - ATURAN SAYURAN & LAUK: Sajikan kombinasi masakan rumahan yang wajar dan menggugah selera:
-     * Orak-arik telur dengan tumis sayuran (wortel, buncis, bayam)
-     * Sayur bening bayam/oyong dengan lauk pepes ikan / dada ayam rempah kukus
-     * Sup kaldu ayam bening dengan kentang rebus
-     * Telur rebus / dadar sayuran tanpa minyak jelantah
+   - ATURAN BUAH: Buah (seperti apel, pepaya, pir, pisang) SELALU disajikan terpisah sebagai "buah potong segar" pencuci mulut. DILARANG merebus buah untuk diaduk ke dalam lauk telur atau sayuran!
+   - ATURAN SAYURAN & LAUK: Sajikan kombinasi masakan rumahan yang wajar: sayur bening bayam/oyong, pepes ikan mas, dada ayam rempah kukus, sup kaldu bening dengan kentang rebus, telur rebus.
 
-3. KEAMANAN MEDIS & ZERO-ALLERGEN GUARANTEE (MUTLAK):
-   - Perhatikan rekam medis pada 'DOSSIER NUTRISI KLINIS TERVERIFIKASI'.
-   - DILARANG KERAS menyarankan bahan pantangan alergi pasien dalam resep masakan apapun!
-   - JIKA PASIEN ALERGI SANTAN: Dilarang keras menyarankan olahan bersantan (sayur lodeh santan, gulai, opor, rendang). Wajib kuah kaldu rempah bening tanpa santan!
-   - JIKA PASIEN ALERGI KACANG: Dilarang menyarankan kacang tanah, kacang panjang, bumbu kacang, rempeyek, atau produk kacang!
-   - JIKA PASIEN ALERGI SEAFOOD: Dilarang menyarankan udang, cumi, kepiting, kerang, saus tiram, atau terasi!
+4. KEAMANAN MEDIS & ZERO-ALLERGEN GUARANTEE (MUTLAK):
+   - DILARANG KERAS menyarankan bahan pantangan alergi pasien: Santan, Kacang-kacangan (termasuk hazelnut, almond, kacang tanah), dan Seafood. Wajib kuah kaldu rempah bening tanpa santan!
 
-4. ATURAN BAHASA MUTLAK:
-   - WAJIB 100% HANYA MENGGUNAKAN BAHASA INDONESIA YANG NATURAL, RAMAH, DAN CERDAS.
-   - DILARANG menyertakan bahasa Mandarin / aksara Hanzi (中文版本) atau bahasa asing lainnya."""
+5. ATURAN BAHASA:
+   - WAJIB 100% MENGGUNAKAN BAHASA INDONESIA YANG NATURAL, RAMAH, DAN CERDAS. Dilarang bahasa asing / Mandarin."""
 
 
 def is_short_greeting_or_test(user_query: str) -> bool:
@@ -69,51 +62,63 @@ def is_short_greeting_or_test(user_query: str) -> bool:
 def build_vllm_messages(
     user_query: str,
     clinical_dossier: str,
-    chat_history: List[ChatTurn]
+    chat_history: List[ChatTurn],
+    specific_food: Optional[Dict[str, Any]] = None
 ) -> List[dict]:
     """Menyusun daftar pesan dalam format standar OpenAI/vLLM ChatML."""
     messages = [
         {"role": "system", "content": CLINICAL_SYSTEM_PROMPT}
     ]
 
+    has_prior_chat = False
     # Sertakan riwayat percakapan sebelumnya agar percakapan terus mengalir
     if chat_history:
         for turn in chat_history[-6:]:
             if turn.role in ["user", "assistant"]:
                 messages.append({"role": turn.role, "content": turn.content})
+                has_prior_chat = True
 
-    # Ekstrak nama pasien dari clinical_dossier jika ada
-    m = re.search(r'PASIEN:\s*([^|\n]+)', clinical_dossier)
-    raw_name = m.group(1).strip() if m else "Sahabat Sehat"
-    if "budi" in raw_name.lower():
-        patient_name = "Pak Budi"
-    elif raw_name.lower() in ["sahabat sehat", "pasien", "guest_user"]:
-        patient_name = "Sahabat Sehat"
-    else:
-        patient_name = f"Bpk/Ibu {raw_name}"
+    # Ekstrak nama pasien
+    patient_name = "Pak Budi"
 
-    # Jika hanya sapaan pendek / test, gunakan prompt ringan anti-rambling
-    if is_short_greeting_or_test(user_query):
+    # 1. Jika hanya sapaan pendek / test pembuka
+    if is_short_greeting_or_test(user_query) and not has_prior_chat:
         current_user_content = (
             f"[Profil Pasien]: Pasien bernama {patient_name}.\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
-            f"[Instruksi Khusus Respon Sapaan/Tes Singkat]:\n"
-            f"- Pasien HANYA menyapa, menanyakan kabar, atau mengetes respon sistem (\" {user_query} \").\n"
-            f"- Balas dengan MAKSIMAL 1 SAMPAI 2 KALIMAT yang hangat, ramah, dan alami layaknya dokter konsultan pribadi menyapa pasien di ruang periksa.\n"
-            f"- DILARANG KERAS menyodorkan daftar menu makanan, resep masakan, takaran kalori, atau rencana makan (meal plan) jika pasien TIDAK memintanya!\n"
-            f"- Tanyakan dengan singkat dan bersahabat apa yang ingin dikonsultasikan seputar nutrisi hari ini."
+            f"[Instruksi Khusus Respon Sapaan]:\n"
+            f"- Sapa pasien dengan hangat dan ramah: \"Selamat pagi/siang {patient_name}!\"\n"
+            f"- Tanyakan dengan singkat dan bersahabat apa yang ingin dikonsultasikan seputar nutrisi atau rekomendasi menu hari ini (maksimal 1-2 kalimat).\n"
+            f"- DILARANG menyodorkan resep masakan panjang atau meal plan jika tidak diminta!"
         )
+    # 2. Jika pasien menanyakan nilai gizi bahan makanan spesifik
+    elif specific_food:
+        current_user_content = (
+            f"{clinical_dossier}\n\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Khusus Pertanyaan Gizi Spesifik]:\n"
+            f"- Pasien menanyakan data nutrisi/protein/kalori dari {specific_food['nama']}.\n"
+            f"- WAJIB MENJAWAB LANGSUNG ANGKA GIZI PRESISINYA TERLEBIH DAHULU: per 100 gram mengandung sekitar {specific_food['protein']} gram protein, {specific_food['kalori']} kkal energi, dan {specific_food['lemak']}g lemak.\n"
+            f"- JANGAN bertele-tele atau langsung menawarkan resep masakan panjang jika pasien hanya bertanya jumlah protein/gram!\n"
+            f"- DILARANG memanggil pasien 'Budi'! Gunakan 'Pak Budi' atau langsung jawab tanpa mengulang sapaan nama.\n"
+            f"- Hentikan pengulangan salam penutup klise. Jawab to-the-point dan cerdas."
+        )
+    # 3. Pesan konsultasi mengalir umum
     else:
-        # Prompt reguler konsultasi klinis dengan dukungan Hybrid GraphRAG
+        greeting_instruction = (
+            "- Percakapan sedang berlangsung. DILARANG mengulang salam seperti 'Halo Pak Budi' atau 'Budi, ...' di awal kalimat. Langsung jawab inti pertanyaan pasien.\n"
+            if has_prior_chat else
+            f"- Sapa dengan hormat menggunakan '{patient_name}'. DILARANG memanggil 'Budi' saja!\n"
+        )
         current_user_content = (
             f"{clinical_dossier}\n\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
             f"[Instruksi Respon]:\n"
-            f"- Jawablah secara interaktif, cerdas, mengalir, dan ramah sesuai pertanyaan terakhir.\n"
-            f"- Jawab langsung ke inti pertanyaan tanpa bertele-tele atau ceramah panjang yang tidak diminta.\n"
-            f"- Terapkan kewajaran kuliner Nusantara (buah disajikan terpisah segar sebagai pencuci mulut, oatmeal gurih kaldu, bukan merebus buah campur lauk).\n"
-            f"- Jika pasien pamit atau sudah cukup, ucapkan terima kasih dan doakan sehat tanpa bertanya balik lagi.\n"
-            f"- Gunakan Bahasa Indonesia murni."
+            f"{greeting_instruction}"
+            f"- Jawab langsung ke inti pertanyaan pasien tanpa ceramah bertele-tele yang tidak diminta.\n"
+            f"- DILARANG memanggil pasien dengan nama depannya saja (DILARANG memanggil 'Budi'!). Selalu gunakan '{patient_name}'.\n"
+            f"- Hentikan pengulangan kalimat penutup klise ('Bagaimana dengan ide tersebut? Apakah ada makanan lain...').\n"
+            f"- Gunakan Bahasa Indonesia murni yang cerdas dan bersahabat."
         )
 
     messages.append({"role": "user", "content": current_user_content})

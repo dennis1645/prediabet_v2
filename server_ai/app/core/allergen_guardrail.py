@@ -8,7 +8,8 @@ ALLERGEN_SYNONYMS = {
     ],
     "kacang": [
         "kacang", "kacang tanah", "kacang panjang", "kacang mede", "selai kacang", "bumbu kacang", 
-        "saus kacang", "sambal kacang", "peanut", "rempeyek kacang"
+        "saus kacang", "sambal kacang", "peanut", "rempeyek kacang",
+        "hazelnut", "walnut", "almond", "almon", "pistachio", "pecan", "macadamia", "cashew"
     ],
     "susu": [
         "susu", "susu sapi", "susu kental manis", "skm", "keju", "cheese", 

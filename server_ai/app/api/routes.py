@@ -82,13 +82,15 @@ async def chat_endpoint(request: ChatRequest):
     # 1. Pastikan konteks user unik & terisolasi
     user_context = await resolve_user_context(request)
 
-    # 2. Bangun Dossier Klinis Hybrid GraphRAG
-    dossier_text, safe_food_names, user_allergens = fusion_engine.build_clinical_dossier(
-        request.message, user_context
+    # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik)
+    dossier_text, safe_food_names, user_allergens, specific_food = fusion_engine.build_clinical_dossier(
+        request.message, user_context, request.chat_history or []
     )
 
     # 3. Format prompt sesuai template resmi Qwen/vLLM
-    messages = build_vllm_messages(request.message, dossier_text, request.chat_history or [])
+    messages = build_vllm_messages(
+        request.message, dossier_text, request.chat_history or [], specific_food=specific_food
+    )
 
     # 4. Generate jawaban lewat vLLM (dengan fallback cerdas jika vLLM offline)
     response_text, telemetry, blocked_allergens = await vllm_client.generate_chat_response(
@@ -127,10 +129,12 @@ async def chat_stream_endpoint(request: ChatRequest):
         raise HTTPException(status_code=400, detail="Pesan pertanyaan tidak boleh kosong.")
 
     user_context = await resolve_user_context(request)
-    dossier_text, safe_food_names, user_allergens = fusion_engine.build_clinical_dossier(
-        request.message, user_context
+    dossier_text, safe_food_names, user_allergens, specific_food = fusion_engine.build_clinical_dossier(
+        request.message, user_context, request.chat_history or []
     )
-    messages = build_vllm_messages(request.message, dossier_text, request.chat_history or [])
+    messages = build_vllm_messages(
+        request.message, dossier_text, request.chat_history or [], specific_food=specific_food
+    )
 
     async def event_generator():
         async for token in vllm_client.stream_chat_response(

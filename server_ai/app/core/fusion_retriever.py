@@ -14,14 +14,16 @@ class HybridGraphVectorFusion:
     def build_clinical_dossier(
         self,
         user_query: str,
-        user_context: UserClinicalContext
-    ) -> Tuple[str, List[str], List[str]]:
+        user_context: UserClinicalContext,
+        chat_history: List[Any] = None
+    ) -> Tuple[str, List[str], List[str], Any]:
         """
         Menyusun Dossier Klinis unik untuk satu user tertentu.
         Menghasilkan:
         - dossier_text: Teks konteks yang aman dan terverifikasi untuk prompt LLM
         - safe_food_names: Daftar nama makanan yang dijamin aman
         - allergens_prevented: Daftar alergen yang dicegah
+        - specific_food: Objek makanan spesifik jika pengguna menanyakan kandungan nutrisi bahan tertentu
         """
         # 1. Parsing Komorbiditas & Alergen Pengguna (Deduplikasi Bersih)
         komorbid_list = []
@@ -45,13 +47,16 @@ class HybridGraphVectorFusion:
         safe_foods = allergen_guardrail.filter_safe_food_candidates(safe_foods, allergens)
         safe_food_names = [f["nama"] for f in safe_foods]
 
-        # 3. Penelusuran Semantik Dokumen Panduan Medis
+        # 3. Penelusuran Bahan Makanan Spesifik dari Query / History (misal: "Berapa protein dada ayam", "berapa gram?")
+        specific_food = self.graph.find_specific_food(user_query, chat_history or [])
+
+        # 4. Penelusuran Semantik Dokumen Panduan Medis
         semantic_hits = self.vector.query_semantic(user_query, n_results=2)
         guideline_texts = [h["document"] for h in semantic_hits]
 
-        # 4. Perakitan Dossier Terisolasi (User-Specific Isolated Context)
+        # 5. Perakitan Dossier Terisolasi (User-Specific Isolated Context)
         dossier_lines = [
-            f"=== DOSSIER NUTRISI KLINIS TERVERIFIKASI (PASIEN: {user_context.username} | ID: {user_context.userId}) ===",
+            f"=== DOSSIER NUTRISI KLINIS TERVERIFIKASI (PASIEN: {user_context.username} | PANGGILAN RESMI: Pak Budi) ===",
             f"• Demografi Pasien  : {user_context.jenis_kelamin}, {user_context.usia} tahun",
             f"• Status Klinis     : BMI {user_context.bmi} ({user_context.kategori_bmi}) | Skor Risiko: {user_context.skor_risiko} ({user_context.kategori_risiko})",
             f"• Hasil Lab         : GDP {user_context.gula_darah_puasa} mg/dL | HbA1c {user_context.hba1c}%",
@@ -59,9 +64,27 @@ class HybridGraphVectorFusion:
             f"• Diet Terpilih     : {user_context.active_diet}",
             f"• Riwayat Komorbid  : {', '.join(komorbid_list) if komorbid_list else 'Tidak ada komorbiditas tercatat'}",
             f"• PANTANGAN MUTLAK  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'}",
+        ]
+
+        if specific_food:
+            dossier_lines.extend([
+                "",
+                f"=== DATA GIZI KLINIS SPESIFIK HASIL QUERY DETERMINISTIK NEO4J (ACUAN RESMI PER 100 GRAM) ===",
+                f"• Nama Bahan Makanan  : {specific_food['nama']}",
+                f"• Takaran Acuan        : 100 gram",
+                f"• Kandungan Protein    : {specific_food['protein']} gram",
+                f"• Total Energi (Kalori): {specific_food['kalori']} kkal",
+                f"• Kandungan Karbohidrat: {specific_food['karbohidrat']} gram",
+                f"• Kandungan Lemak      : {specific_food['lemak']} gram",
+                f"• Indeks Glikemik (GI) : {specific_food['gi']} (Kategori Rendah - Sangat Aman bagi Respon Insulin)",
+                f"• Rekomendasi Olah     : {specific_food['cara_olah']} tanpa minyak jelantah",
+                f"[INSTRUKSI KHUSUS GIZI]: Pasien menanyakan kandungan bahan ini. WAJIB MENJAWAB LANGSUNG ANGKA PROTEIN/GIZI PER 100 GRAM DI AWAL KALIMAT! Jangan bertele-tele langsung menawarkan resep jika pasien hanya menanyakan jumlah protein/gram.",
+            ])
+
+        dossier_lines.extend([
             "",
             "DAFTAR MAKANAN NUSANTARA TERVERIFIKASI AMAN (HASIL FILTER GRAF NEO4J 100% BEBAS ALERGEN):"
-        ]
+        ])
 
         for f in safe_foods[:6]:
             dossier_lines.append(
@@ -78,6 +101,6 @@ class HybridGraphVectorFusion:
         )
 
         dossier_text = "\n".join(dossier_lines)
-        return dossier_text, safe_food_names, allergens
+        return dossier_text, safe_food_names, allergens, specific_food
 
 fusion_engine = HybridGraphVectorFusion(neo4j_manager, vector_manager)

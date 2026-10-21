@@ -27,9 +27,7 @@ export default function ChatbotPage() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Halo sahabat sehat! 👋\n\nSaya **Dr. Predi**, konsultan nutrisi & asisten klinis cerdas Anda. Ada yang bisa saya bantu hari ini terkait pemilihan makanan, takaran 3J, atau rekomendasi menu ramah prediabetes yang aman dari pantangan alergi Anda?",
-      source: "Hybrid GraphRAG + vLLM Engine",
-      mode: "verified_data",
+      content: "Halo Pak Budi! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi Anda. Ada yang ingin Anda tanyakan seputar kandungan gizi makanan, pola makan ramah gula darah, atau rekomendasi menu sehat hari ini?",
     },
   ]);
   
@@ -231,7 +229,7 @@ export default function ChatbotPage() {
                 </span>
               </h2>
               <p className="text-slate-500 font-medium text-xs sm:text-sm mt-0.5">
-                Tanyakan nutrisi, hitung konsumsi, rekomendasi menu 3J, atau edukasi dokumen medis.
+                Tanyakan nutrisi dan Rekomendasi Menu Sehat
               </p>
             </div>
           </div>
@@ -315,55 +313,6 @@ export default function ChatbotPage() {
                           Terapkan Menu Ini
                         </button>
                       </div>
-                    </div>
-                  )}
-
-                  {/* Sumber, Waktu Respon & Mode Footer */}
-                  {msg.role === "assistant" && (msg.source || msg.telemetry) && (
-                    <div className="mt-3 pt-2.5 border-t border-slate-100 flex flex-col gap-2">
-                      <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <div className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50/80 border border-emerald-200/60 px-2 py-0.5 rounded-md font-bold normal-case">
-                            <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
-                            <span>{msg.source || "Hybrid GraphRAG"}</span>
-                          </div>
-
-                          {/* Waktu Respon / Telemetri Pengujian */}
-                          {msg.telemetry?.latency_ms && (
-                            <div className="inline-flex items-center gap-1 text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md font-mono normal-case text-[10px]" title="Waktu inferensi sistem">
-                              <Clock className="w-3 h-3 text-slate-500" />
-                              <span>{(msg.telemetry.latency_ms / 1000).toFixed(2)}s</span>
-                              {msg.telemetry.tokens_per_second > 0 && (
-                                <span className="text-slate-400 font-normal">({msg.telemetry.tokens_per_second} tok/s)</span>
-                              )}
-                            </div>
-                          )}
-                        </div>
-
-                        {msg.guardrail && (
-                          <div className="inline-flex items-center gap-1 text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-md font-extrabold normal-case text-[10px]">
-                            <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                            <span>{msg.guardrail}</span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Tag Verifikasi Makanan Graf Neo4j */}
-                      {msg.safe_foods && msg.safe_foods.length > 0 && (
-                        <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-slate-500 pt-0.5">
-                          <span className="font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-                            <Database className="w-2.5 h-2.5 text-teal-600" /> Neo4j Verified:
-                          </span>
-                          {msg.safe_foods.slice(0, 4).map((food, fIdx) => (
-                            <span
-                              key={fIdx}
-                              className="bg-teal-50/70 border border-teal-200/60 text-teal-800 px-1.5 py-0.5 rounded font-medium"
-                            >
-                              {food}
-                            </span>
-                          ))}
-                        </div>
-                      )}
                     </div>
                   )}
                 </div>

@@ -17,7 +17,8 @@ EXCLUDE_FOOD_KEYWORDS = [
     "enteral", "glucerna", "wrp", "bubuk", "formula", "kemasan", "bumbu", 
     "tepung", "minyak", "margarin", "sirup", "selasih", "suplemen", "dideh", 
     "darah", "perisa", "pewarna", "snack", "bar", "keripik", "kerupuk", 
-    "asin", "terong asam", "terong hintalo", "terung bengkulu", "terung belanda",
+    "asin", "terong asam", "terong hintalo", "terung bengkulu", "terung belanda", "terong, segar", "terong",
+    "hazelnut", "walnut", "almond",
     "mentah", "abadi", "roti", "bread", "krim", "biskuit", "kue", "permen", 
     "wafer", "cokelat", "goreng", "instan", "cerelac", "sun bubur"
 ]
@@ -293,5 +294,103 @@ class Neo4jClinicalGraphManager:
             ]
 
         return self.balance_staples(foods, allergens, limit)
+
+    def find_specific_food(self, query: str, chat_history: List[Any] = None) -> Optional[Dict[str, Any]]:
+        """
+        Mencari item makanan spesifik dari Neo4j / dataset jika pengguna menanyakan
+        kandungan gizi (protein, kalori, karbohidrat, gram, dsb.) secara spesifik.
+        """
+        q = (query or "").lower().strip()
+
+        COMMON_FOOD_ALIASES = {
+            "dada ayam": ["ayam, dada", "dada ayam"],
+            "ayam": ["ayam, dada", "dada ayam", "ayam, daging", "ayam"],
+            "telur": ["telur ayam", "telur rebus", "telur"],
+            "tempe": ["tempe", "tempe pasar", "tempe kedelai"],
+            "tahu": ["tahu", "tahu putih", "tahu kukus"],
+            "ikan mas": ["ikan mas"],
+            "ikan": ["ikan mas", "ikan nila", "ikan kembung", "ikan"],
+            "beras merah": ["beras merah, nasi", "nasi merah"],
+            "nasi merah": ["beras merah, nasi", "nasi merah"],
+            "nasi": ["beras merah, nasi", "nasi"],
+            "bayam": ["bayam, segar", "bayam"],
+            "oyong": ["gambas (oyong)", "oyong"],
+            "gambas": ["gambas (oyong)", "gambas"],
+            "buncis": ["buncis, segar", "buncis"],
+            "wortel": ["wortel, segar", "wortel"],
+            "apel": ["apel, segar", "apel"],
+            "pepaya": ["pepaya muda", "pepaya"],
+            "oatmeal": ["havermut", "oatmeal"],
+            "kentang": ["kentang rebus", "kentang"],
+        }
+
+        # Deteksi follow-up question seperti 'berapa gram?', 'berapa kalori?'
+        is_follow_up = any(q.startswith(k) for k in [
+            "berapa gram", "berapa banyak", "berapa kalori", "berapa protein", 
+            "berapa jumlah", "berapa lemak", "berapa karbo", "berapa gi", "berapa"
+        ]) or q in ["berapa", "berapa gram?", "berapa banyak?", "berapa kalori?", "berapa protein?"]
+
+        search_terms = []
+        if is_follow_up and chat_history:
+            for turn in reversed(chat_history):
+                text = (turn.content if hasattr(turn, "content") else turn.get("content", "")).lower()
+                for alias_key in COMMON_FOOD_ALIASES:
+                    if alias_key in text:
+                        search_terms.append(alias_key)
+                        break
+                if search_terms:
+                    break
+
+        for alias_key in COMMON_FOOD_ALIASES:
+            if alias_key in q and alias_key not in search_terms:
+                search_terms.append(alias_key)
+
+        if not search_terms:
+            return None
+
+        # 1. Coba cari di Neo4j jika aktif
+        if self.is_connected():
+            for term in search_terms:
+                for target in COMMON_FOOD_ALIASES.get(term, [term]):
+                    cypher = """
+                    MATCH (m:Food)
+                    WHERE toLower(m.nama_makanan) CONTAINS toLower($target)
+                    RETURN m.nama_makanan AS nama,
+                           m.kalori_kal AS kalori,
+                           m.karbohidrat_g AS karbohidrat,
+                           m.protein_g AS protein,
+                           m.lemak_g AS lemak,
+                           m.serat_g AS serat,
+                           m.sodium_mg AS sodium_mg,
+                           COALESCE(m.glikemik_indeks, 0) AS gi,
+                           m.kategori_spesifik AS kategori,
+                           m.cara_olah AS cara_olah
+                    LIMIT 5
+                    """
+                    try:
+                        with self.driver.session(database=self.database) as session:
+                            res = session.run(cypher, target=target).data()
+                            if res:
+                                res.sort(key=lambda x: (
+                                    0 if "tanpa kulit" in x["nama"].lower() else 1,
+                                    len(x["nama"])
+                                ))
+                                return res[0]
+                    except Exception as e:
+                        print(f"[Neo4j Manager] Gagal cari makanan spesifik: {e}")
+
+        # 2. Cari di dataset lokal (fallback deterministik)
+        foods = self._load_local_dataset()
+        for term in search_terms:
+            for target in COMMON_FOOD_ALIASES.get(term, [term]):
+                matches = [f for f in foods if target in f["nama"].lower()]
+                if matches:
+                    matches.sort(key=lambda x: (
+                        0 if "tanpa kulit" in x["nama"].lower() else 1,
+                        len(x["nama"])
+                    ))
+                    return matches[0]
+
+        return None
 
 neo4j_manager = Neo4jClinicalGraphManager()
