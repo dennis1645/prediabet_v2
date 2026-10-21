@@ -49,7 +49,12 @@ export default function LoginPage() {
         `Selamat datang kembali, ${res.data?.user?.username || username}!`
       );
       
-      navigate("/dashboard");
+      // Jika pengguna belum mengisi kuesioner profil kesehatan, arahkan ke /questionnaire
+      if (res.data?.hasCompletedQuestionnaire && res.data?.profile) {
+        navigate("/dashboard");
+      } else {
+        navigate("/questionnaire");
+      }
     } catch (err) {
       setLoading(false);
       const errorMsg = err.message || "Gagal masuk ke akun Anda.";

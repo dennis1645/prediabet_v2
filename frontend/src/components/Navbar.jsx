@@ -9,10 +9,11 @@ import {
   UserCheck,
   LogOut,
   ChevronDown,
+  Sparkles,
 } from "lucide-react";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, profile, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -43,7 +44,7 @@ export default function Navbar() {
           
           {/* Kiri: Logo & Nama Aplikasi */}
           <Link
-            to={user ? "/dashboard" : "/"}
+            to={user ? (profile ? "/dashboard" : "/questionnaire") : "/"}
             className="flex-shrink-0 flex items-center gap-3 cursor-pointer group hover:opacity-90 transition-opacity"
           >
             <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-transparent group-hover:scale-105 transition-transform">
@@ -61,55 +62,65 @@ export default function Navbar() {
           {/* Tengah: Menu Utama (Sesuai base.html) */}
           {user ? (
             <nav className="hidden md:flex justify-center">
-              <div className="inline-flex items-center justify-center gap-1.5 bg-slate-50/90 border border-slate-100 rounded-2xl p-1.5 shadow-sm">
+              {!profile ? (
                 <Link
-                  to="/dashboard"
-                  className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
-                    currentPath === "/dashboard"
-                      ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                      : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
-                  }`}
+                  to="/questionnaire"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl text-xs lg:text-sm font-extrabold shadow-md shadow-emerald-500/25 transition-all animate-pulse"
                 >
-                  <Home className="w-4 h-4" />
-                  Dashboard
+                  <Sparkles className="w-4 h-4 text-amber-300" />
+                  <span>Lengkapi Kuesioner Profil Kesehatan</span>
                 </Link>
+              ) : (
+                <div className="inline-flex items-center justify-center gap-1.5 bg-slate-50/90 border border-slate-100 rounded-2xl p-1.5 shadow-sm">
+                  <Link
+                    to="/dashboard"
+                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                      currentPath === "/dashboard"
+                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
+                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                    }`}
+                  >
+                    <Home className="w-4 h-4" />
+                    Dashboard
+                  </Link>
 
-                <Link
-                  to="/menu"
-                  className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
-                    currentPath.startsWith("/menu")
-                      ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                      : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
-                  }`}
-                >
-                  <Utensils className="w-4 h-4" />
-                  Daftar Menu
-                </Link>
+                  <Link
+                    to="/menu"
+                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                      currentPath.startsWith("/menu")
+                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
+                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                    }`}
+                  >
+                    <Utensils className="w-4 h-4" />
+                    Daftar Menu
+                  </Link>
 
-                <Link
-                  to="/diet"
-                  className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
-                    currentPath.startsWith("/diet")
-                      ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                      : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
-                  }`}
-                >
-                  <Sprout className="w-4 h-4" />
-                  Program Diet
-                </Link>
+                  <Link
+                    to="/diet"
+                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                      currentPath.startsWith("/diet")
+                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
+                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                    }`}
+                  >
+                    <Sprout className="w-4 h-4" />
+                    Program Diet
+                  </Link>
 
-                <Link
-                  to="/progress"
-                  className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
-                    currentPath.startsWith("/progress")
-                      ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                      : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
-                  }`}
-                >
-                  <TrendingUp className="w-4 h-4" />
-                  Progress
-                </Link>
-              </div>
+                  <Link
+                    to="/progress"
+                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                      currentPath.startsWith("/progress")
+                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
+                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                    }`}
+                  >
+                    <TrendingUp className="w-4 h-4" />
+                    Progress
+                  </Link>
+                </div>
+              )}
             </nav>
           ) : (
             <div></div>

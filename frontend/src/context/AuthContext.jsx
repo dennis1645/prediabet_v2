@@ -65,8 +65,18 @@ export function AuthProvider({ children }) {
           const res = await api.getMe();
           if (res.success && res.data) {
             setUser(res.data.user);
-            if (res.data.profile) setProfile(res.data.profile);
-            if (res.data.analysis) setAnalysis(res.data.analysis);
+            if (res.data.profile) {
+              setProfile(res.data.profile);
+            } else {
+              setProfile(null);
+              localStorage.removeItem("prediabeat_profile");
+            }
+            if (res.data.analysis) {
+              setAnalysis(res.data.analysis);
+            } else {
+              setAnalysis(null);
+              localStorage.removeItem("prediabeat_analysis");
+            }
           }
         } catch (err) {
           console.warn("Session check with backend failed:", err.message);
@@ -87,18 +97,36 @@ export function AuthProvider({ children }) {
     if (res.success && res.data) {
       setToken(res.data.token);
       setUser(res.data.user);
-      if (res.data.profile) setProfile(res.data.profile);
-      if (res.data.analysis) setAnalysis(res.data.analysis);
+      if (res.data.profile) {
+        setProfile(res.data.profile);
+      } else {
+        setProfile(null);
+        localStorage.removeItem("prediabeat_profile");
+      }
+      if (res.data.analysis) {
+        setAnalysis(res.data.analysis);
+      } else {
+        setAnalysis(null);
+        localStorage.removeItem("prediabeat_analysis");
+      }
       return res;
     }
     throw new Error(res.message || "Gagal masuk.");
   };
 
   const register = async (username, email, password) => {
+    // Pastikan session data profil pengguna lama dibersihkan
+    localStorage.removeItem("prediabeat_profile");
+    localStorage.removeItem("prediabeat_analysis");
+    setProfile(null);
+    setAnalysis(null);
+
     const res = await api.register({ username, email, password });
     if (res.success && res.data) {
       setToken(res.data.token);
       setUser(res.data.user);
+      setProfile(null);
+      setAnalysis(null);
       return res;
     }
     throw new Error(res.message || "Gagal mendaftar.");

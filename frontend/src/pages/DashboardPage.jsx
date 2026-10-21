@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import {
   Sparkles,
@@ -23,11 +23,19 @@ import api from "../services/api";
 import { showToast } from "../utils/alerts";
 
 export default function DashboardPage() {
-  const { user, profile, analysis, setAnalysis } = useAuth();
+  const { user, profile, analysis, setAnalysis, loading } = useAuth();
+  const navigate = useNavigate();
   const [shuffling, setShuffling] = useState(false);
   const [liveData, setLiveData] = useState({ profile, analysis });
   const [mealPlan, setMealPlan] = useState(analysis?.meal_plan || []);
   const [shuffleToast, setShuffleToast] = useState("");
+
+  // Jika pengguna belum mengisi kuesioner kesehatan, wajib dialihkan ke kuesioner terlebih dahulu
+  React.useEffect(() => {
+    if (!loading && !profile) {
+      navigate("/questionnaire", { replace: true });
+    }
+  }, [profile, loading, navigate]);
 
   // Sync state if analysis updates
   React.useEffect(() => {
@@ -52,10 +60,13 @@ export default function DashboardPage() {
         }
       } catch (err) {
         console.warn("Could not load live dashboard from server, using cached session:", err.message);
+        if (err.status === 404 || err.needsQuestionnaire) {
+          navigate("/questionnaire", { replace: true });
+        }
       }
     }
     loadFreshDashboard();
-  }, []);
+  }, [navigate, setAnalysis]);
 
   const currentAnalysis = liveData.analysis || analysis || {};
 

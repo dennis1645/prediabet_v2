@@ -57,27 +57,53 @@ export default function QuestionnairePage() {
   };
 
   const [formData, setFormData] = useState({
-    usia: profile?.usia || 45,
+    usia: profile?.usia ?? "",
     jenis_kelamin: profile?.jenis_kelamin || "Laki-laki",
-    tinggi_badan: profile?.tinggi_badan || 170,
-    berat_badan: profile?.berat_badan || 74,
-    lingkar_pinggang: profile?.lingkar_pinggang || 88,
+    tinggi_badan: profile?.tinggi_badan ?? "",
+    berat_badan: profile?.berat_badan ?? "",
+    lingkar_pinggang: profile?.lingkar_pinggang ?? "",
     aktivitas: profile?.aktivitas || "ringan",
-    gula_darah_puasa: profile?.gula_darah_puasa || 118,
-    hba1c: profile?.hba1c || 5.9,
-    tekanan_darah_sistolik: profile?.tekanan_darah_sistolik || 130,
-    tekanan_darah_diastolik: profile?.tekanan_darah_diastolik || 85,
-    kolesterol_total: profile?.kolesterol_total || 210,
-    asam_urat: profile?.asam_urat || 6.8,
+    gula_darah_puasa: profile?.gula_darah_puasa ?? "",
+    hba1c: profile?.hba1c ?? "",
+    tekanan_darah_sistolik: profile?.tekanan_darah_sistolik ?? "",
+    tekanan_darah_diastolik: profile?.tekanan_darah_diastolik ?? "",
+    kolesterol_total: profile?.kolesterol_total ?? "",
+    asam_urat: profile?.asam_urat ?? "",
   });
 
-  // State multi-selection
+  // State multi-selection (kosong untuk pendaftaran akun baru)
   const [selectedPantangan, setSelectedPantangan] = useState(() =>
-    parseList(profile?.pantangan_alergi, ["Kacang"])
+    profile?.pantangan_alergi ? parseList(profile.pantangan_alergi, []) : []
   );
   const [selectedKomorbid, setSelectedKomorbid] = useState(() =>
-    parseList(profile?.komorbiditas, ["Hipertensi"])
+    profile?.komorbiditas ? parseList(profile.komorbiditas, []) : []
   );
+
+  // Sinkronkan form jika data profil pengguna sudah ada sebelumnya di server
+  React.useEffect(() => {
+    if (profile) {
+      setFormData({
+        usia: profile.usia ?? "",
+        jenis_kelamin: profile.jenis_kelamin || "Laki-laki",
+        tinggi_badan: profile.tinggi_badan ?? "",
+        berat_badan: profile.berat_badan ?? "",
+        lingkar_pinggang: profile.lingkar_pinggang ?? "",
+        aktivitas: profile.aktivitas || "ringan",
+        gula_darah_puasa: profile.gula_darah_puasa ?? "",
+        hba1c: profile.hba1c ?? "",
+        tekanan_darah_sistolik: profile.tekanan_darah_sistolik ?? "",
+        tekanan_darah_diastolik: profile.tekanan_darah_diastolik ?? "",
+        kolesterol_total: profile.kolesterol_total ?? "",
+        asam_urat: profile.asam_urat ?? "",
+      });
+      if (profile.pantangan_alergi) {
+        setSelectedPantangan(parseList(profile.pantangan_alergi, []));
+      }
+      if (profile.komorbiditas) {
+        setSelectedKomorbid(parseList(profile.komorbiditas, []));
+      }
+    }
+  }, [profile]);
 
   const [customPantangan, setCustomPantangan] = useState("");
   const [customKomorbid, setCustomKomorbid] = useState("");
@@ -150,10 +176,29 @@ export default function QuestionnairePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.usia || !formData.tinggi_badan || !formData.berat_badan) {
+      showErrorAlert(
+        "Data Belum Lengkap",
+        "Mohon isi data Usia, Tinggi Badan, dan Berat Badan untuk menghitung profil metabolik Anda."
+      );
+      return;
+    }
+
     setLoading(true);
 
     const payload = {
       ...formData,
+      usia: parseInt(formData.usia, 10),
+      tinggi_badan: parseFloat(formData.tinggi_badan),
+      berat_badan: parseFloat(formData.berat_badan),
+      lingkar_pinggang: formData.lingkar_pinggang ? parseFloat(formData.lingkar_pinggang) : null,
+      gula_darah_puasa: formData.gula_darah_puasa ? parseFloat(formData.gula_darah_puasa) : "Belum ada tes lab",
+      hba1c: formData.hba1c ? parseFloat(formData.hba1c) : "Belum ada tes lab",
+      tekanan_darah_sistolik: formData.tekanan_darah_sistolik ? parseInt(formData.tekanan_darah_sistolik, 10) : null,
+      tekanan_darah_diastolik: formData.tekanan_darah_diastolik ? parseInt(formData.tekanan_darah_diastolik, 10) : null,
+      kolesterol_total: formData.kolesterol_total ? parseInt(formData.kolesterol_total, 10) : null,
+      asam_urat: formData.asam_urat ? parseFloat(formData.asam_urat) : null,
       pantangan_alergi: selectedPantangan.filter((p) => p !== "Tidak Ada"),
       komorbiditas: selectedKomorbid.filter((k) => k !== "Tidak Ada"),
     };
@@ -229,6 +274,7 @@ export default function QuestionnairePage() {
                   required
                   min="15"
                   max="100"
+                  placeholder="Cth: 28"
                   value={formData.usia}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm font-semibold text-slate-800"
@@ -260,6 +306,7 @@ export default function QuestionnairePage() {
                   required
                   min="100"
                   max="230"
+                  placeholder="Cth: 168"
                   value={formData.tinggi_badan}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm font-semibold text-slate-800"
@@ -276,6 +323,7 @@ export default function QuestionnairePage() {
                   required
                   min="30"
                   max="200"
+                  placeholder="Cth: 65.5"
                   value={formData.berat_badan}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm font-semibold text-slate-800"

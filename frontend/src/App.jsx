@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import { useAuth } from "./context/AuthContext";
 
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
@@ -11,6 +12,36 @@ import ChatbotPage from "./pages/ChatbotPage";
 import MenuListPage from "./pages/MenuListPage";
 import DietListPage from "./pages/DietListPage";
 import ProgressTrackerPage from "./pages/ProgressTrackerPage";
+
+function RequireAuth({ children }) {
+  const { user, token, loading } = useAuth();
+  if (loading) return null;
+  if (!token || !user) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
+
+function RequireQuestionnaireCompleted({ children }) {
+  const { user, token, profile, loading } = useAuth();
+  if (loading) return null;
+  if (!token || !user) {
+    return <Navigate to="/login" replace />;
+  }
+  if (!profile) {
+    return <Navigate to="/questionnaire" replace />;
+  }
+  return children;
+}
+
+function PublicOnlyRoute({ children }) {
+  const { user, token, profile, loading } = useAuth();
+  if (loading) return null;
+  if (token && user) {
+    return <Navigate to={profile ? "/dashboard" : "/questionnaire"} replace />;
+  }
+  return children;
+}
 
 export default function App() {
   const location = useLocation();
@@ -33,14 +64,19 @@ export default function App() {
       <main className="flex-1 flex flex-col">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/questionnaire" element={<QuestionnairePage />} />
-          <Route path="/chatbot" element={<ChatbotPage />} />
-          <Route path="/menu" element={<MenuListPage />} />
-          <Route path="/diet" element={<DietListPage />} />
-          <Route path="/progress" element={<ProgressTrackerPage />} />
+          <Route path="/login" element={<PublicOnlyRoute><LoginPage /></PublicOnlyRoute>} />
+          <Route path="/register" element={<PublicOnlyRoute><RegisterPage /></PublicOnlyRoute>} />
+
+          {/* Halaman Kuesioner (Wajib login, dapat diakses sebelum maupun sesudah isi profil) */}
+          <Route path="/questionnaire" element={<RequireAuth><QuestionnairePage /></RequireAuth>} />
+
+          {/* Halaman Fitur Utama: Mensyaratkan Kuesioner Profil Kesehatan Sudah Lengkap */}
+          <Route path="/dashboard" element={<RequireQuestionnaireCompleted><DashboardPage /></RequireQuestionnaireCompleted>} />
+          <Route path="/chatbot" element={<RequireQuestionnaireCompleted><ChatbotPage /></RequireQuestionnaireCompleted>} />
+          <Route path="/menu" element={<RequireQuestionnaireCompleted><MenuListPage /></RequireQuestionnaireCompleted>} />
+          <Route path="/diet" element={<RequireQuestionnaireCompleted><DietListPage /></RequireQuestionnaireCompleted>} />
+          <Route path="/progress" element={<RequireQuestionnaireCompleted><ProgressTrackerPage /></RequireQuestionnaireCompleted>} />
+
           {/* Catch-all redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
