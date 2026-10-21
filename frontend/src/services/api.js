@@ -103,13 +103,25 @@ export const api = {
     }),
   getWeeklyProgress: () => request("/progress/summary/weekly"),
 
-  // AI Chatbot Dr. Predi (Protected with JWT & Isolated Medical Context)
-  sendChatMessage: (message) =>
+  // AI Chatbot Dr. Predi (Protected with JWT, Isolated Medical Context & Multi-Session)
+  sendChatMessage: (message, sessionId) =>
     request("/ai/chat", {
       method: "POST",
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ message, session_id: sessionId }),
     }),
-  getChatHistory: () => request("/ai/history"),
+  getChatSessions: () => request("/ai/sessions"),
+  createChatSession: (title) =>
+    request("/ai/sessions", {
+      method: "POST",
+      body: JSON.stringify({ title }),
+    }),
+  getChatSessionHistory: (sessionId) => request(`/ai/sessions/${sessionId}/history`),
+  deleteChatSession: (sessionId) =>
+    request(`/ai/sessions/${sessionId}`, {
+      method: "DELETE",
+    }),
+  getChatHistory: (sessionId) =>
+    request(sessionId ? `/ai/history?session_id=${sessionId}` : "/ai/history"),
   clearChatHistory: () =>
     request("/ai/history", {
       method: "DELETE",

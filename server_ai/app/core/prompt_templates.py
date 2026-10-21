@@ -1,6 +1,7 @@
 import re
 from typing import List, Optional, Dict, Any
 from app.models.schemas import ChatTurn
+from app.core.allergen_guardrail import allergen_guardrail
 
 
 def get_patient_display_name(user_context: Optional[Any] = None) -> str:
@@ -49,7 +50,7 @@ def get_clinical_system_prompt(user_context: Optional[Any] = None) -> str:
 
     return f"""Anda adalah Dr. Predi, Dokter Spesialis Nutrisi Klinis Pribadi {patient_name} (PrediaBeat).
 
-PRINSIP KOMUNIKASI DOKTER CERDAS & NATURAL:
+PRINSIP KOMUNIKASI DOKTER CERDAS, NATURAL, & AMAN:
 1. PANGGILAN & TONE:
    - Pasien Anda adalah {patient_name}. Selalu panggil dengan "{patient_name}" atau "{salutation}".
    - DILARANG memanggil dengan nama pengguna lain (seperti Pak Budi) jika pasien ini bernama {patient_name}!
@@ -64,7 +65,16 @@ PRINSIP KOMUNIKASI DOKTER CERDAS & NATURAL:
    - Obrolan Santai / Opini / Reaksi ("okee enak keknya nasi ayam", "makasih yaa"): Tanggapi secara wajar dan santai layaknya manusia sedang mengobrol. DILARANG membeberkan angka gizi atau resep lagi!
    - HANYA JIKA PASIEN MEMINTA RESEP / MENU MAKAN: Sajikan 1 rekomendasi menu masakan Nusantara yang lezat, bergizi seimbang, dan ramah prediabetes (bebas dari pantangan: {allergen_str}).
 
-3. KEAMANAN MEDIS & ZERO-ALLERGEN:
+3. BATASAN LINGKUP & GUARDRAIL OUT-OF-SCOPE (MUTLAK):
+   - Anda HANYA melayani konsultasi terkait nutrisi, takaran makanan ramah prediabetes, pola makan 3J, rekam medis pasien, dan pencegahan diabetes.
+   - Jika pasien bertanya hal non-medis / non-nutrisi (seperti politik, presiden, koding/pemrograman, sepak bola/liga olahraga, gosip, film, sains/matematika umum):
+     TOLAK SECARA SOPAN DAN TEGAS! Nyatakan bahwa lingkup Anda khusus nutrisi klinis dan prediabetes di PrediaBeat, lalu tanyakan kebutuhan nutrisi apa yang bisa dibantu. DILARANG KERAS menjawab pertanyaan non-medis tersebut!
+
+4. PROTOKOL MAKANAN TINGGI GULA / KONTRAINDIKASI (Tahu Gejrot, Es Campur, Minuman Manis):
+   - Jika pasien meminta resep atau bertanya tentang makanan yang secara tradisional menggunakan kuah gula merah pekat, sirup kental manis, atau gorengan jelantah (misal Tahu Gejrot, Es Campur, Martabak Manis):
+     DILARANG memberikan resep manis tradisional! Jelaskan secara klinis risiko lonjakan gula darah (glycemic spike), dan HANYA berikan resep MODIFIKASI RAMAH PREDIABETES (menggunakan kuah asam segar dengan pemanis alami stevia dan tahu kukus/air-fryer).
+
+5. KEAMANAN MEDIS & ZERO-ALLERGEN:
    - Pantangan alergi pasien: {allergen_str}.
    - Seluruh saran makanan harus 100% bebas dari pantangan alergen tersebut.
    - Buah selalu disajikan segar sebagai buah potong, bukan direbus."""
@@ -143,9 +153,35 @@ def build_vllm_messages(
                 messages.append({"role": role, "content": content})
                 has_prior_chat = True
 
-    # 1. Jika pertanyaan identitas pengguna ("siapa saya?", "nama saya siapa?")
-    if is_identity_query(user_query):
-        raw_name = getattr(user_context, "nama", None) or getattr(user_context, "username", None) or "Sahabat Sehat"
+    # 1. Pengecekan Guardrail Out-of-Scope (Topik di Luar Nutrisi/Kesehatan)
+    is_out, _ = allergen_guardrail.is_out_of_scope(user_query)
+    if is_out:
+        current_user_content = (
+            f"[Profil Pasien]: Pasien bernama {patient_name}.\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Guardrail Out-of-Scope]:\n"
+            f"- Pertanyaan pasien berada DI LUAR LINGKUP klinis nutrisi atau kesehatan prediabetes.\n"
+            f"- Tolak secara santun dan profesional sebagai Dr. Predi:\n"
+            f"  'Halo {patient_name}! Sebagai Dr. Predi, dokter konsultan nutrisi klinis pribadi {salutation} di PrediaBeat, fokus keahlian saya didedikasikan khusus untuk pendampingan pola makan ramah gula darah, takaran gizi 3J, dan pencegahan prediabetes/diabetes.\n\n"
+            f"  Saya tidak dapat menjawab pertanyaan di luar konteks gizi dan kesehatan metabolik.\n\n"
+            f"  Apakah ada pertanyaan seputar kandungan gizi makanan, takaran karbohidrat/protein, atau rekomendasi menu sehat yang ingin {salutation} konsultasikan hari ini?'\n"
+            f"- DILARANG menjawab pertanyaan non-medis tersebut!"
+        )
+    # 2. Pengecekan Makanan Tradisional Berisiko Tinggi Lonjakan Gula (Simple Sugars, e.g. Tahu Gejrot, Es Campur)
+    elif allergen_guardrail.detect_high_risk_sweet_food(user_query):
+        sweet_info = allergen_guardrail.detect_high_risk_sweet_food(user_query)
+        current_user_content = (
+            f"{clinical_dossier}\n\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Respon Guardrail Glikemik - {sweet_info['nama']}]:\n"
+            f"- Sapa {patient_name} secara ramah.\n"
+            f"- EDUKASI KLINIS: Jelaskan bahwa hidangan tradisional {sweet_info['nama']} berisiko tinggi memicu lonjakan glukosa darah (*glycemic spike*) cepat karena: {sweet_info['risiko']}.\n"
+            f"- SAJIKAN RESEP MODIFIKASI RAMAH PREDIABETES: Berikan resep versi sehat dan aman: {sweet_info['solusi']}.\n"
+            f"- Berikan langkah pengolahan praktis yang higienis dan nikmat.\n"
+            f"- DILARANG menyarankan gula merah pekat, gula pasir, atau minyak jelantah!"
+        )
+    # 3. Jika pertanyaan identitas pengguna ("siapa saya?", "nama saya siapa?")
+    elif is_identity_query(user_query):
         username_str = getattr(user_context, "username", "")
         current_user_content = (
             f"[Profil Pasien]: Nama {patient_name} (Username: {username_str}).\n"
@@ -157,7 +193,7 @@ def build_vllm_messages(
             f"- DILARANG menyebut nama lain (seperti Pak Budi) jika pasien ini bernama {patient_name}!\n"
             f"- Cukup 1-2 kalimat ramah dan lugas."
         )
-    # 2. Jika hanya sapaan pendek, test, atau ucapan terima kasih
+    # 4. Jika hanya sapaan pendek, test, atau ucapan terima kasih
     elif is_short_greeting_or_test(user_query):
         ql = (user_query or "").lower().strip()
         is_thanks = any(k in ql for k in ["makasih", "terima kasih", "terimakasih", "thanks", "thank you"])
@@ -180,7 +216,7 @@ def build_vllm_messages(
             f"[Instruksi Khusus]:\n"
             f"{resp_instruction}"
         )
-    # 3. Jika pasien menanyakan nilai gizi bahan makanan spesifik
+    # 5. Jika pasien menanyakan nilai gizi bahan makanan spesifik
     elif specific_food:
         ql = (user_query or "").lower()
         if "karbo" in ql:
@@ -209,7 +245,7 @@ def build_vllm_messages(
             f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan!\n"
             f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
         )
-    # 4. Pesan konsultasi mengalir umum
+    # 6. Pesan konsultasi mengalir umum
     else:
         greeting_instruction = (
             f"- Percakapan sedang berlangsung. DILARANG mengulang salam seperti 'Halo {patient_name}' di awal kalimat. Langsung jawab inti pertanyaan pasien.\n"

@@ -1,11 +1,33 @@
 import db from "../database/connection.js";
 
-// Ensure metadata column exists for response time & RAG telemetry tracking
+// Inisialisasi skema chat_sessions & pastikan kolom metadata dan session_id tersedia
+try {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS chat_sessions (
+      id TEXT PRIMARY KEY,
+      user_id INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+  `);
+} catch (e) {
+  // Ignored if table already exists
+}
+
 try {
   db.exec("ALTER TABLE chat_logs ADD COLUMN metadata TEXT;");
-} catch (e) {
-  // Ignored if column already exists
-}
+} catch (e) {}
+
+try {
+  db.exec("ALTER TABLE chat_logs ADD COLUMN session_id TEXT;");
+} catch (e) {}
+
+try {
+  db.exec("CREATE INDEX IF NOT EXISTS idx_chat_logs_session ON chat_logs(session_id);");
+  db.exec("CREATE INDEX IF NOT EXISTS idx_chat_sessions_user ON chat_sessions(user_id, updated_at);");
+} catch (e) {}
 
 /**
  * Returns isolated medical context for the AI server to prevent multi-user context leakage.
@@ -77,18 +99,139 @@ export function getUserAIContext(req, res) {
 }
 
 /**
+ * Get all conversation sessions for the active user (like ChatGPT / Gemini sidebar).
+ */
+export function getChatSessions(req, res) {
+  try {
+    const userId = req.user.id;
+    let sessions = db
+      .prepare("SELECT id, title, created_at, updated_at FROM chat_sessions WHERE user_id = ? ORDER BY updated_at DESC")
+      .all(userId);
+
+    // Otomatis buat sesi default jika ada riwayat legacy tanpa sesi
+    if (sessions.length === 0) {
+      const existingLogs = db.prepare("SELECT COUNT(*) as count FROM chat_logs WHERE user_id = ?").get(userId);
+      if (existingLogs && existingLogs.count > 0) {
+        const legacySessionId = `sess_default_${userId}`;
+        const now = new Date().toISOString();
+        db.prepare(
+          "INSERT OR IGNORE INTO chat_sessions (id, user_id, title, created_at, updated_at) VALUES (?, ?, ?, ?, ?)"
+        ).run(legacySessionId, userId, "Konsultasi Sebelumnya", now, now);
+
+        db.prepare(
+          "UPDATE chat_logs SET session_id = ? WHERE user_id = ? AND (session_id IS NULL OR session_id = '')"
+        ).run(legacySessionId, userId);
+
+        sessions = db
+          .prepare("SELECT id, title, created_at, updated_at FROM chat_sessions WHERE user_id = ? ORDER BY updated_at DESC")
+          .all(userId);
+      }
+    }
+
+    res.json({ success: true, data: sessions });
+  } catch (error) {
+    console.error("Error getChatSessions:", error);
+    res.status(500).json({ success: false, message: "Gagal memuat daftar sesi konsultasi." });
+  }
+}
+
+/**
+ * Create a new chat session.
+ */
+export function createChatSession(req, res) {
+  try {
+    const userId = req.user.id;
+    const sessionId = `sess_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    const now = new Date().toISOString();
+    const title = (req.body.title || "Konsultasi Baru").trim().slice(0, 45);
+
+    db.prepare("INSERT INTO chat_sessions (id, user_id, title, created_at, updated_at) VALUES (?, ?, ?, ?, ?)").run(
+      sessionId,
+      userId,
+      title,
+      now,
+      now
+    );
+
+    res.json({
+      success: true,
+      data: { id: sessionId, title, created_at: now, updated_at: now },
+    });
+  } catch (error) {
+    console.error("Error createChatSession:", error);
+    res.status(500).json({ success: false, message: "Gagal membuat sesi konsultasi baru." });
+  }
+}
+
+/**
+ * Get messages for a specific session.
+ */
+export function getChatSessionHistory(req, res) {
+  try {
+    const userId = req.user.id;
+    const { sessionId } = req.params;
+
+    const history = db
+      .prepare(
+        "SELECT id, role, content, metadata, created_at FROM chat_logs WHERE user_id = ? AND session_id = ? ORDER BY id ASC LIMIT 80"
+      )
+      .all(userId, sessionId);
+
+    const mapped = history.map((item) => {
+      let meta = {};
+      if (item.metadata) {
+        try {
+          meta = JSON.parse(item.metadata);
+        } catch (e) {}
+      }
+      return {
+        id: item.id,
+        role: item.role,
+        content: item.content,
+        metadata: meta,
+        created_at: item.created_at,
+      };
+    });
+
+    res.json({ success: true, data: mapped });
+  } catch (error) {
+    console.error("Error getChatSessionHistory:", error);
+    res.status(500).json({ success: false, message: "Gagal memuat pesan sesi chat." });
+  }
+}
+
+/**
+ * Delete a specific chat session and all its messages.
+ */
+export function deleteChatSession(req, res) {
+  try {
+    const userId = req.user.id;
+    const { sessionId } = req.params;
+
+    db.prepare("DELETE FROM chat_logs WHERE user_id = ? AND session_id = ?").run(userId, sessionId);
+    db.prepare("DELETE FROM chat_sessions WHERE user_id = ? AND id = ?").run(userId, sessionId);
+
+    res.json({ success: true, message: "Sesi percakapan berhasil dihapus." });
+  } catch (error) {
+    console.error("Error deleteChatSession:", error);
+    res.status(500).json({ success: false, message: "Gagal menghapus sesi chat." });
+  }
+}
+
+/**
  * Save chat turn to user's isolated history
  */
 export function saveChatLog(req, res) {
   try {
-    const { role, content } = req.body;
+    const { role, content, session_id } = req.body;
     if (!role || !content) {
       return res.status(400).json({ success: false, message: "Role dan konten chat wajib diisi." });
     }
 
     const now = new Date().toISOString();
-    db.prepare("INSERT INTO chat_logs (user_id, role, content, created_at) VALUES (?, ?, ?, ?)").run(
+    db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
       req.user.id,
+      session_id || null,
       role,
       content,
       now
@@ -101,19 +244,23 @@ export function saveChatLog(req, res) {
 }
 
 /**
- * Get user's isolated chat history.
+ * Get user's isolated chat history (fallback or active session).
  */
 export function getChatHistory(req, res) {
   try {
     const userId = req.user.id;
+    const sessionId = req.query.session_id;
+
     let history;
-    try {
+    if (sessionId) {
+      history = db
+        .prepare(
+          "SELECT id, role, content, metadata, created_at FROM chat_logs WHERE user_id = ? AND session_id = ? ORDER BY id ASC LIMIT 50"
+        )
+        .all(userId, sessionId);
+    } else {
       history = db
         .prepare("SELECT id, role, content, metadata, created_at FROM chat_logs WHERE user_id = ? ORDER BY id ASC LIMIT 50")
-        .all(userId);
-    } catch (e) {
-      history = db
-        .prepare("SELECT id, role, content, created_at FROM chat_logs WHERE user_id = ? ORDER BY id ASC LIMIT 50")
         .all(userId);
     }
 
@@ -143,20 +290,21 @@ export function getChatHistory(req, res) {
 }
 
 /**
- * Clear user's isolated chat history.
+ * Clear all chat history and all sessions for user.
  */
 export function clearChatHistory(req, res) {
   try {
     const userId = req.user.id;
     db.prepare("DELETE FROM chat_logs WHERE user_id = ?").run(userId);
-    res.json({ success: true, message: "Riwayat percakapan berhasil dibersihkan." });
+    db.prepare("DELETE FROM chat_sessions WHERE user_id = ?").run(userId);
+    res.json({ success: true, message: "Semua riwayat percakapan berhasil dibersihkan." });
   } catch (error) {
     res.status(500).json({ success: false, message: "Gagal menghapus riwayat chat." });
   }
 }
 
 /**
- * Forward chat message to Python AI Server (localhost:8000) with strictly isolated user context.
+ * Forward chat message to Python AI Server (localhost:8000) with strictly isolated user context & multi-session support.
  * Performs pre-filtering and sanitization on the backend first.
  */
 export async function forwardChatToAI(req, res) {
@@ -167,38 +315,34 @@ export async function forwardChatToAI(req, res) {
     }
 
     // 1. Backend Input Filtering & Sanitization
-    // Hapus tag HTML berbahaya dan batasi panjang input
     const sanitizedMessage = rawMessage.replace(/<[^>]*>?/gm, "").trim().slice(0, 1000);
     const lowerMessage = sanitizedMessage.toLowerCase();
+    const userId = req.user.id;
+    const now = new Date().toISOString();
 
-    // 2. Pre-filter Kondisi Kedaruratan Medis Akut (Red Flag Alert)
-    const emergencyKeywords = ["tidak sadar", "kejang", "nyeri dada hebat", "koma", "pingsan mendadak", "napas sesak berat"];
-    const isEmergency = emergencyKeywords.some((k) => lowerMessage.includes(k));
+    // 2. Multi-Session Management (ChatGPT / Gemini model)
+    let sessionId = req.body.session_id;
+    const sessionTitle = sanitizedMessage.length > 32 
+      ? sanitizedMessage.slice(0, 32) + "..." 
+      : sanitizedMessage;
 
-    if (isEmergency) {
-      const emergencyResponse = 
-        "⚠️ **PERINGATAN GAWAT DARURAT MEDIS:**\n\n" +
-        "Gejala yang Anda sampaikan mengindikasikan potensi kondisi darurat akut (seperti hipoglikemia berat atau komplikasi kardiovaskular akut). " +
-        "**JANGAN MENUNGGU KONSULTASI ONLINE.** Segera hubungi nomor darurat **119** atau bawa pasien ke Instalasi Gawat Darurat (IGD) rumah sakit terdekat untuk penanganan medis segera!";
-
-      // Simpan log kedaruratan ke chat_logs user
-      const now = new Date().toISOString();
-      db.prepare("INSERT INTO chat_logs (user_id, role, content, created_at) VALUES (?, ?, ?, ?)").run(
-        req.user.id, "user", sanitizedMessage, now
-      );
-      db.prepare("INSERT INTO chat_logs (user_id, role, content, created_at) VALUES (?, ?, ?, ?)").run(
-        req.user.id, "assistant", emergencyResponse, now
-      );
-
-      return res.json({
-        success: true,
-        response: emergencyResponse,
-        guardrail: { zero_allergen_verified: true, safety_message: "Protokol Kedaruratan Medis Terpicu" },
-        telemetry: { latency_ms: 5, vllm_connected: false },
-      });
+    if (!sessionId) {
+      sessionId = `sess_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+      db.prepare(
+        "INSERT INTO chat_sessions (id, user_id, title, created_at, updated_at) VALUES (?, ?, ?, ?, ?)"
+      ).run(sessionId, userId, sessionTitle, now, now);
+    } else {
+      const existingSession = db.prepare("SELECT id FROM chat_sessions WHERE id = ? AND user_id = ?").get(sessionId, userId);
+      if (!existingSession) {
+        db.prepare(
+          "INSERT INTO chat_sessions (id, user_id, title, created_at, updated_at) VALUES (?, ?, ?, ?, ?)"
+        ).run(sessionId, userId, sessionTitle, now, now);
+      } else {
+        db.prepare("UPDATE chat_sessions SET updated_at = ? WHERE id = ? AND user_id = ?").run(now, sessionId, userId);
+      }
     }
 
-    const userId = req.user.id;
+    // Ambil data profil medis user
     const profileRow = db.prepare("SELECT full_profile_data, analysis_result FROM profiles WHERE user_id = ?").get(userId);
 
     let profile = {};
@@ -214,12 +358,87 @@ export async function forwardChatToAI(req, res) {
       }
     }
 
-    // Ambil 6 giliran chat terakhir khusus user ini untuk memori AI yang unik
-    const chatHistory = db
-      .prepare("SELECT role, content, created_at FROM chat_logs WHERE user_id = ? ORDER BY id DESC LIMIT 6")
-      .all(userId);
-
     const displayName = profile.nama || req.user.username;
+    const gender = profile.jenis_kelamin || "Laki-laki";
+    const salutation = gender === "Perempuan" ? "Ibu" : "Pak";
+
+    // 3. Pre-filter Kondisi Kedaruratan Medis Akut (Red Flag Alert)
+    const emergencyKeywords = ["tidak sadar", "kejang", "nyeri dada hebat", "koma", "pingsan mendadak", "napas sesak berat"];
+    const isEmergency = emergencyKeywords.some((k) => lowerMessage.includes(k));
+
+    if (isEmergency) {
+      const emergencyResponse = 
+        "⚠️ **PERINGATAN GAWAT DARURAT MEDIS:**\n\n" +
+        "Gejala yang Anda sampaikan mengindikasikan potensi kondisi darurat akut (seperti hipoglikemia berat atau komplikasi kardiovaskular akut). " +
+        "**JANGAN MENUNGGU KONSULTASI ONLINE.** Segera hubungi nomor darurat **119** atau bawa pasien ke Instalasi Gawat Darurat (IGD) rumah sakit terdekat untuk penanganan medis segera!";
+
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+        userId, sessionId, "user", sanitizedMessage, now
+      );
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+        userId, sessionId, "assistant", emergencyResponse, JSON.stringify({ guardrail: "Protokol Kedaruratan Medis Terpicu" }), now
+      );
+
+      return res.json({
+        success: true,
+        session_id: sessionId,
+        response: emergencyResponse,
+        guardrail: { zero_allergen_verified: true, safety_message: "Protokol Kedaruratan Medis Terpicu" },
+        telemetry: { latency_ms: 5, vllm_connected: false },
+      });
+    }
+
+    // 4. Pre-filter Guardrail Pertanyaan di Luar Lingkup Klinis & Gizi (Out-of-Scope Guardrail)
+    const outOfScopePatterns = [
+      /\b(presiden|wakil presiden|menteri|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah)\b/i,
+      /\b(koding|coding|programming|source code|python|javascript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|debugging code|bikin program|script bash)\b/i,
+      /\b(sepak bola|liga champions|liga inggris|piala dunia|world cup|persib|persija|manchester united|real madrid|barcelona|skor bola|hasil pertandingan)\b/i,
+      /\b(film bioskop|aktor|aktris|artis|konser musik|k-pop|anime|manga|mobile legends|free fire|dota|game steam|gosip|selebriti|sinetron)\b/i,
+      /\b(cryptocurrency|crypto|bitcoin|ethereum|trading saham|forex|pinjaman online|pinjol|hukum pidana|pasal kuhp|investasi bodong)\b/i,
+      /\b(teori relativitas|rumus integral|rumus fisika|kecepatan cahaya|tatasurya|astronomi|dinosaurus)\b/i,
+    ];
+
+    const healthKeywords = [
+      "gula", "glukosa", "darah", "makan", "minum", "menu", "resep", "gizi", "nutrisi",
+      "kalori", "protein", "karbo", "lemak", "serat", "diet", "diabetes", "prediabetes",
+      "hba1c", "gdp", "kolesterol", "tensi", "hipertensi", "berat", "tinggi", "bb", "tb",
+      "obesitas", "olahraga", "alergi", "badan", "sehat", "sakit", "puasa", "3j",
+      "sayur", "buah", "nasi", "lauk", "ikan", "ayam", "daging", "tahu", "tempe", "telur",
+      "siapa saya", "nama saya", "siapa aku", "profil saya", "umur saya", "usia saya"
+    ];
+
+    const hasHealthContext = healthKeywords.some((hk) => lowerMessage.includes(hk));
+    const isOutOfScope = outOfScopePatterns.some((pat) => pat.test(lowerMessage)) && !hasHealthContext;
+
+    if (isOutOfScope) {
+      const outOfScopeResponse = 
+        `Halo ${displayName}! Sebagai **Dr. Predi**, dokter konsultan nutrisi klinis pribadi Anda di PrediaBeat, fokus keahlian saya didedikasikan khusus untuk pendampingan pola makan ramah gula darah, takaran gizi 3J, dan pencegahan prediabetes/diabetes sesuai panduan klinis PERKENI & Kemenkes RI.\n\n` +
+        `Saya tidak dapat menjawab pertanyaan di luar konteks gizi, kesehatan metabolik, atau rekomendasi menu makanan ramah gula darah.\n\n` +
+        `Apakah ada pertanyaan seputar kandungan gizi bahan makanan, takaran karbohidrat/protein, atau rekomendasi menu sehat yang ingin ${salutation} konsultasikan hari ini? 😊`;
+
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+        userId, sessionId, "user", sanitizedMessage, now
+      );
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+        userId, sessionId, "assistant", outOfScopeResponse, JSON.stringify({ guardrail: "Scope Guardrail Aktif: Menolak Pertanyaan Non-Medis" }), now
+      );
+
+      return res.json({
+        success: true,
+        session_id: sessionId,
+        response: outOfScopeResponse,
+        guardrail: { zero_allergen_verified: true, safety_message: "100% Terverifikasi Aman (Scope Guardrail Aktif)" },
+        telemetry: { latency_ms: 6, vllm_connected: false },
+      });
+    }
+
+    // Ambil 6 giliran chat terakhir KHUSUS SESI INI agar konteks tidak bocor antar sesi
+    const chatHistory = db
+      .prepare(
+        "SELECT role, content, created_at FROM chat_logs WHERE user_id = ? AND session_id = ? ORDER BY id DESC LIMIT 6"
+      )
+      .all(userId, sessionId);
+
     const userContext = {
       userId,
       username: req.user.username,
@@ -259,11 +478,11 @@ export async function forwardChatToAI(req, res) {
     };
 
     const aiServerUrl = process.env.AI_SERVER_URL || "http://localhost:8000/api/chat";
-    const now = new Date().toISOString();
 
     // Simpan pesan user ke database terisolasi
-    db.prepare("INSERT INTO chat_logs (user_id, role, content, created_at) VALUES (?, ?, ?, ?)").run(
+    db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
       userId,
+      sessionId,
       "user",
       sanitizedMessage,
       now
@@ -300,6 +519,8 @@ export async function forwardChatToAI(req, res) {
       };
     }
 
+    aiData.session_id = sessionId;
+
     // Simpan respons asisten beserta telemetri & bukti graf RAG ke database terisolasi
     if (aiData.response) {
       const meta = {
@@ -314,16 +535,22 @@ export async function forwardChatToAI(req, res) {
       };
 
       try {
-        db.prepare("INSERT INTO chat_logs (user_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?)").run(
+        db.prepare(
+          "INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)"
+        ).run(
           userId,
+          sessionId,
           "assistant",
           aiData.response,
           JSON.stringify(meta),
           new Date().toISOString()
         );
       } catch (err) {
-        db.prepare("INSERT INTO chat_logs (user_id, role, content, created_at) VALUES (?, ?, ?, ?)").run(
+        db.prepare(
+          "INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)"
+        ).run(
           userId,
+          sessionId,
           "assistant",
           aiData.response,
           new Date().toISOString()

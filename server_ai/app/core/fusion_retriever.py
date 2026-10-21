@@ -70,6 +70,17 @@ class HybridGraphVectorFusion:
         dossier_lines = []
         patient_name = get_patient_display_name(user_context)
 
+        # Deteksi makanan tradisional berisiko tinggi lonjakan gula (contoh: tahu gejrot, es campur, boba)
+        high_risk_sweet = allergen_guardrail.detect_high_risk_sweet_food(user_query)
+        if high_risk_sweet:
+            dossier_lines.extend([
+                f"=== PERINGATAN PROTOKOL KLINIS GLIKEMIK (KONTRAINDIKASI GULA SEDERHANA) ===",
+                f"• Makanan yang Ditanyakan : {high_risk_sweet['nama']}",
+                f"• Bahaya Klinis Prediabetes: {high_risk_sweet['risiko']}",
+                f"• Wajib Modifikasi Aman   : {high_risk_sweet['solusi']}",
+                f"[INSTRUKSI MUTLAK DOKTER PREDI]: Pasien menanyakan hidangan ini. Sesuai panduan PERKENI 2021, DILARANG KERAS memberikan resep tradisional dengan kuah gula merah pekat atau gorengan minyak jelantah! Anda WAJIB menjelaskan risiko lonjakan glukosa darah (glycemic spike) secara lugas, lalu HANYA menyajikan resep MODIFIKASI SEHAT RAMAH PREDIABETES (kuah asam segar + pemanis alami stevia dan tahu kukus/air-fryer).",
+            ])
+
         # Rekam medis pasien HANYA dimasukkan sesuai kebutuhan spesifik:
         if is_identity_query(user_query):
             raw_name = getattr(user_context, "nama", None) or getattr(user_context, "username", "Pasien")
@@ -100,14 +111,14 @@ class HybridGraphVectorFusion:
                 f"Tidak perlu panik atau khawatir berlebihan. Dengan perbaikan pola makan 3J dan aktivitas fisik bertahap, kondisi ini sangat bisa dikendalikan dan ditingkatkan kesehatannya."
             )
         elif user_wants_recipe or any(k in ql for k in ["gula", "hba1c", "lab", "kalori"]):
-            dossier_lines = [
+            dossier_lines.extend([
                 f"=== DATA REKAM MEDIS RESMI PASIEN (ACUAN KLINIS) ===",
                 f"• Nama Pasien       : {patient_name}",
                 f"• Usia Pasien       : {getattr(user_context, 'usia', None) or '-'} tahun | BMI: {getattr(user_context, 'bmi', None) or '-'} ({getattr(user_context, 'kategori_bmi', None) or '-'})",
                 f"• Hasil Lab         : GDP {getattr(user_context, 'gula_darah_puasa', None) or '-'} mg/dL | HbA1c {getattr(user_context, 'hba1c', None) or '-'}%",
                 f"• Target Energi 3J  : {getattr(user_context, 'target_kalori', None) or 1900} kkal/hari",
                 f"• PANTANGAN ALERGI  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'} (MUTLAK DILARANG)",
-            ]
+            ])
 
         if specific_food:
             dossier_lines.extend([
