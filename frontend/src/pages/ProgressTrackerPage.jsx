@@ -14,14 +14,8 @@ import {
 export default function ProgressTrackerPage() {
   const { analysis } = useAuth();
 
-  const [foodLogs, setFoodLogs] = useState([
-    { id: 1, waktu: "Sarapan", nama: "Bubur Oatmeal Ayam & Telur Rebus", kalori: 398 },
-    { id: 2, waktu: "Makan Siang", nama: "Nasi Merah + Pepes Ikan + Sayur Bayam", kalori: 485 },
-  ]);
-
-  const [activities, setActivities] = useState([
-    { id: 1, nama: "Jalan Santai Sore", durasi: 30, kaloriTerbakar: 120 },
-  ]);
+  const [foodLogs, setFoodLogs] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   const [inputFoodName, setInputFoodName] = useState("");
   const [inputFoodMeal, setInputFoodMeal] = useState("Sarapan");
@@ -31,8 +25,8 @@ export default function ProgressTrackerPage() {
   const [inputDuration, setInputDuration] = useState(30);
 
   const totalCaloriesIn = foodLogs.reduce((sum, f) => sum + (parseInt(f.kalori) || 0), 0);
-  const totalCaloriesOut = activities.reduce((sum, a) => sum + (parseInt(a.kaloriTerbakar) || 0), 0) + 1450; // BMR baseline
-  const remainingCalories = analysis.target_kalori - totalCaloriesIn;
+  const totalCaloriesOut = activities.reduce((sum, a) => sum + (parseInt(a.kaloriTerbakar) || 0), 0);
+  const remainingCalories = (analysis?.target_kalori || 2000) - totalCaloriesIn;
 
   const handleAddFood = (e) => {
     e.preventDefault();

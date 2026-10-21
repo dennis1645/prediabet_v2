@@ -47,19 +47,23 @@ def is_short_greeting_or_test(user_query: str) -> bool:
     if not q_clean:
         return True
 
+    # Bersihkan salam umum dan variasinya
     greetings = {
         "test", "tes", "testing", "123", "p", "ping", "cek", "check",
         "halo", "hai", "hi", "hey", "halo dok", "halo dr", "halo predi",
         "halo dokter", "dok", "dokter", "assalamualaikum", "assalamu'alaikum",
         "selamat pagi", "selamat siang", "selamat sore", "selamat malam",
+        "halo selamat pagi", "halo selamat siang", "halo selamat sore", "halo selamat malam",
         "kabar baik", "apa kabar", "bagaimana kabarmu", "lagi apa", "lagi ngapain"
     }
 
     if q_clean in greetings:
         return True
 
+    # Jika mengandung kata sapaan dasar dan panjang kalimat <= 4 kata tanpa tanda tanya khusus
     words = q_clean.split()
-    if len(words) <= 2 and any(w in ["halo", "hai", "test", "tes", "p", "ping"] for w in words):
+    greeting_keywords = {"halo", "hai", "hey", "selamat", "pagi", "siang", "sore", "malam", "dok", "dokter", "predi", "tes", "test"}
+    if len(words) <= 4 and all(w in greeting_keywords for w in words):
         return True
 
     return False
@@ -88,14 +92,15 @@ def build_vllm_messages(
     patient_name = "Pak Budi"
 
     # 1. Jika hanya sapaan pendek / test pembuka
-    if is_short_greeting_or_test(user_query) and not has_prior_chat:
+    if is_short_greeting_or_test(user_query):
         current_user_content = (
             f"[Profil Pasien]: Pasien bernama {patient_name}.\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
             f"[Instruksi Khusus Respon Sapaan]:\n"
-            f"- Sapa pasien dengan hangat dan ramah: \"Selamat pagi/siang {patient_name}!\"\n"
-            f"- Tanyakan dengan singkat dan bersahabat apa yang ingin dikonsultasikan seputar nutrisi atau rekomendasi menu hari ini (maksimal 1-2 kalimat).\n"
-            f"- DILARANG menyodorkan resep masakan panjang atau meal plan jika tidak diminta!"
+            f"- Sapa pasien dengan hangat dan ramah: \"Halo {patient_name}, selamat pagi/siang! Semoga kabar Bapak baik hari ini.\"\n"
+            f"- Tanyakan dengan singkat apa yang bisa dibantu seputar nutrisi, takaran makanan ramah prediabetes, atau rekomendasi menu sehat hari ini (cukup 1-2 kalimat pendek).\n"
+            f"- DILARANG KERAS membeberkan rekam medis pasien (berat badan, tinggi badan, kalori) jika pasien hanya menyapa!\n"
+            f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan jika tidak diminta!"
         )
     # 2. Jika pasien menanyakan nilai gizi bahan makanan spesifik
     elif specific_food:
