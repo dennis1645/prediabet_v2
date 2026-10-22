@@ -169,3 +169,17 @@ export function getWeeklySummary(req, res) {
     res.status(500).json({ success: false, message: "Gagal menghitung ringkasan mingguan." });
   }
 }
+
+export function resetProgress(req, res) {
+  try {
+    const userId = req.user.id;
+    db.prepare("DELETE FROM daily_progress_logs WHERE user_id = ?").run(userId);
+    res.json({
+      success: true,
+      message: "Seluruh catatan progres harian berhasil direset ke status awal.",
+    });
+  } catch (error) {
+    console.error("Reset progress error:", error);
+    res.status(500).json({ success: false, message: "Gagal mereset progress pengguna." });
+  }
+}

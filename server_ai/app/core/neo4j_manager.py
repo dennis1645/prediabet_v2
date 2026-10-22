@@ -58,7 +58,22 @@ CURATED_FOOD_IMAGES = {
     "ubi jalar": "/food-images/ubi-rebus.jpg",
     "ubi": "/food-images/ubi-rebus.jpg",
 
+    # Tahu & Tempe (Kedelai Sehat)
+    "tahu kukus": "/food-images/tahu.jpg",
+    "tahu rebus": "/food-images/tahu.jpg",
+    "tahu putih": "/food-images/tahu.jpg",
+    "tahu mentah": "/food-images/tahu.jpg",
+    "tahu": "/food-images/tahu.jpg",
+    "tempe kukus": "/food-images/tempe.jpg",
+    "tempe rebus": "/food-images/tempe.jpg",
+    "tempe bacem": "/food-images/tempe.jpg",
+    "tempe": "/food-images/tempe.jpg",
+
     # Sayuran & Hidangan Berkuah Sehat
+    "sayur sawi": "/food-images/sayur-bayam.jpg",
+    "sawi hijau": "/food-images/sayur-bayam.jpg",
+    "sawi putih": "/food-images/sayur-bening.jpg",
+    "sawi": "/food-images/sayur-bayam.jpg",
     "sayur bening bayam oyong": "/food-images/sayur-bening.jpg",
     "sayur bening bayam": "/food-images/sayur-bening.jpg",
     "sayur bening oyong": "/food-images/sayur-bening.jpg",
@@ -432,8 +447,13 @@ class Neo4jClinicalGraphManager:
             "telur": ["telur ayam", "telur rebus", "telur"],
             "telor": ["telur ayam", "telur rebus", "telur"],
             "tlr": ["telur ayam", "telur rebus", "telur"],
-            "tempe": ["tempe", "tempe pasar", "tempe kedelai"],
-            "tahu": ["tahu", "tahu putih", "tahu kukus"],
+            "tempe": ["tempe, segar", "tempe kedelai murni", "tempe"],
+            "tahu": ["Tahu Kukus", "Tahu Rebus", "Tahu, mentah", "tahu putih", "tahu"],
+            "tahu putih": ["Tahu Kukus", "Tahu Rebus", "Tahu, mentah"],
+            "tahu kukus": ["Tahu Kukus", "Tahu Rebus"],
+            "sawi": ["Sawi, segar", "Sawi Hijau", "Sawi putih / pecai, segar", "sawi"],
+            "sawi hijau": ["Sawi Hijau", "Sawi, segar"],
+            "sawi putih": ["Sawi putih / pecai, segar", "Sawi, segar"],
             "ikan mas": ["ikan mas"],
             "ikan": ["ikan mas", "ikan nila", "ikan kembung", "ikan"],
             "ikn": ["ikan mas", "ikan nila", "ikan kembung", "ikan"],
@@ -505,6 +525,18 @@ class Neo4jClinicalGraphManager:
         if not search_terms:
             return None
 
+        def rank_food_match(item_name: str, target_keyword: str) -> tuple:
+            lower = item_name.lower()
+            tk = target_keyword.lower()
+            
+            # Prioritas 0: Cocok persis atau bentuk sehat standar (Tahu Kukus, Tahu Rebus, Tahu mentah, Ayam dada tanpa kulit)
+            is_pure_tofu = tk in ["tahu", "tahu putih", "tahu kukus"] and lower in ["tahu kukus", "tahu rebus", "tahu, mentah", "tahu"]
+            is_pure_skinless_chicken = "tanpa kulit" in lower
+            is_unwanted_derivative = any(bad in lower for bad in ["kembang tahu", "moon", "ampas", "babi", "minyak", "goreng", "jelantah"])
+
+            prio = 0 if (is_pure_tofu or is_pure_skinless_chicken) else (9 if is_unwanted_derivative else 1)
+            return (prio, len(item_name))
+
         # 1. Coba cari di Neo4j jika aktif
         if self.is_connected():
             for term in search_terms:
@@ -522,16 +554,13 @@ class Neo4jClinicalGraphManager:
                            COALESCE(m.glikemik_indeks, 0) AS gi,
                            m.kategori_spesifik AS kategori,
                            m.cara_olah AS cara_olah
-                    LIMIT 5
+                    LIMIT 10
                     """
                     try:
                         with self.driver.session(database=self.database) as session:
                             res = session.run(cypher, target=target).data()
                             if res:
-                                res.sort(key=lambda x: (
-                                    0 if "tanpa kulit" in x["nama"].lower() else 1,
-                                    len(x["nama"])
-                                ))
+                                res.sort(key=lambda x: rank_food_match(x["nama"], target))
                                 matched = res[0]
                                 matched["gambar"] = resolve_food_image(matched["nama"])
                                 return matched
@@ -545,10 +574,7 @@ class Neo4jClinicalGraphManager:
                 target_lower = target.lower()
                 matches = [f for f in foods if target_lower in f["nama"].lower()]
                 if matches:
-                    matches.sort(key=lambda x: (
-                        0 if "tanpa kulit" in x["nama"].lower() else 1,
-                        len(x["nama"])
-                    ))
+                    matches.sort(key=lambda x: rank_food_match(x["nama"], target))
                     matched = matches[0]
                     matched["gambar"] = resolve_food_image(matched["nama"])
                     return matched

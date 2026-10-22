@@ -785,6 +785,52 @@ export async function forwardChatToAI(req, res) {
       }
     }
 
+    // Auto-log otomatis makanan yang terdeteksi dari cerita pasien (misal 'Hari ini saya makan ayam goreng sama nasi')
+    if (aiData.story_log && Array.isArray(aiData.story_log.items) && aiData.story_log.items.length > 0) {
+      try {
+        const todayDate = new Date().toISOString().split("T")[0];
+        const hour = new Date().getHours();
+        const mealTime = (hour >= 5 && hour < 11) ? "Sarapan" : (hour >= 11 && hour < 16) ? "Makan Siang" : (hour >= 16 && hour < 21) ? "Makan Malam" : "Selingan";
+
+        let totalCal = 0;
+        let totalProt = 0;
+        let totalCarb = 0;
+        let totalFat = 0;
+        const dishNames = [];
+
+        for (const item of aiData.story_log.items) {
+          totalCal += Math.round(item.kalori || 0);
+          totalProt += Math.round(item.protein || 0);
+          totalCarb += Math.round(item.karbo || 0);
+          totalFat += Math.round(item.lemak || 0);
+          dishNames.push(item.nama);
+        }
+
+        const entryNote = `[${mealTime}] ${dishNames.join(" & ")} (${totalCal} kkal)`;
+
+        const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);
+        if (existingLog) {
+          // Cegah duplikasi jika teks catatan yang persis sama sudah ada di notes hari ini
+          if (!existingLog.notes || !existingLog.notes.includes(entryNote)) {
+            const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${entryNote}` : entryNote;
+            db.prepare(`
+              UPDATE daily_progress_logs
+              SET actual_kalori = actual_kalori + ?, actual_protein = actual_protein + ?, actual_karbo = actual_karbo + ?, actual_lemak = actual_lemak + ?, notes = ?, updated_at = ?
+              WHERE id = ?
+            `).run(totalCal, totalProt, totalCarb, totalFat, updatedNotes, now, existingLog.id);
+          }
+        } else {
+          db.prepare(`
+            INSERT INTO daily_progress_logs (user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+          `).run(userId, todayDate, totalCal, totalProt, totalCarb, totalFat, entryNote, now, now);
+        }
+        aiData.story_log.auto_logged = true;
+      } catch (errStoryLog) {
+        console.error("Auto-log story meal error:", errStoryLog);
+      }
+    }
+
     // Auto-log minuman manis jika pengguna menjawab konfirmasi takaran gula
     const lowerUserMsg = sanitizedMessage.toLowerCase();
     if (lowerUserMsg.includes("takaran gula") || (lowerUserMsg.includes("es teh") && (lowerUserMsg.includes("sdm") || lowerUserMsg.includes("sdt") || lowerUserMsg.includes("tawar")))) {

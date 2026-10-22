@@ -86,48 +86,83 @@ class HybridGraphVectorFusion:
         user_wants_recipe = any(k in ql for k in recipe_keywords)
         user_asks_nutrient_only = any(k in ql for k in ["berapa", "protein", "karbo", "lemak", "kalori", "gizi"]) and not any(k in ql for k in ["resep", "cara buat", "cara masak", "bikin", "langkah"])
 
+        # JIKA PENGGUNA MENCERITAKAN KONSUMSI MAKANAN (STORY FOODS):
+        # SUPPRESS specific_food mentah agar tidak menimpa menu konsumsi nyata (misal 'ayam goreng + nasi')
+        if story_foods and story_foods.get("items"):
+            specific_food = None
+
         from app.core.neo4j_manager import resolve_food_image
 
         # Jika pengguna meminta resep / ide makan: SELALU bentuk objek resep hidangan utuh (bukan takaran mentah 100g!)
         if user_wants_recipe and not user_asks_nutrient_only:
+            # Variasi menu Nusantara 3J terverifikasi
+            recipe_catalog = [
+                {
+                    "nama_makanan": "Sayur Bening Bayam Oyong Jagung Manis",
+                    "kalori": 65, "protein": 2.8, "karbohidrat": 12.0, "lemak": 0.4, "gi_val": 25,
+                    "cara_olah": "Rebus kuah bening temu kunci tanpa minyak jelantah"
+                },
+                {
+                    "nama_makanan": "Soto Ayam Kuah Bening Lamongan",
+                    "kalori": 160, "protein": 20.0, "karbohidrat": 8.0, "lemak": 4.0, "gi_val": 32,
+                    "cara_olah": "Rebus kuah rempah kuning tanpa santan"
+                },
+                {
+                    "nama_makanan": "Pepes Ikan Mas Daun Kemangi",
+                    "kalori": 180, "protein": 26.0, "karbohidrat": 2.0, "lemak": 6.5, "gi_val": 0,
+                    "cara_olah": "Kukus bumbu rempah alami berbalut daun pisang"
+                },
+                {
+                    "nama_makanan": "Sup Dada Ayam Bening Wortel Jamur",
+                    "kalori": 145, "protein": 22.0, "karbohidrat": 6.0, "lemak": 2.5, "gi_val": 30,
+                    "cara_olah": "Rebus kuah kaldu rempah bening rendah lemak"
+                },
+                {
+                    "nama_makanan": "Tumis Buncis Tahu Kukus Bumbu Bawang",
+                    "kalori": 120, "protein": 11.0, "karbohidrat": 9.0, "lemak": 3.5, "gi_val": 28,
+                    "cara_olah": "Tumis air tanpa minyak dengan bawang putih dan temu kunci"
+                }
+            ]
+
             # Tentukan hidangan spesifik yang diminta atau direkomendasikan
             if any(w in ql for w in ["sayur bening", "bayam oyong", "oyong", "gambas"]):
-                dish_name = "Sayur Bening Bayam Oyong"
-                cal, prot, carb, fat, gi_val = 65, 2.8, 12.0, 0.4, 25
-                cara = "Rebus kuah bening temu kunci tanpa minyak"
-            elif any(w in ql for w in ["sop ayam", "sup ayam", "sop", "sup"]):
-                dish_name = "Sop Dada Ayam Bening Wortel"
-                cal, prot, carb, fat, gi_val = 145, 22.0, 6.0, 2.5, 30
-                cara = "Rebus kuah kaldu rempah bening rendah lemak"
+                chosen = recipe_catalog[0]
             elif any(w in ql for w in ["soto", "soto ayam"]):
-                dish_name = "Soto Ayam Kuah Bening Kunyit"
-                cal, prot, carb, fat, gi_val = 160, 20.0, 8.0, 4.0, 32
-                cara = "Rebus bumbu kuning tanpa santan"
+                chosen = recipe_catalog[1]
             elif any(w in ql for w in ["pepes", "ikan mas", "pepes ikan"]):
-                dish_name = "Pepes Ikan Mas Daun Kemangi"
-                cal, prot, carb, fat, gi_val = 180, 26.0, 2.0, 6.5, 0
-                cara = "Kukus bumbu rempah alami daun pisang"
+                chosen = recipe_catalog[2]
+            elif any(w in ql for w in ["sop ayam", "sup ayam", "sop", "sup"]):
+                chosen = recipe_catalog[3]
+            elif any(w in ql for w in ["tahu", "buncis"]):
+                chosen = recipe_catalog[4]
             elif any(w in ql for w in ["nasi merah", "beras merah"]):
-                dish_name = "Nasi Beras Merah Pulen"
-                cal, prot, carb, fat, gi_val = 149, 2.8, 32.5, 0.4, 47
-                cara = "Kukus aron pulen"
+                chosen = {
+                    "nama_makanan": "Nasi Beras Merah Pulen",
+                    "kalori": 149, "protein": 2.8, "karbohidrat": 32.5, "lemak": 0.4, "gi_val": 47,
+                    "cara_olah": "Kukus aron pulen kaya serat penstabil glukosa"
+                }
             else:
-                top_rec = safe_foods[0] if safe_foods else {"nama": "Sayur Bening Bayam Oyong"}
-                dish_name = top_rec.get("nama", "Sayur Bening Bayam Oyong")
-                cal = int(top_rec.get("kalori", 120))
-                prot = float(top_rec.get("protein", 10))
-                carb = float(top_rec.get("karbohidrat", 15))
-                fat = float(top_rec.get("lemak", 3))
-                gi_val = int(top_rec.get("gi", 30))
-                cara = top_rec.get("cara_olah", "Kukus/Rebus kuah bening")
+                # Rotasi dinamis berdasarkan riwayat turn agar tidak monoton (variasi menu setiap kali ditanya "selain itu?")
+                turn_count = len(chat_history) if chat_history else 0
+                chosen = recipe_catalog[turn_count % len(recipe_catalog)]
+
+            dish_name = chosen["nama_makanan"]
+            cal = chosen["kalori"]
+            prot = chosen["protein"]
+            carb = chosen["karbohidrat"]
+            fat = chosen["lemak"]
+            gi_val = chosen["gi_val"]
+            cara = chosen["cara_olah"]
 
             specific_food = {
                 "nama_makanan": dish_name,
+                "nama": dish_name,
                 "kategori": "Resep Masakan 3J",
                 "kalori": cal,
                 "protein": prot,
                 "karbohidrat": carb,
                 "lemak": fat,
+                "gi": gi_val,
                 "gi_category": f"GI Rendah ({gi_val})" if gi_val < 55 else f"GI Sedang ({gi_val})",
                 "gambar": resolve_food_image(dish_name),
                 "cara_olah": cara,
@@ -200,17 +235,19 @@ class HybridGraphVectorFusion:
             ])
 
         if specific_food:
+            food_display_name = specific_food.get('nama_makanan') or specific_food.get('nama') or 'Bahan Makanan'
+            food_gi = specific_food.get('gi') if specific_food.get('gi') is not None else specific_food.get('gi_category', 'Rendah')
             dossier_lines.extend([
                 "",
                 f"=== DATA GIZI KLINIS SPESIFIK HASIL QUERY DETERMINISTIK NEO4J (ACUAN RESMI PER 100 GRAM) ===",
-                f"• Nama Bahan Makanan  : {specific_food['nama']}",
+                f"• Nama Bahan Makanan  : {food_display_name}",
                 f"• Takaran Acuan        : 100 gram",
-                f"• Kandungan Protein    : {specific_food['protein']} gram",
-                f"• Total Energi (Kalori): {specific_food['kalori']} kkal",
-                f"• Kandungan Karbohidrat: {specific_food['karbohidrat']} gram",
-                f"• Kandungan Lemak      : {specific_food['lemak']} gram",
-                f"• Indeks Glikemik (GI) : {specific_food['gi']} (Kategori Rendah - Sangat Aman bagi Respon Insulin)",
-                f"• Rekomendasi Olah     : {specific_food['cara_olah']} tanpa minyak jelantah",
+                f"• Kandungan Protein    : {specific_food.get('protein', 0)} gram",
+                f"• Total Energi (Kalori): {specific_food.get('kalori', 0)} kkal",
+                f"• Kandungan Karbohidrat: {specific_food.get('karbohidrat', 0)} gram",
+                f"• Kandungan Lemak      : {specific_food.get('lemak', 0)} gram",
+                f"• Indeks Glikemik (GI) : {food_gi} (Kategori Rendah - Sangat Aman bagi Respon Insulin)",
+                f"• Rekomendasi Olah     : {specific_food.get('cara_olah', 'Kukus/Rebus')} tanpa minyak jelantah",
                 f"[INSTRUKSI KHUSUS GIZI]: Pasien menanyakan kandungan bahan ini. WAJIB MENJAWAB LANGSUNG ANGKA PROTEIN/GIZI PER 100 GRAM DI AWAL KALIMAT! DILARANG memberikan resep jika tidak diminta.",
             ])
 

@@ -101,6 +101,10 @@ export const api = {
       method: "POST",
       body: JSON.stringify(logData),
     }),
+  resetProgress: () =>
+    request("/progress/reset", {
+      method: "DELETE",
+    }),
   getWeeklyProgress: () => request("/progress/summary/weekly"),
 
   // AI Chatbot Dr. Predi (Protected with JWT, Isolated Medical Context & Multi-Session)
