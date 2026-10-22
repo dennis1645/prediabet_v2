@@ -5,6 +5,7 @@ from app.core.allergen_guardrail import allergen_guardrail
 from app.core.prompt_templates import get_patient_display_name, is_identity_query
 from app.core.culinary_normalizer import culinary_normalizer
 from app.core.met_calculator import calculate_exercise_calories
+from app.core.logger_config import rag_logger
 from app.models.schemas import UserClinicalContext
 
 class HybridGraphVectorFusion:
@@ -35,6 +36,9 @@ class HybridGraphVectorFusion:
         - story_foods: Makanan yang terdeteksi dari cerita santai pengguna
         """
         # 1. Parsing Komorbiditas & Alergen Pengguna (Deduplikasi Bersih)
+        rag_logger.info("================================================================================")
+        rag_logger.info("MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: '%s' | User ID: '%s'", user_query, getattr(user_context, "userId", "-"))
+        
         komorbid_list = []
         if isinstance(user_context.komorbiditas, list):
             komorbid_list = user_context.komorbiditas
@@ -48,6 +52,7 @@ class HybridGraphVectorFusion:
         # Bersihkan & hilangkan duplikasi (misal 'kacang' ganda)
         allergens = list(dict.fromkeys([a.strip().capitalize() for a in raw_allergens if a and a.strip()]))
         conditions = [f"Risiko: {user_context.kategori_risiko}"] + komorbid_list
+        rag_logger.debug("Profil Pasien: Alergen: %s | Kondisi/Komorbid: %s", allergens, conditions)
 
         # Cek Normalisasi Typo & Istilah Kuliner Nusantara
         _, confirmation_payload = culinary_normalizer.normalize_food_query(user_query)
@@ -71,9 +76,14 @@ class HybridGraphVectorFusion:
         # Ekstra verifikasi dengan Guardrail
         safe_foods = allergen_guardrail.filter_safe_food_candidates(safe_foods, allergens)
         safe_food_names = [f["nama"] for f in safe_foods]
+        rag_logger.debug("Safe Foods Graf (Terverifikasi Guardrail): %d kandidat -> %s", len(safe_food_names), safe_food_names)
 
         # 3. Penelusuran Bahan Makanan Spesifik dari Query / History (misal: "Berapa protein dada ayam", "berapa gram?")
         specific_food = self.graph.find_specific_food(user_query, chat_history or [])
+        if specific_food:
+            rag_logger.info("Specific Food Matched: %s (Kalori: %s, Protein: %s)", specific_food.get("nama") or specific_food.get("nama_makanan"), specific_food.get("kalori"), specific_food.get("protein"))
+        else:
+            rag_logger.debug("No specific single food matched for query.")
 
         # Deteksi apakah pengguna memang meminta resep / menu masakan (bukan sekadar tanya gizi per 100g)
         ql = (user_query or "").lower()
@@ -174,6 +184,9 @@ class HybridGraphVectorFusion:
         if user_wants_recipe or any(k in ql for k in ["diet", "3j", "jadwal", "pola", "diabetes", "gula darah"]):
             semantic_hits = self.vector.query_semantic(user_query, n_results=2)
             guideline_texts = [h["document"] for h in semantic_hits]
+            rag_logger.info("Semantic Search Hits (ChromaDB/Vector): %d dokumen panduan PERKENI/Kemenkes ditemukan.", len(guideline_texts))
+            for i, h in enumerate(semantic_hits):
+                rag_logger.debug("Hit %d: %s", i+1, h.get("metadata", {}).get("title", "Panduan"))
 
         # 5. Perakitan Dossier Terisolasi (User-Specific Isolated Context)
         dossier_lines = []
@@ -333,6 +346,7 @@ class HybridGraphVectorFusion:
         )
 
         dossier_text = "\n".join(dossier_lines)
+        rag_logger.info("SELESAI MERAKIT DOSSIER KLINIS: Total karakter: %d, Safe Foods: %d, Alergen: %s", len(dossier_text), len(safe_food_names), allergens)
         return dossier_text, safe_food_names, allergens, specific_food, confirmation_payload, exercise_payload, sugar_verification, contextual_recipe, story_foods
 
 fusion_engine = HybridGraphVectorFusion(neo4j_manager, vector_manager)

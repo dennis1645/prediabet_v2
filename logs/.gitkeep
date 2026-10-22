@@ -1,0 +1,6 @@
+# This file ensures the logs directory exists in git while ignoring runtime log files
+*.log
+*.log.*
+!neo4j.log
+!rag.log
+!vllm.log

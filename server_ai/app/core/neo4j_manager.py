@@ -4,6 +4,7 @@ import re
 from typing import List, Dict, Any, Optional
 from app.config import settings
 from app.core.allergen_guardrail import allergen_guardrail
+from app.core.logger_config import neo4j_logger
 
 try:
     from neo4j import GraphDatabase, Driver
@@ -189,16 +190,17 @@ class Neo4jClinicalGraphManager:
 
     def _connect(self):
         if not HAS_NEO4J:
-            print("[Neo4j Manager] [Info] Library neo4j belum terpasang atau mode standalone aktif.")
+            neo4j_logger.warning("Library 'neo4j' belum terpasang atau mode standalone aktif.")
             return
 
         try:
+            neo4j_logger.info("Mencoba menghubungkan driver Neo4j ke %s (user: %s)...", self.uri, self.user)
             self.driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
             self.driver.verify_connectivity()
-            print(f"[Neo4j Manager] [OK] Terhubung ke database Neo4j di {self.uri}")
+            neo4j_logger.info("SUKSES: Terhubung ke database Neo4j di %s (database: %s)", self.uri, self.database)
             self.ensure_seeded()
         except Exception as e:
-            print(f"[Neo4j Manager] [Notice] Neo4j belum aktif di {self.uri} ({e}). Menggunakan Hybrid CSV deterministic engine fallback.")
+            neo4j_logger.error("GAGAL: Tidak dapat terhubung ke Neo4j di %s: %s. Mengaktifkan fallback engine CSV lokal.", self.uri, str(e))
             self.driver = None
 
     def ensure_seeded(self):
@@ -209,8 +211,9 @@ class Neo4jClinicalGraphManager:
             with self.driver.session(database=self.database) as session:
                 res = session.run("MATCH (m:Food) RETURN count(m) AS cnt").single()
                 cnt = res["cnt"] if res else 0
+                neo4j_logger.info("Pengecekan node makanan Neo4j: ditemukan %d node Food.", cnt)
                 if cnt == 0:
-                    print("[Neo4j Manager] Database Neo4j kosong. Memulai inisialisasi seeding node makanan...")
+                    neo4j_logger.info("Database Neo4j kosong. Memulai inisialisasi auto-seeding node makanan dari CSV...")
                     foods = self._load_local_dataset()
                     if foods:
                         batch_size = 500
@@ -229,9 +232,9 @@ class Neo4jClinicalGraphManager:
                                     m.kategori_spesifik = item.kategori,
                                     m.cara_olah = item.cara_olah
                             """, batch=batch)
-                        print(f"[Neo4j Manager] [OK] Berhasil menyuntikkan {len(foods)} node makanan ke Neo4j!")
+                        neo4j_logger.info("SUKSES: Berhasil menyuntikkan %d node makanan ke database Neo4j!", len(foods))
         except Exception as e:
-            print(f"[Neo4j Manager] [Notice] Gagal auto-seed Neo4j ({e}). Tetap menggunakan CSV fallback.")
+            neo4j_logger.error("GAGAL saat auto-seeding Neo4j: %s. Tetap menggunakan CSV fallback.", str(e))
 
     def is_connected(self) -> bool:
         if not HAS_NEO4J:
@@ -243,15 +246,24 @@ class Neo4jClinicalGraphManager:
         try:
             self.driver.verify_connectivity()
             return True
-        except Exception:
+        except Exception as e:
+            neo4j_logger.warning("Koneksi Neo4j terputus saat dicek: %s", str(e))
             return False
 
     def execute_cypher(self, query: str, params: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         if not self.is_connected():
+            neo4j_logger.error("Cypher execution gagal: Neo4j tidak terhubung. Query: %s", query.strip())
             raise ConnectionError("Database Neo4j tidak terhubung.")
-        with self.driver.session(database=self.database) as session:
-            result = session.run(query, params or {})
-            return result.data()
+        neo4j_logger.debug("Menjalankan Cypher Query: %s | Params: %s", query.strip(), params)
+        try:
+            with self.driver.session(database=self.database) as session:
+                result = session.run(query, params or {})
+                data = result.data()
+                neo4j_logger.debug("Hasil Cypher: %d records dikembalikan.", len(data))
+                return data
+        except Exception as e:
+            neo4j_logger.error("Error saat eksekusi Cypher: %s | Query: %s", str(e), query.strip())
+            raise
 
     def balance_staples(self, foods: List[Dict[str, Any]], allergens: List[str], limit: int = 8) -> List[Dict[str, Any]]:
         """Menyusun rekomendasi makanan seimbang 3J (Karbohidrat, Lauk, Sayur, Buah segar)."""
@@ -539,6 +551,7 @@ class Neo4jClinicalGraphManager:
 
         # 1. Coba cari di Neo4j jika aktif
         if self.is_connected():
+            neo4j_logger.info("Mencari bahan makanan spesifik di graf Neo4j untuk terms: %s", search_terms)
             for term in search_terms:
                 for target in COMMON_FOOD_ALIASES.get(term, [term]):
                     cypher = """
@@ -563,11 +576,15 @@ class Neo4jClinicalGraphManager:
                                 res.sort(key=lambda x: rank_food_match(x["nama"], target))
                                 matched = res[0]
                                 matched["gambar"] = resolve_food_image(matched["nama"])
+                                neo4j_logger.info("DITEMUKAN di Neo4j: '%s' cocok dengan target '%s' (Kalori: %s, Protein: %s)", matched["nama"], target, matched["kalori"], matched["protein"])
                                 return matched
+                            else:
+                                neo4j_logger.debug("Tidak ada record di Neo4j untuk target '%s'", target)
                     except Exception as e:
-                        print(f"[Neo4j Manager] Gagal cari makanan spesifik: {e}")
+                        neo4j_logger.error("Gagal menjalankan Cypher query spesifik untuk '%s': %s", target, str(e))
 
         # 2. Cari di dataset lokal (fallback deterministik)
+        neo4j_logger.info("Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: %s", search_terms)
         foods = self._load_local_dataset()
         for term in search_terms:
             for target in COMMON_FOOD_ALIASES.get(term, [term]):
@@ -577,8 +594,12 @@ class Neo4jClinicalGraphManager:
                     matches.sort(key=lambda x: rank_food_match(x["nama"], target))
                     matched = matches[0]
                     matched["gambar"] = resolve_food_image(matched["nama"])
+                    neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched["nama"], target, matched["kalori"], matched["protein"])
                     return matched
+                else:
+                    neo4j_logger.debug("Dataset CSV lokal tidak memiliki item untuk '%s'", target_lower)
 
+        neo4j_logger.warning("Tidak ditemukan bahan makanan spesifik untuk search terms: %s", search_terms)
         return None
 
 neo4j_manager = Neo4jClinicalGraphManager()

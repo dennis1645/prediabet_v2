@@ -5,6 +5,7 @@ from typing import AsyncGenerator, Dict, Any, List, Tuple
 import httpx
 from app.config import settings
 from app.core.allergen_guardrail import allergen_guardrail
+from app.core.logger_config import vllm_logger
 
 class VLLMInferenceClient:
     """Klien inferensi OpenAI-compatible yang terhubung ke vLLM Engine (RTX 5070 Ti)."""
@@ -59,6 +60,8 @@ class VLLMInferenceClient:
         target_model = self.model_id
 
         # 1. Cari endpoint aktif dan sinkronkan model_id resmi dari vLLM
+        vllm_logger.info("================================================================================")
+        vllm_logger.info("MEMULAI INFERENSI vLLM: Target Candidates: %s | Query: '%s'", candidate_bases, user_query)
         active_base = candidate_bases[0]
         for base in candidate_bases:
             try:
@@ -71,8 +74,10 @@ class VLLMInferenceClient:
                         if models_list and "id" in models_list[0]:
                             target_model = models_list[0]["id"]
                             self.model_id = target_model
+                        vllm_logger.info("Endpoint vLLM DITEMUKAN AKTIF di %s | Model ID: %s", active_base, target_model)
                         break
-            except Exception:
+            except Exception as check_err:
+                vllm_logger.debug("Candidate %s tidak merespons: %s", base, str(check_err))
                 continue
 
         url = f"{active_base}/chat/completions"
@@ -90,6 +95,7 @@ class VLLMInferenceClient:
         }
 
         try:
+            vllm_logger.info("Mengirim payload chat completion ke %s (Max Tokens: %d, Temp: %s)...", url, max_tokens, temperature)
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 res = await client.post(url, headers=headers, json=payload)
                 if res.status_code == 200:
@@ -98,18 +104,19 @@ class VLLMInferenceClient:
                     usage = data.get("usage", {})
                     total_tokens = usage.get("completion_tokens", len(raw_text.split()))
                     is_live_vllm = True
-                    print(f"[vLLM Client] [SUCCESS] Inferensi sukses dari {active_base} (Model: {target_model})")
+                    vllm_logger.info("SUKSES: Inferensi vLLM berhasil dari %s (%d tokens dihasilkan)", active_base, total_tokens)
                 else:
-                    print(f"[vLLM Client] Error: vLLM HTTP {res.status_code} response: {res.text}")
+                    vllm_logger.error("HTTP ERROR dari vLLM di %s (Status: %d): %s. Mengaktifkan fallback engine.", url, res.status_code, res.text)
                     raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
                     total_tokens = len(raw_text.split())
         except Exception as e:
-            print(f"[vLLM Client] Notice: vLLM offline/unreachable di {url} ({e}). Menggunakan dynamic clinical engine fallback.")
+            vllm_logger.warning("vLLM offline/unreachable di %s: %s. Mengaktifkan clinical fallback engine.", url, str(e))
             raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
             total_tokens = len(raw_text.split())
 
         elapsed = time.perf_counter() - start_time
         tokens_per_sec = round(total_tokens / max(elapsed, 0.001), 1)
+        vllm_logger.info("Telemetri Inferensi: Waktu: %.2f ms | Kecepatan: %s tok/s | Live vLLM GPU: %s", elapsed * 1000, tokens_per_sec, is_live_vllm)
 
         # Filter aksara Hanzi / terjemahan Mandarin jika model Qwen menyertakannya
         if "中文版本" in raw_text or re.search(r'[\u4e00-\u9fff]', raw_text):

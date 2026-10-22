@@ -61,6 +61,7 @@ services:
       - NEO4J_PASSWORD=prediabeat2026
     volumes:
       - server-ai-knowledge:/app/knowledge_base
+      - ./logs:/app/logs
     networks:
       - prediabeat-network
     depends_on:
