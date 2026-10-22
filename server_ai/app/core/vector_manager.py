@@ -124,6 +124,26 @@ CURATED_3J_RECIPES: List[Dict[str, Any]] = [
         "langkah": "1. Cuci beras merah, rendam 20 menit agar pulen.\n2. Kukus aron bersama daun pandan hingga matang pulen dan wangi.",
         "cara_olah": "Kukus aron pulen kaya serat penstabil glukosa",
         "tips": "Beras merah memiliki Indeks Glikemik rendah yang mencegah lonjakan gula setelah makan."
+    },
+    {
+        "nama_makanan": "Nasi Goreng Shirataki Sayur & Telur",
+        "kategori": "Resep Masakan 3J - Nasi Goreng Ramah Gula",
+        "kalori": 220, "protein": 14.0, "karbohidrat": 12.0, "lemak": 7.0, "gi_val": 22,
+        "keywords": ["nasi goreng", "nasgor", "nasi goreng shirataki", "shirataki", "nasi goreng sehat", "resep nasi goreng", "cara buat nasi goreng", "goreng"],
+        "bahan": "150g nasi shirataki / konjac rice (tiriskan), 1 butir telur ayam ras (kocok lepas), 50g dada ayam suwir, 30g wortel & buncis cincang, 2 siung bawang merah, 2 siung bawang putih cincang, 1 sdm kecap manis rendah kalori / stevia, 1 sdt minyak zaitun / canola.",
+        "langkah": "1. Panaskan 1 sdt minyak sehat di wajan antilengket, tumis bawang putih dan merah hingga harum.\n2. Masukkan telur, orak-arik cepat hingga berserat.\n3. Tambahkan dada ayam suwir dan sayuran, masak 1-2 menit hingga layu.\n4. Masukkan nasi shirataki tiris, tambahkan kecap rendah kalori, sedikit garam dan lada.\n5. Aduk rata dengan api sedang selama 3 menit hingga bumbu meresap sempurna, sajikan hangat.",
+        "cara_olah": "Tumis cepat minim minyak menggunakan serat konjac dan sayuran segar",
+        "tips": "Nasi shirataki berbahan dasar serat glukomanan dengan kalori dan beban glikemik mendekati nol, bebas lonjakan insulin postprandial."
+    },
+    {
+        "nama_makanan": "Nasi Goreng Beras Merah Dada Ayam",
+        "kategori": "Resep Masakan 3J - Nasi Goreng Ramah Gula",
+        "kalori": 285, "protein": 18.0, "karbohidrat": 36.0, "lemak": 6.5, "gi_val": 42,
+        "keywords": ["nasi goreng beras merah", "nasi goreng merah", "nasi goreng ayam", "nasi goreng"],
+        "bahan": "100g nasi beras merah pera/dingin, 60g dada ayam potong dadu, 1 butir telur, daun bawang iris, 2 siung bawang putih geprek, 1 sdm kecap manis diet, 1 sdt minyak kelapa murni.",
+        "langkah": "1. Tumis bawang putih dengan sedikit minyak kelapa hingga wangi.\n2. Masukkan ayam dadu dan telur, masak hingga matang.\n3. Masukkan nasi merah pera dan daun bawang, bumbui kecap diet dan lada.\n4. Aduk merata di atas api besar sebentar agar aroma sedap meresap tanpa gosong.",
+        "cara_olah": "Tumis wajan antilengket bumbu bawang dengan karbohidrat kompleks beras merah",
+        "tips": "Kaya serat utuh yang memperlambat laju glukosa darah dibandingkan nasi goreng beras putih konvensional."
     }
 ]
 

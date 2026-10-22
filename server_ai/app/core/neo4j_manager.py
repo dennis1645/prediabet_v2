@@ -398,8 +398,21 @@ class Neo4jClinicalGraphManager:
                         if gi_val <= 0:
                             gi_val = 35.0  # Default low-moderate GI
 
+                        # Normalisasi label kategori agar informatif (misal: 'Nasi Goreng' -> 'Makanan Pokok', 'Dada ayam' -> 'Lauk')
+                        kat_raw = str(row.get("kategori_spesifik") or "").strip()
+                        kat_utama = str(row.get("kategori_utama") or "").strip()
+                        if kat_raw.lower() == "nasi":
+                            kat_display = "Makanan Pokok"
+                        elif kat_raw and kat_raw != "-":
+                            kat_display = kat_raw
+                        elif kat_utama:
+                            kat_display = kat_utama.split(",")[0].strip()
+                        else:
+                            kat_display = "Bahan Makanan"
+
                         items.append({
                             "nama": nama,
+                            "nama_makanan": nama,
                             "kalori": kalori,
                             "karbohidrat": karbo,
                             "protein": protein,
@@ -407,7 +420,7 @@ class Neo4jClinicalGraphManager:
                             "serat": serat,
                             "sodium_mg": sodium,
                             "gi": gi_val,
-                            "kategori": row.get("kategori_spesifik") or row.get("kategori_utama") or "Menu",
+                            "kategori": kat_display,
                             "cara_olah": row.get("cara_olah") or "Kukus/Rebus",
                             "gambar": resolve_food_image(nama)
                         })
@@ -676,6 +689,7 @@ class Neo4jClinicalGraphManager:
                             if res:
                                 res.sort(key=lambda x: rank_food_match(x.get("nama") or "", target))
                                 matched = res[0]
+                                matched["nama_makanan"] = matched.get("nama")
                                 matched["gambar"] = resolve_food_image(matched.get("nama") or "")
                                 matched = apply_portion_scaling(matched, q)
                                 neo4j_logger.info("DITEMUKAN di Neo4j: '%s' cocok dengan target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
@@ -695,6 +709,7 @@ class Neo4jClinicalGraphManager:
                 if matches:
                     matches.sort(key=lambda x: rank_food_match(x.get("nama") or "", target))
                     matched = matches[0]
+                    matched["nama_makanan"] = matched.get("nama")
                     matched["gambar"] = resolve_food_image(matched.get("nama") or "")
                     matched = apply_portion_scaling(matched, q)
                     neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))

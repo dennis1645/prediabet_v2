@@ -645,10 +645,12 @@ export default function ChatbotPage() {
                                   <div className="flex items-start justify-between gap-2">
                                     <div>
                                       <h4 className="font-extrabold text-slate-800 text-sm sm:text-base leading-tight">
-                                        {msg.food_card.nama_makanan}
+                                        {msg.food_card.nama_makanan || msg.food_card.nama}
                                       </h4>
                                       <p className="text-[11px] text-slate-500 font-medium mt-0.5">
-                                        Nilai gizi baku per 100 gram (Basis Data Kemenkes / PERKENI)
+                                        {msg.food_card.porsi_label
+                                          ? `Nilai gizi takaran: ${msg.food_card.porsi_label}`
+                                          : "Nilai gizi baku per 100 gram (Basis Data Kemenkes / PERKENI)"}
                                       </p>
                                     </div>
                                     {msg.food_card.gi_category && (
