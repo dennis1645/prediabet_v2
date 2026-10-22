@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import api from "../services/api";
+import { showToast } from "../utils/alerts";
 import {
   TrendingUp,
   Plus,
@@ -16,6 +18,7 @@ export default function ProgressTrackerPage() {
 
   const [foodLogs, setFoodLogs] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [inputFoodName, setInputFoodName] = useState("");
   const [inputFoodMeal, setInputFoodMeal] = useState("Sarapan");
@@ -24,42 +27,115 @@ export default function ProgressTrackerPage() {
   const [inputActivityName, setInputActivityName] = useState("Jalan Kaki Cepat");
   const [inputDuration, setInputDuration] = useState(30);
 
+  // Load live data from backend daily_progress_logs
+  const loadDailyProgress = async () => {
+    try {
+      setLoading(true);
+      const res = await api.getDailyLog();
+      if (res && res.success && res.data?.log) {
+        const log = res.data.log;
+
+        // Parse food entries from notes
+        if (log.notes) {
+          const lines = log.notes.split("\n");
+          const parsed = [];
+          lines.forEach((line, i) => {
+            const m = line.match(/^\[(.*?)\]\s*(.*?)(?:\s*\((.*?)\))?$/);
+            if (m) {
+              const calMatch = (m[3] || "").match(/(\d+)/);
+              parsed.push({
+                id: `log-${i}`,
+                waktu: m[1],
+                nama: m[2],
+                kalori: calMatch ? parseInt(calMatch[1], 10) : 0,
+              });
+            } else if (line.trim()) {
+              parsed.push({
+                id: `log-${i}`,
+                waktu: "Menu Harian",
+                nama: line.trim(),
+                kalori: 0,
+              });
+            }
+          });
+          setFoodLogs(parsed);
+        } else {
+          setFoodLogs([]);
+        }
+
+        // Parse activities
+        if (log.activity_name) {
+          setActivities([
+            {
+              id: "act-1",
+              nama: log.activity_name,
+              durasi: log.duration_minutes || 30,
+              kaloriTerbakar: Math.round(log.activity_calories || 0),
+            },
+          ]);
+        } else {
+          setActivities([]);
+        }
+      }
+    } catch (err) {
+      console.warn("Gagal memuat log progress harian:", err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadDailyProgress();
+  }, []);
+
   const totalCaloriesIn = foodLogs.reduce((sum, f) => sum + (parseInt(f.kalori) || 0), 0);
   const totalCaloriesOut = activities.reduce((sum, a) => sum + (parseInt(a.kaloriTerbakar) || 0), 0);
   const remainingCalories = (analysis?.target_kalori || 2000) - totalCaloriesIn;
 
-  const handleAddFood = (e) => {
+  const handleAddFood = async (e) => {
     e.preventDefault();
     if (!inputFoodName.trim() || !inputFoodCal) return;
 
-    setFoodLogs([
-      ...foodLogs,
-      {
-        id: Date.now(),
-        waktu: inputFoodMeal,
-        nama: inputFoodName,
-        kalori: parseInt(inputFoodCal),
-      },
-    ]);
-
-    setInputFoodName("");
-    setInputFoodCal("");
+    try {
+      const cal = parseInt(inputFoodCal, 10);
+      const res = await api.logFoodDirect({
+        food_name: inputFoodName.trim(),
+        calories: cal,
+        meal_time: inputFoodMeal,
+      });
+      if (res && res.success) {
+        showToast("success", `${inputFoodName} berhasil dicatat ke progress hari ini!`);
+        setInputFoodName("");
+        setInputFoodCal("");
+        loadDailyProgress();
+      } else {
+        showToast("error", res?.message || "Gagal mencatat makanan.");
+      }
+    } catch (err) {
+      showToast("error", err.message || "Gagal menyimpan log makanan.");
+    }
   };
 
-  const handleAddActivity = (e) => {
+  const handleAddActivity = async (e) => {
     e.preventDefault();
-    const dur = parseInt(inputDuration) || 15;
+    const dur = parseInt(inputDuration, 10) || 15;
     const estBurn = Math.round(dur * 4.5); // ~4.5 kcal/min
 
-    setActivities([
-      ...activities,
-      {
-        id: Date.now(),
-        nama: inputActivityName,
-        durasi: dur,
-        kaloriTerbakar: estBurn,
-      },
-    ]);
+    try {
+      const res = await api.saveDailyLog({
+        activity_name: inputActivityName,
+        duration_minutes: dur,
+        activity_calories: estBurn,
+      });
+      if (res && res.success) {
+        showToast("success", `Aktivitas ${inputActivityName} (${estBurn} kkal) tersimpan!`);
+        loadDailyProgress();
+      } else {
+        showToast("error", res?.message || "Gagal menyimpan aktivitas.");
+      }
+    } catch (err) {
+      showToast("error", err.message || "Gagal menyimpan aktivitas fisik.");
+    }
   };
 
   return (
@@ -193,20 +269,26 @@ export default function ProgressTrackerPage() {
               <div className="border-t border-slate-100 pt-4">
                 <h4 className="text-xs font-bold uppercase text-slate-400 mb-3">Makanan Terdata Hari Ini:</h4>
                 <div className="space-y-2 max-h-52 overflow-y-auto">
-                  {foodLogs.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-sm"
-                    >
-                      <div>
-                        <span className="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-100/60 px-2 py-0.5 rounded-md mr-2">
-                          {item.waktu}
-                        </span>
-                        <span className="font-bold text-slate-800">{item.nama}</span>
-                      </div>
-                      <span className="font-extrabold text-emerald-600">{item.kalori} kkal</span>
+                  {foodLogs.length === 0 ? (
+                    <div className="py-6 text-center text-xs text-slate-400 font-semibold bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
+                      Belum ada makanan dicatat hari ini. Catat lewat form di atas atau dari Chatbot Dr. Predi!
                     </div>
-                  ))}
+                  ) : (
+                    foodLogs.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-sm"
+                      >
+                        <div>
+                          <span className="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-100/60 px-2 py-0.5 rounded-md mr-2">
+                            {item.waktu}
+                          </span>
+                          <span className="font-bold text-slate-800">{item.nama}</span>
+                        </div>
+                        <span className="font-extrabold text-emerald-600">{item.kalori} kkal</span>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             </div>
@@ -275,18 +357,24 @@ export default function ProgressTrackerPage() {
               <div className="border-t border-slate-100 pt-4">
                 <h4 className="text-xs font-bold uppercase text-slate-400 mb-3">Aktivitas Hari Ini:</h4>
                 <div className="space-y-2 max-h-52 overflow-y-auto">
-                  {activities.map((act) => (
-                    <div
-                      key={act.id}
-                      className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-sm"
-                    >
-                      <div>
-                        <span className="font-bold text-slate-800">{act.nama}</span>
-                        <span className="text-xs text-slate-400 ml-2">({act.durasi} menit)</span>
-                      </div>
-                      <span className="font-extrabold text-orange-600">-{act.kaloriTerbakar} kkal</span>
+                  {activities.length === 0 ? (
+                    <div className="py-6 text-center text-xs text-slate-400 font-semibold bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
+                      Belum ada latihan fisik dicatat hari ini. Catat lewat form di atas atau konsultasi di Chatbot Dr. Predi!
                     </div>
-                  ))}
+                  ) : (
+                    activities.map((act) => (
+                      <div
+                        key={act.id}
+                        className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-sm"
+                      >
+                        <div>
+                          <span className="font-bold text-slate-800">{act.nama}</span>
+                          <span className="text-xs text-slate-400 ml-2">({act.durasi} menit)</span>
+                        </div>
+                        <span className="font-extrabold text-orange-600">-{act.kaloriTerbakar} kkal</span>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             </div>

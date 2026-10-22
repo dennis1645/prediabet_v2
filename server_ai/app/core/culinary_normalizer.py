@@ -102,12 +102,13 @@ SWEET_BEVERAGE_KEYWORDS = {
     }
 }
 
-# Pola Pengguna Merujuk Resep Terakhir (Contextual Quick-Log)
+# Pola Pengguna Merujuk Resep Terakhir (Contextual Quick-Log) - Strict Anchored Patterns
 CONTEXTUAL_RECIPE_PATTERNS = [
-    r"\b(aku|saya)?\s*(mau|pengen|pilih)?\s*(makan|catat|ambil|jadwalkan|masak)?\s*(itu|ini|resep ini|menu ini|resep itu)\b",
-    r"\b(catat|masukin|simpan|jadwalkan)\s*(ke|buat)?\s*(menu|makan|sarapan|siang|malam)?\s*(dong|ya|ini|itu)?\b",
-    r"\b(okee|oke|baik|siap)\s*(aku|saya)?\s*(mau|akan)?\s*(makan|pilih|ambil)\s*(itu|ini)\b",
-    r"\b(catat ini|catat itu|mau makan itu|mau makan ini)\b"
+    r"^(ya|oke|okee|baik|siap)?\s*(aku|saya)?\s*(mau|akan|pilih|ambil)\s+(makan|jadwalkan|catat)\s+(itu|resep itu|menu itu)$",
+    r"^(catat|jadwalkan|simpan)\s+(resep|menu)?\s*(ini|itu)\s*(dong|ya|ke menu)?$",
+    r"^(aku|saya)\s+mau\s+makan\s+(itu|resep ini|menu ini)$",
+    r"^(catat|jadwalkan)\s+(resep ini|menu ini|resep itu|menu itu)$",
+    r"^(aku|saya)\s+pilih\s+(menu ini|resep ini|itu)$"
 ]
 
 # Pemetaan Ekuivalen Kuliner Nusantara (Istilah Lokal -> Profil Resmi Knowledge Base)
@@ -195,6 +196,15 @@ class CulinaryNormalizer:
         if not query:
             return None
         ql = query.lower()
+
+        # JIKA pengguna sedang menjawab/mengonfirmasi takaran gula atau pemanis, JANGAN tanya lagi!
+        sugar_answer_signals = [
+            "takaran", "takaran gulanya", "gula pasir", "sdm", "sdt", "sendok",
+            "tawar", "teh tawar", "tanpa gula", "stevia", "diabetasol", "nol kalori", "gula warung"
+        ]
+        if any(s in ql for s in sugar_answer_signals):
+            return None
+
         for bev_key, bev_data in SWEET_BEVERAGE_KEYWORDS.items():
             if bev_key in ql:
                 return {
@@ -203,6 +213,38 @@ class CulinaryNormalizer:
                     "question": bev_data["pertanyaan"],
                     "options": bev_data["options"]
                 }
+        return None
+
+    def detect_sugar_answer(self, query: str) -> Optional[Dict[str, Any]]:
+        """
+        Mendeteksi jawaban takaran gula dan mengonversinya ke kalori riil.
+        """
+        if not query:
+            return None
+        ql = query.lower()
+        if "takaran gula" in ql or "gula pasir" in ql or "sdm" in ql or "sdt" in ql or "teh tawar" in ql or "stevia" in ql:
+            cal = 0
+            gula = 0
+            label = "Takaran Gula"
+            if "1 sdt" in ql:
+                cal, gula, label = 16, 4, "1 sdt Gula Pasir (~16 kkal)"
+            elif "1 sdm" in ql:
+                cal, gula, label = 48, 12, "1 sdm Gula Pasir (~48 kkal)"
+            elif "2-3 sdm" in ql or "gula warung" in ql:
+                cal, gula, label = 100, 25, "Gula Warung Manis (~100 kkal)"
+            elif "tawar" in ql or "tanpa gula" in ql or "0 kkal" in ql:
+                cal, gula, label = 0, 0, "Teh Tawar Tanpa Gula (0 kkal)"
+            elif "stevia" in ql or "nol kalori" in ql:
+                cal, gula, label = 0, 0, "Pemanis Nol Kalori / Stevia (0 kkal)"
+            return {
+                "nama": "Es Teh Manis" if "es teh" in ql else "Minuman Manis",
+                "label": label,
+                "kalori": cal,
+                "gula_g": gula,
+                "protein": 0,
+                "karbo": gula,
+                "lemak": 0
+            }
         return None
 
     def detect_contextual_recipe_intent(self, query: str, last_suggested_recipe: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
@@ -228,9 +270,25 @@ class CulinaryNormalizer:
         Misal: 'saya hari ini makan ayam goreng sama nasi, terus minum nya es teh manis'
         """
         if not query:
-            return {"items": [], "sweet_beverage": None}
+            return {"items": [], "sweet_beverage": None, "total_kalori_known": 0}
 
-        ql = query.lower()
+        ql = query.lower().strip()
+
+        # 1. Cegah eksekusi jika ini hanya pertanyaan nutrisi, bukan laporan makan
+        # Misal: 'Berapa protein pada dada ayam?', 'Bolehkan saya makan nasi?', 'Saranin resep...'
+        question_words = ["berapa", "apakah", "bolehkah", "gizi", "protein", "karbo", "lemak", "kalori", "resep", "saran", "rekomendasi", "pengen makan"]
+        if any(q in ql for q in question_words) and not any(r in ql for r in ["saya makan", "tadi makan", "hari ini saya makan", "habis makan"]):
+            return {"items": [], "sweet_beverage": None, "total_kalori_known": 0}
+
+        # 2. Wajib ada indikasi eksplisit bahwa pengguna sedang menceritakan apa yang dimakan
+        consumption_indicators = [
+            "saya makan", "aku makan", "tadi makan", "hari ini makan", "hari ini saya makan",
+            "habis makan", "sarapan saya", "makan siang saya", "makan malam saya",
+            "saya minum", "aku minum", "tadi minum", "sarapan dengan", "makan dengan"
+        ]
+        if not any(ind in ql for ind in consumption_indicators):
+            return {"items": [], "sweet_beverage": None, "total_kalori_known": 0}
+
         items = []
 
         # Deteksi protein & lauk

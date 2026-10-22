@@ -80,9 +80,34 @@ class HybridGraphVectorFusion:
         recipe_keywords = [
             "resep", "menu", "masak", "makanan apa", "saran makanan", "rekomendasi makanan",
             "saranin", "sarankan", "sarapan apa", "makan siang apa", "makan malam apa",
-            "ide makan", "olah", "selain itu", "yang lain", "ada menu lain", "opsi lain", "pilihan lain"
+            "ide makan", "olah", "selain itu", "yang lain", "ada menu lain", "opsi lain", "pilihan lain",
+            "pengen makan", "ingin makan", "berkuah", "hangat", "sop", "sup"
         ]
         user_wants_recipe = any(k in ql for k in recipe_keywords)
+
+        # Jika pengguna meminta resep / ide makan dan belum ada specific_food, ambil rekomendasi menu safe_foods teratas!
+        if specific_food is None and user_wants_recipe and safe_foods:
+            top_rec = safe_foods[0]
+            # Jika user minta berkuah/hangat, prioritaskan sayur bening / sup
+            if any(w in ql for w in ["kuah", "berkuah", "hangat", "sop", "sup"]):
+                for sf in safe_foods:
+                    if any(s in sf["nama"].lower() for s in ["sayur", "bayam", "oyong", "gambas", "sop", "sup"]):
+                        top_rec = sf
+                        break
+            
+            from app.core.neo4j_manager import resolve_food_image
+            specific_food = {
+                "nama_makanan": top_rec["nama"],
+                "kategori": "Rekomendasi Menu 3J",
+                "kalori": top_rec.get("kalori", 150),
+                "protein": top_rec.get("protein", 8),
+                "karbohidrat": top_rec.get("karbohidrat", 18),
+                "lemak": top_rec.get("lemak", 3),
+                "gi_category": f"GI Rendah ({top_rec.get('gi', 30)})",
+                "gambar": resolve_food_image(top_rec["nama"]),
+                "cara_olah": top_rec.get("cara_olah", "Kukus/Rebus kuah bening"),
+                "alasan_klinis": f"Menu ramah gula darah kaya serat dan bebas minyak jelantah ({top_rec.get('kalori', 150)} kkal)."
+            }
 
         # 4. Penelusuran Semantik Dokumen Panduan Medis
         guideline_texts = []

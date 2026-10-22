@@ -663,6 +663,44 @@ export async function forwardChatToAI(req, res) {
       }
     }
 
+    // Auto-log minuman manis jika pengguna menjawab konfirmasi takaran gula
+    const lowerUserMsg = sanitizedMessage.toLowerCase();
+    if (lowerUserMsg.includes("takaran gula") || (lowerUserMsg.includes("es teh") && (lowerUserMsg.includes("sdm") || lowerUserMsg.includes("sdt") || lowerUserMsg.includes("tawar")))) {
+      try {
+        let drinkCal = 0;
+        let drinkName = lowerUserMsg.includes("es teh") ? "Es Teh Manis" : "Minuman Manis";
+        if (lowerUserMsg.includes("1 sdt")) drinkCal = 16;
+        else if (lowerUserMsg.includes("1 sdm")) drinkCal = 48;
+        else if (lowerUserMsg.includes("2-3 sdm") || lowerUserMsg.includes("gula warung")) drinkCal = 100;
+        else if (lowerUserMsg.includes("tawar") || lowerUserMsg.includes("tanpa gula")) {
+          drinkCal = 0;
+          drinkName = "Es Teh Tawar";
+        }
+
+        const todayDate = new Date().toISOString().split("T")[0];
+        const hour = new Date().getHours();
+        const mealTime = (hour >= 5 && hour < 11) ? "Sarapan" : (hour >= 11 && hour < 16) ? "Makan Siang" : (hour >= 16 && hour < 21) ? "Makan Malam" : "Selingan";
+        const drinkNote = `[${mealTime}] ${drinkName} (${drinkCal} kkal)`;
+
+        const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);
+        if (existingLog) {
+          const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${drinkNote}` : drinkNote;
+          db.prepare(`
+            UPDATE daily_progress_logs
+            SET actual_kalori = actual_kalori + ?, actual_karbo = actual_karbo + ?, notes = ?, updated_at = ?
+            WHERE id = ?
+          `).run(drinkCal, Math.round(drinkCal / 4), updatedNotes, now, existingLog.id);
+        } else {
+          db.prepare(`
+            INSERT INTO daily_progress_logs (user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+          `).run(userId, todayDate, drinkCal, 0, Math.round(drinkCal / 4), 0, drinkNote, now, now);
+        }
+      } catch (errDrink) {
+        console.error("Auto-log drink error:", errDrink);
+      }
+    }
+
     // Simpan respons asisten beserta telemetri & bukti graf RAG ke database terisolasi
     if (aiData.response) {
       const meta = {
