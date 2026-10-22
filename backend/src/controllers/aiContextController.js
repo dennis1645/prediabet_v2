@@ -417,6 +417,13 @@ export async function forwardChatToAI(req, res) {
     const salutation = gender === "Perempuan" ? "Ibu" : "Pak";
     const userWeight = profile.berat_badan || 68;
 
+    // Ambil 6 giliran chat terakhir KHUSUS SESI INI agar konteks tidak bocor antar sesi
+    const chatHistory = db
+      .prepare(
+        "SELECT role, content, created_at FROM chat_logs WHERE user_id = ? AND session_id = ? ORDER BY id DESC LIMIT 6"
+      )
+      .all(userId, sessionId);
+
     // 3. Pre-filter Kondisi Kedaruratan Medis Akut (Red Flag Alert)
     const emergencyKeywords = ["tidak sadar", "kejang", "nyeri dada hebat", "koma", "pingsan mendadak", "napas sesak berat"];
     const isEmergency = emergencyKeywords.some((k) => lowerMessage.includes(k));
@@ -606,13 +613,6 @@ export async function forwardChatToAI(req, res) {
       }
     }
 
-    // Ambil 6 giliran chat terakhir KHUSUS SESI INI agar konteks tidak bocor antar sesi
-    const chatHistory = db
-      .prepare(
-        "SELECT role, content, created_at FROM chat_logs WHERE user_id = ? AND session_id = ? ORDER BY id DESC LIMIT 6"
-      )
-      .all(userId, sessionId);
-
     const userContext = {
       userId,
       username: req.user.username,
@@ -672,11 +672,17 @@ export async function forwardChatToAI(req, res) {
           user_id: userId,
           message: sanitizedMessage,
           user_context: userContext,
-          chat_history: chatHistory.reverse(),
+          chat_history: chatHistory.slice().reverse(),
           last_suggested_recipe: req.body.last_suggested_recipe || null,
         }),
       });
-      aiData = await aiResponse.json();
+      if (aiResponse.ok) {
+        aiData = await aiResponse.json();
+      } else {
+        const errText = await aiResponse.text();
+        console.error(`[AI Server] Non-200 response (${aiResponse.status}):`, errText);
+        throw new Error(`AI server HTTP ${aiResponse.status}`);
+      }
     } catch (err) {
       aiData = {
         success: true,

@@ -1,5 +1,6 @@
 import os
 import csv
+import re
 from typing import List, Dict, Any, Optional
 from app.config import settings
 from app.core.allergen_guardrail import allergen_guardrail
