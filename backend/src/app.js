@@ -64,11 +64,26 @@ app.get("/api/health", (req, res) => {
 // Main API Router
 app.use("/api", apiRouter);
 
-// SPA fallback for frontend routes in combined image
+// SPA fallback for frontend routes in combined image with dynamic Open Graph injection
 if (fs.existsSync(publicPath)) {
   app.get("*", (req, res, next) => {
     if (req.path.startsWith("/api")) return next();
-    res.sendFile(path.join(publicPath, "index.html"));
+
+    const indexPath = path.join(publicPath, "index.html");
+    if (fs.existsSync(indexPath)) {
+      try {
+        const protocol = req.headers["x-forwarded-proto"] || req.protocol || "https";
+        const host = req.headers["x-forwarded-host"] || req.headers.host || "localhost:5000";
+        const baseUrl = `${protocol}://${host}`;
+        let html = fs.readFileSync(indexPath, "utf-8");
+        html = html.replace(/content="\/og-image\.png"/g, `content="${baseUrl}/og-image.png"`);
+        html = html.replace(/content="https:\/\/prediabeat\.app\/"/g, `content="${baseUrl}${req.path}"`);
+        return res.send(html);
+      } catch (e) {
+        return res.sendFile(indexPath);
+      }
+    }
+    res.sendFile(indexPath);
   });
 }
 
