@@ -512,12 +512,36 @@ export async function forwardChatToAI(req, res) {
       });
     }
 
-    // 4.1. Pre-filter Guardrail Pertanyaan di Luar Lingkup Klinis & Gizi (Out-of-Scope Guardrail)
+    // 4.1. Pre-filter Privasi Rekam Medis Pasien (Data Privacy Guardrail)
+    const privacyPatterns = /\b(user lain|pasien lain|orang lain|data orang|pengguna lain)\b/i;
+    if (privacyPatterns.test(lowerMessage)) {
+      const privacyResponse = 
+        `Mohon maaf, ${displayName}! Sesuai dengan kode etik kedokteran dan protokol privasi rekam medis pasien di PrediaBeat, ` +
+        `saya tidak diizinkan untuk membagikan data, riwayat kesehatan, atau profil pasien lain. Seluruh data pasien diisolasi secara ketat.\n\n` +
+        `Mari kita fokus pada evaluasi progres, pola makan 3J, dan kestabilan glukosa darah ${salutation} sendiri! 😊`;
+
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+        userId, sessionId, "user", sanitizedMessage, now
+      );
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+        userId, sessionId, "assistant", privacyResponse, JSON.stringify({ guardrail: "Guardrail Privasi Medis Aktif" }), now
+      );
+
+      return res.json({
+        success: true,
+        session_id: sessionId,
+        response: privacyResponse,
+        guardrail: { zero_allergen_verified: true, safety_message: "100% Terverifikasi Aman" },
+        telemetry: { latency_ms: 5, vllm_connected: false },
+      });
+    }
+
+    // 4.2. Pre-filter Guardrail Pertanyaan di Luar Lingkup Klinis & Gizi (Out-of-Scope Guardrail)
     const outOfScopePatterns = [
       /\b(presiden|wakil presiden|wapres|menteri|mentri|menter|kementerian|kemendikbud|mendikbud|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah|pejabat|hukum pidana|pasal kuhp)\b/i,
       /\b(koding|coding|programming|source code|python|javascript|typescript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|debugging code|bikin program|script bash|buatkan saya code|buatkan kode|tuliskan kode|buat program)\b/i,
       /\b(sepak bola|liga champions|liga inggris|piala dunia|world cup|persib|persija|manchester united|real madrid|barcelona|skor bola|hasil pertandingan)\b/i,
-      /\b(film bioskop|aktor|aktris|artis|konser musik|k-pop|anime|manga|mobile legends|free fire|dota|game steam|gosip|selebriti|sinetron)\b/i,
+      /\b(film bioskop|aktor|aktris|artis|konser musik|k-pop|anime|manga|mobile legends|free fire|dota|game steam|gosip|selebriti|sinetron|judika|penyanyi|musisi|lagu|album)\b/i,
       /\b(cryptocurrency|crypto|bitcoin|ethereum|trading saham|forex|pinjaman online|pinjol|investasi bodong)\b/i,
       /\b(teori relativitas|rumus integral|rumus fisika|kecepatan cahaya|tatasurya|astronomi|dinosaurus)\b/i,
     ];
@@ -539,7 +563,10 @@ export async function forwardChatToAI(req, res) {
       return pattern.test(lowerMessage);
     });
 
-    const isOutOfScope = outOfScopePatterns.some((pat) => pat.test(lowerMessage)) && !hasHealthContext;
+    // Deteksi pertanyaan figur publik / selebriti non-kesehatan umum (seperti 'siapa judika')
+    const isGenericPersonQuestion = /^\s*(?:siapa|taukah kamu siapa|kenalkah kamu|kenal|tahu)\s+([a-zA-Z\s]{2,25})\??\s*$/i.test(lowerMessage) && !/(saya|aku|predi|dr|dokter)/i.test(lowerMessage);
+
+    const isOutOfScope = (outOfScopePatterns.some((pat) => pat.test(lowerMessage)) || isGenericPersonQuestion) && !hasHealthContext;
 
     if (isOutOfScope) {
       const outOfScopeResponse = 

@@ -220,57 +220,90 @@ def build_vllm_messages(
             f"[Instruksi Khusus]:\n"
             f"{resp_instruction}"
         )
-    # 5. Jika pasien menanyakan nilai gizi bahan makanan spesifik
+    # 5. Jika ada bahan makanan spesifik atau permintaan resep terdeteksi
     elif specific_food:
-        ql = (user_query or "").lower()
-        if "karbo" in ql:
-            nutrisi_utama = f"kandungan karbohidratnya adalah sekitar {specific_food['karbohidrat']} gram, dengan energi sekitar {specific_food['kalori']} kkal dan serat {specific_food.get('serat', 0)} gram"
-        elif "lemak" in ql:
-            nutrisi_utama = f"kandungan lemaknya adalah sekitar {specific_food['lemak']} gram, dengan energi sekitar {specific_food['kalori']} kkal"
-        elif "kalori" in ql:
-            nutrisi_utama = f"total kalorinya adalah sekitar {specific_food['kalori']} kkal per 100 gram"
-        else:
-            nutrisi_utama = f"kandungan proteinnya adalah sekitar {specific_food['protein']} gram, dengan kalori sekitar {specific_food['kalori']} kkal"
+        ql = (user_query or "").lower().strip()
+        is_recipe_request = any(k in ql for k in ["resep", "cara buat", "cara masak", "langkah", "bahan", "bikin", "masak"]) or "resep" in str(specific_food.get("kategori", "")).lower()
 
-        current_user_content = (
-            f"Pesan Pasien: \"{user_query}\"\n\n"
-            f"[Data Gizi Spesifik dari Graf Database Neo4j]:\n"
-            f"- Bahan Makanan: {specific_food['nama']}\n"
-            f"- Takaran Acuan: 100 gram\n"
-            f"- Protein: {specific_food['protein']} gram\n"
-            f"- Karbohidrat: {specific_food['karbohidrat']} gram\n"
-            f"- Lemak: {specific_food['lemak']} gram\n"
-            f"- Kalori: {specific_food['kalori']} kkal\n"
-            f"- Indeks Glikemik (GI): {specific_food['gi']}\n\n"
-            f"[Instruksi Respon]:\n"
-            f"- Pasien HANYA menanyakan kandungan nutrisi bahan ini.\n"
-            f"- JAWAB LANGSUNG KANDUNGAN NUTRISINYA: 'Untuk 100 gram {specific_food['nama']}, {nutrisi_utama}.'\n"
-            f"- DILARANG KERAS membeberkan berat badan pasien, BMI, tinggi badan, atau hasil lab! Pasien TIDAK menanyakan hal itu!\n"
-            f"- DILARANG menyodorkan resep masakan panjang atau jadwal makan!\n"
-            f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
-        )
+        food_title = specific_food.get("nama_makanan") or specific_food.get("nama") or "Menu Sehat"
+
+        if is_recipe_request:
+            current_user_content = (
+                f"Pesan Pasien: \"{user_query}\"\n\n"
+                f"[Data Resep Resmi PrediaBeat]:\n"
+                f"- Nama Hidangan: {food_title}\n"
+                f"- Kalori: ~{specific_food.get('kalori', 120)} kkal\n"
+                f"- Protein: ~{specific_food.get('protein', 10)} gram\n"
+                f"- Karbohidrat: ~{specific_food.get('karbohidrat', 15)} gram\n"
+                f"- Lemak: ~{specific_food.get('lemak', 3)} gram\n"
+                f"- GI: Rendah (< 55)\n"
+                f"- Pantangan Pasien yang DILARANG: {allergen_str}\n\n"
+                f"[Instruksi Respon]:\n"
+                f"- Pasien meminta RESEP hidangan ini ({food_title}).\n"
+                f"- Sajikan resep yang lezat dan ramah prediabetes dengan format rapi:\n"
+                f"  1. Judul Menu\n"
+                f"  2. Nilai Gizi (Kalori, Protein, Karbohidrat, Lemak, GI Rendah)\n"
+                f"  3. Bahan Utama (PILIH HANYA BAHAN SEHAT, DILARANG KERAS MENGGUNAKAN {allergen_str})\n"
+                f"  4. Langkah Pengolahan (rebus/kukus/tumis kuah bening tanpa minyak jelantah)\n"
+                f"  5. Tips Klinis Stabilitas Gula Darah\n"
+                f"- Pastikan 100% bebas dari pantangan alergi: {allergen_str}."
+            )
+        else:
+            if "karbo" in ql:
+                nutrisi_utama = f"kandungan karbohidratnya adalah sekitar {specific_food['karbohidrat']} gram, dengan energi sekitar {specific_food['kalori']} kkal dan serat {specific_food.get('serat', 0)} gram"
+            elif "lemak" in ql:
+                nutrisi_utama = f"kandungan lemaknya adalah sekitar {specific_food['lemak']} gram, dengan energi sekitar {specific_food['kalori']} kkal"
+            elif "kalori" in ql:
+                nutrisi_utama = f"total kalorinya adalah sekitar {specific_food['kalori']} kkal per 100 gram"
+            else:
+                nutrisi_utama = f"kandungan proteinnya adalah sekitar {specific_food['protein']} gram, dengan kalori sekitar {specific_food['kalori']} kkal"
+
+            current_user_content = (
+                f"Pesan Pasien: \"{user_query}\"\n\n"
+                f"[Data Gizi Spesifik dari Graf Database Neo4j]:\n"
+                f"- Bahan Makanan: {food_title}\n"
+                f"- Takaran Acuan: 100 gram\n"
+                f"- Protein: {specific_food.get('protein', 0)} gram\n"
+                f"- Karbohidrat: {specific_food.get('karbohidrat', 0)} gram\n"
+                f"- Lemak: {specific_food.get('lemak', 0)} gram\n"
+                f"- Kalori: {specific_food.get('kalori', 0)} kkal\n"
+                f"- Indeks Glikemik (GI): {specific_food.get('gi', 0)}\n\n"
+                f"[Instruksi Respon]:\n"
+                f"- Pasien HANYA menanyakan kandungan nutrisi bahan ini.\n"
+                f"- JAWAB LANGSUNG KANDUNGAN NUTRISINYA: 'Untuk 100 gram {food_title}, {nutrisi_utama}.'\n"
+                f"- DILARANG KERAS menyodorkan resep masakan panjang atau jadwal makan!\n"
+                f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
+            )
     # 6. Pesan konsultasi mengalir umum
     else:
+        ql = (user_query or "").lower().strip()
+        user_explicitly_wants_recipe = any(k in ql for k in ["resep", "saran menu", "ide makan", "rekomendasi makan", "mau makan apa", "makan siang apa", "sarapan apa", "berkuah & hangat", "makan malam apa"])
+
         greeting_instruction = (
             f"- Percakapan sedang berlangsung. DILARANG mengulang salam seperti 'Halo {patient_name}' di awal kalimat. Langsung jawab inti pertanyaan pasien.\n"
             if has_prior_chat else
             f"- Sapa dengan hormat menggunakan panggilan '{patient_name}'.\n"
         )
-        ql = (user_query or "").lower().strip()
-        is_followup_recipe = any(k in ql for k in ["selain itu", "menu lain", "resep lain", "opsi lain", "yang lain", "pilihan lain"])
-        is_casual_reaction = any(k in ql for k in ["enak keknya", "keliatannya enak", "kayaknya enak", "enak ya", "mantap", "boleh juga", "sedap", "menarik"])
 
-        if is_casual_reaction:
+        if user_explicitly_wants_recipe:
             recipe_guidance = (
-                f"  * Pasien hanya menanggapi atau memuji hidangan yang disarankan sebelumnya ('enak keknya...'). Tanggapi dengan santai, hangat, dan positif (misalnya: 'Pilihan yang sangat baik, {patient_name}! Hidangan tersebut lezat dan cocok untuk menu sehat {salutation}. Selamat menikmati!'). DILARANG membeberkan angka gizi detail, resep baru, atau rekam medis lagi!\n"
+                f"- Pasien meminta rekomendasi hidangan/resep.\n"
+                f"- Sajikan 1 resep masakan Nusantara ramah 3J (misal Sayur Bening Bayam Oyong atau Pepes Ikan Mas Daun Kemangi).\n"
+                f"- Format: Judul, Nilai Gizi Singkat, Bahan, Langkah Pengolahan, dan Tips Klinis.\n"
+                f"- DILARANG KERAS MENGGUNAKAN BAHAN PANTANGAN PASIEN ({allergen_str})!\n"
             )
-        elif is_followup_recipe:
+        elif any(k in ql for k in ["user lain", "pasien lain", "orang lain", "data orang"]):
             recipe_guidance = (
-                "  * Pasien meminta variasi menu baru / alternatif ('selain itu?'). Langsung sajikan 1 menu masakan Nusantara BERBEDA yang lezat dan bergizi seimbang (misalnya: Pepes Ikan Mas Kemangi atau Sayur Bening Bayam Oyong). DILARANG membuka dengan kalimat 'tidak perlu panik' atau mengulang bahasan rekam medis! Langsung berikan rekomendasi menu alternatifnya.\n"
+                f"- Pasien menanyakan data pasien atau pengguna lain.\n"
+                f"- Tolak dengan sopan demi privasi rekam medis: jelaskan bahwa data setiap pasien diisolasi secara ketat dan aman sesuai etika kedokteran.\n"
+                f"- Ajak pasien kembali fokus pada kondisi kesehatan atau gizi pribadinya.\n"
+                f"- DILARANG MENYODORKAN RESEP!\n"
             )
         else:
             recipe_guidance = (
-                "  * HANYA JIKA pasien meminta resep/rekomendasi menu: Buatkan 1 menu masakan Nusantara yang lezat dan bervariasi (DILARANG mengulang resep oatmeal kaldu atau jambu biji rebus!). Gunakan format resep rapi (Judul Menu, Nilai Gizi, Bahan Utama, Langkah Pengolahan, dan Tips Klinis).\n"
+                f"- Tanggapi pertanyaan atau pernyataan pasien secara langsung, ringkas, dan empatik (1-3 kalimat).\n"
+                f"- DILARANG KERAS MENYODORKAN RESEP MASAKAN! Pasien TIDAK meminta resep!\n"
+                f"- DILARANG membacakan template klise seperti 'Umur Anda adalah...', 'Evaluasi status gizi...', atau 'Berikut rekomendasi masakan...'!\n"
             )
 
         current_user_content = (
@@ -278,19 +311,8 @@ def build_vllm_messages(
             f"Pesan Pasien: \"{user_query}\"\n\n"
             f"[Instruksi Respon]:\n"
             f"{greeting_instruction}"
-            f"- PENTING: Periksa intent pesan pasien di atas dan tanggapi secara manusiawi, mengalir, dan empatik layaknya dokter nutrisi asli:\n"
-            f"  * Jika pasien hanya bereaksi santai/curhat (seperti 'wah gawat yaa', 'aduh gimana dong', 'takut saya'): JANGAN mengulang membacakan rekam medis lengkap lagi! Tanggapi dengan empati dan tenangkan: 'Tidak perlu panik atau berkecil hati, {patient_name}. Kondisi prediabetes dan berat badan ini masih sangat bisa diperbaiki dengan langkah bertahap melalui pola makan 3J dan olahraga teratur. Saya siap mendampingi perjalanan sehat {salutation}.' Cukup 2-3 kalimat.\n"
-            f"  * Jika pasien menanyakan umur/usia: Jawab umur pasien sesuai data dossier. Jika belum diisi, sampaikan belum ada data usia di profil. DILARANG menambahkan pembahasan berat badan atau obesitas jika hanya ditanya umur!\n"
-            f"  * Jika pasien menanyakan kondisi tubuhnya (seperti 'apakah sehat?', 'apakah ideal?'): Jelaskan evaluasi status gizi secara jujur dan empatik tanpa menyodorkan resep masakan!\n"
-            f"  * Jika pasien menanyakan data pribadi spesifik (alergi, berat badan, tinggi badan): JAWAB HANYA HAL YANG DITANYAKAN secara singkat dan tepat! DILARANG menambahkan kalimat klise 'jangan khawatir' jika pasien tidak cemas!\n"
-            f"  * Jika pasien menanyakan jadwal/frekuensi makan ('makan berapa kali?'): Jelaskan prinsip 3J secara ringkas tanpa resep masakan panjang!\n"
             f"{recipe_guidance}"
-            f"- DILARANG menambahkan kalimat template klise di setiap jawaban (seperti: 'Jangan khawatir, ... Kondisi prediabetes...'). HAPUS SEMUA KALIMAT KLISE ITU! Jawab langsung intinya saja!\n"
-            f"- DILARANG memuntahkan rekam medis jika pasien TIDAK menanyakannya!\n"
-            f"- DILARANG menyodorkan resep masakan jika pasien tidak memintanya!\n"
-            f"- DILARANG memanggil dengan nama pengguna lain. Selalu gunakan '{patient_name}'.\n"
-            f"- DILARANG memancing pertanyaan penutup klise ('Apakah ada resep masakan spesial yang ingin Anda coba hari ini?'). Cukup jawab inti pesan pasien secara hangat dan profesional.\n"
-            f"- Gunakan Bahasa Indonesia murni yang cerdas, hangat, dan mengalir alami."
+            f"- Gunakan Bahasa Indonesia dokter spesialis yang cerdas, hangat, presisi, dan alami."
         )
 
     messages.append({"role": "user", "content": current_user_content})

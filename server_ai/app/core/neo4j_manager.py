@@ -35,9 +35,12 @@ CURATED_FOOD_IMAGES = {
     "telur": "/food-images/telur-rebus.jpg",
 
     # Nasi & Karbohidrat Kompleks
-    "nasi goreng": "/food-images/nasi-goreng.jpg",
+    "beras merah, nasi": "/food-images/nasi-merah.jpg",
+    "nasi beras merah": "/food-images/nasi-merah.jpg",
+    "nasi merah pulen": "/food-images/nasi-merah.jpg",
     "nasi merah": "/food-images/nasi-merah.jpg",
     "beras merah": "/food-images/nasi-merah.jpg",
+    "nasi goreng": "/food-images/nasi-goreng.jpg",
     "nasi putih": "/food-images/nasi-putih.jpg",
     "nasi biasa": "/food-images/nasi-putih.jpg",
     "nasi uduk": "/food-images/nasi-putih.jpg",
@@ -55,34 +58,27 @@ CURATED_FOOD_IMAGES = {
     "ubi jalar": "/food-images/ubi-rebus.jpg",
     "ubi": "/food-images/ubi-rebus.jpg",
 
-    # Ikan & Lauk Air
-    "pepes ikan": "/food-images/pepes-ikan.jpg",
-    "ikan bakar": "/food-images/ikan-bakar.jpg",
-    "ikan kembung": "/food-images/ikan-kembung.jpg",
-    "ikan mas": "/food-images/pepes-ikan.jpg",
-    "ikan": "/food-images/pepes-ikan.jpg",
-
-    # Nabati
-    "tahu": "/food-images/tahu.jpg",
-    "tahu putih": "/food-images/tahu.jpg",
-    "tahu gejrot": "/food-images/tahu.jpg",
-    "tempe": "/food-images/tempe.jpg",
-    "tempe bacem": "/food-images/tempe.jpg",
-
-    # Sayuran
+    # Sayuran & Hidangan Berkuah Sehat
+    "sayur bening bayam oyong": "/food-images/sayur-bening.jpg",
+    "sayur bening bayam": "/food-images/sayur-bening.jpg",
+    "sayur bening oyong": "/food-images/sayur-bening.jpg",
+    "sayur bening": "/food-images/sayur-bening.jpg",
     "sayur bayam": "/food-images/sayur-bayam.jpg",
     "bayam": "/food-images/sayur-bayam.jpg",
-    "sayur bening": "/food-images/sayur-bening.jpg",
     "oyong": "/food-images/sayur-bening.jpg",
     "gambas": "/food-images/sayur-bening.jpg",
+    "buncis wortel": "/food-images/buncis-wortel.jpg",
     "buncis": "/food-images/buncis-wortel.jpg",
     "wortel": "/food-images/buncis-wortel.jpg",
+    "sop ayam": "/food-images/sop-ayam.jpg",
+    "sup ayam": "/food-images/sop-ayam.jpg",
+    "soto ayam": "/food-images/soto-ayam.jpg",
     "capcay": "/food-images/capcay.jpg",
     "gado-gado": "/food-images/gado-gado.jpg",
     "gado gado": "/food-images/gado-gado.jpg",
     "pecel": "/food-images/gado-gado.jpg",
-    "salad": "/food-images/salad-sayur.jpg",
     "salad sayur": "/food-images/salad-sayur.jpg",
+    "salad": "/food-images/salad-sayur.jpg",
 
     # Buah-buahan
     "apel": "/food-images/buah-apel.jpg",
@@ -104,12 +100,38 @@ CURATED_FOOD_IMAGES = {
 }
 
 def resolve_food_image(food_name: str) -> str:
-    """Mengembalikan URL gambar HD terbaik untuk makanan tertentu."""
-    fn = (food_name or "").lower()
-    for key, url in CURATED_FOOD_IMAGES.items():
-        if key in fn:
-            return url
-    return "/food-images/dada-ayam.jpg"
+    """
+    Mengembalikan URL gambar HD terbaik untuk makanan tertentu.
+    Menggunakan regex word-boundary dan pengurutan panjang frasa agar kata pendek
+    seperti 'ayam' TIDAK memicu hidangan 'bayam' atau 'sayur bening'!
+    """
+    fn = (food_name or "").lower().strip()
+    if not fn:
+        return "/food-images/sayur-bening.jpg"
+
+    # 1. Cari kecocokan kata kunci dengan urutan dari frasa terpanjang
+    sorted_keys = sorted(CURATED_FOOD_IMAGES.keys(), key=len, reverse=True)
+    for key in sorted_keys:
+        # Gunakan regex word boundary
+        pattern = rf"\b{re.escape(key)}\b"
+        if re.search(pattern, fn, re.IGNORECASE):
+            return CURATED_FOOD_IMAGES[key]
+
+    # 2. Fallback cerdas berbasis kategori hidangan (Bukan sembarangan dada ayam!)
+    if any(k in fn for k in ["sayur", "bayam", "oyong", "gambas", "sop", "sup", "labu", "kuah"]):
+        return "/food-images/sayur-bening.jpg"
+    elif any(k in fn for k in ["ikan", "pepes", "laut", "kembung", "nila", "lele"]):
+        return "/food-images/pepes-ikan.jpg"
+    elif any(k in fn for k in ["telur", "telor"]):
+        return "/food-images/telur-rebus.jpg"
+    elif any(k in fn for k in ["nasi", "beras", "merah"]):
+        return "/food-images/nasi-merah.jpg"
+    elif any(k in fn for k in ["tahu", "tempe"]):
+        return "/food-images/tempe.jpg"
+    elif any(k in fn for k in ["ayam", "unggas"]):
+        return "/food-images/dada-ayam.jpg"
+
+    return "/food-images/sayur-bening.jpg"
 
 
 EXCLUDE_FOOD_KEYWORDS = [

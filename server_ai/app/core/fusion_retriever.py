@@ -75,7 +75,7 @@ class HybridGraphVectorFusion:
         # 3. Penelusuran Bahan Makanan Spesifik dari Query / History (misal: "Berapa protein dada ayam", "berapa gram?")
         specific_food = self.graph.find_specific_food(user_query, chat_history or [])
 
-        # Deteksi apakah pengguna memang meminta resep / menu masakan
+        # Deteksi apakah pengguna memang meminta resep / menu masakan (bukan sekadar tanya gizi per 100g)
         ql = (user_query or "").lower()
         recipe_keywords = [
             "resep", "menu", "masak", "makanan apa", "saran makanan", "rekomendasi makanan",
@@ -84,29 +84,54 @@ class HybridGraphVectorFusion:
             "pengen makan", "ingin makan", "berkuah", "hangat", "sop", "sup"
         ]
         user_wants_recipe = any(k in ql for k in recipe_keywords)
+        user_asks_nutrient_only = any(k in ql for k in ["berapa", "protein", "karbo", "lemak", "kalori", "gizi"]) and not any(k in ql for k in ["resep", "cara buat", "cara masak", "bikin", "langkah"])
 
-        # Jika pengguna meminta resep / ide makan dan belum ada specific_food, ambil rekomendasi menu safe_foods teratas!
-        if specific_food is None and user_wants_recipe and safe_foods:
-            top_rec = safe_foods[0]
-            # Jika user minta berkuah/hangat, prioritaskan sayur bening / sup
-            if any(w in ql for w in ["kuah", "berkuah", "hangat", "sop", "sup"]):
-                for sf in safe_foods:
-                    if any(s in sf["nama"].lower() for s in ["sayur", "bayam", "oyong", "gambas", "sop", "sup"]):
-                        top_rec = sf
-                        break
-            
-            from app.core.neo4j_manager import resolve_food_image
+        from app.core.neo4j_manager import resolve_food_image
+
+        # Jika pengguna meminta resep / ide makan: SELALU bentuk objek resep hidangan utuh (bukan takaran mentah 100g!)
+        if user_wants_recipe and not user_asks_nutrient_only:
+            # Tentukan hidangan spesifik yang diminta atau direkomendasikan
+            if any(w in ql for w in ["sayur bening", "bayam oyong", "oyong", "gambas"]):
+                dish_name = "Sayur Bening Bayam Oyong"
+                cal, prot, carb, fat, gi_val = 65, 2.8, 12.0, 0.4, 25
+                cara = "Rebus kuah bening temu kunci tanpa minyak"
+            elif any(w in ql for w in ["sop ayam", "sup ayam", "sop", "sup"]):
+                dish_name = "Sop Dada Ayam Bening Wortel"
+                cal, prot, carb, fat, gi_val = 145, 22.0, 6.0, 2.5, 30
+                cara = "Rebus kuah kaldu rempah bening rendah lemak"
+            elif any(w in ql for w in ["soto", "soto ayam"]):
+                dish_name = "Soto Ayam Kuah Bening Kunyit"
+                cal, prot, carb, fat, gi_val = 160, 20.0, 8.0, 4.0, 32
+                cara = "Rebus bumbu kuning tanpa santan"
+            elif any(w in ql for w in ["pepes", "ikan mas", "pepes ikan"]):
+                dish_name = "Pepes Ikan Mas Daun Kemangi"
+                cal, prot, carb, fat, gi_val = 180, 26.0, 2.0, 6.5, 0
+                cara = "Kukus bumbu rempah alami daun pisang"
+            elif any(w in ql for w in ["nasi merah", "beras merah"]):
+                dish_name = "Nasi Beras Merah Pulen"
+                cal, prot, carb, fat, gi_val = 149, 2.8, 32.5, 0.4, 47
+                cara = "Kukus aron pulen"
+            else:
+                top_rec = safe_foods[0] if safe_foods else {"nama": "Sayur Bening Bayam Oyong"}
+                dish_name = top_rec.get("nama", "Sayur Bening Bayam Oyong")
+                cal = int(top_rec.get("kalori", 120))
+                prot = float(top_rec.get("protein", 10))
+                carb = float(top_rec.get("karbohidrat", 15))
+                fat = float(top_rec.get("lemak", 3))
+                gi_val = int(top_rec.get("gi", 30))
+                cara = top_rec.get("cara_olah", "Kukus/Rebus kuah bening")
+
             specific_food = {
-                "nama_makanan": top_rec["nama"],
-                "kategori": "Rekomendasi Menu 3J",
-                "kalori": top_rec.get("kalori", 150),
-                "protein": top_rec.get("protein", 8),
-                "karbohidrat": top_rec.get("karbohidrat", 18),
-                "lemak": top_rec.get("lemak", 3),
-                "gi_category": f"GI Rendah ({top_rec.get('gi', 30)})",
-                "gambar": resolve_food_image(top_rec["nama"]),
-                "cara_olah": top_rec.get("cara_olah", "Kukus/Rebus kuah bening"),
-                "alasan_klinis": f"Menu ramah gula darah kaya serat dan bebas minyak jelantah ({top_rec.get('kalori', 150)} kkal)."
+                "nama_makanan": dish_name,
+                "kategori": "Resep Masakan 3J",
+                "kalori": cal,
+                "protein": prot,
+                "karbohidrat": carb,
+                "lemak": fat,
+                "gi_category": f"GI Rendah ({gi_val})" if gi_val < 55 else f"GI Sedang ({gi_val})",
+                "gambar": resolve_food_image(dish_name),
+                "cara_olah": cara,
+                "alasan_klinis": f"Hidangan bergizi seimbang ramah respon insulin ({cal} kkal, bebas minyak jelantah)."
             }
 
         # 4. Penelusuran Semantik Dokumen Panduan Medis
