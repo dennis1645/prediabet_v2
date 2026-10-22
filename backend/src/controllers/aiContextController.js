@@ -604,6 +604,7 @@ export async function forwardChatToAI(req, res) {
           message: sanitizedMessage,
           user_context: userContext,
           chat_history: chatHistory.reverse(),
+          last_suggested_recipe: req.body.last_suggested_recipe || null,
         }),
       });
       aiData = await aiResponse.json();
@@ -630,6 +631,38 @@ export async function forwardChatToAI(req, res) {
       aiData.exercise_logged = detectedExercise;
     }
 
+    // Auto-log resep kontekstual ke daily_progress_logs jika pengguna menyetujui rekomendasi resep
+    if (aiData.meal_logged) {
+      try {
+        const todayDate = new Date().toISOString().split("T")[0];
+        const hour = new Date().getHours();
+        const mealTime = (hour >= 5 && hour < 11) ? "Sarapan" : (hour >= 11 && hour < 16) ? "Makan Siang" : (hour >= 16 && hour < 21) ? "Makan Malam" : "Selingan";
+        const rName = aiData.meal_logged.nama_makanan || "Menu Sehat 3J";
+        const rCal = Math.round(aiData.meal_logged.kalori || 250);
+        const rProt = Math.round(aiData.meal_logged.protein || 15);
+        const rCarb = Math.round(aiData.meal_logged.karbohidrat || 30);
+        const rFat = Math.round(aiData.meal_logged.lemak || 8);
+        const entryNote = `[${mealTime}] ${rName} (${rCal} kkal)`;
+
+        const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);
+        if (existingLog) {
+          const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${entryNote}` : entryNote;
+          db.prepare(`
+            UPDATE daily_progress_logs
+            SET actual_kalori = actual_kalori + ?, actual_protein = actual_protein + ?, actual_karbo = actual_karbo + ?, actual_lemak = actual_lemak + ?, notes = ?, updated_at = ?
+            WHERE id = ?
+          `).run(rCal, rProt, rCarb, rFat, updatedNotes, now, existingLog.id);
+        } else {
+          db.prepare(`
+            INSERT INTO daily_progress_logs (user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+          `).run(userId, todayDate, rCal, rProt, rCarb, rFat, entryNote, now, now);
+        }
+      } catch (errLog) {
+        console.error("Auto-log contextual meal error:", errLog);
+      }
+    }
+
     // Simpan respons asisten beserta telemetri & bukti graf RAG ke database terisolasi
     if (aiData.response) {
       const meta = {
@@ -644,6 +677,9 @@ export async function forwardChatToAI(req, res) {
         food_card: aiData.food_card || null,
         confirmation: aiData.confirmation || null,
         exercise_logged: aiData.exercise_logged || null,
+        meal_logged: aiData.meal_logged || null,
+        sugar_verification: aiData.sugar_verification || null,
+        story_log: aiData.story_log || null,
       };
 
       try {

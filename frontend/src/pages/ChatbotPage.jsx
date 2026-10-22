@@ -41,7 +41,7 @@ export default function ChatbotPage() {
 
   const createInitialWelcomeMessage = (name) => ({
     role: "assistant",
-    content: `Halo ${name}! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, dokter konsultan nutrisi klinis pribadi Anda. Ada yang ingin Anda konsultasikan seputar kandungan gizi makanan, takaran pola 3J ramah gula darah, atau rekomendasi menu sehat hari ini?`,
+    content: `Halo ${name}! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi Anda.\n\nBagaimana perasaan dan kondisi tubuh Anda hari ini? Apakah sedang ingin makan sesuatu yang hangat, segar, atau ada makanan spesifik yang sedang Anda idamkan? Ceritakan kepada saya, dan saya akan bantu evaluasi atau rekomendasikan menu sehat ramah gula darah!`,
     source: "Dr. Predi Clinical AI",
     guardrail: "100% Bebas Alergen & Sesuai Pedoman PERKENI",
   });
@@ -54,6 +54,7 @@ export default function ChatbotPage() {
   const [isTyping, setIsTyping] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar drawer
   const [loadingHistory, setLoadingHistory] = useState(false);
+  const [lastSuggestedRecipe, setLastSuggestedRecipe] = useState(null);
 
   // State Modal Catat Makanan ke Menu Harian
   const [logModalOpen, setLogModalOpen] = useState(false);
@@ -119,6 +120,9 @@ export default function ChatbotPage() {
             food_card: meta.food_card || null,
             confirmation: meta.confirmation || null,
             exercise_logged: meta.exercise_logged || null,
+            meal_logged: meta.meal_logged || null,
+            sugar_verification: meta.sugar_verification || null,
+            story_log: meta.story_log || null,
             created_at: item.created_at,
           };
         });
@@ -232,8 +236,8 @@ export default function ChatbotPage() {
     setIsTyping(true);
 
     try {
-      // Panggil backend AI dengan menyertakan activeSessionId
-      const res = await api.sendChatMessage(query, activeSessionId);
+      // Panggil backend AI dengan menyertakan activeSessionId dan resep rujukan terakhir
+      const res = await api.sendChatMessage(query, activeSessionId, lastSuggestedRecipe);
       if (res && res.response) {
         setIsTyping(false);
 
@@ -253,6 +257,13 @@ export default function ChatbotPage() {
         const food_card = res.food_card || null;
         const confirmation = res.confirmation || null;
         const exercise_logged = res.exercise_logged || null;
+        const meal_logged = res.meal_logged || null;
+        const sugar_verification = res.sugar_verification || null;
+        const story_log = res.story_log || null;
+
+        if (food_card) {
+          setLastSuggestedRecipe(food_card);
+        }
 
         // Inisialisasi bubble assistant dengan status streaming aktif
         setMessages((prev) => [
@@ -268,6 +279,9 @@ export default function ChatbotPage() {
             food_card,
             confirmation,
             exercise_logged,
+            meal_logged,
+            sugar_verification,
+            story_log,
           },
         ]);
 
@@ -774,6 +788,93 @@ export default function ChatbotPage() {
                               </span>
                             </div>
                           )}
+
+                          {/* Protokol Anti-Halu: Verifikasi Takaran Gula Minuman */}
+                          {msg.sugar_verification?.needs_sugar_verification && !msg.isTypingStream && (
+                            <div className="mt-3.5 p-3.5 bg-amber-50/95 border border-amber-200 rounded-2xl shadow-2xs animate-fade-in">
+                              <div className="flex items-center gap-2 text-amber-900 text-xs font-bold mb-1.5">
+                                <Sparkles className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                                <span>Verifikasi Takaran Gula ({msg.sugar_verification.item_name}):</span>
+                              </div>
+                              <p className="text-xs text-amber-800 mb-3 leading-relaxed">
+                                {msg.sugar_verification.question}
+                              </p>
+                              <div className="flex flex-wrap gap-2">
+                                {msg.sugar_verification.options.map((opt, oIdx) => (
+                                  <button
+                                    key={oIdx}
+                                    type="button"
+                                    onClick={() => sendMessage(`Untuk ${msg.sugar_verification.item_name}, takaran gulanya: ${opt.label}`)}
+                                    className="inline-flex items-center gap-1.5 bg-white hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-300 text-slate-700 border border-slate-200 text-xs font-semibold px-3 py-1.5 rounded-xl transition shadow-2xs cursor-pointer active:scale-95"
+                                  >
+                                    <span>{opt.label}</span>
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Contextual Recipe Logged Badge */}
+                          {msg.meal_logged && !msg.isTypingStream && (
+                            <div className="mt-3.5 p-3.5 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-300 rounded-2xl shadow-2xs flex items-center justify-between gap-3 animate-fade-in">
+                              <div className="flex items-center gap-3">
+                                <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-base shadow-xs shrink-0">
+                                  🍽️
+                                </div>
+                                <div>
+                                  <div className="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+                                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                    <span>Resep Berhasil Terjadwal & Tercatat di Progres!</span>
+                                  </div>
+                                  <div className="text-xs text-emerald-800 font-semibold mt-0.5">
+                                    {msg.meal_logged.nama_makanan || "Menu Sehat 3J"} ({msg.meal_logged.kalori || 250} kkal) • Langsung tersinkron ke Dashboard
+                                  </div>
+                                </div>
+                              </div>
+                              <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-200/70 px-2.5 py-1 rounded-full border border-emerald-300 shrink-0">
+                                Tersimpan
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Story Food Log Detected */}
+                          {msg.story_log?.items?.length > 0 && !msg.isTypingStream && (
+                            <div className="mt-3.5 p-3.5 bg-emerald-50/90 border border-emerald-200 rounded-2xl shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fade-in">
+                              <div>
+                                <div className="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+                                  <Utensils className="w-4 h-4 text-emerald-600" />
+                                  <span>Makanan dari cerita Anda terdeteksi:</span>
+                                </div>
+                                <div className="text-xs text-emerald-800 font-semibold mt-0.5">
+                                  {msg.story_log.items.map((it) => `${it.nama} (${it.kalori} kkal)`).join(" • ")} • Total ~{msg.story_log.total_kalori_known} kkal
+                                </div>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={async () => {
+                                  try {
+                                    for (const it of msg.story_log.items) {
+                                      await api.logFoodDirect({
+                                        food_name: it.nama,
+                                        calories: it.kalori,
+                                        meal_time: "Makan Siang",
+                                        protein: it.protein,
+                                        karbo: it.karbo,
+                                        lemak: it.lemak,
+                                      });
+                                    }
+                                    showToast("Semua makanan dari cerita Anda berhasil dicatat ke progres!", "success");
+                                  } catch (e) {
+                                    showToast("Gagal mencatat makanan", "error");
+                                  }
+                                }}
+                                className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow-xs cursor-pointer active:scale-95 shrink-0"
+                              >
+                                <Plus className="w-3.5 h-3.5" />
+                                <span>+ Catat ke Progres Hari Ini</span>
+                              </button>
+                            </div>
+                          )}
                         </div>
                       ) : (
                         <p className="whitespace-pre-wrap">{msg.content}</p>
@@ -820,10 +921,10 @@ export default function ChatbotPage() {
             <div className="px-4 py-2 bg-slate-50/50 border-t border-slate-100/80 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
               <span className="text-[11px] font-bold text-slate-400 flex-shrink-0">Contoh:</span>
               {[
-                "Berapa protein dada ayam?",
-                "Apakah saya boleh makan nasi goreng?",
-                "Resep tahu gejrot ramah diabetes",
-                "Rekomendasi menu sarapan 3J",
+                "Hari ini saya makan ayam goreng sama nasi, dan es teh manis",
+                "Lagi pengen makan yang berkuah & hangat",
+                "Berapa protein pada dada ayam?",
+                "Saranin resep makan siang ramah glukosa dong",
               ].map((suggestion, i) => (
                 <button
                   key={i}

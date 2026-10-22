@@ -8,6 +8,7 @@ import {
   Bell,
   HeartPulse,
   CheckCircle2,
+  Check,
   AlertTriangle,
   Info,
   Clock,
@@ -127,6 +128,67 @@ export default function DashboardPage() {
       showToast("info", "Menu diacak ulang secara lokal.");
     } finally {
       setShuffling(false);
+    }
+  };
+
+  // Helper: Parse catatan makanan yang sudah dicatat di daily_progress_logs hari ini
+  const parseLoggedMeals = (notes) => {
+    if (!notes) return { Sarapan: [], "Makan Siang": [], "Makan Malam": [], Selingan: [] };
+    const lines = notes.split("\n");
+    const result = { Sarapan: [], "Makan Siang": [], "Makan Malam": [], Selingan: [] };
+
+    for (const line of lines) {
+      const match = line.match(/^\[(.*?)\]\s*(.*?)(?:\s*\((.*?)\))?$/);
+      if (match) {
+        const slotRaw = match[1].trim().toLowerCase();
+        const foodName = match[2].trim();
+        const calStr = match[3] || "";
+        const calMatch = calStr.match(/(\d+)/);
+        const calories = calMatch ? parseInt(calMatch[1], 10) : 0;
+
+        let key = "Selingan";
+        if (slotRaw.includes("sarapan") || slotRaw.includes("pagi")) key = "Sarapan";
+        else if (slotRaw.includes("siang")) key = "Makan Siang";
+        else if (slotRaw.includes("malam")) key = "Makan Malam";
+
+        result[key].push({ nama: foodName, kalori: calories, raw: line });
+      }
+    }
+    return result;
+  };
+
+  const mapSlotToKey = (waktu) => {
+    const w = (waktu || "").toLowerCase();
+    if (w.includes("sarapan")) return "Sarapan";
+    if (w.includes("siang")) return "Makan Siang";
+    if (w.includes("malam")) return "Makan Malam";
+    return "Selingan";
+  };
+
+  const loggedMeals = parseLoggedMeals(liveData.todayLog?.notes);
+
+  // Aksi Cepat: Tandai menu rencana sebagai sudah dikonsumsi
+  const handleMarkMealConsumed = async (slot, item) => {
+    try {
+      const mealTime = mapSlotToKey(slot.waktu);
+      const res = await api.logFoodDirect({
+        food_name: item.nama,
+        calories: item.kalori || 150,
+        meal_time: mealTime,
+        protein: item.protein || 10,
+        karbo: item.karbo || 20,
+        lemak: item.lemak || 5,
+      });
+
+      if (res && res.success) {
+        showToast("success", `${item.nama} berhasil dicatat ke menu ${mealTime} hari ini!`);
+        const fresh = await api.getDashboard();
+        if (fresh.success && fresh.data) {
+          setLiveData(fresh.data);
+        }
+      }
+    } catch (err) {
+      showToast("error", "Gagal mencatat menu ke progres harian.");
     }
   };
 
@@ -640,10 +702,24 @@ export default function DashboardPage() {
                 const targetSlotKal = slot.target_kalori_slot || Math.round(analysis.target_kalori / mealPlan.length);
                 const slotPct = Math.min(100, Math.round((totalSlotKal / targetSlotKal) * 100));
 
+                const slotKey = mapSlotToKey(slot.waktu);
+                const loggedForThisSlot = loggedMeals[slotKey] || [];
+                const isConsumed = loggedForThisSlot.length > 0;
+                const loggedNames = loggedForThisSlot.map((l) => l.nama.toLowerCase());
+                const matchesPlanned = slot.items.some((item) =>
+                  loggedNames.some((lname) => lname.includes(item.nama.toLowerCase()) || item.nama.toLowerCase().includes(lname))
+                );
+
                 return (
                   <article
                     key={idx}
-                    className="bg-white/85 backdrop-blur-xl border border-white rounded-[2rem] p-5 md:p-6 shadow-[0_14px_40px_rgba(15,23,42,0.055)] hover:-translate-y-0.5 transition-all"
+                    className={`bg-white/85 backdrop-blur-xl border rounded-[2rem] p-5 md:p-6 shadow-[0_14px_40px_rgba(15,23,42,0.055)] hover:-translate-y-0.5 transition-all ${
+                      isConsumed
+                        ? matchesPlanned
+                          ? "border-emerald-300 ring-1 ring-emerald-400/30"
+                          : "border-teal-300 ring-1 ring-teal-400/30"
+                        : "border-white"
+                    }`}
                   >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5 pb-4 border-b border-slate-100">
                       <div className="flex items-center gap-4">
@@ -651,14 +727,36 @@ export default function DashboardPage() {
                           {waktuIcons[slot.waktu] || "🍽️"}
                         </div>
                         <div>
-                          <h3 className="text-xl md:text-2xl font-black text-slate-800 flex flex-wrap items-center gap-2">
-                            <span>{slot.waktu}</span>
-                            {slot.jam && (
-                              <span className="text-xs bg-teal-50 text-teal-700 border border-teal-200/80 px-3 py-1 rounded-full font-black">
-                                {slot.jam}
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="text-xl md:text-2xl font-black text-slate-800 flex items-center gap-2">
+                              <span>{slot.waktu}</span>
+                              {slot.jam && (
+                                <span className="text-xs bg-teal-50 text-teal-700 border border-teal-200/80 px-3 py-1 rounded-full font-black">
+                                  {slot.jam}
+                                </span>
+                              )}
+                            </h3>
+
+                            {/* Badge Status Konsumsi Realtime */}
+                            {isConsumed ? (
+                              matchesPlanned ? (
+                                <span className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-full shadow-2xs animate-fade-in">
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                                  Sudah Dikonsumsi (Sesuai Rencana)
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1.5 text-xs font-black text-teal-900 bg-teal-100 border border-teal-300 px-3 py-1 rounded-full shadow-2xs animate-fade-in">
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
+                                  Sudah Dikonsumsi (Menu Diperbarui Sesuai Log)
+                                </span>
+                              )
+                            ) : (
+                              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
+                                <Clock className="w-3.5 h-3.5 text-slate-400" />
+                                Rencana Belum Dicatat
                               </span>
                             )}
-                          </h3>
+                          </div>
                           <p className="text-xs text-slate-500 font-semibold mt-1">
                             {slot.items.length} menu makanan · target sekitar {targetSlotKal} kkal
                           </p>
@@ -667,8 +765,10 @@ export default function DashboardPage() {
 
                       <div className="min-w-[210px]">
                         <div className="flex justify-between text-xs font-black text-slate-500 mb-2">
-                          <span>Aktual Kalori</span>
-                          <span className="text-emerald-700 font-black">{totalSlotKal} kkal</span>
+                          <span>{isConsumed ? "Kalori Terkonsumsi" : "Target Slot"}</span>
+                          <span className="text-emerald-700 font-black">
+                            {isConsumed ? loggedForThisSlot.reduce((s, x) => s + (x.kalori || 0), 0) : totalSlotKal} kkal
+                          </span>
                         </div>
                         <div className="h-2.5 rounded-full bg-slate-200/70 overflow-hidden">
                           <div
@@ -679,65 +779,112 @@ export default function DashboardPage() {
                       </div>
                     </div>
 
-                    {/* Meal Item Cards (Sesuai format foto & 3 makro di dashboard.html) */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                      {slot.items.map((item, itemIdx) => (
-                        <div
-                          key={itemIdx}
-                          className="rounded-[1.65rem] bg-white border border-slate-200/80 overflow-hidden shadow-2xs hover:shadow-md hover:-translate-y-1 transition-all flex flex-col"
-                        >
-                          {/* Image Box */}
-                          <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
-                            {item.gambar ? (
-                              <img
-                                src={item.gambar}
-                                alt={item.nama}
-                                loading="lazy"
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                              />
-                            ) : (
-                              <div className="absolute inset-0 flex items-center justify-center text-4xl bg-slate-50">
-                                {item.kategori === "Buah" ? "🍎" : item.kategori === "Sayur" ? "🥦" : item.kategori === "Lauk" ? "🍗" : "🍚"}
-                              </div>
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
-                            
-                            <span className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-white text-[10px] font-black px-3 py-1 rounded-full">
-                              {slot.waktu}
-                            </span>
-                            
-                            <span className="absolute bottom-3 right-3 bg-white/95 text-amber-600 border border-white text-[11px] font-black px-3 py-1.5 rounded-full shadow-xs">
-                              {item.kalori} kkal
-                            </span>
+                    {/* Jika pengguna mengonsumsi menu lain, tampilkan banner menu aktual yang dicatat */}
+                    {isConsumed && !matchesPlanned && (
+                      <div className="mb-5 p-4 rounded-2xl bg-teal-50/90 border border-teal-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fade-in">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-base shadow-xs shrink-0">
+                            ✓
                           </div>
-
-                          {/* Content Box */}
-                          <div className="p-4 flex flex-col flex-1 justify-between">
-                            <div>
-                              <h4 className="text-base font-black text-slate-800 leading-snug mb-1">
-                                {item.nama}
-                              </h4>
-                              <p className="text-xs text-slate-500 font-bold mb-3">{item.porsi}</p>
+                          <div>
+                            <div className="text-xs font-black text-teal-950">
+                              Menu Aktual yang Anda Konsumsi & Tercatat di Progres Hari Ini:
                             </div>
-
-                            {/* 3 Makronutrien Badges */}
-                            <div className="grid grid-cols-3 gap-1.5 mt-auto pt-2 border-t border-slate-100">
-                              <div className="rounded-xl bg-sky-50 border border-sky-100 p-1.5 text-center">
-                                <p className="text-[9px] font-black text-sky-500 uppercase">Karbo</p>
-                                <p className="text-xs font-black text-sky-700">{item.karbo || 15}g</p>
-                              </div>
-                              <div className="rounded-xl bg-emerald-50 border border-emerald-100 p-1.5 text-center">
-                                <p className="text-[9px] font-black text-emerald-500 uppercase">Protein</p>
-                                <p className="text-xs font-black text-emerald-700">{item.protein || 8}g</p>
-                              </div>
-                              <div className="rounded-xl bg-pink-50 border border-pink-100 p-1.5 text-center">
-                                <p className="text-[9px] font-black text-pink-500 uppercase">Lemak</p>
-                                <p className="text-xs font-black text-pink-700">{item.lemak || 4}g</p>
-                              </div>
+                            <div className="text-sm font-black text-teal-800 mt-0.5">
+                              {loggedForThisSlot.map((l) => `${l.nama} (${l.kalori} kkal)`).join(" • ")}
                             </div>
                           </div>
                         </div>
-                      ))}
+                        <span className="text-[10px] font-black uppercase tracking-wider text-teal-800 bg-teal-200/80 px-2.5 py-1 rounded-full border border-teal-300 shrink-0">
+                          Sinkron dengan Progress
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Meal Item Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                      {slot.items.map((item, itemIdx) => {
+                        const itemConsumed = isConsumed && (matchesPlanned || loggedNames.some((l) => l.includes(item.nama.toLowerCase())));
+
+                        return (
+                          <div
+                            key={itemIdx}
+                            className={`rounded-[1.65rem] bg-white border overflow-hidden shadow-2xs hover:shadow-md hover:-translate-y-1 transition-all flex flex-col relative ${
+                              itemConsumed ? "border-emerald-300 ring-2 ring-emerald-400/20" : "border-slate-200/80"
+                            }`}
+                          >
+                            {/* Image Box */}
+                            <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+                              {item.gambar ? (
+                                <img
+                                  src={item.gambar}
+                                  alt={item.nama}
+                                  loading="lazy"
+                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                />
+                              ) : (
+                                <div className="absolute inset-0 flex items-center justify-center text-4xl bg-slate-50">
+                                  {item.kategori === "Buah" ? "🍎" : item.kategori === "Sayur" ? "🥦" : item.kategori === "Lauk" ? "🍗" : "🍚"}
+                                </div>
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
+                              
+                              <span className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-white text-[10px] font-black px-3 py-1 rounded-full">
+                                {slot.waktu}
+                              </span>
+
+                              {itemConsumed ? (
+                                <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
+                                  <Check className="w-3 h-3" />
+                                  <span>Sudah Dimakan</span>
+                                </span>
+                              ) : (
+                                <span className="absolute bottom-3 right-3 bg-white/95 text-amber-600 border border-white text-[11px] font-black px-3 py-1.5 rounded-full shadow-xs">
+                                  {item.kalori} kkal
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Content Box */}
+                            <div className="p-4 flex flex-col flex-1 justify-between">
+                              <div>
+                                <h4 className="text-base font-black text-slate-800 leading-snug mb-1">
+                                  {item.nama}
+                                </h4>
+                                <p className="text-xs text-slate-500 font-bold mb-3">{item.porsi}</p>
+                              </div>
+
+                              {/* 3 Makronutrien Badges */}
+                              <div className="grid grid-cols-3 gap-1.5 mt-auto pt-2 border-t border-slate-100">
+                                <div className="rounded-xl bg-sky-50 border border-sky-100 p-1.5 text-center">
+                                  <p className="text-[9px] font-black text-sky-500 uppercase">Karbo</p>
+                                  <p className="text-xs font-black text-sky-700">{item.karbo || 15}g</p>
+                                </div>
+                                <div className="rounded-xl bg-emerald-50 border border-emerald-100 p-1.5 text-center">
+                                  <p className="text-[9px] font-black text-emerald-500 uppercase">Protein</p>
+                                  <p className="text-xs font-black text-emerald-700">{item.protein || 8}g</p>
+                                </div>
+                                <div className="rounded-xl bg-pink-50 border border-pink-100 p-1.5 text-center">
+                                  <p className="text-[9px] font-black text-pink-500 uppercase">Lemak</p>
+                                  <p className="text-xs font-black text-pink-700">{item.lemak || 4}g</p>
+                                </div>
+                              </div>
+
+                              {/* Tombol aksi cepat jika belum dikonsumsi */}
+                              {!itemConsumed && !isConsumed && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleMarkMealConsumed(slot, item)}
+                                  className="w-full mt-3 inline-flex items-center justify-center gap-1.5 bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white border border-emerald-200 hover:border-emerald-600 rounded-xl py-2 px-3 text-xs font-bold transition shadow-2xs cursor-pointer active:scale-95"
+                                >
+                                  <Check className="w-3.5 h-3.5" />
+                                  <span>Tandai Sudah Makan</span>
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </article>
                 );

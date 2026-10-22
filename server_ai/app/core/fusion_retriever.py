@@ -18,8 +18,9 @@ class HybridGraphVectorFusion:
         self,
         user_query: str,
         user_context: UserClinicalContext,
-        chat_history: List[Any] = None
-    ) -> Tuple[str, List[str], List[str], Any, Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+        chat_history: List[Any] = None,
+        last_suggested_recipe: Optional[Dict[str, Any]] = None
+    ) -> Tuple[str, List[str], List[str], Any, Optional[Dict[str, Any]], Optional[Dict[str, Any]], Optional[Dict[str, Any]], Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         """
         Menyusun Dossier Klinis unik untuk satu user tertentu.
         Menghasilkan:
@@ -29,6 +30,9 @@ class HybridGraphVectorFusion:
         - specific_food: Objek makanan spesifik jika pengguna menanyakan kandungan nutrisi bahan tertentu
         - confirmation_payload: Payload konfirmasi typo interaktif (Ya / Tidak)
         - exercise_payload: Hasil kalkulasi olahraga deterministik (MET)
+        - sugar_verification: Verifikasi takaran gula untuk minuman manis (Anti-Halu)
+        - contextual_recipe: Resep yang disetujui pengguna (Contextual Quick-Log)
+        - story_foods: Makanan yang terdeteksi dari cerita santai pengguna
         """
         # 1. Parsing Komorbiditas & Alergen Pengguna (Deduplikasi Bersih)
         komorbid_list = []
@@ -47,6 +51,15 @@ class HybridGraphVectorFusion:
 
         # Cek Normalisasi Typo & Istilah Kuliner Nusantara
         _, confirmation_payload = culinary_normalizer.normalize_food_query(user_query)
+
+        # Cek Verifikasi Minuman Manis (Anti-Halu Es Teh Manis dll)
+        sugar_verification = culinary_normalizer.detect_sweet_beverage_verification(user_query)
+
+        # Cek Contextual Recipe Intent (misal 'okee aku mau makan itu')
+        contextual_recipe = culinary_normalizer.detect_contextual_recipe_intent(user_query, last_suggested_recipe)
+
+        # Cek Ekstraksi Makanan dari Cerita Pasien
+        story_foods = culinary_normalizer.extract_story_foods(user_query)
 
         # Cek Kalkulator Kalori Olahraga Deterministik (MET)
         user_weight = getattr(user_context, 'berat_badan', 68.0) or 68.0
@@ -197,11 +210,42 @@ class HybridGraphVectorFusion:
                 f"[INSTRUKSI DOKTER PREDI]: Edukasi pasien mengenai kemiripan profil gizi hidangan tersebut dengan bijak dan ramah prediabetes.",
             ])
 
+        # Injeksi Protokol Anti-Halu Verifikasi Gula Minuman
+        if sugar_verification:
+            dossier_lines.extend([
+                "",
+                "=== PROTOKOL ANTI-HALU: VERIFIKASI TAKARAN GULA MINUMAN ===",
+                f"• Minuman Terdeteksi: {sugar_verification['item_name']}",
+                "• INSTRUKSI MUTLAK : DILARANG MENEBAK ATAU MENENTUKAN SENDIRI KALORI / GULA MINUMAN INI!",
+                f"• TINDAKAN DOKTER  : Tanyakan ramah kepada pasien: '{sugar_verification['question']}'. Berikan edukasi klinis bahwa gula cair sederhana memicu lonjakan glukosa darah (GI tinggi) mendadak.",
+            ])
+
+        # Injeksi Contextual Quick-Log (Persetujuan Resep)
+        if contextual_recipe:
+            rc = contextual_recipe["recipe"]
+            dossier_lines.extend([
+                "",
+                "=== PERSETUJUAN RESEP OLEH PASIEN (CONTEXTUAL QUICK-LOG) ===",
+                f"• Resep Disetujui  : {rc.get('nama_makanan', 'Rekomendasi Menu 3J')}",
+                f"• Kalori           : {rc.get('kalori', 0)} kkal",
+                f"[INSTRUKSI DOKTER PREDI]: Sambut dengan sangat antusias dan konfirmasikan bahwa menu '{rc.get('nama_makanan')}' langsung dijadwalkan dan dicatatkan ke menu hari ini!",
+            ])
+
+        # Injeksi Ekstraksi Cerita Makanan
+        if story_foods and story_foods.get("items"):
+            dossier_lines.extend([
+                "",
+                "=== DETEKSI POLA MAKAN DARI CERITA PASIEN ===",
+                f"• Makanan Terdeteksi: {', '.join(x['nama'] for x in story_foods['items'])}",
+                f"• Total Kalori Baku : ~{story_foods['total_kalori_known']} kkal",
+                f"[INSTRUKSI DOKTER PREDI]: Apresiasi keterbukaan pasien menceritakan makanannya, jelaskan ringkasan gizi bahan-bahan tersebut, dan ingatkan batasan minyak/gula.",
+            ])
+
         dossier_lines.append(
             f"\nPERINGATAN PROTOKOL ZERO-ALLERGEN (MUTLAK): DILARANG KERAS menyarankan makanan atau bahan yang mengandung {', '.join(allergens) if allergens else 'gula sederhana dan minyak jelantah'}. Jangan menyarankan santan, kacang, kacang panjang, atau seafood!"
         )
 
         dossier_text = "\n".join(dossier_lines)
-        return dossier_text, safe_food_names, allergens, specific_food, confirmation_payload, exercise_payload
+        return dossier_text, safe_food_names, allergens, specific_food, confirmation_payload, exercise_payload, sugar_verification, contextual_recipe, story_foods
 
 fusion_engine = HybridGraphVectorFusion(neo4j_manager, vector_manager)

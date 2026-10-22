@@ -84,9 +84,9 @@ async def chat_endpoint(request: ChatRequest):
     # 1. Pastikan konteks user unik & terisolasi
     user_context = await resolve_user_context(request)
 
-    # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik, typo normalizer, & MET kalkulator)
-    dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged = fusion_engine.build_clinical_dossier(
-        request.message, user_context, request.chat_history or []
+    # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik, typo normalizer, sugar verification, contextual recipe, & MET kalkulator)
+    dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(
+        request.message, user_context, request.chat_history or [], request.last_suggested_recipe
     )
 
     # 3. Format prompt sesuai template resmi Qwen/vLLM
@@ -124,6 +124,9 @@ async def chat_endpoint(request: ChatRequest):
         food_card=specific_food,
         confirmation=confirmation,
         exercise_logged=exercise_logged,
+        meal_logged=contextual_recipe["recipe"] if contextual_recipe else None,
+        sugar_verification=sugar_verification,
+        story_log=story_foods if (story_foods and story_foods.get("items")) else None,
     )
 
 
@@ -134,8 +137,8 @@ async def chat_stream_endpoint(request: ChatRequest):
         raise HTTPException(status_code=400, detail="Pesan pertanyaan tidak boleh kosong.")
 
     user_context = await resolve_user_context(request)
-    dossier_text, safe_food_names, user_allergens, specific_food, _, _ = fusion_engine.build_clinical_dossier(
-        request.message, user_context, request.chat_history or []
+    dossier_text, safe_food_names, user_allergens, specific_food, _, _, _, _, _ = fusion_engine.build_clinical_dossier(
+        request.message, user_context, request.chat_history or [], request.last_suggested_recipe
     )
     messages = build_vllm_messages(
         request.message, dossier_text, request.chat_history or [], specific_food=specific_food

@@ -104,10 +104,14 @@ export const api = {
   getWeeklyProgress: () => request("/progress/summary/weekly"),
 
   // AI Chatbot Dr. Predi (Protected with JWT, Isolated Medical Context & Multi-Session)
-  sendChatMessage: (message, sessionId) =>
+  sendChatMessage: (message, sessionId, lastSuggestedRecipe) =>
     request("/ai/chat", {
       method: "POST",
-      body: JSON.stringify({ message, session_id: sessionId }),
+      body: JSON.stringify({
+        message,
+        session_id: sessionId,
+        last_suggested_recipe: lastSuggestedRecipe || null,
+      }),
     }),
   getChatSessions: () => request("/ai/sessions"),
   createChatSession: (title) =>

@@ -41,6 +41,7 @@ class ChatRequest(BaseModel):
     message: str
     user_context: Optional[UserClinicalContext] = None
     chat_history: Optional[List[ChatTurn]] = Field(default_factory=list)
+    last_suggested_recipe: Optional[Dict[str, Any]] = None
     stream: bool = False
 
 class GuardrailReport(BaseModel):
@@ -61,3 +62,5 @@ class ChatResponse(BaseModel):
     confirmation: Optional[Dict[str, Any]] = None
     exercise_logged: Optional[Dict[str, Any]] = None
     meal_logged: Optional[Dict[str, Any]] = None
+    sugar_verification: Optional[Dict[str, Any]] = None
+    story_log: Optional[Dict[str, Any]] = None
