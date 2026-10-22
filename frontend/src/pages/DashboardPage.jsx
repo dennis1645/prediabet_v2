@@ -138,13 +138,11 @@ export default function DashboardPage() {
     const result = { Sarapan: [], "Makan Siang": [], "Makan Malam": [], Selingan: [] };
 
     for (const line of lines) {
-      const match = line.match(/^\[(.*?)\]\s*(.*?)(?:\s*\((.*?)\))?$/);
+      const match = line.match(/^\[(.*?)\]\s*(.*?)(?:\s*\((?:[^()]*?(\d+)\s*kkal)\))?\s*$/);
       if (match) {
         const slotRaw = match[1].trim().toLowerCase();
         const foodName = match[2].trim();
-        const calStr = match[3] || "";
-        const calMatch = calStr.match(/(\d+)/);
-        const calories = calMatch ? parseInt(calMatch[1], 10) : 0;
+        const calories = match[3] ? parseInt(match[3], 10) : 0;
 
         let key = "Selingan";
         if (slotRaw.includes("sarapan") || slotRaw.includes("pagi")) key = "Sarapan";

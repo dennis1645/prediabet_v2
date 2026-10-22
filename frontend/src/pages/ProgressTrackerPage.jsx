@@ -41,14 +41,13 @@ export default function ProgressTrackerPage() {
           const lines = log.notes.split("\n");
           const parsed = [];
           lines.forEach((line, i) => {
-            const m = line.match(/^\[(.*?)\]\s*(.*?)(?:\s*\((.*?)\))?$/);
+            const m = line.match(/^\[(.*?)\]\s*(.*?)(?:\s*\((?:[^()]*?(\d+)\s*kkal)\))?\s*$/);
             if (m) {
-              const calMatch = (m[3] || "").match(/(\d+)/);
               parsed.push({
                 id: `log-${i}`,
                 waktu: m[1],
-                nama: m[2],
-                kalori: calMatch ? parseInt(calMatch[1], 10) : 0,
+                nama: m[2].trim(),
+                kalori: m[3] ? parseInt(m[3], 10) : 0,
               });
             } else if (line.trim()) {
               parsed.push({

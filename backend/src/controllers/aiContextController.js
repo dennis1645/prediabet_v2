@@ -821,23 +821,25 @@ export async function forwardChatToAI(req, res) {
         let totalProt = 0;
         let totalCarb = 0;
         let totalFat = 0;
-        const dishNames = [];
+        const entryNotesList = [];
 
         for (const item of aiData.story_log.items) {
-          totalCal += Math.round(item.kalori || 0);
+          const itemCal = Math.round(item.kalori || 0);
+          totalCal += itemCal;
           totalProt += Math.round(item.protein || 0);
           totalCarb += Math.round(item.karbo || 0);
           totalFat += Math.round(item.lemak || 0);
-          dishNames.push(item.nama);
+          entryNotesList.push(`[${mealTime}] ${item.nama} (${itemCal} kkal)`);
         }
 
-        const entryNote = `[${mealTime}] ${dishNames.join(" & ")} (${totalCal} kkal)`;
+        const entryNotesJoined = entryNotesList.join("\n");
 
         const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);
         if (existingLog) {
           // Cegah duplikasi jika teks catatan yang persis sama sudah ada di notes hari ini
-          if (!existingLog.notes || !existingLog.notes.includes(entryNote)) {
-            const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${entryNote}` : entryNote;
+          const newEntriesToAdd = entryNotesList.filter(note => !existingLog.notes || !existingLog.notes.includes(note));
+          if (newEntriesToAdd.length > 0) {
+            const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${newEntriesToAdd.join("\n")}` : newEntriesToAdd.join("\n");
             db.prepare(`
               UPDATE daily_progress_logs
               SET actual_kalori = actual_kalori + ?, actual_protein = actual_protein + ?, actual_karbo = actual_karbo + ?, actual_lemak = actual_lemak + ?, notes = ?, updated_at = ?
@@ -848,7 +850,7 @@ export async function forwardChatToAI(req, res) {
           db.prepare(`
             INSERT INTO daily_progress_logs (user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-          `).run(userId, todayDate, totalCal, totalProt, totalCarb, totalFat, entryNote, now, now);
+          `).run(userId, todayDate, totalCal, totalProt, totalCarb, totalFat, entryNotesJoined, now, now);
         }
         aiData.story_log.auto_logged = true;
       } catch (errStoryLog) {
