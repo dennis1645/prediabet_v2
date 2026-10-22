@@ -1,6 +1,36 @@
 import db from "../database/connection.js";
 import { detectAndCalculateExercise } from "../utils/metCalculator.js";
 
+/**
+ * Menentukan kategori jadwal makan berdasarkan input pengguna atau jam aktual WIB (UTC+7).
+ */
+function resolveMealTime(userQuery = "", explicitFromAI = null) {
+  const ql = (userQuery || "").toLowerCase();
+  if (explicitFromAI) return explicitFromAI;
+  if (ql.includes("sarapan") || ql.includes("pagi") || ql.includes("breakfast")) return "Sarapan";
+  if (ql.includes("makan siang") || ql.includes("siang") || ql.includes("lunch")) return "Makan Siang";
+  if (ql.includes("makan malam") || ql.includes("malam") || ql.includes("dinner")) return "Makan Malam";
+  if (ql.includes("camilan") || ql.includes("ngemil") || ql.includes("snack") || ql.includes("selingan") || ql.includes("sore")) return "Selingan";
+
+  // Waktu Default berdasarkan Waktu Indonesia Barat (WIB / Asia/Jakarta)
+  try {
+    const wibHour = parseInt(
+      new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", hour: "2-digit", hour12: false }).format(new Date()),
+      10
+    );
+    if (wibHour >= 5 && wibHour < 11) return "Sarapan";
+    if (wibHour >= 11 && wibHour < 16) return "Makan Siang";
+    if (wibHour >= 16 && wibHour < 21) return "Makan Malam";
+    return "Selingan";
+  } catch (e) {
+    const h = new Date().getHours();
+    if (h >= 5 && h < 11) return "Sarapan";
+    if (h >= 11 && h < 16) return "Makan Siang";
+    if (h >= 16 && h < 21) return "Makan Malam";
+    return "Selingan";
+  }
+}
+
 // Inisialisasi skema chat_sessions & pastikan kolom metadata dan session_id tersedia
 try {
   db.exec(`
@@ -754,12 +784,11 @@ export async function forwardChatToAI(req, res) {
     }
 
     // Auto-log resep kontekstual ke daily_progress_logs jika pengguna menyetujui rekomendasi resep
-    if (aiData.meal_logged) {
+    if (aiData.meal_logged && aiData.meal_logged.nama_makanan && aiData.meal_logged.nama_makanan !== "Menu Sehat 3J") {
       try {
         const todayDate = new Date().toISOString().split("T")[0];
-        const hour = new Date().getHours();
-        const mealTime = (hour >= 5 && hour < 11) ? "Sarapan" : (hour >= 11 && hour < 16) ? "Makan Siang" : (hour >= 16 && hour < 21) ? "Makan Malam" : "Selingan";
-        const rName = aiData.meal_logged.nama_makanan || "Menu Sehat 3J";
+        const mealTime = resolveMealTime(sanitizedMessage, aiData.meal_logged.meal_time || null);
+        const rName = aiData.meal_logged.nama_makanan;
         const rCal = Math.round(aiData.meal_logged.kalori || 250);
         const rProt = Math.round(aiData.meal_logged.protein || 15);
         const rCarb = Math.round(aiData.meal_logged.karbohidrat || 30);
@@ -768,12 +797,14 @@ export async function forwardChatToAI(req, res) {
 
         const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);
         if (existingLog) {
-          const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${entryNote}` : entryNote;
-          db.prepare(`
-            UPDATE daily_progress_logs
-            SET actual_kalori = actual_kalori + ?, actual_protein = actual_protein + ?, actual_karbo = actual_karbo + ?, actual_lemak = actual_lemak + ?, notes = ?, updated_at = ?
-            WHERE id = ?
-          `).run(rCal, rProt, rCarb, rFat, updatedNotes, now, existingLog.id);
+          if (!existingLog.notes || !existingLog.notes.includes(entryNote)) {
+            const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${entryNote}` : entryNote;
+            db.prepare(`
+              UPDATE daily_progress_logs
+              SET actual_kalori = actual_kalori + ?, actual_protein = actual_protein + ?, actual_karbo = actual_karbo + ?, actual_lemak = actual_lemak + ?, notes = ?, updated_at = ?
+              WHERE id = ?
+            `).run(rCal, rProt, rCarb, rFat, updatedNotes, now, existingLog.id);
+          }
         } else {
           db.prepare(`
             INSERT INTO daily_progress_logs (user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at)
@@ -789,8 +820,7 @@ export async function forwardChatToAI(req, res) {
     if (aiData.story_log && Array.isArray(aiData.story_log.items) && aiData.story_log.items.length > 0) {
       try {
         const todayDate = new Date().toISOString().split("T")[0];
-        const hour = new Date().getHours();
-        const mealTime = (hour >= 5 && hour < 11) ? "Sarapan" : (hour >= 11 && hour < 16) ? "Makan Siang" : (hour >= 16 && hour < 21) ? "Makan Malam" : "Selingan";
+        const mealTime = resolveMealTime(sanitizedMessage, aiData.story_log.meal_time || null);
 
         let totalCal = 0;
         let totalProt = 0;
@@ -846,8 +876,7 @@ export async function forwardChatToAI(req, res) {
         }
 
         const todayDate = new Date().toISOString().split("T")[0];
-        const hour = new Date().getHours();
-        const mealTime = (hour >= 5 && hour < 11) ? "Sarapan" : (hour >= 11 && hour < 16) ? "Makan Siang" : (hour >= 16 && hour < 21) ? "Makan Malam" : "Selingan";
+        const mealTime = resolveMealTime(sanitizedMessage, null);
         const drinkNote = `[${mealTime}] ${drinkName} (${drinkCal} kkal)`;
 
         const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);

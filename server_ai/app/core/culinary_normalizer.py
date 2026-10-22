@@ -330,8 +330,20 @@ class CulinaryNormalizer:
 
         sweet_bev = self.detect_sweet_beverage_verification(query)
 
+        # Deteksi eksplisit waktu makan jika disebutkan dalam cerita pasien
+        meal_time = None
+        if any(w in ql for w in ["sarapan", "pagi", "makan pagi", "breakfast"]):
+            meal_time = "Sarapan"
+        elif any(w in ql for w in ["makan siang", "siang", "lunch"]):
+            meal_time = "Makan Siang"
+        elif any(w in ql for w in ["makan malam", "malam", "dinner"]):
+            meal_time = "Makan Malam"
+        elif any(w in ql for w in ["camilan", "ngemil", "snack", "sore", "selingan"]):
+            meal_time = "Selingan"
+
         return {
             "items": items,
+            "meal_time": meal_time,
             "sweet_beverage": sweet_bev,
             "total_kalori_known": sum(x["kalori"] for x in items)
         }
