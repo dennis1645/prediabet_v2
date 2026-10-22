@@ -103,81 +103,68 @@ class HybridGraphVectorFusion:
 
         from app.core.neo4j_manager import resolve_food_image
 
-        # Jika pengguna meminta resep / ide makan: SELALU bentuk objek resep hidangan utuh (bukan takaran mentah 100g!)
+        # Jika pengguna meminta resep / ide makan: TELUSURI RAG DOKUMEN RESEP DINAMIS (Anti-Looping)
         if user_wants_recipe and not user_asks_nutrient_only:
-            # Variasi menu Nusantara 3J terverifikasi
-            recipe_catalog = [
-                {
-                    "nama_makanan": "Sayur Bening Bayam Oyong Jagung Manis",
-                    "kalori": 65, "protein": 2.8, "karbohidrat": 12.0, "lemak": 0.4, "gi_val": 25,
-                    "cara_olah": "Rebus kuah bening temu kunci tanpa minyak jelantah"
-                },
-                {
-                    "nama_makanan": "Soto Ayam Kuah Bening Lamongan",
-                    "kalori": 160, "protein": 20.0, "karbohidrat": 8.0, "lemak": 4.0, "gi_val": 32,
-                    "cara_olah": "Rebus kuah rempah kuning tanpa santan"
-                },
-                {
-                    "nama_makanan": "Pepes Ikan Mas Daun Kemangi",
-                    "kalori": 180, "protein": 26.0, "karbohidrat": 2.0, "lemak": 6.5, "gi_val": 0,
-                    "cara_olah": "Kukus bumbu rempah alami berbalut daun pisang"
-                },
-                {
-                    "nama_makanan": "Sup Dada Ayam Bening Wortel Jamur",
-                    "kalori": 145, "protein": 22.0, "karbohidrat": 6.0, "lemak": 2.5, "gi_val": 30,
-                    "cara_olah": "Rebus kuah kaldu rempah bening rendah lemak"
-                },
-                {
-                    "nama_makanan": "Tumis Buncis Tahu Kukus Bumbu Bawang",
-                    "kalori": 120, "protein": 11.0, "karbohidrat": 9.0, "lemak": 3.5, "gi_val": 28,
-                    "cara_olah": "Tumis air tanpa minyak dengan bawang putih dan temu kunci"
+            # 1. Kumpulkan judul resep yang sudah pernah disarankan di sesi ini agar tidak mengulang (Blacklist)
+            already_suggested = []
+            if chat_history:
+                for turn in chat_history:
+                    c_text = (turn.content if hasattr(turn, "content") else turn.get("content", "")).lower()
+                    for r_item in getattr(self.vector, "_recipes_catalog", []):
+                        r_name = r_item["nama_makanan"]
+                        if r_name.lower() in c_text and r_name not in already_suggested:
+                            already_suggested.append(r_name)
+
+            if last_suggested_recipe and last_suggested_recipe.get("nama_makanan"):
+                if last_suggested_recipe["nama_makanan"] not in already_suggested:
+                    already_suggested.append(last_suggested_recipe["nama_makanan"])
+
+            # 2. Cek apakah ini pertanyaan kelanjutan ("ada yang lain?", "selain itu ada ngga?", "ada lagi?")
+            context_theme = ""
+            is_follow_up_recipe = any(k in ql for k in ["selain itu", "yang lain", "ada lagi", "menu lain", "opsi lain", "resep lain", "ada yang lain"])
+            if is_follow_up_recipe and chat_history:
+                for turn in reversed(chat_history):
+                    role = getattr(turn, "role", None) or (turn.get("role") if isinstance(turn, dict) else "")
+                    if role == "user":
+                        u_text = (turn.content if hasattr(turn, "content") else turn.get("content", "")).lower()
+                        if any(w in u_text for w in ["kuah", "berkuah", "hangat", "sop", "sup", "soto", "ikan", "ayam", "sayur", "tumis", "pepes"]):
+                            context_theme = u_text
+                            break
+
+            # 3. Panggil RAG Resep Masakan (Bebas Alergen & Anti-Looping)
+            chosen = self.vector.query_recipes(
+                query=user_query,
+                exclude_titles=already_suggested,
+                user_allergens=allergens,
+                context_theme=context_theme
+            )
+
+            if chosen:
+                dish_name = chosen["nama_makanan"]
+                cal = chosen["kalori"]
+                prot = chosen["protein"]
+                carb = chosen["karbohidrat"]
+                fat = chosen["lemak"]
+                gi_val = chosen["gi_val"]
+                cara = chosen["cara_olah"]
+
+                specific_food = {
+                    "nama_makanan": dish_name,
+                    "nama": dish_name,
+                    "kategori": chosen.get("kategori", "Resep Masakan 3J"),
+                    "kalori": cal,
+                    "protein": prot,
+                    "karbohidrat": carb,
+                    "lemak": fat,
+                    "gi": gi_val,
+                    "gi_category": f"GI Rendah ({gi_val})" if gi_val < 55 else f"GI Sedang ({gi_val})",
+                    "gambar": resolve_food_image(dish_name),
+                    "bahan": chosen.get("bahan", ""),
+                    "langkah": chosen.get("langkah", ""),
+                    "cara_olah": cara,
+                    "alasan_klinis": chosen.get("tips", f"Hidangan bergizi seimbang ramah respon insulin ({cal} kkal, bebas minyak jelantah).")
                 }
-            ]
-
-            # Tentukan hidangan spesifik yang diminta atau direkomendasikan
-            if any(w in ql for w in ["sayur bening", "bayam oyong", "oyong", "gambas"]):
-                chosen = recipe_catalog[0]
-            elif any(w in ql for w in ["soto", "soto ayam"]):
-                chosen = recipe_catalog[1]
-            elif any(w in ql for w in ["pepes", "ikan mas", "pepes ikan"]):
-                chosen = recipe_catalog[2]
-            elif any(w in ql for w in ["sop ayam", "sup ayam", "sop", "sup"]):
-                chosen = recipe_catalog[3]
-            elif any(w in ql for w in ["tahu", "buncis"]):
-                chosen = recipe_catalog[4]
-            elif any(w in ql for w in ["nasi merah", "beras merah"]):
-                chosen = {
-                    "nama_makanan": "Nasi Beras Merah Pulen",
-                    "kalori": 149, "protein": 2.8, "karbohidrat": 32.5, "lemak": 0.4, "gi_val": 47,
-                    "cara_olah": "Kukus aron pulen kaya serat penstabil glukosa"
-                }
-            else:
-                # Rotasi dinamis berdasarkan riwayat turn agar tidak monoton (variasi menu setiap kali ditanya "selain itu?")
-                turn_count = len(chat_history) if chat_history else 0
-                chosen = recipe_catalog[turn_count % len(recipe_catalog)]
-
-            dish_name = chosen["nama_makanan"]
-            cal = chosen["kalori"]
-            prot = chosen["protein"]
-            carb = chosen["karbohidrat"]
-            fat = chosen["lemak"]
-            gi_val = chosen["gi_val"]
-            cara = chosen["cara_olah"]
-
-            specific_food = {
-                "nama_makanan": dish_name,
-                "nama": dish_name,
-                "kategori": "Resep Masakan 3J",
-                "kalori": cal,
-                "protein": prot,
-                "karbohidrat": carb,
-                "lemak": fat,
-                "gi": gi_val,
-                "gi_category": f"GI Rendah ({gi_val})" if gi_val < 55 else f"GI Sedang ({gi_val})",
-                "gambar": resolve_food_image(dish_name),
-                "cara_olah": cara,
-                "alasan_klinis": f"Hidangan bergizi seimbang ramah respon insulin ({cal} kkal, bebas minyak jelantah)."
-            }
+                rag_logger.info("RAG Resep Dinamis Terpilih: '%s' (Kalori: %s, Excluded: %s)", dish_name, cal, already_suggested)
 
         # 4. Penelusuran Semantik Dokumen Panduan Medis
         guideline_texts = []

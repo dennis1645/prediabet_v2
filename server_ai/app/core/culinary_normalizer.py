@@ -291,38 +291,67 @@ class CulinaryNormalizer:
 
         items = []
 
-        # Deteksi protein & lauk
+        # Helper ekstraksi kuantitas cerdas: misal '2 telur', '3 butir telur', '2 potong ayam', '2 piring nasi goreng'
+        def get_qty(food_terms):
+            for ft in food_terms:
+                m = re.search(r'(\d+)\s*(?:butir|potong|piring|buah|mangkok|centong|porsi)?\s*' + re.escape(ft), ql)
+                if m:
+                    try:
+                        v = int(m.group(1))
+                        if 1 <= v <= 10:
+                            return v
+                    except ValueError:
+                        pass
+                for w_num, num_val in [("se", 1), ("satu", 1), ("dua", 2), ("tiga", 3), ("empat", 4), ("sepasang", 2)]:
+                    if re.search(rf'\b{w_num}\s*(?:butir|potong|piring|buah|mangkok|centong|porsi)?\s*{re.escape(ft)}\b', ql):
+                        return num_val
+            return 1
+
+        # 1. Deteksi protein & lauk hewani
         if "ayam goreng" in ql:
-            items.append({"nama": "Ayam Goreng", "kalori": 245, "protein": 18, "karbo": 0, "lemak": 15})
+            q_aym = get_qty(["ayam goreng", "ayam krispi"])
+            items.append({"nama": f"Ayam Goreng ({q_aym} Potong)" if q_aym > 1 else "Ayam Goreng (1 Potong)", "kalori": 245 * q_aym, "protein": 18 * q_aym, "karbo": 0, "lemak": 15 * q_aym})
         elif "dada ayam" in ql or "ayam dada" in ql:
-            items.append({"nama": "Dada Ayam Tanpa Kulit", "kalori": 165, "protein": 31, "karbo": 0, "lemak": 3.6})
+            q_aym = get_qty(["dada ayam", "ayam dada"])
+            items.append({"nama": f"Dada Ayam Tanpa Kulit ({q_aym} Porsi)" if q_aym > 1 else "Dada Ayam Tanpa Kulit", "kalori": 165 * q_aym, "protein": 31 * q_aym, "karbo": 0, "lemak": round(3.6 * q_aym, 1)})
         elif "ayam bakar" in ql:
-            items.append({"nama": "Ayam Bakar", "kalori": 190, "protein": 24, "karbo": 2, "lemak": 8})
+            q_aym = get_qty(["ayam bakar"])
+            items.append({"nama": f"Ayam Bakar ({q_aym} Potong)" if q_aym > 1 else "Ayam Bakar (1 Potong)", "kalori": 190 * q_aym, "protein": 24 * q_aym, "karbo": 2 * q_aym, "lemak": 8 * q_aym})
         elif "ayam" in ql:
-            items.append({"nama": "Ayam", "kalori": 200, "protein": 22, "karbo": 0, "lemak": 10})
+            q_aym = get_qty(["ayam"])
+            items.append({"nama": f"Ayam ({q_aym} Potong)" if q_aym > 1 else "Ayam (1 Potong)", "kalori": 200 * q_aym, "protein": 22 * q_aym, "karbo": 0, "lemak": 10 * q_aym})
 
         if "telur rebus" in ql:
-            items.append({"nama": "Telur Rebus", "kalori": 78, "protein": 6.3, "karbo": 0.6, "lemak": 5.3})
+            q_tlr = get_qty(["telur rebus", "telor rebus"])
+            items.append({"nama": f"Telur Rebus ({q_tlr} Butir)" if q_tlr > 1 else "Telur Rebus (1 Butir)", "kalori": 78 * q_tlr, "protein": round(6.3 * q_tlr, 1), "karbo": round(0.6 * q_tlr, 1), "lemak": round(5.3 * q_tlr, 1)})
         elif "telur dadar" in ql or "telur ceplok" in ql:
-            items.append({"nama": "Telur Dadar", "kalori": 110, "protein": 6.5, "karbo": 0.8, "lemak": 9})
-        elif "telur" in ql:
-            items.append({"nama": "Telur", "kalori": 78, "protein": 6.3, "karbo": 0.6, "lemak": 5.3})
+            q_tlr = get_qty(["telur dadar", "telur ceplok", "telor dadar", "telor ceplok"])
+            items.append({"nama": f"Telur Dadar ({q_tlr} Butir)" if q_tlr > 1 else "Telur Dadar (1 Butir)", "kalori": 110 * q_tlr, "protein": round(6.5 * q_tlr, 1), "karbo": round(0.8 * q_tlr, 1), "lemak": round(9.0 * q_tlr, 1)})
+        elif "telur" in ql or "telor" in ql:
+            q_tlr = get_qty(["telur", "telor"])
+            items.append({"nama": f"Telur ({q_tlr} Butir)" if q_tlr > 1 else "Telur (1 Butir)", "kalori": 78 * q_tlr, "protein": round(6.3 * q_tlr, 1), "karbo": round(0.6 * q_tlr, 1), "lemak": round(5.3 * q_tlr, 1)})
 
-        # Deteksi karbohidrat
-        if "nasi merah" in ql or "beras merah" in ql:
-            items.append({"nama": "Nasi Beras Merah", "kalori": 110, "protein": 2.6, "karbo": 23, "lemak": 0.9})
+        # 2. Deteksi karbohidrat & makanan pokok (Porsi Wajar Piring/Porsi)
+        if "nasi goreng" in ql:
+            q_nasgor = get_qty(["nasi goreng", "nasgor"])
+            items.append({"nama": f"Nasi Goreng ({q_nasgor} Piring)" if q_nasgor > 1 else "Nasi Goreng (1 Piring)", "kalori": 420 * q_nasgor, "protein": 12 * q_nasgor, "karbo": 55 * q_nasgor, "lemak": 15 * q_nasgor})
+        elif "nasi merah" in ql or "beras merah" in ql:
+            q_nsi = get_qty(["nasi merah", "beras merah"])
+            items.append({"nama": f"Nasi Beras Merah ({q_nsi} Porsi)" if q_nsi > 1 else "Nasi Beras Merah", "kalori": 110 * q_nsi, "protein": round(2.6 * q_nsi, 1), "karbo": 23 * q_nsi, "lemak": round(0.9 * q_nsi, 1)})
         elif "nasi uduk" in ql or "nasi lemak" in ql:
-            items.append({"nama": "Nasi Uduk", "kalori": 260, "protein": 5, "karbo": 40, "lemak": 9})
-        elif "nasi goreng" in ql:
-            items.append({"nama": "Nasi Goreng", "kalori": 250, "protein": 6, "karbo": 38, "lemak": 8})
+            q_nsi = get_qty(["nasi uduk", "nasi lemak"])
+            items.append({"nama": f"Nasi Uduk ({q_nsi} Porsi)" if q_nsi > 1 else "Nasi Uduk", "kalori": 260 * q_nsi, "protein": 5 * q_nsi, "karbo": 40 * q_nsi, "lemak": 9 * q_nsi})
         elif "nasi" in ql:
-            items.append({"nama": "Nasi Putih", "kalori": 194, "protein": 4.0, "karbo": 43.0, "lemak": 0.5})
+            q_nsi = get_qty(["nasi putih", "nasi"])
+            items.append({"nama": f"Nasi Putih ({q_nsi} Porsi)" if q_nsi > 1 else "Nasi Putih", "kalori": 194 * q_nsi, "protein": round(4.0 * q_nsi, 1), "karbo": round(43.0 * q_nsi, 1), "lemak": round(0.5 * q_nsi, 1)})
 
-        # Deteksi sayuran & nabati
+        # 3. Deteksi sayuran & nabati
         if "tahu" in ql:
-            items.append({"nama": "Tahu", "kalori": 76, "protein": 8, "karbo": 2, "lemak": 4.8})
+            q_thu = get_qty(["tahu", "tofu"])
+            items.append({"nama": f"Tahu ({q_thu} Potong)" if q_thu > 1 else "Tahu (1 Potong)", "kalori": 40 * q_thu, "protein": round(4.0 * q_thu, 1), "karbo": round(1.0 * q_thu, 1), "lemak": round(2.3 * q_thu, 1)})
         if "tempe" in ql:
-            items.append({"nama": "Tempe", "kalori": 150, "protein": 14, "karbo": 8, "lemak": 7})
+            q_tmp = get_qty(["tempe", "tempeh"])
+            items.append({"nama": f"Tempe ({q_tmp} Potong)" if q_tmp > 1 else "Tempe (1 Potong)", "kalori": 75 * q_tmp, "protein": round(7.0 * q_tmp, 1), "karbo": round(4.0 * q_tmp, 1), "lemak": round(3.5 * q_tmp, 1)})
         if "bayam" in ql or "sayur bening" in ql:
             items.append({"nama": "Sayur Bening Bayam", "kalori": 45, "protein": 2, "karbo": 6, "lemak": 0.5})
         if "sop" in ql or "sayur sop" in ql:

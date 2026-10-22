@@ -254,27 +254,40 @@ def build_vllm_messages(
     # 5. Jika ada bahan makanan spesifik atau permintaan resep terdeteksi
     elif specific_food:
         ql = (user_query or "").lower().strip()
-        is_recipe_request = any(k in ql for k in ["resep", "cara buat", "cara masak", "langkah", "bahan", "bikin", "masak"]) or "resep" in str(specific_food.get("kategori", "")).lower()
+        is_recipe_request = any(k in ql for k in [
+            "resep", "cara buat", "cara masak", "langkah", "bahan", "bikin", "masak",
+            "berkuah", "hangat", "sop", "sup", "soto", "pepes", "tumis",
+            "selain itu", "yang lain", "ada lagi", "menu lain", "opsi lain", "resep lain"
+        ]) or "resep" in str(specific_food.get("kategori", "")).lower()
 
         food_title = specific_food.get("nama_makanan") or specific_food.get("nama") or "Menu Sehat"
+        porsi_label = specific_food.get("porsi_label")
 
         if is_recipe_request:
+            rag_bahan = specific_food.get("bahan") or f"Bahan baku sehat bebas dari {allergen_str}"
+            rag_langkah = specific_food.get("langkah") or f"Kukus/Rebus kuah bening tanpa minyak jelantah"
+            rag_tips = specific_food.get("alasan_klinis") or "Stabilkan respon glukosa postprandial"
+
             current_user_content = (
                 f"Pesan Pasien: \"{user_query}\"\n\n"
-                f"[Data Resep Resmi PrediaBeat]:\n"
+                f"[Data Resep Resmi PrediaBeat dari RAG Knowledge Base]:\n"
                 f"- Nama Hidangan: {food_title}\n"
-                f"- Kalori: ~{specific_food.get('kalori', 120)} kkal\n"
-                f"- Protein: ~{specific_food.get('protein', 10)} gram\n"
-                f"- Karbohidrat: ~{specific_food.get('karbohidrat', 15)} gram\n"
-                f"- Lemak: ~{specific_food.get('lemak', 3)} gram\n"
+                f"- Kategori: {specific_food.get('kategori', 'Resep Masakan 3J')}\n"
+                f"- Kalori: ~{specific_food.get('kalori', 150)} kkal\n"
+                f"- Protein: ~{specific_food.get('protein', 15)} gram\n"
+                f"- Karbohidrat: ~{specific_food.get('karbohidrat', 12)} gram\n"
+                f"- Lemak: ~{specific_food.get('lemak', 4)} gram\n"
                 f"- GI: Rendah (< 55)\n"
+                f"- Bahan Resmi: {rag_bahan}\n"
+                f"- Langkah Memasak Resmi: {rag_langkah}\n"
+                f"- Tips Klinis 3J: {rag_tips}\n"
                 f"- Pantangan Pasien yang DILARANG: {allergen_str}\n\n"
                 f"[Instruksi Respon]:\n"
-                f"- Pasien meminta RESEP hidangan ini ({food_title}).\n"
+                f"- Pasien meminta rekomendasi hidangan/resep ini ({food_title}).\n"
                 f"- Sajikan resep yang lezat dan ramah prediabetes dengan format rapi:\n"
                 f"  1. Judul Menu\n"
                 f"  2. Nilai Gizi (Kalori, Protein, Karbohidrat, Lemak, GI Rendah)\n"
-                f"  3. Bahan Utama (PILIH HANYA BAHAN SEHAT, DILARANG KERAS MENGGUNAKAN {allergen_str})\n"
+                f"  3. Bahan Utama (PILIH HANYA BAHAN SEHAT DARI DATA RESEP, DILARANG KERAS MENGGUNAKAN {allergen_str})\n"
                 f"  4. Langkah Pengolahan (rebus/kukus/tumis kuah bening tanpa minyak jelantah)\n"
                 f"  5. Tips Klinis Stabilitas Gula Darah\n"
                 f"- Pastikan 100% bebas dari pantangan alergi: {allergen_str}."
@@ -286,12 +299,14 @@ def build_vllm_messages(
             prot_val = specific_food.get('protein') if specific_food.get('protein') is not None else specific_food.get('protein_g', 0)
             serat_val = specific_food.get('serat') if specific_food.get('serat') is not None else specific_food.get('serat_g', 0)
 
+            portion_prefix = porsi_label if porsi_label else "100 gram"
+
             if "karbo" in ql:
                 nutrisi_utama = f"kandungan karbohidratnya adalah sekitar {carb_val} gram, dengan energi sekitar {cal_val} kkal dan serat {serat_val} gram"
             elif "lemak" in ql:
                 nutrisi_utama = f"kandungan lemaknya adalah sekitar {fat_val} gram, dengan energi sekitar {cal_val} kkal"
             elif "kalori" in ql:
-                nutrisi_utama = f"total kalorinya adalah sekitar {cal_val} kkal per 100 gram"
+                nutrisi_utama = f"total kalorinya adalah sekitar {cal_val} kkal"
             else:
                 nutrisi_utama = f"kandungan proteinnya adalah sekitar {prot_val} gram, dengan kalori sekitar {cal_val} kkal"
 
@@ -299,7 +314,7 @@ def build_vllm_messages(
                 f"Pesan Pasien: \"{user_query}\"\n\n"
                 f"[Data Gizi Spesifik dari Graf Database Neo4j]:\n"
                 f"- Bahan Makanan: {food_title}\n"
-                f"- Takaran Acuan: 100 gram\n"
+                f"- Takaran Acuan: {portion_prefix}\n"
                 f"- Protein: {prot_val} gram\n"
                 f"- Karbohidrat: {carb_val} gram\n"
                 f"- Lemak: {fat_val} gram\n"
@@ -307,7 +322,7 @@ def build_vllm_messages(
                 f"- Indeks Glikemik (GI): {specific_food.get('gi', 0)}\n\n"
                 f"[Instruksi Respon]:\n"
                 f"- Pasien HANYA menanyakan kandungan nutrisi bahan ini.\n"
-                f"- JAWAB LANGSUNG KANDUNGAN NUTRISINYA: 'Untuk 100 gram {food_title}, {nutrisi_utama}.'\n"
+                f"- JAWAB LANGSUNG KANDUNGAN NUTRISINYA: 'Untuk {portion_prefix} {food_title}, {nutrisi_utama}.'\n"
                 f"- DILARANG KERAS menyodorkan resep masakan panjang atau jadwal makan!\n"
                 f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
             )

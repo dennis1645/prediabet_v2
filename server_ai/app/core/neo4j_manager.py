@@ -456,6 +456,21 @@ class Neo4jClinicalGraphManager:
         q = (query or "").lower().strip()
 
         COMMON_FOOD_ALIASES = {
+            # Hidangan Olahan Populer & Porsi Lengkap (Diprioritaskan sebelum kata tunggal)
+            "nasi goreng spesial": ["Nasi Goreng Spesial (Telur + Ayam)", "Nasi Goreng"],
+            "nasi goreng tuna": ["Nasi Goreng Tuna", "Nasi Goreng"],
+            "nasi goreng shirataki": ["Nasi Goreng Shirataki (Diet)", "Nasi Goreng"],
+            "nasi goreng": ["Nasi Goreng"],
+            "nasgor": ["Nasi Goreng"],
+            "ayam goreng tepung": ["Ayam Goreng"],
+            "ayam goreng": ["Ayam Goreng", "ayam, daging"],
+            "ayam bakar": ["Ayam Bakar", "ayam, daging"],
+            "ayam krispi": ["Ayam Goreng"],
+            "telur dadar": ["Telur Dadar"],
+            "telur ceplok": ["Telur Ceplok", "Telur Dadar"],
+            "telur rebus": ["Telur Rebus", "telur ayam"],
+            "mie goreng": ["Bihun goreng instan", "Mie goreng"],
+            "bihun goreng": ["Bihun goreng instan", "bihun goreng"],
             "dada ayam": ["ayam, dada", "dada ayam"],
             "dada aym": ["ayam, dada", "dada ayam"],
             "aym": ["ayam, dada", "dada ayam"],
@@ -485,7 +500,6 @@ class Neo4jClinicalGraphManager:
             "nsi uduk": ["Nasi Uduk", "Nasi"],
             "nasi lemak": ["Nasi Uduk", "Nasi Putih"],
             "nasi kuning": ["Nasi Kuning"],
-            "nasgor": ["Nasi Goreng"],
             "tahu gejrot": ["Tahu Gejrot", "tahu"],
             "tahu gjrot": ["Tahu Gejrot", "tahu"],
             "bayam": ["bayam, segar", "bayam"],
@@ -549,13 +563,92 @@ class Neo4jClinicalGraphManager:
             lower = str(item_name or "").lower()
             tk = str(target_keyword or "").lower()
             
-            # Prioritas 0: Cocok persis atau bentuk sehat standar (Tahu Kukus, Tahu Rebus, Tahu mentah, Ayam dada tanpa kulit)
+            # Prioritas 0: Cocok persis makanan olahan / bentuk sehat standar
+            if tk in ["nasi goreng", "nasgor"] and "nasi goreng" in lower:
+                return (0, len(lower))
+            if tk in ["ayam goreng"] and "ayam goreng" in lower:
+                return (0, len(lower))
+            if tk in ["ayam bakar"] and "ayam bakar" in lower:
+                return (0, len(lower))
+            if tk in ["telur dadar"] and "telur dadar" in lower:
+                return (0, len(lower))
+
             is_pure_tofu = tk in ["tahu", "tahu putih", "tahu kukus"] and lower in ["tahu kukus", "tahu rebus", "tahu, mentah", "tahu"]
             is_pure_skinless_chicken = "tanpa kulit" in lower
             is_unwanted_derivative = any(bad in lower for bad in ["kembang tahu", "moon", "ampas", "babi", "minyak", "goreng", "jelantah"])
 
             prio = 0 if (is_pure_tofu or is_pure_skinless_chicken) else (9 if is_unwanted_derivative else 1)
             return (prio, len(lower))
+
+        def apply_portion_scaling(matched_item: dict, user_q: str) -> dict:
+            if not matched_item:
+                return matched_item
+
+            item_copy = dict(matched_item)
+            f_name_lower = str(item_copy.get("nama") or "").lower()
+
+            is_piring = any(p in user_q for p in ["piring", "sepiring", "1 piring", "porsi", "seporsi", "1 porsi"])
+            is_potong = any(p in user_q for p in ["potong", "sepotong", "1 potong"])
+            is_butir = any(p in user_q for p in ["butir", "sebutir", "1 butir"])
+
+            qty = 1
+            m_qty = re.search(r'\b(\d+)\s*(?:butir|potong|piring|buah|mangkok|porsi)?\b', user_q)
+            if m_qty:
+                try:
+                    val = int(m_qty.group(1))
+                    if 1 <= val <= 10:
+                        qty = val
+                except ValueError:
+                    pass
+
+            if "nasi goreng" in f_name_lower or "nasgor" in f_name_lower:
+                item_copy["porsi_label"] = f"{qty} Piring Standar (~{qty * 280} gram)" if qty > 1 else "1 Piring Standar (~280 gram)"
+                item_copy["kalori"] = 420 * qty
+                item_copy["protein"] = 12 * qty
+                item_copy["karbohidrat"] = 55 * qty
+                item_copy["lemak"] = 15 * qty
+                item_copy["gi"] = 58
+                item_copy["cara_olah"] = "Digoreng dengan minyak & kecap manis (Batasi porsi & dampingi sayur)"
+                item_copy["alasan_klinis"] = "Nasi goreng diolah dengan minyak dan kecap manis, sehingga 1 piring wajar mengandung sekitar ~420 kkal dengan GI sedang. Disarankan kontrol porsi."
+            elif "telur" in f_name_lower:
+                if "dadar" in f_name_lower or "ceplok" in f_name_lower or "telur dadar" in user_q or "telur ceplok" in user_q:
+                    item_copy["porsi_label"] = f"{qty} Butir Telur Dadar/Ceplok" if qty > 1 else "1 Butir Telur Dadar/Ceplok"
+                    item_copy["kalori"] = 110 * qty
+                    item_copy["protein"] = round(6.5 * qty, 1)
+                    item_copy["karbohidrat"] = round(0.8 * qty, 1)
+                    item_copy["lemak"] = round(9.0 * qty, 1)
+                else:
+                    item_copy["porsi_label"] = f"{qty} Butir Telur Rebus" if qty > 1 else "1 Butir Telur Rebus"
+                    item_copy["kalori"] = 78 * qty
+                    item_copy["protein"] = round(6.3 * qty, 1)
+                    item_copy["karbohidrat"] = round(0.6 * qty, 1)
+                    item_copy["lemak"] = round(5.3 * qty, 1)
+            elif "tempe" in f_name_lower and (is_potong or qty > 1):
+                item_copy["porsi_label"] = f"{qty} Potong Tempe Sedang (~{qty * 50}g)"
+                item_copy["kalori"] = 75 * qty
+                item_copy["protein"] = round(7.0 * qty, 1)
+                item_copy["karbohidrat"] = round(4.0 * qty, 1)
+                item_copy["lemak"] = round(3.5 * qty, 1)
+            elif "tahu" in f_name_lower and (is_potong or qty > 1):
+                item_copy["porsi_label"] = f"{qty} Potong Tahu Kukus (~{qty * 50}g)"
+                item_copy["kalori"] = 40 * qty
+                item_copy["protein"] = round(4.0 * qty, 1)
+                item_copy["karbohidrat"] = round(1.0 * qty, 1)
+                item_copy["lemak"] = round(2.3 * qty, 1)
+            elif "ayam goreng" in f_name_lower or "ayam goreng" in user_q:
+                item_copy["porsi_label"] = f"{qty} Potong Ayam Goreng Sedang" if qty > 1 else "1 Potong Ayam Goreng Sedang"
+                item_copy["kalori"] = 245 * qty
+                item_copy["protein"] = 18 * qty
+                item_copy["karbohidrat"] = 0
+                item_copy["lemak"] = 15 * qty
+            elif "ayam bakar" in f_name_lower or "ayam bakar" in user_q:
+                item_copy["porsi_label"] = f"{qty} Potong Ayam Bakar Sedang" if qty > 1 else "1 Potong Ayam Bakar Sedang"
+                item_copy["kalori"] = 190 * qty
+                item_copy["protein"] = 24 * qty
+                item_copy["karbohidrat"] = 2 * qty
+                item_copy["lemak"] = 8 * qty
+
+            return item_copy
 
         # 1. Coba cari di Neo4j jika aktif
         if self.is_connected():
@@ -584,6 +677,7 @@ class Neo4jClinicalGraphManager:
                                 res.sort(key=lambda x: rank_food_match(x.get("nama") or "", target))
                                 matched = res[0]
                                 matched["gambar"] = resolve_food_image(matched.get("nama") or "")
+                                matched = apply_portion_scaling(matched, q)
                                 neo4j_logger.info("DITEMUKAN di Neo4j: '%s' cocok dengan target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                                 return matched
                             else:
@@ -602,6 +696,7 @@ class Neo4jClinicalGraphManager:
                     matches.sort(key=lambda x: rank_food_match(x.get("nama") or "", target))
                     matched = matches[0]
                     matched["gambar"] = resolve_food_image(matched.get("nama") or "")
+                    matched = apply_portion_scaling(matched, q)
                     neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                     return matched
                 else:
