@@ -71,13 +71,13 @@ export default function Navbar() {
                   <span>Lengkapi Kuesioner Profil Kesehatan</span>
                 </Link>
               ) : (
-                <div className="inline-flex items-center justify-center gap-1.5 bg-slate-50/90 border border-slate-100 rounded-2xl p-1.5 shadow-sm">
+                <div className="inline-flex items-center justify-center gap-1 sm:gap-2">
                   <Link
                     to="/dashboard"
-                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                    className={`inline-flex items-center justify-center gap-2 px-3.5 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-bold transition-all ${
                       currentPath === "/dashboard"
-                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                        ? "bg-slate-900 text-white shadow-xs"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-emerald-700"
                     }`}
                   >
                     <Home className="w-4 h-4" />
@@ -86,10 +86,10 @@ export default function Navbar() {
 
                   <Link
                     to="/menu"
-                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                    className={`inline-flex items-center justify-center gap-2 px-3.5 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-bold transition-all ${
                       currentPath.startsWith("/menu")
-                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                        ? "bg-slate-900 text-white shadow-xs"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-emerald-700"
                     }`}
                   >
                     <Utensils className="w-4 h-4" />
@@ -98,10 +98,10 @@ export default function Navbar() {
 
                   <Link
                     to="/diet"
-                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                    className={`inline-flex items-center justify-center gap-2 px-3.5 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-bold transition-all ${
                       currentPath.startsWith("/diet")
-                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                        ? "bg-slate-900 text-white shadow-xs"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-emerald-700"
                     }`}
                   >
                     <Sprout className="w-4 h-4" />
@@ -110,10 +110,10 @@ export default function Navbar() {
 
                   <Link
                     to="/progress"
-                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs lg:text-sm font-extrabold transition-all ${
+                    className={`inline-flex items-center justify-center gap-2 px-3.5 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-bold transition-all ${
                       currentPath.startsWith("/progress")
-                        ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
-                        : "text-slate-600 hover:bg-emerald-50 hover:text-emerald-700"
+                        ? "bg-slate-900 text-white shadow-xs"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-emerald-700"
                     }`}
                   >
                     <TrendingUp className="w-4 h-4" />

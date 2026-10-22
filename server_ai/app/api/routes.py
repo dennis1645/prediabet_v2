@@ -83,6 +83,55 @@ async def chat_endpoint(request: ChatRequest):
 
     # 1. Pastikan konteks user unik & terisolasi
     user_context = await resolve_user_context(request)
+    display_name = user_context.nama or user_context.username or "Pasien"
+
+    # 1.1. Guardrail Anti-Jailbreak & Bypass
+    if allergen_guardrail.is_jailbreak_attempt(request.message):
+        jailbreak_msg = (
+            f"Mohon maaf, {display_name}! Sebagai Dr. Predi, konsultan nutrisi klinis pribadi Anda di PrediaBeat, "
+            "saya terikat secara ketat pada protokol keselamatan klinis PERKENI & Kemenkes RI. "
+            "Saya tidak diizinkan untuk melanggar batasan sistem ataupun memberikan kode pemrograman/topik non-medis. "
+            "Mari kita kembali fokus pada kesehatan metabolik, menu 3J, atau nutrisi ramah gula darah Anda! 😊"
+        )
+        return ChatResponse(
+            success=True,
+            response=jailbreak_msg,
+            user_id=user_context.userId,
+            safe_foods_recommended=[],
+            guardrail=GuardrailReport(
+                zero_allergen_verified=True,
+                allergens_checked=[],
+                allergens_detected_and_blocked=[],
+                deterministic_graph_used=False,
+                safety_message="Guardrail Anti-Jailbreak Aktif"
+            ),
+            telemetry={"latency_ms": 5, "tokens_per_second": 0, "vllm_connected": False}
+        )
+
+    # 1.2. Guardrail Out-of-Scope (Non-Medis / Non-Nutrisi)
+    is_out, _ = allergen_guardrail.is_out_of_scope(request.message)
+    if is_out:
+        out_msg = (
+            f"Halo {display_name}! Sebagai Dr. Predi, dokter konsultan nutrisi klinis pribadi Anda di PrediaBeat, "
+            "fokus keahlian saya didedikasikan khusus untuk pendampingan pola makan ramah gula darah, takaran gizi 3J, "
+            "dan pencegahan prediabetes/diabetes sesuai panduan klinis PERKENI & Kemenkes RI.\n\n"
+            "Saya tidak dapat menjawab pertanyaan di luar konteks gizi, kesehatan metabolik, atau rekomendasi menu makanan ramah gula darah.\n\n"
+            "Apakah ada pertanyaan seputar kandungan gizi bahan makanan, takaran karbohidrat/protein, atau rekomendasi menu sehat yang ingin dikonsultasikan hari ini? 😊"
+        )
+        return ChatResponse(
+            success=True,
+            response=out_msg,
+            user_id=user_context.userId,
+            safe_foods_recommended=[],
+            guardrail=GuardrailReport(
+                zero_allergen_verified=True,
+                allergens_checked=[],
+                allergens_detected_and_blocked=[],
+                deterministic_graph_used=False,
+                safety_message="Guardrail Out-of-Scope Aktif"
+            ),
+            telemetry={"latency_ms": 5, "tokens_per_second": 0, "vllm_connected": False}
+        )
 
     # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik, typo normalizer, sugar verification, contextual recipe, & MET kalkulator)
     dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(

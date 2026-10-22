@@ -443,26 +443,69 @@ export async function forwardChatToAI(req, res) {
       });
     }
 
-    // 4. Pre-filter Guardrail Pertanyaan di Luar Lingkup Klinis & Gizi (Out-of-Scope Guardrail)
+    // 4. Pre-filter Guardrail Anti-Jailbreak & Bypass
+    const jailbreakPatterns = [
+      /\b(langgar|bypass|jailbreak|paksa|abaikan|hiraukan|override)\b/i,
+      /boleh dong kamu langgar/i,
+      /kamu langgar/i,
+      /bisa kamu langgar/i,
+      /abaikan aturan/i,
+      /abaikan panduan/i,
+      /lupakan instruksi/i,
+      /mode pengembang/i,
+      /developer mode/i
+    ];
+
+    const isJailbreak = jailbreakPatterns.some((jp) => jp.test(lowerMessage));
+    if (isJailbreak) {
+      const jailbreakResponse = 
+        `Mohon maaf, ${displayName}! Sebagai **Dr. Predi**, konsultan nutrisi klinis pribadi Anda di PrediaBeat, saya terikat secara ketat pada protokol keselamatan medis PERKENI & Kemenkes RI.\n\n` +
+        `Saya tidak diizinkan untuk melanggar panduan klinis, mengabaikan batasan sistem, ataupun memberikan kode pemrograman, topik politik, atau hal lain di luar gizi dan kesehatan prediabetes.\n\n` +
+        `Mari kita kembali fokus pada kestabilan glukosa darah, rekomendasi hidangan ramah 3J, atau target nutrisi ${salutation} hari ini! 😊`;
+
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+        userId, sessionId, "user", sanitizedMessage, now
+      );
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+        userId, sessionId, "assistant", jailbreakResponse, JSON.stringify({ guardrail: "Guardrail Anti-Jailbreak Aktif" }), now
+      );
+
+      return res.json({
+        success: true,
+        session_id: sessionId,
+        response: jailbreakResponse,
+        guardrail: { zero_allergen_verified: true, safety_message: "100% Terverifikasi Aman" },
+        telemetry: { latency_ms: 5, vllm_connected: false },
+      });
+    }
+
+    // 4.1. Pre-filter Guardrail Pertanyaan di Luar Lingkup Klinis & Gizi (Out-of-Scope Guardrail)
     const outOfScopePatterns = [
-      /\b(presiden|wakil presiden|menteri|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah)\b/i,
-      /\b(koding|coding|programming|source code|python|javascript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|debugging code|bikin program|script bash)\b/i,
+      /\b(presiden|wakil presiden|wapres|menteri|mentri|menter|kementerian|kemendikbud|mendikbud|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah|pejabat|hukum pidana|pasal kuhp)\b/i,
+      /\b(koding|coding|programming|source code|python|javascript|typescript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|debugging code|bikin program|script bash|buatkan saya code|buatkan kode|tuliskan kode|buat program)\b/i,
       /\b(sepak bola|liga champions|liga inggris|piala dunia|world cup|persib|persija|manchester united|real madrid|barcelona|skor bola|hasil pertandingan)\b/i,
       /\b(film bioskop|aktor|aktris|artis|konser musik|k-pop|anime|manga|mobile legends|free fire|dota|game steam|gosip|selebriti|sinetron)\b/i,
-      /\b(cryptocurrency|crypto|bitcoin|ethereum|trading saham|forex|pinjaman online|pinjol|hukum pidana|pasal kuhp|investasi bodong)\b/i,
+      /\b(cryptocurrency|crypto|bitcoin|ethereum|trading saham|forex|pinjaman online|pinjol|investasi bodong)\b/i,
       /\b(teori relativitas|rumus integral|rumus fisika|kecepatan cahaya|tatasurya|astronomi|dinosaurus)\b/i,
     ];
 
     const healthKeywords = [
       "gula", "glukosa", "darah", "makan", "minum", "menu", "resep", "gizi", "nutrisi",
-      "kalori", "protein", "karbo", "lemak", "serat", "diet", "diabetes", "prediabetes",
-      "hba1c", "gdp", "kolesterol", "tensi", "hipertensi", "berat", "tinggi", "bb", "tb",
-      "obesitas", "olahraga", "alergi", "badan", "sehat", "sakit", "puasa", "3j",
+      "kalori", "protein", "karbo", "karbohidrat", "lemak", "serat", "diet", "diabetes", "prediabetes",
+      "hba1c", "gdp", "kolesterol", "tensi", "hipertensi", "berat badan", "tinggi badan",
+      "obesitas", "olahraga", "alergi", "pantangan", "puasa", "3j",
       "sayur", "buah", "nasi", "lauk", "ikan", "ayam", "daging", "tahu", "tempe", "telur",
+      "oyong", "bayam", "wortel", "brokoli", "pepes", "sup", "soto",
       "siapa saya", "nama saya", "siapa aku", "profil saya", "umur saya", "usia saya"
     ];
 
-    const hasHealthContext = healthKeywords.some((hk) => lowerMessage.includes(hk));
+    // Gunakan word-boundary regex agar kata seperti "ikan" TIDAK cocok di dalam kata "pendidikan"
+    const hasHealthContext = healthKeywords.some((hk) => {
+      const escaped = hk.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const pattern = new RegExp(`\\b${escaped}\\b`, "i");
+      return pattern.test(lowerMessage);
+    });
+
     const isOutOfScope = outOfScopePatterns.some((pat) => pat.test(lowerMessage)) && !hasHealthContext;
 
     if (isOutOfScope) {
@@ -475,14 +518,14 @@ export async function forwardChatToAI(req, res) {
         userId, sessionId, "user", sanitizedMessage, now
       );
       db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
-        userId, sessionId, "assistant", outOfScopeResponse, JSON.stringify({ guardrail: "Scope Guardrail Aktif: Menolak Pertanyaan Non-Medis" }), now
+        userId, sessionId, "assistant", outOfScopeResponse, JSON.stringify({ guardrail: "Menolak Pertanyaan Non-Medis" }), now
       );
 
       return res.json({
         success: true,
         session_id: sessionId,
         response: outOfScopeResponse,
-        guardrail: { zero_allergen_verified: true, safety_message: "100% Terverifikasi Aman (Scope Guardrail Aktif)" },
+        guardrail: { zero_allergen_verified: true, safety_message: "100% Terverifikasi Aman" },
         telemetry: { latency_ms: 6, vllm_connected: false },
       });
     }

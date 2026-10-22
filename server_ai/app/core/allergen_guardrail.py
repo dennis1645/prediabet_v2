@@ -34,10 +34,10 @@ ALLERGEN_SYNONYMS = {
 
 # Pola Pertanyaan di Luar Lingkup Medis & Gizi PrediaBeat (Out-of-Scope Guardrail)
 OUT_OF_SCOPE_PATTERNS = [
-    # Politik & Pemerintahan
-    r"\b(presiden|wakil presiden|menteri|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah)\b",
+    # Politik, Pemerintahan & Tokoh Negara (termasuk variasi/typo menteri/mentri/menter)
+    r"\b(presiden|wakil presiden|wapres|menteri|mentri|menter|kementerian|kemendikbud|mendikbud|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah|pejabat)\b",
     # Koding & Komputer Teknis Non-Medis
-    r"\b(koding|coding|programming|source code|python|javascript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|debugging code|bikin program|script bash)\b",
+    r"\b(koding|coding|programming|source code|python|javascript|typescript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|debugging code|bikin program|script bash|buatkan saya code|buatkan kode|tuliskan kode|buat program)\b",
     # Olahraga Komersial / Sepak Bola
     r"\b(sepak bola|liga champions|liga inggris|piala dunia|world cup|persib|persija|manchester united|real madrid|barcelona|skor bola|hasil pertandingan)\b",
     # Hiburan, Gosip, Film, Game, Anime
@@ -48,13 +48,22 @@ OUT_OF_SCOPE_PATTERNS = [
     r"\b(teori relativitas|rumus integral|rumus fisika|kecepatan cahaya|tatasurya|astronomi|dinosaurus)\b",
 ]
 
+# Pola Percobaan Jailbreak & Pemaksaan Pelanggaran Aturan
+JAILBREAK_PATTERNS = [
+    r"\b(langgar|bypass|jailbreak|paksa|abaikan aturan|abaikan panduan|override rules|lupakan instruksi|mode pengembang|developer mode)\b",
+    r"boleh dong kamu langgar",
+    r"kamu langgar",
+    r"bisa kamu langgar"
+]
+
 # Kata Kunci Konteks Kesehatan / Gizi untuk Mencegah False Positives
 HEALTH_CONTEXT_KEYWORDS = [
     "gula", "glukosa", "darah", "makan", "minum", "menu", "resep", "gizi", "nutrisi",
-    "kalori", "protein", "karbo", "lemak", "serat", "diet", "diabetes", "prediabetes",
+    "kalori", "protein", "karbo", "karbohidrat", "lemak", "serat", "diet", "diabetes", "prediabetes",
     "hba1c", "gdp", "kolesterol", "tensi", "hipertensi", "berat badan", "tinggi badan",
-    "obesitas", "olahraga", "alergi", "badan", "sehat", "sakit", "puasa", "3j",
+    "obesitas", "olahraga", "alergi", "pantangan", "puasa", "3j",
     "sayur", "buah", "nasi", "lauk", "ikan", "ayam", "daging", "tahu", "tempe", "telur",
+    "oyong", "bayam", "wortel", "brokoli", "pepes", "sup", "soto",
     "siapa saya", "nama saya", "siapa aku", "profil saya", "umur saya", "usia saya"
 ]
 
@@ -104,6 +113,15 @@ class ClinicalAllergenGuardrail:
        - Response Inspection (Memastikan resep dan jawaban keluaran LLM 100% bebas dari pantangan alergi).
     """
 
+    def is_jailbreak_attempt(self, query: str) -> bool:
+        """
+        Mendeteksi upaya jailbreak atau memaksa asisten melanggar batasan medis/sistem.
+        """
+        ql = (query or "").lower().strip()
+        if not ql:
+            return False
+        return any(re.search(pat, ql, re.IGNORECASE) for pat in JAILBREAK_PATTERNS)
+
     def is_out_of_scope(self, query: str) -> Tuple[bool, Optional[str]]:
         """
         Mendeteksi apakah pertanyaan berada di luar lingkup keahlian Dr. Predi (nutrisi, prediabetes, gaya hidup sehat).
@@ -112,8 +130,11 @@ class ClinicalAllergenGuardrail:
         if not ql:
             return False, None
 
-        # Cek apakah mengandung kata kunci kesehatan
-        has_health = any(k in ql for k in HEALTH_CONTEXT_KEYWORDS)
+        # Cek apakah mengandung kata kunci kesehatan (dengan regex word-boundary agar "ikan" TIDAK cocok di "pendidikan")
+        has_health = any(
+            re.search(rf"\b{re.escape(k)}\b", ql, re.IGNORECASE)
+            for k in HEALTH_CONTEXT_KEYWORDS
+        )
 
         # Cek apakah cocok dengan pola out-of-scope
         for pat in OUT_OF_SCOPE_PATTERNS:

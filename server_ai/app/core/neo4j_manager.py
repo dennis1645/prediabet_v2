@@ -455,7 +455,9 @@ class Neo4jClinicalGraphManager:
         # 1. PRIORITAS UTAMA: Cari kecocokan frasa makanan langsung di query pasien saat ini!
         search_terms = []
         for alias_key in sorted(COMMON_FOOD_ALIASES.keys(), key=len, reverse=True):
-            if alias_key in q and alias_key not in search_terms:
+            # Gunakan regex word-boundary agar kata seperti "ikan" TIDAK cocok di dalam "pendidikan" atau "bisikan"
+            pattern = rf"\b{re.escape(alias_key)}\b"
+            if re.search(pattern, q, re.IGNORECASE) and alias_key not in search_terms:
                 search_terms.append(alias_key)
 
         # 2. HANYA JIKA TIDAK ADA MAKANAN DI QUERY, baru periksa apakah ini follow-up murni (misal: 'berapa gram?', 'kalau proteinnya?')
@@ -470,7 +472,8 @@ class Neo4jClinicalGraphManager:
                 for turn in reversed(chat_history):
                     text = (turn.content if hasattr(turn, "content") else turn.get("content", "")).lower()
                     for alias_key in sorted(COMMON_FOOD_ALIASES.keys(), key=len, reverse=True):
-                        if alias_key in text:
+                        pattern = rf"\b{re.escape(alias_key)}\b"
+                        if re.search(pattern, text, re.IGNORECASE):
                             search_terms.append(alias_key)
                             break
                     if search_terms:
