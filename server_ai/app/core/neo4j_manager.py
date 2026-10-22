@@ -14,18 +14,26 @@ except ImportError:
 
 
 CURATED_FOOD_IMAGES = {
+    # Ayam & Unggas
     "dada ayam": "/food-images/dada-ayam.jpg",
     "ayam dada": "/food-images/dada-ayam.jpg",
     "ayam goreng": "/food-images/ayam-goreng.jpg",
     "ayam bakar": "/food-images/dada-ayam.jpg",
     "sop ayam": "/food-images/sop-ayam.jpg",
     "sup ayam": "/food-images/sop-ayam.jpg",
+    "soto ayam": "/food-images/soto-ayam.jpg",
+    "bubur ayam": "/food-images/bubur-oatmeal.jpg",
     "ayam": "/food-images/dada-ayam.jpg",
+
+    # Telur
     "telur rebus": "/food-images/telur-rebus.jpg",
     "telur dadar": "/food-images/telur-dadar.jpg",
     "telur ceplok": "/food-images/telur-dadar.jpg",
+    "omelet": "/food-images/omelet.jpg",
     "telur ayam": "/food-images/telur-rebus.jpg",
     "telur": "/food-images/telur-rebus.jpg",
+
+    # Nasi & Karbohidrat Kompleks
     "nasi goreng": "/food-images/nasi-goreng.jpg",
     "nasi merah": "/food-images/nasi-merah.jpg",
     "beras merah": "/food-images/nasi-merah.jpg",
@@ -34,31 +42,64 @@ CURATED_FOOD_IMAGES = {
     "nasi uduk": "/food-images/nasi-putih.jpg",
     "nasi lemak": "/food-images/nasi-putih.jpg",
     "nasi kuning": "/food-images/nasi-putih.jpg",
+    "roti gandum": "/food-images/roti-gandum.jpg",
+    "oatmeal": "/food-images/oatmeal.jpg",
+    "havermut": "/food-images/oatmeal.jpg",
+    "bubur oatmeal": "/food-images/bubur-oatmeal.jpg",
+    "kentang rebus": "/food-images/kentang-rebus.jpg",
+    "kentang": "/food-images/kentang-rebus.jpg",
+    "jagung rebus": "/food-images/jagung-rebus.jpg",
+    "jagung": "/food-images/jagung-rebus.jpg",
+    "ubi rebus": "/food-images/ubi-rebus.jpg",
+    "ubi jalar": "/food-images/ubi-rebus.jpg",
+    "ubi": "/food-images/ubi-rebus.jpg",
+
+    # Ikan & Lauk Air
     "pepes ikan": "/food-images/pepes-ikan.jpg",
     "ikan bakar": "/food-images/ikan-bakar.jpg",
+    "ikan kembung": "/food-images/ikan-kembung.jpg",
     "ikan mas": "/food-images/pepes-ikan.jpg",
     "ikan": "/food-images/pepes-ikan.jpg",
+
+    # Nabati
     "tahu": "/food-images/tahu.jpg",
     "tahu putih": "/food-images/tahu.jpg",
+    "tahu gejrot": "/food-images/tahu.jpg",
     "tempe": "/food-images/tempe.jpg",
     "tempe bacem": "/food-images/tempe.jpg",
+
+    # Sayuran
     "sayur bayam": "/food-images/sayur-bayam.jpg",
     "bayam": "/food-images/sayur-bayam.jpg",
     "sayur bening": "/food-images/sayur-bening.jpg",
     "oyong": "/food-images/sayur-bening.jpg",
     "gambas": "/food-images/sayur-bening.jpg",
+    "buncis": "/food-images/buncis-wortel.jpg",
+    "wortel": "/food-images/buncis-wortel.jpg",
+    "capcay": "/food-images/capcay.jpg",
     "gado-gado": "/food-images/gado-gado.jpg",
     "gado gado": "/food-images/gado-gado.jpg",
+    "pecel": "/food-images/gado-gado.jpg",
+    "salad": "/food-images/salad-sayur.jpg",
+    "salad sayur": "/food-images/salad-sayur.jpg",
+
+    # Buah-buahan
+    "apel": "/food-images/buah-apel.jpg",
+    "pepaya": "/food-images/buah-pepaya.jpg",
+    "pir": "/food-images/buah-pir.jpg",
+    "alpukat": "/food-images/alpukat.jpg",
+    "pisang": "/food-images/pisang.jpg",
+    "jus": "/food-images/jus-buah.jpg",
+    "jus buah": "/food-images/jus-buah.jpg",
+
+    # Minuman & Camilan
     "es teh": "/food-images/es-teh.jpg",
     "es teh manis": "/food-images/es-teh.jpg",
     "teh manis": "/food-images/es-teh.jpg",
-    "apel": "/food-images/buah-apel.jpg",
-    "pepaya": "/food-images/buah-pepaya.jpg",
-    "oatmeal": "/food-images/oatmeal.jpg",
-    "havermut": "/food-images/oatmeal.jpg",
-    "kentang": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&auto=format&fit=crop",
-    "wortel": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop",
-    "buncis": "https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?w=600&auto=format&fit=crop",
+    "kopi": "/food-images/kopi.jpg",
+    "kopi susu": "/food-images/kopi.jpg",
+    "almond": "/food-images/almond.jpg",
+    "kacang almond": "/food-images/almond.jpg",
 }
 
 def resolve_food_image(food_name: str) -> str:
