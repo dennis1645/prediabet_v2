@@ -48,12 +48,31 @@ OUT_OF_SCOPE_PATTERNS = [
     r"\b(teori relativitas|rumus integral|rumus fisika|kecepatan cahaya|tatasurya|astronomi|dinosaurus)\b",
 ]
 
-# Pola Percobaan Jailbreak & Pemaksaan Pelanggaran Aturan
+# Pola Percobaan Jailbreak & Pemaksaan Pelanggaran Aturan (Multi-Vector Attack Prevention)
 JAILBREAK_PATTERNS = [
-    r"\b(langgar|bypass|jailbreak|paksa|abaikan aturan|abaikan panduan|override rules|lupakan instruksi|mode pengembang|developer mode)\b",
+    r"\b(langgar|bypass|jailbreak|paksa|abaikan aturan|abaikan panduan|abaikan sistem|abaikan prompt|override rules|lupakan instruksi|lupakan batasan|mode pengembang|developer mode)\b",
+    r"\b(sekarang kamu bukan|kamu bukan lagi dokter|berperanlah sebagai|bertindaklah sebagai|pretend to be|act as|dan jawab saja|abaikan semua aturan)\b",
+    r"\b(tetap (buatkan|tuliskan|jawab|buat|tulis)|tetep (buatkan|tuliskan|jawab|buat|tulis)|buat aja|jawab aja|jangan menolak|jangan nolak|jangan sok suci)\b",
     r"boleh dong kamu langgar",
     r"kamu langgar",
-    r"bisa kamu langgar"
+    r"bisa kamu langgar",
+    r"langgar aja",
+    r"langgar dong"
+]
+
+# Pola Pancingan Koding & Teknis yang Sering Digunakan Pasien untuk Bypass
+CODE_REQUEST_PATTERNS = [
+    r"\b(buatkan kode|buatkan script|buatkan fungsi|tuliskan kode|tulis kode|bikin kode|bikin program|buatkan program|source code)\b",
+    r"\b(bahasa python|bahasa javascript|bahasa c\+\+|bahasa java|bahasa go|bahasa php|bahasa sql)\b",
+    r"\b(def\s+[a-zA-Z_]|function\s+[a-zA-Z_]|console\.log|print\(|import\s+[a-zA-Z_])\b",
+    r"apakah n\s*=\s*1",
+    r"n\s*==\s*1"
+]
+
+# Pola Pembujukan Lanjutan Setelah Permintaan Sebelumnya Ditolak
+COERCION_FOLLOWUP_PATTERNS = [
+    r"\b(ayolah|plis|tolonglah|tolong dong|kenapa tidak bisa|kenapa gak bisa|kenapa ngga bisa|kenapa pelit|kan cuma|kan gampang|sekali aja|cuma nanya)\b",
+    r"\b(bisa dong|boleh ya|boleh dong|ayolah dok|ayolah predi|buatkan dong|jawab dong)\b"
 ]
 
 # Kata Kunci Konteks Kesehatan / Gizi untuk Mencegah False Positives
@@ -113,14 +132,76 @@ class ClinicalAllergenGuardrail:
        - Response Inspection (Memastikan resep dan jawaban keluaran LLM 100% bebas dari pantangan alergi).
     """
 
-    def is_jailbreak_attempt(self, query: str) -> bool:
+    def is_jailbreak_attempt(self, query: str, chat_history: Optional[List[Any]] = None) -> bool:
         """
         Mendeteksi upaya jailbreak atau memaksa asisten melanggar batasan medis/sistem.
+        Juga mendeteksi pembujukan lanjutan (continuation coercion) setelah permintaan sebelumnya ditolak.
         """
         ql = (query or "").lower().strip()
         if not ql:
             return False
-        return any(re.search(pat, ql, re.IGNORECASE) for pat in JAILBREAK_PATTERNS)
+
+        # 1. Cek pola jailbreak eksplisit
+        if any(re.search(pat, ql, re.IGNORECASE) for pat in JAILBREAK_PATTERNS):
+            return True
+
+        # 2. Cek permintaan koding eksplisit
+        if any(re.search(pat, ql, re.IGNORECASE) for pat in CODE_REQUEST_PATTERNS):
+            return True
+
+        # 3. Cek pembujukan lanjutan jika pesan assistant sebelumnya adalah penolakan
+        if chat_history and len(chat_history) > 0:
+            last_turn = chat_history[-1]
+            last_content = (last_turn.content if hasattr(last_turn, "content") else last_turn.get("content", "")).lower()
+            refusal_signals = [
+                "tidak dapat menjawab pertanyaan di luar",
+                "protokol keselamatan",
+                "terikat secara ketat",
+                "fokus keahlian saya didedikasikan khusus",
+                "tidak diizinkan untuk melanggar"
+            ]
+            was_refused = any(sig in last_content for sig in refusal_signals)
+            if was_refused:
+                # Periksa apakah pesan baru pengguna adalah bujukan / paksaan
+                has_coercion = any(re.search(pat, ql, re.IGNORECASE) for pat in COERCION_FOLLOWUP_PATTERNS)
+                has_health = any(re.search(rf"\b{re.escape(k)}\b", ql, re.IGNORECASE) for k in HEALTH_CONTEXT_KEYWORDS)
+                if has_coercion and not has_health:
+                    return True
+
+        return False
+
+    def inspect_and_sanitize_output(self, raw_text: str, patient_name: str = "Bapak/Ibu") -> str:
+        """
+        Post-Flight Output Verifier (Rule-Based):
+        Mendeteksi apakah LLM secara keliru mematuhi jailbreak dan menghasilkan blok kode (Python/JS/SQL dsb.).
+        Jika terdeteksi kode, otomatis gantikan teks dengan penolakan klinis standar sebelum sampai ke pengguna!
+        """
+        if not raw_text:
+            return raw_text
+
+        code_signatures = [
+            r"```[a-zA-Z]*",
+            r"\bdef\s+[a-zA-Z0-9_]+\s*\(",
+            r"\bfunction\s+[a-zA-Z0-9_]+\s*\(",
+            r"\bconsole\.log\(",
+            r"\bprint\(",
+            r"\bimport\s+[a-zA-Z0-9_]+",
+            r"\bfrom\s+[a-zA-Z0-9_]+\s+import",
+            r"return\s+[\"']n\s+adalah",
+            r"\bif\s+n\s*==\s*1\s*:"
+        ]
+
+        has_code = any(re.search(pat, raw_text, re.IGNORECASE) for pat in code_signatures)
+        if has_code:
+            print(f"[AllergenGuardrail] [ALERT] Output LLM dicegat karena mengandung kode pemrograman!")
+            return (
+                f"Mohon maaf, {patient_name}. Sebagai dokter spesialis nutrisi klinis Dr. Predi di PrediaBeat, "
+                "saya tidak diizinkan untuk menyajikan kode pemrograman atau instruksi komputasi teknis. "
+                "Fokus pendampingan saya adalah pola makan 3J, takaran gizi bahan pangan, dan kestabilan metabolik Anda. "
+                "Adakah menu sehat atau informasi nutrisi yang ingin Anda konsultasikan hari ini? 😊"
+            )
+
+        return raw_text
 
     def is_out_of_scope(self, query: str) -> Tuple[bool, Optional[str]]:
         """

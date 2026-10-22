@@ -125,6 +125,10 @@ class VLLMInferenceClient:
             raw_text, user_allergens
         )
 
+        # Post-Generation Output Verifier (Rule-Based intercept for code / jailbreak leaks)
+        patient_name = getattr(user_context, "nama", None) or getattr(user_context, "username", "Bapak/Ibu")
+        sanitized_text = allergen_guardrail.inspect_and_sanitize_output(sanitized_text, patient_name)
+
         telemetry = {
             "latency_ms": round(elapsed * 1000, 1),
             "tokens_generated": total_tokens,

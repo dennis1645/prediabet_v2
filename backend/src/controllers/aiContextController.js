@@ -443,12 +443,16 @@ export async function forwardChatToAI(req, res) {
       });
     }
 
-    // 4. Pre-filter Guardrail Anti-Jailbreak & Bypass
+    // 4. Pre-filter Guardrail Anti-Jailbreak & Bypass (Rule-Based & Regex)
     const jailbreakPatterns = [
       /\b(langgar|bypass|jailbreak|paksa|abaikan|hiraukan|override)\b/i,
+      /\b(sekarang kamu bukan|kamu bukan lagi dokter|berperanlah sebagai|bertindaklah sebagai|pretend to be|act as|dan jawab saja|abaikan semua aturan)\b/i,
+      /\b(tetap (buatkan|tuliskan|jawab|buat|tulis)|tetep (buatkan|tuliskan|jawab|buat|tulis)|buat aja|jawab aja|jangan menolak|jangan nolak|jangan sok suci)\b/i,
       /boleh dong kamu langgar/i,
       /kamu langgar/i,
       /bisa kamu langgar/i,
+      /langgar aja/i,
+      /langgar dong/i,
       /abaikan aturan/i,
       /abaikan panduan/i,
       /lupakan instruksi/i,
@@ -456,7 +460,29 @@ export async function forwardChatToAI(req, res) {
       /developer mode/i
     ];
 
-    const isJailbreak = jailbreakPatterns.some((jp) => jp.test(lowerMessage));
+    // Deteksi pembujukan lanjutan (follow-up coercion) jika interaksi sebelumnya adalah penolakan guardrail
+    let isFollowupCoercion = false;
+    if (chatHistory && chatHistory.length > 0) {
+      const lastTurn = chatHistory[chatHistory.length - 1];
+      const lastContent = (lastTurn.content || "").toLowerCase();
+      const refusalSignals = [
+        "tidak dapat menjawab pertanyaan di luar",
+        "protokol keselamatan",
+        "terikat secara ketat",
+        "fokus keahlian saya didedikasikan khusus",
+        "tidak diizinkan untuk melanggar"
+      ];
+      const wasRefused = refusalSignals.some((sig) => lastContent.includes(sig));
+      if (wasRefused) {
+        const coercionKeywords = [
+          /\b(ayolah|plis|tolonglah|tolong dong|kenapa tidak bisa|kenapa gak bisa|kenapa ngga bisa|kenapa pelit|kan cuma|kan gampang|sekali aja|cuma nanya)\b/i,
+          /\b(bisa dong|boleh ya|boleh dong|ayolah dok|ayolah predi|buatkan dong|jawab dong)\b/i
+        ];
+        isFollowupCoercion = coercionKeywords.some((p) => p.test(lowerMessage));
+      }
+    }
+
+    const isJailbreak = jailbreakPatterns.some((jp) => jp.test(lowerMessage)) || isFollowupCoercion;
     if (isJailbreak) {
       const jailbreakResponse = 
         `Mohon maaf, ${displayName}! Sebagai **Dr. Predi**, konsultan nutrisi klinis pribadi Anda di PrediaBeat, saya terikat secara ketat pada protokol keselamatan medis PERKENI & Kemenkes RI.\n\n` +
@@ -667,6 +693,26 @@ export async function forwardChatToAI(req, res) {
         guardrail: { zero_allergen_verified: true, safety_message: "100% Bebas Alergen" },
         telemetry: { latency_ms: 15, vllm_connected: false },
       };
+    }
+
+    // Post-Flight Output Guardrail (Rule-Based intercept jika output AI membocorkan kode pemrograman)
+    if (aiData && aiData.response) {
+      const codeSignatures = [
+        /```[a-z]*/i,
+        /\bdef\s+[a-zA-Z0-9_]+\s*\(/i,
+        /\bfunction\s+[a-zA-Z0-9_]+\s*\(/i,
+        /\bconsole\.log\(/i,
+        /\bprint\(/i,
+        /\bimport\s+[a-zA-Z0-9_]+/i,
+        /return\s+["']n\s+adalah/i
+      ];
+      const hasCodeOutput = codeSignatures.some((sig) => sig.test(aiData.response));
+      if (hasCodeOutput) {
+        aiData.response = 
+          `Mohon maaf, ${displayName}! Sebagai **Dr. Predi**, dokter konsultan nutrisi klinis pribadi Anda di PrediaBeat, ` +
+          `saya tidak diperkenankan memberikan kode pemrograman atau instruksi komputasi teknis di luar bidang kesehatan dan gizi prediabetes.\n\n` +
+          `Adakah pertanyaan seputar pola makan 3J atau gizi ramah glukosa yang bisa saya bantu hari ini? 😊`;
+      }
     }
 
     aiData.session_id = sessionId;

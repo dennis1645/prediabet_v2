@@ -85,8 +85,8 @@ async def chat_endpoint(request: ChatRequest):
     user_context = await resolve_user_context(request)
     display_name = user_context.nama or user_context.username or "Pasien"
 
-    # 1.1. Guardrail Anti-Jailbreak & Bypass
-    if allergen_guardrail.is_jailbreak_attempt(request.message):
+    # 1.1. Guardrail Anti-Jailbreak & Bypass (Mendeteksi teks manipulasi langsung maupun pembujukan lanjutan)
+    if allergen_guardrail.is_jailbreak_attempt(request.message, request.chat_history or []):
         jailbreak_msg = (
             f"Mohon maaf, {display_name}! Sebagai Dr. Predi, konsultan nutrisi klinis pribadi Anda di PrediaBeat, "
             "saya terikat secara ketat pada protokol keselamatan klinis PERKENI & Kemenkes RI. "
