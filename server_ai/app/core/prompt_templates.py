@@ -251,34 +251,54 @@ def build_vllm_messages(
             f"[Instruksi Khusus]:\n"
             f"{resp_instruction}"
         )
-    # 5. Jika ada bahan makanan spesifik atau permintaan resep terdeteksi
+    # 5. Jika ada bahan makanan spesifik atau rekomendasi menu / resep terdeteksi
     elif specific_food:
         ql = (user_query or "").lower().strip()
         is_multi_menu_request = any(k in ql for k in ["3 menu", "tiga menu", "2 menu", "dua menu", "beberapa menu", "pilihan menu", "opsi menu"])
-        is_recipe_request = any(k in ql for k in [
-            "resep", "cara buat", "cara masak", "langkah", "bahan", "bikin", "masak",
+        
+        # ATURAN EMAS: Resep HANYA diberikan jika user secara EKSPLISIT meminta cara masak / langkah / bumbu
+        is_explicit_recipe_request = any(k in ql for k in [
+            "resep", "cara buat", "cara masak", "langkah", "langkah-langkah", "langkah masak",
+            "bikinnya gimana", "gimana masaknya", "gimana cara buatnya", "bagaimana cara membuatnya",
+            "bahan-bahannya", "bumbu", "resepnya dong", "minta resep", "mana resepnya", "resep lengkap"
+        ])
+        
+        is_menu_suggestion = any(k in ql for k in [
             "berkuah", "hangat", "sop", "sup", "soto", "pepes", "tumis",
             "selain itu", "yang lain", "ada lagi", "menu lain", "opsi lain", "resep lain",
-            "basis", "bahan dasar", "olahan", "enak nya dimasak apa", "dimasak apa"
+            "basis", "bahan dasar", "olahan", "enak nya dimasak apa", "dimasak apa", "enaknya dimasak apa",
+            "saran", "sarankan", "saranin", "rekomendasi", "ide makan", "pengen makan", "ingin makan"
         ]) or "resep" in str(specific_food.get("kategori", "")).lower()
 
         food_title = specific_food.get("nama_makanan") or specific_food.get("nama") or "Menu Sehat"
         porsi_label = specific_food.get("porsi_label")
 
         if is_multi_menu_request:
+            multi_items = specific_food.get("multi_menu_candidates") or []
+            multi_desc = ""
+            if multi_items:
+                multi_desc = "\n".join([
+                    f"- Pilihan {idx+1}: **{item.get('nama_makanan')}** (~{item.get('kalori', 150)} kkal, Protein ~{item.get('protein', 15)}g, Karbo ~{item.get('karbohidrat', 10)}g, Lemak ~{item.get('lemak', 4)}g) - {item.get('tips', 'Sehat & ramah gula darah')}."
+                    for idx, item in enumerate(multi_items[:3])
+                ])
+            else:
+                multi_desc = (
+                    f"1. **{food_title}** (~{specific_food.get('kalori', 160)} kkal) - Olahan kuah bening rempah kaya serat.\n"
+                    f"2. **Sayur Bening Bayam Oyong Jagung** (~65 kkal) - Kaya magnesium memperlambat absorbsi gula.\n"
+                    f"3. **Pepes Tahu Jamur Kemangi** (~115 kkal) - Protein nabati kukus daun pisang tanpa minyak."
+                )
+
             current_user_content = (
                 f"Pesan Pasien: \"{user_query}\"\n\n"
-                f"[Instruksi Respon Rekomendasi Multi-Menu 3J]:\n"
+                f"[Daftar Pilihan Menu Ramah 3J dari RAG]:\n"
+                f"{multi_desc}\n\n"
+                f"[Instruksi Respon Multi-Menu]:\n"
                 f"- Pasien meminta rekomendasi beberapa menu ({user_query}).\n"
-                f"- Sajikan 3 pilihan hidangan Nusantara ramah glukosa & 3J secara RINGKAS, RAPI, dan LENGKAP.\n"
-                f"- Format per menu:\n"
-                f"  1. Nama Menu Hidangan\n"
-                f"  2. Estimasi Nilai Gizi Singkat (Kalori, Protein, Karbo, Lemak)\n"
-                f"  3. Gambaran Bahan & Keunggulan Klinis (1-2 kalimat)\n"
-                f"- DILARANG MENULIS LANGKAH MEMASAK PANJANG UNTUK SEMUA MENU AGAR JAWABAN TIDAK TERPOTONG!\n"
-                f"- Di akhir kalimat, tanyakan ramah: 'Dari 3 menu di atas, mana yang ingin Bapak/Ibu ketahui resep lengkapnya atau dicatat ke tracker hari ini?'"
+                f"- Tampilkan 3 nama menu di atas beserta estimasi kalori dan 1 kalimat manfaat klinisnya secara RINGKAS.\n"
+                f"- DILARANG KERAS MENULIS LANGKAH MEMASAK, CARA PENGOLAHAN, ATAU DAFTAR BUMBU LENGKAP KARENA PASIEN BELUM MEMINTA RESEP!\n"
+                f"- Di akhir jawaban, tanyakan dengan ramah: 'Dari ketiga menu di atas, apakah ada yang ingin Bapak/Ibu ketahui resep lengkapnya atau ingin dicatat ke menu hari ini?'"
             )
-        elif is_recipe_request:
+        elif is_explicit_recipe_request:
             rag_bahan = specific_food.get("bahan") or f"Bahan baku sehat bebas dari {allergen_str}"
             rag_langkah = specific_food.get("langkah") or f"Kukus/Rebus kuah bening tanpa minyak jelantah"
             rag_tips = specific_food.get("alasan_klinis") or "Stabilkan respon glukosa postprandial"
@@ -297,15 +317,34 @@ def build_vllm_messages(
                 f"- Langkah Memasak Resmi: {rag_langkah}\n"
                 f"- Tips Klinis 3J: {rag_tips}\n"
                 f"- Pantangan Pasien yang DILARANG: {allergen_str}\n\n"
-                f"[Instruksi Respon]:\n"
-                f"- Pasien meminta rekomendasi hidangan/resep ini ({food_title}).\n"
-                f"- Sajikan resep yang lezat dan ramah prediabetes dengan format rapi:\n"
+                f"[Instruksi Respon Resep Lengkap]:\n"
+                f"- Pasien secara EKSPLISIT meminta resep/cara masak hidangan ini ({food_title}).\n"
+                f"- Sajikan resep lengkap dan ramah prediabetes dengan format rapi:\n"
                 f"  1. Judul Menu\n"
                 f"  2. Nilai Gizi (Kalori, Protein, Karbohidrat, Lemak, GI Rendah)\n"
                 f"  3. Bahan Utama (PILIH HANYA BAHAN SEHAT DARI DATA RESEP, DILARANG KERAS MENGGUNAKAN {allergen_str})\n"
                 f"  4. Langkah Pengolahan (rebus/kukus/tumis kuah bening tanpa minyak jelantah)\n"
                 f"  5. Tips Klinis Stabilitas Gula Darah\n"
                 f"- Pastikan 100% bebas dari pantangan alergi: {allergen_str}."
+            )
+        elif is_menu_suggestion:
+            cal_val = specific_food.get('kalori', 150)
+            prot_val = specific_food.get('protein', 15)
+            carb_val = specific_food.get('karbohidrat', 10)
+            fat_val = specific_food.get('lemak', 4)
+            clinical_tips = specific_food.get('alasan_klinis') or "Kaya serat dan protein seimbang, menjaga kurva glukosa tetap stabil."
+
+            current_user_content = (
+                f"Pesan Pasien: \"{user_query}\"\n\n"
+                f"[Rekomendasi Menu Ramah 3J]:\n"
+                f"- Nama Hidangan Rekomendasi: {food_title}\n"
+                f"- Estimasi Kalori: ~{cal_val} kkal | Protein: ~{prot_val}g | Karbo: ~{carb_val}g | Lemak: ~{fat_val}g\n"
+                f"- Keunggulan Klinis: {clinical_tips}\n\n"
+                f"[Instruksi Respon Saran Menu (INGAT ATURAN EMAS)]: \n"
+                f"- Pasien HANYA meminta ide atau saran menu hidangan ({user_query}), PASIEN TIDAK / BELUM MEMINTA RESEP!\n"
+                f"- DILARANG KERAS MENYODORKAN LANGKAH MEMASAK, DAFTAR BUMBU LENGKAP, ATAU CARA MEMBUAT!\n"
+                f"- Sajikan nama hidangan yang direkomendasikan ({food_title}), sebutkan ringkasan kalorinya (~{cal_val} kkal), dan jelaskan 1-2 kalimat keunggulan kesehatannya.\n"
+                f"- Di akhir kalimat, tanyakan dengan ramah apakah pasien ingin dibuatkan langkah resep lengkapnya: 'Apakah Bapak/Ibu ingin saya bagikan resep dan cara membuatnya?'"
             )
         else:
             carb_val = specific_food.get('karbohidrat') if specific_food.get('karbohidrat') is not None else specific_food.get('karbo', 0)
@@ -344,7 +383,12 @@ def build_vllm_messages(
     # 6. Pesan konsultasi mengalir umum
     else:
         ql = (user_query or "").lower().strip()
-        user_explicitly_wants_recipe = any(k in ql for k in ["resep", "saran menu", "ide makan", "rekomendasi makan", "mau makan apa", "makan siang apa", "sarapan apa", "berkuah & hangat", "makan malam apa"])
+        user_explicitly_wants_full_recipe = any(k in ql for k in [
+            "resep", "cara buat", "cara masak", "langkah", "langkah masak", "bumbu", "cara bikin", "gimana masaknya"
+        ])
+        user_wants_menu_idea = any(k in ql for k in [
+            "saran menu", "ide makan", "rekomendasi makan", "mau makan apa", "makan siang apa", "sarapan apa", "berkuah & hangat", "makan malam apa"
+        ])
 
         greeting_instruction = (
             f"- Percakapan sedang berlangsung. DILARANG mengulang salam seperti 'Halo {patient_name}' di awal kalimat. Langsung jawab inti pertanyaan pasien.\n"
@@ -352,12 +396,19 @@ def build_vllm_messages(
             f"- Sapa dengan hormat menggunakan panggilan '{patient_name}'.\n"
         )
 
-        if user_explicitly_wants_recipe:
+        if user_explicitly_wants_full_recipe:
             recipe_guidance = (
-                f"- Pasien meminta rekomendasi hidangan/resep.\n"
+                f"- Pasien secara eksplisit meminta resep masakan.\n"
                 f"- Sajikan 1 resep masakan Nusantara ramah 3J (misal Sayur Bening Bayam Oyong atau Pepes Ikan Mas Daun Kemangi).\n"
                 f"- Format: Judul, Nilai Gizi Singkat, Bahan, Langkah Pengolahan, dan Tips Klinis.\n"
                 f"- DILARANG KERAS MENGGUNAKAN BAHAN PANTANGAN PASIEN ({allergen_str})!\n"
+            )
+        elif user_wants_menu_idea:
+            recipe_guidance = (
+                f"- Pasien menanyakan ide/saran makanan. Pasien TIDAK meminta resep lengkap.\n"
+                f"- Sebutkan 1-2 nama hidangan ramah glukosa yang cocok (misal Sayur Bening Bayam Oyong atau Soto Ayam Kuah Bening) beserta estimasi kalori dan 1 kalimat alasan kesehatannya.\n"
+                f"- DILARANG KERAS MENULIS LANGKAH MEMASAK ATAU DAFTAR BUMBU LENGKAP KARENA PASIEN BELUM MEMINTA RESEP!\n"
+                f"- Di akhir respon, tanyakan: 'Apakah ingin saya buatkan resep lengkap untuk salah satu hidangan tersebut?'\n"
             )
         elif any(k in ql for k in ["user lain", "pasien lain", "orang lain", "data orang"]):
             recipe_guidance = (

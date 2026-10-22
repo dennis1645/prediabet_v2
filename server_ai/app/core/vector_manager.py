@@ -277,4 +277,49 @@ class ClinicalVectorStoreManager:
         candidates.sort(key=lambda x: x[0], reverse=True)
         return dict(candidates[0][1])
 
+    def get_multi_recipe_candidates(
+        self,
+        query: str,
+        limit: int = 3,
+        exclude_titles: Optional[List[str]] = None,
+        user_allergens: Optional[List[str]] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Mengambil beberapa kandidat hidangan/resep yang berbeda dan bebas alergen untuk permintaan multi-menu.
+        """
+        excluded = [t.lower().strip() for t in (exclude_titles or []) if t]
+        allergens = [a.lower().strip() for a in (user_allergens or []) if a]
+        full_query = (query or "").lower()
+
+        candidates = []
+        for r in self._recipes_catalog:
+            title_lower = r["nama_makanan"].lower()
+            if any(ex in title_lower or title_lower in ex for ex in excluded):
+                continue
+            r_text = f"{r['nama_makanan']} {r.get('bahan', '')} {r.get('keywords', [])}".lower()
+            if any(alg in r_text for alg in allergens):
+                continue
+
+            score = 0
+            for kw in r.get("keywords", []):
+                if kw in full_query:
+                    score += 5
+            candidates.append((score, r))
+
+        candidates.sort(key=lambda x: x[0], reverse=True)
+        chosen = [dict(c[1]) for c in candidates[:limit]]
+
+        # Fallback jika kurang dari limit: ambil sisa dari catalog yang bebas alergen
+        if len(chosen) < limit:
+            for r in self._recipes_catalog:
+                if len(chosen) >= limit:
+                    break
+                if any(c["nama_makanan"] == r["nama_makanan"] for c in chosen):
+                    continue
+                r_text = f"{r['nama_makanan']} {r.get('bahan', '')}".lower()
+                if not any(alg in r_text for alg in allergens):
+                    chosen.append(dict(r))
+
+        return chosen
+
 vector_manager = ClinicalVectorStoreManager()

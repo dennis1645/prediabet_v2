@@ -168,6 +168,18 @@ class HybridGraphVectorFusion:
                     "cara_olah": cara,
                     "alasan_klinis": chosen.get("tips", f"Hidangan bergizi seimbang ramah respon insulin ({cal} kkal, bebas minyak jelantah).")
                 }
+
+                # Jika pengguna meminta multi-menu (misal: "sarankan 3 menu dulu"), lampirkan multi-candidates ke specific_food
+                is_multi_req = any(k in ql for k in ["3 menu", "tiga menu", "2 menu", "dua menu", "beberapa menu", "pilihan menu", "opsi menu"])
+                if is_multi_req:
+                    multi_candidates = self.vector.get_multi_recipe_candidates(
+                        query=user_query,
+                        limit=3,
+                        exclude_titles=already_suggested,
+                        user_allergens=allergens
+                    )
+                    specific_food["multi_menu_candidates"] = multi_candidates
+
                 rag_logger.info("RAG Resep Dinamis Terpilih: '%s' (Kalori: %s, Excluded: %s)", dish_name, cal, already_suggested)
 
         # 4. Penelusuran Semantik Dokumen Panduan Medis
