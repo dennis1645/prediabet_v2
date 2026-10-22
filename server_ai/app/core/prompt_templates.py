@@ -166,6 +166,14 @@ def build_vllm_messages(
     salutation = get_patient_salutation(user_context)
     system_prompt = get_clinical_system_prompt(user_context)
 
+    raw_allergens = getattr(user_context, "pantangan_alergi", []) if user_context else []
+    if isinstance(raw_allergens, list) and raw_allergens:
+        allergen_str = ", ".join(raw_allergens)
+    elif isinstance(raw_allergens, str) and raw_allergens.strip():
+        allergen_str = raw_allergens.strip()
+    else:
+        allergen_str = "Tidak ada pantangan alergi khusus"
+
     messages = [
         {"role": "system", "content": system_prompt}
     ]

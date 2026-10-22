@@ -11,6 +11,7 @@ import {
   Calendar,
   Utensils,
   Award,
+  RotateCcw,
 } from "lucide-react";
 
 export default function ProgressTrackerPage() {
@@ -267,7 +268,29 @@ export default function ProgressTrackerPage() {
 
               {/* List Makanan Tercatat */}
               <div className="border-t border-slate-100 pt-4">
-                <h4 className="text-xs font-bold uppercase text-slate-400 mb-3">Makanan Terdata Hari Ini:</h4>
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="text-xs font-bold uppercase text-slate-400">Makanan Terdata Hari Ini:</h4>
+                  {foodLogs.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        if (window.confirm("Apakah Anda yakin ingin mereset seluruh catatan progres dan makanan hari ini?")) {
+                          try {
+                            await api.resetProgress();
+                            showToast("success", "Catatan progres hari ini berhasil direset bersih!");
+                            loadDailyProgress();
+                          } catch (err) {
+                            showToast("error", err.message || "Gagal mereset progres.");
+                          }
+                        }
+                      }}
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 hover:text-rose-700 hover:bg-rose-50 px-2.5 py-1 rounded-lg transition cursor-pointer"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                      <span>Reset Data</span>
+                    </button>
+                  )}
+                </div>
                 <div className="space-y-2 max-h-52 overflow-y-auto">
                   {foodLogs.length === 0 ? (
                     <div className="py-6 text-center text-xs text-slate-400 font-semibold bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
