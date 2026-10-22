@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     VLLM_DTYPE: str = "auto"
     VLLM_TEMPERATURE: float = 0.6
     VLLM_TOP_P: float = 0.9
-    VLLM_MAX_TOKENS: int = 768
+    VLLM_MAX_TOKENS: int = 1536
 
     # Neo4j Enterprise / Community Graph Database
     NEO4J_URI: str = os.getenv("NEO4J_URI", "bolt://localhost:7687")

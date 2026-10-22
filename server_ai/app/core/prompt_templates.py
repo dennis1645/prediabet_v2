@@ -254,16 +254,31 @@ def build_vllm_messages(
     # 5. Jika ada bahan makanan spesifik atau permintaan resep terdeteksi
     elif specific_food:
         ql = (user_query or "").lower().strip()
+        is_multi_menu_request = any(k in ql for k in ["3 menu", "tiga menu", "2 menu", "dua menu", "beberapa menu", "pilihan menu", "opsi menu"])
         is_recipe_request = any(k in ql for k in [
             "resep", "cara buat", "cara masak", "langkah", "bahan", "bikin", "masak",
             "berkuah", "hangat", "sop", "sup", "soto", "pepes", "tumis",
-            "selain itu", "yang lain", "ada lagi", "menu lain", "opsi lain", "resep lain"
+            "selain itu", "yang lain", "ada lagi", "menu lain", "opsi lain", "resep lain",
+            "basis", "bahan dasar", "olahan", "enak nya dimasak apa", "dimasak apa"
         ]) or "resep" in str(specific_food.get("kategori", "")).lower()
 
         food_title = specific_food.get("nama_makanan") or specific_food.get("nama") or "Menu Sehat"
         porsi_label = specific_food.get("porsi_label")
 
-        if is_recipe_request:
+        if is_multi_menu_request:
+            current_user_content = (
+                f"Pesan Pasien: \"{user_query}\"\n\n"
+                f"[Instruksi Respon Rekomendasi Multi-Menu 3J]:\n"
+                f"- Pasien meminta rekomendasi beberapa menu ({user_query}).\n"
+                f"- Sajikan 3 pilihan hidangan Nusantara ramah glukosa & 3J secara RINGKAS, RAPI, dan LENGKAP.\n"
+                f"- Format per menu:\n"
+                f"  1. Nama Menu Hidangan\n"
+                f"  2. Estimasi Nilai Gizi Singkat (Kalori, Protein, Karbo, Lemak)\n"
+                f"  3. Gambaran Bahan & Keunggulan Klinis (1-2 kalimat)\n"
+                f"- DILARANG MENULIS LANGKAH MEMASAK PANJANG UNTUK SEMUA MENU AGAR JAWABAN TIDAK TERPOTONG!\n"
+                f"- Di akhir kalimat, tanyakan ramah: 'Dari 3 menu di atas, mana yang ingin Bapak/Ibu ketahui resep lengkapnya atau dicatat ke tracker hari ini?'"
+            )
+        elif is_recipe_request:
             rag_bahan = specific_food.get("bahan") or f"Bahan baku sehat bebas dari {allergen_str}"
             rag_langkah = specific_food.get("langkah") or f"Kukus/Rebus kuah bening tanpa minyak jelantah"
             rag_tips = specific_food.get("alasan_klinis") or "Stabilkan respon glukosa postprandial"

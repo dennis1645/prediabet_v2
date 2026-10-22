@@ -90,11 +90,15 @@ class HybridGraphVectorFusion:
         recipe_keywords = [
             "resep", "menu", "masak", "makanan apa", "saran makanan", "rekomendasi makanan",
             "saranin", "sarankan", "sarapan apa", "makan siang apa", "makan malam apa",
-            "ide makan", "olah", "selain itu", "yang lain", "ada menu lain", "opsi lain", "pilihan lain",
-            "pengen makan", "ingin makan", "berkuah", "hangat", "sop", "sup"
+            "ide makan", "olah", "olahan", "selain itu", "yang lain", "ada menu lain", "opsi lain", "pilihan lain",
+            "pengen makan", "ingin makan", "berkuah", "hangat", "sop", "sup", "soto",
+            "basis", "bahan dasar", "enaknya dimasak apa", "punya", "masak apa", "dimasak apa", "bikin apa",
+            "kalau basis", "kalau bahan", "makan siang", "makan malam", "sarapan"
         ]
         user_wants_recipe = any(k in ql for k in recipe_keywords)
-        user_asks_nutrient_only = any(k in ql for k in ["berapa", "protein", "karbo", "lemak", "kalori", "gizi"]) and not any(k in ql for k in ["resep", "cara buat", "cara masak", "bikin", "langkah"])
+        user_asks_nutrient_only = any(k in ql for k in ["berapa", "gizi"]) and not any(k in ql for k in [
+            "resep", "cara buat", "cara masak", "bikin", "langkah", "basis", "bahan dasar", "olahan", "masak apa", "dimasak apa", "menu", "saran"
+        ])
 
         # JIKA PENGGUNA MENCERITAKAN KONSUMSI MAKANAN (STORY FOODS):
         # SUPPRESS specific_food mentah agar tidak menimpa menu konsumsi nyata (misal 'ayam goreng + nasi')
@@ -234,21 +238,22 @@ class HybridGraphVectorFusion:
                 f"• PANTANGAN ALERGI  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'} (MUTLAK DILARANG)",
             ])
 
-        if specific_food:
+        if specific_food and not specific_food.get("bahan"):
             food_display_name = specific_food.get('nama_makanan') or specific_food.get('nama') or 'Bahan Makanan'
             food_gi = specific_food.get('gi') if specific_food.get('gi') is not None else specific_food.get('gi_category', 'Rendah')
+            porsi_label = specific_food.get('porsi_label') or '100 gram'
             dossier_lines.extend([
                 "",
-                f"=== DATA GIZI KLINIS SPESIFIK HASIL QUERY DETERMINISTIK NEO4J (ACUAN RESMI PER 100 GRAM) ===",
+                f"=== DATA GIZI KLINIS SPESIFIK HASIL QUERY DETERMINISTIK NEO4J (ACUAN {porsi_label.upper()}) ===",
                 f"• Nama Bahan Makanan  : {food_display_name}",
-                f"• Takaran Acuan        : 100 gram",
+                f"• Takaran Acuan        : {porsi_label}",
                 f"• Kandungan Protein    : {specific_food.get('protein', 0)} gram",
                 f"• Total Energi (Kalori): {specific_food.get('kalori', 0)} kkal",
                 f"• Kandungan Karbohidrat: {specific_food.get('karbohidrat', 0)} gram",
                 f"• Kandungan Lemak      : {specific_food.get('lemak', 0)} gram",
                 f"• Indeks Glikemik (GI) : {food_gi} (Kategori Rendah - Sangat Aman bagi Respon Insulin)",
                 f"• Rekomendasi Olah     : {specific_food.get('cara_olah', 'Kukus/Rebus')} tanpa minyak jelantah",
-                f"[INSTRUKSI KHUSUS GIZI]: Pasien menanyakan kandungan bahan ini. WAJIB MENJAWAB LANGSUNG ANGKA PROTEIN/GIZI PER 100 GRAM DI AWAL KALIMAT! DILARANG memberikan resep jika tidak diminta.",
+                f"[INSTRUKSI KHUSUS GIZI]: Pasien menanyakan kandungan bahan ini. WAJIB MENJAWAB LANGSUNG ANGKA GIZI PER {porsi_label.upper()} DI AWAL KALIMAT! DILARANG memberikan resep jika tidak diminta.",
             ])
 
         # Hanya injeksikan daftar makanan Neo4j jika pengguna memang meminta menu/resep

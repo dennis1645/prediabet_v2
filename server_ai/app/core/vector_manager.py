@@ -36,6 +36,26 @@ CURATED_3J_RECIPES: List[Dict[str, Any]] = [
         "tips": "Jamur tiram kaya beta-glukan penstabil respon insulin postprandial."
     },
     {
+        "nama_makanan": "Sup Dada Ayam & Tahu Kukus Bening",
+        "kategori": "Resep Masakan 3J - Ayam & Tahu",
+        "kalori": 155, "protein": 22.0, "karbohidrat": 4.0, "lemak": 3.5, "gi_val": 25,
+        "keywords": ["ayam dan tahu", "ayam tahu", "tahu ayam", "olahan ayam dan tahu", "ayam", "tahu", "sup", "kuah", "hangat", "bening"],
+        "bahan": "Dada ayam tanpa kulit (100g, potong dadu), tahu putih kukus (100g, potong dadu), daun bawang, seledri, 3 siung bawang putih cincang, kaldu ayam alami rendah sodium.",
+        "langkah": "1. Rebus dada ayam hingga empuk dan kaldu bening terbentuk.\n2. Masukkan bawang putih tumis air dan tahu kukus dadu.\n3. Masak dengan api kecil selama 3 menit agar kaldu meresap ke dalam tahu.\n4. Beri sedikit merica dan garam, taburi seledri lalu sajikan hangat.",
+        "cara_olah": "Rebus kuah kaldu rempah bening tanpa minyak",
+        "tips": "Paduan protein hewani dan nabati yang sangat padat nutrisi dengan kalori rendah dan indeks glikemik minimal."
+    },
+    {
+        "nama_makanan": "Tumis Ayam Suwir Tahu Bumbu Bawang",
+        "kategori": "Resep Masakan 3J - Tumis Sehat",
+        "kalori": 165, "protein": 20.0, "karbohidrat": 6.0, "lemak": 4.5, "gi_val": 26,
+        "keywords": ["tumis ayam tahu", "ayam dan tahu", "ayam tahu", "tahu ayam", "tumis", "ayam", "tahu"],
+        "bahan": "Dada ayam rebus suwir (80g), tahu kukus potong dadu (80g), 3 siung bawang putih cincang, 2 siung bawang merah, cabai merah iris, sedikit air.",
+        "langkah": "1. Tumis bawang putih dan merah dengan 2 sdm air hingga wangi.\n2. Masukkan ayam suwir dan tahu dadu, aduk perlahan.\n3. Tambahkan sedikit garam dan lada, masak hingga bumbu meresap.",
+        "cara_olah": "Tumis air tanpa minyak jelantah dengan bumbu bawang melimpah",
+        "tips": "Tinggi protein dan rendah karbohidrat sederhana, sangat aman bagi respon glukosa."
+    },
+    {
         "nama_makanan": "Sup Ikan Nila Kuah Asam Segar",
         "kategori": "Resep Masakan 3J - Kuah Ikan",
         "kalori": 175, "protein": 24.0, "karbohidrat": 4.0, "lemak": 3.8, "gi_val": 20,
@@ -227,10 +247,20 @@ class ClinicalVectorStoreManager:
             score = 0
             for kw in r.get("keywords", []):
                 if kw in full_query:
-                    score += 5
+                    score += 6
             for w in query_words:
                 if w in r_text:
                     score += 2
+
+            # Bonus besar jika pasien menyebutkan bahan majemuk (misal 'ayam dan tahu', 'ikan dan kemangi')
+            key_ingredients = ["ayam", "tahu", "tempe", "ikan", "telur", "buncis", "bayam", "oyong", "jagung", "jamur"]
+            mentioned_ingredients = [ing for ing in key_ingredients if ing in full_query]
+            if len(mentioned_ingredients) >= 2:
+                if all(ing in r_text for ing in mentioned_ingredients):
+                    score += 25
+            elif len(mentioned_ingredients) == 1:
+                if mentioned_ingredients[0] in r_text:
+                    score += 10
 
             candidates.append((score, r))
 
