@@ -155,23 +155,23 @@ EXCLUDE_FOOD_KEYWORDS = [
     "tepung", "minyak", "margarin", "sirup", "selasih", "suplemen", "dideh", 
     "darah", "perisa", "pewarna", "snack", "bar", "keripik", "kerupuk", 
     "asin", "terong asam", "terong hintalo", "terung bengkulu", "terung belanda", "terong, segar", "terong",
-    "hazelnut", "walnut", "almond",
+    "hazelnut", "walnut", "almond", "plum", "canned", "syrup", "juice pack", "drained solids", "water pack",
     "mentah", "abadi", "roti", "bread", "krim", "biskuit", "kue", "permen", 
     "wafer", "cokelat", "goreng", "instan", "cerelac", "sun bubur"
 ]
 
 STAPLE_PATTERNS = {
     "karbohidrat": [
-        "beras merah, nasi", "kentang rebus", "jagung rebus", "havermut", "oatmeal", "ubi rebus"
+        "beras merah", "kentang", "jagung", "havermut", "oatmeal", "ubi"
     ],
     "protein": [
-        "ayam, dada, daging tanpa kulit", "ikan mas, segar", "telur ayam ras, segar", "tahu", "tempe"
+        "ayam, dada", "dada ayam", "ikan mas", "ikan", "telur", "tahu", "tempe"
     ],
     "sayuran": [
-        "bayam, segar", "gambas (oyong), segar", "buncis, segar", "labu siam", "wortel, segar"
+        "bayam", "gambas", "oyong", "buncis", "labu siam", "wortel", "sawi"
     ],
     "buah": [
-        "apel, segar", "pepaya muda, segar", "jambu biji, segar", "jeruk manis"
+        "apel", "pepaya", "jambu biji", "jambu", "jeruk", "pisang"
     ]
 }
 
@@ -495,6 +495,10 @@ class Neo4jClinicalGraphManager:
             "nanas": ["Nanas, segar", "Potongan Nanas"],
             "oatmeal": ["havermut", "oatmeal"],
             "kentang": ["kentang rebus", "kentang"],
+            "jagung": ["Jagung kuning pipil, rebus", "Jagung muda, rebus", "jagung rebus", "jagung"],
+            "jagung rebus": ["Jagung kuning pipil, rebus", "Jagung muda, rebus"],
+            "ubi": ["ubi rebus", "ubi jalar", "ubi"],
+            "singkong": ["Ketela pohon/ singkong kukus", "singkong"],
         }
 
         # DILARANG menganggap follow-up jika pertanyaan berkaitan dengan tubuh/profil medis (berat badan, tinggi, umur, dll.)
