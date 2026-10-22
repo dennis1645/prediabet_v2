@@ -5,7 +5,15 @@ from app.core.allergen_guardrail import allergen_guardrail
 
 
 def get_patient_display_name(user_context: Optional[Any] = None) -> str:
-    """Mengembalikan sapaan dan nama pasien dinamis berdasarkan user_context."""
+    """
+    Mengembalikan sapaan dan nama pasien dinamis berdasarkan user_context:
+    - Gender Perempuan:
+        - Usia < 40 tahun: 'Mbak <Nama>'
+        - Usia >= 40 tahun: 'Ibu <Nama>'
+    - Gender Laki-laki:
+        - Usia < 40 tahun: 'Mas <Nama>'
+        - Usia >= 40 tahun: 'Pak <Nama>'
+    """
     if not user_context:
         return "Bapak/Ibu"
     
@@ -17,22 +25,37 @@ def get_patient_display_name(user_context: Optional[Any] = None) -> str:
     lower = nama_clean.lower()
     
     # Jika nama sudah diawali sapaan sopan
-    if lower.startswith(("pak ", "ibu ", "bapak ", "dr. ", "dr ", "mas ", "mbak ")):
+    if lower.startswith(("pak ", "ibu ", "bapak ", "dr. ", "dr ", "mas ", "mbak ", "kak ")):
         return nama_clean
     
     gender = str(getattr(user_context, "jenis_kelamin", "")).lower()
-    if any(g in gender for g in ["perempuan", "wanita", "female", "p"]):
-        return f"Ibu {nama_clean}"
+    raw_age = getattr(user_context, "usia", None)
+    try:
+        age = int(raw_age) if raw_age is not None else 45
+    except (ValueError, TypeError):
+        age = 45
+
+    is_female = any(g in gender for g in ["perempuan", "wanita", "female", "p"])
+    if age < 40:
+        return f"Mbak {nama_clean}" if is_female else f"Mas {nama_clean}"
     else:
-        return f"Pak {nama_clean}"
+        return f"Ibu {nama_clean}" if is_female else f"Pak {nama_clean}"
 
 
 def get_patient_salutation(user_context: Optional[Any] = None) -> str:
-    """Mengembalikan sapaan kehormatan (Bapak/Ibu) sesuai gender pasien."""
+    """Mengembalikan sapaan kehormatan (Mas/Mbak/Pak/Ibu) sesuai gender dan umur pasien."""
     gender = str(getattr(user_context, "jenis_kelamin", "")).lower() if user_context else ""
-    if any(g in gender for g in ["perempuan", "wanita", "female", "p"]):
-        return "Ibu"
-    return "Bapak"
+    raw_age = getattr(user_context, "usia", None) if user_context else None
+    try:
+        age = int(raw_age) if raw_age is not None else 45
+    except (ValueError, TypeError):
+        age = 45
+
+    is_female = any(g in gender for g in ["perempuan", "wanita", "female", "p"])
+    if age < 40:
+        return "Mbak" if is_female else "Mas"
+    else:
+        return "Ibu" if is_female else "Bapak"
 
 
 def get_clinical_system_prompt(user_context: Optional[Any] = None) -> str:
