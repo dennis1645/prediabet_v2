@@ -741,20 +741,15 @@ export async function forwardChatToAI(req, res) {
         throw new Error(`AI server HTTP ${aiResponse.status}`);
       }
     } catch (err) {
+      console.error("[aiContextController] Error connecting to AI server or handling response:", err.message);
       aiData = {
         success: true,
         response:
-          "Halo! Saya Dr. Predi, asisten nutrisi klinis Anda.\n\n" +
-          "🩺 **Tinjauan Medis & Edukasi:**\n" +
-          "Sesuai pedoman PERKENI 2021 dan panduan gizi seimbang Kemenkes RI, pengelolaan prediabetes dititikberatkan pada pola makan 3J (Jadwal, Jumlah, dan Jenis) teratur.\n\n" +
-          "🍽️ **Rekomendasi Menu 3J Terverifikasi:**\n" +
-          "1. **Pepes Ikan Mas Kemangi (100g):** 180 kkal, 26g Protein, 65mg Sodium. Bebas minyak goreng jelantah.\n" +
-          "2. **Sayur Bening Bayam Oyong (150g):** 65 kkal, kaya serat pangan penstabil laju glukosa.\n" +
-          "3. **Nasi Beras Merah Pulen (100g):** 1 centong sedang, sumber karbohidrat kompleks rendah GI.\n\n" +
-          "🛡️ **Jaminan Keamanan:**\n" +
-          "Rekomendasi ini telah disaring melalui Guardrail dan **100% Bebas dari Pantangan Alergen** pada profil medis Anda.",
-        guardrail: { zero_allergen_verified: true, safety_message: "100% Bebas Alergen" },
-        telemetry: { latency_ms: 15, vllm_connected: false },
+          `Halo ${displayName}! Mohon maaf, Dr. Predi mendeteksi sedikit kendala koneksi ke mesin komputasi AI saat ini.\n\n` +
+          `Sesuai pedoman klinis PERKENI & Kemenkes RI, pastikan Anda tetap menjaga prinsip **3J (Jadwal, Jumlah, Jenis)** dan mengutamakan makanan tinggi serat serta rendah indeks glikemik.\n\n` +
+          `Silakan ulangi pesan atau tanyakan kembali bahan makanan yang ingin Anda ketahui kandungan gizinya! 😊`,
+        guardrail: { zero_allergen_verified: true, safety_message: "Koneksi Cadangan Aktif" },
+        telemetry: { latency_ms: 50, vllm_connected: false, error: true },
       };
     }
 

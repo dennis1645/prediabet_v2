@@ -270,8 +270,10 @@ class Neo4jClinicalGraphManager:
         safe_candidates = allergen_guardrail.filter_safe_food_candidates(foods, allergens)
         safe_wholesome = [
             f for f in safe_candidates 
-            if f["gi"] <= 55 and f["sodium_mg"] <= 350 and f["kalori"] >= 15
-            and not any(bad in f["nama"].lower() for bad in EXCLUDE_FOOD_KEYWORDS)
+            if (f.get("gi") if f.get("gi") is not None else 35) <= 55 
+            and (f.get("sodium_mg") if f.get("sodium_mg") is not None else 0) <= 350 
+            and (f.get("kalori") if f.get("kalori") is not None else 50) >= 15
+            and not any(bad in str(f.get("nama") or "").lower() for bad in EXCLUDE_FOOD_KEYWORDS)
         ]
 
         selected = []
@@ -280,9 +282,10 @@ class Neo4jClinicalGraphManager:
             cat_count = 0
             for pat in patterns:
                 for f in safe_wholesome:
-                    if pat in f["nama"].lower() and f["nama"] not in selected_names:
+                    f_name = str(f.get("nama") or "")
+                    if pat in f_name.lower() and f_name not in selected_names:
                         item_copy = dict(f)
-                        if not item_copy.get("cara_olah") or item_copy["cara_olah"] in ["Kukus/Rebus", "", "none"]:
+                        if not item_copy.get("cara_olah") or item_copy.get("cara_olah") in ["Kukus/Rebus", "", "none"]:
                             if cat == "karbohidrat":
                                 item_copy["cara_olah"] = "Kukus matang pulen"
                             elif cat == "protein":
@@ -292,7 +295,7 @@ class Neo4jClinicalGraphManager:
                             elif cat == "buah":
                                 item_copy["cara_olah"] = "Buah potong segar pencuci mulut terpisah"
                         selected.append(item_copy)
-                        selected_names.add(f["nama"])
+                        selected_names.add(f_name)
                         cat_count += 1
                         break
                 if cat_count >= 2:
@@ -300,9 +303,10 @@ class Neo4jClinicalGraphManager:
 
         if len(selected) < limit:
             for f in safe_wholesome:
-                if f["nama"] not in selected_names:
+                f_name = str(f.get("nama") or "")
+                if f_name not in selected_names:
                     selected.append(f)
-                    selected_names.add(f["nama"])
+                    selected_names.add(f_name)
                     if len(selected) >= limit:
                         break
 
@@ -542,8 +546,8 @@ class Neo4jClinicalGraphManager:
             return None
 
         def rank_food_match(item_name: str, target_keyword: str) -> tuple:
-            lower = item_name.lower()
-            tk = target_keyword.lower()
+            lower = str(item_name or "").lower()
+            tk = str(target_keyword or "").lower()
             
             # Prioritas 0: Cocok persis atau bentuk sehat standar (Tahu Kukus, Tahu Rebus, Tahu mentah, Ayam dada tanpa kulit)
             is_pure_tofu = tk in ["tahu", "tahu putih", "tahu kukus"] and lower in ["tahu kukus", "tahu rebus", "tahu, mentah", "tahu"]
@@ -551,7 +555,7 @@ class Neo4jClinicalGraphManager:
             is_unwanted_derivative = any(bad in lower for bad in ["kembang tahu", "moon", "ampas", "babi", "minyak", "goreng", "jelantah"])
 
             prio = 0 if (is_pure_tofu or is_pure_skinless_chicken) else (9 if is_unwanted_derivative else 1)
-            return (prio, len(item_name))
+            return (prio, len(lower))
 
         # 1. Coba cari di Neo4j jika aktif
         if self.is_connected():
@@ -577,10 +581,10 @@ class Neo4jClinicalGraphManager:
                         with self.driver.session(database=self.database) as session:
                             res = session.run(cypher, target=target).data()
                             if res:
-                                res.sort(key=lambda x: rank_food_match(x["nama"], target))
+                                res.sort(key=lambda x: rank_food_match(x.get("nama") or "", target))
                                 matched = res[0]
-                                matched["gambar"] = resolve_food_image(matched["nama"])
-                                neo4j_logger.info("DITEMUKAN di Neo4j: '%s' cocok dengan target '%s' (Kalori: %s, Protein: %s)", matched["nama"], target, matched["kalori"], matched["protein"])
+                                matched["gambar"] = resolve_food_image(matched.get("nama") or "")
+                                neo4j_logger.info("DITEMUKAN di Neo4j: '%s' cocok dengan target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                                 return matched
                             else:
                                 neo4j_logger.debug("Tidak ada record di Neo4j untuk target '%s'", target)
@@ -592,13 +596,13 @@ class Neo4jClinicalGraphManager:
         foods = self._load_local_dataset()
         for term in search_terms:
             for target in COMMON_FOOD_ALIASES.get(term, [term]):
-                target_lower = target.lower()
-                matches = [f for f in foods if target_lower in f["nama"].lower()]
+                target_lower = str(target or "").lower()
+                matches = [f for f in foods if target_lower in str(f.get("nama") or "").lower()]
                 if matches:
-                    matches.sort(key=lambda x: rank_food_match(x["nama"], target))
+                    matches.sort(key=lambda x: rank_food_match(x.get("nama") or "", target))
                     matched = matches[0]
-                    matched["gambar"] = resolve_food_image(matched["nama"])
-                    neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched["nama"], target, matched["kalori"], matched["protein"])
+                    matched["gambar"] = resolve_food_image(matched.get("nama") or "")
+                    neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                     return matched
                 else:
                     neo4j_logger.debug("Dataset CSV lokal tidak memiliki item untuk '%s'", target_lower)

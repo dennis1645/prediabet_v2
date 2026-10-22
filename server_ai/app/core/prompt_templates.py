@@ -280,24 +280,30 @@ def build_vllm_messages(
                 f"- Pastikan 100% bebas dari pantangan alergi: {allergen_str}."
             )
         else:
+            carb_val = specific_food.get('karbohidrat') if specific_food.get('karbohidrat') is not None else specific_food.get('karbo', 0)
+            cal_val = specific_food.get('kalori') if specific_food.get('kalori') is not None else specific_food.get('kalori_kal', 0)
+            fat_val = specific_food.get('lemak') if specific_food.get('lemak') is not None else specific_food.get('lemak_g', 0)
+            prot_val = specific_food.get('protein') if specific_food.get('protein') is not None else specific_food.get('protein_g', 0)
+            serat_val = specific_food.get('serat') if specific_food.get('serat') is not None else specific_food.get('serat_g', 0)
+
             if "karbo" in ql:
-                nutrisi_utama = f"kandungan karbohidratnya adalah sekitar {specific_food['karbohidrat']} gram, dengan energi sekitar {specific_food['kalori']} kkal dan serat {specific_food.get('serat', 0)} gram"
+                nutrisi_utama = f"kandungan karbohidratnya adalah sekitar {carb_val} gram, dengan energi sekitar {cal_val} kkal dan serat {serat_val} gram"
             elif "lemak" in ql:
-                nutrisi_utama = f"kandungan lemaknya adalah sekitar {specific_food['lemak']} gram, dengan energi sekitar {specific_food['kalori']} kkal"
+                nutrisi_utama = f"kandungan lemaknya adalah sekitar {fat_val} gram, dengan energi sekitar {cal_val} kkal"
             elif "kalori" in ql:
-                nutrisi_utama = f"total kalorinya adalah sekitar {specific_food['kalori']} kkal per 100 gram"
+                nutrisi_utama = f"total kalorinya adalah sekitar {cal_val} kkal per 100 gram"
             else:
-                nutrisi_utama = f"kandungan proteinnya adalah sekitar {specific_food['protein']} gram, dengan kalori sekitar {specific_food['kalori']} kkal"
+                nutrisi_utama = f"kandungan proteinnya adalah sekitar {prot_val} gram, dengan kalori sekitar {cal_val} kkal"
 
             current_user_content = (
                 f"Pesan Pasien: \"{user_query}\"\n\n"
                 f"[Data Gizi Spesifik dari Graf Database Neo4j]:\n"
                 f"- Bahan Makanan: {food_title}\n"
                 f"- Takaran Acuan: 100 gram\n"
-                f"- Protein: {specific_food.get('protein', 0)} gram\n"
-                f"- Karbohidrat: {specific_food.get('karbohidrat', 0)} gram\n"
-                f"- Lemak: {specific_food.get('lemak', 0)} gram\n"
-                f"- Kalori: {specific_food.get('kalori', 0)} kkal\n"
+                f"- Protein: {prot_val} gram\n"
+                f"- Karbohidrat: {carb_val} gram\n"
+                f"- Lemak: {fat_val} gram\n"
+                f"- Kalori: {cal_val} kkal\n"
                 f"- Indeks Glikemik (GI): {specific_food.get('gi', 0)}\n\n"
                 f"[Instruksi Respon]:\n"
                 f"- Pasien HANYA menanyakan kandungan nutrisi bahan ini.\n"

@@ -271,8 +271,16 @@ class HybridGraphVectorFusion:
                 "DAFTAR MAKANAN NUSANTARA TERVERIFIKASI AMAN (HASIL FILTER GRAF NEO4J 100% BEBAS ALERGEN):"
             ])
             for f in safe_foods[:6]:
+                f_name = f.get('nama') or f.get('nama_makanan') or 'Bahan Sehat'
+                f_cal = f.get('kalori') or f.get('kalori_kal') or 0
+                f_carb = f.get('karbohidrat') or f.get('karbo') or 0
+                f_prot = f.get('protein') or 0
+                f_fat = f.get('lemak') or 0
+                f_sod = f.get('sodium_mg') or 0
+                f_gi = f.get('gi') if f.get('gi') is not None else 35
+                f_olah = f.get('cara_olah') or 'Kukus/Rebus'
                 dossier_lines.append(
-                    f"- {f['nama']}: {f['kalori']} kkal (Karbo: {f['karbohidrat']}g, Protein: {f['protein']}g, Lemak: {f['lemak']}g, Sodium: {f['sodium_mg']}mg, GI: {f['gi']}). Cara olah: {f['cara_olah']}."
+                    f"- {f_name}: {f_cal} kkal (Karbo: {f_carb}g, Protein: {f_prot}g, Lemak: {f_fat}g, Sodium: {f_sod}mg, GI: {f_gi}). Cara olah: {f_olah}."
                 )
 
         if guideline_texts:

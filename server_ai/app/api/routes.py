@@ -8,6 +8,7 @@ from app.core.prompt_templates import build_vllm_messages
 from app.core.vllm_client import vllm_client
 from app.core.neo4j_manager import neo4j_manager
 from app.core.allergen_guardrail import allergen_guardrail
+from app.core.logger_config import rag_logger
 
 router = APIRouter(prefix="/api", tags=["AI Clinical Chatbot"])
 
@@ -133,50 +134,72 @@ async def chat_endpoint(request: ChatRequest):
             telemetry={"latency_ms": 5, "tokens_per_second": 0, "vllm_connected": False}
         )
 
-    # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik, typo normalizer, sugar verification, contextual recipe, & MET kalkulator)
-    dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(
-        request.message, user_context, request.chat_history or [], request.last_suggested_recipe
-    )
+    try:
+        # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik, typo normalizer, sugar verification, contextual recipe, & MET kalkulator)
+        dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(
+            request.message, user_context, request.chat_history or [], request.last_suggested_recipe
+        )
 
-    # 3. Format prompt sesuai template resmi Qwen/vLLM
-    messages = build_vllm_messages(
-        request.message, dossier_text, request.chat_history or [], specific_food=specific_food, user_context=user_context
-    )
+        # 3. Format prompt sesuai template resmi Qwen/vLLM
+        messages = build_vllm_messages(
+            request.message, dossier_text, request.chat_history or [], specific_food=specific_food, user_context=user_context
+        )
 
-    # 4. Generate jawaban lewat vLLM (dengan fallback cerdas jika vLLM offline)
-    response_text, telemetry, blocked_allergens = await vllm_client.generate_chat_response(
-        messages=messages,
-        user_allergens=user_allergens,
-        user_query=request.message,
-        user_context=user_context,
-        safe_food_names=safe_food_names,
-        max_tokens=settings.VLLM_MAX_TOKENS,
-        temperature=settings.VLLM_TEMPERATURE
-    )
+        # 4. Generate jawaban lewat vLLM (dengan fallback cerdas jika vLLM offline)
+        response_text, telemetry, blocked_allergens = await vllm_client.generate_chat_response(
+            messages=messages,
+            user_allergens=user_allergens,
+            user_query=request.message,
+            user_context=user_context,
+            safe_food_names=safe_food_names,
+            max_tokens=settings.VLLM_MAX_TOKENS,
+            temperature=settings.VLLM_TEMPERATURE
+        )
 
-    # 5. Siapkan laporan Guardrail
-    guardrail_report = GuardrailReport(
-        zero_allergen_verified=len(blocked_allergens) == 0,
-        allergens_checked=user_allergens,
-        allergens_detected_and_blocked=blocked_allergens,
-        deterministic_graph_used=neo4j_manager.is_connected() or True,
-        safety_message="100% Terverifikasi Aman dan Bebas Alergen" if not blocked_allergens else "Bahan pantangan berhasil disaring dan diblokir oleh Guardrail"
-    )
+        # 5. Siapkan laporan Guardrail
+        guardrail_report = GuardrailReport(
+            zero_allergen_verified=len(blocked_allergens) == 0,
+            allergens_checked=user_allergens,
+            allergens_detected_and_blocked=blocked_allergens,
+            deterministic_graph_used=neo4j_manager.is_connected() or True,
+            safety_message="100% Terverifikasi Aman dan Bebas Alergen" if not blocked_allergens else "Bahan pantangan berhasil disaring dan diblokir oleh Guardrail"
+        )
 
-    return ChatResponse(
-        success=True,
-        response=response_text,
-        user_id=user_context.userId,
-        safe_foods_recommended=safe_food_names,
-        guardrail=guardrail_report,
-        telemetry=telemetry,
-        food_card=specific_food,
-        confirmation=confirmation,
-        exercise_logged=exercise_logged,
-        meal_logged=contextual_recipe["recipe"] if contextual_recipe else None,
-        sugar_verification=sugar_verification,
-        story_log=story_foods if (story_foods and story_foods.get("items")) else None,
-    )
+        return ChatResponse(
+            success=True,
+            response=response_text,
+            user_id=user_context.userId,
+            safe_foods_recommended=safe_food_names,
+            guardrail=guardrail_report,
+            telemetry=telemetry,
+            food_card=specific_food,
+            confirmation=confirmation,
+            exercise_logged=exercise_logged,
+            meal_logged=contextual_recipe["recipe"] if contextual_recipe else None,
+            sugar_verification=sugar_verification,
+            story_log=story_foods if (story_foods and story_foods.get("items")) else None,
+        )
+    except Exception as e:
+        rag_logger.error("Exception pada chat_endpoint pipeline: %s", str(e), exc_info=True)
+        fallback_msg = (
+            f"Halo {display_name}! Mohon maaf, Dr. Predi mendeteksi sedikit kendala teknis saat memproses penelusuran graf nutrisi. "
+            f"Untuk menjaga respon insulin tetap stabil, tetap utamakan pedoman 3J (Jadwal teratur, Jumlah terkontrol, dan Jenis karbohidrat kompleks/serat tinggi). "
+            f"Bisa tolong ulangi pertanyaan Anda atau sebutkan kembali nama bahan makanan yang ingin dikonsultasikan? 😊"
+        )
+        return ChatResponse(
+            success=True,
+            response=fallback_msg,
+            user_id=user_context.userId,
+            safe_foods_recommended=[],
+            guardrail=GuardrailReport(
+                zero_allergen_verified=True,
+                allergens_checked=[],
+                allergens_detected_and_blocked=[],
+                deterministic_graph_used=False,
+                safety_message="Fallback Darurat Aktif"
+            ),
+            telemetry={"latency_ms": 10, "tokens_per_second": 0, "vllm_connected": False}
+        )
 
 
 @router.post("/chat/stream")
