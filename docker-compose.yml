@@ -60,6 +60,7 @@ services:
       - NEO4J_USER=neo4j
       - NEO4J_PASSWORD=prediabeat2026
     volumes:
+      - ./server_ai/app:/app/app
       - ./server_ai/knowledge_base_new:/app/knowledge_base_new
       - ./logs:/app/logs
     networks:
