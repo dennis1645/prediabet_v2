@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { showToast } from "../utils/alerts";
 import {
   Sparkles,
   ArrowRight,
@@ -608,51 +609,71 @@ export default function LandingPage() {
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
-              <a
-                href="#"
-                className="inline-flex items-center bg-[#0f172a] hover:bg-slate-900 text-white px-7 py-3.5 rounded-2xl font-bold shadow-lg shadow-black/15 hover:-translate-y-0.5 transition-all group"
-              >
-                <svg
-                  className="w-7 h-7 mr-3 group-hover:scale-105 transition-transform"
-                  viewBox="0 0 24 24"
-                  fill="none"
+              {/* Tombol Google Play Store dengan Badge Coming Soon & Masih Pengembangan */}
+              <div className="relative group">
+                <button
+                  type="button"
+                  onClick={() =>
+                    showToast(
+                      "Aplikasi mobile Android saat ini masih dalam tahap pengembangan (Coming Soon). Anda dapat langsung mengakses fitur lengkap melalui Versi Web!",
+                      "info"
+                    )
+                  }
+                  className="w-full sm:w-auto inline-flex items-center bg-slate-900/95 hover:bg-slate-900 text-white px-6 py-3.5 rounded-2xl font-bold shadow-md shadow-slate-950/20 hover:-translate-y-0.5 transition-all cursor-pointer relative border border-slate-700/60"
                 >
-                  <path
-                    d="M4 22.3407V1.6593C4 1.13459 4.58245 0.82079 5.02008 1.10996L20.8929 11.606C21.2828 11.8636 21.2828 12.4338 20.8929 12.6914L5.02008 23.1874C4.58245 23.4766 4 23.1628 4 22.6381V22.3407Z"
-                    fill="url(#paint0_linear_store_5)"
-                  />
-                  <path
-                    d="M14.9218 15.654L4 23.1874V1.6593L14.9218 9.19277L9.93291 12.4234L14.9218 15.654Z"
-                    fill="#F4F4F4"
-                    fillOpacity="0.2"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="paint0_linear_store_5"
-                      x1="4"
-                      y1="12.4234"
-                      x2="21.1111"
-                      y2="12.4234"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stopColor="#2196F3" />
-                      <stop offset="0.33" stopColor="#4CAF50" />
-                      <stop offset="0.66" stopColor="#FFC107" />
-                      <stop offset="1" stopColor="#F44336" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <div className="text-left">
-                  <div className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">
-                    Download di
+                  <svg
+                    className="w-7 h-7 mr-3.5 group-hover:scale-105 transition-transform"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M4 22.3407V1.6593C4 1.13459 4.58245 0.82079 5.02008 1.10996L20.8929 11.606C21.2828 11.8636 21.2828 12.4338 20.8929 12.6914L5.02008 23.1874C4.58245 23.4766 4 23.1628 4 22.6381V22.3407Z"
+                      fill="url(#paint0_linear_store_5)"
+                    />
+                    <path
+                      d="M14.9218 15.654L4 23.1874V1.6593L14.9218 9.19277L9.93291 12.4234L14.9218 15.654Z"
+                      fill="#F4F4F4"
+                      fillOpacity="0.2"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="paint0_linear_store_5"
+                        x1="4"
+                        y1="12.4234"
+                        x2="21.1111"
+                        y2="12.4234"
+                        gradientUnits="userSpaceOnUse"
+                      >
+                        <stop stopColor="#2196F3" />
+                        <stop offset="0.33" stopColor="#4CAF50" />
+                        <stop offset="0.66" stopColor="#FFC107" />
+                        <stop offset="1" stopColor="#F44336" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="text-left">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                        Download di
+                      </span>
+                      <span className="text-[9px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/20 border border-amber-400/40 px-1.5 py-0.5 rounded-sm">
+                        Coming Soon
+                      </span>
+                    </div>
+                    <div className="text-sm sm:text-base font-extrabold leading-tight mt-0.5 text-slate-100">
+                      Google Play Store
+                    </div>
                   </div>
-                  <div className="text-base font-extrabold leading-none mt-0.5">Google Play Store</div>
+                </button>
+                <div className="absolute -top-2.5 right-4 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full shadow-sm pointer-events-none">
+                  Tahap Pengembangan
                 </div>
-              </a>
+              </div>
 
+              {/* Tombol Akses Versi Web Langsung (Primary CTA Aktif) */}
               <Link
                 to="/register"
-                className="inline-flex items-center gap-2 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-6 py-3.5 rounded-2xl font-bold text-sm border border-emerald-200/80 transition"
+                className="inline-flex items-center justify-center gap-2 text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 px-6 py-3.5 rounded-2xl font-extrabold text-sm shadow-lg shadow-emerald-600/25 transition hover:-translate-y-0.5 active:scale-95"
               >
                 <span>Akses Versi Web Langsung</span>
                 <ChevronRight className="w-4 h-4" />

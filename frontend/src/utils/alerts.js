@@ -29,7 +29,22 @@ export const showErrorAlert = (title, text) => {
   });
 };
 
-export const showToast = (icon, title) => {
+export const showToast = (arg1, arg2 = "success") => {
+  const validIcons = ["success", "error", "warning", "info", "question"];
+  let icon = "info";
+  let title = "";
+
+  if (validIcons.includes(arg1)) {
+    icon = arg1;
+    title = arg2;
+  } else if (validIcons.includes(arg2)) {
+    title = arg1;
+    icon = arg2;
+  } else {
+    title = arg1;
+    icon = "info";
+  }
+
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",

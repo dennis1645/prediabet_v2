@@ -212,7 +212,12 @@ class Neo4jClinicalGraphManager:
 
         try:
             neo4j_logger.info("Mencoba menghubungkan driver Neo4j ke %s (user: %s)...", self.uri, self.user)
-            self.driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
+            self.driver = GraphDatabase.driver(
+                self.uri,
+                auth=(self.user, self.password),
+                connection_timeout=5.0,
+                max_connection_lifetime=300
+            )
             self.driver.verify_connectivity()
             neo4j_logger.info("SUKSES: Terhubung ke database Neo4j di %s (database: %s)", self.uri, self.database)
             self.ensure_seeded()

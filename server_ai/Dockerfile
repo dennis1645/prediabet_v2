@@ -25,6 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source code, clinical knowledge base, and scripts
 COPY app/ ./app/
 COPY knowledge_base/ ./knowledge_base/
+COPY knowledge_base_new/ ./knowledge_base_new/
 COPY scripts/ ./scripts/
 
 ENV PORT=8000
