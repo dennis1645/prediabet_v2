@@ -7,7 +7,7 @@
 # Network           : prediabeat-network (Docker Bridge)
 # ==============================================================================
 
-version: "3.8"
+# version: "3.8" (obsolete in modern Compose)
 
 services:
   # ----------------------------------------------------------------------------
@@ -75,6 +75,7 @@ services:
     image: vllm/vllm-openai:latest
     container_name: prediabeat-vllm
     restart: unless-stopped
+    runtime: nvidia
     ipc: host
     ports:
       - "8000:8000"
