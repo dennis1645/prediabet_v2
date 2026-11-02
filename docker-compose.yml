@@ -30,7 +30,7 @@ services:
       - JWT_EXPIRES_IN=7d
       - DATABASE_FILE=./data/prediabeat.db
       - CLIENT_ORIGIN=http://localhost:5000
-      - AI_SERVER_URL=http://server_ai:8000/api/chat
+      - AI_SERVER_URL=http://prediabeat-server-ai:8000/api/chat
     volumes:
       - prediabeat-db-data:/app/backend/data
     networks:
@@ -63,7 +63,11 @@ services:
       - ./server_ai/knowledge_base_new:/app/knowledge_base_new
       - ./logs:/app/logs
     networks:
-      - prediabeat-network
+      prediabeat-network:
+        aliases:
+          - prediabeat-server-ai
+          - server-ai
+          - server_ai
     depends_on:
       - vllm
       - neo4j

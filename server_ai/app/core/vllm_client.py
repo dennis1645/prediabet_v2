@@ -274,17 +274,17 @@ class VLLMInferenceClient:
             if dish:
                 dish_title = dish.get("nama_makanan") or dish.get("nama") or "Resep Masakan Sehat"
                 return (
-                    f"Resep {dish_title}\n\n"
-                    f"1. **Judul Menu:** {dish_title}\n\n"
-                    f"2. **Nilai Gizi (Estimasi Saji):**\n"
-                    f"• Kalori: ~{dish.get('kalori', 0)} kkal\n"
-                    f"• Protein: ~{dish.get('protein', 0)} gram\n"
-                    f"• Karbohidrat: ~{dish.get('karbohidrat', 0)} gram\n"
-                    f"• Lemak: ~{dish.get('lemak', 0)} gram\n"
-                    f"• Indeks Glikemik: {dish.get('gi_category', 'GI Rendah (< 55)')}\n\n"
-                    f"3. **Bahan Utama:**\n{dish.get('bahan', '-')}\n\n"
-                    f"4. **Langkah Pengolahan:**\n{dish.get('langkah', '-')}\n\n"
-                    f"5. **Tips Klinis Stabilitas Gula Darah:**\n{dish.get('alasan_klinis', 'Gunakan bumbu rempah alami dan hindari pemanasan minyak berulang untuk menjaga sensitivitas insulin.')}\n\n"
+                    f"### 🍲 **{dish_title}** *(Pola 3J Ramah Glukosa)*\n\n"
+                    f"📊 **Nilai Gizi per Porsi:**\n"
+                    f"• **Kalori:** ~**{dish.get('kalori', 0)} kkal**\n"
+                    f"• **Protein:** **{dish.get('protein', 0)}g** *(membantu rasa kenyang & sensitivitas insulin)*\n"
+                    f"• **Karbohidrat:** **{dish.get('karbohidrat', 0)}g** *(pelepasan lambat)*\n"
+                    f"• **Lemak:** **{dish.get('lemak', 0)}g**\n"
+                    f"• **Indeks Glikemik:** **{dish.get('gi_category', 'GI Rendah (< 55)')}**\n\n"
+                    f"🛒 **Bahan Utama:**\n{dish.get('bahan', '-')}\n\n"
+                    f"👩‍🍳 **Cara Memasak Praktis:**\n{dish.get('langkah', '-')}\n\n"
+                    f"💡 **Catatan Nutrisi Dr. Predi:**\n"
+                    f"**{dish.get('alasan_klinis', 'Gunakan bumbu rempah alami dan hindari pemanasan minyak berulang untuk menjaga sensitivitas insulin.')}**\n\n"
                     f"Apakah ada menu atau bahan lain yang ingin Anda konsultasikan, {username}?"
                 )
 

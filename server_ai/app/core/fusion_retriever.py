@@ -215,44 +215,27 @@ class HybridGraphVectorFusion:
         if db_cache and isinstance(db_cache, str) and db_cache.strip():
             dossier_lines.append(db_cache.strip())
 
-        # Rekam medis pasien HANYA dimasukkan sesuai kebutuhan spesifik:
-        if is_identity_query(user_query):
-            raw_name = getattr(user_context, "nama", None) or getattr(user_context, "username", "Pasien")
-            dossier_lines.append(f"• Identitas Pasien: Nama {patient_name} (Username: {getattr(user_context, 'username', '-')}).")
-        elif any(k in ql for k in ["umur", "usia"]):
-            if getattr(user_context, "usia", None):
-                dossier_lines.append(f"• Usia Pasien: {user_context.usia} tahun.")
-            else:
-                dossier_lines.append(f"• Usia Pasien: Belum ada data usia yang diisi di profil.")
-        elif any(k in ql for k in ["berat", "bb"]):
-            if getattr(user_context, "berat_badan", None):
-                dossier_lines.append(f"• Berat Badan Pasien: {user_context.berat_badan} kg.")
-            else:
-                dossier_lines.append(f"• Berat Badan Pasien: Belum ada data berat badan yang diisi di profil.")
-        elif any(k in ql for k in ["tinggi", "tb"]):
-            if getattr(user_context, "tinggi_badan", None):
-                dossier_lines.append(f"• Tinggi Badan Pasien: {user_context.tinggi_badan} cm.")
-            else:
-                dossier_lines.append(f"• Tinggi Badan Pasien: Belum ada data tinggi badan yang diisi di profil.")
-        elif any(k in ql for k in ["alergi", "pantangan"]):
-            dossier_lines.append(f"• Pantangan Alergi: {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'}.")
-        elif any(k in ql for k in ["sehat", "ideal", "bmi", "kondisi", "gawat", "bahaya", "gimana", "bagaimana"]):
-            bb_val = f"{user_context.berat_badan} kg" if getattr(user_context, "berat_badan", None) else "belum tercatat"
-            tb_val = f"{user_context.tinggi_badan} cm" if getattr(user_context, "tinggi_badan", None) else "belum tercatat"
-            bmi_val = f"{user_context.bmi} ({user_context.kategori_bmi})" if getattr(user_context, "bmi", None) else "belum dihitung"
-            dossier_lines.append(
-                f"• Kondisi Klinis & BMI Pasien: Berat badan {bb_val}, tinggi {tb_val}, BMI {bmi_val}. "
-                f"Tidak perlu panik atau khawatir berlebihan. Dengan perbaikan pola makan 3J dan aktivitas fisik bertahap, kondisi ini sangat bisa dikendalikan dan ditingkatkan kesehatannya."
-            )
-        elif user_wants_recipe or any(k in ql for k in ["gula", "hba1c", "lab", "kalori"]):
-            dossier_lines.extend([
-                f"=== DATA REKAM MEDIS RESMI PASIEN (ACUAN KLINIS) ===",
-                f"• Nama Pasien       : {patient_name}",
-                f"• Usia Pasien       : {getattr(user_context, 'usia', None) or '-'} tahun | BMI: {getattr(user_context, 'bmi', None) or '-'} ({getattr(user_context, 'kategori_bmi', None) or '-'})",
-                f"• Hasil Lab         : GDP {getattr(user_context, 'gula_darah_puasa', None) or '-'} mg/dL | HbA1c {getattr(user_context, 'hba1c', None) or '-'}%",
-                f"• Target Energi 3J  : {getattr(user_context, 'target_kalori', None) or 1900} kkal/hari",
-                f"• PANTANGAN ALERGI  : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'} (MUTLAK DILARANG)",
-            ])
+        # Rekam medis resmi pasien dimasukkan secara konsisten sebagai acuan klinis Dr. Predi:
+        user_bb = f"{user_context.berat_badan} kg" if getattr(user_context, "berat_badan", None) else "belum tercatat"
+        user_tb = f"{user_context.tinggi_badan} cm" if getattr(user_context, "tinggi_badan", None) else "belum tercatat"
+        user_age = f"{user_context.usia} tahun" if getattr(user_context, "usia", None) else "belum tercatat"
+        user_bmi = f"{user_context.bmi} ({user_context.kategori_bmi})" if getattr(user_context, "bmi", None) else "belum dihitung"
+        user_risk = getattr(user_context, "kategori_risiko", "Prediabetes")
+        user_cal = getattr(user_context, "target_kalori", 1850)
+        user_diet = getattr(user_context, "active_diet", "Diet Gizi Seimbang 3J")
+
+        dossier_lines.extend([
+            f"=== DATA REKAM MEDIS & PROFIL RESMI PASIEN (ACUAN KLINIS DR. PREDI) ===",
+            f"• Nama Pasien        : {patient_name} (Username: {getattr(user_context, 'username', '-')})",
+            f"• Berat Badan Pasien : {user_bb}",
+            f"• Tinggi Badan Pasien: {user_tb}",
+            f"• Usia Pasien        : {user_age}",
+            f"• Indeks Massa Tubuh : {user_bmi}",
+            f"• Kategori Risiko    : {user_risk}",
+            f"• Target Kalori 3J   : {user_cal} kkal/hari ({user_diet})",
+            f"• Pantangan Alergi   : {', '.join(allergens) if allergens else 'Tidak ada pantangan khusus'}",
+            f"• Kondisi Komorbid   : {', '.join(conditions) if conditions else 'Tidak ada komorbid'}"
+        ])
 
         if specific_food and not specific_food.get("bahan"):
             food_display_name = specific_food.get('nama_makanan') or specific_food.get('nama') or 'Bahan Makanan'

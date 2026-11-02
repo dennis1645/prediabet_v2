@@ -736,7 +736,15 @@ export async function forwardChatToAI(req, res) {
       database_progress_cache: databaseProgressCacheText,
     };
 
-    const aiServerUrl = process.env.AI_SERVER_URL || "http://localhost:8000/api/chat";
+    const candidateUrls = [
+      process.env.AI_SERVER_URL,
+      "http://prediabeat-server-ai:8000/api/chat",
+      "http://server_ai:8000/api/chat",
+      "http://server-ai:8000/api/chat",
+      "http://127.0.0.1:8002/api/chat",
+      "http://localhost:8000/api/chat"
+    ].filter(Boolean);
+    const uniqueCandidateUrls = [...new Set(candidateUrls)];
 
     // Simpan pesan user ke database terisolasi
     db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
@@ -747,28 +755,40 @@ export async function forwardChatToAI(req, res) {
       now
     );
 
-    let aiData;
-    try {
-      const aiResponse = await fetch(aiServerUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: userId,
-          message: sanitizedMessage,
-          user_context: userContext,
-          chat_history: chatHistory.slice().reverse(),
-          last_suggested_recipe: req.body.last_suggested_recipe || null,
-        }),
-      });
-      if (aiResponse.ok) {
-        aiData = await aiResponse.json();
-      } else {
-        const errText = await aiResponse.text();
-        console.error(`[AI Server] Non-200 response (${aiResponse.status}):`, errText);
-        throw new Error(`AI server HTTP ${aiResponse.status}`);
+    let aiData = null;
+    let lastError = null;
+
+    for (const targetUrl of uniqueCandidateUrls) {
+      try {
+        const aiResponse = await fetch(targetUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: userId,
+            message: sanitizedMessage,
+            user_context: userContext,
+            chat_history: chatHistory.slice().reverse(),
+            last_suggested_recipe: req.body.last_suggested_recipe || null,
+          }),
+          signal: AbortSignal.timeout(15000),
+        });
+
+        if (aiResponse.ok) {
+          aiData = await aiResponse.json();
+          break;
+        } else {
+          const errText = await aiResponse.text();
+          console.error(`[AI Server] Non-200 response from ${targetUrl} (${aiResponse.status}):`, errText);
+          lastError = new Error(`AI server HTTP ${aiResponse.status}`);
+        }
+      } catch (err) {
+        lastError = err;
+        console.warn(`[aiContextController] Notice: Target ${targetUrl} unavailable (${err.message}). Trying next candidate...`);
       }
-    } catch (err) {
-      console.error("[aiContextController] Error connecting to AI server or handling response:", err.message);
+    }
+
+    if (!aiData) {
+      console.error("[aiContextController] All AI server candidate endpoints failed. Last error:", lastError?.message);
       aiData = {
         success: true,
         response:
@@ -776,7 +796,7 @@ export async function forwardChatToAI(req, res) {
           `Sesuai pedoman klinis PERKENI & Kemenkes RI, pastikan Anda tetap menjaga prinsip **3J (Jadwal, Jumlah, Jenis)** dan mengutamakan makanan tinggi serat serta rendah indeks glikemik.\n\n` +
           `Silakan ulangi pesan atau tanyakan kembali bahan makanan yang ingin Anda ketahui kandungan gizinya! 😊`,
         guardrail: { zero_allergen_verified: true, safety_message: "Koneksi Cadangan Aktif" },
-        telemetry: { latency_ms: 50, vllm_connected: false, error: true },
+        telemetry: { latency_ms: 50, vllm_connected: false, error: true, error_detail: lastError?.message },
       };
     }
 

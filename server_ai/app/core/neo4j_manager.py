@@ -581,10 +581,10 @@ class Neo4jClinicalGraphManager:
             "telur rebus": ["Telur Rebus", "telur ayam"],
             "mie goreng": ["Bihun goreng instan", "Mie goreng"],
             "bihun goreng": ["Bihun goreng instan", "bihun goreng"],
-            "dada ayam": ["ayam, dada", "dada ayam"],
-            "dada aym": ["ayam, dada", "dada ayam"],
-            "aym": ["ayam, dada", "dada ayam"],
-            "ayam": ["ayam, dada", "dada ayam", "ayam, daging", "ayam"],
+            "dada ayam": ["dada ayam", "ayam dada", "daging dada ayam", "fillet dada ayam"],
+            "dada aym": ["dada ayam", "ayam dada"],
+            "aym": ["dada ayam", "ayam, daging", "ayam"],
+            "ayam": ["dada ayam", "ayam, daging", "ayam"],
             "telur": ["telur ayam", "telur rebus", "telur"],
             "telor": ["telur ayam", "telur rebus", "telur"],
             "tlr": ["telur ayam", "telur rebus", "telur"],
@@ -672,6 +672,20 @@ class Neo4jClinicalGraphManager:
         def rank_food_match(item_name: str, target_keyword: str) -> tuple:
             lower = str(item_name or "").lower()
             tk = str(target_keyword or "").lower()
+
+            # Cegah kontaminasi silang (Cross-contamination prevention: Ayam vs Telur)
+            if any(k in tk for k in ["ayam", "dada", "unggas"]) and "telur" in lower and "telur" not in tk:
+                return (9999, len(lower))
+            if any(k in tk for k in ["telur", "telor"]) and ("dada ayam" in lower or ("ayam" in lower and "dada" in lower)):
+                return (9999, len(lower))
+
+            # Prioritas -2: Cocok persis (Exact match)
+            if lower == tk or lower == f"{tk}, segar" or lower == f"{tk}, mentah":
+                return (-2, len(lower))
+
+            # Prioritas -1: Prefix match
+            if lower.startswith(tk) or f" {tk}" in lower:
+                return (-1, len(lower))
             
             # Prioritas 0: Cocok persis makanan olahan / bentuk sehat standar
             if tk in ["nasi goreng", "nasgor"] and "nasi goreng" in lower:
@@ -681,6 +695,8 @@ class Neo4jClinicalGraphManager:
             if tk in ["ayam bakar"] and "ayam bakar" in lower:
                 return (0, len(lower))
             if tk in ["telur dadar"] and "telur dadar" in lower:
+                return (0, len(lower))
+            if tk in ["dada ayam"] and "dada ayam" in lower:
                 return (0, len(lower))
 
             is_pure_tofu = tk in ["tahu", "tahu putih", "tahu kukus"] and lower in ["tahu kukus", "tahu rebus", "tahu, mentah", "tahu"]
@@ -711,7 +727,16 @@ class Neo4jClinicalGraphManager:
                 except ValueError:
                     pass
 
-            if "nasi goreng" in f_name_lower or "nasgor" in f_name_lower:
+            if "dada ayam" in f_name_lower or "dada ayam" in user_q:
+                item_copy["porsi_label"] = f"{qty} Potong Dada Ayam (~{qty * 100} gram)" if qty > 1 else "1 Potong Dada Ayam (~100 gram)"
+                item_copy["kalori"] = 165 * qty
+                item_copy["protein"] = round(31.0 * qty, 1)
+                item_copy["karbohidrat"] = 0
+                item_copy["lemak"] = round(3.6 * qty, 1)
+                item_copy["gi"] = 0
+                item_copy["cara_olah"] = "Kukus/Panggang tanpa kulit dan tanpa minyak jelantah"
+                item_copy["alasan_klinis"] = "Dada ayam tanpa kulit merupakan sumber protein murni berkualitas tinggi (lean protein) bebas karbohidrat dan sangat ramah respon insulin."
+            elif "nasi goreng" in f_name_lower or "nasgor" in f_name_lower:
                 item_copy["porsi_label"] = f"{qty} Piring Standar (~{qty * 280} gram)" if qty > 1 else "1 Piring Standar (~280 gram)"
                 item_copy["kalori"] = 420 * qty
                 item_copy["protein"] = 12 * qty
@@ -780,6 +805,11 @@ class Neo4jClinicalGraphManager:
                            coalesce(m.glikemik_indeks, CASE WHEN m.glikemik_risk = 'low' THEN 25.0 WHEN m.glikemik_risk = 'high' THEN 70.0 ELSE 45.0 END) AS gi,
                            coalesce(m.kategori_spesifik, 'Bahan Makanan') AS kategori,
                            coalesce(m.cara_olah, 'Kukus/Rebus') AS cara_olah
+                    ORDER BY CASE
+                        WHEN toLower(coalesce(m.nama_kanonik, m.nama_resep, m.nama_makanan, '')) = toLower($target) THEN 0
+                        WHEN toLower(coalesce(m.nama_kanonik, m.nama_resep, m.nama_makanan, '')) STARTS WITH toLower($target) THEN 1
+                        ELSE 2
+                    END, size(coalesce(m.nama_kanonik, m.nama_resep, m.nama_makanan, '')) ASC
                     LIMIT 10
                     """
                     try:

@@ -154,6 +154,17 @@ def is_identity_query(user_query: str) -> bool:
     return any(p in ql for p in patterns)
 
 
+def is_profile_metrics_query(user_query: str) -> bool:
+    """Mendeteksi apakah pertanyaan pasien menanyakan data fisik / rekam medis (berat badan, tinggi, usia, BMI, dll)."""
+    ql = (user_query or "").lower().strip()
+    return any(k in ql for k in [
+        "berat", "abdan", "badan", "tinggi", "tb", "bb", "usia", "umur", "bmi",
+        "kalori", "tdee", "gula darah", "gula", "hba1c", "kolesterol", "tensi",
+        "alergi", "pantangan", "komorbid", "profil", "data saya", "rekam medis",
+        "status gizi", "ideal", "kurus", "gemuk", "obesitas", "kategori"
+    ])
+
+
 def build_vllm_messages(
     user_query: str,
     clinical_dossier: str,
@@ -215,18 +226,32 @@ def build_vllm_messages(
             f"- Berikan langkah pengolahan praktis yang higienis dan nikmat.\n"
             f"- DILARANG menyarankan gula merah pekat, gula pasir, atau minyak jelantah!"
         )
-    # 3. Jika pertanyaan identitas pengguna ("siapa saya?", "nama saya siapa?")
-    elif is_identity_query(user_query):
+    # 3. Jika pertanyaan identitas pengguna dan/atau data fisik rekam medis
+    elif is_identity_query(user_query) or is_profile_metrics_query(user_query):
         username_str = getattr(user_context, "username", "")
+        bb_str = f"{getattr(user_context, 'berat_badan', None)} kg" if getattr(user_context, 'berat_badan', None) else "belum tercatat di profil"
+        tb_str = f"{getattr(user_context, 'tinggi_badan', None)} cm" if getattr(user_context, 'tinggi_badan', None) else "belum tercatat di profil"
+        usia_str = f"{getattr(user_context, 'usia', None)} tahun" if getattr(user_context, 'usia', None) else "belum tercatat di profil"
+        bmi_str = f"{getattr(user_context, 'bmi', None)} ({getattr(user_context, 'kategori_bmi', 'Normal')})" if getattr(user_context, 'bmi', None) else "belum dihitung"
+        cal_str = f"{getattr(user_context, 'target_kalori', 1850)} kkal/hari"
+        risk_str = getattr(user_context, 'kategori_risiko', 'Prediabetes')
+
         current_user_content = (
-            f"[Profil Pasien]: Nama {patient_name} (Username: {username_str}).\n"
+            f"{clinical_dossier}\n\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
-            f"[Instruksi Respon]:\n"
-            f"- Pasien menanyakan identitas dirinya.\n"
-            f"- Sapa dengan hangat: sebutkan bahwa pasien adalah {patient_name} (akun username: {username_str}).\n"
-            f"- Sampaikan bahwa Anda adalah Dr. Predi, dokter konsultan nutrisi klinis pribadinya di PrediaBeat yang siap membantu pola makan ramah gula darahnya.\n"
-            f"- DILARANG menyebut nama lain (seperti Pak Budi) jika pasien ini bernama {patient_name}!\n"
-            f"- Cukup 1-2 kalimat ramah dan lugas."
+            f"[Instruksi Respon Identitas & Rekam Medis]:\n"
+            f"- Sapa pasien dengan hangat dan hormat: '{patient_name}'.\n"
+            f"- Jika pasien menanyakan identitas (siapa saya?): Tegaskan bahwa beliau adalah {patient_name} (akun username: {username_str}) dan Anda adalah Dr. Predi, dokter konsultan nutrisi klinis pribadinya di PrediaBeat.\n"
+            f"- Jika pasien menanyakan data fisik atau rekam medis (berat badan, tinggi badan, usia, BMI, kalori): JAWAB SECARA SPESIFIK DAN EKSPLISIT DENGAN ANGKA AKURAT DARI DATA RESMI BERIKUT:\n"
+            f"  • Berat Badan: **{bb_str}**\n"
+            f"  • Tinggi Badan: **{tb_str}**\n"
+            f"  • Usia: **{usia_str}**\n"
+            f"  • Indeks Massa Tubuh (BMI): **{bmi_str}**\n"
+            f"  • Kategori Risiko: **{risk_str}**\n"
+            f"  • Target Energi Harian: **{cal_str}**\n"
+            f"- Jika pasien bertanya kombinasi (misal 'Saya siapa? berapa berat badan saya?'): Jawab KEDUA pertanyaan tersebut secara runtut, jelas, ramah, dan percaya diri!\n"
+            f"- DILARANG menyodorkan resep masakan jika pasien hanya bertanya identitas atau data fisik!\n"
+            f"- Berikan kalimat penutup yang hangat dan tanyakan kebutuhan nutrisi atau menu yang ingin dikonsultasikan hari ini."
         )
     # 4. Jika hanya sapaan pendek, test, atau ucapan terima kasih
     elif is_short_greeting_or_test(user_query):
@@ -317,14 +342,22 @@ def build_vllm_messages(
                 f"- Langkah Memasak Resmi: {rag_langkah}\n"
                 f"- Tips Klinis 3J: {rag_tips}\n"
                 f"- Pantangan Pasien yang DILARANG: {allergen_str}\n\n"
-                f"[Instruksi Respon Resep Lengkap]:\n"
+                f"[Instruksi Respon Resep Lengkap Cantik & Terstruktur]:\n"
                 f"- Pasien secara EKSPLISIT meminta resep/cara masak hidangan ini ({food_title}).\n"
-                f"- Sajikan resep lengkap dan ramah prediabetes dengan format rapi:\n"
-                f"  1. Judul Menu\n"
-                f"  2. Nilai Gizi (Kalori, Protein, Karbohidrat, Lemak, GI Rendah)\n"
-                f"  3. Bahan Utama (PILIH HANYA BAHAN SEHAT DARI DATA RESEP, DILARANG KERAS MENGGUNAKAN {allergen_str})\n"
-                f"  4. Langkah Pengolahan (rebus/kukus/tumis kuah bening tanpa minyak jelantah)\n"
-                f"  5. Tips Klinis Stabilitas Gula Darah\n"
+                f"- Sajikan resep menggunakan format Markdown estetik, per-list rapi, dengan sorotan bold pada judul dan angka penting (DILARANG teks polos bertele-tele):\n\n"
+                f"  ### 🍲 **{food_title}** *(Pola 3J Ramah Glukosa)*\n\n"
+                f"  📊 **Nilai Gizi per Porsi:**\n"
+                f"  • **Kalori:** ~**{specific_food.get('kalori', 150)} kkal**\n"
+                f"  • **Protein:** **{specific_food.get('protein', 15)}g** *(mendukung rasa kenyang & massa otot)*\n"
+                f"  • **Karbohidrat:** **{specific_food.get('karbohidrat', 12)}g** *(pelepasan lambat)*\n"
+                f"  • **Lemak:** **{specific_food.get('lemak', 4)}g**\n"
+                f"  • **Indeks Glikemik:** **GI Rendah (< 55)**\n\n"
+                f"  🛒 **Bahan Utama & Bumbu:**\n"
+                f"  (Buat daftar poin rapi berisi 4-6 bahan terpenting, sorot takaran secara tebal, misal: • **100g** Bahan utama, • **2 siung** Bawang putih)\n\n"
+                f"  👩‍🍳 **Cara Memasak Praktis:**\n"
+                f"  (Gunakan nomor 1, 2, 3 singkat dan padat, sorot teknik pengolahan sehat: **Rebus**, **Kukus**, **Tumis air**)\n\n"
+                f"  💡 **Catatan Nutrisi Dr. Predi:**\n"
+                f"  **{rag_tips}**\n\n"
                 f"- Pastikan 100% bebas dari pantangan alergi: {allergen_str}."
             )
         elif is_menu_suggestion:
@@ -340,11 +373,16 @@ def build_vllm_messages(
                 f"- Nama Hidangan Rekomendasi: {food_title}\n"
                 f"- Estimasi Kalori: ~{cal_val} kkal | Protein: ~{prot_val}g | Karbo: ~{carb_val}g | Lemak: ~{fat_val}g\n"
                 f"- Keunggulan Klinis: {clinical_tips}\n\n"
-                f"[Instruksi Respon Saran Menu (INGAT ATURAN EMAS)]: \n"
-                f"- Pasien HANYA meminta ide atau saran menu hidangan ({user_query}), PASIEN TIDAK / BELUM MEMINTA RESEP!\n"
-                f"- DILARANG KERAS MENYODORKAN LANGKAH MEMASAK, DAFTAR BUMBU LENGKAP, ATAU CARA MEMBUAT!\n"
-                f"- Sajikan nama hidangan yang direkomendasikan ({food_title}), sebutkan ringkasan kalorinya (~{cal_val} kkal), dan jelaskan 1-2 kalimat keunggulan kesehatannya.\n"
-                f"- Di akhir kalimat, tanyakan dengan ramah apakah pasien ingin dibuatkan langkah resep lengkapnya: 'Apakah Bapak/Ibu ingin saya bagikan resep dan cara membuatnya?'"
+                f"[Instruksi Respon Saran Menu Cantik]: \n"
+                f"- Pasien meminta ide/saran menu hidangan ({user_query}). Sajikan secara elegan dan terstruktur per-list:\n\n"
+                f"  Halo {patient_name}! Berikut rekomendasi hidangan lezat dan ramah respon insulin Anda hari ini:\n\n"
+                f"  🍲 **{food_title}**\n"
+                f"  • **Estimasi Kalori:** ~**{cal_val} kkal**\n"
+                f"  • **Makronutrisi:** Protein **{prot_val}g** • Karbo **{carb_val}g** • Lemak **{fat_val}g**\n"
+                f"  • **Indeks Glikemik:** **GI Rendah** *(aman untuk respon insulin)*\n"
+                f"  • **Keunggulan Klinis:** **{clinical_tips}**\n\n"
+                f"  Di akhir kalimat, tanyakan dengan ramah: 'Apakah {salutation} ingin saya bagikan resep dan langkah praktis membuatnya?'\n"
+                f"- DILARANG KERAS menyodorkan daftar bumbu panjang atau langkah memasak jika pasien belum meminta resep!"
             )
         else:
             carb_val = specific_food.get('karbohidrat') if specific_food.get('karbohidrat') is not None else specific_food.get('karbo', 0)
@@ -399,16 +437,16 @@ def build_vllm_messages(
         if user_explicitly_wants_full_recipe:
             recipe_guidance = (
                 f"- Pasien secara eksplisit meminta resep masakan.\n"
-                f"- Sajikan 1 resep masakan Nusantara ramah 3J (misal Sayur Bening Bayam Oyong atau Pepes Ikan Mas Daun Kemangi).\n"
-                f"- Format: Judul, Nilai Gizi Singkat, Bahan, Langkah Pengolahan, dan Tips Klinis.\n"
+                f"- Sajikan 1 resep masakan Nusantara ramah 3J dengan format estetik Markdown per-list (Header ###, bullet gizi dengan angka tebal, bahan utama rapi dengan takaran tebal, langkah bernomor 1-2-3 singkat, dan catatan dokter tebal).\n"
+                f"- DILARANG menulis teks polos panjang tanpa formatting bold!\n"
                 f"- DILARANG KERAS MENGGUNAKAN BAHAN PANTANGAN PASIEN ({allergen_str})!\n"
             )
         elif user_wants_menu_idea:
             recipe_guidance = (
                 f"- Pasien menanyakan ide/saran makanan. Pasien TIDAK meminta resep lengkap.\n"
-                f"- Sebutkan 1-2 nama hidangan ramah glukosa yang cocok (misal Sayur Bening Bayam Oyong atau Soto Ayam Kuah Bening) beserta estimasi kalori dan 1 kalimat alasan kesehatannya.\n"
+                f"- Sebutkan 1-2 nama hidangan ramah glukosa yang cocok dengan format rapi (bullet list dengan kalori tebal dan keunggulan klinis tebal).\n"
                 f"- DILARANG KERAS MENULIS LANGKAH MEMASAK ATAU DAFTAR BUMBU LENGKAP KARENA PASIEN BELUM MEMINTA RESEP!\n"
-                f"- Di akhir respon, tanyakan: 'Apakah ingin saya buatkan resep lengkap untuk salah satu hidangan tersebut?'\n"
+                f"- Di akhir respon, tanyakan: 'Apakah {salutation} ingin saya buatkan resep lengkap untuk salah satu hidangan tersebut?'\n"
             )
         elif any(k in ql for k in ["user lain", "pasien lain", "orang lain", "data orang"]):
             recipe_guidance = (
