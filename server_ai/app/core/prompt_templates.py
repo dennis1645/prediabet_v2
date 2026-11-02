@@ -59,7 +59,7 @@ def get_patient_salutation(user_context: Optional[Any] = None) -> str:
 
 
 def get_clinical_system_prompt(user_context: Optional[Any] = None) -> str:
-    """Membangun system prompt klinis dokter nutrisi dinamis per pengguna."""
+    """Membangun system prompt klinis dokter nutrisi dinamis dan adaptif per profil & usia pengguna."""
     patient_name = get_patient_display_name(user_context)
     salutation = get_patient_salutation(user_context)
     
@@ -71,14 +71,44 @@ def get_clinical_system_prompt(user_context: Optional[Any] = None) -> str:
     else:
         allergen_str = "Tidak ada pantangan alergi khusus"
 
-    return f"""Anda adalah Dr. Predi, Dokter Spesialis Nutrisi Klinis Pribadi {patient_name} (PrediaBeat).
+    raw_age = getattr(user_context, "usia", None) if user_context else None
+    try:
+        age = int(raw_age) if raw_age is not None else 45
+    except (ValueError, TypeError):
+        age = 45
+
+    if age < 35:
+        tone_persona = (
+            f"TARGET PASIEN: Generasi Muda / Gen-Z & Milenial (~{age} tahun).\n"
+            f"- GAYA KOMUNIKASI: Sangat santai, luwes, bersahabat, suportif, dan anti-kaku ('dokter muda yang asik').\n"
+            f"- Hindari bahasa birokratis formal yang kaku atau menggurui.\n"
+            f"- Berikan penjelasan gizi dengan bahasa kekinian yang mudah dipahami.\n"
+            f"- Berikan tips realistis dan solutif untuk gaya hidup anak muda (kulineran di luar, pesan antar, nongkrong di kafe/resto).\n"
+            f"- Tunjukkan optimisme: prediabetes bisa dikendalikan dengan fleksibel tanpa harus makan serba hambar atau tersiksa!"
+        )
+    else:
+        tone_persona = (
+            f"TARGET PASIEN: Dewasa / Senior (~{age} tahun).\n"
+            f"- GAYA KOMUNIKASI: Hangat, santun, membumi, penuh rasa hormat, menenangkan, dan solutif.\n"
+            f"- Gunakan analogi sederhana dan berikan semangat positif agar pasien merasa didampingi penuh dalam menjaga kesehatan."
+        )
+
+    return f"""Anda adalah Dr. Predi, Dokter Spesialis Nutrisi Klinis Pribadi {patient_name} di PrediaBeat.
+
+{tone_persona}
 
 PRINSIP KOMUNIKASI DOKTER CERDAS, NATURAL, & AMAN:
 1. PANGGILAN & TONE:
    - Pasien Anda adalah {patient_name}. Selalu panggil dengan "{patient_name}" atau "{salutation}".
    - DILARANG memanggil dengan nama pengguna lain (seperti Pak Budi) jika pasien ini bernama {patient_name}!
-   - Bersikaplah cerdas, tenang, to-the-point, dan ramah seperti dokter spesialis nutrisi asli.
-   - JANGAN mengulang-ulang kalimat klise di setiap pesan! (DILARANG: "Jangan khawatir...", "Semoga hari Anda menyenangkan...", "Bagaimana informasi ini membantu Bapak/Ibu?").
+   - Bersikaplah cerdas, komunikatif, dan alami layaknya dokter spesialis nutrisi asli yang sedang berbincang santai tapi solutif.
+   - DILARANG KERAS menggunakan kalimat klise robotik AI seperti:
+     * "Bagaimana informasi ini membantu Anda?"
+     * "Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?"
+     * "Apakah ada hal lain yang bisa saya bantu?"
+     * "Pilihan yang baik untuk diet Anda."
+     * "Semoga hari Anda menyenangkan!"
+   - Akhiri penjelasan secara natural: boleh memberikan 1 kalimat pemantik obrolan seputar menu makanannya atau tuntas langsung tanpa basa-basi berulang.
    - Jika pasien tidak sedang cemas atau panik, TIDAK PERLU mengucapkan "jangan khawatir" atau "tidak perlu panik"! Jawab langsung substansinya.
 
 2. ATURAN INTENT PERTANYAAN (JAWAB HANYA APA YANG DITANYAKAN):
@@ -163,6 +193,30 @@ def is_profile_metrics_query(user_query: str) -> bool:
         "alergi", "pantangan", "komorbid", "profil", "data saya", "rekam medis",
         "status gizi", "ideal", "kurus", "gemuk", "obesitas", "kategori"
     ])
+
+
+def is_dietary_counseling_query(user_query: str) -> bool:
+    """Mendeteksi pertanyaan konseling pola makan fleksibel: apakah boleh makan makanan tertentu (nasi padang, durian, mie instan, gorengan, es krim, dll)."""
+    ql = (user_query or "").lower().strip()
+    patterns = [
+        "boleh gak", "boleh tidak", "bolehkah", "apakah boleh", "bisa gak", "bisa tidak", "bisakah",
+        "aman gak", "aman tidak", "amankah", "bahaya gak", "bahayakah", "pantangan gak",
+        "gimana kalau mau makan", "bagaimana kalau makan", "boleh makan", "boleh konsumsi",
+        "apakah aman", "apakah berbahaya", "apakah penderita prediabetes boleh", "kalo makan", "kalau makan",
+        "pengen makan", "kepingin makan", "ngidam", "tips makan di", "cara makan di", "makan di restoran",
+        "makan di rm", "makan di warung", "makan padang"
+    ]
+    return any(p in ql for p in patterns)
+
+
+def is_clarification_or_correction(user_query: str) -> bool:
+    """Mendeteksi koreksi dari pasien jika AI salah memahami konteks (misal 'itu mah nasi putih bukan nasi padang')."""
+    ql = (user_query or "").lower().strip()
+    patterns = [
+        "bukan itu", "itu mah", "bukan ini", "salah dok", "maksud saya", "maksudku",
+        "bukan maksudnya", "kok malah", "kan saya nanya", "kan aku nanya", "bukan nasi putih"
+    ]
+    return any(p in ql for p in patterns)
 
 
 def build_vllm_messages(
@@ -276,7 +330,56 @@ def build_vllm_messages(
             f"[Instruksi Khusus]:\n"
             f"{resp_instruction}"
         )
-    # 5. Jika ada bahan makanan spesifik atau rekomendasi menu / resep terdeteksi
+    # 5. Jika pasien melakukan klarifikasi atau koreksi (misal: 'itu mah nasi putih bukan nasi padang')
+    elif is_clarification_or_correction(user_query):
+        ql = (user_query or "").lower().strip()
+        corrected_topic = "Nasi Padang" if any(p in ql for p in ["padang", "nasi padang", "ansi padang"]) else "makanan yang Anda maksud"
+        current_user_content = (
+            f"{clinical_dossier}\n\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Respon Koreksi Pasien]:\n"
+            f"- Pasien mengoreksi kekeliruan pemahaman: pasien TIDAK bermaksud membahas nasi putih, melainkan sedang mengonfirmasi {corrected_topic}!\n"
+            f"- Tanggapi dengan santun, luwes, dan bersahabat (misal: 'Wah mohon maaf {salutation}! Betul sekali, maksud {salutation} tadi {corrected_topic} ya, bukan nasi putih polos. Mari kita bahas {corrected_topic}!').\n"
+            f"- Langsung berikan edukasi klinis dan strategi makan {corrected_topic} yang ramah prediabetes:\n"
+            f"  • **Prinsip Utama:** Penderita prediabetes **TETAP BOLEH** menikmati {corrected_topic}! Kuncinya adalah kontrol porsi karbohidrat dan pemilihan lauk.\n"
+            f"  • **Atur Porsi Nasi:** Minta 1/2 porsi nasi putih saja.\n"
+            f"  • **Pilihan Lauk:** Pilih Ayam Pop (tanpa kulit), Ikan Bakar, atau Telur dibanding olahan santan jenuh tinggi.\n"
+            f"  • **Perbanyak Serat:** Minta ekstra sayur daun singkong rebus atau lalap timun tanpa siraman kuah santan.\n"
+            f"  • **Trik Kuah Santan:** Minta kuah gulai/rendang dipisah di mangkok kecil untuk aroma rasa saja, jangan disiram banjir ke nasi.\n"
+            f"  • **Urutan Makan:** Santap serat sayur dan protein lauk terlebih dahulu sebelum nasi putih.\n"
+            f"- DILARANG KERAS mengulang penjelasan nasi putih polos lagi!\n"
+            f"- DILARANG menutup dengan kalimat klise AI robotik."
+        )
+    # 6. Jika pertanyaan konseling edukasi pola makan (Boleh gak penderita prediabetes makan nasi padang / durian / mie / dll)
+    elif is_dietary_counseling_query(user_query):
+        ql = (user_query or "").lower().strip()
+        food_name = (specific_food.get("nama_makanan") or specific_food.get("nama")) if specific_food else ""
+        if not food_name or any(w in food_name.lower() for w in ["putih", "menu sehat", "bahan makanan"]):
+            for candidate in ["nasi padang", "padang", "durian", "mie instan", "mie", "bakso", "gorengan", "es krim", "boba", "sate", "pizza", "burger"]:
+                if candidate in ql:
+                    food_name = candidate.title()
+                    break
+        if not food_name:
+            food_name = "makanan tersebut"
+
+        current_user_content = (
+            f"{clinical_dossier}\n\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Konseling Edukasi Diet Realistis (Pola 3J & Food Sequencing)]: \n"
+            f"- Pasien menanyakan apakah aman/boleh makan '{food_name}' untuk penderita prediabetes ({user_query}).\n"
+            f"- TONE: Hangat, luwes, menenangkan, modern, dan bebas penghakiman (non-judgmental).\n"
+            f"- PRINSIP KLINIS UTAMA: TEGASKAN BAHWA PENDERITA PREDIABETES TETAP BOLEH MAKAN '{food_name}'! Prediabetes bukan vonis pantangan ekstrem yang menyiksa. Kuncinya ada pada manajemen **3J (Jadwal, Jumlah, Jenis)** dan urutan makan (*food sequencing*).\n"
+            f"- STRATEGI PRAKTIS & CERDAS: Sajikan panduan taktis yang bisa langsung dipraktekkan secara ber-list rapi dengan poin-poin tebal (**bold**):\n"
+            f"  • **Atur Porsi Nasi / Karbohidrat (Jumlah):** Jika Nasi Padang, minta 1/2 porsi nasi saja (jangan 1 piring munjung) agar beban glikemik tetap aman bagi respon insulin.\n"
+            f"  • **Pilihan Lauk Cerdas (Jenis):** Prioritaskan lauk minim santan kental atau minyak jenuh berulang, misalnya Ayam Pop (tanpa kulit), Ikan Bakar/Panggang, atau Telur Dadar/Rebus.\n"
+            f"  • **Perbanyak Serat Sayuran:** Minta ekstra sayuran seperti Daun Singkong Rebus atau Lalapan Timun segar (pastikan tanpa siraman kuah santan kental) untuk memperlambat laju absorpsi glukosa.\n"
+            f"  • **Trik Kuah Santan:** Minta kuah gulai/rendang dipisah di wadah kecil. Cukup ambil 1-2 sendok untuk aroma gurih, jangan disiram basah ke seluruh piring.\n"
+            f"  • **Urutan Makan (Food Sequencing):** Habiskan sayuran serat dan lauk protein terlebih dahulu, baru santap nasi di bagian akhir. Urutan ini secara klinis terbukti memperlandai kurva glukosa postprandial (*flatten the glucose curve*).\n"
+            f"  • **Pilihan Minuman:** Dampingi dengan air putih atau teh tawar hangat, hindari es teh manis atau jus buah dengan kental manis.\n"
+            f"- Jika makanan yang ditanyakan adalah jenis lain (misal durian/mie/bakso/es krim), adaptasikan tipsnya secara proporsional (porsi kecil, frekuensi sesekali sebagai *occasional treat*, jangan tiap hari, dan imbangi jalan kaki 15-20 menit).\n"
+            f"- DILARANG KERAS menutup dengan kalimat klise AI robotik ('Bagaimana informasi ini membantu Anda?' atau 'Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?'). Tanyakan santai seputar lauk favorit yang biasa dipilih pasien!"
+        )
+    # 7. Jika ada bahan makanan spesifik atau rekomendasi menu / resep terdeteksi
     elif specific_food:
         ql = (user_query or "").lower().strip()
         is_multi_menu_request = any(k in ql for k in ["3 menu", "tiga menu", "2 menu", "dua menu", "beberapa menu", "pilihan menu", "opsi menu"])
@@ -416,6 +519,7 @@ def build_vllm_messages(
                 f"- Pasien HANYA menanyakan kandungan nutrisi bahan ini.\n"
                 f"- JAWAB LANGSUNG KANDUNGAN NUTRISINYA: 'Untuk {portion_prefix} {food_title}, {nutrisi_utama}.'\n"
                 f"- DILARANG KERAS menyodorkan resep masakan panjang atau jadwal makan!\n"
+                f"- DILARANG KERAS menutup dengan kalimat klise AI robotik seperti 'Bagaimana informasi ini membantu Anda?' atau 'Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?'!\n"
                 f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
             )
     # 6. Pesan konsultasi mengalir umum
@@ -468,7 +572,8 @@ def build_vllm_messages(
             f"[Instruksi Respon]:\n"
             f"{greeting_instruction}"
             f"{recipe_guidance}"
-            f"- Gunakan Bahasa Indonesia dokter spesialis yang cerdas, hangat, presisi, dan alami."
+            f"- Gunakan Bahasa Indonesia dokter spesialis yang cerdas, hangat, presisi, dan alami.\n"
+            f"- DILARANG KERAS menutup dengan kalimat klise AI robotik seperti 'Bagaimana informasi ini membantu Anda?' atau 'Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?'!"
         )
 
     messages.append({"role": "user", "content": current_user_content})

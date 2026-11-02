@@ -567,6 +567,12 @@ class Neo4jClinicalGraphManager:
 
         COMMON_FOOD_ALIASES = {
             # Hidangan Olahan Populer & Porsi Lengkap (Diprioritaskan sebelum kata tunggal)
+            "nasi padang ayam pop": ["Nasi Padang Ayam Pop", "nasi padang"],
+            "nasi padang rendang": ["Nasi Padang Lauk Rendang", "nasi padang"],
+            "nasi padang keliling": ["Nasi Padang Keliling (Porsi)", "nasi padang"],
+            "nasi padang": ["Nasi Padang Keliling (Porsi)", "Nasi Padang Ayam Pop", "Nasi Padang Lauk Rendang", "nasi padang"],
+            "padang": ["Nasi Padang Keliling (Porsi)", "Nasi Padang Ayam Pop", "nasi padang"],
+            "ansi padang": ["Nasi Padang Keliling (Porsi)", "Nasi Padang Ayam Pop", "nasi padang"],
             "nasi goreng spesial": ["Nasi Goreng Spesial (Telur + Ayam)", "Nasi Goreng"],
             "nasi goreng tuna": ["Nasi Goreng Tuna", "Nasi Goreng"],
             "nasi goreng shirataki": ["Nasi Goreng Shirataki (Diet)", "Nasi Goreng"],
@@ -640,8 +646,18 @@ class Neo4jClinicalGraphManager:
             return None
 
         # 1. PRIORITAS UTAMA: Cari kecocokan frasa makanan langsung di query pasien saat ini!
+        # Deteksi negasi/koreksi pasien: contoh 'itu mah nasi putih bukan nasi padang' -> abaikan 'nasi putih'
+        negated_terms = set()
+        for neg_match in re.finditer(r"(?:bukan|jangan|bukanlah|itu mah|itu kan)\s+([a-zA-Z\s]{2,20})", q, re.IGNORECASE):
+            neg_chunk = neg_match.group(1).strip()
+            for ak in COMMON_FOOD_ALIASES.keys():
+                if ak in neg_chunk:
+                    negated_terms.add(ak)
+
         search_terms = []
         for alias_key in sorted(COMMON_FOOD_ALIASES.keys(), key=len, reverse=True):
+            if alias_key in negated_terms:
+                continue
             # Gunakan regex word-boundary agar kata seperti "ikan" TIDAK cocok di dalam "pendidikan" atau "bisikan"
             pattern = rf"\b{re.escape(alias_key)}\b"
             if re.search(pattern, q, re.IGNORECASE) and alias_key not in search_terms:
@@ -678,6 +694,12 @@ class Neo4jClinicalGraphManager:
                 return (9999, len(lower))
             if any(k in tk for k in ["telur", "telor"]) and ("dada ayam" in lower or ("ayam" in lower and "dada" in lower)):
                 return (9999, len(lower))
+
+            # Cegah kontaminasi silang Nasi Padang vs Nasi Putih biasa
+            if "padang" in tk and "padang" not in lower:
+                return (9999, len(lower))
+            if "padang" in tk and "padang" in lower:
+                return (-2, len(lower))
 
             # Prioritas -2: Cocok persis (Exact match)
             if lower == tk or lower == f"{tk}, segar" or lower == f"{tk}, mentah":
@@ -736,6 +758,15 @@ class Neo4jClinicalGraphManager:
                 item_copy["gi"] = 0
                 item_copy["cara_olah"] = "Kukus/Panggang tanpa kulit dan tanpa minyak jelantah"
                 item_copy["alasan_klinis"] = "Dada ayam tanpa kulit merupakan sumber protein murni berkualitas tinggi (lean protein) bebas karbohidrat dan sangat ramah respon insulin."
+            elif "nasi padang" in f_name_lower or "padang" in f_name_lower or "padang" in user_q:
+                item_copy["porsi_label"] = f"{qty} Porsi Nasi Padang (~{qty * 350} gram)" if qty > 1 else "1 Porsi Nasi Padang (~350 gram)"
+                item_copy["kalori"] = 580 * qty
+                item_copy["protein"] = 26 * qty
+                item_copy["karbohidrat"] = 65 * qty
+                item_copy["lemak"] = 22 * qty
+                item_copy["gi"] = 68
+                item_copy["cara_olah"] = "Kombinasi nasi putih, lauk olahan rempah/santan, dan sayur daun singkong"
+                item_copy["alasan_klinis"] = "Nasi Padang boleh dikonsumsi penderita prediabetes dengan strategi 3J: minta 1/2 porsi nasi, pilih lauk ayam pop atau ikan bakar, perbanyak sayur daun singkong tanpa kuah santan kental, dan santap serat-protein sebelum nasi."
             elif "nasi goreng" in f_name_lower or "nasgor" in f_name_lower:
                 item_copy["porsi_label"] = f"{qty} Piring Standar (~{qty * 280} gram)" if qty > 1 else "1 Piring Standar (~280 gram)"
                 item_copy["kalori"] = 420 * qty
