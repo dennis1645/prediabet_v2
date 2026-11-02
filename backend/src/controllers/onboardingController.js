@@ -52,7 +52,14 @@ export function answerOnboardingQuestion(req, res) {
 
 export function resetOnboarding(req, res) {
   try {
+    const userId = req.user.id;
     const now = new Date().toISOString();
+
+    // Hapus profil dan riwayat assessment agar user benar-benar bisa mengulang kuesioner dari nol
+    db.prepare("DELETE FROM profiles WHERE user_id = ?").run(userId);
+    db.prepare("DELETE FROM assessment_history WHERE user_id = ?").run(userId);
+    db.prepare("DELETE FROM questionnaire_drafts WHERE user_id = ?").run(userId);
+
     db.prepare(`
       INSERT INTO onboarding_progress (user_id, current_question_id, answers_json, is_completed, created_at, updated_at)
       VALUES (?, 1, '{}', 0, ?, ?)
@@ -61,9 +68,9 @@ export function resetOnboarding(req, res) {
         answers_json = '{}',
         is_completed = 0,
         updated_at = excluded.updated_at
-    `).run(req.user.id, now, now);
+    `).run(userId, now, now);
 
-    const state = getUserOnboardingState(req.user.id, req.user);
+    const state = getUserOnboardingState(userId, req.user);
     res.json({
       success: true,
       message: "Sesi wawancara berhasil diulang dari awal.",

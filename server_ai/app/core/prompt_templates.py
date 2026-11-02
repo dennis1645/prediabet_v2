@@ -22,6 +22,8 @@ def get_patient_display_name(user_context: Optional[Any] = None) -> str:
         return "Bapak/Ibu"
     
     nama_clean = str(nama).strip()
+    # Bersihkan underscore, strip, dan titik (misal: budi_santoso -> Budi Santoso)
+    nama_clean = re.sub(r'[_.-]+', ' ', nama_clean).strip().title()
     lower = nama_clean.lower()
     
     # Jika nama sudah diawali sapaan sopan
@@ -79,8 +81,9 @@ def get_clinical_system_prompt(user_context: Optional[Any] = None) -> str:
 
     if age < 35:
         tone_persona = (
-            f"TARGET PASIEN: Generasi Muda / Gen-Z & Milenial (~{age} tahun).\n"
-            f"- GAYA KOMUNIKASI: Sangat santai, luwes, bersahabat, suportif, dan anti-kaku ('dokter muda yang asik').\n"
+            f"TARGET PASIEN: Generasi Muda / Dewasa Muda (~{age} tahun).\n"
+            f"- GAYA KOMUNIKASI: Sangat santai, luwes, bersahabat, suportif, dan anti-kaku. Panggil pasien dengan '{patient_name}' atau 'kamu'.\n"
+            f"- DILARANG KERAS menggunakan kata gaul ganjil/kasar seperti 'halo lo!', 'lo/gue', 'lu', 'gw'! Gunakan bahasa santai tapi tetap santun, empatik, dan profesional (gunakan 'kamu', atau panggil nama pasien '{patient_name}').\n"
             f"- Hindari bahasa birokratis formal yang kaku atau menggurui.\n"
             f"- Berikan penjelasan gizi dengan bahasa kekinian yang mudah dipahami.\n"
             f"- Berikan tips realistis dan solutif untuk gaya hidup anak muda (kulineran di luar, pesan antar, nongkrong di kafe/resto).\n"
@@ -184,15 +187,61 @@ def is_identity_query(user_query: str) -> bool:
     return any(p in ql for p in patterns)
 
 
+def is_sugar_verification_response(user_query: str) -> bool:
+    """Mendeteksi konfirmasi takaran gula dari tombol verifikasi (misal 'Untuk Es Teh Manis, takaran gulanya: 1 sdt Gula Pasir (~16 kkal)')."""
+    ql = (user_query or "").lower().strip()
+    return "takaran gula" in ql or "takaran gulanya" in ql or ("es teh" in ql and any(k in ql for k in ["sdt", "sdm", "tawar", "tanpa gula", "gula pasir"]))
+
+
+def detect_absurd_metric(user_query: str) -> Optional[Dict[str, Any]]:
+    """Mendeteksi input metrik fisik yang secara klinis mustahil atau janggal untuk orang dewasa."""
+    ql = (user_query or "").lower()
+    # Deteksi berat badan < 30 kg atau > 250 kg
+    bb_match = re.search(r'(?:berat|bb|berat\s*badan)(?:ku|mu|nya)?\s*(?:cuma|hanya|adalah|sekarang|menjadi|jadi)?\s*[:=]?\s*(\d+(?:[.,]\d+)?)\s*(?:kg|kilo)?', ql)
+    if bb_match:
+        try:
+            val = float(bb_match.group(1).replace(',', '.'))
+            if 0 < val < 30:
+                return {"type": "berat_badan_rendah", "val": val, "unit": "kg", "suggestion": round(val + 50)}
+            elif val > 250:
+                return {"type": "berat_badan_tinggi", "val": val, "unit": "kg", "suggestion": 75}
+        except ValueError:
+            pass
+
+    # Deteksi tinggi badan < 80 cm atau > 240 cm
+    tb_match = re.search(r'(?:tinggi|tb|tinggi\s*badan)(?:ku|mu|nya)?\s*(?:cuma|hanya|adalah|sekarang|menjadi|jadi)?\s*[:=]?\s*(\d+(?:[.,]\d+)?)\s*(?:cm|meter|m)?', ql)
+    if tb_match:
+        try:
+            val = float(tb_match.group(1).replace(',', '.'))
+            if 3 < val < 80:
+                return {"type": "tinggi_badan_rendah", "val": val, "unit": "cm", "suggestion": 165}
+            elif val > 240:
+                return {"type": "tinggi_badan_tinggi", "val": val, "unit": "cm", "suggestion": 170}
+        except ValueError:
+            pass
+
+    return None
+
+
 def is_profile_metrics_query(user_query: str) -> bool:
     """Mendeteksi apakah pertanyaan pasien menanyakan data fisik / rekam medis (berat badan, tinggi, usia, BMI, dll)."""
     ql = (user_query or "").lower().strip()
-    return any(k in ql for k in [
+    if is_sugar_verification_response(user_query):
+        return False
+    metrics_keywords = [
         "berat", "abdan", "badan", "tinggi", "tb", "bb", "usia", "umur", "bmi",
-        "kalori", "tdee", "gula darah", "gula", "hba1c", "kolesterol", "tensi",
+        "tdee", "gula darah puasa", "gdp", "hba1c", "kolesterol", "tensi",
         "alergi", "pantangan", "komorbid", "profil", "data saya", "rekam medis",
-        "status gizi", "ideal", "kurus", "gemuk", "obesitas", "kategori"
-    ])
+        "status gizi", "ideal", "kurus", "gemuk", "obesitas", "kategori risiko"
+    ]
+    interrogative_tokens = [
+        "berapa", "apakah", "siapa", "cek", "lihat", "data saya", "rekam medis",
+        "profil saya", "kondisi saya", "bagaimana", "gimana", "apa saja", "status saya",
+        "apakah saya", "berat badan saya", "tinggi saya", "umur saya", "bb saya", "tb saya"
+    ]
+    has_metric = any(k in ql for k in metrics_keywords)
+    has_interrogative = any(t in ql for t in interrogative_tokens)
+    return has_metric and has_interrogative
 
 
 def is_dietary_counseling_query(user_query: str) -> bool:
@@ -203,7 +252,7 @@ def is_dietary_counseling_query(user_query: str) -> bool:
         "aman gak", "aman tidak", "amankah", "bahaya gak", "bahayakah", "pantangan gak",
         "gimana kalau mau makan", "bagaimana kalau makan", "boleh makan", "boleh konsumsi",
         "apakah aman", "apakah berbahaya", "apakah penderita prediabetes boleh", "kalo makan", "kalau makan",
-        "pengen makan", "kepingin makan", "ngidam", "tips makan di", "cara makan di", "makan di restoran",
+        "tips makan di", "cara makan di", "makan di restoran",
         "makan di rm", "makan di warung", "makan padang"
     ]
     return any(p in ql for p in patterns)
@@ -279,6 +328,34 @@ def build_vllm_messages(
             f"- SAJIKAN RESEP MODIFIKASI RAMAH PREDIABETES: Berikan resep versi sehat dan aman: {sweet_info['solusi']}.\n"
             f"- Berikan langkah pengolahan praktis yang higienis dan nikmat.\n"
             f"- DILARANG menyarankan gula merah pekat, gula pasir, atau minyak jelantah!"
+        )
+    # 2.1. Pengecekan Metrik Fisik Tidak Masuk Akal / Absurd (Guardrail Resiliensi AI)
+    elif detect_absurd_metric(user_query):
+        absurd_info = detect_absurd_metric(user_query)
+        current_user_content = (
+            f"[Profil Pasien]: Pasien bernama {patient_name}.\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Klarifikasi Metrik Fisik Tidak Masuk Akal]:\n"
+            f"- Pasien menyebutkan angka metrik tubuh yang secara klinis tidak masuk akal atau tidak lazim bagi orang dewasa ({absurd_info['type']}: {absurd_info['val']} {absurd_info['unit']}).\n"
+            f"- Tanggapi dengan santun, hangat, dan perhatian layaknya dokter spesialis nutrisi klinis:\n"
+            f"  'Waduh {patient_name}! Berat badan {absurd_info['val']} kg untuk orang dewasa secara klinis tidak lazim nih. Apakah maksud {salutation} berat badan Anda turun {absurd_info['val']} kg, atau ada salah ketik (misalnya {absurd_info['suggestion']} kg)?'\n"
+            f"- Minta konfirmasi ramah tanpa menghakimi atau mengasumsikan data tersebut benar.\n"
+            f"- DILARANG KERAS menyodorkan resep masakan, menu makan, atau menghitung Indeks Massa Tubuh (BMI) dengan angka absurd tersebut!\n"
+            f"- Selesaikan dalam 2-3 kalimat santun dan bersahabat."
+        )
+    # 2.2. Pengecekan Respon Verifikasi Takaran Gula Minuman (Anti-Halu & Anti-Dossier Dump)
+    elif is_sugar_verification_response(user_query):
+        current_user_content = (
+            f"[Profil Pasien]: Pasien bernama {patient_name}.\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Respon Konfirmasi Minuman Manis & Takaran Gula]:\n"
+            f"- Pasien baru saja mengonfirmasi takaran gula minuman manisnya ({user_query}).\n"
+            f"- Sambut dengan hangat dan apresiasi kejujuran pasien dalam mencatat asupan gula ke progres hariannya.\n"
+            f"- EDUKASI KLINIS RINGKAS: Jelaskan secara santai bahwa takaran gula tersebut sudah resmi dicatat. Jika takaran 1 sdt (~16 kkal), itu masih relatif terkontrol, namun sarankan untuk bertahap membiasakan teh tawar atau air mineral dingin agar respon insulin tidak terbebani.\n"
+            f"- REKOMENDASI AKTIVITAS: Sarankan jalan santai ringan selama 15-20 menit setelah minum manis untuk membantu otot menyerap glukosa darah tanpa memicu lonjakan insulin.\n"
+            f"- DILARANG KERAS membacakan seluruh rekam medis profil pasien (berat badan, tinggi badan, kalori harian)!\n"
+            f"- DILARANG KERAS menyodorkan resep masakan panjang!\n"
+            f"- Tanyakan dengan ramah rencana makan berikutnya atau apakah ada menu makan yang ingin didiskusikan."
         )
     # 3. Jika pertanyaan identitas pengguna dan/atau data fisik rekam medis
     elif is_identity_query(user_query) or is_profile_metrics_query(user_query):
@@ -362,6 +439,26 @@ def build_vllm_messages(
         if not food_name:
             food_name = "makanan tersebut"
 
+        is_padang = any(k in ql for k in ["padang", "nasi padang", "ansi padang"]) or "padang" in food_name.lower()
+        if is_padang:
+            counseling_tips = (
+                f"  • **Atur Porsi Nasi / Karbohidrat (Jumlah):** Minta 1/2 porsi nasi putih saja (jangan 1 piring munjung) agar beban glikemik tetap terkontrol bagi respon insulin.\n"
+                f"  • **Pilihan Lauk Cerdas (Jenis):** Prioritaskan lauk minim santan kental atau minyak jenuh berulang, misalnya Ayam Pop (tanpa kulit), Ikan Bakar/Panggang, atau Telur Dadar/Rebus.\n"
+                f"  • **Perbanyak Serat Sayuran:** Minta ekstra sayuran seperti Daun Singkong Rebus atau Lalapan Timun segar (pastikan tanpa siraman kuah santan kental) untuk memperlambat laju absorpsi glukosa.\n"
+                f"  • **Trik Kuah Santan:** Minta kuah gulai/rendang dipisah di wadah kecil. Cukup ambil 1-2 sendok untuk aroma gurih, jangan disiram basah ke seluruh piring.\n"
+                f"  • **Urutan Makan (Food Sequencing):** Habiskan sayuran serat dan lauk protein terlebih dahulu, baru santap nasi di bagian akhir. Urutan ini secara klinis terbukti memperlandai kurva glukosa postprandial (*flatten the glucose curve*).\n"
+                f"  • **Pilihan Minuman:** Dampingi dengan air putih atau teh tawar hangat, hindari es teh manis atau jus buah dengan kental manis."
+            )
+            closing_prompt = f"Tanyakan santai seputar lauk favorit yang biasa dipilih {salutation} saat makan di rumah makan Padang."
+        else:
+            counseling_tips = (
+                f"  • **Kontrol Porsi (Jumlah):** Nikmati '{food_name}' dalam porsi terukur (porsi kecil/sedang), jangan berlebihan agar tidak memicu lonjakan glukosa tinggi.\n"
+                f"  • **Frekuensi Bijak (Jadwal):** Jadikan '{food_name}' sebagai hidangan berkala (occasional treat), misalnya 1-2 kali seminggu, bukan menu pokok setiap hari.\n"
+                f"  • **Kombinasi Serat & Protein (Jenis):** Imbangi dengan sayuran kaya serat atau protein sehat (misal telur, tahu, tempe) untuk memperlambat penyerapan karbohidrat/gula.\n"
+                f"  • **Aktivitas Fisik:** Luangkan waktu jalan santai ringan selama 15-20 menit setelah makan untuk membantu otot menyerap glukosa darah."
+            )
+            closing_prompt = f"Tanyakan santai apakah {salutation} memiliki variasi atau pilihan olahan '{food_name}' yang biasa dikonsumsi."
+
         current_user_content = (
             f"{clinical_dossier}\n\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
@@ -370,14 +467,8 @@ def build_vllm_messages(
             f"- TONE: Hangat, luwes, menenangkan, modern, dan bebas penghakiman (non-judgmental).\n"
             f"- PRINSIP KLINIS UTAMA: TEGASKAN BAHWA PENDERITA PREDIABETES TETAP BOLEH MAKAN '{food_name}'! Prediabetes bukan vonis pantangan ekstrem yang menyiksa. Kuncinya ada pada manajemen **3J (Jadwal, Jumlah, Jenis)** dan urutan makan (*food sequencing*).\n"
             f"- STRATEGI PRAKTIS & CERDAS: Sajikan panduan taktis yang bisa langsung dipraktekkan secara ber-list rapi dengan poin-poin tebal (**bold**):\n"
-            f"  • **Atur Porsi Nasi / Karbohidrat (Jumlah):** Jika Nasi Padang, minta 1/2 porsi nasi saja (jangan 1 piring munjung) agar beban glikemik tetap aman bagi respon insulin.\n"
-            f"  • **Pilihan Lauk Cerdas (Jenis):** Prioritaskan lauk minim santan kental atau minyak jenuh berulang, misalnya Ayam Pop (tanpa kulit), Ikan Bakar/Panggang, atau Telur Dadar/Rebus.\n"
-            f"  • **Perbanyak Serat Sayuran:** Minta ekstra sayuran seperti Daun Singkong Rebus atau Lalapan Timun segar (pastikan tanpa siraman kuah santan kental) untuk memperlambat laju absorpsi glukosa.\n"
-            f"  • **Trik Kuah Santan:** Minta kuah gulai/rendang dipisah di wadah kecil. Cukup ambil 1-2 sendok untuk aroma gurih, jangan disiram basah ke seluruh piring.\n"
-            f"  • **Urutan Makan (Food Sequencing):** Habiskan sayuran serat dan lauk protein terlebih dahulu, baru santap nasi di bagian akhir. Urutan ini secara klinis terbukti memperlandai kurva glukosa postprandial (*flatten the glucose curve*).\n"
-            f"  • **Pilihan Minuman:** Dampingi dengan air putih atau teh tawar hangat, hindari es teh manis atau jus buah dengan kental manis.\n"
-            f"- Jika makanan yang ditanyakan adalah jenis lain (misal durian/mie/bakso/es krim), adaptasikan tipsnya secara proporsional (porsi kecil, frekuensi sesekali sebagai *occasional treat*, jangan tiap hari, dan imbangi jalan kaki 15-20 menit).\n"
-            f"- DILARANG KERAS menutup dengan kalimat klise AI robotik ('Bagaimana informasi ini membantu Anda?' atau 'Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?'). Tanyakan santai seputar lauk favorit yang biasa dipilih pasien!"
+            f"{counseling_tips}\n"
+            f"- DILARANG KERAS menutup dengan kalimat klise AI robotik ('Bagaimana informasi ini membantu Anda?' atau 'Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?'). {closing_prompt}!"
         )
     # 7. Jika ada bahan makanan spesifik atau rekomendasi menu / resep terdeteksi
     elif specific_food:

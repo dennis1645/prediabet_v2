@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "node --test tests/**/*.test.js"
+    "test": "node --test tests/**/*.test.js",
+    "reset-db": "node scripts/reset_db.js",
+    "reset-db:all": "node scripts/reset_db.js --all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

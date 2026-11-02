@@ -1,5 +1,6 @@
 import db from "../database/connection.js";
 import { detectAndCalculateExercise } from "../utils/metCalculator.js";
+import { prosesAnalisisKlinis } from "../clinical/assessment.js";
 
 /**
  * Menentukan kategori jadwal makan berdasarkan input pengguna atau jam aktual WIB (UTC+7).
@@ -94,7 +95,7 @@ export function getUserAIContext(req, res) {
         userId,
         username: req.user.username,
         medicalContext: {
-          nama: profile.nama || req.user.username,
+          nama: (profile.nama || req.user.username || "Bapak/Ibu").replace(/[_.-]+/g, " ").trim().replace(/\b\w/g, (c) => c.toUpperCase()),
           has_profile: hasProfile,
           usia: profile.usia || null,
           jenis_kelamin: profile.jenis_kelamin || "Laki-laki",
@@ -442,7 +443,8 @@ export async function forwardChatToAI(req, res) {
       }
     }
 
-    const displayName = profile.nama || req.user.username;
+    const rawName = profile.nama || req.user.username || "Bapak/Ibu";
+    const displayName = rawName.replace(/[_.-]+/g, " ").trim().replace(/\b\w/g, (c) => c.toUpperCase());
     const gender = profile.jenis_kelamin || "Laki-laki";
     const salutation = gender === "Perempuan" ? "Ibu" : "Pak";
     const userWeight = profile.berat_badan || 68;
@@ -505,6 +507,100 @@ export async function forwardChatToAI(req, res) {
         guardrail: { zero_allergen_verified: true, safety_message: "Courtesy Response Handled" },
         telemetry: { latency_ms: 5, vllm_connected: false },
       });
+    }
+
+    // 3.2. Deteksi Update/Koreksi Metrik Fisik Langsung via Chat (Live Metric Revision & Guardrail Absurd)
+    const bbRegex = /\b(?:update|ubah|ganti|set|catat|sekarang|berat badan(?:ku| saya)? (?:adalah|sekarang|menjadi|jadi|cuma|hanya)?)\s*(?:bb|berat badan)\s*(?:menjadi|jadi|ke)?\s*[:=]?\s*(\d+(?:[.,]\d+)?)\s*(?:kg|kilo)?\b/i;
+    const bbShortRegex = /^bb\s*[:=]?\s*(\d+(?:[.,]\d+)?)\s*(?:kg)?$/i;
+    const bbSimpleRegex = /(?:berat badanku|berat badan saya)\s*(?:cuma|hanya|sekarang|adalah)?\s*(\d+(?:[.,]\d+)?)\s*(?:kg|kilo)?/i;
+    const bbMatch = lowerMessage.match(bbRegex) || lowerMessage.match(bbShortRegex) || lowerMessage.match(bbSimpleRegex);
+
+    if (bbMatch && !lowerMessage.includes("berapa") && !lowerMessage.includes("tanya")) {
+      const parsedVal = parseFloat(bbMatch[1].replace(",", "."));
+      if (!isNaN(parsedVal)) {
+        if (parsedVal < 30) {
+          const absurdResp = 
+            `Waduh ${displayName}! Berat badan **${parsedVal} kg** untuk orang dewasa secara klinis tidak lazim nih. 🧐\n\n` +
+            `Apakah maksud ${salutation} berat badan Anda **turun ${parsedVal} kg**, atau mungkin ada salah ketik (misalnya **${Math.round(parsedVal + 50)} kg** atau **${Math.round(parsedVal + 60)} kg**)?\n\n` +
+            `Coba konfirmasikan kembali angka berat badan Anda yang sebenarnya ya agar perhitungan kebutuhan nutrisi dan Indeks Massa Tubuh (BMI) Anda tetap akurat! 😊`;
+
+          db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+            userId, sessionId, "user", sanitizedMessage, now
+          );
+          db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+            userId, sessionId, "assistant", absurdResp, JSON.stringify({ guardrail: "Klarifikasi Metrik Absurd" }), now
+          );
+
+          return res.json({
+            success: true,
+            session_id: sessionId,
+            response: absurdResp,
+            guardrail: { zero_allergen_verified: true, safety_message: "Klarifikasi Metrik Klinis Diperlukan" },
+            telemetry: { latency_ms: 5, vllm_connected: false },
+          });
+        } else if (parsedVal > 250) {
+          const absurdHighResp = 
+            `Mohon maaf ${displayName}, berat badan **${parsedVal} kg** melebihi batas acuan sistem (30 - 250 kg). Mohon periksa kembali apakah ada salah ketik angka ya! 😊`;
+          return res.json({
+            success: true,
+            session_id: sessionId,
+            response: absurdHighResp,
+            guardrail: { zero_allergen_verified: true, safety_message: "Batas Metrik Terlampaui" },
+            telemetry: { latency_ms: 5, vllm_connected: false },
+          });
+        } else {
+          let fullAnswers = {};
+          if (profileRow && profileRow.full_profile_data) {
+            try {
+              fullAnswers = JSON.parse(profileRow.full_profile_data);
+            } catch (e) {}
+          }
+          fullAnswers.berat_badan = parsedVal;
+          if (displayName && !fullAnswers.nama) {
+            fullAnswers.nama = displayName;
+          }
+
+          const updatedAnalysis = prosesAnalisisKlinis(fullAnswers);
+
+          db.prepare(`
+            INSERT INTO profiles (user_id, full_profile_data, analysis_result, questionnaire_completed_at, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(user_id) DO UPDATE SET
+              full_profile_data = excluded.full_profile_data,
+              analysis_result = excluded.analysis_result,
+              updated_at = excluded.updated_at
+          `).run(userId, JSON.stringify(fullAnswers), JSON.stringify(updatedAnalysis), now, now, now);
+
+          const todayDate = new Date().toISOString().split("T")[0];
+          db.prepare("UPDATE daily_progress_logs SET weight_kg = ?, updated_at = ? WHERE user_id = ? AND tanggal = ?").run(
+            parsedVal, now, userId, todayDate
+          );
+
+          const updateResp = 
+            `Siap ${displayName}! Data berat badan Anda berhasil Dr. Predi perbarui menjadi **${parsedVal} kg** di rekam medis klinis! 🎯\n\n` +
+            `Berikut hasil pembaruan metrik metabolik Anda:\n` +
+            `• **Indeks Massa Tubuh (BMI):** **${updatedAnalysis.bmi}** (${updatedAnalysis.status_bmi || updatedAnalysis.kategori_bmi})\n` +
+            `• **Target Energi Harian:** **${updatedAnalysis.target_kalori} kkal**\n` +
+            `• **Kebutuhan Protein Harian:** **${updatedAnalysis.target_protein} gram**\n` +
+            `• **Pola Diet Rekomendasi:** **${updatedAnalysis.active_diet_label || "Diet Seimbang 3J"}**\n\n` +
+            `Seluruh perhitungan nutrisi Anda sudah otomatis tersinkronisasi. Ada data fisik lain atau menu makanan yang ingin ${salutation} konsultasikan hari ini? 😊`;
+
+          db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+            userId, sessionId, "user", sanitizedMessage, now
+          );
+          db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+            userId, sessionId, "assistant", updateResp, JSON.stringify({ guardrail: "Live Metric Update Berhasil", updated_metric: { berat_badan: parsedVal, bmi: updatedAnalysis.bmi } }), now
+          );
+
+          return res.json({
+            success: true,
+            session_id: sessionId,
+            response: updateResp,
+            guardrail: { zero_allergen_verified: true, safety_message: "Profil Berhasil Diperbarui" },
+            telemetry: { latency_ms: 10, vllm_connected: false },
+          });
+        }
+      }
     }
 
     // 4. Pre-filter Guardrail Anti-Jailbreak & Bypass (Rule-Based & Regex)
