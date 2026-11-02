@@ -693,7 +693,7 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
                     <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                     {isMulti
                       ? "Pilih Jawaban (Bisa pilih lebih dari satu):"
-                      : "Pilih Jawaban Kamu (Sekali Klik):"}
+                      : "Pilih Jawaban Kamu:"}
                   </span>
                   {isMulti && selectedMulti.length > 0 && (
                     <span className="text-[11px] font-bold text-emerald-700 font-mono">

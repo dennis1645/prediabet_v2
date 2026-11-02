@@ -723,8 +723,12 @@ export async function forwardChatToAI(req, res) {
         new Set(
           (Array.isArray(profile.pantangan_alergi)
             ? profile.pantangan_alergi
+            : Array.isArray(profile.pantangan_makanan)
+            ? profile.pantangan_makanan
             : typeof profile.pantangan_alergi === "string"
             ? profile.pantangan_alergi.split(",")
+            : typeof profile.pantangan_makanan === "string"
+            ? profile.pantangan_makanan.split(",")
             : []
           )
             .map((s) => s.trim())

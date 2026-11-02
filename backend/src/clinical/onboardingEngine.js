@@ -49,34 +49,34 @@ const GENZ_PROMPTS = {
   tekanan_darah_sistol: "Berapa angka tensi darah SISTOL (angka atas) kamu? (Contoh: 120. Kalau belum pernah tensi, ketik 'skip' ya)",
   tekanan_darah_diastol: "Lalu angka DIASTOL (angka bawah) kamu berapa? (Contoh: 80. Kalau belum tahu, ketik 'skip')",
   riwayat_kondisi_kesehatan: "Apakah kamu punya riwayat kondisi kesehatan berikut? (Boleh centang yang berlaku)",
+  gejala_klasik: "Akhir-akhir ini, pernah ngerasain gejala klasik kayak gini gak? (Boleh pilih lebih dari satu ya!)",
   riwayat_diabetes_keluarga: "Ada anggota keluarga kandung atau kerabat yang punya riwayat diabetes gak nih?",
-  tingkat_kerabat_diabetes: "Kalau ada, seberapa dekat hubungan kekerabatannya?",
-  gejala_klasik: "Akhir-akhir ini, pernah ngerasain gejala klasik kayak gini gak? (Boleh pilih lebih dari satu)",
+  tingkat_kerabat_diabetes: "Kalau ada, siapa anggota keluarga kamu yang punya riwayat diabetes?",
+  riwayat_kardiovaskular_keluarga: "Kalau riwayat penyakit jantung atau stroke di keluarga, ada juga gak nih?",
   konsumsi_obat_rutin: "Apakah kamu saat ini lagi rutin konsumsi obat medis tertentu?",
-  pantangan_alergi: "Apakah kamu punya alergi makanan tertentu? (Misal: santan, udang, kacang, susu, atau ketik 'tidak ada')",
   biasa_sarapan: "Masuk ke pola makan nih! Kamu tipe yang rutin sarapan pagi sebelum ngampus/aktivitas gak?",
   frekuensi_minum_manis: "Seberapa sering kamu jajan minuman manis? (Kayak boba, kopi susu gula aren, es teh manis, soda)",
   frekuensi_gorengan: "Seberapa sering makan gorengan atau cemilan berminyak dalam seminggu?",
   frekuensi_makanan_manis: "Seberapa sering ngemil makanan manis kayak kue, cokelat, atau dessert?",
   frekuensi_sayuran: "Seberapa sering kamu makan sayur dalam seminggu nih?",
   frekuensi_buah: "Kalau makan buah-buahan segar, seberapa sering biasanya?",
-  jenis_makanan_pokok: "Makanan pokok harian kamu biasanya apa nih?",
-  porsi_nasi: "Porsi nasi sekali makan biasanya seberapa banyak nih?",
-  frekuensi_makanan_cepat_saji: "Seberapa sering makan fast food atau junk food dalam seminggu? (Misal: 2 kali)",
-  frekuensi_ngemil_malam: "Pernah gak ngemil tengah malam pas nugas atau begadang? Jam berapa biasanya?",
-  kebiasaan_baca_label_gula: "Pas beli makanan atau minuman kemasan di minimarket, suka ngecek tabel info nilai gizi & gulanya gak?",
-  jumlah_air_putih: "Berapa gelas air putih yang biasa kamu minum dalam sehari?",
-  jumlah_makan_utama: "Berapa kali kamu makan besar (makan utama) dalam sehari?",
-  pola_waktu_makan: "Jadwal jam makan kamu biasanya teratur atau suka telat nih?",
-  sumber_makanan_harian: "Makanan sehari-hari kamu kebanyakan dari mana? Masak sendiri, warteg/kantin, atau delivery online?",
-  anggaran_makan_harian: "Rata-rata budget makan kamu sehari kira-kira berapa nih?",
-  pantangan_makanan_diet: "Ada pola diet khusus yang lagi kamu jalanin gak saat ini?",
+  porsi_nasi: "Berapa porsi nasi yang biasa kamu makan per hari?",
+  frekuensi_ngemil: "Seberapa sering kamu ngemil di antara jam makan utama?",
+  jenis_camilan: "Camilan apa nih yang paling sering kamu makan pas santai atau nugas?",
+  tempat_makan_harian: "Makanan sehari-hari kamu kebanyakan dari mana nih? (Boleh pilih lebih dari satu)",
+  makan_larut_malam: "Pernah gak makan larut malam (setelah jam 9 malam) pas nugas atau begadang?",
+  pantangan_makanan: "Apakah kamu memiliki pantangan atau batasan makanan? (Boleh pilih lebih dari satu)",
+  makanan_favorit: "Makanan khas Indonesia apa nih yang paling kamu suka? (Boleh pilih lebih dari satu)",
+  buah_favorit: "Buah segar apa yang paling kamu suka dan mudah ditemukan di sekitarmu?",
+  sayur_favorit: "Kalau sayuran segar, sayur apa yang paling kamu suka dan biasa kamu santap?",
+  protein_favorit: "Sumber lauk protein hewani apa yang paling kamu suka santap?",
+  anggaran_makan_harian: "Rata-rata budget uang jajan atau makan kamu sehari kira-kira berapa nih?",
   hari_olahraga_seminggu: "Masuk ke aktivitas fisik! Berapa hari dalam seminggu kamu sempatin olahraga atau gerak aktif?",
   durasi_olahraga_sesi: "Kalau lagi olahraga, biasanya durasinya berapa lama per sesi?",
   jenis_olahraga_favorit: "Olahraga apa nih yang paling kamu suka lakuin? (Bisa pilih lebih dari satu)",
-  ikut_ekskul_olahraga: "Ikut UKM olahraga atau komunitas fisik di kampus/luar gak?",
+  ikut_ekskul_olahraga: "Ikut kegiatan olahraga atau ekskul fisik di sekolah/kampus gak?",
   durasi_duduk_rebahan: "Jujur nih, di luar tidur, berapa jam sehari kamu biasanya duduk nugas, main HP, atau rebahan?",
-  transportasi_harian: "Transportasi harian kamu biasanya naik apa nih pas bepergian?",
+  hambatan_olahraga: "Apa hambatan terbesar kamu buat berolahraga rutin? (Boleh pilih lebih dari satu)",
   durasi_tidur_malam: "Nah soal tidur nih, rata-rata berapa jam kamu tidur di malam hari pas hari kuliah/kerja?",
   jam_mulai_tidur: "Jam berapa kamu biasanya baru mulai merem / tidur malam?",
   gadget_sebelum_tidur: "Suka scrolling HP / laptop di kasur dalam 1 jam sebelum tidur gak nih?",
@@ -303,6 +303,18 @@ export function submitAnswerAndAdvance(userId, rawAnswer, textMessage = "", user
     }
   }
 
+  // Logika conditional skip: jika riwayat_diabetes_keluarga TIDAK ADA / TIDAK TAHU, lewati tingkat_kerabat_diabetes
+  if (currentQ.field_key === "riwayat_diabetes_keluarga") {
+    const ansLow = String(cleanedAnswer).toLowerCase();
+    if (ansLow.includes("tidak") || ansLow.includes("ngga") || ansLow.includes("gak") || ansLow.includes("bukan")) {
+      const skipIdx = ONBOARDING_QUESTIONS.findIndex((q) => q.field_key === "tingkat_kerabat_diabetes");
+      if (skipIdx !== -1 && nextIndex === skipIdx) {
+        answers["tingkat_kerabat_diabetes"] = "Tidak ada";
+        nextIndex = skipIdx + 1;
+      }
+    }
+  }
+
   // Cek jika sudah mencapai akhir kuesioner
   const isFinished = nextIndex >= ONBOARDING_QUESTIONS.length;
   const now = new Date().toISOString();
@@ -310,10 +322,11 @@ export function submitAnswerAndAdvance(userId, rawAnswer, textMessage = "", user
   if (isFinished) {
     // Jalankan analisis klinis dan simpan ke profiles & assessment_history
     const analysis = prosesAnalisisKlinis(answers);
-    const allergies = Array.isArray(answers.pantangan_alergi)
-      ? answers.pantangan_alergi
-      : typeof answers.pantangan_alergi === "string"
-      ? answers.pantangan_alergi.split(",").map((s) => s.trim())
+    const rawAllergies = answers.pantangan_makanan || answers.pantangan_alergi || [];
+    const allergies = Array.isArray(rawAllergies)
+      ? rawAllergies
+      : typeof rawAllergies === "string"
+      ? rawAllergies.split(",").map((s) => s.trim())
       : [];
 
     const mealPlan = generateDailyMealPlan(analysis.target_kalori, allergies, analysis.active_diet);

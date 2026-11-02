@@ -219,7 +219,7 @@
   },
   {
     "id": 16,
-    "field_key": "riwayat_diabetes_keluarga",
+    "field_key": "gejala_klasik",
     "section": "RIWAYAT KESEHATAN",
     "question": "Apakah kamu sering merasakan gejala-gejala berikut akhir-akhir ini? Centang yang berlaku.",
     "type": "Kotak centang",
@@ -240,7 +240,7 @@
   },
   {
     "id": 17,
-    "field_key": "tingkat_kerabat_diabetes",
+    "field_key": "riwayat_diabetes_keluarga",
     "section": "RIWAYAT KESEHATAN",
     "question": "Apakah ada anggota keluarga yang memiliki diabetes?",
     "type": "Pilihan ganda",
@@ -255,7 +255,7 @@
   },
   {
     "id": 18,
-    "field_key": "gejala_klasik",
+    "field_key": "tingkat_kerabat_diabetes",
     "section": "RIWAYAT KESEHATAN",
     "question": "Jika iya, siapa anggota keluarga kamu yang mempunyai riwayat sakit diabetes?",
     "type": "Kotak centang",
@@ -271,7 +271,7 @@
   },
   {
     "id": 19,
-    "field_key": "konsumsi_obat_rutin",
+    "field_key": "riwayat_kardiovaskular_keluarga",
     "section": "RIWAYAT KESEHATAN",
     "question": "Apakah ada riwayat penyakit jantung atau stroke di keluargamu?",
     "type": "Pilihan ganda",
@@ -286,7 +286,7 @@
   },
   {
     "id": 20,
-    "field_key": "pantangan_alergi",
+    "field_key": "konsumsi_obat_rutin",
     "section": "RIWAYAT KESEHATAN",
     "question": "Apakah kamu sedang rutin mengonsumsi obat-obatan tertentu?",
     "type": "Jawaban singkat",
@@ -397,7 +397,7 @@
   },
   {
     "id": 27,
-    "field_key": "jenis_makanan_pokok",
+    "field_key": "porsi_nasi",
     "section": "POLA MAKAN",
     "question": "Berapa porsi nasi yang biasa kamu makan per hari?",
     "type": "Pilihan ganda",
@@ -413,7 +413,7 @@
   },
   {
     "id": 28,
-    "field_key": "porsi_nasi",
+    "field_key": "frekuensi_ngemil",
     "section": "POLA MAKAN",
     "question": "Seberapa sering kamu ngemil di antara jam makan?",
     "type": "Pilihan ganda",
@@ -428,7 +428,7 @@
   },
   {
     "id": 29,
-    "field_key": "frekuensi_makanan_cepat_saji",
+    "field_key": "jenis_camilan",
     "section": "POLA MAKAN",
     "question": "Camilan yang paling sering kamu makan?",
     "type": "Jawaban singkat",
@@ -439,7 +439,7 @@
   },
   {
     "id": 30,
-    "field_key": "frekuensi_ngemil_malam",
+    "field_key": "tempat_makan_harian",
     "section": "POLA MAKAN",
     "question": "Di mana kamu biasanya makan sehari-hari? (boleh pilih lebih dari satu)",
     "type": "Kotak centang",
@@ -457,7 +457,7 @@
   },
   {
     "id": 31,
-    "field_key": "kebiasaan_baca_label_gula",
+    "field_key": "makan_larut_malam",
     "section": "POLA MAKAN",
     "question": "Apakah kamu makan larut malam (setelah pukul 21.00)?",
     "type": "Pilihan ganda",
@@ -472,7 +472,7 @@
   },
   {
     "id": 32,
-    "field_key": "jumlah_air_putih",
+    "field_key": "pantangan_makanan",
     "section": "POLA MAKAN",
     "question": "Apakah kamu memiliki pantangan atau batasan makanan?",
     "type": "Kotak centang",
@@ -490,7 +490,7 @@
   },
   {
     "id": 33,
-    "field_key": "jumlah_makan_utama",
+    "field_key": "makanan_favorit",
     "section": "POLA MAKAN",
     "question": "Makanan Indonesia apa yang paling kamu suka? (boleh pilih lebih dari satu)",
     "type": "Kotak centang",
@@ -511,7 +511,7 @@
   },
   {
     "id": 34,
-    "field_key": "pola_waktu_makan",
+    "field_key": "buah_favorit",
     "section": "POLA MAKAN",
     "question": "Buah apa yang kamu suka dan mudah kamu temukan? (boleh pilih salah satu)",
     "type": "Pilihan ganda",
@@ -530,7 +530,7 @@
   },
   {
     "id": 35,
-    "field_key": "sumber_makanan_harian",
+    "field_key": "sayur_favorit",
     "section": "POLA MAKAN",
     "question": "Sayuran apa yang kamu suka dan biasa kamu makan? (boleh pilih salah satu)",
     "type": "Pilihan ganda",
@@ -547,7 +547,7 @@
   },
   {
     "id": 36,
-    "field_key": "anggaran_makan_harian",
+    "field_key": "protein_favorit",
     "section": "POLA MAKAN",
     "question": "Daging atau sumber protein hewani apa yang kamu suka dan biasa kamu makan? (boleh pilih salah satu)",
     "type": "Pilihan ganda",
@@ -566,7 +566,7 @@
   },
   {
     "id": 37,
-    "field_key": "pantangan_makanan_diet",
+    "field_key": "anggaran_makan_harian",
     "section": "POLA MAKAN",
     "question": "Berapa kira-kira uang jajan atau anggaran makananmu per hari?",
     "type": "Pilihan ganda",
@@ -669,7 +669,7 @@
   },
   {
     "id": 43,
-    "field_key": "transportasi_harian",
+    "field_key": "hambatan_olahraga",
     "section": "AKTIVITAS FISIK",
     "question": "Apa hambatan terbesar kamu untuk berolahraga rutin? (boleh pilih lebih dari satu)",
     "type": "Kotak centang",

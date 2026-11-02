@@ -68,7 +68,7 @@ export default function Navbar() {
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl text-xs lg:text-sm font-extrabold shadow-md shadow-emerald-500/25 transition-all animate-pulse"
                 >
                   <Sparkles className="w-4 h-4 text-amber-300" />
-                  <span>Wawancara Intake AI Bersama Dr. Predi</span>
+                  <span>Konsultasi Dr. Predi</span>
                 </Link>
               ) : (
                 <div className="inline-flex items-center justify-center gap-1 sm:gap-2">
