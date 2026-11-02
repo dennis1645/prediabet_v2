@@ -1,0 +1,20 @@
+{
+  "total_food_items": 2248,
+  "total_master_bahan": 814,
+  "total_alias_bahan": 1041,
+  "total_kategori": 13,
+  "total_resep": 453,
+  "total_resep_bahan_links": 2760,
+  "total_konversi_satuan": 694,
+  "total_pantangan_rules": 25,
+  "total_pantangan_item_mappings": 137,
+  "recipes_safe_for_prediabetes": 344,
+  "glycemic_risk_distribution": {
+    "low": 1145,
+    "moderate": 880,
+    "high": 223
+  },
+  "sources_count": 5,
+  "generated_timestamp": "2026-11-02T08:30:00+07:00",
+  "version": "3.0.0"
+}

@@ -1,0 +1,94 @@
+:START_ID(Contraindication),:END_ID(Comorbid)
+P001,Prediabetes
+P001,DMT2
+P001,Obesitas
+P001,MASLD
+P002,Prediabetes
+P002,DMT2
+P002,Gout/Asam Urat
+P002,MASLD
+P002,Obesitas
+P003,Prediabetes
+P003,DMT2
+P003,Hipertrigliseridemia
+P003,MASLD
+P004,Prediabetes
+P004,Dislipidemia
+P004,Penyakit Jantung Koroner (PJK)
+P005,Prediabetes
+P005,Hipertensi
+P005,Dislipidemia
+P005,PGK/CKD
+P005,MASLD
+P006,Prediabetes
+P006,Dislipidemia
+P006,Obesitas
+P007,Prediabetes
+P007,DMT2
+P007,Obesitas
+P007,Hipertensi
+P007,PGK/CKD
+P007,MASLD
+P008,Prediabetes
+P008,DMT2
+P008,MASLD
+P008,Hipertrigliseridemia
+P009,Prediabetes
+P009,Hipertensi
+P009,PGK/CKD
+P009,Gagal Jantung
+P010,Prediabetes
+P010,DMT2
+P010,MASLD
+P010,Gout/Asam Urat
+P010,Hipertrigliseridemia
+P011,Prediabetes
+P011,Obesitas
+P011,Disbiosis Usus
+P011,Risiko Kardiovaskular
+P012,Dislipidemia
+P012,PJK/ASCVD
+P012,Hiperurisemia & Artritis Gout
+P013,Hiperurisemia & Artritis Gout
+P013,Prediabetes
+P013,Dislipidemia
+P014,Dislipidemia
+P014,PJK/ASCVD
+P014,Obesitas
+P014,MASLD
+P015,Hiperurisemia & Artritis Gout
+P015,Dislipidemia
+P015,Hipertensi
+P016,Penyakit Ginjal Kronik (PGK/CKD)
+P016,Nefropati Diabetik
+P016,Risiko AKI
+P017,Penyakit Ginjal Kronik (PGK/CKD)
+P017,Risiko AKI
+P017,Urolitiasis
+P017,Prediabetes
+P018,PGK Stadium G3b-G5
+P018,Nefropati Diabetik dengan Hiperkalemia (>5.0 mmol/L)
+P019,PGK Stadium G3-G5 Non-Dialisis
+P019,Nefropati Diabetik
+P020,Prediabetes
+P020,DMT2
+P020,Obesitas
+P020,Hipertrigliseridemia
+P021,Prediabetes
+P021,DMT2
+P021,Obesitas
+P021,Hipertrigliseridemia
+P022,Prediabetes
+P022,DMT2
+P022,Hipertensi
+P022,Obesitas
+P023,Dislipidemia
+P023,PJK/ASCVD
+P023,Hipertensi
+P024,PGK/CKD Stadium G3-G5
+P024,Nefropati Diabetik
+P024,Kalsifikasi Vaskular
+P025,Prediabetes
+P025,DMT2
+P025,PGK/CKD
+P025,Gangguan Hati

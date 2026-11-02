@@ -148,54 +148,147 @@ CURATED_3J_RECIPES: List[Dict[str, Any]] = [
 ]
 
 class ClinicalVectorStoreManager:
-    """Manajer penelusuran semantik dokumen panduan PERKENI 2021 dan resep masakan berbasis RAG."""
+    """Manajer penelusuran semantik dokumen panduan PERKENI 2021 dan 453 resep masakan Nusantara berbasis RAG."""
 
     def __init__(self):
-        self.medical_file = os.path.join(settings.KNOWLEDGE_BASE_DIR, "medical", "diabetes_nutrition_guidelines.md")
-        self.recipes_file = os.path.join(settings.KNOWLEDGE_BASE_DIR, "recipes", "recipes_all.md")
+        self.medical_dir = os.path.join(settings.KNOWLEDGE_BASE_DIR, "medical")
+        self.pantangan_dir = os.path.join(settings.KNOWLEDGE_BASE_DIR, "pantangan")
+        self.recipes_json = os.path.join(settings.KNOWLEDGE_BASE_DIR, "chromadb", "recipe_documents.json")
+        self.clinical_json = os.path.join(settings.KNOWLEDGE_BASE_DIR, "chromadb", "clinical_documents.json")
+
         self._guidelines_chunks: List[Dict[str, str]] = []
         self._recipes_catalog: List[Dict[str, Any]] = list(CURATED_3J_RECIPES)
         self._load_and_chunk_documents()
 
     def _load_and_chunk_documents(self):
         chunks = []
-        # 1. Baca pedoman medis
-        if os.path.exists(self.medical_file):
-            try:
-                with open(self.medical_file, "r", encoding="utf-8") as f:
-                    content = f.read()
-                    sections = re.split(r'\n(?=##\s+)', content)
-                    for sec in sections:
-                        if sec.strip():
-                            lines = sec.strip().split("\n")
-                            title = lines[0].replace("##", "").strip()
-                            chunks.append({
-                                "title": f"Pedoman PERKENI: {title}",
-                                "text": sec.strip(),
-                                "category": "medical"
-                            })
-            except Exception as e:
-                print(f"[Vector Manager] Gagal membaca guidelines: {e}")
 
-        # 2. Baca resep
-        if os.path.exists(self.recipes_file):
+        # 1. Baca pedoman medis dan pantangan dari folder Markdown
+        for search_dir, cat_name in [(self.medical_dir, "medical"), (self.pantangan_dir, "pantangan")]:
+            if os.path.exists(search_dir):
+                for f_name in os.listdir(search_dir):
+                    if f_name.endswith(".md"):
+                        f_path = os.path.join(search_dir, f_name)
+                        try:
+                            with open(f_path, "r", encoding="utf-8") as f:
+                                content = f.read()
+                                sections = re.split(r'\n(?=##\s+)', content)
+                                for sec in sections:
+                                    if sec.strip():
+                                        lines = sec.strip().split("\n")
+                                        title = lines[0].replace("##", "").replace("#", "").strip()
+                                        chunks.append({
+                                            "title": f"Pedoman Klinis: {title}",
+                                            "text": sec.strip(),
+                                            "category": cat_name
+                                        })
+                        except Exception as e:
+                            print(f"[Vector Manager] Gagal membaca {f_path}: {e}")
+
+        # 2. Baca dokumen klinis dari clinical_documents.json
+        if os.path.exists(self.clinical_json):
             try:
-                with open(self.recipes_file, "r", encoding="utf-8") as f:
-                    content = f.read()
-                    recipes = re.split(r'\n(?=##\s+)', content)
-                    for rec in recipes:
-                        if rec.strip():
-                            lines = rec.strip().split("\n")
-                            title = lines[0].replace("##", "").strip()
-                            chunks.append({
-                                "title": f"Resep Nusantara: {title}",
-                                "text": rec.strip()[:600],
-                                "category": "recipe"
-                            })
+                import json
+                with open(self.clinical_json, "r", encoding="utf-8") as f:
+                    clin_docs = json.load(f)
+                    for cd in clin_docs:
+                        chunks.append({
+                            "title": f"Pantangan: {cd.get('metadata', {}).get('kategori', 'Medis')}",
+                            "text": cd.get("document", ""),
+                            "category": "pantangan"
+                        })
             except Exception as e:
-                print(f"[Vector Manager] Gagal membaca recipes: {e}")
+                print(f"[Vector Manager] Gagal membaca clinical_documents.json: {e}")
 
         self._guidelines_chunks = chunks
+
+        # 3. Muat 453 Resep Lengkap dari recipe_documents.json
+        if os.path.exists(self.recipes_json):
+            try:
+                import json
+                with open(self.recipes_json, "r", encoding="utf-8") as f:
+                    recipe_docs = json.load(f)
+
+                loaded_recipes = []
+                for rd in recipe_docs:
+                    meta = rd.get("metadata", {})
+                    doc_text = rd.get("document", "")
+                    name = meta.get("name") or meta.get("clean_name") or "Menu Sehat"
+                    cal = float(meta.get("kalori") or 150.0)
+                    prot = float(meta.get("protein") or 12.0)
+                    carb = float(meta.get("karbohidrat") or 15.0)
+                    fat = float(meta.get("lemak") or 4.0)
+                    serat = float(meta.get("serat") or 2.0)
+                    gi_risk = str(meta.get("glikemik_risk") or "moderate").lower()
+                    gi_val = 25.0 if gi_risk == "low" else (45.0 if gi_risk == "moderate" else 70.0)
+                    safe_predia = bool(meta.get("safe_for_prediabetes", True))
+
+                    # Ekstraksi bumbu & bahan dari dokumen markdown
+                    bahan_str = ""
+                    if "## Komposisi Bahan:" in doc_text:
+                        parts = doc_text.split("## Komposisi Bahan:")[1]
+                        bahan_str = parts.split("##")[0].strip()
+                    else:
+                        bahan_str = f"Bahan baku alami bernutrisi seimbang ({name})"
+
+                    # Ekstraksi tips klinis
+                    tips_str = ""
+                    if "## Panduan Klinis Pola 3J" in doc_text:
+                        tips_str = doc_text.split("## Panduan Klinis Pola 3J")[1].strip()
+                    else:
+                        tips_str = f"Kaya serat dan protein seimbang, menjaga kurva glukosa postprandial stabil ({cal} kkal)."
+
+                    # Hasilkan kata kunci pencarian otomatis
+                    keywords = set()
+                    for word in re.findall(r'\w+', name.lower()):
+                        if len(word) > 2:
+                            keywords.add(word)
+                    for word in re.findall(r'\w+', bahan_str.lower()):
+                        if len(word) > 2:
+                            keywords.add(word)
+
+                    # Tag kategori kuliner
+                    name_lower = name.lower()
+                    if any(w in name_lower for w in ["soto", "sop", "sup", "kuah", "bening", "sayur sop", "sayur bening"]):
+                        keywords.update(["kuah", "berkuah", "hangat", "segar", "bening", "sup", "sop", "soto"])
+                    if any(w in name_lower for w in ["pepes", "kukus"]):
+                        keywords.update(["pepes", "kukus", "daun pisang", "sehat", "bebas minyak"])
+                    if any(w in name_lower for w in ["tumis", "cah"]):
+                        keywords.update(["tumis", "cah", "sayur"])
+                    if any(w in name_lower for w in ["bakar", "panggang"]):
+                        keywords.update(["bakar", "panggang"])
+                    if any(w in name_lower for w in ["rebus"]):
+                        keywords.update(["rebus", "kuah", "segar"])
+
+                    loaded_recipes.append({
+                        "nama_makanan": name,
+                        "kategori": f"Resep Masakan 3J ({gi_risk.title()} GI)",
+                        "kalori": cal,
+                        "protein": prot,
+                        "karbohidrat": carb,
+                        "lemak": fat,
+                        "serat": serat,
+                        "gi_val": gi_val,
+                        "safe_for_prediabetes": safe_predia,
+                        "keywords": list(keywords),
+                        "bahan": bahan_str,
+                        "langkah": f"1. Siapkan bahan baku segar higienis.\n2. Olah bumbu rempah alami tanpa minyak jelantah berlebih.\n3. Masak dengan metode sehat (kukus/rebus kuah bening) hingga matang empuk.\n4. Sajikan hangat sesuai porsi seimbang 3J.",
+                        "cara_olah": "Kukus/Rebus kuah bening ramah glukosa",
+                        "tips": tips_str[:250] if tips_str else f"Hidangan bergizi seimbang ramah respon insulin ({cal} kkal)."
+                    })
+
+                # Gabungkan curated 3J resep dengan 453 resep baru
+                catalog_names = set(r["nama_makanan"].lower() for r in CURATED_3J_RECIPES)
+                merged = list(CURATED_3J_RECIPES)
+                for lr in loaded_recipes:
+                    if lr["nama_makanan"].lower() not in catalog_names:
+                        merged.append(lr)
+                        catalog_names.add(lr["nama_makanan"].lower())
+
+                self._recipes_catalog = merged
+                print(f"[Vector Manager] Sukses memuat {len(self._recipes_catalog)} resep ke katalog.")
+            except Exception as e:
+                print(f"[Vector Manager] Gagal memuat recipe_documents.json: {e}")
 
     def query_semantic(self, query: str, n_results: int = 3) -> List[Dict[str, Any]]:
         """Pencarian semantik cepat dokumen pedoman klinis berbasis kata kunci & relevansi."""
@@ -235,20 +328,35 @@ class ClinicalVectorStoreManager:
         query: str,
         exclude_titles: Optional[List[str]] = None,
         user_allergens: Optional[List[str]] = None,
-        context_theme: Optional[str] = None
+        context_theme: Optional[str] = None,
+        user_conditions: Optional[List[str]] = None,
+        patient_seed: Optional[str] = None
     ) -> Optional[Dict[str, Any]]:
         """
         Pencarian resep masakan dinamis anti-looping:
         - Mengecualikan resep yang sudah pernah disarankan di percakapan sesi ini (exclude_titles).
         - Mengecualikan resep yang mengandung bahan pantangan alergi pasien (user_allergens).
-        - Mencocokkan tema (berkuah, hangat, ikan, ayam, tumis, dll.).
+        - Menyesuaikan komorbiditas klinis (Asam Urat menyaring purin, Hipertensi membatasi sodium).
+        - Memvariasikan rekomendasi secara deterministik antar-pasien via patient_seed.
         """
         excluded = [t.lower().strip() for t in (exclude_titles or []) if t]
         allergens = [a.lower().strip() for a in (user_allergens or []) if a]
+        conditions = [c.lower().strip() for c in (user_conditions or []) if c]
+        is_gout = any("asam urat" in c or "gout" in c for c in conditions)
+        is_hypertension = any("hipertensi" in c or "darah tinggi" in c for c in conditions)
 
         # Gabungkan query dengan tema sebelumnya jika follow-up ("ada yang lain?", "selain itu?")
         full_query = f"{query or ''} {context_theme or ''}".lower()
         query_words = [w for w in re.findall(r'\w+', full_query) if len(w) > 2]
+
+        # 0. Jika pengguna secara eksplisit menyebut judul resep (misal: "resep sayur bening bayam gimana?")
+        for r in self._recipes_catalog:
+            title_lower = r["nama_makanan"].lower()
+            if len(title_lower) >= 6 and title_lower in full_query:
+                # Pastikan bebas alergen
+                r_text = f"{r['nama_makanan']} {r.get('bahan', '')}".lower()
+                if not any(alg in r_text for alg in allergens):
+                    return dict(r)
 
         candidates = []
         for r in self._recipes_catalog:
@@ -272,8 +380,20 @@ class ClinicalVectorStoreManager:
                 if w in r_text:
                     score += 2
 
+            # Prioritas untuk resep yang terverifikasi aman prediabetes
+            if r.get("safe_for_prediabetes", True):
+                score += 5
+
+            # Filter & Penalti Komorbiditas Khusus
+            if is_gout:
+                if any(p in r_text for p in ["bayam", "kangkung", "emping", "melinjo", "singkong", "jeroan", "hati", "ampela"]):
+                    score -= 40
+            if is_hypertension:
+                if r.get("natrium_mg", 0) > 350:
+                    score -= 25
+
             # Bonus besar jika pasien menyebutkan bahan majemuk (misal 'ayam dan tahu', 'ikan dan kemangi')
-            key_ingredients = ["ayam", "tahu", "tempe", "ikan", "telur", "buncis", "bayam", "oyong", "jagung", "jamur"]
+            key_ingredients = ["ayam", "tahu", "tempe", "ikan", "telur", "buncis", "bayam", "oyong", "jagung", "jamur", "daging", "sapi"]
             mentioned_ingredients = [ing for ing in key_ingredients if ing in full_query]
             if len(mentioned_ingredients) >= 2:
                 if all(ing in r_text for ing in mentioned_ingredients):
@@ -295,6 +415,16 @@ class ClinicalVectorStoreManager:
 
         # Urutkan berdasarkan skor tertinggi
         candidates.sort(key=lambda x: x[0], reverse=True)
+        top_score = candidates[0][0]
+        # Pilih bervariasi dari kandidat dengan skor optimal agar tidak monoton
+        top_candidates = [c[1] for c in candidates if c[0] >= max(top_score - 4, 1)]
+        if top_candidates:
+            import hashlib
+            seed_key = f"{full_query}_{patient_seed or ''}"
+            h_val = int(hashlib.md5(seed_key.encode()).hexdigest()[:6], 16)
+            chosen_recipe = top_candidates[h_val % len(top_candidates)]
+            return dict(chosen_recipe)
+
         return dict(candidates[0][1])
 
     def get_multi_recipe_candidates(
@@ -306,6 +436,7 @@ class ClinicalVectorStoreManager:
     ) -> List[Dict[str, Any]]:
         """
         Mengambil beberapa kandidat hidangan/resep yang berbeda dan bebas alergen untuk permintaan multi-menu.
+        Memastikan variasi ragam makanan (tidak menampilkan 3 soto sekaligus).
         """
         excluded = [t.lower().strip() for t in (exclude_titles or []) if t]
         allergens = [a.lower().strip() for a in (user_allergens or []) if a]
@@ -324,10 +455,23 @@ class ClinicalVectorStoreManager:
             for kw in r.get("keywords", []):
                 if kw in full_query:
                     score += 5
+            if r.get("safe_for_prediabetes", True):
+                score += 3
             candidates.append((score, r))
 
         candidates.sort(key=lambda x: x[0], reverse=True)
-        chosen = [dict(c[1]) for c in candidates[:limit]]
+
+        chosen = []
+        seen_words = set()
+        for _, cand in candidates:
+            name_low = cand["nama_makanan"].lower()
+            # Cek keanekaragaman: hindari 2 menu yang mengandung kata utama sama (misal 2 soto atau 2 ayam)
+            main_word = name_low.split()[0]
+            if main_word not in seen_words or len(chosen) >= len(candidates) - 1:
+                chosen.append(dict(cand))
+                seen_words.add(main_word)
+            if len(chosen) >= limit:
+                break
 
         # Fallback jika kurang dari limit: ambil sisa dari catalog yang bebas alergen
         if len(chosen) < limit:

@@ -1,0 +1,160 @@
+[2026-10-22 09:15:00] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:15:00] [INFO] [vllm] Test vLLM log message
+[2026-10-22 09:17:10] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:42:58] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:43:07] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:43:25] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:43:35] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:43:52] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:55:47] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 09:55:57] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 10:30:31] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 10:30:38] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 10:31:01] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 11:16:25] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 11:31:14] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 11:34:16] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 12:16:12] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-10-22 12:21:24] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 08:56:46] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 08:57:41] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 08:59:30] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 08:59:34] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 08:59:43] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 08:59:44] [INFO] [vllm] ================================================================================
+[2026-11-02 08:59:44] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Dok, saya ingin makan siang yang lezat tapi aman untuk tekanan darah saya. Menu apa yang disarankan?'
+[2026-11-02 08:59:46] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 08:59:48] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 08:59:48] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 08:59:51] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 08:59:51] [INFO] [vllm] Telemetri Inferensi: Waktu: 7262.31 ms | Kecepatan: 10.1 tok/s | Live vLLM GPU: False
+[2026-11-02 08:59:51] [INFO] [vllm] ================================================================================
+[2026-11-02 08:59:51] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Dr. Predi, tolong beri ide camilan sore yang enak tapi asam urat saya tidak kambuh ya.'
+[2026-11-02 08:59:53] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 08:59:56] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 08:59:56] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 08:59:58] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 08:59:58] [INFO] [vllm] Telemetri Inferensi: Waktu: 7082.37 ms | Kecepatan: 9.5 tok/s | Live vLLM GPU: False
+[2026-11-02 09:01:21] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:01:22] [INFO] [vllm] ================================================================================
+[2026-11-02 09:01:22] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Dok, saya ingin makan siang yang lezat tapi aman untuk tekanan darah saya. Menu apa yang disarankan?'
+[2026-11-02 09:01:24] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:01:26] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:01:26] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:01:29] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:01:29] [INFO] [vllm] Telemetri Inferensi: Waktu: 7166.73 ms | Kecepatan: 10.2 tok/s | Live vLLM GPU: False
+[2026-11-02 09:01:29] [INFO] [vllm] ================================================================================
+[2026-11-02 09:01:29] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Dr. Predi, tolong beri ide camilan sore yang enak tapi asam urat saya tidak kambuh ya.'
+[2026-11-02 09:01:31] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:01:33] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:01:33] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:01:36] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:01:36] [INFO] [vllm] Telemetri Inferensi: Waktu: 7097.72 ms | Kecepatan: 9.4 tok/s | Live vLLM GPU: False
+[2026-11-02 09:03:58] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:04:19] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:04:52] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:04:53] [INFO] [vllm] ================================================================================
+[2026-11-02 09:04:53] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Lagi pengen makan yang berkuah & hangat'
+[2026-11-02 09:04:55] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:04:57] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:04:57] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:05:00] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:05:00] [INFO] [vllm] Telemetri Inferensi: Waktu: 7154.66 ms | Kecepatan: 10.2 tok/s | Live vLLM GPU: False
+[2026-11-02 09:05:28] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:05:29] [INFO] [vllm] ================================================================================
+[2026-11-02 09:05:29] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Lagi pengen makan yang berkuah & hangat'
+[2026-11-02 09:05:31] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:05:33] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:05:33] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:05:36] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:05:36] [INFO] [vllm] Telemetri Inferensi: Waktu: 7149.24 ms | Kecepatan: 10.2 tok/s | Live vLLM GPU: False
+[2026-11-02 09:08:52] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:09:03] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:09:03] [INFO] [vllm] ================================================================================
+[2026-11-02 09:09:03] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Lagi pengen makan yang berkuah & hangat'
+[2026-11-02 09:09:06] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:09:08] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:09:08] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:09:10] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:09:10] [INFO] [vllm] Telemetri Inferensi: Waktu: 7106.43 ms | Kecepatan: 12.2 tok/s | Live vLLM GPU: False
+[2026-11-02 09:09:21] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:09:21] [INFO] [vllm] ================================================================================
+[2026-11-02 09:09:21] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Lagi pengen makan yang berkuah & hangat'
+[2026-11-02 09:09:24] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:09:26] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:09:26] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:09:29] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:09:29] [INFO] [vllm] Telemetri Inferensi: Waktu: 7071.25 ms | Kecepatan: 12.3 tok/s | Live vLLM GPU: False
+[2026-11-02 09:09:29] [INFO] [vllm] ================================================================================
+[2026-11-02 09:09:29] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'resep dan cara buat Sayur Bening Bayam gimana?'
+[2026-11-02 09:09:31] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:09:33] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:09:33] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:09:36] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:09:36] [INFO] [vllm] Telemetri Inferensi: Waktu: 6986.57 ms | Kecepatan: 22.8 tok/s | Live vLLM GPU: False
+[2026-11-02 09:09:36] [INFO] [vllm] ================================================================================
+[2026-11-02 09:09:36] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Berapa protein pada dada ayam?'
+[2026-11-02 09:09:38] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:09:40] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:09:40] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:09:43] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:09:43] [INFO] [vllm] Telemetri Inferensi: Waktu: 7107.22 ms | Kecepatan: 9.6 tok/s | Live vLLM GPU: False
+[2026-11-02 09:09:43] [INFO] [vllm] ================================================================================
+[2026-11-02 09:09:43] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Lagi pengen makan yang berkuah & hangat'
+[2026-11-02 09:09:45] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:09:47] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:09:47] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:09:50] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:09:50] [INFO] [vllm] Telemetri Inferensi: Waktu: 7037.79 ms | Kecepatan: 12.4 tok/s | Live vLLM GPU: False
+[2026-11-02 09:11:38] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:11:38] [INFO] [vllm] ================================================================================
+[2026-11-02 09:11:38] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Berapa protein pada dada ayam?'
+[2026-11-02 09:11:40] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:11:43] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:11:43] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:11:46] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:11:46] [INFO] [vllm] Telemetri Inferensi: Waktu: 7708.15 ms | Kecepatan: 8.8 tok/s | Live vLLM GPU: False
+[2026-11-02 09:12:18] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:12:18] [INFO] [vllm] ================================================================================
+[2026-11-02 09:12:18] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Lagi pengen makan yang berkuah & hangat'
+[2026-11-02 09:12:20] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:12:23] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:12:23] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:12:25] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:12:25] [INFO] [vllm] Telemetri Inferensi: Waktu: 7402.32 ms | Kecepatan: 11.8 tok/s | Live vLLM GPU: False
+[2026-11-02 09:12:25] [INFO] [vllm] ================================================================================
+[2026-11-02 09:12:25] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'resep dan cara buat Soto Mie Bogor gimana?'
+[2026-11-02 09:12:28] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:12:30] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:12:30] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:12:33] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:12:33] [INFO] [vllm] Telemetri Inferensi: Waktu: 7624.95 ms | Kecepatan: 19.0 tok/s | Live vLLM GPU: False
+[2026-11-02 09:12:33] [INFO] [vllm] ================================================================================
+[2026-11-02 09:12:33] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Berapa protein pada dada ayam?'
+[2026-11-02 09:12:36] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:12:38] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:12:38] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:12:41] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:12:41] [INFO] [vllm] Telemetri Inferensi: Waktu: 7704.17 ms | Kecepatan: 8.8 tok/s | Live vLLM GPU: False
+[2026-11-02 09:12:41] [INFO] [vllm] ================================================================================
+[2026-11-02 09:12:41] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Lagi pengen makan yang berkuah & hangat'
+[2026-11-02 09:12:43] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:12:46] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:12:46] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:12:49] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:12:49] [INFO] [vllm] Telemetri Inferensi: Waktu: 7516.88 ms | Kecepatan: 12.0 tok/s | Live vLLM GPU: False
+[2026-11-02 09:13:02] [INFO] [vllm] === VLLM INFERENCE LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/vllm.log) ===
+[2026-11-02 09:13:03] [INFO] [vllm] ================================================================================
+[2026-11-02 09:13:03] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Dok, saya ingin makan siang yang lezat tapi aman untuk tekanan darah saya. Menu apa yang disarankan?'
+[2026-11-02 09:13:05] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:13:08] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:13:08] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:13:10] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:13:10] [INFO] [vllm] Telemetri Inferensi: Waktu: 7517.68 ms | Kecepatan: 11.6 tok/s | Live vLLM GPU: False
+[2026-11-02 09:13:10] [INFO] [vllm] ================================================================================
+[2026-11-02 09:13:10] [INFO] [vllm] MEMULAI INFERENSI vLLM: Target Candidates: ['http://localhost:8000/v1', 'http://vllm:8000/v1'] | Query: 'Dr. Predi, tolong beri ide camilan sore yang enak tapi asam urat saya tidak kambuh ya.'
+[2026-11-02 09:13:13] [DEBUG] [vllm] Candidate http://localhost:8000/v1 tidak merespons: 
+[2026-11-02 09:13:15] [DEBUG] [vllm] Candidate http://vllm:8000/v1 tidak merespons: 
+[2026-11-02 09:13:15] [INFO] [vllm] Mengirim payload chat completion ke http://localhost:8000/v1/chat/completions (Max Tokens: 1536, Temp: 0.6)...
+[2026-11-02 09:13:18] [WARNING] [vllm] vLLM offline/unreachable di http://localhost:8000/v1/chat/completions: All connection attempts failed. Mengaktifkan clinical fallback engine.
+[2026-11-02 09:13:18] [INFO] [vllm] Telemetri Inferensi: Waktu: 7513.98 ms | Kecepatan: 8.9 tok/s | Live vLLM GPU: False

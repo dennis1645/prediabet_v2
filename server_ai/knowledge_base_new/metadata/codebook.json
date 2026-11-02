@@ -1,0 +1,592 @@
+[
+  {
+    "file": "master_bahan.csv",
+    "kolom": "bahan_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "ID unik bahan kanonik",
+    "contoh_nilai": "B0073",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "PK"
+  },
+  {
+    "file": "master_bahan.csv",
+    "kolom": "nama_kanonik",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama bahan baku setelah dinormalisasi (lowercase, catatan persiapan dihapus)",
+    "contoh_nilai": "bawang putih",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "master_bahan.csv",
+    "kolom": "sumber",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Keterangan asal data bahan ini disusun",
+    "contoh_nilai": "ingredients.csv (TKPI/nutrinusa/situs resep)",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "master_bahan.csv",
+    "kolom": "status_review",
+    "tipe_data": "enum",
+    "satuan": "-",
+    "deskripsi": "Status peninjauan manual: perlu_review_manual / terverifikasi",
+    "contoh_nilai": "perlu_review_manual",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "alias_bahan.csv",
+    "kolom": "alias_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "ID unik baris alias",
+    "contoh_nilai": "A00001",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "PK"
+  },
+  {
+    "file": "alias_bahan.csv",
+    "kolom": "bahan_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Bahan kanonik yang dirujuk",
+    "contoh_nilai": "B0073",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> master_bahan.bahan_id"
+  },
+  {
+    "file": "alias_bahan.csv",
+    "kolom": "nama_tertulis",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Teks asli persis dari ingredients.csv sebelum dibersihkan",
+    "contoh_nilai": "(iris tipis) Bawang putih",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "kategori.csv",
+    "kolom": "kategori_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "ID unik kategori bahan",
+    "contoh_nilai": "K001",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "PK"
+  },
+  {
+    "file": "kategori.csv",
+    "kolom": "nama_kategori",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama kategori bahan",
+    "contoh_nilai": "Biji-bijian",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "bahan_kategori.csv",
+    "kolom": "bahan_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Bahan yang dikategorikan",
+    "contoh_nilai": "B0001",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> master_bahan.bahan_id"
+  },
+  {
+    "file": "bahan_kategori.csv",
+    "kolom": "kategori_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Kategori yang berlaku (1 bahan bisa >1 kategori)",
+    "contoh_nilai": "K002",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> kategori.kategori_id"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "nama",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama makanan/bahan",
+    "contoh_nilai": "Beras giling, mentah",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "sumber_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Sumber data asal baris ini; default S00 (belum ditelusuri) untuk data lama",
+    "contoh_nilai": "S00",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> sumber.sumber_id"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "ID_PrediaBeat",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "ID unik untuk setiap bahan makanan utama",
+    "contoh_nilai": "F1",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "PK"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "sumber_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Sumber data asal bahan (TKPI/Nutrinusa/Scraping)",
+    "contoh_nilai": "S01",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "kondisi_bahan",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Status fisik, bentuk, potongan, atau anatomi bahan",
+    "contoh_nilai": "segar, mentah",
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "NAMA BAHAN KANONIK",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama bahan baku bersih dari AI (tanpa status/kondisi)",
+    "contoh_nilai": "beras giling",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "NAMA BAHAN ASLI",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama bahan mentah asli persis dari sumber data",
+    "contoh_nilai": "beras giling, mentah",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "ENERGI (Kal)",
+    "tipe_data": "float",
+    "satuan": "kkal",
+    "deskripsi": "Kandungan energi total per 100g BDD",
+    "contoh_nilai": 357,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "PROTEIN (g)",
+    "tipe_data": "float",
+    "satuan": "gram",
+    "deskripsi": "Kandungan protein total per 100g BDD",
+    "contoh_nilai": 8.4,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "LEMAK (g)",
+    "tipe_data": "float",
+    "satuan": "gram",
+    "deskripsi": "Kandungan lemak total per 100g BDD",
+    "contoh_nilai": 1.7,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "KH (g)",
+    "tipe_data": "float",
+    "satuan": "gram",
+    "deskripsi": "Kandungan karbohidrat total per 100g BDD",
+    "contoh_nilai": 77.1,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "SERAT (g)",
+    "tipe_data": "float",
+    "satuan": "gram",
+    "deskripsi": "Kandungan serat pangan per 100g BDD",
+    "contoh_nilai": 0.2,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "ABU (g)",
+    "tipe_data": "float",
+    "satuan": "gram",
+    "deskripsi": "Kandungan abu/mineral per 100g BDD",
+    "contoh_nilai": 0.8,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "KALSIUM (mg)",
+    "tipe_data": "float",
+    "satuan": "mg",
+    "deskripsi": "Kandungan kalsium per 100g BDD",
+    "contoh_nilai": 147,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "BESI (mg)",
+    "tipe_data": "float",
+    "satuan": "mg",
+    "deskripsi": "Kandungan zat besi per 100g BDD",
+    "contoh_nilai": 1.8,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "NATRIUM (mg)",
+    "tipe_data": "float",
+    "satuan": "mg",
+    "deskripsi": "Kandungan natrium per 100g BDD",
+    "contoh_nilai": 27,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "KALIUM (mg)",
+    "tipe_data": "float",
+    "satuan": "mg",
+    "deskripsi": "Kandungan kalium per 100g BDD",
+    "contoh_nilai": 71,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "TEMBAGA (mg)",
+    "tipe_data": "float",
+    "satuan": "mg",
+    "deskripsi": "Kandungan tembaga per 100g BDD",
+    "contoh_nilai": 0.1,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "SENG (mg)",
+    "tipe_data": "float",
+    "satuan": "mg",
+    "deskripsi": "Kandungan seng/zinc per 100g BDD",
+    "contoh_nilai": 0.5,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "VIT_C (mg)",
+    "tipe_data": "float",
+    "satuan": "mg",
+    "deskripsi": "Kandungan vitamin C per 100g BDD",
+    "contoh_nilai": 0,
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "BDD (%)",
+    "tipe_data": "integer",
+    "satuan": "%",
+    "deskripsi": "Persentase Berat Dapat Dimakan (Edible Portion)",
+    "contoh_nilai": 100,
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "Temp_URT_String",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Data ukuran rumah tangga (URT) pentahapan untuk konversi",
+    "contoh_nilai": "1 mangkok",
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "food_item.csv",
+    "kolom": "canonical_base_ingredient",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Ekstraksi baseline nama makanan",
+    "contoh_nilai": "beras giling",
+    "boleh_kosong": "ya",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "resep.csv",
+    "kolom": "resep_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "ID unik resep",
+    "contoh_nilai": "R0001",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "PK"
+  },
+  {
+    "file": "resep.csv",
+    "kolom": "nama_resep",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama resep hasil pembersihan",
+    "contoh_nilai": "Bihun goreng instan",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "resep.csv",
+    "kolom": "ID_PrediaBeat_FK",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Kunci tamu yang merujuk ke bahan utama di food_item",
+    "contoh_nilai": "F28",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> food_item.ID_PrediaBeat"
+  },
+  {
+    "file": "resep.csv",
+    "kolom": "nama_resep_clean",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama resep huruf kecil untuk pencocokan algoritma relasional",
+    "contoh_nilai": "bihun goreng instan",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "-"
+  },
+  {
+    "file": "resep.csv",
+    "kolom": "nama_asli_sumber",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Judul resep asli sebagaimana tertulis di sumber",
+    "contoh_nilai": "Bihun Instant Goreng",
+    "boleh_kosong": "ya",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "resep.csv",
+    "kolom": "sumber_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Situs/basis data asal resep ini; default S00 untuk data lama",
+    "contoh_nilai": "S00",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> sumber.sumber_id"
+  },
+  {
+    "file": "resep_bahan.csv",
+    "kolom": "resep_bahan_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "ID unik baris komposisi",
+    "contoh_nilai": "RB00001",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "PK"
+  },
+  {
+    "file": "resep_bahan.csv",
+    "kolom": "resep_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Resep yang dimaksud",
+    "contoh_nilai": "R0001",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> resep.resep_id"
+  },
+  {
+    "file": "resep_bahan.csv",
+    "kolom": "bahan_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Bahan yang dipakai; kosong jika nama bahan belum berhasil dipetakan ke master_bahan",
+    "contoh_nilai": "B0098",
+    "boleh_kosong": "ya",
+    "jenis_kunci": "FK -> master_bahan.bahan_id"
+  },
+  {
+    "file": "resep_bahan.csv",
+    "kolom": "jumlah",
+    "tipe_data": "float",
+    "satuan": "sesuai kolom satuan",
+    "deskripsi": "Jumlah takaran bahan",
+    "contoh_nilai": 2,
+    "boleh_kosong": "ya",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "resep_bahan.csv",
+    "kolom": "satuan",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Satuan takaran rumah tangga (URT) asli",
+    "contoh_nilai": "bungkus",
+    "boleh_kosong": "ya",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "bahan_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Bahan yang dikonversi",
+    "contoh_nilai": "B0002",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> master_bahan.bahan_id"
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "nama_kanonik",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama bahan (duplikat dari master_bahan untuk kemudahan baca)",
+    "contoh_nilai": "adas",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "satuan",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Satuan URT yang dikonversi",
+    "contoh_nilai": "sdt",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "gram_per_unit",
+    "tipe_data": "float",
+    "satuan": "gram",
+    "deskripsi": "Berat 1 unit satuan tsb untuk bahan ini; KOSONG = belum diverifikasi, JANGAN ditebak",
+    "contoh_nilai": 5,
+    "boleh_kosong": "ya",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "sumber_rujukan",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Rujukan nilai konversi",
+    "contoh_nilai": "Estimasi umum AKG/Kemenkes (perlu verifikasi per bahan)",
+    "boleh_kosong": "ya",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "status",
+    "tipe_data": "enum",
+    "satuan": "-",
+    "deskripsi": "draft_umum (perkiraan awal) / perlu_diisi (belum ada nilai) / terverifikasi",
+    "contoh_nilai": "draft_umum",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "sumber_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Sumber rujukan konversi",
+    "contoh_nilai": "S01",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "FK -> sumber.sumber_id"
+  },
+  {
+    "file": "sumber.csv",
+    "kolom": "sumber_id",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "ID unik sumber data",
+    "contoh_nilai": "S01",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": "PK"
+  },
+  {
+    "file": "sumber.csv",
+    "kolom": "nama_sumber",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Nama sumber data",
+    "contoh_nilai": "TKPI (Tabel Komposisi Pangan Indonesia)",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "sumber.csv",
+    "kolom": "jenis_sumber",
+    "tipe_data": "enum",
+    "satuan": "-",
+    "deskripsi": "institusi_resmi/basis_data_gizi/situs_resep_ugc/lainnya",
+    "contoh_nilai": "institusi_resmi",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "sumber.csv",
+    "kolom": "url",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Tautan sumber bila ada",
+    "contoh_nilai": "https://www.panganku.org",
+    "boleh_kosong": "ya",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "sumber.csv",
+    "kolom": "tingkat_kepercayaan",
+    "tipe_data": "enum",
+    "satuan": "-",
+    "deskripsi": "tinggi/sedang/rendah/tidak_diketahui",
+    "contoh_nilai": "tinggi",
+    "boleh_kosong": "tidak",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "sumber.csv",
+    "kolom": "keterangan",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Catatan tambahan tentang keandalan/metodologi sumber",
+    "contoh_nilai": "Basis data gizi resmi Kemenkes RI, diukur laboratorium",
+    "boleh_kosong": "ya",
+    "jenis_kunci": NaN
+  },
+  {
+    "file": "konversi_satuan.csv",
+    "kolom": "kode_sumber",
+    "tipe_data": "string",
+    "satuan": "-",
+    "deskripsi": "Kode asli dari basis data sumber; selalu \"no_code\" karena baris konversi tidak merujuk satu item bernomor kode di sumber aslinya",
+    "contoh_nilai": "no_code",
+    "boleh_kosong": "tidak (selalu no_code)",
+    "jenis_kunci": NaN
+  }
+]

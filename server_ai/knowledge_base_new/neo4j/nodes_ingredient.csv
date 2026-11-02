@@ -1,0 +1,815 @@
+id:ID(Ingredient),nama_kanonik,status_review
+B0001,acar timun,perlu_review_manual
+B0002,adas,perlu_review_manual
+B0003,agar-agar,perlu_review_manual
+B0004,air,perlu_review_manual
+B0005,air asam,perlu_review_manual
+B0006,air asam jawa,perlu_review_manual
+B0007,air bersih,perlu_review_manual
+B0008,air biasa,perlu_review_manual
+B0009,air cucian beras,perlu_review_manual
+B0010,air dingin,perlu_review_manual
+B0011,air endapan kapur sirih,perlu_review_manual
+B0012,air es,perlu_review_manual
+B0013,air hangat,perlu_review_manual
+B0014,air jeruk nipis,perlu_review_manual
+B0015,air kaldu,perlu_review_manual
+B0016,air kaldu ayam,perlu_review_manual
+B0017,air kelapa muda,perlu_review_manual
+B0018,air matang,perlu_review_manual
+B0019,air mineral,perlu_review_manual
+B0020,air minum,perlu_review_manual
+B0021,air panas,perlu_review_manual
+B0022,air pandan suji,perlu_review_manual
+B0023,air putih + 1 sdm susu bubuk,perlu_review_manual
+B0024,air rebusan,perlu_review_manual
+B0025,air rendaman jamur,perlu_review_manual
+B0026,air secukupnya,perlu_review_manual
+B0027,air ungkepan ayam,perlu_review_manual
+B0028,air untuk merebus ubi ungu,perlu_review_manual
+B0029,air untuk merendam singkong,perlu_review_manual
+B0030,air/secukupnya,perlu_review_manual
+B0031,alpukat,perlu_review_manual
+B0032,gula pasir,perlu_review_manual
+B0033,msg secukupnya,perlu_review_manual
+B0034,aneka bakso seafood,perlu_review_manual
+B0035,anggur muscat,perlu_review_manual
+B0036,anggur ungu dan hijau,perlu_review_manual
+B0037,apel,perlu_review_manual
+B0038,apel fuji,perlu_review_manual
+B0039,apel manalagi,perlu_review_manual
+B0040,apel merah,perlu_review_manual
+B0041,asam jawa,perlu_review_manual
+B0042,asam kandis,perlu_review_manual
+B0043,asam sunti ukuran kecil,perlu_review_manual
+B0044,ayam,perlu_review_manual
+B0045,"ayam , rebus, suwir2",perlu_review_manual
+B0046,ayam broiler,perlu_review_manual
+B0047,ayam dada,perlu_review_manual
+B0048,ayam filet,perlu_review_manual
+B0049,ayam fillet,perlu_review_manual
+B0050,ayam goreng,perlu_review_manual
+B0051,ayam goreng tepung,perlu_review_manual
+B0052,ayam kampung,perlu_review_manual
+B0053,ayam potong,perlu_review_manual
+B0054,ayam ukuran besar,perlu_review_manual
+B0055,"ayam, potong sesuai selera",perlu_review_manual
+B0056,b. putih parut,perlu_review_manual
+B0057,babat sapi,perlu_review_manual
+B0058,baking powder,perlu_review_manual
+B0059,baking soda,perlu_review_manual
+B0060,bakso,perlu_review_manual
+B0061,bakso sapi,perlu_review_manual
+B0062,bakwan,perlu_review_manual
+B0063,bamer,perlu_review_manual
+B0064,bandeng sudah bersih dari tulang dan kulit jadi tinggal 250 g daging bandeng,perlu_review_manual
+B0065,bawang bombay,perlu_review_manual
+B0066,bawang bombay 3 warna,perlu_review_manual
+B0067,bawang daun,perlu_review_manual
+B0068,bawang goreng,perlu_review_manual
+B0069,bawang goreng kriuk,perlu_review_manual
+B0070,bawang merah,perlu_review_manual
+B0071,bawang merah goreng,perlu_review_manual
+B0072,bawang merah iris,perlu_review_manual
+B0073,bawang putih,perlu_review_manual
+B0074,bawang putih bawang merah halus,perlu_review_manual
+B0075,bawang putih bubuk,perlu_review_manual
+B0076,bawang putih cincang,perlu_review_manual
+B0077,bawang putih haluskan,perlu_review_manual
+B0078,bawang putih kating parut,perlu_review_manual
+B0079,bawang putih parut,perlu_review_manual
+B0080,"bawang putih, chopped",perlu_review_manual
+B0081,"bawang putih, goreng",perlu_review_manual
+B0082,"bawang putih, iris",perlu_review_manual
+B0083,bayam,perlu_review_manual
+B0084,bayam hijau,perlu_review_manual
+B0085,belimbing,perlu_review_manual
+B0086,belimbing ukuran kecil,perlu_review_manual
+B0087,belut yang ukurang besar,perlu_review_manual
+B0088,bengkuang,perlu_review_manual
+B0089,beras,perlu_review_manual
+B0090,beras ketan,perlu_review_manual
+B0091,beras ketan putih,perlu_review_manual
+B0092,beras merah,perlu_review_manual
+B0093,beras putih,perlu_review_manual
+B0094,beras shirataki,perlu_review_manual
+B0095,besar jahe,perlu_review_manual
+B0096,bihun beras,perlu_review_manual
+B0097,bihun goreng,perlu_review_manual
+B0098,bihun goreng rose brand,perlu_review_manual
+B0099,bihun jagung,perlu_review_manual
+B0100,biji chia,perlu_review_manual
+B0101,biji labu,perlu_review_manual
+B0102,biji nangka,perlu_review_manual
+B0103,biji pala,perlu_review_manual
+B0104,biji wijen,perlu_review_manual
+B0105,"blimbing wuluh, potong2",perlu_review_manual
+B0106,blueband,perlu_review_manual
+B0107,bombay iris panjang,perlu_review_manual
+B0108,botol susu fresh,perlu_review_manual
+B0109,brokoli,perlu_review_manual
+B0110,brown sugar,perlu_review_manual
+B0111,buah brem,perlu_review_manual
+B0112,buah buahan,perlu_review_manual
+B0113,buah leci,perlu_review_manual
+B0114,buah naga merah,perlu_review_manual
+B0115,bubuk cabai,perlu_review_manual
+B0116,bubuk cokelat,perlu_review_manual
+B0117,bubuk kakao,perlu_review_manual
+B0118,bubuk kayu manis,perlu_review_manual
+B0119,bubuk merica,perlu_review_manual
+B0120,bumbu dasar kuning,perlu_review_manual
+B0121,bumbu gulai,perlu_review_manual
+B0122,bumbu halus :,perlu_review_manual
+B0123,bumbu halus tekwan,perlu_review_manual
+B0124,bumbu instan bulgogi,perlu_review_manual
+B0125,bumbu kacang,perlu_review_manual
+B0126,bumbu kaldu,perlu_review_manual
+B0127,bumbu pecel / sambal kacang,perlu_review_manual
+B0128,bumbu pemasak kalio,perlu_review_manual
+B0129,bumbu rahasia,perlu_review_manual
+B0130,bumbu rasa ayam,perlu_review_manual
+B0131,bumbu rempah,perlu_review_manual
+B0132,bumbu semur,perlu_review_manual
+B0133,bumbu soto instan,perlu_review_manual
+B0134,bumbu tabur,perlu_review_manual
+B0135,bumbu tekwan kering,perlu_review_manual
+B0136,buncis,perlu_review_manual
+B0137,bunga lawang,perlu_review_manual
+B0138,bunga pekak,perlu_review_manual
+B0139,bunga pepaya,perlu_review_manual
+B0140,bunga telang kering,perlu_review_manual
+B0141,butter,perlu_review_manual
+B0142,cabai,perlu_review_manual
+B0143,cabai besar,perlu_review_manual
+B0144,cabai bubuk,perlu_review_manual
+B0145,cabai hijau besar,perlu_review_manual
+B0146,cabai keriting merah,perlu_review_manual
+B0147,cabai merah,perlu_review_manual
+B0148,cabai merah besar,perlu_review_manual
+B0149,cabai merah keriting,perlu_review_manual
+B0150,cabai merah keriting buang bijinya,perlu_review_manual
+B0151,cabai rawit,perlu_review_manual
+B0152,cabai rawit merah,perlu_review_manual
+B0153,cabe bubuk,perlu_review_manual
+B0154,cabe halus,perlu_review_manual
+B0155,cabe hijau,perlu_review_manual
+B0156,cabe hijau besar,perlu_review_manual
+B0157,cabe hijau keriting,perlu_review_manual
+B0158,cabe kering,perlu_review_manual
+B0159,cabe kering giling/secukupnya,perlu_review_manual
+B0160,cabe keriting,perlu_review_manual
+B0161,cabe keriting merah,perlu_review_manual
+B0162,cabe kriting,perlu_review_manual
+B0163,cabe merah,perlu_review_manual
+B0164,cabe merah besar,perlu_review_manual
+B0165,cabe merah giling,perlu_review_manual
+B0166,cabe merah kering,perlu_review_manual
+B0167,cabe merah keriting,perlu_review_manual
+B0168,cabe rawit,perlu_review_manual
+B0169,cabe rawit hijau,perlu_review_manual
+B0170,cabe rawit hijau blender,perlu_review_manual
+B0171,cabe rawit kecil,perlu_review_manual
+B0172,cabe rawit merah,perlu_review_manual
+B0173,cabe rawit merah utuh,perlu_review_manual
+B0174,cabe rawit/kriting,perlu_review_manual
+B0175,cabe rawit/sesuai selera,perlu_review_manual
+B0176,cabe setan,perlu_review_manual
+B0177,caisim,perlu_review_manual
+B0178,cakwe,perlu_review_manual
+B0179,cengkeh,perlu_review_manual
+B0180,cengkih,perlu_review_manual
+B0181,charcoal bubuk,perlu_review_manual
+B0182,chia seeds,perlu_review_manual
+B0183,choco chip sebagai mata ulat,perlu_review_manual
+B0184,cingur sapi,perlu_review_manual
+B0185,cokelat batang,perlu_review_manual
+B0186,cokelat manis,perlu_review_manual
+B0187,cokelat pasta,perlu_review_manual
+B0188,coklat bubuk,perlu_review_manual
+B0189,coklat chips / potong kecil-kecil biar cepat meleleh,perlu_review_manual
+B0190,cola,perlu_review_manual
+B0191,cone waffle,perlu_review_manual
+B0192,cuka,perlu_review_manual
+B0193,cuka makan,perlu_review_manual
+B0194,cumi-cumi,perlu_review_manual
+B0195,dada ayam,perlu_review_manual
+B0196,dada ayam tg,perlu_review_manual
+B0197,daging,perlu_review_manual
+B0198,daging asap,perlu_review_manual
+B0199,daging ayam,perlu_review_manual
+B0200,daging ayam asap,perlu_review_manual
+B0201,daging ayam cincang,perlu_review_manual
+B0202,daging ayam suwir,perlu_review_manual
+B0203,daging babi /babi hutan,perlu_review_manual
+B0204,daging bebek,perlu_review_manual
+B0205,daging durian,perlu_review_manual
+B0206,daging ikan hiu,perlu_review_manual
+B0207,daging ikan tenggiri,perlu_review_manual
+B0208,daging kambing,perlu_review_manual
+B0209,daging sapi,perlu_review_manual
+B0210,daging sapi cincang,perlu_review_manual
+B0211,daging sapi slice,perlu_review_manual
+B0212,daging tenggiri giling setengah beku,perlu_review_manual
+B0213,dark soy sauce,perlu_review_manual
+B0214,daun bawang,perlu_review_manual
+B0215,daun bawang potong,perlu_review_manual
+B0216,daun bawang seledri,perlu_review_manual
+B0217,"daun bawang, iris",perlu_review_manual
+B0218,"daun bawang, iris halus",perlu_review_manual
+B0219,daun jeruk,perlu_review_manual
+B0220,daun jeruk buang tulang nya,perlu_review_manual
+B0221,daun jeruk purut,perlu_review_manual
+B0222,daun jeruk sobek buang batang,perlu_review_manual
+B0223,"daun jeruk, buang tulang tengahnya dan iris tipis",perlu_review_manual
+B0224,daun kari,perlu_review_manual
+B0225,daun katuk,perlu_review_manual
+B0226,daun kemangi,perlu_review_manual
+B0227,daun kunyit,perlu_review_manual
+B0228,daun kunyit di ikat,perlu_review_manual
+B0229,"daun melinjo,potong2",perlu_review_manual
+B0230,daun mlinjo,perlu_review_manual
+B0231,daun pandan,perlu_review_manual
+B0232,daun pandan ikat simpul,perlu_review_manual
+B0233,daun pandan kecil,perlu_review_manual
+B0234,"daun pandan, ikat simpul",perlu_review_manual
+B0235,daun pandan?,perlu_review_manual
+B0236,daun pepaya muda,perlu_review_manual
+B0237,daun pisang,perlu_review_manual
+B0238,daun prei,perlu_review_manual
+B0239,daun salam,perlu_review_manual
+B0240,daun seledri,perlu_review_manual
+B0241,daun singkong,perlu_review_manual
+B0242,daun singkong muda,perlu_review_manual
+B0243,dekstrosa,perlu_review_manual
+B0244,ebi,perlu_review_manual
+B0245,ebi sangrai,perlu_review_manual
+B0246,ekstrak paprika,perlu_review_manual
+B0247,emping,perlu_review_manual
+B0248,emping melinjo goreng,perlu_review_manual
+B0249,endapan pandan,perlu_review_manual
+B0250,english muffin,perlu_review_manual
+B0251,es batu dihancurkan,perlu_review_manual
+B0252,es krim,perlu_review_manual
+B0253,evoo,perlu_review_manual
+B0254,filett paha ayam,perlu_review_manual
+B0255,"fillet ayam, bagian paha",perlu_review_manual
+B0256,gandum oat,perlu_review_manual
+B0257,gaplek atau singkong kering,perlu_review_manual
+B0258,garam,perlu_review_manual
+B0259,garam dan pemasak kambing,perlu_review_manual
+B0260,garam halus,perlu_review_manual
+B0261,garam kira kira aja,perlu_review_manual
+B0262,garam laut,perlu_review_manual
+B0263,garam meja,perlu_review_manual
+B0264,garam putih,perlu_review_manual
+B0265,garam sesuaikan dengan rasa masing2,perlu_review_manual
+B0266,"garam, penyedap secukupnya",perlu_review_manual
+B0267,"garam,lada,gula",perlu_review_manual
+B0268,garam/secukupnya,perlu_review_manual
+B0269,granola,perlu_review_manual
+B0270,greek yogurt,perlu_review_manual
+B0271,gula,perlu_review_manual
+B0272,gula aren,perlu_review_manual
+B0273,gula aren/gula merah/ gula pasir.. seadanya aja,perlu_review_manual
+B0274,gula halus,perlu_review_manual
+B0275,gula jawa,perlu_review_manual
+B0276,gula jawa sisir,perlu_review_manual
+B0277,"gula jawa, sisir",perlu_review_manual
+B0278,gula jawa/gula aren,perlu_review_manual
+B0279,gula kelapa,perlu_review_manual
+B0280,gula kelapa coklat,perlu_review_manual
+B0281,gula kelapa serut,perlu_review_manual
+B0282,gula merah,perlu_review_manual
+B0283,gula merah aren,perlu_review_manual
+B0284,gula merah cincang,perlu_review_manual
+B0285,gula merah sisir halus,perlu_review_manual
+B0286,gula merah yang telah diserut halus,perlu_review_manual
+B0287,"gula merah, sisir",perlu_review_manual
+B0288,"gula merah, sisir halus",perlu_review_manual
+B0289,gula pasir,perlu_review_manual
+B0290,gula pasir rose brand,perlu_review_manual
+B0291,gula pasir rose brand untuk taburan,perlu_review_manual
+B0292,gula pasir 律両�¢隆 藍料琉僚粒,perlu_review_manual
+B0293,gula pasir. diblender sebentar hingga halus,perlu_review_manual
+B0294,"gula,garam,dan penyedap rasa",perlu_review_manual
+B0295,gulai nangka,perlu_review_manual
+B0296,hati ayam,perlu_review_manual
+B0297,hati sapi,perlu_review_manual
+B0298,hiasan : springkel/ chocochip,perlu_review_manual
+B0299,himalayan salt,perlu_review_manual
+B0300,iga sapi,perlu_review_manual
+B0301,ikan,perlu_review_manual
+B0302,ikan bandeng,perlu_review_manual
+B0303,ikan barakuda,perlu_review_manual
+B0304,ikan belida giling,perlu_review_manual
+B0305,ikan cakalang asap,perlu_review_manual
+B0306,ikan cucut,perlu_review_manual
+B0307,ikan dencis / ikan kembung / ikan kakap/ ikan tongkol,perlu_review_manual
+B0308,ikan dori fillet,perlu_review_manual
+B0309,ikan ekor kuning,perlu_review_manual
+B0310,ikan gabus,perlu_review_manual
+B0311,ikan kembung,perlu_review_manual
+B0312,ikan laut,perlu_review_manual
+B0313,ikan layang,perlu_review_manual
+B0314,ikan lele,perlu_review_manual
+B0315,ikan mas,perlu_review_manual
+B0316,ikan mubara,perlu_review_manual
+B0317,ikan mujaer,perlu_review_manual
+B0318,ikan nila,perlu_review_manual
+B0319,ikan patin,perlu_review_manual
+B0320,"ikan roa kering,bersihkan dr tulangnya",perlu_review_manual
+B0321,ikan salem,perlu_review_manual
+B0322,ikan tenggiri,perlu_review_manual
+B0323,ikan teri,perlu_review_manual
+B0324,ikan tongkol,perlu_review_manual
+B0325,ikan tongkol ukuran besar,perlu_review_manual
+B0326,ikan tuna,perlu_review_manual
+B0327,indomie mi goreng,perlu_review_manual
+B0328,iris lengkuas,perlu_review_manual
+B0329,irisan daun jeruk,perlu_review_manual
+B0330,jagung,perlu_review_manual
+B0331,jagung manis,perlu_review_manual
+B0332,jagung muda,perlu_review_manual
+B0333,jahe,perlu_review_manual
+B0334,jahe bubuk,perlu_review_manual
+B0335,jahe kupas,perlu_review_manual
+B0336,"jahe, lengkuas halus",perlu_review_manual
+B0337,jambu air,perlu_review_manual
+B0338,jambu biji,perlu_review_manual
+B0339,jambu biji merah,perlu_review_manual
+B0340,jamur,perlu_review_manual
+B0341,jamur kancing,perlu_review_manual
+B0342,jamur kering yg sdh direndam sampai lunak trus di potong kecil kecil,perlu_review_manual
+B0343,jamur shiitake,perlu_review_manual
+B0344,jamur tiram,perlu_review_manual
+B0345,jantung pisang kepok,perlu_review_manual
+B0346,jari jahe,perlu_review_manual
+B0347,jari kencur,perlu_review_manual
+B0348,jari kunyit,perlu_review_manual
+B0349,jari kunyit bakar,perlu_review_manual
+B0350,jelly,perlu_review_manual
+B0351,jengkol,perlu_review_manual
+B0352,jengkol kupas rebus,perlu_review_manual
+B0353,jeroan sapi,perlu_review_manual
+B0354,jeruk,perlu_review_manual
+B0355,jeruk limau,perlu_review_manual
+B0356,jeruk manis,perlu_review_manual
+B0357,jeruk nipis,perlu_review_manual
+B0358,jeruk nipis/ lemon/ limau,perlu_review_manual
+B0359,jeruk purut,perlu_review_manual
+B0360,jeruk sunkist,perlu_review_manual
+B0361,jika suka penyedap,perlu_review_manual
+B0362,jintan,perlu_review_manual
+B0363,jus pandan,perlu_review_manual
+B0364,jus pandan suji,perlu_review_manual
+B0365,kacang almond,perlu_review_manual
+B0366,kacang hijau,perlu_review_manual
+B0367,kacang kedelai,perlu_review_manual
+B0368,kacang kedelai goreng,perlu_review_manual
+B0369,kacang merah,perlu_review_manual
+B0370,kacang panjang,perlu_review_manual
+B0371,kacang tanah,perlu_review_manual
+B0372,kacang tanah goreng,perlu_review_manual
+B0373,kacang tholo,perlu_review_manual
+B0374,kacang tolo,perlu_review_manual
+B0375,kaki kambing,perlu_review_manual
+B0376,kaldu ayam,perlu_review_manual
+B0377,kaldu ayam bubuk,perlu_review_manual
+B0378,kaldu bubuk,perlu_review_manual
+B0379,kaldu bubuk/saya pakai masako,perlu_review_manual
+B0380,kaldu jamur,perlu_review_manual
+B0381,kaldu jamur bubuk,perlu_review_manual
+B0382,kaldu jamur totole,perlu_review_manual
+B0383,kaldu rebusan tulang ayam,perlu_review_manual
+B0384,kaldu sapi,perlu_review_manual
+B0385,kangkung,perlu_review_manual
+B0386,kangkung yang sudah direbus,perlu_review_manual
+B0387,"kangkung, siangi daunnya",perlu_review_manual
+B0388,kapulaga,perlu_review_manual
+B0389,kapur sirih,perlu_review_manual
+B0390,kas-kas,perlu_review_manual
+B0391,kayu manis,perlu_review_manual
+B0392,kayu manis bubuk,perlu_review_manual
+B0393,kayumanis,perlu_review_manual
+B0394,kecap asin,perlu_review_manual
+B0395,kecap ikan,perlu_review_manual
+B0396,kecap manis,perlu_review_manual
+B0397,kecil daun singkong,perlu_review_manual
+B0398,kedondong,perlu_review_manual
+B0399,"kedondong, iris",perlu_review_manual
+B0400,keju,perlu_review_manual
+B0401,keju cheddar,perlu_review_manual
+B0402,keju mozarella,perlu_review_manual
+B0403,keju mozzarella,perlu_review_manual
+B0404,keju parmesan,perlu_review_manual
+B0405,keju parut,perlu_review_manual
+B0406,kelapa,perlu_review_manual
+B0407,kelapa gonseng,perlu_review_manual
+B0408,"kelapa muda parut, sangrai",perlu_review_manual
+B0409,kelapa parut,perlu_review_manual
+B0410,kelapa parut agak muda,perlu_review_manual
+B0411,kelapa parut sangrai,perlu_review_manual
+B0412,kelapa parut setengah tua,perlu_review_manual
+B0413,kelapa parut ukuran sedang,perlu_review_manual
+B0414,"kelapa sedang, parut",perlu_review_manual
+B0415,kelapa setengah tua,perlu_review_manual
+B0416,kelapa setengah tua diparut,perlu_review_manual
+B0417,kelapa untuk campuran sagu,perlu_review_manual
+B0418,kelopak bunga lawang,perlu_review_manual
+B0419,keluwak,perlu_review_manual
+B0420,kemangi,perlu_review_manual
+B0421,"kemangi, petiki",perlu_review_manual
+B0422,kembang kol,perlu_review_manual
+B0423,kembang kol kecil,perlu_review_manual
+B0424,kemiri,perlu_review_manual
+B0425,kemiri bakar,perlu_review_manual
+B0426,kemiri halus,perlu_review_manual
+B0427,kemiri sangrai,perlu_review_manual
+B0428,kemiri yang sudah di goreng,perlu_review_manual
+B0429,"kenari cincang, sangrai",perlu_review_manual
+B0430,kencur,perlu_review_manual
+B0431,kental manis,perlu_review_manual
+B0432,kental manis cap enaak,perlu_review_manual
+B0433,kentang,perlu_review_manual
+B0434,kentang kukus,perlu_review_manual
+B0435,kepala kambing,perlu_review_manual
+B0436,kepiting,perlu_review_manual
+B0437,kertas roti panggang,perlu_review_manual
+B0438,kerupuk,perlu_review_manual
+B0439,kerupuk aci,perlu_review_manual
+B0440,kerupuk kulit/krecek..tambahan aja /boleh di skip,perlu_review_manual
+B0441,kerupuk mawar,perlu_review_manual
+B0442,kerupuk udang,perlu_review_manual
+B0443,kesemek,perlu_review_manual
+B0444,ketan putih,perlu_review_manual
+B0445,ketumbar,perlu_review_manual
+B0446,ketumbar bubuk,perlu_review_manual
+B0447,ketumbar sangrai,perlu_review_manual
+B0448,ketupat,perlu_review_manual
+B0449,kikil,perlu_review_manual
+B0450,kikil sapi,perlu_review_manual
+B0451,kobe tepung kentucky supercrispy,perlu_review_manual
+B0452,"kobis, potong2",perlu_review_manual
+B0453,kol,perlu_review_manual
+B0454,kol putih,perlu_review_manual
+B0455,konjac / shirataki,perlu_review_manual
+B0456,kontak,perlu_review_manual
+B0457,kopi hitam tanpa gula,perlu_review_manual
+B0458,kornet sapi,perlu_review_manual
+B0459,kuah santan susu,perlu_review_manual
+B0460,kubis,perlu_review_manual
+B0461,kubis kecil,perlu_review_manual
+B0462,"kulit ari kacang tanah,cuci bersih",perlu_review_manual
+B0463,kulit ikan tenggiri,perlu_review_manual
+B0464,kulit lumpia,perlu_review_manual
+B0465,kulit pangsit,perlu_review_manual
+B0466,kulit pangsit goreng,perlu_review_manual
+B0467,kulit sapi potong/kikil,perlu_review_manual
+B0468,kulit tahu,perlu_review_manual
+B0469,kulit tortilla,perlu_review_manual
+B0470,kunci,perlu_review_manual
+B0471,kuning telur,perlu_review_manual
+B0472,kunyit,perlu_review_manual
+B0473,kunyit bubuk,perlu_review_manual
+B0474,kunyit halus,perlu_review_manual
+B0475,kurang 2 jari terigu,perlu_review_manual
+B0476,"kurma merah,cuci lalu buang bijinya",perlu_review_manual
+B0477,kuyit,perlu_review_manual
+B0478,labu kuning,perlu_review_manual
+B0479,labu kuning dikupas,perlu_review_manual
+B0480,labu siam,perlu_review_manual
+B0481,labu siam besar,perlu_review_manual
+B0482,lada,perlu_review_manual
+B0483,lada bubuk,perlu_review_manual
+B0484,lada bubuk putih,perlu_review_manual
+B0485,lada hitam,perlu_review_manual
+B0486,laos,perlu_review_manual
+B0487,lemak ikan,perlu_review_manual
+B0488,lengkuas,perlu_review_manual
+B0489,lengkuas / laos,perlu_review_manual
+B0490,lengkuas bubuk,perlu_review_manual
+B0491,lengkuas di geprek,perlu_review_manual
+B0492,lengkuas geprek,perlu_review_manual
+B0493,"lengkuas, parut",perlu_review_manual
+B0494,leunca,perlu_review_manual
+B0495,lidah sapi,perlu_review_manual
+B0496,lontong,perlu_review_manual
+B0497,lontong polos,perlu_review_manual
+B0498,madu murni,perlu_review_manual
+B0499,madu original,perlu_review_manual
+B0500,maizena,perlu_review_manual
+B0501,makaroni,perlu_review_manual
+B0502,mangga harum manis,perlu_review_manual
+B0503,"mangga mengkal, iris",perlu_review_manual
+B0504,mangga muda,perlu_review_manual
+B0505,margarin,perlu_review_manual
+B0506,margarin palmia,perlu_review_manual
+B0507,margarin rose brand,perlu_review_manual
+B0508,margarin untuk menumis,perlu_review_manual
+B0509,"margarin, lelehkan",perlu_review_manual
+B0510,margarine,perlu_review_manual
+B0511,margarine/mentega,perlu_review_manual
+B0512,masako,perlu_review_manual
+B0513,matoa,perlu_review_manual
+B0514,mayones,perlu_review_manual
+B0515,mayonnaise,perlu_review_manual
+B0516,melinjo,perlu_review_manual
+B0517,melon hijau,perlu_review_manual
+B0518,mentega,perlu_review_manual
+B0519,mentega tawar,perlu_review_manual
+B0520,mentimun,perlu_review_manual
+B0521,merica,perlu_review_manual
+B0522,merica bubuk,perlu_review_manual
+B0523,mi tepung terigu,perlu_review_manual
+B0524,micin,perlu_review_manual
+B0525,micin asatu rose brand,perlu_review_manual
+B0526,micin/penyedap/msg,perlu_review_manual
+B0527,mie basah,perlu_review_manual
+B0528,mie kuning basah,perlu_review_manual
+B0529,"mie lethek/bendo, rendam kurleb 10 menit, cuci, tiriskan",perlu_review_manual
+B0530,mie telur,perlu_review_manual
+B0531,mie telur kering,perlu_review_manual
+B0532,minuman teh kemasan,perlu_review_manual
+B0533,minyak,perlu_review_manual
+B0534,minyak ayam,perlu_review_manual
+B0535,minyak bawang,perlu_review_manual
+B0536,minyak bumbu,perlu_review_manual
+B0537,minyak goreng,perlu_review_manual
+B0538,minyak goreng panas,perlu_review_manual
+B0539,minyak goreng rose brand,perlu_review_manual
+B0540,minyak kelapa,perlu_review_manual
+B0541,minyak makan,perlu_review_manual
+B0542,minyak nabati,perlu_review_manual
+B0543,minyak sayur,perlu_review_manual
+B0544,minyak sayur untuk menggoreng ikan,perlu_review_manual
+B0545,minyak sayur untuk menumis,perlu_review_manual
+B0546,minyak untuk menggoreng,perlu_review_manual
+B0547,minyak untuk menumis,perlu_review_manual
+B0548,minyak wijen,perlu_review_manual
+B0549,minyak zaitun,perlu_review_manual
+B0550,misoa,perlu_review_manual
+B0551,mrica bubuk,perlu_review_manual
+B0552,msg,perlu_review_manual
+B0553,msg asatu rose brand,perlu_review_manual
+B0554,nanas,perlu_review_manual
+B0555,nangka muda,perlu_review_manual
+B0556,nangka muda sudah dibersihkan,perlu_review_manual
+B0557,nasi putih,perlu_review_manual
+B0558,oat instan,perlu_review_manual
+B0559,okara,perlu_review_manual
+B0560,oncom,perlu_review_manual
+B0561,otak sapi,perlu_review_manual
+B0562,pada bubuk,perlu_review_manual
+B0563,paha ayam,perlu_review_manual
+B0564,paha ayam atas,perlu_review_manual
+B0565,paha ayam bawah,perlu_review_manual
+B0566,paha ayam fillet,perlu_review_manual
+B0567,"paha ayam, saya pakai yang ukuran besar",perlu_review_manual
+B0568,pakis,perlu_review_manual
+B0569,pala,perlu_review_manual
+B0570,pala bubuk,perlu_review_manual
+B0571,pandan,perlu_review_manual
+B0572,pangsit goreng,perlu_review_manual
+B0573,paprika,perlu_review_manual
+B0574,paru sapi,perlu_review_manual
+B0575,parut kelapa,perlu_review_manual
+B0576,pasta pandan,perlu_review_manual
+B0577,pasta pandan+1/4 sdt pewarna orange,perlu_review_manual
+B0578,pasta vanila,perlu_review_manual
+B0579,pasta vanilla,perlu_review_manual
+B0580,patty ayam,perlu_review_manual
+B0581,pelapa daun pisang,perlu_review_manual
+B0582,penuh tepung beras,perlu_review_manual
+B0583,penuh tepung terigu,perlu_review_manual
+B0584,penyedap,perlu_review_manual
+B0585,penyedap jamur,perlu_review_manual
+B0586,penyedap rasa,perlu_review_manual
+B0587,pepaya california,perlu_review_manual
+B0588,perasan jeruk nipis,perlu_review_manual
+B0589,perkedel kentang,perlu_review_manual
+B0590,pete,perlu_review_manual
+B0591,petis,perlu_review_manual
+B0592,petis udang,perlu_review_manual
+B0593,pewarna,perlu_review_manual
+B0594,pewarna makanan merah,perlu_review_manual
+B0595,pewarna merah n hijau,perlu_review_manual
+B0596,pir hijau,perlu_review_manual
+B0597,pisang,perlu_review_manual
+B0598,pisang ambon,perlu_review_manual
+B0599,pisang kepok,perlu_review_manual
+B0600,pisang raja nangka,perlu_review_manual
+B0601,pisang uli,perlu_review_manual
+B0602,"pisang uli, ukuran kecil",perlu_review_manual
+B0603,pok choy,perlu_review_manual
+B0604,pucuk ubi jalar,perlu_review_manual
+B0605,putih telur,perlu_review_manual
+B0606,putih telur rebus,perlu_review_manual
+B0607,putren kecil,perlu_review_manual
+B0608,quot;,perlu_review_manual
+B0609,ragi,perlu_review_manual
+B0610,ragi instan,perlu_review_manual
+B0611,ragi tape,perlu_review_manual
+B0612,raja ukuran sedang,perlu_review_manual
+B0613,rebung,perlu_review_manual
+B0614,rebung asam,perlu_review_manual
+B0615,risoles bihun,perlu_review_manual
+B0616,roti burger,perlu_review_manual
+B0617,roti gandum utuh,perlu_review_manual
+B0618,roti tawar putih,perlu_review_manual
+B0619,sagu,perlu_review_manual
+B0620,sagu ambon,perlu_review_manual
+B0621,sagu basah,perlu_review_manual
+B0622,sambal ijo,perlu_review_manual
+B0623,sambal tauco,perlu_review_manual
+B0624,sambal terasi dan ikan belanak,perlu_review_manual
+B0625,santan,perlu_review_manual
+B0626,santan encer,perlu_review_manual
+B0627,santan hangat,perlu_review_manual
+B0628,santan instan,perlu_review_manual
+B0629,santan instan + air,perlu_review_manual
+B0630,santan instan rose brand,perlu_review_manual
+B0631,santan instant,perlu_review_manual
+B0632,santan kara,perlu_review_manual
+B0633,santan kara segitiga,perlu_review_manual
+B0634,santan kelapa,perlu_review_manual
+B0635,santan kental,perlu_review_manual
+B0636,santan kental rose brand,perlu_review_manual
+B0637,santan rose brand,perlu_review_manual
+B0638,santan sedang kurang lebih,perlu_review_manual
+B0639,saset skm putih,perlu_review_manual
+B0640,saus barbeque,perlu_review_manual
+B0641,saus cabai,perlu_review_manual
+B0642,saus keju,perlu_review_manual
+B0643,saus lada hitam,perlu_review_manual
+B0644,saus pedas manis,perlu_review_manual
+B0645,saus tiram,perlu_review_manual
+B0646,saus tomat,perlu_review_manual
+B0647,saus tomat manis,perlu_review_manual
+B0648,saus yakiniku,perlu_review_manual
+B0649,sawi asin,perlu_review_manual
+B0650,sawi hijau,perlu_review_manual
+B0651,sawi putih,perlu_review_manual
+B0652,sayur lodeh,perlu_review_manual
+B0653,sayur sop,perlu_review_manual
+B0654,sayur terubuk,perlu_review_manual
+B0655,scalop kering rendam disuir suir,perlu_review_manual
+B0656,sdm tempoyak,perlu_review_manual
+B0657,sedaer,perlu_review_manual
+B0658,sedikit baking powder,perlu_review_manual
+B0659,sedikit vanili bubuk,perlu_review_manual
+B0660,sei sapi,perlu_review_manual
+B0661,selada air,perlu_review_manual
+B0662,selada keriting,perlu_review_manual
+B0663,seledri,perlu_review_manual
+B0664,semangka,perlu_review_manual
+B0665,serai,perlu_review_manual
+B0666,serai geprek,perlu_review_manual
+B0667,"serai, potong 3 lalu geprek",perlu_review_manual
+B0668,"serai, rajang halus",perlu_review_manual
+B0669,sere geprek,perlu_review_manual
+B0670,sereh,perlu_review_manual
+B0671,sereh di geprek,perlu_review_manual
+B0672,sereh geprek,perlu_review_manual
+B0673,"sereh,laos keprek",perlu_review_manual
+B0674,seukuran ibu jari jahe,perlu_review_manual
+B0675,seukuran ibu jari kunyit,perlu_review_manual
+B0676,singkong,perlu_review_manual
+B0677,singkong kupas,perlu_review_manual
+B0678,singkong segar,perlu_review_manual
+B0679,singkong yang sudah direbus dan dihaluskan,perlu_review_manual
+B0680,sirup merah,perlu_review_manual
+B0681,skm,perlu_review_manual
+B0682,slice beef,perlu_review_manual
+B0683,"smoked beef, iris",perlu_review_manual
+B0684,soda kue,perlu_review_manual
+B0685,sosis,perlu_review_manual
+B0686,sosis ayam,perlu_review_manual
+B0687,sosis sapi,perlu_review_manual
+B0688,"sosis, iris",perlu_review_manual
+B0689,soun,perlu_review_manual
+B0690,soy sauce,perlu_review_manual
+B0691,sp,perlu_review_manual
+B0692,spaghetti,perlu_review_manual
+B0693,starter,perlu_review_manual
+B0694,stroberi,perlu_review_manual
+B0695,susu,perlu_review_manual
+B0696,susu almond,perlu_review_manual
+B0697,susu bubuk,perlu_review_manual
+B0698,susu cair,perlu_review_manual
+B0699,susu evaporasi,perlu_review_manual
+B0700,susu kental manis,perlu_review_manual
+B0701,susu kental manis coklat,perlu_review_manual
+B0702,susu oat,perlu_review_manual
+B0703,susu sapi murni,perlu_review_manual
+B0704,susu sapi segar,perlu_review_manual
+B0705,susu segar,perlu_review_manual
+B0706,suweg,perlu_review_manual
+B0707,"tahu coklat, potong jadi 2",perlu_review_manual
+B0708,tahu dan tempe,perlu_review_manual
+B0709,tahu goreng,perlu_review_manual
+B0710,tahu putih,perlu_review_manual
+B0711,tahu sumedang,perlu_review_manual
+B0712,talas ukuran besar,perlu_review_manual
+B0713,tangkai daun seledri,perlu_review_manual
+B0714,taoge yang sudah direbus,perlu_review_manual
+B0715,tape singkong,perlu_review_manual
+B0716,tart cherry,perlu_review_manual
+B0717,tauco,perlu_review_manual
+B0718,tauge,perlu_review_manual
+B0719,tekwan basah,perlu_review_manual
+B0720,telor,perlu_review_manual
+B0721,telur,perlu_review_manual
+B0722,telur ayam,perlu_review_manual
+B0723,telur ayam ras,perlu_review_manual
+B0724,"telur ayam, rebus",perlu_review_manual
+B0725,telur balado,perlu_review_manual
+B0726,telur bebek,perlu_review_manual
+B0727,telur bebek mentah,perlu_review_manual
+B0728,telur ceplok,perlu_review_manual
+B0729,telur rebus,perlu_review_manual
+B0730,telur ukuran besar,perlu_review_manual
+B0731,telur utuh,perlu_review_manual
+B0732,tempe goreng,perlu_review_manual
+B0733,tempe kacang tanah,perlu_review_manual
+B0734,tempe kedelai,perlu_review_manual
+B0735,tempe orek,perlu_review_manual
+B0736,temu kunci,perlu_review_manual
+B0737,temu kunci iris tipis,perlu_review_manual
+B0738,tepung bakwan serbaguna,perlu_review_manual
+B0739,tepung beras,perlu_review_manual
+B0740,tepung beras rose brand,perlu_review_manual
+B0741,tepung buah sawo mentega,perlu_review_manual
+B0742,tepung bumbu,perlu_review_manual
+B0743,tepung cobe,perlu_review_manual
+B0744,tepung garut,perlu_review_manual
+B0745,tepung injin,perlu_review_manual
+B0746,tepung jagung,perlu_review_manual
+B0747,tepung kanji,perlu_review_manual
+B0748,tepung ketan,perlu_review_manual
+B0749,tepung ketan putih,perlu_review_manual
+B0750,tepung ketan rose brand,perlu_review_manual
+B0751,tepung kunci,perlu_review_manual
+B0752,tepung maizena,perlu_review_manual
+B0753,tepung mocaf,perlu_review_manual
+B0754,tepung panir,perlu_review_manual
+B0755,tepung protein sedang,perlu_review_manual
+B0756,tepung roti / panir,perlu_review_manual
+B0757,tepung sagu,perlu_review_manual
+B0758,"tepung sagu, sangrai",perlu_review_manual
+B0759,tepung tapioka,perlu_review_manual
+B0760,tepung tapioka / kanji,perlu_review_manual
+B0761,tepung tapioka cap pak tani gunung,perlu_review_manual
+B0762,tepung tapioka cap tani gunung,perlu_review_manual
+B0763,tepung tapioka rose brand,perlu_review_manual
+B0764,tepung tapioka rose brand cap pak tani gunung,perlu_review_manual
+B0765,tepung tapioka,perlu_review_manual
+B0766,tepung terigu,perlu_review_manual
+B0767,tepung terigu pro rendah,perlu_review_manual
+B0768,tepung terigu pro sedang,perlu_review_manual
+B0769,tepung terigu protein rendah,perlu_review_manual
+B0770,tepung terigu protein sedang,perlu_review_manual
+B0771,tepung terigu protein tinggi,perlu_review_manual
+B0772,tepung terigu segitiga biru,perlu_review_manual
+B0773,terasi,perlu_review_manual
+B0774,terasi bakar,perlu_review_manual
+B0775,terasi matang,perlu_review_manual
+B0776,terasi udang,perlu_review_manual
+B0777,teri medan,perlu_review_manual
+B0778,teri nasi goreng,perlu_review_manual
+B0779,terigu,perlu_review_manual
+B0780,terigu protein sedang,perlu_review_manual
+B0781,terong,perlu_review_manual
+B0782,terong bulat,perlu_review_manual
+B0783,terong hijau,perlu_review_manual
+B0784,terong ijo bulet,perlu_review_manual
+B0785,terong ungu,perlu_review_manual
+B0786,tetelan sapi / daging,perlu_review_manual
+B0787,tetes pewarna kuning,perlu_review_manual
+B0788,toge,perlu_review_manual
+B0789,tomat,perlu_review_manual
+B0790,tomat merah,perlu_review_manual
+B0791,tomat merah kecil,perlu_review_manual
+B0792,tortilla,perlu_review_manual
+B0793,ubi jalar,perlu_review_manual
+B0794,"ubi oranye, potong dadu",perlu_review_manual
+B0795,ubi ungu,perlu_review_manual
+B0796,udang,perlu_review_manual
+B0797,udang kering,perlu_review_manual
+B0798,udang kupas,perlu_review_manual
+B0799,umbi ganyong,perlu_review_manual
+B0800,urat sapi/ kaki sapi,perlu_review_manual
+B0801,vanila esens,perlu_review_manual
+B0802,vanili,perlu_review_manual
+B0803,vanili bubuk,perlu_review_manual
+B0804,vanili cair,perlu_review_manual
+B0805,vanilla,perlu_review_manual
+B0806,vanilla butter,perlu_review_manual
+B0807,vanilla cair,perlu_review_manual
+B0808,wijen hitam,perlu_review_manual
+B0809,wijen putih,perlu_review_manual
+B0810,wortel,perlu_review_manual
+B0811,wortel iris panjang,perlu_review_manual
+B0812,wortel kecil,perlu_review_manual
+B0813,santan,perlu_review_manual
+B0814,yogurt,perlu_review_manual

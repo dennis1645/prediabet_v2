@@ -1,0 +1,302 @@
+[
+  {
+    "id": "P001",
+    "document": "# Panduan Klinis Pembatasan Makanan: Gula & pemanis pekat\nID Regulasi: P001\nTingkat Pembatasan: HINDARI TOTAL\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, Obesitas, MASLD\n\n## Contoh Makanan / Bahan Terkait:\ngula pasir (B0289), gula merah (F1661), gula aren (F1095), sirup (F1104), madu porsi besar (F1100), susu kental manis/SKM (F1068), selai tinggi gula\n\n## Rasional / Alasan Klinis Medis:\nGula sederhana cepat diserap dan menyebabkan lonjakan gula darah tajam; PERKENI dan Kemenkes membatasi gula sederhana <5% total energi harian (lebih ketat dari batas umum G4-G1-L5 50g/hari)\n\n## Referensi Ilmiah Resmi:\n- Rujukan: PERKENI (2021/2024); Kemkes RI - Nutrisi Diet pada Diabetes Mellitus\n- Tautan Verifikasi: keslan.kemkes.go.id/view_artikel/4340/nutrisi-diet-pada-diabetes-mellitus",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P001",
+      "kategori": "Gula & pemanis pekat",
+      "tingkat_pembatasan": "hindari_total",
+      "komorbid_terkait": "Prediabetes, DMT2, Obesitas, MASLD",
+      "sumber_referensi": "PERKENI (2021/2024); Kemkes RI - Nutrisi Diet pada Diabetes Mellitus"
+    }
+  },
+  {
+    "id": "P002",
+    "document": "# Panduan Klinis Pembatasan Makanan: Minuman manis & bersoda\nID Regulasi: P002\nTingkat Pembatasan: HINDARI TOTAL\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, Gout/Asam Urat, MASLD, Obesitas\n\n## Contoh Makanan / Bahan Terkait:\nsoda (F1554), cola (F1556), teh manis kemasan (B0532), minuman energi (F1553), es teh manis (F1517), jus buah kemasan manis, kopi susu gula aren\n\n## Rasional / Alasan Klinis Medis:\nDirekomendasikan diganti air putih/minuman tanpa kalori; berkontribusi besar terhadap lonjakan glukosa darah, lipogenesis hati (MASLD), dan peningkatan asam urat akibat deplesi ATP hati oleh fruktosa\n\n## Referensi Ilmiah Resmi:\n- Rujukan: ADA Consensus Report (2019); EASL-EASD-EASO (2024); IRA Gout (2024)\n- Tautan Verifikasi: diabetesjournals.org/care/article/42/5/731/40480",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P002",
+      "kategori": "Minuman manis & bersoda",
+      "tingkat_pembatasan": "hindari_total",
+      "komorbid_terkait": "Prediabetes, DMT2, Gout/Asam Urat, MASLD, Obesitas",
+      "sumber_referensi": "ADA Consensus Report (2019); EASL-EASD-EASO (2024); IRA Gout (2024)"
+    }
+  },
+  {
+    "id": "P003",
+    "document": "# Panduan Klinis Pembatasan Makanan: Karbohidrat olahan/rendah serat\nID Regulasi: P003\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, Hipertrigliseridemia, MASLD\n\n## Contoh Makanan / Bahan Terkait:\nnasi putih porsi besar (F1/F2048), roti tawar putih (F1971), bihun/mie instan (F28/F2236), kentang goreng (F2196), lontong/ketupat (F1965), bubur nasi (F1989)\n\n## Rasional / Alasan Klinis Medis:\nDianjurkan diganti sumber karbohidrat kompleks tinggi serat (beras merah F1968, oat F1605, shirataki F1969) dengan target serat 20-35 g/hari; porsi dan frekuensi karbohidrat olahan dibatasi ketat\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Kemenkes RI PNPK DMT2 (2026); PERKENI (2024); ADA (2019)\n- Tautan Verifikasi: keslan.kemkes.go.id/unduhan/fileunduhan1777518085_672976.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P003",
+      "kategori": "Karbohidrat olahan/rendah serat",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "Prediabetes, DMT2, Hipertrigliseridemia, MASLD",
+      "sumber_referensi": "Kemenkes RI PNPK DMT2 (2026); PERKENI (2024); ADA (2019)"
+    }
+  },
+  {
+    "id": "P004",
+    "document": "# Panduan Klinis Pembatasan Makanan: Gorengan & lemak trans\nID Regulasi: P004\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: Prediabetes, Dislipidemia, Penyakit Jantung Koroner (PJK)\n\n## Contoh Makanan / Bahan Terkait:\ngorengan minyak dalam (bakwan F2119, mendoan F2112, risoles F2165), ayam krispi cepat saji (F2181), margarin (B0505), pastry/croissant (F4238)\n\n## Rasional / Alasan Klinis Medis:\nLemak trans dan minyak goreng berulang (jelantah) meningkatkan kolesterol LDL, menurunkan HDL, dan meningkatkan risiko kardiovaskular; Kemenkes dan ADA merekomendasikan hindari lemak trans industri\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Kemenkes RI (2026); PERKI Pedoman Dislipidemia (2021); ADA\n- Tautan Verifikasi: keslan.kemkes.go.id/view_artikel/4340/nutrisi-diet-pada-diabetes-mellitus",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P004",
+      "kategori": "Gorengan & lemak trans",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "Prediabetes, Dislipidemia, Penyakit Jantung Koroner (PJK)",
+      "sumber_referensi": "Kemenkes RI (2026); PERKI Pedoman Dislipidemia (2021); ADA"
+    }
+  },
+  {
+    "id": "P005",
+    "document": "# Panduan Klinis Pembatasan Makanan: Daging olahan\nID Regulasi: P005\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: Prediabetes, Hipertensi, Dislipidemia, PGK/CKD, MASLD\n\n## Contoh Makanan / Bahan Terkait:\nsosis (F1314/F1318), nugget, bacon, dendeng sapi (F788), ham, kornet sapi (F785), daging asap (B0683), bakso kemasan (B0060)\n\n## Rasional / Alasan Klinis Medis:\nTinggi lemak jenuh, natrium pengawet (700-1.483 mg Na/100g), dan aditif fosfat; memicu resistensi insulin, hipertensi, dislipidemia, dan perburukan fungsi ginjal serta hati\n\n## Referensi Ilmiah Resmi:\n- Rujukan: ADA Consensus Report (2019); EASL-EASD-EASO (2024); KDIGO (2024)\n- Tautan Verifikasi: pmc.ncbi.nlm.nih.gov/articles/PMC7011201/",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P005",
+      "kategori": "Daging olahan",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "Prediabetes, Hipertensi, Dislipidemia, PGK/CKD, MASLD",
+      "sumber_referensi": "ADA Consensus Report (2019); EASL-EASD-EASO (2024); KDIGO (2024)"
+    }
+  },
+  {
+    "id": "P006",
+    "document": "# Panduan Klinis Pembatasan Makanan: Produk susu tinggi lemak\nID Regulasi: P006\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Prediabetes, Dislipidemia, Obesitas\n\n## Contoh Makanan / Bahan Terkait:\nsusu full cream (B0697), keju tinggi lemak (B0401), es krim (F2248), mentega/butter (B0141), yoghurt tinggi lemak\n\n## Rasional / Alasan Klinis Medis:\nTinggi lemak jenuh (batas <7% total energi harian menurut PERKENI/Kemenkes); dianjurkan diganti susu skim, susu kedelai tanpa gula, atau Greek yogurt rendah lemak (B0270)\n\n## Referensi Ilmiah Resmi:\n- Rujukan: PERKENI (2021/2024); Kemenkes RI (2026)\n- Tautan Verifikasi: keslan.kemkes.go.id/view_artikel/4340/nutrisi-diet-pada-diabetes-mellitus",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P006",
+      "kategori": "Produk susu tinggi lemak",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Prediabetes, Dislipidemia, Obesitas",
+      "sumber_referensi": "PERKENI (2021/2024); Kemenkes RI (2026)"
+    }
+  },
+  {
+    "id": "P007",
+    "document": "# Panduan Klinis Pembatasan Makanan: Makanan ultra-proses & kemasan\nID Regulasi: P007\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, Obesitas, Hipertensi, PGK/CKD, MASLD\n\n## Contoh Makanan / Bahan Terkait:\nmie instan goreng (F2236/F2237), burger cepat saji (F2188), keripik kentang kemasan (F1473), makanan beku siap saji, camilan kemasan tinggi GGL\n\n## Rasional / Alasan Klinis Medis:\nKonsumsi makanan ultra-proses berhubungan konsisten dengan peningkatan risiko diabetes tipe 2, obesitas, hipertensi, dan progresivitas penyakit ginjal kronik\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Heianza et al. (2026) - Journal of Diabetes; DGA 2025-2030; KDIGO (2024)\n- Tautan Verifikasi: onlinelibrary.wiley.com/doi/10.1111/1753-0407.70234",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P007",
+      "kategori": "Makanan ultra-proses & kemasan",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Prediabetes, DMT2, Obesitas, Hipertensi, PGK/CKD, MASLD",
+      "sumber_referensi": "Heianza et al. (2026) - Journal of Diabetes; DGA 2025-2030; KDIGO (2024)"
+    }
+  },
+  {
+    "id": "P008",
+    "document": "# Panduan Klinis Pembatasan Makanan: Buah olahan tinggi gula\nID Regulasi: P008\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, MASLD, Hipertrigliseridemia\n\n## Contoh Makanan / Bahan Terkait:\nbuah kalengan sirup manis (F4279), selai buah, buah kering/kismis berlebih (F4266), es buah/rujak manis bersirup (F2135), jus buah kemasan (F1519)\n\n## Rasional / Alasan Klinis Medis:\nBuah segar utuh dianjurkan karena serat utuh memperlambat absorpsi glukosa; bentuk olahan/jus kehilangan serat dan gulanya cepat memicu lonjakan glikemik\n\n## Referensi Ilmiah Resmi:\n- Rujukan: PERKENI (2024); ADA Standards of Care; Kemenkes RI\n- Tautan Verifikasi: bumame.com/news/buah-untuk-diabetes-pilihan-porsi-cara-makan-aman",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P008",
+      "kategori": "Buah olahan tinggi gula",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Prediabetes, DMT2, MASLD, Hipertrigliseridemia",
+      "sumber_referensi": "PERKENI (2024); ADA Standards of Care; Kemenkes RI"
+    }
+  },
+  {
+    "id": "P009",
+    "document": "# Panduan Klinis Pembatasan Makanan: Natrium/garam tinggi\nID Regulasi: P009\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Prediabetes, Hipertensi, PGK/CKD, Gagal Jantung\n\n## Contoh Makanan / Bahan Terkait:\npetis udang (F1139), terasi merah (F1145), ikan asin (F960/F951), telur asin (F1050), kecap asin/manis (F1137/F1666), acar asin, MSG/kaldu bubuk (B0378)\n\n## Rasional / Alasan Klinis Medis:\nBatas umum <2.300 mg/hari (PERKENI 2024/ADA) atau <2.000 mg/hari (G4-G1-L5/KDIGO), turun ketat ke <1.500 mg/hari pada PNPK Kemenkes 2026 atau bila ada komorbid hipertensi\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Kemenkes RI PNPK DMT2 (2026); PERKENI (2024); KDIGO (2024)\n- Tautan Verifikasi: keslan.kemkes.go.id/unduhan/fileunduhan1777518085_672976.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P009",
+      "kategori": "Natrium/garam tinggi",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Prediabetes, Hipertensi, PGK/CKD, Gagal Jantung",
+      "sumber_referensi": "Kemenkes RI PNPK DMT2 (2026); PERKENI (2024); KDIGO (2024)"
+    }
+  },
+  {
+    "id": "P010",
+    "document": "# Panduan Klinis Pembatasan Makanan: Alkohol & fermentasi beralkohol\nID Regulasi: P010\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, MASLD, Gout/Asam Urat, Hipertrigliseridemia\n\n## Contoh Makanan / Bahan Terkait:\nminuman beralkohol (bir F1497, wine F1499, mojito F1542, margarita F1543), brem (F60), tapai ketan/singkong porsi besar (F24/B0715)\n\n## Rasional / Alasan Klinis Medis:\nMengganggu glukoneogenesis hati, memicu hiperurisemia, dan menyebabkan kerusakan hati sinergis dengan sindrom metabolik; wajib dihindari total pada komorbid MASLD dan gout akut\n\n## Referensi Ilmiah Resmi:\n- Rujukan: ADA (2019); EASL-EASD-EASO MASLD Guideline (2024); ACR Gout (2020)\n- Tautan Verifikasi: pmc.ncbi.nlm.nih.gov/articles/PMC11557364/",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P010",
+      "kategori": "Alkohol & fermentasi beralkohol",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Prediabetes, DMT2, MASLD, Gout/Asam Urat, Hipertrigliseridemia",
+      "sumber_referensi": "ADA (2019); EASL-EASD-EASO MASLD Guideline (2024); ACR Gout (2020)"
+    }
+  },
+  {
+    "id": "P011",
+    "document": "# Panduan Klinis Pembatasan Makanan: Pemanis buatan berlebihan\nID Regulasi: P011\nTingkat Pembatasan: HATI HATI\nKondisi Medis / Komorbid Terkait: Prediabetes, Obesitas, Disbiosis Usus, Risiko Kardiovaskular\n\n## Contoh Makanan / Bahan Terkait:\ndiet soda (F1555), minuman/makanan tanpa gula dengan pemanis buatan (aspartam, sukralosa, asesulfam-K, sakarin, stevia) dosis tinggi jangka panjang\n\n## Rasional / Alasan Klinis Medis:\nADA & PNPK Kemenkes 2026 mengizinkan dalam batas ADI sebagai pengganti gula kalori, namun WHO (2023) & DGA 2025-2030 tidak merekomendasikan untuk kontrol BB karena asosiasi risiko DMT2 dan PJK jangka panjang\n\n## Referensi Ilmiah Resmi:\n- Rujukan: WHO Guideline on Non-Sugar Sweeteners (2023); Heianza et al. (2026)\n- Tautan Verifikasi: who.int/publications/i/item/9789240073616",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P011",
+      "kategori": "Pemanis buatan berlebihan",
+      "tingkat_pembatasan": "hati_hati",
+      "komorbid_terkait": "Prediabetes, Obesitas, Disbiosis Usus, Risiko Kardiovaskular",
+      "sumber_referensi": "WHO Guideline on Non-Sugar Sweeteners (2023); Heianza et al. (2026)"
+    }
+  },
+  {
+    "id": "P012",
+    "document": "# Panduan Klinis Pembatasan Makanan: Jeroan & lemak jenuh hewani pekat\nID Regulasi: P012\nTingkat Pembatasan: HINDARI TOTAL\nKondisi Medis / Komorbid Terkait: Dislipidemia, PJK/ASCVD, Hiperurisemia & Artritis Gout\n\n## Contoh Makanan / Bahan Terkait:\notak sapi (F2004), hati ayam/sapi (F1894/B0297), babat (B0057), paru goreng (F789), usus, kikil/tunjang (F2005), cingur (B0184), kulit ayam (F1903)\n\n## Rasional / Alasan Klinis Medis:\nSangat tinggi kolesterol (280-350 mg/100g; batas aman DM <200 mg/hari), lemak jenuh pemicu LDL-C, dan purin hewani yang meningkatkan risiko serangan gout akut berulang serta aterosklerosis\n\n## Referensi Ilmiah Resmi:\n- Rujukan: PERKI Pedoman Dislipidemia (2021); IRA Pedoman Gout (2024); PERKENI\n- Tautan Verifikasi: reumatologi.or.id/wp-content/uploads/2024/09/ISBN-Hiperurisemia-Artritis-Gout_download.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P012",
+      "kategori": "Jeroan & lemak jenuh hewani pekat",
+      "tingkat_pembatasan": "hindari_total",
+      "komorbid_terkait": "Dislipidemia, PJK/ASCVD, Hiperurisemia & Artritis Gout",
+      "sumber_referensi": "PERKI Pedoman Dislipidemia (2021); IRA Pedoman Gout (2024); PERKENI"
+    }
+  },
+  {
+    "id": "P013",
+    "document": "# Panduan Klinis Pembatasan Makanan: Emping & olahan biji melinjo\nID Regulasi: P013\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: Hiperurisemia & Artritis Gout, Prediabetes, Dislipidemia\n\n## Contoh Makanan / Bahan Terkait:\nemping melinjo (F320/F1998), emping tebal goreng manis (F343), emping tipis goreng (F345), biji melinjo (F510/B0516)\n\n## Rasional / Alasan Klinis Medis:\nBerbeda dari sayuran hijau yang terbukti aman bagi gout (OR 0,86), emping melinjo tinggi purin pemicu gout sekaligus padat karbohidrat (59-65,7 g/100g) dan menyerap minyak goreng\n\n## Referensi Ilmiah Resmi:\n- Rujukan: IRA Pedoman Hiperurisemia & Artritis Gout (2024); TKPI Kemenkes RI\n- Tautan Verifikasi: reumatologi.or.id/wp-content/uploads/2024/09/ISBN-Hiperurisemia-Artritis-Gout_download.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P013",
+      "kategori": "Emping & olahan biji melinjo",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "Hiperurisemia & Artritis Gout, Prediabetes, Dislipidemia",
+      "sumber_referensi": "IRA Pedoman Hiperurisemia & Artritis Gout (2024); TKPI Kemenkes RI"
+    }
+  },
+  {
+    "id": "P014",
+    "document": "# Panduan Klinis Pembatasan Makanan: Hidangan bersantan kental\nID Regulasi: P014\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: Dislipidemia, PJK/ASCVD, Obesitas, MASLD\n\n## Contoh Makanan / Bahan Terkait:\nsantan murni/kental (F1090/B0635), gulai tunjang/otak/kambing (F2003-F2005), opor ayam (F2056), rendang basah bersantan (F2046), soto santan (F2098)\n\n## Rasional / Alasan Klinis Medis:\nSantan murni mengandung 34,3 g lemak/100g yang didominasi lemak jenuh; konsumsi berlebih meningkatkan kolesterol LDL dan resistensi insulin (batas lemak jenuh <7% energi total)\n\n## Referensi Ilmiah Resmi:\n- Rujukan: PERKI Pedoman Dislipidemia (2021); Kemenkes RI (2026); PERKENI\n- Tautan Verifikasi: keslan.kemkes.go.id/view_artikel/4340/nutrisi-diet-pada-diabetes-mellitus",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P014",
+      "kategori": "Hidangan bersantan kental",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "Dislipidemia, PJK/ASCVD, Obesitas, MASLD",
+      "sumber_referensi": "PERKI Pedoman Dislipidemia (2021); Kemenkes RI (2026); PERKENI"
+    }
+  },
+  {
+    "id": "P015",
+    "document": "# Panduan Klinis Pembatasan Makanan: Seafood tinggi purin & kolesterol\nID Regulasi: P015\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Hiperurisemia & Artritis Gout, Dislipidemia, Hipertensi\n\n## Contoh Makanan / Bahan Terkait:\nikan sarden kaleng (F991/F1342), ikan teri asin (F926), udang (F1917), kerang (F1353), kepiting saus padang (F2018), cumi-cumi (B0194)\n\n## Rasional / Alasan Klinis Medis:\nSarden, teri, udang, dan kerang tinggi purin hewani dan kolesterol; harus dibatasi ketat bila prediabetes disertai hiperurisemia/gout atau dislipidemia\n\n## Referensi Ilmiah Resmi:\n- Rujukan: IRA Pedoman Gout (2024); ACR Gout Guideline (2020)\n- Tautan Verifikasi: pmc.ncbi.nlm.nih.gov/articles/PMC10563586/",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P015",
+      "kategori": "Seafood tinggi purin & kolesterol",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Hiperurisemia & Artritis Gout, Dislipidemia, Hipertensi",
+      "sumber_referensi": "IRA Pedoman Gout (2024); ACR Gout Guideline (2020)"
+    }
+  },
+  {
+    "id": "P016",
+    "document": "# Panduan Klinis Pembatasan Makanan: Buah belimbing (Averrhoa carambola)\nID Regulasi: P016\nTingkat Pembatasan: HINDARI TOTAL\nKondisi Medis / Komorbid Terkait: Penyakit Ginjal Kronik (PGK/CKD), Nefropati Diabetik, Risiko AKI\n\n## Contoh Makanan / Bahan Terkait:\nbelimbing manis/asam segar (F615/B0085), jus belimbing, sambal/rujak belimbing (R0062), belimbing wuluh porsi besar (B0105)\n\n## Rasional / Alasan Klinis Medis:\nMengandung neurotoksin karamboksin dan asam oksalat tinggi; memicu nefropati oksalat akut (AKI) dan ensefalopati uremik fatal (kejang, koma, kematian) pada gangguan ginjal. Tidak boleh dipakai sebagai terapi herba DM\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Wijayaratne et al. (2018); Stumpf et al. (2020); Yasawardene et al. (2021)\n- Tautan Verifikasi: pmc.ncbi.nlm.nih.gov/articles/PMC6198447/",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P016",
+      "kategori": "Buah belimbing (Averrhoa carambola)",
+      "tingkat_pembatasan": "hindari_total",
+      "komorbid_terkait": "Penyakit Ginjal Kronik (PGK/CKD), Nefropati Diabetik, Risiko AKI",
+      "sumber_referensi": "Wijayaratne et al. (2018); Stumpf et al. (2020); Yasawardene et al. (2021)"
+    }
+  },
+  {
+    "id": "P017",
+    "document": "# Panduan Klinis Pembatasan Makanan: Jengkol (Archidendron jiringa)\nID Regulasi: P017\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: Penyakit Ginjal Kronik (PGK/CKD), Risiko AKI, Urolitiasis, Prediabetes\n\n## Contoh Makanan / Bahan Terkait:\njengkol mentah/rebus (F475/B0351), semur jengkol (F2090/R0326), kalio jengkol (R0123), balado jengkol (R0140)\n\n## Rasional / Alasan Klinis Medis:\nMengandung asam jengkolat (0,3-1,3 g/100g) yang mengkristal menjadi jarum di tubulus ginjal pada urin asam dan memicu gagal ginjal akut obstruktif (djenkolism), serta tinggi karbohidrat (40,7 g/100g)\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Bunawan et al. (2014); Kandarini et al. (2021)\n- Tautan Verifikasi: pmc.ncbi.nlm.nih.gov/articles/PMC3998865/",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P017",
+      "kategori": "Jengkol (Archidendron jiringa)",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "Penyakit Ginjal Kronik (PGK/CKD), Risiko AKI, Urolitiasis, Prediabetes",
+      "sumber_referensi": "Bunawan et al. (2014); Kandarini et al. (2021)"
+    }
+  },
+  {
+    "id": "P018",
+    "document": "# Panduan Klinis Pembatasan Makanan: Pangan tinggi kalium (Khusus PGK Lanjut)\nID Regulasi: P018\nTingkat Pembatasan: HATI HATI\nKondisi Medis / Komorbid Terkait: PGK Stadium G3b-G5, Nefropati Diabetik dengan Hiperkalemia (>5.0 mmol/L)\n\n## Contoh Makanan / Bahan Terkait:\ndurian (F632: 601 mg K), daun melinjo (F437: 605 mg K), bayam (F1704: 558 mg K), santan murni (F1090: 514 mg K), alpukat (F1179: 485 mg K), pisang ambon (F1937: 422 mg K), air kelapa (B0017)\n\n## Rasional / Alasan Klinis Medis:\nDianjurkan pada prediabetes fungsi ginjal normal, namun wajib dibatasi pada PGK G3b-G5 atau pengguna obat ACEi/ARB/finerenone dengan kalium serum >5,0-5,5 mmol/L untuk mencegah aritmia jantung\n\n## Referensi Ilmiah Resmi:\n- Rujukan: KDIGO 2022 Diabetes in CKD & KDIGO 2024 CKD Guidelines\n- Tautan Verifikasi: kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P018",
+      "kategori": "Pangan tinggi kalium (Khusus PGK Lanjut)",
+      "tingkat_pembatasan": "hati_hati",
+      "komorbid_terkait": "PGK Stadium G3b-G5, Nefropati Diabetik dengan Hiperkalemia (>5.0 mmol/L)",
+      "sumber_referensi": "KDIGO 2022 Diabetes in CKD & KDIGO 2024 CKD Guidelines"
+    }
+  },
+  {
+    "id": "P019",
+    "document": "# Panduan Klinis Pembatasan Makanan: Diet protein berlebih (Khusus PGK Non-Dialisis)\nID Regulasi: P019\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: PGK Stadium G3-G5 Non-Dialisis, Nefropati Diabetik\n\n## Contoh Makanan / Bahan Terkait:\nasupan protein >1,3 g/kg BB/hari, porsi besar daging/steak/sate (F2078/F2206), suplemen protein tinggi pada pasien nefropati\n\n## Rasional / Alasan Klinis Medis:\nKDIGO 2024 dan PERKENI menetapkan target protein 0,8 g/kg BB/hari pada PGK G3-G5 non-dialisis dan menyarankan menghindari >1,3 g/kg BB/hari karena mempercepat hiperfiltrasi glomerulus\n\n## Referensi Ilmiah Resmi:\n- Rujukan: KDIGO 2024 CKD Guideline; PERKENI (2021); Kemenkes RI (2026)\n- Tautan Verifikasi: keslan.kemkes.go.id/view_artikel/4340/nutrisi-diet-pada-diabetes-mellitus",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P019",
+      "kategori": "Diet protein berlebih (Khusus PGK Non-Dialisis)",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "PGK Stadium G3-G5 Non-Dialisis, Nefropati Diabetik",
+      "sumber_referensi": "KDIGO 2024 CKD Guideline; PERKENI (2021); Kemenkes RI (2026)"
+    }
+  },
+  {
+    "id": "P020",
+    "document": "# Panduan Klinis Pembatasan Makanan: Olahan tepung aci/tapioka & ketan\nID Regulasi: P020\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, Obesitas, Hipertrigliseridemia\n\n## Contoh Makanan / Bahan Terkait:\ncilok (F2124), cimol (F2125), cireng (F2126), bakso aci (F2118), seblak (F2172/F2173), klepon (F2140), lemper/ketan (F2145), bika ambon (R0010)\n\n## Rasional / Alasan Klinis Medis:\nPati tapioka/aci dan beras ketan mengalami gelatinisasi cepat dan rendah serat (<2 g/porsi), menyebabkan pencernaan cepat dan lonjakan glukosa darah postprandial\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Kemenkes RI PNPK DMT2 (2026); PERKENI (2024)\n- Tautan Verifikasi: keslan.kemkes.go.id/unduhan/fileunduhan1777518085_672976.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P020",
+      "kategori": "Olahan tepung aci/tapioka & ketan",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "Prediabetes, DMT2, Obesitas, Hipertrigliseridemia",
+      "sumber_referensi": "Kemenkes RI PNPK DMT2 (2026); PERKENI (2024)"
+    }
+  },
+  {
+    "id": "P021",
+    "document": "# Panduan Klinis Pembatasan Makanan: Buah segar padat karbohidrat (IG/BG tinggi)\nID Regulasi: P021\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, Obesitas, Hipertrigliseridemia\n\n## Contoh Makanan / Bahan Terkait:\ndurian segar (F632), pisang ambon besar (F1937), mangga harum manis (F1933), matoa (F1924), leci (F1923), nangka matang, anggur muscat (F1919)\n\n## Rasional / Alasan Klinis Medis:\nMengandung 20-28 g karbohidrat per 100g; boleh dikonsumsi namun wajib ditakar ketat (1 porsi penukar buah = 15 g karbohidrat) agar tidak memicu hiperglikemia postprandial\n\n## Referensi Ilmiah Resmi:\n- Rujukan: ADA Carbohydrate Counting; Kemenkes RI; PERKENI (2024)\n- Tautan Verifikasi: bumame.com/news/buah-untuk-diabetes-pilihan-porsi-cara-makan-aman",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P021",
+      "kategori": "Buah segar padat karbohidrat (IG/BG tinggi)",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Prediabetes, DMT2, Obesitas, Hipertrigliseridemia",
+      "sumber_referensi": "ADA Carbohydrate Counting; Kemenkes RI; PERKENI (2024)"
+    }
+  },
+  {
+    "id": "P022",
+    "document": "# Panduan Klinis Pembatasan Makanan: Saus & bumbu kacang tinggi gula-garam\nID Regulasi: P022\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, Hipertensi, Obesitas\n\n## Contoh Makanan / Bahan Terkait:\nkecap manis (B0396), bumbu kacang/pecel/sate/gado-gado (B0125/B0127), saus tomat/cabai kemasan (B0641/B0646), saus barbeque/teriyaki (B0640), mayones (B0514)\n\n## Rasional / Alasan Klinis Medis:\nMenyumbang gula sederhana dan natrium tersembunyi dalam jumlah besar (1 porsi bumbu ketoprak/gado-gado/sate menyumbang 12-15 g gula dan 580-1.100 mg natrium)\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Kemenkes RI; PERKENI (2024); ADA Nutrition Therapy\n- Tautan Verifikasi: diabetasol.com/id/news-detail/5-cara-utama-mencegah-diabetes-di-usia-muda",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P022",
+      "kategori": "Saus & bumbu kacang tinggi gula-garam",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Prediabetes, DMT2, Hipertensi, Obesitas",
+      "sumber_referensi": "Kemenkes RI; PERKENI (2024); ADA Nutrition Therapy"
+    }
+  },
+  {
+    "id": "P023",
+    "document": "# Panduan Klinis Pembatasan Makanan: Kuning telur & telur asin berlebih\nID Regulasi: P023\nTingkat Pembatasan: BATASI\nKondisi Medis / Komorbid Terkait: Dislipidemia, PJK/ASCVD, Hipertensi\n\n## Contoh Makanan / Bahan Terkait:\nkuning telur rebus/goreng (F1904: 185 mg kolesterol/butir), telur bebek asin (F1050: 483 mg Na), martabak telur bebek (F2150), kerak telor (F2138), lapis legit (F99)\n\n## Rasional / Alasan Klinis Medis:\nSatu kuning telur hampir mencapai batas maksimal kolesterol harian (<200 mg/hari pada DM/dislipidemia). Dianjurkan membatasi kuning telur dan mengutamakan putih telur (F1907: 0 mg kolesterol)\n\n## Referensi Ilmiah Resmi:\n- Rujukan: PERKENI (2021/2024); Kemenkes RI (2026); PERKI (2021)\n- Tautan Verifikasi: keslan.kemkes.go.id/view_artikel/4340/nutrisi-diet-pada-diabetes-mellitus",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P023",
+      "kategori": "Kuning telur & telur asin berlebih",
+      "tingkat_pembatasan": "batasi",
+      "komorbid_terkait": "Dislipidemia, PJK/ASCVD, Hipertensi",
+      "sumber_referensi": "PERKENI (2021/2024); Kemenkes RI (2026); PERKI (2021)"
+    }
+  },
+  {
+    "id": "P024",
+    "document": "# Panduan Klinis Pembatasan Makanan: Makanan/minuman beraditif fosfat anorganik\nID Regulasi: P024\nTingkat Pembatasan: BATASI KETAT\nKondisi Medis / Komorbid Terkait: PGK/CKD Stadium G3-G5, Nefropati Diabetik, Kalsifikasi Vaskular\n\n## Contoh Makanan / Bahan Terkait:\nminuman cola (F1556), keju olahan/saus keju (B0642), sosis/kornet/bakso pabrik (B0458/B0685), krimer bubuk, makanan cepat saji\n\n## Rasional / Alasan Klinis Medis:\nFosfat anorganik memiliki bioavailabilitas tinggi di saluran cerna, memicu hiperfosfatemia, hiperparatiroidisme sekunder, dan kalsifikasi pembuluh darah pada komorbid PGK\n\n## Referensi Ilmiah Resmi:\n- Rujukan: KDIGO 2022 Diabetes in CKD & KDIGO 2024 CKD Guidelines\n- Tautan Verifikasi: kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P024",
+      "kategori": "Makanan/minuman beraditif fosfat anorganik",
+      "tingkat_pembatasan": "batasi_ketat",
+      "komorbid_terkait": "PGK/CKD Stadium G3-G5, Nefropati Diabetik, Kalsifikasi Vaskular",
+      "sumber_referensi": "KDIGO 2022 Diabetes in CKD & KDIGO 2024 CKD Guidelines"
+    }
+  },
+  {
+    "id": "P025",
+    "document": "# Panduan Klinis Pembatasan Makanan: Suplemen herba/mikronutrien tanpa indikasi\nID Regulasi: P025\nTingkat Pembatasan: HATI HATI\nKondisi Medis / Komorbid Terkait: Prediabetes, DMT2, PGK/CKD, Gangguan Hati\n\n## Contoh Makanan / Bahan Terkait:\nsuplemen kromium, kayu manis dosis tinggi, lidah buaya (aloe vera), jamu penurun gula tanpa uji klinis, vitamin D dosis tinggi tanpa defisiensi\n\n## Rasional / Alasan Klinis Medis:\nPNPK Kemenkes 2026 & ADA menyatakan suplementasi rutin vitamin, mineral, atau herba tidak direkomendasikan untuk kontrol glikemik tanpa bukti defisiensi klinis\n\n## Referensi Ilmiah Resmi:\n- Rujukan: Kemenkes RI PNPK DMT2 (2026); ADA Consensus Report (2019)\n- Tautan Verifikasi: keslan.kemkes.go.id/unduhan/fileunduhan1777518085_672976.pdf",
+    "metadata": {
+      "type": "clinical_guideline",
+      "pantangan_id": "P025",
+      "kategori": "Suplemen herba/mikronutrien tanpa indikasi",
+      "tingkat_pembatasan": "hati_hati",
+      "komorbid_terkait": "Prediabetes, DMT2, PGK/CKD, Gangguan Hati",
+      "sumber_referensi": "Kemenkes RI PNPK DMT2 (2026); ADA Consensus Report (2019)"
+    }
+  }
+]

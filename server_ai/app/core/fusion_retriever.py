@@ -52,6 +52,7 @@ class HybridGraphVectorFusion:
         # Bersihkan & hilangkan duplikasi (misal 'kacang' ganda)
         allergens = list(dict.fromkeys([a.strip().capitalize() for a in raw_allergens if a and a.strip()]))
         conditions = [f"Risiko: {user_context.kategori_risiko}"] + komorbid_list
+        patient_name = get_patient_display_name(user_context)
         rag_logger.debug("Profil Pasien: Alergen: %s | Kondisi/Komorbid: %s", allergens, conditions)
 
         # Cek Normalisasi Typo & Istilah Kuliner Nusantara
@@ -136,11 +137,14 @@ class HybridGraphVectorFusion:
                             break
 
             # 3. Panggil RAG Resep Masakan (Bebas Alergen & Anti-Looping)
+            patient_id_seed = f"{getattr(user_context, 'userId', '')}_{patient_name}"
             chosen = self.vector.query_recipes(
                 query=user_query,
                 exclude_titles=already_suggested,
                 user_allergens=allergens,
-                context_theme=context_theme
+                context_theme=context_theme,
+                user_conditions=conditions,
+                patient_seed=patient_id_seed
             )
 
             if chosen:

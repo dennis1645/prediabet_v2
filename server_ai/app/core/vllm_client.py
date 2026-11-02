@@ -1,7 +1,7 @@
 import time
 import json
 import re
-from typing import AsyncGenerator, Dict, Any, List, Tuple
+from typing import AsyncGenerator, Dict, Any, List, Tuple, Optional
 import httpx
 from app.config import settings
 from app.core.allergen_guardrail import allergen_guardrail
@@ -37,6 +37,7 @@ class VLLMInferenceClient:
         user_query: str = "",
         user_context: Any = None,
         safe_food_names: List[str] = None,
+        specific_food: Optional[Dict[str, Any]] = None,
         max_tokens: int = 768,
         temperature: float = 0.2
     ) -> Tuple[str, Dict[str, Any], List[str]]:
@@ -107,11 +108,11 @@ class VLLMInferenceClient:
                     vllm_logger.info("SUKSES: Inferensi vLLM berhasil dari %s (%d tokens dihasilkan)", active_base, total_tokens)
                 else:
                     vllm_logger.error("HTTP ERROR dari vLLM di %s (Status: %d): %s. Mengaktifkan fallback engine.", url, res.status_code, res.text)
-                    raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
+                    raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens, specific_food)
                     total_tokens = len(raw_text.split())
         except Exception as e:
             vllm_logger.warning("vLLM offline/unreachable di %s: %s. Mengaktifkan clinical fallback engine.", url, str(e))
-            raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens)
+            raw_text = self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens, specific_food)
             total_tokens = len(raw_text.split())
 
         elapsed = time.perf_counter() - start_time
@@ -153,6 +154,7 @@ class VLLMInferenceClient:
         user_query: str = "",
         user_context: Any = None,
         safe_food_names: List[str] = None,
+        specific_food: Optional[Dict[str, Any]] = None,
         max_tokens: int = 768,
         temperature: float = 0.2
     ) -> AsyncGenerator[str, None]:
@@ -189,10 +191,10 @@ class VLLMInferenceClient:
                                 except Exception:
                                     continue
                     else:
-                        for word in self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens).split(" "):
+                        for word in self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens, specific_food).split(" "):
                             yield word + " "
         except Exception:
-            for word in self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens).split(" "):
+            for word in self._generate_fallback_response(user_query, user_context, safe_food_names, user_allergens, specific_food).split(" "):
                 yield word + " "
 
     def _generate_fallback_response(
@@ -200,14 +202,15 @@ class VLLMInferenceClient:
         user_query: str = "",
         user_context: Any = None,
         safe_food_names: List[str] = None,
-        user_allergens: List[str] = None
+        user_allergens: List[str] = None,
+        specific_food: Optional[Dict[str, Any]] = None
     ) -> str:
         """Respon klinis dinamis jika engine vLLM GPU sedang loading / offline."""
         q = (user_query or "").strip().lower()
         allergens_str = ", ".join(user_allergens) if user_allergens else "Tidak ada"
-        username = getattr(user_context, "username", "Sahabat Sehat") if user_context else "Sahabat Sehat"
+        username = getattr(user_context, "nama", None) or getattr(user_context, "username", "Sahabat Sehat") if user_context else "Sahabat Sehat"
         kalori_target = getattr(user_context, "target_kalori", 1850) if user_context else 1850
-        diet = getattr(user_context, "active_diet", "Diet Mediterania") if user_context else "Diet Mediterania"
+        diet = getattr(user_context, "active_diet", "Pola 3J Ramah Prediabetes") if user_context else "Pola 3J Ramah Prediabetes"
         gdp = getattr(user_context, "gula_darah_puasa", "100") if user_context else "100"
         hba1c = getattr(user_context, "hba1c", "5.7") if user_context else "5.7"
 
@@ -221,11 +224,11 @@ class VLLMInferenceClient:
                 f"• **Nilai HbA1c:** {hba1c}%\n"
                 f"• **Target Kebutuhan Kalori:** {kalori_target} kkal/hari\n"
                 f"• **Pola Diet Terpilih:** {diet}\n\n"
-                "Seluruh rekomendasi nutrisi dan konsultasi Dr. Predi secara otomatis disaring agar **100% bebas dari pantangan alergen** Anda demi menjaga respon insulin dan mencegah hipersensitivitas."
+                "Seluruh rekomendasi nutrisi dan konsultasi Dr. Predi secara otomatis disaring agar **100% bebas dari pantangan alergen** Anda demi menjaga respon insulin dan mencegah lonjakan glukosa."
             )
 
         # 2. Pertanyaan seputar Identitas / Sapaan (Siapa kamu / Halo)
-        if any(k in q for k in ["siapa", "kamu siapa", "kenalan", "halo", "hai", "assalamu", "selamat"]):
+        if any(k in q for k in ["siapa", "kamu siapa", "kenalan", "halo", "hai", "assalamu", "selamat pagi", "selamat siang", "selamat sore", "selamat malam"]):
             return (
                 f"Halo {username}! 👋\n\n"
                 "Saya **Dr. Predi**, konsultan nutrisi klinis dan asisten cerdas Anda dalam program pencegahan serta tata laksana Prediabetes.\n\n"
@@ -236,7 +239,70 @@ class VLLMInferenceClient:
                 "Ada yang ingin Anda tanyakan seputar takaran makanan, resep ramah gula darah, atau ide menu hari ini?"
             )
 
-        # 3. Pertanyaan seputar Kandungan Nutrisi Bahan Makanan (misal: "dada ayam", "telur", "tempe", dsb)
+        # 3. Permintaan Resep Masakan Eksplisit (User secara sadar meminta resep atau langkah masak)
+        is_recipe_request = any(k in q for k in ["resep", "cara buat", "cara membuat", "cara masak", "langkah masak", "bagaimana membuatnya", "gimana membuatnya", "resepnya", "bahan dan cara"])
+        if is_recipe_request:
+            dish = specific_food if (specific_food and (specific_food.get("bahan") or specific_food.get("langkah"))) else None
+            if not dish:
+                # Coba cari resep dari vector manager
+                try:
+                    from app.core.vector_manager import vector_manager
+                    rec = vector_manager.search_recipe(q)
+                    if rec:
+                        dish = {
+                            "nama_makanan": rec["title"],
+                            "kalori": rec.get("kalori", 160),
+                            "protein": rec.get("protein", 15),
+                            "karbohidrat": rec.get("karbohidrat", 10),
+                            "lemak": rec.get("lemak", 4),
+                            "gi_category": "GI Rendah (< 55)",
+                            "bahan": rec.get("bahan", ""),
+                            "langkah": rec.get("langkah", ""),
+                            "alasan_klinis": rec.get("tips", "Diolah tanpa santan kental dan kaya rempah stabilisator glukosa darah.")
+                        }
+                except Exception:
+                    pass
+
+            if dish:
+                dish_title = dish.get("nama_makanan") or dish.get("nama") or "Resep Masakan Sehat"
+                return (
+                    f"Resep {dish_title}\n\n"
+                    f"1. **Judul Menu:** {dish_title}\n\n"
+                    f"2. **Nilai Gizi (Estimasi Saji):**\n"
+                    f"• Kalori: ~{dish.get('kalori', 0)} kkal\n"
+                    f"• Protein: ~{dish.get('protein', 0)} gram\n"
+                    f"• Karbohidrat: ~{dish.get('karbohidrat', 0)} gram\n"
+                    f"• Lemak: ~{dish.get('lemak', 0)} gram\n"
+                    f"• Indeks Glikemik: {dish.get('gi_category', 'GI Rendah (< 55)')}\n\n"
+                    f"3. **Bahan Utama:**\n{dish.get('bahan', '-')}\n\n"
+                    f"4. **Langkah Pengolahan:**\n{dish.get('langkah', '-')}\n\n"
+                    f"5. **Tips Klinis Stabilitas Gula Darah:**\n{dish.get('alasan_klinis', 'Gunakan bumbu rempah alami dan hindari pemanasan minyak berulang untuk menjaga sensitivitas insulin.')}\n\n"
+                    f"Apakah ada menu atau bahan lain yang ingin Anda konsultasikan, {username}?"
+                )
+
+        # 4. Rekomendasi Menu (Kuah, Hangat, Siang, Malam, Sarapan, dsb)
+        is_menu_suggestion = any(k in q for k in ["kuah", "berkuah", "hangat", "sarankan", "menu", "pengen makan", "rekomendasi", "selain itu", "makan siang", "makan malam", "sarapan", "opsi"])
+        if is_menu_suggestion and specific_food:
+            dish_name = specific_food.get("nama_makanan") or specific_food.get("nama") or "Hidangan Sehat"
+            cal = specific_food.get("kalori", 0)
+            prot = specific_food.get("protein", 0)
+            carb = specific_food.get("karbohidrat", 0)
+            fat = specific_food.get("lemak", 0)
+            reason = specific_food.get("alasan_klinis", "Kaya antioksidan dan serat larut yang efektif menstabilkan penyerapan glukosa darah.")
+            return (
+                f"Halo {username}!\n\n"
+                f"Berikut rekomendasi hidangan lezat dan aman untuk respon insulin Anda hari ini:\n\n"
+                f"🍲 **Nama Hidangan Rekomendasi:** {dish_name}\n"
+                f"• **Estimasi Kalori:** ~{cal} kkal\n"
+                f"• **Protein:** ~{prot}g\n"
+                f"• **Karbohidrat:** ~{carb}g\n"
+                f"• **Lemak:** ~{fat}g\n"
+                f"• **Kategori Glikemik:** {specific_food.get('gi_category', 'GI Rendah')}\n\n"
+                f"💡 **Keunggulan Klinis:**\n{reason}\n\n"
+                f"Apakah Bapak/Ibu ingin saya bagikan resep dan cara membuatnya?"
+            )
+
+        # 5. Pertanyaan seputar Kandungan Nutrisi Bahan Makanan Spesifik
         try:
             from app.core.neo4j_manager import neo4j_manager
             raw_foods = neo4j_manager._load_local_dataset()
@@ -245,19 +311,22 @@ class VLLMInferenceClient:
             all_foods = []
 
         matched_food = None
-        # Prioritaskan pencarian frasa makanan spesifik
-        for phrase in ["dada ayam", "daging ayam", "ayam", "ikan mas", "telur", "tempe", "tahu", "beras merah", "oatmeal", "bayam", "sayur bening"]:
+        for phrase in ["dada ayam", "daging ayam", "ayam bakar", "ayam goreng", "ikan mas", "telur rebus", "telur", "tempe", "tahu", "beras merah", "nasi merah", "oatmeal", "bayam"]:
             if phrase in q:
-                if phrase == "ayam":
-                    candidates = [f for f in all_foods if "ayam" in f["nama"].lower() and "bayam" not in f["nama"].lower()]
-                else:
-                    candidates = [f for f in all_foods if phrase in f["nama"].lower()]
+                candidates = [f for f in all_foods if phrase in f["nama"].lower()]
                 if candidates:
                     matched_food = candidates[0]
                     break
 
         if not matched_food:
-            stop_words = {"berapa", "jumlah", "protein", "dalam", "gram", "kalori", "lemak", "karbohidrat", "makan", "apakah", "untuk", "pada", "banyak", "kandungan", "nutrisi", "halo", "dok"}
+            stop_words = {
+                "berapa", "jumlah", "protein", "dalam", "gram", "kalori", "lemak", "karbohidrat",
+                "makan", "apakah", "untuk", "pada", "banyak", "kandungan", "nutrisi", "halo", "dok",
+                "lagi", "pengen", "ingin", "mau", "yang", "dan", "sama", "dengan", "ke", "di", "dari",
+                "buat", "resep", "cara", "hangat", "berkuah", "kuah", "dingin", "minum", "minuman",
+                "ada", "apa", "ini", "itu", "saya", "aku", "anda", "bisa", "tolong", "mohon", "kasih",
+                "saran", "rekomendasi", "dong", "selain", "gimana", "bagaimana", "saja"
+            }
             words = [w.strip("?,.!") for w in q.split() if len(w.strip("?,.!")) >= 3 and w.strip("?,.!") not in stop_words]
             for w in words:
                 for f in all_foods:
@@ -267,22 +336,19 @@ class VLLMInferenceClient:
                 if matched_food:
                     break
 
-        if matched_food or any(k in q for k in ["ayam", "ikan", "telur", "tempe", "tahu", "daging", "nasi", "protein", "kalori", "gizi"]):
-            target_item = matched_food if matched_food else {
-                "nama": "Dada Ayam Fillet Tanpa Kulit", "kalori": 165.0, "protein": 31.0, "lemak": 3.6, "karbohidrat": 0.0, "gi": 0.0, "cara_olah": "Kukus atau Rebus Bumbu Kuning"
-            }
+        if matched_food:
             return (
                 f"Halo {username}! Berdasarkan basis data gizi klinis PrediaBeat:\n\n"
-                f"🍗 **Informasi Nilai Gizi: {target_item['nama']} (per 100 gram)**\n"
-                f"• **Kandungan Protein:** ~{target_item['protein']} gram\n"
-                f"• **Total Energi (Kalori):** {target_item['kalori']} kkal\n"
-                f"• **Kandungan Karbohidrat:** {target_item['karbohidrat']} gram\n"
-                f"• **Kandungan Lemak:** {target_item['lemak']} gram\n"
-                f"• **Indeks Glikemik (GI):** {target_item['gi']} (Kategori Rendah - Sangat Aman bagi respon insulin)\n\n"
-                f"💡 **Rekomendasi Cara Olah Sehat:** Disarankan diolah dengan teknik {target_item['cara_olah']} menggunakan bumbu rempah alami tanpa minyak jelantah."
+                f"🍗 **Informasi Nilai Gizi: {matched_food['nama']} (per 100 gram)**\n"
+                f"• **Kandungan Protein:** ~{matched_food.get('protein', 0)} gram\n"
+                f"• **Total Energi (Kalori):** {matched_food.get('kalori', 0)} kkal\n"
+                f"• **Kandungan Karbohidrat:** {matched_food.get('karbohidrat', 0)} gram\n"
+                f"• **Kandungan Lemak:** {matched_food.get('lemak', 0)} gram\n"
+                f"• **Indeks Glikemik (GI):** {matched_food.get('gi', 0)} (Kategori Rendah - Sangat Aman bagi respon insulin)\n\n"
+                f"💡 **Rekomendasi Cara Olah Sehat:** Disarankan diolah dengan teknik {matched_food.get('cara_olah', 'Kukus/Rebus')} menggunakan bumbu rempah alami tanpa minyak jelantah."
             )
 
-        # 4. Pertanyaan Menu / Rekomendasi Makanan Umum
+        # 6. Pertanyaan Menu / Rekomendasi Makanan Umum (3J Fallback)
         menu_items = safe_food_names[:3] if safe_food_names and len(safe_food_names) >= 3 else [
             "Pepes Ikan Mas Bumbu Kuning Kemangi (180 kkal)",
             "Sayur Bening Bayam Oyong (65 kkal)",

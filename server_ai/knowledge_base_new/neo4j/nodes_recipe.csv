@@ -1,0 +1,454 @@
+id:ID(Recipe),nama_resep,nama_resep_clean,energi_kal:float,protein_g:float,lemak_g:float,karbohidrat_g:float,serat_g:float,natrium_mg:float,glikemik_risk,sodium_level,safe_for_prediabetes:boolean
+R0001,Bihun goreng instan,bihun goreng instan,381.0,6.1,3.9,80.3,,928.0,high,tinggi,False
+R0002,"Jagung muda, rebus","jagung muda, rebus",147.0,5.1,0.7,31.5,1.3,5.0,moderate,rendah,True
+R0003,"Ketan putih, tapai","ketan putih, tapai",172.0,3.0,0.5,37.5,0.6,1.0,moderate,rendah,True
+R0004,Mi kering,mi kering,339.0,10.0,1.7,6.3,0.4,760.0,moderate,tinggi,True
+R0005,Misoa,misoa,345.0,8.5,2.2,78.0,0.5,3064.0,high,tinggi,False
+R0006,Roti putih,roti putih,248.0,8.0,1.2,50.0,9.1,530.0,moderate,tinggi,True
+R0007,"Apem, kue","apem, kue",148.0,2.0,0.5,33.9,,,moderate,rendah,True
+R0008,"Bakpia, kue","bakpia, kue",272.0,8.7,6.7,44.1,0.9,,moderate,rendah,True
+R0009,Bantal,bantal,190.0,3.3,0.3,43.5,3.4,164.0,moderate,sedang,False
+R0010,Bika ambon,bika ambon,199.0,2.1,1.5,44.4,0.3,,moderate,rendah,False
+R0011,Bingka,bingka,273.0,5.3,10.6,39.1,,,moderate,rendah,True
+R0012,Bolu peca,bolu peca,197.0,3.3,4.6,35.6,,0.0,moderate,rendah,False
+R0013,Brem,brem,249.0,3.4,0.4,58.0,0.0,,high,rendah,False
+R0014,Cake tape,cake tape,323.0,4.9,11.5,50.1,1.4,,high,rendah,False
+R0015,Cangkuning,cangkuning,204.0,2.8,7.5,31.4,,,moderate,rendah,True
+R0016,Dodol bali,dodol bali,298.0,3.7,2.1,65.9,0.4,,high,rendah,False
+R0017,Dodol kedondong,dodol kedondong,331.0,1.9,7.6,63.8,1.0,,high,rendah,False
+R0018,Gemblong,gemblong,274.0,1.7,5.4,55.5,2.2,,moderate,rendah,True
+R0019,Jagung gerontol,jagung gerontol,156.0,2.7,1.3,33.3,1.0,,moderate,rendah,False
+R0020,Japilus,japilus,500.0,1.2,25.1,67.3,0.4,,high,rendah,False
+R0021,Kakicak,kakicak,296.0,3.4,15.1,36.7,,,moderate,rendah,True
+R0022,Kapusa,kapusa,158.0,4.4,3.2,27.8,5.3,104.0,moderate,rendah,True
+R0023,Koyabu,koyabu,241.0,3.4,4.3,47.2,,,moderate,rendah,True
+R0024,Kue jahe,kue jahe,425.0,1.6,8.8,84.6,1.2,,high,rendah,False
+R0025,Kue kelapa,kue kelapa,591.0,5.6,42.1,47.5,,33.0,moderate,rendah,False
+R0026,Kue koa,kue koa,340.0,4.8,0.4,79.3,,,high,rendah,False
+R0027,Kue lumpur,kue lumpur,291.0,3.6,11.1,44.1,,,moderate,rendah,False
+R0028,Lapis legit,lapis legit,350.0,4.0,15.0,28.0,0.5,150.0,moderate,sedang,True
+R0029,Mie ayam,mie ayam,450.0,18.5,0.0,62.4,2.8,950.0,moderate,tinggi,True
+R0030,Mie bakso,mie bakso,114.0,5.3,3.0,16.4,0.1,760.0,moderate,tinggi,False
+R0031,Mie pangsit basah,mie pangsit basah,105.0,5.9,4.9,9.4,,530.0,moderate,tinggi,True
+R0032,onde onde,onde onde,336.0,4.0,9.8,57.9,,,high,rendah,False
+R0033,Nasi gurih,nasi gurih,190.0,4.7,7.5,26.0,0.7,296.0,moderate,sedang,True
+R0034,Padamaran,padamaran,171.0,3.9,8.9,18.8,,,moderate,rendah,False
+R0035,Kue Pulut,kue pulut,216.0,2.6,3.1,44.4,,100.0,moderate,rendah,False
+R0036,Roti warna sawo matang,roti warna sawo matang,249.0,7.9,1.5,49.7,,500.0,moderate,tinggi,True
+R0037,Sarimuka,sarimuka,166.0,2.3,2.8,32.9,,3.0,moderate,rendah,False
+R0038,Wingko babat,wingko babat,355.0,3.2,15.1,51.4,2.4,,moderate,rendah,False
+R0039,"Ganyong, rebus","ganyong, rebus",100.0,0.8,0.2,23.8,0.9,,moderate,rendah,True
+R0040,"Suweg, talas, kukus","suweg, talas, kukus",93.0,1.5,0.1,21.9,0.9,6.0,moderate,rendah,True
+R0041,"Ubi jalar, kuning, kukus","ubi jalar, kuning, kukus",100.0,0.7,0.3,23.8,1.0,3.0,moderate,rendah,True
+R0042,Bagea kenari asin,bagea kenari asin,529.0,3.2,29.1,63.6,,74.0,high,rendah,False
+R0043,Bagea kenari manis,bagea kenari manis,523.0,3.2,28.2,64.2,,74.0,high,rendah,False
+R0044,Bagea kw 1,bagea kw 1,416.0,6.5,9.4,76.3,0.4,,high,rendah,False
+R0045,Bagea kw 2,bagea kw 2,382.0,0.3,3.5,87.2,0.9,,high,rendah,False
+R0046,Bubur sagu,bubur sagu,167.0,0.2,4.0,33.0,,7.0,moderate,rendah,False
+R0047,Ceriping getuk singkong,ceriping getuk singkong,462.0,1.2,20.7,67.7,0.6,,high,rendah,False
+R0048,Gatot,gatot,347.0,1.3,0.7,83.8,5.8,28.0,high,rendah,False
+R0049,Getuk singkong,getuk singkong,204.0,0.5,1.4,47.4,0.8,,moderate,rendah,True
+R0050,Gurandil,gurandil,218.0,0.5,2.5,48.5,3.1,,moderate,rendah,True
+R0051,Kecimpring singkong goreng,kecimpring singkong goreng,464.0,1.2,18.6,73.0,1.3,,high,rendah,False
+R0052,Keripik gadung,keripik gadung,446.0,2.8,14.5,76.0,1.7,,high,rendah,False
+R0053,Kerupuk udang goreng,kerupuk udang goreng,477.0,4.7,20.5,68.5,5.0,449.0,high,tinggi,False
+R0054,Kue putu singkong,kue putu singkong,217.0,1.2,0.5,53.2,2.4,3.0,moderate,rendah,True
+R0055,Lanting getuk,lanting getuk,422.0,0.9,10.8,80.4,1.4,,high,rendah,False
+R0056,Mie Bendo,mie bendo,353.0,0.3,0.0,88.0,2.4,9.0,high,rendah,False
+R0057,Oyek,oyek,351.0,0.9,0.9,84.9,4.3,5.0,high,rendah,False
+R0058,Sagu sinole,sagu sinole,354.0,0.8,8.3,68.9,,30.0,high,rendah,False
+R0059,Serimping talas kebumen,serimping talas kebumen,478.0,2.5,21.2,69.2,1.7,,high,rendah,False
+R0060,Tepung Ubi Ungu,tepung ubi ungu,354.0,2.8,0.6,84.4,12.9,42.0,high,rendah,False
+R0061,Ubi Cilembu,ubi cilembu,115.0,1.5,0.3,25.0,3.4,1.0,moderate,rendah,True
+R0062,"Kacang belimbing, rebus","kacang belimbing, rebus",204.0,16.9,8.8,17.5,4.8,43.0,low,rendah,True
+R0063,"kacang hijau, rebus","kacang hijau, rebus",109.0,8.7,0.5,18.3,1.5,447.0,moderate,tinggi,True
+R0064,"Kacang tanah, rebus","kacang tanah, rebus",220.0,10.6,18.0,8.0,1.0,36.0,moderate,rendah,True
+R0065,"Kacang tolo, rebus","kacang tolo, rebus",138.0,10.7,1.1,22.6,0.9,13.0,moderate,rendah,True
+R0066,"Ampas tahu, kering","ampas tahu, kering",414.0,26.6,18.3,41.3,0.0,45.0,moderate,rendah,True
+R0067,Bungkil kacang tanah,bungkil kacang tanah,365.0,45.0,13.0,17.0,,,moderate,rendah,True
+R0068,Bungkil kelapa,bungkil kelapa,367.0,23.0,15.0,35.0,,,moderate,rendah,True
+R0069,Emping (kerupuk melinjo),emping (kerupuk melinjo),300.0,12.0,1.5,61.0,,,high,rendah,False
+R0070,Enting-enting wijen,enting-enting wijen,565.0,18.2,38.4,36.8,1.9,,moderate,rendah,True
+R0071,Geplak,geplak,350.0,1.4,14.4,53.6,1.8,,high,rendah,False
+R0072,Kacang atom,kacang atom,533.0,27.8,38.1,28.8,2.5,,moderate,rendah,True
+R0073,Kacang goyang,kacang goyang,516.0,14.7,31.1,44.4,,2.0,moderate,rendah,True
+R0074,Kacang sukro,kacang sukro,484.0,8.8,26.1,57.7,1.8,,high,rendah,False
+R0075,Kembang tahu,kembang tahu,380.0,48.9,13.8,23.3,0.0,55.0,moderate,rendah,True
+R0076,Kwaci,kwaci,515.0,30.6,42.1,13.8,13.6,124.0,low,rendah,True
+R0077,Melinjo emping tebal goreng manis,melinjo emping tebal goreng manis,439.0,10.0,16.4,65.7,,,high,rendah,False
+R0078,"Melinjo emping tebal, goreng asin","melinjo emping tebal, goreng asin",431.0,11.1,16.2,63.0,,,high,rendah,False
+R0079,Melinjo emping tipis goreng,melinjo emping tipis goreng,485.0,11.5,24.5,59.1,,,high,rendah,False
+R0080,Moon tahu,moon tahu,128.0,8.0,10.0,1.3,0.2,393.0,low,sedang,True
+R0081,Rempeyek kacang tolo,rempeyek kacang tolo,451.0,11.2,20.2,59.7,1.8,,high,rendah,False
+R0082,Rempeyek kacang uci,rempeyek kacang uci,497.0,17.0,27.6,50.8,2.4,,moderate,rendah,True
+R0083,Tahu telur,tahu telur,328.0,12.6,19.9,24.6,0.4,755.0,moderate,tinggi,True
+R0084,Tempe kacang belimbing,tempe kacang belimbing,212.0,17.5,10.0,12.9,2.9,,low,rendah,True
+R0085,"Tempe kedelai murni, goreng","tempe kedelai murni, goreng",350.0,24.5,26.6,10.4,4.2,22.0,low,rendah,True
+R0086,"Bayam, kukus","bayam, kukus",30.0,1.3,0.7,5.8,1.2,15.0,low,rendah,True
+R0087,"Daun katuk, rebus","daun katuk, rebus",53.0,5.3,0.9,9.1,1.2,16.0,moderate,rendah,False
+R0088,"Daun singkong, rebus","daun singkong, rebus",31.0,3.7,0.6,4.8,1.6,13.0,low,rendah,True
+R0089,"Daun talas, rebus","daun talas, rebus",27.0,1.3,0.2,5.9,1.6,3.0,low,rendah,True
+R0090,"Kangkung, rebus","kangkung, rebus",22.0,2.5,0.6,3.1,1.2,31.0,low,rendah,False
+R0091,"Anyang, sayur","anyang, sayur",126.0,3.4,7.9,10.3,5.4,290.0,low,sedang,False
+R0092,Beberuk,beberuk,65.0,1.1,5.2,3.5,3.1,53.0,low,rendah,True
+R0093,Cammetutu,cammetutu,102.0,3.2,6.0,8.7,4.3,443.0,low,tinggi,True
+R0094,"Cap cai, sayur","cap cai, sayur",97.0,5.8,6.3,4.2,0.6,405.0,low,tinggi,True
+R0095,"Gudeg, sayur","gudeg, sayur",160.0,3.3,9.2,16.0,2.3,,moderate,rendah,True
+R0096,Gulai pakis,gulai pakis,143.0,4.0,11.4,6.0,1.4,,low,rendah,True
+R0097,Lema/ Rebung asam,lema/ rebung asam,15.0,1.0,0.4,1.9,,3.0,low,rendah,False
+R0098,Pelecing kangkung,pelecing kangkung,75.0,2.5,2.8,10.0,5.4,408.0,low,tinggi,False
+R0099,Rujak cingur,rujak cingur,249.0,13.7,0.0,22.5,3.5,580.0,moderate,tinggi,True
+R0100,Sayur garu,sayur garu,178.0,2.6,13.9,10.6,8.4,20.0,low,rendah,True
+R0101,Sayur lilin-terubuk,sayur lilin-terubuk,36.0,2.7,0.7,4.8,1.4,30.0,low,rendah,True
+R0102,Shabu-shabu,shabu-shabu,88.0,3.2,8.0,0.8,0.9,514.0,low,tinggi,True
+R0103,Keripik lampung,keripik lampung,485.0,1.7,22.2,69.7,0.6,,high,rendah,False
+R0104,Ledre pisang,ledre pisang,405.0,4.8,5.1,84.9,0.4,,high,rendah,False
+R0105,Lempog durian,lempog durian,320.0,3.5,5.7,63.7,4.9,,moderate,rendah,False
+R0106,Sale kesemek,sale kesemek,296.0,1.1,0.6,71.4,,,high,rendah,False
+R0107,Sanggara belanda,sanggara belanda,242.0,6.4,7.1,38.2,,,moderate,rendah,True
+R0108,Kerupuk urat,kerupuk urat,588.0,53.7,40.9,1.2,,1024.0,low,tinggi,True
+R0109,"Sapi, daging, asap","sapi, daging, asap",182.0,32.0,6.0,0.0,0.0,1620.0,low,tinggi,False
+R0110,"Sapi, daging, kornet","sapi, daging, kornet",289.0,16.0,25.0,0.0,0.0,794.0,low,tinggi,True
+R0111,"Sapi, paru, goreng","sapi, paru, goreng",268.0,23.9,12.7,14.5,,923.0,moderate,tinggi,False
+R0112,"Ulat sagu, panggang","ulat sagu, panggang",380.0,11.9,30.3,14.9,4.8,260.0,low,sedang,True
+R0113,"Ayam goreng Kentucky, paha","ayam goreng kentucky, paha",286.0,32.1,16.1,1.1,0.0,746.0,low,tinggi,True
+R0114,"Ayam goreng Kentucky,sayap","ayam goreng kentucky,sayap",297.0,35.9,15.2,1.6,0.0,807.0,low,tinggi,True
+R0115,Ayam goreng mbok berek dada,ayam goreng mbok berek dada,295.0,39.2,13.6,1.0,0.0,,low,rendah,False
+R0116,"Ayam taliwang, masakan","ayam taliwang, masakan",264.0,18.2,20.1,2.7,,507.0,low,tinggi,True
+R0117,"Babi hutan masak rica, masakan","babi hutan masak rica, masakan",491.0,24.6,16.3,0.2,,1415.0,low,tinggi,False
+R0118,Brongkos,brongkos,141.0,15.3,3.3,12.6,1.0,,moderate,rendah,True
+R0119,"Bulgogi, masakan","bulgogi, masakan",72.0,11.4,4.9,1.4,1.7,509.0,low,tinggi,True
+R0120,"Chikiniku, masakan","chikiniku, masakan",143.0,9.8,1.4,22.8,0.4,531.0,moderate,tinggi,True
+R0121,"Kalio ayam, masakan","kalio ayam, masakan",203.0,16.0,13.5,4.4,,534.0,low,tinggi,True
+R0122,"Kalio jeroan, masakan","kalio jeroan, masakan",163.0,16.5,9.0,4.1,,570.0,low,tinggi,True
+R0123,"Kalio kikil (tunjang), masakan","kalio kikil (tunjang), masakan",122.0,13.8,5.7,3.9,,519.0,low,tinggi,False
+R0124,"Nasu likku, masakan","nasu likku, masakan",196.0,14.5,8.3,15.9,,386.0,moderate,sedang,True
+R0125,"Paniki masak santan, masakan","paniki masak santan, masakan",460.0,28.5,35.2,7.2,,2002.0,moderate,tinggi,True
+R0126,"Rendang sapi, masakan","rendang sapi, masakan",193.0,22.6,7.9,7.8,0.0,,moderate,rendah,True
+R0127,"Sop daging sapi, masakan","sop daging sapi, masakan",49.0,5.8,0.5,5.3,,391.0,moderate,sedang,True
+R0128,"Sop kambing, masakan","sop kambing, masakan",34.0,5.5,0.8,1.1,,348.0,low,sedang,True
+R0129,"Sop saudara, masakan","sop saudara, masakan",89.0,7.2,5.0,3.9,,274.0,low,sedang,False
+R0130,"Soto madura, masakan","soto madura, masakan",60.0,3.5,4.5,1.3,0.0,,low,rendah,True
+R0131,"Soto pemalang, masakan","soto pemalang, masakan",75.0,3.6,5.2,3.5,0.0,,low,rendah,True
+R0132,"Ikan bandeng presto, masakan","ikan bandeng presto, masakan",296.0,17.1,20.3,11.3,0.0,,moderate,rendah,True
+R0133,Ikan baung bakar,ikan baung bakar,144.0,17.8,5.8,5.2,,168.0,moderate,sedang,True
+R0134,"Ikan Gabus asap, mentah","ikan gabus asap, mentah",261.0,38.1,2.3,21.9,0.0,320.0,moderate,sedang,True
+R0135,Ikan Mujahir pepes,ikan mujahir pepes,121.0,21.7,2.8,0.8,0.0,58.0,low,rendah,True
+R0136,"Ikan Patin, bakar","ikan patin, bakar",144.0,17.5,6.3,4.3,,379.0,low,sedang,True
+R0137,"Udang kering, mentah","udang kering, mentah",278.0,62.6,4.1,2.2,,540.0,low,tinggi,True
+R0138,Abon ikan,abon ikan,435.0,27.2,20.2,36.1,,,moderate,rendah,True
+R0139,Cakalang asar (asap),cakalang asar (asap),155.0,20.1,3.8,10.2,,90.0,moderate,rendah,False
+R0140,"Dendeng belut, goreng, masakan","dendeng belut, goreng, masakan",382.0,55.7,14.1,8.0,0.0,,moderate,rendah,True
+R0141,"Gulai ikan, masakan","gulai ikan, masakan",106.0,16.5,3.3,2.5,,743.0,low,tinggi,True
+R0142,"Pempek belida, masakan","pempek belida, masakan",156.0,4.2,1.4,31.6,0.2,,moderate,rendah,True
+R0143,"Pempek kulit, masakan","pempek kulit, masakan",243.0,5.2,7.3,39.1,,555.0,moderate,tinggi,True
+R0144,"Pempek tenggiri, masakan","pempek tenggiri, masakan",173.0,7.2,1.2,33.4,0.2,,moderate,rendah,False
+R0145,Sate Bandeng,sate bandeng,283.0,12.1,16.8,20.9,2.0,543.0,moderate,tinggi,True
+R0146,"Tekwan, masakan","tekwan, masakan",53.0,1.9,0.9,9.4,,174.0,moderate,sedang,True
+R0147,"Telur ayam, dadar, masakan","telur ayam, dadar, masakan",251.0,16.3,19.4,1.4,0.0,,low,rendah,True
+R0148,"Telur bebek, asin, mentah","telur bebek, asin, mentah",179.0,13.6,13.3,4.4,0.0,483.0,low,tinggi,True
+R0149,Ayam Bakar (Tanpa Kulit),ayam bakar (tanpa kulit),165.0,31.0,3.0,4.0,0.0,350.0,low,sedang,True
+R0150,Ayam Goreng,ayam goreng,221.0,15.0,14.7,0.0,0.0,260.0,low,sedang,True
+R0151,Chicken Steak Grill,chicken steak grill,260.0,32.0,6.0,14.0,2.0,650.0,moderate,tinggi,True
+R0152,Dada Ayam,dada ayam,234.0,35.5,8.2,0.0,0.0,472.0,low,tinggi,True
+R0153,Daging Sapi Panggang,daging sapi panggang,210.0,26.0,10.5,0.0,0.0,60.0,low,rendah,True
+R0154,Dendeng Balado Basah,dendeng balado basah,290.0,22.0,8.0,8.0,1.0,0.0,moderate,rendah,True
+R0155,Hati Ayam Rebus,hati ayam rebus,84.0,12.3,2.0,0.5,0.0,35.0,low,rendah,True
+R0156,Ikan Barakuda,ikan barakuda,104.0,22.2,0.8,0.0,0.0,0.0,low,rendah,True
+R0157,Ikan Cucut,ikan cucut,130.0,21.0,3.5,0.0,0.0,0.0,low,rendah,True
+R0158,Ikan Dori,ikan dori,84.0,11.0,3.59999999999999,0.0,0.0,27.0,low,rendah,True
+R0159,Ikan Ekor Kuning,ikan ekor kuning,112.0,21.0,0.8,0.0,0.0,60.0,low,rendah,True
+R0160,Ikan Gabus,ikan gabus,80.0,25.2,1.7,0.0,0.0,65.0,low,rendah,True
+R0161,Ikan Layang,ikan layang,110.0,22.0,2.0,0.0,0.0,0.0,low,rendah,True
+R0162,Ikan Salem,ikan salem,205.0,18.6,12.8,0.0,0.0,0.0,low,rendah,True
+R0163,"Jeroan Sapi (Hati, Paru, Babat)","jeroan sapi (hati, paru, babat)",160.0,20.0,0.0,3.0,0.0,80.0,low,rendah,True
+R0164,Kulit Ayam,kulit ayam,135.0,6.1,11.1,0.0,0.0,20.0,low,rendah,True
+R0165,Kuning Telur Rebus,kuning telur rebus,55.0,2.7,1.6,0.6,0.0,8.0,low,rendah,True
+R0166,Paha Atas Ayam,paha atas ayam,135.0,13.67,8.45,0.0,0.0,223.0,low,sedang,True
+R0167,Paha Bawah Ayam,paha bawah ayam,207.0,25.72,10.79,0.0,0.0,410.0,low,tinggi,True
+R0168,Putih Telur Rebus,putih telur rebus,17.0,3.6,0.0,0.2,0.0,55.0,low,rendah,True
+R0169,Rendang Sapi,rendang sapi,195.0,20.0,7.0,5.0,1.5,0.0,low,rendah,True
+R0170,Sate Ayam,sate ayam,338.0,29.3,19.2999999999999,7.3,3.0,530.0,low,tinggi,True
+R0171,Sayap Ayam,sayap ayam,175.0,16.0,10.2,0.0,0.0,242.0,low,sedang,True
+R0172,Tahu Kukus,tahu kukus,78.0,8.0,4.2,1.9,0.9,120.0,low,rendah,True
+R0173,Tahu Rebus,tahu rebus,78.0,8.0,4.0,2.0,1.0,7.0,low,rendah,True
+R0174,Telur Rebus,telur rebus,77.0,6.0,4.4,0.6,0.0,62.0,low,rendah,True
+R0175,Tempe Goreng,tempe goreng,192.0,11.3,11.1,10.1,0.0,280.0,moderate,sedang,True
+R0176,Tempe Kukus,tempe kukus,96.0,9.5,4.3,4.7,1.7,5.0,low,rendah,True
+R0177,Tongkol Balado,tongkol balado,202.0,22.0,0.0,5.0,1.0,350.0,low,sedang,True
+R0178,Udang,udang,144.0,27.6,1.7,1.2,0.0,613.0,low,tinggi,True
+R0179,Alpukat Mentega,alpukat mentega,160.0,2.0,12.1,9.0,7.0,7.0,low,rendah,True
+R0180,Anggur Muscat,anggur muscat,83.0,0.7,0.0,20.0,0.9,0.0,moderate,rendah,True
+R0181,Apel Fuji,apel fuji,52.0,0.26,0.079,13.81,2.1,1.0,moderate,rendah,True
+R0182,Apel Malang (Manalagi),apel malang (manalagi),86.0,0.8,0.4,19.2,3.6,2.0,moderate,rendah,True
+R0183,Apel Potong (Segar),apel potong (segar),78.0,0.4,0.0,21.0,3.6,1.0,moderate,rendah,True
+R0184,Buah Leci,buah leci,66.0,0.8,0.2,16.5,1.3,0.0,moderate,rendah,True
+R0185,Buah Matoa,buah matoa,90.0,1.2,0.1,21.1,0.5,10.0,moderate,rendah,True
+R0186,Buah Naga Merah,buah naga merah,90.0,1.8,0.5,19.0,4.5,0.0,low,rendah,True
+R0187,Es Kul-Kul Buah Viral,es kul-kul buah viral,120.0,1.0,3.5,18.0,1.5,0.0,moderate,rendah,True
+R0188,Jambu Biji Merah,jambu biji merah,64.0,0.9,0.3,12.2,2.4,10.0,moderate,rendah,True
+R0189,Jambu Kristal (Tanpa Biji),jambu kristal (tanpa biji),55.0,0.9,0.2,15.4,5.4,2.0,low,rendah,True
+R0190,Jeruk Manis,jeruk manis,60.0,1.2,0.1,15.0,3.0,0.0,moderate,rendah,True
+R0191,Jeruk Nipis,jeruk nipis,30.0,0.7,0.0,10.5,0.4,2.0,moderate,rendah,True
+R0192,Jeruk Sunkist,jeruk sunkist,69.0,1.3,0.0,17.5,3.1,0.0,moderate,rendah,True
+R0193,Keripik Apel Malang,keripik apel malang,480.0,1.5,0.0,70.0,6.0,10.0,high,rendah,False
+R0194,Mangga,mangga,98.0,0.8,0.3,25.5,2.7,3.0,moderate,rendah,True
+R0195,Pepaya Potong,pepaya potong,46.0,0.5,0.1,12.2,1.6,4.0,moderate,rendah,True
+R0196,Pir Hijau,pir hijau,92.0,0.6,0.0,25.0,5.5,1.5,low,rendah,True
+R0197,Pisang Ambon,pisang ambon,105.0,1.3,0.2,27.0,3.1,1.0,moderate,rendah,True
+R0198,Potongan Buah Segar Campur,potongan buah segar campur,80.0,1.2,0.3,20.0,3.0,4.0,moderate,rendah,True
+R0199,Potongan Nanas,potongan nanas,50.0,0.5,0.0,13.0,1.4,1.0,moderate,rendah,True
+R0200,Rujak Buah Potong,rujak buah potong,280.0,4.0,1.0,55.0,6.0,0.0,moderate,rendah,True
+R0201,Salad Buah Mayo,salad buah mayo,450.0,6.0,8.0,60.0,4.0,0.0,moderate,rendah,True
+R0202,Semangka Potong,semangka potong,46.0,0.9,0.0,11.5,0.6,1.5,moderate,rendah,True
+R0203,Tart Cherry (Ceri Asam),tart cherry (ceri asam),50.0,1.0,0.0,12.2,1.6,3.0,moderate,rendah,True
+R0204,Capcay Goreng / Kuah (Ayam),capcay goreng / kuah (ayam),250.0,15.0,3.0,15.0,4.0,600.0,low,tinggi,True
+R0205,Capcay Seafood Kuah,capcay seafood kuah,150.0,15.0,4.0,12.0,4.0,450.0,low,tinggi,True
+R0206,Kimchi,kimchi,25.0,2.0,0.0,5.0,2.5,670.0,low,tinggi,True
+R0207,Lalapan Sayur Segar (Fresh Vegetables Platter),lalapan sayur segar (fresh vegetables platter),20.0,1.0,0.0,4.0,2.0,10.0,low,rendah,True
+R0208,Nasi Pecel,nasi pecel,530.0,14.0,5.0,65.0,8.0,580.0,high,tinggi,False
+R0209,Salad Sayur Segar,salad sayur segar,45.0,2.0,0.0,10.0,4.0,15.0,low,rendah,True
+R0210,Salad Timun Tomat (Cucumber Tomato Salad),salad timun tomat (cucumber tomato salad),120.0,1.5,9.5,6.0,1.5,50.0,low,rendah,True
+R0211,Sawi Hijau,sawi hijau,13.0,1.5,0.13,2.2,1.0,65.0,low,rendah,True
+R0212,Sayur Asem,sayur asem,80.0,3.0,0.0,13.0,4.0,550.0,low,tinggi,True
+R0213,Sayur Lodeh (Keto Friendly),sayur lodeh (keto friendly),100.0,1.6,8.0,3.2,1.2,0.0,low,rendah,True
+R0214,Sayur Sop,sayur sop,75.0,2.0,0.5,12.0,3.0,400.0,low,sedang,True
+R0215,Sup Brenebon,sup brenebon,405.0,22.0,0.0,35.0,9.0,650.0,low,tinggi,True
+R0216,Sup Tahu Telur (Egg Drop Soup),sup tahu telur (egg drop soup),150.0,10.0,8.0,8.0,1.0,400.0,moderate,sedang,True
+R0217,Timun (Lalap),timun (lalap),8.0,0.3,0.0,1.5,0.5,0.0,low,rendah,True
+R0218,Tumis Buncis Jagung Muda,tumis buncis jagung muda,60.0,2.5,2.0,8.0,2.5,200.0,low,sedang,True
+R0219,Tumis Kangkung,tumis kangkung,150.0,4.0,0.0,8.0,4.0,550.0,low,tinggi,True
+R0220,Tumis Kol (Kubis),tumis kol (kubis),50.0,1.5,2.3,6.0,2.5,150.0,low,sedang,True
+R0221,Tumis Wortel Buncis,tumis wortel buncis,65.0,1.8,2.5,9.0,3.0,250.0,low,sedang,True
+R0222,Bubur Pati Garut,bubur pati garut,150.0,0.5,0.0,35.0,2.5,15.0,moderate,rendah,True
+R0223,Kentang Rebus,kentang rebus,130.0,2.8,0.0,30.0,3.0,5.0,moderate,rendah,True
+R0224,Ketupat,ketupat,160.0,3.2,0.5,30.4,0.5,5.0,moderate,rendah,True
+R0225,Lontong,lontong,144.0,2.8,0.0,31.8,0.5,2.0,moderate,rendah,True
+R0226,Nasi Goreng,nasi goreng,336.0,12.6,10.5,42.1,1.4,830.0,moderate,tinggi,True
+R0227,Nasi Merah,nasi merah,110.0,2.8,0.6,23.0,1.8,5.0,moderate,rendah,True
+R0228,Nasi Shirataki (Konjac),nasi shirataki (konjac),30.0,0.0,0.0,6.0,5.0,0.0,low,rendah,True
+R0229,Roti Tawar Putih,roti tawar putih,100.0,3.0,0.0,18.0,1.0,150.0,moderate,sedang,False
+R0230,Singkong Rebus,singkong rebus,190.0,2.0,0.2,45.0,3.0,10.0,moderate,rendah,True
+R0231,Asinan Betawi,asinan betawi,185.0,8.5,0.0,22.4,4.5,450.0,low,tinggi,True
+R0232,Ayam Bakar Taliwang,ayam bakar taliwang,342.0,27.0,17.0,4.0,1.0,510.0,low,tinggi,True
+R0233,Ayam Betutu,ayam betutu,425.0,22.6,30.5,6.3,1.2,720.0,moderate,tinggi,True
+R0234,Ayam Geprek,ayam geprek,450.0,30.0,0.0,15.0,1.0,750.0,moderate,tinggi,True
+R0235,Ayam Sisit Bali,ayam sisit bali,150.0,22.5,4.5,3.5,1.0,450.0,low,tinggi,True
+R0236,Bakso Aci,bakso aci,450.0,8.5,0.0,78.2,1.5,1.25,high,rendah,False
+R0237,Bakso Sapi Kuah (Tanpa Mie),bakso sapi kuah (tanpa mie),280.0,15.0,13.0,15.0,1.0,900.0,moderate,tinggi,True
+R0238,Balado Teri Kacang,balado teri kacang,135.0,8.0,8.0,6.0,1.0,350.0,moderate,sedang,False
+R0239,Bapmericano (Nasi Kopi Viral),bapmericano (nasi kopi viral),210.0,4.5,0.0,45.0,0.5,10.0,moderate,rendah,True
+R0240,Bebek Goreng,bebek goreng,600.0,25.0,0.0,8.0,1.0,800.0,moderate,tinggi,True
+R0241,Beberuk Terong,beberuk terong,45.0,1.5,0.0,9.0,3.0,250.0,low,sedang,True
+R0242,Bihun Goreng Sayur,bihun goreng sayur,310.0,8.0,6.0,55.0,4.0,650.0,moderate,tinggi,True
+R0243,Bolu Kukus,bolu kukus,145.0,2.5,0.0,28.5,0.5,85.0,moderate,rendah,False
+R0244,Bubur Ayam,bubur ayam,298.0,15.0,0.0,40.0,2.0,0.0,moderate,rendah,True
+R0245,Bubur Ayam Cirebon,bubur ayam cirebon,420.0,16.0,0.0,52.0,2.0,1.1,moderate,rendah,True
+R0246,Bubur Ayam Jakarta,bubur ayam jakarta,372.0,18.0,3.0,54.0,2.0,950.0,moderate,tinggi,True
+R0247,Bubur Manado (Tinutuan),bubur manado (tinutuan),260.0,8.0,0.0,55.0,8.2,350.0,moderate,sedang,True
+R0248,Coto Makassar,coto makassar,289.0,25.4,0.0,12.9,1.2,650.0,moderate,tinggi,True
+R0249,Empal Gentong,empal gentong,265.0,18.2,0.0,9.4,0.8,710.0,moderate,tinggi,True
+R0250,Emping Melinjo,emping melinjo,120.0,3.0,2.0,18.0,1.0,150.0,moderate,sedang,True
+R0251,Gudeg Jogja,gudeg jogja,456.0,34.0,0.0,53.0,5.5,850.0,moderate,tinggi,True
+R0252,Gulai Ayam,gulai ayam,336.0,28.6,0.0,8.0,0.5,620.0,moderate,tinggi,True
+R0253,Gulai Daun Singkong,gulai daun singkong,210.0,8.0,15.0,12.0,4.0,450.0,low,tinggi,True
+R0254,Gulai Kambing,gulai kambing,312.0,11.8,0.0,16.1,0.8,755.0,moderate,tinggi,True
+R0255,Gulai Otak Sapi,gulai otak sapi,250.0,10.0,20.0,5.0,1.0,400.0,low,sedang,True
+R0256,Gulai Tunjang,gulai tunjang,380.0,28.0,26.0,8.0,1.0,650.0,moderate,tinggi,True
+R0257,Ikan Asin (Goreng),ikan asin (goreng),290.0,42.0,8.0,0.0,0.0,3.5,low,rendah,True
+R0258,Ikan Kembung Goreng,ikan kembung goreng,215.0,21.0,0.0,2.0,0.0,350.0,low,sedang,True
+R0259,Ikan Kuah Kuning,ikan kuah kuning,279.0,42.5,0.0,7.2,1.0,680.0,moderate,tinggi,True
+R0260,Ikan Pesmol (Bumbu Kuning),ikan pesmol (bumbu kuning),280.0,22.0,16.0,8.0,2.0,450.0,low,tinggi,True
+R0261,Ikan Sarden (Kaleng),ikan sarden (kaleng),140.0,15.0,2.5,4.0,0.5,400.0,low,sedang,True
+R0262,Indomie Mi Nyemek,indomie mi nyemek,420.0,12.0,16.3,52.0,2.0,1.2,moderate,rendah,True
+R0263,Kepiting Saus Padang,kepiting saus padang,450.0,30.0,0.0,15.0,2.0,1.2,moderate,rendah,True
+R0264,Kerak Telor,kerak telor,452.0,20.1,0.0,55.6,2.1,840.0,moderate,tinggi,True
+R0265,Konro Bakar,konro bakar,680.0,35.0,42.5,25.0,3.0,1.1,moderate,rendah,True
+R0266,Lele Goreng (Tanpa Tepung),lele goreng (tanpa tepung),240.0,18.0,14.0,0.0,0.0,0.0,low,rendah,True
+R0267,Lontong Balap Surabaya,lontong balap surabaya,480.0,16.0,9.0,80.0,8.0,850.0,high,tinggi,False
+R0268,Lontong Sayur,lontong sayur,420.0,14.0,10.0,55.0,4.0,850.0,moderate,tinggi,True
+R0269,Lontong Sayur Medan,lontong sayur medan,520.0,18.0,0.0,68.0,4.5,1.35,high,rendah,False
+R0270,Macaroni Schotel (Panggang),macaroni schotel (panggang),280.0,12.0,7.0,25.0,1.5,450.0,moderate,tinggi,True
+R0271,Mie Aceh,mie aceh,238.0,14.5,0.0,28.6,3.0,890.0,moderate,tinggi,True
+R0272,Mie Ayam,mie ayam,450.0,18.5,0.0,62.4,2.8,950.0,moderate,tinggi,True
+R0273,Mie Ayam Jamur,mie ayam jamur,420.0,18.0,4.0,55.0,3.0,950.0,moderate,tinggi,True
+R0274,Mie Gacoan (Mie Iblis/Setan),mie gacoan (mie iblis/setan),580.0,22.4,0.0,68.5,3.2,1.35,high,rendah,False
+R0275,Mie Goreng Jawa,mie goreng jawa,520.0,18.0,0.0,68.0,4.0,1.1,high,rendah,False
+R0276,Mie Kocok Bandung,mie kocok bandung,388.0,20.8,0.0,40.7,2.2,1.12,moderate,rendah,True
+R0277,Mie Soobek (Biang Mie),mie soobek (biang mie),530.0,18.0,0.0,72.0,4.0,950.0,high,tinggi,False
+R0278,Mie Tek-Tek (Goreng/Kuah),mie tek-tek (goreng/kuah),520.0,18.0,6.0,65.0,4.0,0.0,high,rendah,False
+R0279,Nasi Campur,nasi campur,550.0,22.5,0.0,72.0,4.5,1.05,high,rendah,False
+R0280,Nasi Campur Bali,nasi campur bali,600.0,28.0,18.0,75.0,7.0,950.0,high,tinggi,False
+R0281,Nasi Gila,nasi gila,720.0,28.5,0.0,82.4,2.1,1.45,high,rendah,False
+R0282,Nasi Goreng Spesial (Telur + Ayam),nasi goreng spesial (telur + ayam),630.0,24.0,6.0,78.0,2.0,0.0,high,rendah,False
+R0283,Nasi Goreng Tuna,nasi goreng tuna,520.0,22.0,4.0,65.0,2.0,0.0,high,rendah,False
+R0284,Nasi Jagung,nasi jagung,300.0,5.6,0.0,52.0,11.0,800.0,low,tinggi,True
+R0285,Nasi Kapau Ikan Bakar,nasi kapau ikan bakar,470.0,32.0,12.0,55.0,4.0,600.0,moderate,tinggi,True
+R0286,Nasi Kuning Komplit,nasi kuning komplit,750.0,28.0,14.0,85.0,3.0,0.0,high,rendah,False
+R0287,Nasi Padang Ayam Pop,nasi padang ayam pop,610.0,29.0,20.0,72.0,5.0,980.0,high,tinggi,False
+R0288,Nasi Padang Keliling (Porsi),nasi padang keliling (porsi),520.0,22.0,0.0,62.5,3.5,950.0,moderate,tinggi,True
+R0289,Nasi Padang Lauk Rendang,nasi padang lauk rendang,720.0,32.0,34.5,78.0,6.0,1.35,high,rendah,False
+R0290,Nasi Putih,nasi putih,194.0,4.0,0.3,43.0,0.4,1.0,moderate,rendah,True
+R0291,Nasi Rames (Warteg),nasi rames (warteg),500.0,20.0,6.0,60.0,4.0,800.0,moderate,tinggi,True
+R0292,Nasi Tiwul,nasi tiwul,147.0,1.5,0.0,35.0,4.0,0.0,moderate,rendah,True
+R0293,Nasi Tutug Oncom,nasi tutug oncom,580.0,22.0,0.0,78.0,5.0,950.0,high,tinggi,False
+R0294,Nasi Uduk (Porsi Standar),nasi uduk (porsi standar),460.0,12.0,8.0,65.0,3.0,0.0,high,rendah,False
+R0295,Nasi Uduk Betawi,nasi uduk betawi,550.0,12.0,12.0,75.0,3.0,800.0,high,tinggi,False
+R0296,Nasi Uduk Kebon Kacang,nasi uduk kebon kacang,720.0,28.0,0.0,85.0,3.5,1.2,high,rendah,False
+R0297,Nasi Uduk Komplit,nasi uduk komplit,550.0,22.0,11.0,65.0,3.0,850.0,high,tinggi,False
+R0298,Opor Ayam,opor ayam,392.0,26.0,18.0,13.0,1.5,0.0,moderate,rendah,True
+R0299,Orek Tempe Basah (Kecap),orek tempe basah (kecap),180.0,10.0,2.0,15.0,3.0,350.0,moderate,sedang,True
+R0300,Otak-Otak Ikan Tenggiri Bakar,otak-otak ikan tenggiri bakar,180.0,10.0,1.0,25.0,1.0,0.0,moderate,rendah,True
+R0301,Pastel Ayam Sayur,pastel ayam sayur,240.0,7.5,5.5,22.0,1.5,290.0,moderate,sedang,True
+R0302,Pecel Lele,pecel lele,250.0,18.0,4.0,8.0,2.0,450.0,low,tinggi,True
+R0303,Pempek Kapal Selam,pempek kapal selam,335.0,25.8,3.5,22.5,1.0,0.0,moderate,rendah,True
+R0304,Pepes Ayam,pepes ayam,220.0,22.0,9.5,6.0,1.5,480.0,low,tinggi,True
+R0305,Pepes Ikan Mas,pepes ikan mas,246.0,26.0,10.0,8.0,2.0,580.0,low,tinggi,True
+R0306,Perkedel Jagung,perkedel jagung,130.0,3.0,0.0,15.0,1.0,200.0,moderate,sedang,True
+R0307,Perkedel Kentang,perkedel kentang,90.0,2.0,1.5,12.0,1.0,120.0,moderate,rendah,True
+R0308,Plecing Kangkung,plecing kangkung,75.0,2.5,2.8,10.0,5.4,408.0,low,tinggi,True
+R0309,Rawon Daging Sapi,rawon daging sapi,320.0,22.0,8.0,10.0,2.0,0.0,moderate,rendah,True
+R0310,Rujak Cingur,rujak cingur,249.0,13.7,0.0,22.5,3.5,580.0,moderate,tinggi,True
+R0311,Sambal Goreng Hati Sapi,sambal goreng hati sapi,210.0,12.0,5.0,15.0,2.0,450.0,moderate,tinggi,True
+R0312,Sambal Terasi,sambal terasi,25.0,0.5,0.0,3.0,0.8,180.0,low,sedang,True
+R0313,Sate Ayam + Lontong,sate ayam + lontong,680.0,30.0,8.0,75.0,4.0,1.1,high,rendah,False
+R0314,Sate Kambing,sate kambing,320.0,28.4,8.0,7.2,1.5,580.0,low,tinggi,True
+R0315,Sate Lilit,sate lilit,255.0,19.6,0.0,3.6,1.5,420.0,low,tinggi,True
+R0316,Sate Lilit Ayam,sate lilit ayam,165.0,12.5,11.0,4.5,1.5,250.0,low,sedang,True
+R0317,Sate Maranggi,sate maranggi,520.0,38.5,0.0,12.4,0.8,850.0,moderate,tinggi,True
+R0318,Sate Padang (Daging & Lidah),sate padang (daging & lidah),630.0,24.0,6.0,78.0,2.0,0.0,high,rendah,False
+R0319,Sate Ratu (Sate Merah),sate ratu (sate merah),270.0,40.0,0.0,12.0,1.0,550.0,moderate,tinggi,True
+R0320,Sate Rembiga,sate rembiga,220.0,22.0,10.0,8.0,1.0,450.0,moderate,tinggi,True
+R0321,Sate Taichan,sate taichan,280.0,45.0,7.0,2.0,1.0,600.0,low,tinggi,True
+R0322,Sayur Bening Bayam,sayur bening bayam,85.0,3.5,0.3,18.0,4.0,350.0,low,sedang,True
+R0323,Sayur Bening Labu Siam,sayur bening labu siam,22.5,0.5,0.0,5.0,1.0,0.0,low,rendah,True
+R0324,Sayur Bobor Bayam,sayur bobor bayam,140.0,4.0,6.0,8.0,5.0,0.0,low,rendah,True
+R0325,Sayur Lodeh,sayur lodeh,170.0,5.0,8.0,12.0,4.0,400.0,low,sedang,True
+R0326,Semur Jengkol,semur jengkol,192.0,7.5,0.0,20.4,3.2,450.0,moderate,tinggi,True
+R0327,Semur Tahu,semur tahu,130.0,8.5,5.5,12.0,1.0,650.0,moderate,tinggi,True
+R0328,Sop Buntut,sop buntut,284.0,30.0,0.0,8.8,2.0,980.0,low,tinggi,True
+R0329,Sop Iga Sapi (Bening),sop iga sapi (bening),112.0,7.5,8.0,2.0,0.5,0.0,low,rendah,True
+R0330,Sop Konro,sop konro,450.0,25.0,15.0,10.0,2.0,800.0,moderate,tinggi,True
+R0331,Sop Sapi (Kuah Bening),sop sapi (kuah bening),220.0,18.0,4.5,12.0,2.5,980.0,low,tinggi,True
+R0332,Soto Ayam (Lamongan/Kuning),soto ayam (lamongan/kuning),320.0,20.0,8.0,15.0,2.0,900.0,moderate,tinggi,True
+R0333,Soto Ayam Bening,soto ayam bening,250.0,18.0,11.0,15.0,2.0,980.0,moderate,tinggi,True
+R0334,Soto Betawi,soto betawi,380.0,22.0,15.0,18.0,2.0,0.0,moderate,rendah,True
+R0335,Soto Lamongan,soto lamongan,380.0,22.0,10.0,18.0,2.0,950.0,moderate,tinggi,True
+R0336,Soto Mie Bogor,soto mie bogor,530.0,25.0,0.0,55.0,4.0,1.1,moderate,rendah,True
+R0337,Sup Kimlo,sup kimlo,250.0,15.0,1.5,35.0,3.0,0.0,moderate,rendah,True
+R0338,Tahu Campur Lamongan,tahu campur lamongan,550.0,25.0,20.0,60.0,4.0,1.1,moderate,rendah,True
+R0339,Tahu Goreng,tahu goreng,80.0,4.0,1.0,2.0,0.5,150.0,low,sedang,True
+R0340,Tahu Tek Surabaya,tahu tek surabaya,520.0,22.0,21.0,55.0,5.0,980.0,moderate,tinggi,True
+R0341,Telur Balado,telur balado,140.0,7.0,3.0,4.0,0.5,300.0,low,sedang,True
+R0342,Tempe Bakar Kecap,tempe bakar kecap,210.0,19.0,7.5,14.0,3.0,320.0,low,sedang,True
+R0343,Tempe Goreng Tepung,tempe goreng tepung,270.0,14.0,0.0,22.0,4.0,300.0,moderate,sedang,True
+R0344,Tempe Kecap,tempe kecap,210.0,13.0,0.0,16.0,5.0,400.0,low,sedang,True
+R0345,Tempe Mendoan,tempe mendoan,160.0,5.0,8.7,12.0,1.0,280.0,moderate,sedang,True
+R0346,Tongseng Kambing,tongseng kambing,350.0,25.0,12.0,15.0,3.0,0.0,moderate,rendah,True
+R0347,Urap Sayur,urap sayur,115.0,3.5,7.0,11.0,5.0,200.0,low,sedang,True
+R0348,Bakwan Sayur,bakwan sayur,140.0,2.0,7.7,15.0,1.0,200.0,moderate,sedang,True
+R0349,Batagor,batagor,522.0,18.5,0.0,52.4,2.5,820.0,moderate,tinggi,True
+R0350,Bubur Kacang Hijau,bubur kacang hijau,260.0,8.5,6.5,45.0,5.0,120.0,moderate,rendah,True
+R0351,Bubur Sumsum,bubur sumsum,418.0,4.7,6.0,81.0,1.0,150.0,high,sedang,False
+R0352,Chiffon Cake,chiffon cake,160.0,3.5,7.0,18.0,0.5,90.0,moderate,rendah,False
+R0353,Cilok,cilok,310.0,4.0,0.0,50.0,2.0,550.0,moderate,tinggi,True
+R0354,Cimol (Aci Digemol),cimol (aci digemol),222.0,0.8,2.0,41.0,0.2,600.0,moderate,tinggi,True
+R0355,Cireng (Aci Goreng),cireng (aci goreng),348.0,1.2,7.0,50.0,0.5,450.0,high,tinggi,False
+R0356,Crispy Cheese Bombs,crispy cheese bombs,300.0,9.0,0.0,28.0,1.0,520.0,moderate,tinggi,True
+R0357,Cuanki Mini (Viral),cuanki mini (viral),210.0,4.2,0.0,35.0,0.5,450.0,moderate,tinggi,True
+R0358,Dadar Gulung,dadar gulung,160.0,2.5,4.5,25.0,1.5,100.0,moderate,rendah,True
+R0359,Dimsum Ayam Kukus,dimsum ayam kukus,130.0,9.0,5.19999999999999,9.1,0.6,390.0,moderate,sedang,True
+R0360,Dimsum Goreng Mentai,dimsum goreng mentai,350.0,18.0,13.7,30.0,0.5,520.0,moderate,tinggi,True
+R0361,Dimsum Mie Gacoan,dimsum mie gacoan,280.0,12.5,0.0,22.0,1.0,650.0,moderate,tinggi,True
+R0362,Donat Gula Halus,donat gula halus,250.0,4.0,5.0,30.0,1.0,150.0,moderate,sedang,True
+R0363,Gohyong Ayam Viral,gohyong ayam viral,450.0,18.0,12.0,35.0,2.0,850.0,moderate,tinggi,True
+R0364,Keju Aroma,keju aroma,95.0,2.0,2.5,10.0,0.5,80.0,moderate,rendah,False
+R0365,Ketoprak Jakarta,ketoprak jakarta,580.0,18.0,18.0,75.0,5.0,850.0,high,tinggi,False
+R0366,Klepon,klepon,280.0,3.0,6.0,45.0,2.0,150.0,moderate,sedang,True
+R0367,Kolak Pisang,kolak pisang,420.0,3.0,15.0,65.0,4.0,80.0,high,rendah,False
+R0368,Kue Lumpur Kentang,kue lumpur kentang,130.0,2.0,3.0,18.0,0.5,50.0,moderate,rendah,False
+R0369,Kue Sus,kue sus,150.0,3.0,7.7,13.0,0.5,85.0,moderate,rendah,False
+R0370,Lapis Legit,lapis legit,350.0,4.0,15.0,28.0,0.5,150.0,moderate,sedang,True
+R0371,Lemper Ayam,lemper ayam,180.0,7.0,4.0,22.0,1.0,200.0,moderate,sedang,True
+R0372,Lentho Kacang Tolo,lentho kacang tolo,125.0,4.0,5.0,15.0,2.0,150.0,moderate,sedang,True
+R0373,Lumpia Basah,lumpia basah,250.0,12.0,6.0,35.0,5.0,450.0,moderate,tinggi,True
+R0374,Martabak Manis Cokelat Keju,martabak manis cokelat keju,347.0,6.5,8.5,48.2,1.5,280.0,moderate,sedang,False
+R0375,Martabak Telur Bebek Spesial,martabak telur bebek spesial,396.0,18.4,6.0,40.2,1.0,450.0,moderate,tinggi,True
+R0376,Nagasari (Kue Pisang),nagasari (kue pisang),154.0,2.1,2.0,30.2,1.0,91.0,moderate,rendah,False
+R0377,Onde-onde Kacang Hijau,onde-onde kacang hijau,210.0,4.0,3.2,28.5,2.1,95.0,moderate,rendah,False
+R0378,Perkedel Singkong (Lentho Singkong),perkedel singkong (lentho singkong),95.0,1.0,2.5,18.0,1.0,120.0,moderate,rendah,True
+R0379,Pie Susu Bali,pie susu bali,105.0,2.0,3.0,12.5,0.0,40.0,moderate,rendah,True
+R0380,Pisang Goreng Tepung,pisang goreng tepung,114.0,1.3,2.0,16.2,1.0,100.0,moderate,rendah,False
+R0381,Poffertjes,poffertjes,441.0,10.5,8.5,49.8,1.5,380.0,moderate,sedang,True
+R0382,Risol Lumer,risol lumer,236.0,11.8,8.7,23.8,0.8,420.0,moderate,tinggi,True
+R0383,Risol Matcha Isi Keju,risol matcha isi keju,200.0,8.0,8.2,20.0,0.5,280.0,moderate,sedang,True
+R0384,Risoles Bihun,risoles bihun,130.0,2.0,3.0,15.0,0.5,200.0,moderate,sedang,True
+R0385,Risoles Mayo (American Risol),risoles mayo (american risol),275.0,9.0,6.8,20.5,0.8,420.0,moderate,tinggi,True
+R0386,Risoles Ragout Ayam,risoles ragout ayam,160.0,4.0,3.0,18.0,1.0,250.0,moderate,sedang,True
+R0387,Risoles Sayur,risoles sayur,110.0,3.0,0.0,10.0,1.0,180.0,moderate,sedang,True
+R0388,Roti Bakar (Cokelat Keju),roti bakar (cokelat keju),450.0,10.0,10.0,55.0,2.0,0.0,moderate,rendah,True
+R0389,Sate Tempe (Viral Beef Flavored),sate tempe (viral beef flavored),200.0,14.0,0.0,11.0,6.0,650.0,low,tinggi,True
+R0390,Seblak,seblak,360.0,10.0,0.0,45.0,2.0,1.1,moderate,rendah,True
+R0391,Seblak Coet (Rafael),seblak coet (rafael),580.0,4.0,4.0,85.0,1.0,1.5,high,rendah,False
+R0392,Siomay Bandung (Ikan),siomay bandung (ikan),450.0,22.0,4.0,45.0,5.0,800.0,moderate,tinggi,True
+R0393,Sosis Solo,sosis solo,140.0,5.0,3.5,10.0,0.5,200.0,moderate,sedang,True
+R0394,Tahu Bacem,tahu bacem,72.0,4.8,3.0,6.5,0.5,150.0,moderate,sedang,True
+R0395,Tahu Gejrot,tahu gejrot,230.0,10.0,0.0,25.0,2.0,350.0,moderate,sedang,True
+R0396,Tahu Kocek,tahu kocek,350.0,8.0,7.0,45.0,2.0,600.0,moderate,tinggi,True
+R0397,Tahu Petis Semarang,tahu petis semarang,90.0,4.0,4.0,8.0,1.0,180.0,moderate,sedang,True
+R0398,Ayam Goreng KFC Crispy,ayam goreng kfc crispy,330.0,22.0,17.5,9.0,0.5,900.0,moderate,tinggi,True
+R0399,Ayam Goreng KFC Original,ayam goreng kfc original,280.0,19.0,16.7,8.0,0.5,800.0,moderate,tinggi,True
+R0400,Ayam Goreng McD - Paha (Thigh),ayam goreng mcd - paha (thigh),330.0,28.0,3.5,16.0,0.0,740.0,moderate,tinggi,True
+R0401,Ayam Spicy McD,ayam spicy mcd,341.0,24.0,15.5,13.0,1.0,1.0,moderate,rendah,True
+R0402,Beef Prosperity Burger,beef prosperity burger,480.0,22.0,0.0,55.0,3.0,950.0,moderate,tinggi,True
+R0403,Beef Yakiniku,beef yakiniku,320.0,18.0,10.0,12.0,1.0,850.0,moderate,tinggi,True
+R0404,Bento Special 4,bento special 4,850.0,30.0,15.0,90.0,3.0,1.2,high,rendah,False
+R0405,Big Mac,big mac,550.0,25.0,29.5,45.0,3.0,960.0,moderate,tinggi,True
+R0406,Bubur Ayam McD,bubur ayam mcd,193.0,6.0,5.0,30.0,2.0,680.0,moderate,tinggi,True
+R0407,Chicken Snack Wrap,chicken snack wrap,330.0,14.0,11.5,33.0,2.0,780.0,moderate,tinggi,True
+R0408,Egg McMuffin,egg mcmuffin,300.0,18.0,11.0,30.0,2.0,730.0,moderate,tinggi,True
+R0409,Hoka Hemat 3,hoka hemat 3,413.0,20.0,3.0,47.0,3.0,494.0,moderate,tinggi,True
+R0410,Kebab Turki (Doner Kebab),kebab turki (doner kebab),550.0,22.0,10.0,45.0,3.0,0.0,moderate,rendah,True
+R0411,KFC Colonel Burger,kfc colonel burger,381.0,13.0,12.5,39.0,2.0,680.0,moderate,tinggi,True
+R0412,KFC Cream Soup,kfc cream soup,110.0,3.0,5.0,14.0,1.0,620.0,moderate,tinggi,True
+R0413,KFC French Fries (Large),kfc french fries (large),520.0,6.0,24.5,66.0,6.0,700.0,high,tinggi,False
+R0414,KFC Perkedel,kfc perkedel,105.0,5.0,5.0,10.0,1.0,280.0,moderate,sedang,True
+R0415,McDonalds Ayam Krispy (Original),mcdonalds ayam krispy (original),350.0,18.0,13.7,30.0,0.5,520.0,moderate,tinggi,True
+R0416,McSpaghetti Pedas Manis,mcspaghetti pedas manis,420.0,18.0,11.0,58.0,3.0,980.0,moderate,tinggi,True
+R0417,Nasi Putih KFC,nasi putih kfc,208.0,4.0,0.1,45.0,0.5,5.0,moderate,rendah,True
+R0418,PaNas 1 (Ayam Goreng McD),panas 1 (ayam goreng mcd),635.0,29.0,0.0,78.0,1.0,1.15,high,rendah,False
+R0419,Pizza Hut Cheese Deluxe,pizza hut cheese deluxe,240.0,10.0,5.0,26.0,1.0,0.0,moderate,rendah,True
+R0420,Pizza Hut Meat Lovers (Pan Pizza),pizza hut meat lovers (pan pizza),290.0,12.0,6.0,28.0,1.5,0.0,moderate,rendah,True
+R0421,Richeese Fire Chicken,richeese fire chicken,380.0,22.0,7.5,18.0,1.0,850.0,moderate,tinggi,True
+R0422,Super Besar 1 (Nasi + Ayam + Minum),super besar 1 (nasi + ayam + minum),690.0,25.0,16.5,93.0,1.0,920.0,high,tinggi,False
+R0423,Triple Cheeseburger,triple cheeseburger,520.0,32.0,26.5,35.0,2.0,1.15,moderate,rendah,True
+R0424,Ayam Rebus Jahe (Pek Cam Kee),ayam rebus jahe (pek cam kee),245.0,25.0,11.5,2.0,0.5,450.0,low,tinggi,True
+R0425,Ikan Bakar Teflon (Diet Friendly),ikan bakar teflon (diet friendly),120.0,22.0,2.3,1.0,0.0,150.0,low,sedang,True
+R0426,Kacang Almond Panggang (Roasted Almond),kacang almond panggang (roasted almond),165.0,6.0,13.0,6.0,3.5,0.0,low,rendah,True
+R0427,Nasi Goreng Shirataki (Diet),nasi goreng shirataki (diet),250.0,15.0,4.0,10.0,8.0,600.0,low,tinggi,True
+R0428,Oatmeal Gurih Telur Rebus,oatmeal gurih telur rebus,230.0,11.5,6.5,27.0,4.0,300.0,moderate,sedang,True
+R0429,Oatmeal Pisang (Vegan),oatmeal pisang (vegan),280.0,8.0,3.5,52.0,7.0,0.0,moderate,rendah,True
+R0430,Orak-Arik Tempe Telur,orak-arik tempe telur,285.0,21.0,16.5,8.0,2.0,350.0,low,sedang,True
+R0431,Overnight Oats,overnight oats,350.0,12.0,1.5,55.0,8.0,0.0,moderate,rendah,True
+R0432,Overnight Oats Cokelat,overnight oats cokelat,380.0,15.0,2.0,55.0,10.0,100.0,moderate,rendah,True
+R0433,Pancake Pisang Telur (2 Bahan),pancake pisang telur (2 bahan),260.0,13.0,8.5,25.0,3.0,140.0,moderate,rendah,True
+R0434,Pepes Tahu Kemangi,pepes tahu kemangi,126.0,11.4,6.2,4.9,2.4,320.0,low,sedang,True
+R0435,Roti Gandum Alpukat (Avocado Toast),roti gandum alpukat (avocado toast),220.0,6.0,13.0,18.0,7.0,180.0,low,sedang,True
+R0436,Salad Wrap (Chicken),salad wrap (chicken),350.0,25.0,2.5,35.0,5.0,0.0,moderate,rendah,True
+R0437,Salad Wrap Ayam (Chicken Caesar Wrap),salad wrap ayam (chicken caesar wrap),380.0,25.0,4.0,35.0,5.0,550.0,moderate,tinggi,True
+R0438,Smoothie Bowl Naga (Dragon Fruit),smoothie bowl naga (dragon fruit),420.0,8.0,4.0,75.0,12.0,50.0,high,rendah,False
+R0439,Steak Tempe Saus Lada Hitam,steak tempe saus lada hitam,280.0,18.0,11.0,22.0,4.0,650.0,moderate,tinggi,True
+R0440,Tuna Salad,tuna salad,280.0,22.0,3.0,10.0,3.0,0.0,low,rendah,True
+R0441,Yogurt Buah (Yogurt Bowl),yogurt buah (yogurt bowl),160.0,8.0,0.0,28.0,4.0,0.0,moderate,rendah,True
+R0442,Indomie Mi Goreng,indomie mi goreng,380.0,8.0,6.0,54.0,2.0,830.0,moderate,tinggi,True
+R0443,Indomie Mi Goreng Jumbo,indomie mi goreng jumbo,570.0,13.0,21.0,80.0,3.0,1.34,high,rendah,False
+R0444,Indomie Rasa Ayam Bawang,indomie rasa ayam bawang,300.0,7.0,13.0,40.0,2.0,1.33,moderate,rendah,True
+R0445,Lemonilo Mie Goreng,lemonilo mie goreng,300.0,7.0,6.0,54.0,3.0,850.0,moderate,tinggi,True
+R0446,Mie Instan Goreng + Telur,mie instan goreng + telur,490.0,14.5,9.0,54.5,2.0,980.0,moderate,tinggi,True
+R0447,Mie Sedaap Goreng,mie sedaap goreng,430.0,9.0,8.0,57.0,7.0,820.0,moderate,tinggi,True
+R0448,Super Bubur Ayam,super bubur ayam,170.0,4.0,1.0,34.0,1.0,550.0,moderate,tinggi,True
+R0449,Butter Croissant,butter croissant,240.0,5.0,13.5,26.0,1.0,200.0,moderate,sedang,False
+R0450,Kopi Kenangan - Cerita Roti Coklat Klasik,kopi kenangan - cerita roti coklat klasik,420.0,7.0,0.0,52.0,2.0,300.0,moderate,sedang,True
+R0451,Kopi Kenangan - Cerita Roti Daging Asap Keju,kopi kenangan - cerita roti daging asap keju,250.0,6.0,0.0,39.0,1.0,450.0,moderate,tinggi,True
+R0452,Kopi Kenangan - Cerita Roti Keju Manis,kopi kenangan - cerita roti keju manis,360.0,6.0,0.0,41.0,1.0,350.0,moderate,sedang,True
+R0453,Mixue Ice Cream Cone,mixue ice cream cone,190.0,4.0,3.5,30.0,0.0,80.0,moderate,rendah,False

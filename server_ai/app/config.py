@@ -31,7 +31,7 @@ class Settings(BaseSettings):
 
     # Paths
     BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    KNOWLEDGE_BASE_DIR: str = os.path.join(BASE_DIR, "knowledge_base")
+    KNOWLEDGE_BASE_DIR: str = os.path.join(BASE_DIR, "knowledge_base_new")
 
     class Config:
         env_file = ".env"

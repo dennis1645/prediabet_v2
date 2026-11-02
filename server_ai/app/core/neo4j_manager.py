@@ -24,6 +24,8 @@ CURATED_FOOD_IMAGES = {
     "sop ayam": "/food-images/sop-ayam.jpg",
     "sup ayam": "/food-images/sop-ayam.jpg",
     "soto ayam": "/food-images/soto-ayam.jpg",
+    "soto mie bogor": "/food-images/soto-ayam.jpg",
+    "soto mie": "/food-images/soto-ayam.jpg",
     "bubur ayam": "/food-images/bubur-oatmeal.jpg",
     "ayam": "/food-images/dada-ayam.jpg",
 
@@ -89,6 +91,8 @@ CURATED_FOOD_IMAGES = {
     "sop ayam": "/food-images/sop-ayam.jpg",
     "sup ayam": "/food-images/sop-ayam.jpg",
     "soto ayam": "/food-images/soto-ayam.jpg",
+    "soto mie bogor": "/food-images/soto-ayam.jpg",
+    "soto mie": "/food-images/soto-ayam.jpg",
     "capcay": "/food-images/capcay.jpg",
     "gado-gado": "/food-images/gado-gado.jpg",
     "gado gado": "/food-images/gado-gado.jpg",
@@ -113,6 +117,19 @@ CURATED_FOOD_IMAGES = {
     "kopi susu": "/food-images/kopi.jpg",
     "almond": "/food-images/almond.jpg",
     "kacang almond": "/food-images/almond.jpg",
+
+    # Hidangan Nusantara Tambahan
+    "mie ayam": "/food-images/mie-ayam.jpg",
+    "bakmi ayam": "/food-images/mie-ayam.jpg",
+    "soto betawi": "/food-images/soto-betawi.jpg",
+    "ayam bakar taliwang": "/food-images/ayam-taliwang.jpg",
+    "ayam taliwang": "/food-images/ayam-taliwang.jpg",
+    "gudeg": "/food-images/gudeg.jpg",
+    "kangkung": "/food-images/kangkung.jpg",
+    "plecing kangkung": "/food-images/kangkung.jpg",
+    "cah kangkung": "/food-images/kangkung.jpg",
+    "rawon": "/food-images/rawon.jpg",
+    "nasi rawon": "/food-images/rawon.jpg",
 }
 
 def resolve_food_image(food_name: str) -> str:
@@ -265,22 +282,48 @@ class Neo4jClinicalGraphManager:
             neo4j_logger.error("Error saat eksekusi Cypher: %s | Query: %s", str(e), query.strip())
             raise
 
-    def balance_staples(self, foods: List[Dict[str, Any]], allergens: List[str], limit: int = 8) -> List[Dict[str, Any]]:
-        """Menyusun rekomendasi makanan seimbang 3J (Karbohidrat, Lauk, Sayur, Buah segar)."""
+    def balance_staples(
+        self,
+        foods: List[Dict[str, Any]],
+        allergens: List[str],
+        limit: int = 8,
+        conditions: Optional[List[str]] = None
+    ) -> List[Dict[str, Any]]:
+        """Menyusun rekomendasi makanan seimbang 3J (Karbohidrat, Lauk, Sayur, Buah segar) disesuaikan kondisi komorbiditas."""
+        cond_str = " ".join(conditions or []).lower()
+        is_hipertensi = "hipertensi" in cond_str or "darah tinggi" in cond_str
+        is_asam_urat = "asam urat" in cond_str or "gout" in cond_str
+
         safe_candidates = allergen_guardrail.filter_safe_food_candidates(foods, allergens)
+
+        def is_comorbid_safe(f: Dict[str, Any]) -> bool:
+            f_name = str(f.get("nama") or "").lower()
+            sod = f.get("sodium_mg") if f.get("sodium_mg") is not None else 0
+            if is_hipertensi and sod > 140:
+                return False
+            if is_asam_urat and any(p in f_name for p in ["jeroan", "remis", "kerang", "sapi", "kambing", "bebek"]):
+                return False
+            return True
+
         safe_wholesome = [
             f for f in safe_candidates 
             if (f.get("gi") if f.get("gi") is not None else 35) <= 55 
-            and (f.get("sodium_mg") if f.get("sodium_mg") is not None else 0) <= 350 
+            and (f.get("sodium_mg") if f.get("sodium_mg") is not None else 0) <= (140 if is_hipertensi else 350)
             and (f.get("kalori") if f.get("kalori") is not None else 50) >= 15
+            and is_comorbid_safe(f)
             and not any(bad in str(f.get("nama") or "").lower() for bad in EXCLUDE_FOOD_KEYWORDS)
         ]
+
+        # Buat variasi urutan staples berdasarkan profil pengguna agar rekomendasi personal dan terisolasi
+        seed_offset = sum(ord(c) for c in (cond_str + " ".join(allergens))) % 5
 
         selected = []
         selected_names = set()
         for cat, patterns in STAPLE_PATTERNS.items():
             cat_count = 0
-            for pat in patterns:
+            # Rotasi patterns sesuai seed kondisi pasien
+            rotated_patterns = patterns[seed_offset % len(patterns):] + patterns[:seed_offset % len(patterns)]
+            for pat in rotated_patterns:
                 for f in safe_wholesome:
                     f_name = str(f.get("nama") or "")
                     if pat in f_name.lower() and f_name not in selected_names:
@@ -365,18 +408,19 @@ class Neo4jClinicalGraphManager:
         if self._local_foods_cache is not None:
             return self._local_foods_cache
 
-        csv_path = os.path.join(settings.KNOWLEDGE_BASE_DIR, "neo4j", "nodes_food.csv")
         items = []
+
+        # 1. Baca nodes_food.csv (Basis Data Pangan Kemenkes)
+        csv_path = os.path.join(settings.KNOWLEDGE_BASE_DIR, "neo4j", "nodes_food.csv")
         if os.path.exists(csv_path):
             try:
                 with open(csv_path, mode="r", encoding="utf-8") as f:
                     reader = csv.DictReader(f)
                     for row in reader:
-                        nama = (row.get("nama_makanan") or "").strip()
+                        nama = (row.get("nama_kanonik") or row.get("nama_asli") or row.get("nama_makanan") or "").strip()
                         if not nama:
                             continue
 
-                        # Bersihkan key dengan tipe data Neo4j (:float, :int)
                         def get_val(key_base):
                             for k in [key_base, f"{key_base}:float", f"{key_base}:int"]:
                                 if k in row and row[k] is not None and row[k] != "":
@@ -386,27 +430,28 @@ class Neo4jClinicalGraphManager:
                                         pass
                             return 0.0
 
-                        kalori = get_val("kalori_kal")
-                        karbo = get_val("karbohidrat_g")
+                        kalori = get_val("energi_kal") or get_val("kalori_kal")
+                        karbo = get_val("karbohidrat_g") or get_val("kh_g")
                         protein = get_val("protein_g")
                         lemak = get_val("lemak_g")
                         serat = get_val("serat_g")
-                        sodium = get_val("sodium_mg")
-                        gi_val = get_val("glikemik_indeks")
-                        if gi_val <= 0:
-                            gi_val = get_val("estimated_gi")
-                        if gi_val <= 0:
-                            gi_val = 35.0  # Default low-moderate GI
+                        sodium = get_val("natrium_mg") or get_val("sodium_mg")
 
-                        # Normalisasi label kategori agar informatif (misal: 'Nasi Goreng' -> 'Makanan Pokok', 'Dada ayam' -> 'Lauk')
-                        kat_raw = str(row.get("kategori_spesifik") or "").strip()
+                        gi_risk = (row.get("glikemik_risk") or "moderate").lower()
+                        gi_val = 25.0 if gi_risk == "low" else (45.0 if gi_risk == "moderate" else 70.0)
+
+                        kat_raw = str(row.get("kategori_spesifik") or row.get("kategori") or "").strip()
                         kat_utama = str(row.get("kategori_utama") or "").strip()
-                        if kat_raw.lower() == "nasi":
+                        if "nasi" in nama.lower() or kat_raw.lower() == "nasi":
                             kat_display = "Makanan Pokok"
                         elif kat_raw and kat_raw != "-":
                             kat_display = kat_raw
                         elif kat_utama:
                             kat_display = kat_utama.split(",")[0].strip()
+                        elif protein >= 10.0:
+                            kat_display = "Lauk Sumber Protein"
+                        elif serat >= 2.0 or "sayur" in nama.lower() or "daun" in nama.lower():
+                            kat_display = "Sayuran & Serat"
                         else:
                             kat_display = "Bahan Makanan"
 
@@ -426,6 +471,53 @@ class Neo4jClinicalGraphManager:
                         })
             except Exception as e:
                 print(f"[Neo4j Manager] Gagal membaca nodes_food.csv: {e}")
+
+        # 2. Baca nodes_recipe.csv (453 Resep Masakan Nusantara)
+        recipe_csv_path = os.path.join(settings.KNOWLEDGE_BASE_DIR, "neo4j", "nodes_recipe.csv")
+        if os.path.exists(recipe_csv_path):
+            try:
+                with open(recipe_csv_path, mode="r", encoding="utf-8") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        nama = (row.get("nama_resep") or row.get("nama_resep_clean") or "").strip()
+                        if not nama:
+                            continue
+
+                        def get_rval(key_base):
+                            for k in [key_base, f"{key_base}:float", f"{key_base}:int"]:
+                                if k in row and row[k] is not None and row[k] != "":
+                                    try:
+                                        return float(row[k])
+                                    except ValueError:
+                                        pass
+                            return 0.0
+
+                        kalori = get_rval("energi_kal")
+                        karbo = get_rval("karbohidrat_g")
+                        protein = get_rval("protein_g")
+                        lemak = get_rval("lemak_g")
+                        serat = get_rval("serat_g")
+                        sodium = get_rval("natrium_mg")
+
+                        gi_risk = (row.get("glikemik_risk") or "moderate").lower()
+                        gi_val = 25.0 if gi_risk == "low" else (45.0 if gi_risk == "moderate" else 70.0)
+
+                        items.append({
+                            "nama": nama,
+                            "nama_makanan": nama,
+                            "kalori": kalori,
+                            "karbohidrat": karbo,
+                            "protein": protein,
+                            "lemak": lemak,
+                            "serat": serat,
+                            "sodium_mg": sodium,
+                            "gi": gi_val,
+                            "kategori": "Resep Masakan 3J",
+                            "cara_olah": "Kukus/Rebus/Tumis Sehat",
+                            "gambar": resolve_food_image(nama)
+                        })
+            except Exception as e:
+                print(f"[Neo4j Manager] Gagal membaca nodes_recipe.csv: {e}")
 
         self._local_foods_cache = items
         return items
@@ -459,7 +551,7 @@ class Neo4jClinicalGraphManager:
                 }
             ]
 
-        return self.balance_staples(foods, allergens, limit)
+        return self.balance_staples(foods, allergens, limit, conditions=conditions)
 
     def find_specific_food(self, query: str, chat_history: List[Any] = None) -> Optional[Dict[str, Any]]:
         """
@@ -669,18 +761,20 @@ class Neo4jClinicalGraphManager:
             for term in search_terms:
                 for target in COMMON_FOOD_ALIASES.get(term, [term]):
                     cypher = """
-                    MATCH (m:Food)
-                    WHERE toLower(m.nama_makanan) CONTAINS toLower($target)
-                    RETURN m.nama_makanan AS nama,
-                           m.kalori_kal AS kalori,
-                           m.karbohidrat_g AS karbohidrat,
+                    MATCH (m)
+                    WHERE (m:FoodItem OR m:Recipe OR m:Food)
+                      AND (toLower(coalesce(m.nama_kanonik, m.nama_resep, m.nama_makanan, '')) CONTAINS toLower($target)
+                           OR toLower(coalesce(m.nama_asli, m.nama_resep_clean, '')) CONTAINS toLower($target))
+                    RETURN coalesce(m.nama_kanonik, m.nama_resep, m.nama_makanan) AS nama,
+                           coalesce(m.energi_kal, m.kalori_kal) AS kalori,
+                           coalesce(m.karbohidrat_g, m.kh_g) AS karbohidrat,
                            m.protein_g AS protein,
                            m.lemak_g AS lemak,
                            m.serat_g AS serat,
-                           m.sodium_mg AS sodium_mg,
-                           COALESCE(m.glikemik_indeks, 0) AS gi,
-                           m.kategori_spesifik AS kategori,
-                           m.cara_olah AS cara_olah
+                           coalesce(m.natrium_mg, m.sodium_mg) AS sodium_mg,
+                           coalesce(m.glikemik_indeks, CASE WHEN m.glikemik_risk = 'low' THEN 25.0 WHEN m.glikemik_risk = 'high' THEN 70.0 ELSE 45.0 END) AS gi,
+                           coalesce(m.kategori_spesifik, 'Bahan Makanan') AS kategori,
+                           coalesce(m.cara_olah, 'Kukus/Rebus') AS cara_olah
                     LIMIT 10
                     """
                     try:

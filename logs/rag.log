@@ -1,0 +1,321 @@
+[2026-10-22 09:15:00] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:15:00] [INFO] [rag] Test RAG log message
+[2026-10-22 09:17:10] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:17:10] [INFO] [rag] ================================================================================
+[2026-10-22 09:17:10] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Berapa protein pada dada ayam?' | User ID: 'test_user'
+[2026-10-22 09:17:10] [DEBUG] [rag] Profil Pasien: Alergen: ['Kacang'] | Kondisi/Komorbid: ['Risiko: None']
+[2026-10-22 09:17:11] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang Rebus', 'Ayam, dada, daging tanpa kulit, tanpa tulang, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel, segar', 'Pepaya muda, segar']
+[2026-10-22 09:17:11] [INFO] [rag] Specific Food Matched: Ayam, dada, daging tanpa kulit, tanpa tulang, segar (Kalori: 120.0, Protein: 23.0)
+[2026-10-22 09:17:11] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 846, Safe Foods: 8, Alergen: ['Kacang']
+[2026-10-22 09:42:58] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:43:07] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:43:25] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:43:35] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:43:52] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:55:47] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 09:55:57] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 10:30:31] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 10:30:31] [INFO] [rag] ================================================================================
+[2026-10-22 10:30:31] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Gimana resep nya? sayuran apa?' | User ID: '1'
+[2026-10-22 10:30:31] [DEBUG] [rag] Profil Pasien: Alergen: ['Kacang', 'Seafood'] | Kondisi/Komorbid: ['Risiko: None']
+[2026-10-22 10:30:32] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 10:30:32] [DEBUG] [rag] No specific single food matched for query.
+[2026-10-22 10:30:32] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 10:30:32] [DEBUG] [rag] Hit 1: Pedoman PERKENI: 12. PANDUAN MENU MAKANAN RAMAH DIABETES & SUBSTITUSI ALERGEN TERSTRUKTUR
+[2026-10-22 10:30:32] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 4. DIABETES MELITUS TIPE 2 – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 10:30:32] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2940, Safe Foods: 8, Alergen: ['Kacang', 'Seafood']
+[2026-10-22 10:30:38] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 10:30:38] [INFO] [rag] ================================================================================
+[2026-10-22 10:30:38] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Gimana resep nya? sayuran apa?' | User ID: '1'
+[2026-10-22 10:30:38] [DEBUG] [rag] Profil Pasien: Alergen: ['Kacang', 'Seafood'] | Kondisi/Komorbid: ['Risiko: None']
+[2026-10-22 10:30:40] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 10:30:40] [DEBUG] [rag] No specific single food matched for query.
+[2026-10-22 10:30:40] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 10:30:40] [DEBUG] [rag] Hit 1: Pedoman PERKENI: 12. PANDUAN MENU MAKANAN RAMAH DIABETES & SUBSTITUSI ALERGEN TERSTRUKTUR
+[2026-10-22 10:30:40] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 4. DIABETES MELITUS TIPE 2 – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 10:30:40] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2940, Safe Foods: 8, Alergen: ['Kacang', 'Seafood']
+[2026-10-22 10:31:01] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 10:31:01] [INFO] [rag] ================================================================================
+[2026-10-22 10:31:01] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Gimana resep nya? sayuran apa?' | User ID: '1'
+[2026-10-22 10:31:01] [DEBUG] [rag] Profil Pasien: Alergen: ['Kacang', 'Seafood'] | Kondisi/Komorbid: ['Risiko: None']
+[2026-10-22 10:31:02] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 10:31:02] [DEBUG] [rag] No specific single food matched for query.
+[2026-10-22 10:31:02] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 10:31:02] [DEBUG] [rag] Hit 1: Pedoman PERKENI: 12. PANDUAN MENU MAKANAN RAMAH DIABETES & SUBSTITUSI ALERGEN TERSTRUKTUR
+[2026-10-22 10:31:02] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 4. DIABETES MELITUS TIPE 2 – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 10:31:02] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2940, Safe Foods: 8, Alergen: ['Kacang', 'Seafood']
+[2026-10-22 11:16:25] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 11:31:14] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 11:31:15] [INFO] [rag] ================================================================================
+[2026-10-22 11:31:15] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Selain itu?' | User ID: '1'
+[2026-10-22 11:31:15] [DEBUG] [rag] Profil Pasien: Alergen: ['Kacang', 'Seafood'] | Kondisi/Komorbid: ['Risiko: None']
+[2026-10-22 11:31:16] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 11:31:16] [DEBUG] [rag] No specific single food matched for query.
+[2026-10-22 11:31:16] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sayur Bening Bayam Oyong Jagung Manis' (Kalori: 65, Excluded: ['Pepes Ikan Mas Daun Kemangi', 'Tumis Buncis Tahu Kukus Bumbu Bawang', 'Soto Ayam Kuah Bening Lamongan'])
+[2026-10-22 11:31:16] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 11:31:16] [DEBUG] [rag] Hit 1: Pedoman PERKENI: # Diabetes & Prediabetes: Panduan Nutrisi dan Pantangan Makanan
+[2026-10-22 11:31:16] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 1. DEFINISI DAN KLASIFIKASI DIABETES
+[2026-10-22 11:31:16] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2932, Safe Foods: 8, Alergen: ['Kacang', 'Seafood']
+[2026-10-22 11:34:16] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 11:34:17] [INFO] [rag] ================================================================================
+[2026-10-22 11:34:17] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Kalau basis nya ayam?' | User ID: '1'
+[2026-10-22 11:34:17] [DEBUG] [rag] Profil Pasien: Alergen: ['Kacang', 'Seafood'] | Kondisi/Komorbid: ['Risiko: None']
+[2026-10-22 11:34:18] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 11:34:18] [INFO] [rag] Specific Food Matched: Ayam, dada, daging tanpa kulit, tanpa tulang, segar (Kalori: 120.0, Protein: 23.0)
+[2026-10-22 11:34:18] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Soto Ayam Kuah Bening Lamongan' (Kalori: 160, Excluded: [])
+[2026-10-22 11:34:18] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 11:34:18] [DEBUG] [rag] Hit 1: Pedoman PERKENI: 4. DIABETES MELITUS TIPE 2 – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 11:34:18] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 12. PANDUAN MENU MAKANAN RAMAH DIABETES & SUBSTITUSI ALERGEN TERSTRUKTUR
+[2026-10-22 11:34:18] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2248, Safe Foods: 8, Alergen: ['Kacang', 'Seafood']
+[2026-10-22 11:34:18] [INFO] [rag] ================================================================================
+[2026-10-22 11:34:18] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'aku punya ayam dan tahu enak nya dimasak apa?' | User ID: '1'
+[2026-10-22 11:34:18] [DEBUG] [rag] Profil Pasien: Alergen: ['Kacang', 'Seafood'] | Kondisi/Komorbid: ['Risiko: None']
+[2026-10-22 11:34:18] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 11:34:18] [INFO] [rag] Specific Food Matched: Ayam, dada, daging tanpa kulit, tanpa tulang, segar (Kalori: 120.0, Protein: 23.0)
+[2026-10-22 11:34:18] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sup Dada Ayam & Tahu Kukus Bening' (Kalori: 155, Excluded: [])
+[2026-10-22 11:34:18] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 11:34:18] [DEBUG] [rag] Hit 1: Pedoman PERKENI: 12. PANDUAN MENU MAKANAN RAMAH DIABETES & SUBSTITUSI ALERGEN TERSTRUKTUR
+[2026-10-22 11:34:18] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 4. DIABETES MELITUS TIPE 2 – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 11:34:18] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2248, Safe Foods: 8, Alergen: ['Kacang', 'Seafood']
+[2026-10-22 12:16:12] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 12:16:12] [INFO] [rag] ================================================================================
+[2026-10-22 12:16:12] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'resep nasi goreng gimana' | User ID: 'budi_santoso'
+[2026-10-22 12:16:12] [DEBUG] [rag] Profil Pasien: Alergen: [] | Kondisi/Komorbid: ['Risiko: Tinggi', 'Hipertensi']
+[2026-10-22 12:16:13] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 12:16:13] [INFO] [rag] Specific Food Matched: Nasi Goreng (Kalori: 420, Protein: 12)
+[2026-10-22 12:16:13] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Nasi Beras Merah Pulen' (Kalori: 149, Excluded: [])
+[2026-10-22 12:16:13] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 12:16:13] [DEBUG] [rag] Hit 1: Pedoman PERKENI: 4. DIABETES MELITUS TIPE 2 – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 12:16:13] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 2. PREDIABETES – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 12:16:13] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2268, Safe Foods: 8, Alergen: []
+[2026-10-22 12:21:24] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-10-22 12:21:25] [INFO] [rag] ================================================================================
+[2026-10-22 12:21:25] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'resep nasi goreng gimana' | User ID: 'budi_santoso'
+[2026-10-22 12:21:25] [DEBUG] [rag] Profil Pasien: Alergen: [] | Kondisi/Komorbid: ['Risiko: Tinggi', 'Hipertensi']
+[2026-10-22 12:21:25] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 12:21:25] [INFO] [rag] Specific Food Matched: Nasi Goreng (Kalori: 420, Protein: 12)
+[2026-10-22 12:21:25] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Nasi Goreng Shirataki Sayur & Telur' (Kalori: 220, Excluded: [])
+[2026-10-22 12:21:25] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-10-22 12:21:25] [DEBUG] [rag] Hit 1: Pedoman PERKENI: 4. DIABETES MELITUS TIPE 2 – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 12:21:25] [DEBUG] [rag] Hit 2: Pedoman PERKENI: 2. PREDIABETES – PANDUAN DIET DAN PANTANGAN
+[2026-10-22 12:21:25] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2268, Safe Foods: 8, Alergen: []
+[2026-10-22 12:21:25] [INFO] [rag] ================================================================================
+[2026-10-22 12:21:25] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'kalau nasi goreng?' | User ID: 'budi_santoso'
+[2026-10-22 12:21:25] [DEBUG] [rag] Profil Pasien: Alergen: [] | Kondisi/Komorbid: ['Risiko: Tinggi', 'Hipertensi']
+[2026-10-22 12:21:26] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['Beras merah, Nasi', 'Kentang, segar', 'Ayam, dada, daging dan kulit, segar', 'Ikan mas, segar', 'Bayam, segar', 'Gambas (oyong), segar', 'Apel malang, segar', 'Bunga pepaya, segar']
+[2026-10-22 12:21:26] [INFO] [rag] Specific Food Matched: Nasi Goreng (Kalori: 420, Protein: 12)
+[2026-10-22 12:21:26] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 925, Safe Foods: 8, Alergen: []
+[2026-11-02 08:56:46] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 08:57:41] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 08:59:30] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 08:59:34] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 08:59:43] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 08:59:43] [INFO] [rag] ================================================================================
+[2026-11-02 08:59:43] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Dok, saya ingin makan siang yang lezat tapi aman untuk tekanan darah saya. Menu apa yang disarankan?' | User ID: '1'
+[2026-11-02 08:59:43] [DEBUG] [rag] Profil Pasien: Alergen: ['Seafood', 'Santan'] | Kondisi/Komorbid: ['Risiko: Prediabetes (Impaired Fasting Glucose / IFG)', 'Hipertensi Derajat 1']
+[2026-11-02 08:59:44] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['nasi beras merah', 'kentang', 'Telur ayam, dadar, masakan', 'dada ayam masak', 'bayam', 'gambas (oyong)', 'apel malang', 'bunga pepaya']
+[2026-11-02 08:59:44] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 08:59:44] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Ayam goreng Kentucky,sayap' (Kalori: 297.0, Excluded: [])
+[2026-11-02 08:59:44] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 08:59:44] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 08:59:44] [DEBUG] [rag] Hit 2: Pedoman Klinis: 1. Satuan Sendok & Alat Makan Standar
+[2026-11-02 08:59:44] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2247, Safe Foods: 8, Alergen: ['Seafood', 'Santan']
+[2026-11-02 08:59:51] [INFO] [rag] ================================================================================
+[2026-11-02 08:59:51] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Dr. Predi, tolong beri ide camilan sore yang enak tapi asam urat saya tidak kambuh ya.' | User ID: '2'
+[2026-11-02 08:59:51] [DEBUG] [rag] Profil Pasien: Alergen: ['Susu', 'Kacang'] | Kondisi/Komorbid: ['Risiko: Rendah (Risiko Minimal)', 'Asam Urat']
+[2026-11-02 08:59:51] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['nasi beras merah', 'kentang', 'Telur ayam, dadar, masakan', 'dada ayam masak', 'bayam', 'gambas (oyong)', 'apel malang', 'bunga pepaya']
+[2026-11-02 08:59:51] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 08:59:51] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 185, Safe Foods: 8, Alergen: ['Susu', 'Kacang']
+[2026-11-02 09:01:21] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:01:21] [INFO] [rag] ================================================================================
+[2026-11-02 09:01:21] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Dok, saya ingin makan siang yang lezat tapi aman untuk tekanan darah saya. Menu apa yang disarankan?' | User ID: '1'
+[2026-11-02 09:01:21] [DEBUG] [rag] Profil Pasien: Alergen: ['Seafood', 'Santan'] | Kondisi/Komorbid: ['Risiko: Prediabetes (Impaired Fasting Glucose / IFG)', 'Hipertensi Derajat 1']
+[2026-11-02 09:01:22] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['oatmeal', 'hofa/ubi hutan', 'telur ayam ras', 'ampas tahu', 'daun labu siam', 'wortel', 'jeruk bali', 'jantung pisang']
+[2026-11-02 09:01:22] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:01:22] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Ayam goreng Kentucky,sayap' (Kalori: 297.0, Excluded: [])
+[2026-11-02 09:01:22] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:01:22] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:01:22] [DEBUG] [rag] Hit 2: Pedoman Klinis: 1. Satuan Sendok & Alat Makan Standar
+[2026-11-02 09:01:22] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2245, Safe Foods: 8, Alergen: ['Seafood', 'Santan']
+[2026-11-02 09:01:29] [INFO] [rag] ================================================================================
+[2026-11-02 09:01:29] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Dr. Predi, tolong beri ide camilan sore yang enak tapi asam urat saya tidak kambuh ya.' | User ID: '2'
+[2026-11-02 09:01:29] [DEBUG] [rag] Profil Pasien: Alergen: ['Susu', 'Kacang'] | Kondisi/Komorbid: ['Risiko: Rendah (Risiko Minimal)', 'Asam Urat']
+[2026-11-02 09:01:29] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['oatmeal', 'hofa/ubi hutan', 'telur ayam kampung', 'ampas tahu', 'daun labu siam', 'wortel', 'jeruk bali', 'jantung pisang']
+[2026-11-02 09:01:29] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:01:29] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 185, Safe Foods: 8, Alergen: ['Susu', 'Kacang']
+[2026-11-02 09:03:58] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:04:19] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:04:52] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:04:52] [INFO] [rag] ================================================================================
+[2026-11-02 09:04:52] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '1'
+[2026-11-02 09:04:52] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:04:53] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:04:53] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:04:53] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sayur Bening Bayam' (Kalori: 85.0, Excluded: [])
+[2026-11-02 09:04:53] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:04:53] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:04:53] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. J1: Jadwal Makan Teratur
+[2026-11-02 09:04:53] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2232, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:05:28] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:05:29] [INFO] [rag] ================================================================================
+[2026-11-02 09:05:29] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '1'
+[2026-11-02 09:05:29] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:05:29] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:05:29] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:05:29] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sayur Bening Bayam' (Kalori: 85.0, Excluded: [])
+[2026-11-02 09:05:29] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:05:29] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:05:29] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. J1: Jadwal Makan Teratur
+[2026-11-02 09:05:29] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2232, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:08:52] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:09:03] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:09:03] [INFO] [rag] ================================================================================
+[2026-11-02 09:09:03] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '1'
+[2026-11-02 09:09:03] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:09:03] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:09:03] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:09:03] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sayur Bening Bayam' (Kalori: 85.0, Excluded: [])
+[2026-11-02 09:09:03] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:09:03] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:09:03] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. J1: Jadwal Makan Teratur
+[2026-11-02 09:09:03] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2232, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:09:21] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:09:21] [INFO] [rag] ================================================================================
+[2026-11-02 09:09:21] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '1'
+[2026-11-02 09:09:21] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:09:21] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:09:21] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:09:21] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sayur Bening Bayam' (Kalori: 85.0, Excluded: [])
+[2026-11-02 09:09:21] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:09:21] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:09:21] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. J1: Jadwal Makan Teratur
+[2026-11-02 09:09:21] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2232, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:09:29] [INFO] [rag] ================================================================================
+[2026-11-02 09:09:29] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'resep dan cara buat Sayur Bening Bayam gimana?' | User ID: '1'
+[2026-11-02 09:09:29] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:09:29] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:09:29] [INFO] [rag] Specific Food Matched: bayam (Kalori: 16.0, Protein: 0.9)
+[2026-11-02 09:09:29] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Urap Sayur' (Kalori: 115.0, Excluded: ['Sayur Bening Bayam'])
+[2026-11-02 09:09:29] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:09:29] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:09:29] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. Satuan Potong & Butir Lauk
+[2026-11-02 09:09:29] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2220, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:09:36] [INFO] [rag] ================================================================================
+[2026-11-02 09:09:36] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Berapa protein pada dada ayam?' | User ID: '1'
+[2026-11-02 09:09:36] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:09:36] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:09:36] [INFO] [rag] Specific Food Matched: Telur ayam, dadar, masakan (Kalori: 110, Protein: 6.5)
+[2026-11-02 09:09:36] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 875, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:09:43] [INFO] [rag] ================================================================================
+[2026-11-02 09:09:43] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '2'
+[2026-11-02 09:09:43] [DEBUG] [rag] Profil Pasien: Alergen: ['Susu', 'Kacang'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Asam Urat']
+[2026-11-02 09:09:43] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['oatmeal', 'hofa/ubi hutan', 'ikan bader', 'telur ayam kampung', 'buncis', 'daun labu siam', 'daun jambu mete muda', 'jeruk bali']
+[2026-11-02 09:09:43] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:09:43] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sayur Bening Bayam' (Kalori: 85.0, Excluded: [])
+[2026-11-02 09:09:43] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:09:43] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:09:43] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. J1: Jadwal Makan Teratur
+[2026-11-02 09:09:43] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2231, Safe Foods: 8, Alergen: ['Susu', 'Kacang']
+[2026-11-02 09:11:38] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:11:38] [INFO] [rag] ================================================================================
+[2026-11-02 09:11:38] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '1'
+[2026-11-02 09:11:38] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:11:38] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:11:38] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:11:38] [ERROR] [rag] Exception pada chat_endpoint pipeline: cannot access local variable 'patient_name' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Kuliah\prediabeat_app\prediabeat_app\server_ai\app\api\routes.py", line 139, in chat_endpoint
+    dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(
+                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Kuliah\prediabeat_app\prediabeat_app\server_ai\app\core\fusion_retriever.py", line 139, in build_clinical_dossier
+    patient_id_seed = f"{getattr(user_context, 'userId', '')}_{patient_name}"
+                                                               ^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'patient_name' where it is not associated with a value
+[2026-11-02 09:11:38] [INFO] [rag] ================================================================================
+[2026-11-02 09:11:38] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'resep dan cara buat Sayur Bening Bayam gimana?' | User ID: '1'
+[2026-11-02 09:11:38] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:11:38] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:11:38] [INFO] [rag] Specific Food Matched: bayam (Kalori: 16.0, Protein: 0.9)
+[2026-11-02 09:11:38] [ERROR] [rag] Exception pada chat_endpoint pipeline: cannot access local variable 'patient_name' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Kuliah\prediabeat_app\prediabeat_app\server_ai\app\api\routes.py", line 139, in chat_endpoint
+    dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(
+                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Kuliah\prediabeat_app\prediabeat_app\server_ai\app\core\fusion_retriever.py", line 139, in build_clinical_dossier
+    patient_id_seed = f"{getattr(user_context, 'userId', '')}_{patient_name}"
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'patient_name' where it is not associated with a value
+[2026-11-02 09:11:38] [INFO] [rag] ================================================================================
+[2026-11-02 09:11:38] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Berapa protein pada dada ayam?' | User ID: '1'
+[2026-11-02 09:11:38] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:11:38] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:11:38] [INFO] [rag] Specific Food Matched: Telur ayam, dadar, masakan (Kalori: 110, Protein: 6.5)
+[2026-11-02 09:11:38] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 875, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:11:46] [INFO] [rag] ================================================================================
+[2026-11-02 09:11:46] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '2'
+[2026-11-02 09:11:46] [DEBUG] [rag] Profil Pasien: Alergen: ['Susu', 'Kacang'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Asam Urat']
+[2026-11-02 09:11:46] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['oatmeal', 'hofa/ubi hutan', 'ikan bader', 'telur ayam kampung', 'buncis', 'daun labu siam', 'daun jambu mete muda', 'jeruk bali']
+[2026-11-02 09:11:46] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:11:46] [ERROR] [rag] Exception pada chat_endpoint pipeline: cannot access local variable 'patient_name' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Kuliah\prediabeat_app\prediabeat_app\server_ai\app\api\routes.py", line 139, in chat_endpoint
+    dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(
+                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Kuliah\prediabeat_app\prediabeat_app\server_ai\app\core\fusion_retriever.py", line 139, in build_clinical_dossier
+    patient_id_seed = f"{getattr(user_context, 'userId', '')}_{patient_name}"
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'patient_name' where it is not associated with a value
+[2026-11-02 09:12:18] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:12:18] [INFO] [rag] ================================================================================
+[2026-11-02 09:12:18] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '1'
+[2026-11-02 09:12:18] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:12:18] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:12:18] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:12:18] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Soto Mie Bogor' (Kalori: 530.0, Excluded: [])
+[2026-11-02 09:12:18] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:12:18] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:12:18] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. J1: Jadwal Makan Teratur
+[2026-11-02 09:12:18] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2232, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:12:25] [INFO] [rag] ================================================================================
+[2026-11-02 09:12:25] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'resep dan cara buat Soto Mie Bogor gimana?' | User ID: '1'
+[2026-11-02 09:12:25] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:12:25] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:12:25] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:12:25] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Soto Mie Bogor' (Kalori: 530.0, Excluded: ['Soto Mie Bogor'])
+[2026-11-02 09:12:25] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:12:25] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:12:25] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. Satuan Potong & Butir Lauk
+[2026-11-02 09:12:25] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2220, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:12:33] [INFO] [rag] ================================================================================
+[2026-11-02 09:12:33] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Berapa protein pada dada ayam?' | User ID: '1'
+[2026-11-02 09:12:33] [DEBUG] [rag] Profil Pasien: Alergen: ['Santan', 'Seafood'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Hipertensi']
+[2026-11-02 09:12:33] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['jagung muda', 'oatmeal', 'ikan mas', 'ikan bader', 'daun oyong', 'buncis', 'jambu biji', 'kacang mete/biji jambu monyet']
+[2026-11-02 09:12:33] [INFO] [rag] Specific Food Matched: Telur ayam, dadar, masakan (Kalori: 110, Protein: 6.5)
+[2026-11-02 09:12:33] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 875, Safe Foods: 8, Alergen: ['Santan', 'Seafood']
+[2026-11-02 09:12:41] [INFO] [rag] ================================================================================
+[2026-11-02 09:12:41] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Lagi pengen makan yang berkuah & hangat' | User ID: '2'
+[2026-11-02 09:12:41] [DEBUG] [rag] Profil Pasien: Alergen: ['Susu', 'Kacang'] | Kondisi/Komorbid: ['Risiko: Prediabetes', 'Asam Urat']
+[2026-11-02 09:12:41] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['oatmeal', 'hofa/ubi hutan', 'ikan bader', 'telur ayam kampung', 'buncis', 'daun labu siam', 'daun jambu mete muda', 'jeruk bali']
+[2026-11-02 09:12:41] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:12:41] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Sup Tahu Telur (Egg Drop Soup)' (Kalori: 150.0, Excluded: [])
+[2026-11-02 09:12:41] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:12:41] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:12:41] [DEBUG] [rag] Hit 2: Pedoman Klinis: 2. J1: Jadwal Makan Teratur
+[2026-11-02 09:12:41] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2231, Safe Foods: 8, Alergen: ['Susu', 'Kacang']
+[2026-11-02 09:13:02] [INFO] [rag] === HYBRID GRAPHRAG LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/rag.log) ===
+[2026-11-02 09:13:02] [INFO] [rag] ================================================================================
+[2026-11-02 09:13:02] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Dok, saya ingin makan siang yang lezat tapi aman untuk tekanan darah saya. Menu apa yang disarankan?' | User ID: '1'
+[2026-11-02 09:13:02] [DEBUG] [rag] Profil Pasien: Alergen: ['Seafood', 'Santan'] | Kondisi/Komorbid: ['Risiko: Prediabetes (Impaired Fasting Glucose / IFG)', 'Hipertensi Derajat 1']
+[2026-11-02 09:13:03] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['oatmeal', 'hofa/ubi hutan', 'telur ayam ras', 'ampas tahu', 'daun labu siam', 'wortel', 'jeruk bali', 'jantung pisang']
+[2026-11-02 09:13:03] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:13:03] [INFO] [rag] RAG Resep Dinamis Terpilih: 'Ayam goreng Kentucky,sayap' (Kalori: 297.0, Excluded: [])
+[2026-11-02 09:13:03] [INFO] [rag] Semantic Search Hits (ChromaDB/Vector): 2 dokumen panduan PERKENI/Kemenkes ditemukan.
+[2026-11-02 09:13:03] [DEBUG] [rag] Hit 1: Pedoman Klinis: Aturan Pantangan Klinis Makanan Prediabetes & Komorbiditas
+[2026-11-02 09:13:03] [DEBUG] [rag] Hit 2: Pedoman Klinis: 1. Satuan Sendok & Alat Makan Standar
+[2026-11-02 09:13:03] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 2245, Safe Foods: 8, Alergen: ['Seafood', 'Santan']
+[2026-11-02 09:13:10] [INFO] [rag] ================================================================================
+[2026-11-02 09:13:10] [INFO] [rag] MEMULAI HYBRID GRAPHRAG RETRIEVAL: Query: 'Dr. Predi, tolong beri ide camilan sore yang enak tapi asam urat saya tidak kambuh ya.' | User ID: '2'
+[2026-11-02 09:13:10] [DEBUG] [rag] Profil Pasien: Alergen: ['Susu', 'Kacang'] | Kondisi/Komorbid: ['Risiko: Rendah (Risiko Minimal)', 'Asam Urat']
+[2026-11-02 09:13:10] [DEBUG] [rag] Safe Foods Graf (Terverifikasi Guardrail): 8 kandidat -> ['oatmeal', 'hofa/ubi hutan', 'telur ayam kampung', 'ampas tahu', 'daun labu siam', 'wortel', 'jeruk bali', 'jantung pisang']
+[2026-11-02 09:13:10] [DEBUG] [rag] No specific single food matched for query.
+[2026-11-02 09:13:10] [INFO] [rag] SELESAI MERAKIT DOSSIER KLINIS: Total karakter: 185, Safe Foods: 8, Alergen: ['Susu', 'Kacang']

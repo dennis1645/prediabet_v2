@@ -152,6 +152,7 @@ async def chat_endpoint(request: ChatRequest):
             user_query=request.message,
             user_context=user_context,
             safe_food_names=safe_food_names,
+            specific_food=specific_food,
             max_tokens=settings.VLLM_MAX_TOKENS,
             temperature=settings.VLLM_TEMPERATURE
         )
@@ -223,6 +224,7 @@ async def chat_stream_endpoint(request: ChatRequest):
             user_query=request.message,
             user_context=user_context,
             safe_food_names=safe_food_names,
+            specific_food=specific_food,
             max_tokens=settings.VLLM_MAX_TOKENS,
             temperature=settings.VLLM_TEMPERATURE
         ):

@@ -1,5 +1,7 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from app.config import settings
 from app.api.routes import router
 
@@ -17,6 +19,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Static Files Mounting untuk Food Images dari Knowledge Base Baru
+food_images_dir = os.path.join(settings.KNOWLEDGE_BASE_DIR, "food_images")
+if os.path.exists(food_images_dir):
+    app.mount("/food-images", StaticFiles(directory=food_images_dir), name="food-images")
 
 app.include_router(router)
 

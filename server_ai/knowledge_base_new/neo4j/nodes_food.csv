@@ -1,0 +1,2249 @@
+id:ID(FoodItem),nama_kanonik,nama_asli,energi_kal:float,protein_g:float,lemak_g:float,karbohidrat_g:float,serat_g:float,natrium_mg:float,kalium_mg:float,bdd_persen:int,glikemik_risk
+F1,beras giling,"beras giling, mentah",357.0,8.4,1.7,77.1,0.2,27.0,71.0,100,high
+F2,beras giling var pelita,"beras giling var pelita, mentah",369.0,9.5,1.4,77.1,0.4,34.0,0.0,100,high
+F3,beras giling var rojolele,"beras giling var rojolele, mentah",357.0,8.4,1.7,77.1,0.2,34.0,112.9,100,high
+F4,beras hitam,"beras hitam, mentah",351.0,8.0,1.3,76.9,20.1,15.0,105.0,100,low
+F5,beras jagung kuning,"beras jagung kuning, kering, mentah",358.0,5.5,0.1,82.7,10.0,1.0,80.0,100,high
+F6,beras jagung putih,"beras jagung putih, kering, mentah",307.0,4.8,0.1,71.8,10.0,1.0,70.0,100,high
+F7,beras ketan hitam tumbuk,"beras ketan hitam tumbuk, mentah",360.0,8.0,2.3,74.5,1.0,11.0,288.0,100,high
+F8,beras ketan putih tumbuk,"beras ketan putih tumbuk, mentah",361.0,7.4,0.8,78.4,0.4,3.0,282.0,100,high
+F9,beras ladang,"beras ladang, mentah",376.0,7.5,3.8,78.0,5.9,10.0,70.0,100,high
+F10,beras menir,"beras menir, mentah",362.0,7.7,4.4,73.0,0.2,90.0,201.0,100,high
+F11,beras parboiled,beras parboiled,353.0,6.8,0.6,80.0,0.5,2.0,46.0,100,high
+F12,beras tumbuk,"beras tumbuk, mentah",354.0,7.8,0.4,79.9,3.8,5.0,85.0,100,high
+F13,beras tumbuk merah,"beras tumbuk merah, mentah",352.0,7.3,0.9,76.2,0.8,10.0,202.0,100,high
+F14,cantel,"cantel, mentah",366.0,11.0,3.3,73.0,1.2,7.0,249.0,100,high
+F15,jagung muda,"jagung muda, kuning, mentah",147.0,5.1,0.7,31.5,1.3,5.0,33.6,100,moderate
+F16,jagung kuning pipil,"jagung kuning pipil, kering, mentah",366.0,9.8,7.3,69.1,2.2,5.0,79.4,100,high
+F17,jagung pipil var. harapan,"jagung pipil var. harapan, kering",367.0,6.2,5.1,76.2,2.6,1.0,79.6,100,high
+F18,jagung pipil var. metro,"jagung pipil var. metro, kering",368.0,5.5,4.6,78.0,2.9,1.0,80.2,100,high
+F19,jali,"jali, mentah",324.0,11.0,4.0,61.0,3.1,24.0,,90,moderate
+F20,jawawut,"jawawut, mentah",364.0,9.7,3.5,73.4,8.2,7.0,255.1,100,high
+F21,jampang huma,"jampang huma, mentah",350.0,6.2,1.4,78.2,1.7,53.0,396.7,100,high
+F22,nasi,nasi,180.0,3.0,0.3,39.8,0.2,1.0,38.0,100,moderate
+F23,nasi tim,nasi tim,120.0,2.4,0.4,26.0,0.5,0.0,23.9,100,moderate
+F24,tapai beras,tapai beras,99.0,1.7,0.3,22.4,0.0,26.0,2.0,100,moderate
+F25,tepung beras,"tepung beras, mentah",353.0,7.0,0.5,80.0,2.4,5.0,241.0,100,high
+F26,nasi beras merah,nasi beras merah,149.0,2.8,0.4,32.5,0.3,5.0,91.4,100,moderate
+F27,bihun,"bihun, mentah",348.0,4.7,0.1,82.1,1.2,12.0,5.0,100,high
+F28,bihun goreng instan,bihun goreng instan,381.0,6.1,3.9,80.3,,928.0,,100,high
+F29,bihun jagung,"bihun jagung, mentah",354.0,0.5,0.3,87.4,3.0,49.0,1.4,100,high
+F30,nasi jagung,nasi jagung,357.0,8.8,0.5,79.5,6.2,2.0,30.4,100,high
+F31,jagung kuning muda,"jagung kuning muda, rebus",142.0,5.0,0.7,30.3,0.8,5.0,24.3,100,moderate
+F32,jagung kuning,"jagung kuning, tepung",355.0,9.2,3.9,73.7,7.2,11.0,24.4,100,high
+F33,jagung kuning pipil,"jagung kuning pipil, rebus",154.0,3.8,3.5,28.4,0.7,5.0,56.4,100,moderate
+F34,tepung jagung putih,tepung jagung putih,355.0,9.2,3.9,73.7,7.2,11.0,24.4,100,high
+F35,ketupat ketan,ketupat ketan,212.0,4.0,4.6,38.6,0.2,,,100,moderate
+F36,ketan hitam,"ketan hitam, matang",181.0,4.0,1.2,37.3,0.3,9.0,18.4,100,moderate
+F37,tapai ketan hitam,tapai ketan hitam,166.0,3.8,1.0,34.4,0.3,5.0,12.0,100,moderate
+F38,ketan putih,"ketan putih, matang",163.0,3.0,0.4,35.7,0.2,8.0,16.8,100,moderate
+F39,tapai ketan putih,tapai ketan putih,172.0,3.0,0.5,37.5,0.6,1.0,,100,moderate
+F40,maizena,"maizena, tepung",341.0,0.3,0.0,85.0,7.0,6.0,9.0,100,high
+F41,makaroni,"makaroni, mentah",353.0,8.7,0.4,78.7,4.9,5.0,0.0,100,high
+F42,mi basah,mi basah,88.0,0.6,3.3,14.0,0.1,63.0,13.5,100,moderate
+F43,mi kering,mi kering,339.0,10.0,1.7,6.3,0.4,760.0,83.0,100,moderate
+F44,misoa,misoa,345.0,8.5,2.2,78.0,0.5,3064.0,44.0,100,high
+F45,roti putih,roti putih,248.0,8.0,1.2,50.0,9.1,530.0,91.0,100,moderate
+F46,tepung terigu,tepung terigu,333.0,9.0,1.0,77.2,0.3,2.0,0.0,100,high
+F47,amparan tatak,amparan tatak,191.0,1.3,5.5,34.0,,,,100,moderate
+F48,apang kukus,"apang kukus, kue",202.0,3.0,0.3,46.7,,,,100,moderate
+F49,apem,"apem, kue",148.0,2.0,0.5,33.9,,,,100,moderate
+F50,biskuit,biskuit,458.0,6.9,14.4,75.1,2.1,241.0,20.3,100,high
+F51,bakpia,"bakpia, kue",272.0,8.7,6.7,44.1,0.9,,,100,moderate
+F52,bakwan,bakwan,280.0,8.2,10.2,39.0,3.4,,,100,moderate
+F53,bantal,bantal,190.0,3.3,0.3,43.5,3.4,164.0,84.0,100,moderate
+F54,baruasa,baruasa,417.0,6.5,8.2,79.3,,,,100,high
+F55,batar daan,batar daan,107.0,2.2,2.2,19.6,,200.0,90.0,100,moderate
+F56,bika ambon,bika ambon,199.0,2.1,1.5,44.4,0.3,,,100,moderate
+F57,bingka,bingka,273.0,5.3,10.6,39.1,,,,100,moderate
+F58,bobengka,bobengka,225.0,5.3,2.6,45.2,,,,100,moderate
+F59,bolu peca,bolu peca,197.0,3.3,4.6,35.6,,0.0,0.0,100,moderate
+F60,brem,brem,249.0,3.4,0.4,58.0,0.0,,,100,high
+F61,bubur tinotuan (manado),bubur tinotuan (manado),156.0,2.3,0.2,15.6,8.2,486.0,164.0,100,low
+F62,cake tape,cake tape,323.0,4.9,11.5,50.1,1.4,,,100,high
+F63,cangkuning,cangkuning,204.0,2.8,7.5,31.4,,,,100,moderate
+F64,dodol bali,dodol bali,298.0,3.7,2.1,65.9,0.4,,,100,high
+F65,dodol galamai,dodol galamai,348.0,0.4,3.8,76.1,0.5,38.0,76.0,100,high
+F66,dodol kedondong,dodol kedondong,331.0,1.9,7.6,63.8,1.0,,,100,high
+F67,dodol manado,dodol manado,373.0,4.3,16.5,51.9,0.4,35.0,72.0,100,high
+F68,emping beras,emping beras,403.0,10.6,2.2,71.7,0.2,1.0,113.0,100,high
+F69,gemblong,gemblong,274.0,1.7,5.4,55.5,2.2,,,100,moderate
+F70,gendar goreng,gendar goreng,407.0,6.4,28.2,32.0,0.1,,,100,moderate
+F71,intip goreng,intip goreng,474.0,7.6,21.6,62.3,1.2,0.0,38.0,100,high
+F72,jagung gerontol,jagung gerontol,156.0,2.7,1.3,33.3,1.0,,,100,moderate
+F73,jagung titi,jagung titi,374.0,9.4,2.2,79.1,0.8,,,100,high
+F74,japilus,japilus,500.0,1.2,25.1,67.3,0.4,,,100,high
+F75,kakicak,kakicak,296.0,3.4,15.1,36.7,,,,100,moderate
+F76,kambose,kambose,164.0,3.0,2.4,32.6,4.3,0.0,32.0,100,moderate
+F77,kapusa,kapusa,158.0,4.4,3.2,27.8,5.3,104.0,149.0,100,moderate
+F78,keddo bodong,keddo bodong,290.0,4.6,5.7,55.2,,,,100,high
+F79,kelepon,"kelepon, kue",215.0,3.7,3.7,41.8,1.0,,,100,moderate
+F80,kereput,kereput,580.0,4.8,39.6,51.1,,,,100,high
+F81,ketoprak,ketoprak,153.0,7.9,7.7,13.0,2.9,,,100,low
+F82,ketupat kandangan,ketupat kandangan,109.0,2.2,5.2,13.4,,,,100,moderate
+F83,koya,koya,366.0,4.2,4.3,77.5,0.8,,,100,high
+F84,koya mirasa,koya mirasa,370.0,8.0,1.0,82.2,0.4,,,100,high
+F85,koyabu,koyabu,241.0,3.4,4.3,47.2,,,,100,moderate
+F86,kue ali,kue ali,440.0,3.8,18.5,64.5,0.3,,,100,high
+F87,kue bangen,kue bangen,442.0,3.3,14.7,74.2,,,,100,high
+F88,kue gelang,kue gelang,448.0,5.8,16.1,70.0,,,,100,high
+F89,kue jahe,kue jahe,425.0,1.6,8.8,84.6,1.2,,,100,high
+F90,kue kelapa,kue kelapa,591.0,5.6,42.1,47.5,,33.0,443.0,100,moderate
+F91,kue koa,kue koa,340.0,4.8,0.4,79.3,,,,100,high
+F92,kue ku temu,kue ku temu,214.0,3.5,0.2,49.6,,,,100,moderate
+F93,kue lumpur,kue lumpur,291.0,3.6,11.1,44.1,,,,100,moderate
+F94,kue pelita,kue pelita,141.0,5.3,5.5,17.6,,,,100,moderate
+F95,kue putu cangkir,kue putu cangkir,304.0,5.3,7.0,54.9,0.9,,,100,high
+F96,kue sus,kue sus,221.0,7.5,10.2,24.8,,,,100,moderate
+F97,kue timphan,kue timphan,247.0,2.9,4.2,49.5,,95.0,56.0,100,moderate
+F98,laksa/putu mayang,laksa/putu mayang,121.0,1.7,3.4,21.1,,,,100,moderate
+F99,lapis legit,lapis legit,389.0,6.6,15.7,55.5,0.5,,,100,high
+F100,lupis ketan,lupis ketan,164.0,1.8,2.1,34.5,0.7,,,100,moderate
+F101,manan samin,manan samin,379.0,3.4,18.1,50.6,,,,100,high
+F102,martabak india,martabak india,153.0,4.5,4.2,24.3,,240.0,112.0,100,moderate
+F103,martabak mesir,martabak mesir,278.0,5.1,8.6,45.0,,193.0,123.0,100,moderate
+F104,masekat,masekat,369.0,2.1,7.0,74.1,4.0,141.0,12.0,100,high
+F105,mie aceh rebus,mie aceh rebus,113.0,3.0,3.2,18.1,,191.0,36.0,100,moderate
+F106,mie ayam,mie ayam,102.0,6.2,3.9,10.5,,279.0,,100,moderate
+F107,mie bakso,mie bakso,114.0,5.3,3.0,16.4,0.1,760.0,,100,moderate
+F108,mie celon,mie celon,102.0,3.0,2.1,17.8,,451.0,112.0,100,moderate
+F109,mie pangsit basah,mie pangsit basah,105.0,5.9,4.9,9.4,,530.0,,100,moderate
+F110,nasi gemuk,nasi gemuk,192.0,3.8,8.8,24.4,0.7,355.0,63.0,100,moderate
+F111,nasi gurih,nasi gurih,190.0,4.7,7.5,26.0,0.7,296.0,52.0,100,moderate
+F112,nasi minyak,nasi minyak,207.0,3.5,5.0,37.1,0.8,74.0,174.0,100,moderate
+F113,nasi rames,nasi rames,155.0,10.3,4.2,19.1,,265.0,,100,moderate
+F114,nopia spesial,nopia spesial,387.0,5.3,7.6,74.3,0.3,,,100,high
+F115,onde-onde,onde-onde,336.0,4.0,9.8,57.9,,,,100,high
+F116,padamaran,padamaran,171.0,3.9,8.9,18.8,,,,100,moderate
+F117,pastel,pastel,307.0,4.5,13.3,42.4,,,,100,moderate
+F118,pulut,pulut,216.0,2.6,3.1,44.4,,100.0,22.0,100,moderate
+F119,pundut nasi,pundut nasi,104.0,1.9,4.1,15.1,0.4,74.0,174.0,100,moderate
+F120,putri hijau,putri hijau,189.0,5.4,2.1,37.2,,,,100,moderate
+F121,putri selat,putri selat,163.0,2.2,6.5,23.8,,6.0,68.0,100,moderate
+F122,putu sopa,putu sopa,215.0,3.3,4.1,41.1,,,,100,moderate
+F123,renggi goreng,renggi goreng,471.0,4.7,21.8,64.1,6.4,126.0,29.0,100,moderate
+F124,roti boong,roti boong,341.0,5.5,16.2,43.3,,161.0,41.0,100,moderate
+F125,roti warna sawo matang,roti warna sawo matang,249.0,7.9,1.5,49.7,,500.0,91.0,100,moderate
+F126,sarimuka,sarimuka,166.0,2.3,2.8,32.9,,3.0,34.0,100,moderate
+F127,spaghetti,spaghetti,139.0,7.4,2.1,22.6,,,,100,moderate
+F128,srikaya ketan,srikaya ketan,265.0,2.7,6.4,49.1,,,,100,moderate
+F129,sunduk lawang,sunduk lawang,181.0,1.9,1.3,32.4,,,,100,moderate
+F130,suwir-suwir,suwir-suwir,347.0,0.5,0.9,84.2,0.8,,,100,high
+F131,tipa-tipa,tipa-tipa,355.0,6.2,1.2,79.8,1.3,,,100,high
+F132,wajit camilan,wajit camilan,303.0,6.3,2.7,63.3,6.9,,,100,moderate
+F133,widaran,widaran,424.0,1.3,10.7,80.7,0.2,,,100,high
+F134,wingko babat,wingko babat,355.0,3.2,15.1,51.4,2.4,,,100,moderate
+F135,yangko,yangko,254.0,3.0,1.1,58.1,0.8,,,100,high
+F136,arrowroot,"arrowroot, segar",102.0,1.0,0.2,24.1,1.7,36.0,626.6,100,moderate
+F137,batatas gembili,"batatas gembili, segar",76.0,1.1,0.9,16.0,4.2,10.0,200.0,85,low
+F138,batatas kelapa,"batatas kelapa, ubi, segar",89.0,1.1,0.1,21.0,4.0,20.0,340.0,85,moderate
+F139,belitung,"belitung, talas, segar",145.0,1.2,0.4,34.2,1.5,6.0,536.1,85,moderate
+F140,bengkuang,"bengkuang, segar",59.0,1.4,0.2,12.8,1.0,2.0,244.3,84,moderate
+F141,bentul (komba),"bentul (komba),  talas, segar",98.0,1.6,0.7,20.9,0.7,,195.5,86,moderate
+F142,gadeng/gadung,"gadeng/gadung, kering",322.0,2.4,0.6,76.6,,5.0,2.0,100,high
+F143,gadung,"gadung, ubi, segar",100.0,0.9,0.3,23.5,2.1,8.0,687.2,85,moderate
+F144,ganyong,"ganyong, segar",77.0,0.6,0.2,18.4,0.8,,,65,moderate
+F145,gembili,"gembili, ubi, segar",131.0,1.1,0.2,31.3,1.1,10.0,200.0,85,moderate
+F146,hofa/ubi hutan,"hofa/ubi hutan, segar",127.0,1.2,0.5,29.5,3.4,3.0,4.0,85,moderate
+F147,kaburan,"kaburan, ubi, segar",133.0,1.0,0.2,32.2,0.7,10.0,899.2,81,moderate
+F148,kentang,"kentang, segar",62.0,2.1,0.2,13.5,0.5,7.0,396.0,85,moderate
+F149,kentang hitam,"kentang hitam, segar",142.0,0.9,0.4,33.7,5.4,22.0,890.3,75,moderate
+F150,keribang,"keribang, ubi, segar",137.0,1.3,1.1,29.8,0.6,10.0,885.8,83,moderate
+F151,ketela pohon/ singkong,"ketela pohon/ singkong, segar",154.0,1.0,0.3,36.8,0.9,2.0,394.0,85,moderate
+F152,lepok/ubi rumput,lepok/ubi rumput,181.0,2.8,1.2,39.8,10.7,116.0,306.0,85,low
+F153,sagu aren,"sagu aren, kering",355.0,0.6,1.1,85.6,0.3,2.0,200.0,100,high
+F154,sagu aren,"sagu aren, segar",231.0,0.6,0.2,56.6,3.2,7.0,0.0,100,moderate
+F155,sagu kasbi segar,sagu kasbi segar,230.0,0.6,0.2,56.5,3.0,100.0,410.0,100,moderate
+F156,sagu lempeng,sagu lempeng,347.0,0.9,0.3,85.2,4.7,11.0,0.0,100,high
+F157,sagu singkong,"sagu singkong, kering",362.0,0.5,0.3,86.9,,,,100,high
+F158,sente,"sente, talas, segar",353.0,0.7,0.2,84.7,6.6,30.0,694.6,86,high
+F159,suweg,"suweg, talas, segar",74.0,1.4,0.1,17.2,1.4,7.0,400.0,86,moderate
+F160,talas bogor,"talas bogor, segar",108.0,1.4,0.4,25.0,0.9,10.0,448.0,85,moderate
+F161,talas pontianak,"talas pontianak, segar",163.0,2.3,0.5,36.4,0.7,14.0,323.1,83,moderate
+F162,talas viqueque,"talas viqueque, segar",115.0,1.8,0.5,25.9,8.6,1.0,70.0,85,low
+F163,ubi jalar,"ubi jalar, kuning, segar",119.0,0.5,0.4,25.1,4.2,3.0,1.0,85,moderate
+F164,ubi jalar manis,"ubi jalar manis, segar",83.0,1.5,0.2,18.8,0.6,52.0,320.7,85,moderate
+F165,ubi jalar merah,"ubi jalar merah, segar",151.0,1.6,0.3,35.4,0.7,92.0,565.6,86,moderate
+F166,ubi jalar putih,"ubi jalar putih, segar",88.0,0.4,0.4,20.6,4.0,2.0,4.0,86,moderate
+F167,ubi jalar tinta/ kemayung,ubi jalar tinta/ kemayung,108.0,0.5,0.4,25.6,4.2,1.0,1.0,85,moderate
+F168,umbi uwi,"umbi uwi, segar",120.0,2.8,0.5,82.3,2.6,12.0,412.0,86,high
+F169,batatas kelapa,"batatas kelapa, ubi, bakar",110.0,1.4,1.1,23.4,4.5,12.0,230.0,85,moderate
+F170,batatas kelapa,"batatas kelapa, ubi, kukus",92.0,1.2,0.3,21.0,4.1,10.0,209.0,100,moderate
+F171,batatas tali,"batatas tali, ubi, rebus",182.0,2.4,0.4,42.2,9.2,20.0,402.0,100,low
+F172,belitung,"belitung, talas, kukus",145.0,1.2,0.4,34.2,1.0,7.0,552.6,100,moderate
+F173,bentul,"bentul, talas, kukus",71.0,2.3,0.3,15.4,0.5,,201.0,100,moderate
+F174,gadung,"gadung, ubi, kukus",88.0,0.6,0.3,20.9,0.9,6.0,584.0,100,moderate
+F175,ganyong,"ganyong, rebus",100.0,0.8,0.2,23.8,0.9,,,100,moderate
+F176,ketela pohon/singkong kukus,ketela pohon/singkong kukus,153.0,1.2,0.3,36.4,1.3,2.0,345.3,100,moderate
+F177,suweg,"suweg, talas, kukus",93.0,1.5,0.1,21.9,0.9,6.0,350.3,100,moderate
+F178,talas bogor,"talas bogor, kukus",120.0,1.5,0.3,28.2,0.7,11.0,498.0,100,moderate
+F179,ubi jalar,"ubi jalar, kuning, kukus",100.0,0.7,0.3,23.8,1.0,3.0,0.8,100,moderate
+F180,ubi jalar tinta/ kemayung kukus,ubi jalar tinta/ kemayung kukus,165.0,0.9,0.2,39.8,1.1,1.0,0.9,100,moderate
+F181,bagea kelapa asin,bagea kelapa asin,450.0,3.2,13.9,78.1,,74.0,0.0,100,high
+F182,bagea kelapa manis,bagea kelapa manis,452.0,1.3,13.8,80.6,,75.0,0.0,100,high
+F183,bagea kenari asin,bagea kenari asin,529.0,3.2,29.1,63.6,,74.0,0.0,100,high
+F184,bagea kenari manis,bagea kenari manis,523.0,3.2,28.2,64.2,,74.0,0.0,100,high
+F185,bagea kw 1,bagea kw 1,416.0,6.5,9.4,76.3,0.4,,,100,high
+F186,bagea kw 2,bagea kw 2,382.0,0.3,3.5,87.2,0.9,,,100,high
+F187,beras cerdas,beras cerdas,350.0,2.7,1.1,82.3,6.2,358.0,568.0,100,high
+F188,beras ganyong,beras ganyong,364.0,3.4,0.7,86.3,4.7,4.0,72.2,100,high
+F189,beras siger,beras siger,344.0,1.1,0.2,28.3,5.6,106.0,77.9,100,moderate
+F190,biji nangka/biji salak,biji nangka/biji salak,262.0,2.3,5.4,51.1,8.0,10.0,2.0,100,moderate
+F191,bubur sagu,bubur sagu,167.0,0.2,4.0,33.0,,7.0,0.0,100,moderate
+F192,cassavastick,cassavastick,460.0,0.8,18.7,71.8,1.6,,,100,high
+F193,ceriping getuk singkong,ceriping getuk singkong,462.0,1.2,20.7,67.7,0.6,,,100,high
+F194,gatot,gatot,347.0,1.3,0.7,83.8,5.8,28.0,242.0,100,high
+F195,geblek,geblek,195.0,0.4,1.7,44.4,3.6,353.0,125.0,100,moderate
+F196,getuk goreng,getuk goreng,360.0,1.3,6.4,74.3,0.8,,,100,high
+F197,getuk singkong,getuk singkong,204.0,0.5,1.4,47.4,0.8,,,100,moderate
+F198,gurandil,gurandil,218.0,0.5,2.5,48.5,3.1,,,100,moderate
+F199,kabuto,kabuto,250.0,2.6,2.5,35.4,1.8,2.0,218.0,100,moderate
+F200,kapurung,kapurung,41.0,2.0,0.3,7.8,2.0,185.0,566.0,100,low
+F201,kecimpring singkong goreng,kecimpring singkong goreng,464.0,1.2,18.6,73.0,1.3,,,100,high
+F202,keremes,keremes,475.0,1.6,25.2,64.4,2.1,,,100,moderate
+F203,keripik gadung,keripik gadung,446.0,2.8,14.5,76.0,1.7,,,100,high
+F204,keripik kentang,keripik kentang,448.0,2.7,18.8,67.1,3.8,712.0,406.0,100,high
+F205,keripik singkong,keripik singkong,478.0,0.9,20.7,72.0,2.0,,,100,high
+F206,keripik singkong berbumbu,keripik singkong berbumbu,481.0,2.2,19.7,73.6,1.6,,,100,high
+F207,keripik ubi,keripik ubi,486.0,0.2,23.9,67.6,14.3,52.0,2.0,100,low
+F208,kerupuk cumi goreng,kerupuk cumi goreng,444.0,6.9,14.6,71.3,5.0,837.0,191.0,100,high
+F209,kerupuk kemplang (ikan) mentah,kerupuk kemplang  (ikan) mentah,325.0,1.8,0.4,78.5,4.5,1123.0,273.0,100,high
+F210,kerupuk kemplang goreng,kerupuk kemplang goreng,504.0,5.6,28.1,57.1,0.3,,,100,high
+F211,kerupuk kemplang panggang,kerupuk kemplang panggang,356.0,9.7,1.1,76.9,1.0,,,100,high
+F212,kerupuk mie kuning goreng,kerupuk mie kuning goreng,476.0,0.1,21.1,71.3,4.2,,109.0,100,high
+F213,kerupuk udang goreng,kerupuk udang goreng,477.0,4.7,20.5,68.5,5.0,449.0,109.0,100,high
+F214,kue bangket,kue bangket,338.0,1.5,1.2,80.3,,67.0,0.0,100,high
+F215,kue putu singkong,kue putu singkong,217.0,1.2,0.5,53.2,2.4,3.0,305.0,100,moderate
+F216,lanting getuk,lanting getuk,422.0,0.9,10.8,80.4,1.4,,,100,high
+F217,mi golosor,mi golosor,71.0,0.2,0.8,15.9,0.1,,,100,moderate
+F218,mie bendo,mie bendo,353.0,0.3,0.0,88.0,2.4,9.0,49.2,100,high
+F219,mie sagu,mie sagu,190.0,0.2,0.4,46.5,1.4,10.0,2.6,100,moderate
+F220,ongol-ongol sagu,ongol-ongol sagu,111.0,0.3,2.7,21.2,0.3,,,100,moderate
+F221,oyek,oyek,351.0,0.9,0.9,84.9,4.3,5.0,229.0,100,high
+F222,papeda,papeda,61.0,0.2,0.1,14.9,0.5,4.0,20.0,100,moderate
+F223,rasbi (beras ubi),rasbi (beras ubi),394.0,2.2,8.8,76.6,6.8,165.0,388.0,100,high
+F224,rasi (beras singkong),rasi (beras singkong),350.0,0.9,0.4,85.7,14.4,8.0,14.0,100,high
+F225,sagu forno,sagu forno,291.0,0.5,4.0,63.4,,40.0,50.0,100,high
+F226,sagu lemak (kue sagon),sagu lemak (kue sagon),452.0,2.8,14.8,76.8,1.1,182.0,52.7,100,high
+F227,sagu manis,sagu manis,287.0,0.5,3.9,62.4,,34.0,42.0,100,high
+F228,sagu rendang,sagu rendang,364.0,0.1,0.2,90.5,1.9,42.0,15.1,100,high
+F229,sagu sinole,sagu sinole,354.0,0.8,8.3,68.9,,30.0,11.0,100,high
+F230,serimping talas kebumen,serimping talas kebumen,478.0,2.5,21.2,69.2,1.7,,,100,high
+F231,tapai singkong,tapai singkong,169.0,1.4,0.3,40.2,2.0,,,100,moderate
+F232,tepung arrowroot,tepung arrowroot,355.0,0.7,0.2,85.2,0.4,2.0,10.7,100,high
+F233,tepung ganyong,tepung ganyong,353.0,0.8,1.7,83.6,0.7,3.0,63.5,100,high
+F234,tepung gaplek,tepung gaplek,345.0,2.4,0.4,83.1,6.7,6.0,55.0,100,high
+F235,tepung kentang,"tepung kentang, kering",347.0,0.3,0.1,85.6,0.4,51.0,156.3,100,high
+F236,tepung mocaf,tepung mocaf,350.0,1.2,0.6,85.0,6.0,8.0,403.0,100,high
+F237,tepung sente,tepung sente,326.0,4.0,0.4,76.7,8.5,14.0,1602.0,100,high
+F238,tepung singkong/ tapioka,tepung singkong/ tapioka,363.0,1.1,0.5,88.2,0.9,1.0,7.1,100,high
+F239,tepung tales beneng,tepung tales beneng,332.0,5.7,0.6,76.1,12.2,7.0,1404.0,100,high
+F240,tepung ubi ungu,tepung ubi ungu,354.0,2.8,0.6,84.4,12.9,42.0,940.0,100,high
+F241,tiwul,tiwul,353.0,2.4,1.1,83.4,6.5,5.0,670.0,100,high
+F242,tiwul instan,tiwul instan,395.0,3.2,8.5,76.5,4.2,377.0,469.0,100,high
+F243,ubi cilembu,ubi cilembu,186.0,1.9,0.2,44.3,3.4,1.0,61.9,90,moderate
+F244,uli batatas,uli batatas,150.0,1.1,4.0,27.4,,6.0,112.0,100,moderate
+F245,kacang arab,"kacang arab, kering",330.0,23.8,1.4,60.2,17.4,24.0,874.3,100,low
+F246,kacang babi,"kacang babi, kering",341.0,30.4,3.2,51.3,4.5,13.0,1768.0,80,moderate
+F247,kacang belimbing (kecipir),"kacang belimbing (kecipir), kering",400.0,34.4,16.9,34.1,10.7,37.0,955.0,100,low
+F248,kacang beracun,"kacang beracun, segar",118.0,4.4,1.5,21.6,,10.0,40.0,100,moderate
+F249,kacang bogor,"kacang bogor, kering",370.0,16.0,6.0,65.0,26.3,44.0,868.8,100,low
+F250,kacang bogor,"kacang bogor, segar",165.0,7.7,3.1,27.4,2.5,6.0,537.0,100,moderate
+F251,kacang endel,"kacang endel, biji, kering",331.0,25.0,1.0,58.0,23.6,12.0,1322.4,95,low
+F252,kacang ercis,"kacang ercis, segar",129.0,12.4,0.7,18.3,28.6,4.0,310.0,45,low
+F253,kacang galing,"kacang galing, segar",336.0,23.1,1.7,59.5,,,,95,high
+F254,kacang gude,"kacang gude, biji, kering",316.0,20.7,1.0,58.0,4.6,16.0,1306.2,100,moderate
+F255,kacang gude,"kacang gude, biji, segar",114.0,7.0,0.6,20.8,4.4,4.0,480.5,100,low
+F256,kacang hijau var. bakti,"kacang hijau var. bakti, kering",350.0,17.1,1.8,70.7,5.7,46.0,893.9,100,high
+F257,kacang hijau var. siwalik,"kacang hijau var. siwalik, kering",339.0,20.8,2.1,64.6,7.4,45.0,880.4,100,moderate
+F258,kacang hijau,"kacang hijau, kering",323.0,22.9,1.5,56.8,7.5,42.0,815.7,100,moderate
+F259,kacang hitam,"kacang hitam, kering",346.0,16.6,1.7,66.1,22.8,3.0,0.0,100,low
+F260,kacang kapri,"kacang kapri, segar",98.0,6.7,0.4,17.7,6.2,6.0,296.6,45,low
+F261,kacang kedelai,"kacang kedelai, kering",381.0,40.4,16.7,24.9,3.2,210.0,713.4,100,moderate
+F262,kacang kedelai,"kacang kedelai, segar",286.0,30.2,15.6,30.1,2.9,28.0,870.9,100,moderate
+F263,kacang kincai,"kacang kincai, kering",444.0,19.9,16.0,55.0,,,,100,high
+F264,kacang komak,"kacang komak, segar",327.0,16.4,4.3,55.8,0.5,22.0,1137.0,45,high
+F265,kacang kuning,"kacang kuning, kering",355.0,17.0,2.5,66.0,15.1,1.0,0.0,100,low
+F266,kacang lebui/ iris,"kacang lebui/ iris, kering",346.0,16.5,1.5,66.6,37.3,17.0,1225.0,100,low
+F267,kacang mentega,"kacang mentega, kering",344.0,16.7,2.1,64.6,13.0,1.0,10.0,100,low
+F268,kacang merah/ banda,"kacang merah/ banda, kering",350.0,13.9,3.0,66.9,26.3,19.0,1127.0,100,low
+F269,kacang merah tua,"kacang merah tua, kering",280.0,16.7,1.6,63.2,4.6,19.0,1348.5,100,moderate
+F270,kacang merah,"kacang merah, kering",314.0,22.1,1.1,56.2,4.0,11.0,1265.5,100,moderate
+F271,kacang merah,"kacang merah, segar",171.0,11.0,2.2,28.0,2.1,7.0,360.7,100,moderate
+F272,kacang mete/biji jambu monyet,"kacang mete/biji jambu monyet, segar",616.0,16.3,48.4,28.7,0.9,26.0,692.0,69,moderate
+F273,kacang panjang,"kacang panjang, biji, kering",357.0,17.3,1.5,68.6,10.6,16.0,1109.4,100,high
+F274,kacang tanah sangan,kacang tanah sangan,560.0,29.5,43.0,24.1,2.9,34.0,509.8,100,moderate
+F275,kacang tanah sangan tanpa selaput,kacang tanah sangan tanpa selaput,559.0,26.9,44.2,23.6,2.6,33.0,202.3,100,moderate
+F276,kacang tanah,"kacang tanah, kering",525.0,27.9,42.7,17.4,2.4,31.0,466.5,100,moderate
+F277,kacang tolo/ tunggak,"kacang tolo/ tunggak, kering",331.0,24.4,1.9,56.6,1.6,15.0,7.8,100,high
+F278,kacang tunis,"kacang tunis, kering",351.0,12.2,1.2,72.9,29.5,1.0,0.0,100,low
+F279,kacang uci,"kacang uci, kering",358.0,23.4,2.4,60.6,7.4,13.0,1457.7,100,moderate
+F280,kacang urei,"kacang urei, kering",354.0,12.8,1.8,69.3,26.1,1.0,0.0,100,low
+F281,kenari banda,"kenari banda, kering",616.0,13.9,56.2,13.7,,11.0,460.0,100,moderate
+F282,kenari,"kenari, kering",657.0,15.0,66.0,13.0,,3.0,505.8,100,moderate
+F283,komak polong,"komak polong, segar",99.0,3.3,0.1,21.2,10.3,15.0,567.0,100,low
+F284,koro andong,"koro andong, kering",356.0,20.5,4.1,61.6,7.0,18.0,301.8,100,moderate
+F285,koro benguk,"koro benguk, biji, kering",332.0,24.0,3.0,55.0,5.6,42.0,389.2,95,moderate
+F286,koro kerupuk,"koro kerupuk, biji, segar",125.0,8.3,0.7,22.1,2.2,16.0,150.3,68,moderate
+F287,koro loke,"koro loke, biji, segar",33.0,2.7,0.2,7.9,3.5,2.0,38.6,95,low
+F288,koro roay,"koro roay, kering",344.0,12.5,2.1,69.4,7.5,18.0,294.3,100,high
+F289,koro wedus,"koro wedus, biji, kering",338.0,22.2,1.5,61.0,5.8,43.0,403.8,100,moderate
+F290,lamtoro biji,"lamtoro biji, muda, segar",85.0,5.7,0.3,15.4,10.8,35.0,485.7,100,low
+F291,lamtoro biji,"lamtoro biji, tua, segar",148.0,10.6,0.5,26.2,17.0,28.0,628.5,100,low
+F292,lamtoro var. gung tanpa kulit,lamtoro var. gung tanpa kulit,367.0,46.4,5.4,32.5,2.6,65.0,1462.3,100,moderate
+F293,lamtoro var. lokal dengan kulit,lamtoro var. lokal dengan kulit,336.0,23.8,1.2,59.7,15.4,134.0,1858.9,100,low
+F294,nangka,"nangka, biji, segar",165.0,4.2,0.1,36.7,1.8,69.0,179.0,75,moderate
+F295,saga merah terkupas,"saga merah terkupas, kering",449.0,30.6,25.5,31.9,3.5,66.0,1496.5,100,moderate
+F296,wijen,"wijen, kering",568.0,19.3,51.1,18.1,3.6,18.0,303.7,100,moderate
+F297,kacang belimbing,"kacang belimbing, rebus",204.0,16.9,8.8,17.5,4.8,43.0,1098.0,100,low
+F298,kacang bogor,"kacang bogor, goreng",479.0,12.7,23.2,58.9,1.2,,,35,high
+F299,kacang bogor,"kacang bogor, rebus",161.0,7.7,2.8,27.1,2.0,,,35,moderate
+F300,kacang gude,"kacang gude, rebus",147.0,9.0,0.5,27.5,3.4,14.0,1126.0,100,moderate
+F301,kacang hijau,"kacang hijau, rebus",109.0,8.7,0.5,18.3,1.5,447.0,657.8,100,moderate
+F302,kacang kedelai,"kacang kedelai, goreng",521.0,32.2,37.7,22.9,7.6,3492.0,11890.0,100,low
+F303,kacang kedelai,"kacang kedelai, rebus",189.0,20.2,8.2,12.7,1.6,181.0,615.0,100,moderate
+F304,kacang merah kering,"kacang merah kering, rebus",158.0,10.3,0.9,28.2,2.6,6.0,311.0,100,moderate
+F305,kacang merah segar,"kacang merah segar, rebus",144.0,10.0,1.0,24.7,3.5,6.0,311.0,100,moderate
+F306,kacang mete/biji jambu monyet,"kacang mete/biji jambu monyet, goreng",629.0,20.4,56.3,19.8,1.1,13.0,641.7,100,moderate
+F307,kacang tanah rebus dg kulit,kacang tanah rebus dg kulit,360.0,13.5,31.2,12.8,,32.0,483.0,43,moderate
+F308,kacang tanah,"kacang tanah, goreng",564.0,25.5,44.4,25.5,2.8,,,100,moderate
+F309,kacang tanah,"kacang tanah, rebus",220.0,10.6,18.0,8.0,1.0,36.0,536.2,100,moderate
+F310,kacang tolo,"kacang tolo, rebus",138.0,10.7,1.1,22.6,0.9,13.0,6.7,100,moderate
+F311,ampas kacang hijau,ampas kacang hijau,96.0,3.7,0.6,19.1,2.7,,,100,moderate
+F312,ampas tahu,"ampas tahu, mentah",67.0,5.0,2.1,8.1,4.1,8.0,184.5,100,low
+F313,ampas tahu kukus,ampas tahu kukus,75.0,4.1,2.1,10.7,5.1,,,100,low
+F314,ampas tahu,"ampas tahu, kering",414.0,26.6,18.3,41.3,0.0,45.0,1055.7,100,moderate
+F315,pepea oncom ampas tahu,pepea oncom ampas tahu,76.0,5.2,1.8,10.6,2.2,,,100,low
+F316,bungkil biji karet,bungkil biji karet,210.0,30.0,10.0,10.0,,,,100,moderate
+F317,bungkil kacang tanah,bungkil kacang tanah,365.0,45.0,13.0,17.0,,,,100,moderate
+F318,bungkil kelapa,bungkil kelapa,367.0,23.0,15.0,35.0,,,,100,moderate
+F319,dodol banjarmasin,dodol banjarmasin,368.0,2.6,8.6,70.0,0.5,48.0,96.0,100,high
+F320,emping (kerupuk melinjo),emping (kerupuk melinjo),300.0,12.0,1.5,61.0,,,,100,high
+F321,emping komak,emping komak,355.0,17.8,4.6,60.7,,24.0,1233.0,100,high
+F322,enting-enting gepuk hello kity,enting-enting gepuk hello kity,538.0,13.6,30.3,52.6,0.2,,,100,high
+F323,enting-enting gepuk kacang tanah,enting-enting gepuk kacang tanah,524.0,13.3,29.2,52.0,0.2,,,100,high
+F324,enting-enting wijen,enting-enting wijen,565.0,18.2,38.4,36.8,1.9,,,100,moderate
+F325,geplak,geplak,350.0,1.4,14.4,53.6,1.8,,,100,high
+F326,geplak jahe,geplak jahe,462.0,3.1,24.4,57.7,3.3,,,100,moderate
+F327,kacang atom,kacang atom,533.0,27.8,38.1,28.8,2.5,,,100,moderate
+F328,kacang goyang,kacang goyang,516.0,14.7,31.1,44.4,,2.0,365.0,100,moderate
+F329,kacang negara,kacang negara,480.0,18.4,19.1,58.5,11.7,1010.0,385.0,100,moderate
+F330,kacang sukro,kacang sukro,484.0,8.8,26.1,57.7,1.8,,,100,high
+F331,kacang tanah sari,kacang tanah sari,561.0,25.5,43.8,26.0,2.2,,,100,moderate
+F332,keju kacang tanah (peanut butter),keju kacang tanah (peanut butter),590.0,27.0,49.0,20.9,1.6,355.0,492.4,100,moderate
+F333,kembang tahu,kembang tahu,380.0,48.9,13.8,23.3,0.0,55.0,455.3,100,moderate
+F334,kembang tahu rebus,kembang tahu rebus,90.0,10.7,4.0,4.7,,,,100,low
+F335,keripik oncom,keripik oncom,598.0,8.3,43.8,42.6,3.3,,,100,moderate
+F336,keripik tempe,keripik tempe,581.0,12.1,40.6,41.7,2.2,,,100,moderate
+F337,keripik tempe abadi besar,keripik tempe abadi besar,556.0,15.8,37.1,39.8,3.5,,,100,moderate
+F338,keripik tempe abadi murni,keripik tempe abadi murni,542.0,40.3,42.4,11.6,2.2,,,100,moderate
+F339,keripik tempe abadi sedang,keripik tempe abadi sedang,510.0,12.3,27.9,52.4,3.6,,,100,moderate
+F340,keripik tempe abadi telur,keripik tempe abadi telur,529.0,20.8,31.7,40.2,3.0,,,100,moderate
+F341,kerupik tempe abadi prima,kerupik tempe abadi prima,540.0,16.7,33.9,42.0,2.2,,,100,moderate
+F342,kwaci,kwaci,515.0,30.6,42.1,13.8,13.6,124.0,448.6,35,low
+F343,melinjo emping tebal goreng manis,melinjo emping tebal goreng manis,439.0,10.0,16.4,65.7,,,,100,high
+F344,melinjo emping tebal,"melinjo emping tebal, goreng asin",431.0,11.1,16.2,63.0,,,,100,high
+F345,melinjo emping tipis goreng,melinjo emping tipis goreng,485.0,11.5,24.5,59.1,,,,100,high
+F346,moon tahu,moon tahu,128.0,8.0,10.0,1.3,0.2,393.0,,100,low
+F347,oncom,oncom,187.0,13.0,6.0,22.6,,,,100,moderate
+F348,oncom ampas kacang hijau,oncom ampas kacang hijau,376.0,14.9,6.0,65.7,12.3,,,100,high
+F349,oncom kacang hijau + singkong,oncom kacang hijau + singkong,351.0,11.0,5.3,65.9,9.0,,,100,high
+F350,oncom kacang tanah pepes,oncom kacang tanah pepes,132.0,12.7,3.8,13.7,3.1,,,100,low
+F351,rempeyek kacang tanah,rempeyek kacang tanah,513.0,17.5,32.5,44.3,1.7,,,100,moderate
+F352,rempeyek kacang tolo,rempeyek kacang tolo,451.0,11.2,20.2,59.7,1.8,,,100,high
+F353,rempeyek kacang uci,rempeyek kacang uci,497.0,17.0,27.6,50.8,2.4,,,100,moderate
+F354,sayur lebui,sayur lebui,64.0,2.1,0.6,12.5,5.7,124.0,146.0,100,low
+F355,saridele,"saridele, bubuk",344.0,30.0,20.0,43.0,6.2,56.0,2572.3,100,moderate
+F356,susu kedelai,susu kedelai,41.0,3.5,2.5,5.0,0.2,128.0,287.9,100,low
+F357,tahu,"tahu, mentah",80.0,10.9,4.7,0.8,0.1,2.0,50.6,100,low
+F358,tahu goreng,tahu goreng,115.0,9.7,8.5,2.5,0.1,7.0,68.2,100,low
+F359,tahu telur,tahu telur,328.0,12.6,19.9,24.6,0.4,755.0,,100,moderate
+F360,takwa,takwa,148.0,13.8,8.5,4.0,0.0,3.0,79.0,100,low
+F361,tauco,tauco,184.0,11.4,5.5,22.2,1.9,1766.0,233.0,100,moderate
+F362,tauco cap beruang,"tauco cap beruang, cake",347.0,7.4,5.2,67.6,3.2,,,100,high
+F363,tauco cap das,"tauco cap das, cake",358.0,7.5,4.3,70.4,3.1,,,100,high
+F364,tauco cap meong,tauco cap meong,159.0,7.4,4.9,21.3,1.6,1547.0,204.1,100,moderate
+F365,tauji cap singa,tauji cap singa,277.0,9.1,4.7,49.6,1.2,,,100,moderate
+F366,tempe bongkrek,tempe bongkrek,88.0,10.0,4.0,3.0,,,,100,low
+F367,tempe gembus p3g,tempe gembus p3g,73.0,5.7,1.3,10.3,4.2,,,100,low
+F368,tempe gembus yogya,tempe gembus yogya,76.0,6.8,0.7,10.6,5.3,,,100,low
+F369,tempe kacang babi,tempe kacang babi,139.0,12.5,0.8,21.9,1.8,,,100,moderate
+F370,tempe kacang belimbing,tempe kacang belimbing,212.0,17.5,10.0,12.9,2.9,,,100,low
+F371,tempe kedelai + jagung,tempe kedelai + jagung,143.0,12.0,5.5,11.4,1.9,,,100,moderate
+F372,tempe kedelai murni,"tempe kedelai murni, goreng",350.0,24.5,26.6,10.4,4.2,22.0,626.7,100,low
+F373,tempe kedelai murni,"tempe kedelai murni, mentah",201.0,20.8,8.8,13.5,1.4,9.0,234.0,100,moderate
+F374,tempe koro benguk,tempe koro benguk,141.0,10.2,1.3,23.2,,,,100,moderate
+F375,tempe lamtoro,tempe lamtoro,128.0,10.7,0.5,21.3,7.1,,,100,low
+F376,tempe lamtoro var. gung dengan kulit,tempe lamtoro var. gung dengan kulit,146.0,11.7,2.3,19.6,7.6,,,100,low
+F377,tempe lamtoro var. gung tanpa kulit,tempe lamtoro var. gung tanpa kulit,131.0,18.0,0.8,13.0,1.3,,,100,moderate
+F378,tempe pasar,tempe pasar,150.0,14.0,7.7,9.1,1.4,7.0,165.9,100,moderate
+F379,tempe pasar goreng,tempe pasar goreng,336.0,20.0,28.0,7.8,3.4,20.0,566.2,100,low
+F380,tepung hunkwe (pati kacang ijo),tepung hunkwe (pati kacang ijo),364.0,4.5,1.0,83.5,16.1,15.0,1232.9,100,high
+F381,tepung jalejo,tepung jalejo,388.0,19.0,7.5,61.2,5.8,3.0,712.0,100,moderate
+F382,tepung kacang kedelai,tepung kacang kedelai,347.0,35.9,20.6,29.9,5.8,52.0,2522.6,100,moderate
+F383,akar tonjong,"akar tonjong, segar",45.0,1.1,0.4,10.8,1.2,96.0,1147.1,100,moderate
+F384,ale,"ale,toge, segar",37.0,4.4,0.5,3.8,1.7,2.0,105.0,90,low
+F385,andaliman,"andaliman, segar",99.0,4.6,1.0,18.0,8.5,,,100,low
+F386,andewi,"andewi, segar",226.0,1.6,0.2,5.3,4.1,29.0,414.6,80,low
+F387,bakung,"bakung, segar",27.0,2.0,0.2,4.2,3.8,37.0,340.0,100,low
+F388,baligo,"baligo, segar",15.0,0.4,0.2,3.0,0.4,2.0,131.1,69,low
+F389,bawang bombay,"bawang bombay, segar",43.0,1.4,0.2,10.3,2.0,12.0,9.6,94,moderate
+F390,bayam,"bayam, segar",16.0,0.9,0.4,2.9,0.7,16.0,456.4,71,low
+F391,bayam merah,"bayam merah, segar",41.0,2.2,0.8,6.3,2.2,20.0,60.0,71,low
+F392,bit,"bit, segar",41.0,1.6,0.1,9.6,2.6,28.0,404.9,75,low
+F393,buah kelor,buah kelor,38.0,1.5,0.2,7.5,3.2,48.0,216.0,65,low
+F394,buah merah,buah merah,87.0,2.6,2.7,13.1,4.0,110.0,140.0,100,low
+F395,buncis,"buncis, segar",34.0,2.4,0.3,7.2,1.9,8.0,250.0,90,low
+F396,bunga pepaya,"bunga pepaya, segar",45.0,2.6,0.3,8.1,1.6,2.0,478.3,100,moderate
+F397,bunga turi,"bunga turi, segar",42.0,2.0,1.1,6.1,3.3,29.0,97.4,96,low
+F398,caisin,"caisin, segar",20.0,1.7,0.4,3.4,1.2,18.0,358.2,100,low
+F399,daun bangun-bangun,"daun bangun-bangun, segar",27.0,1.3,0.6,4.0,1.0,4.0,144.0,66,low
+F400,daun bawang merah,"daun bawang  merah, segar",41.0,2.0,0.3,7.8,2.1,30.0,90.0,67,low
+F401,daun bebuas,"daun bebuas, segar",41.0,2.7,1.0,7.3,2.1,,,49,low
+F402,daun belem,"daun belem, segar",50.0,4.4,1.4,7.8,1.9,,,81,low
+F403,daun bluntas,"daun bluntas, segar",44.0,1.8,0.5,9.4,,,,65,moderate
+F404,daun gandaria,"daun gandaria, segar",63.0,3.1,0.3,14.0,2.1,3.0,127.7,65,moderate
+F405,daun gedi besar,"daun gedi besar, segar",58.0,2.9,0.7,10.0,3.3,30.0,40.0,65,low
+F406,daun gedi kecil,"daun gedi kecil, segar",61.0,3.2,0.7,10.4,3.4,20.0,50.0,65,low
+F407,daun gelang,"daun gelang, segar",30.0,1.3,0.7,5.8,1.3,5.0,333.3,52,low
+F408,daun gunda bali,"daun gunda bali, segar",50.0,4.6,0.9,7.0,1.4,,,49,moderate
+F409,daun gunda serang,"daun gunda serang, segar",62.0,4.2,0.9,9.2,1.3,,,47,moderate
+F410,daun jambu mete muda,"daun jambu mete muda, segar",78.0,4.6,0.5,16.2,3.0,14.0,670.5,65,moderate
+F411,daun jampang,"daun jampang, segar",34.0,3.8,0.5,5.3,1.4,,,47,low
+F412,daun jawaw seluang,"daun jawaw seluang, segar",93.0,5.0,1.3,15.3,3.9,2.0,434.0,100,low
+F413,daun jonghe,"daun jonghe, segar",27.0,2.1,0.7,4.4,2.0,,,45,low
+F414,daun kacang ma,"daun kacang ma, segar",36.0,2.9,0.6,6.8,1.8,7.0,485.3,33,low
+F415,daun kacang panjang,"daun kacang panjang, segar",30.0,3.1,0.3,5.8,1.7,7.0,458.6,65,low
+F416,daun kasbi/singkong karet,"daun kasbi/singkong karet, segar",92.0,4.0,3.6,10.9,5.8,70.0,90.0,87,low
+F417,daun katuk,"daun katuk, segar",59.0,6.4,1.0,9.9,1.5,21.0,478.8,40,moderate
+F418,daun kecipir,"daun kecipir, segar",52.0,5.0,0.5,8.5,,6.0,114.0,70,moderate
+F419,daun kedondong,"daun kedondong, segar",59.0,3.5,0.3,13.4,10.7,12.0,579.0,65,low
+F420,daun kelor,"daun kelor, segar",92.0,5.1,1.6,14.3,8.2,61.0,298.0,65,low
+F421,daun kemang,"daun kemang, segar",43.0,5.5,0.3,7.5,8.4,10.0,457.1,65,low
+F422,daun kenikir,"daun kenikir, segar",45.0,3.7,0.5,6.6,5.8,6.0,431.0,36,low
+F423,daun kesum,"daun kesum, segar",48.0,4.5,0.8,9.1,1.6,11.0,174.7,53,moderate
+F424,daun kol sawi,"daun kol sawi, segar",22.0,2.1,0.5,3.6,0.9,19.0,386.2,87,low
+F425,daun koro,"daun koro, segar",23.0,3.0,0.3,3.7,,4.0,68.4,65,low
+F426,daun kubis,"daun kubis, segar",51.0,2.5,1.1,8.0,3.4,50.0,100.0,75,low
+F427,daun kumak,"daun kumak, segar",14.0,1.3,0.3,2.3,0.9,2.0,36.5,78,low
+F428,daun labu siam,"daun labu siam, segar",34.0,4.0,0.4,4.7,3.5,16.0,630.7,100,low
+F429,daun labu waluh/kuning,"daun labu waluh/kuning, segar",34.0,3.6,0.6,4.5,2.9,16.0,630.7,70,low
+F430,daun lamtoro,"daun lamtoro, segar",87.0,8.3,1.8,14.4,3.3,10.0,197.7,40,low
+F431,daun leilem,"daun leilem, segar",76.0,2.8,0.2,15.8,3.1,6.0,46.0,90,moderate
+F432,daun leunca,"daun leunca, segar",49.0,4.7,0.5,8.1,,,,70,moderate
+F433,daun lobak,"daun lobak, segar",30.0,2.3,0.4,5.8,3.2,16.0,747.4,70,low
+F434,daun lompong talas,"daun lompong talas, segar",44.0,3.0,0.8,7.4,3.3,3.0,578.4,75,low
+F435,daun mangkokan,"daun mangkokan, segar",57.0,3.7,0.3,11.8,,,,80,moderate
+F436,daun matel ambon,"daun matel ambon, segar",71.0,6.8,1.6,11.5,4.6,,,100,low
+F437,daun melinjo,"daun melinjo, segar",104.0,5.0,1.3,21.3,10.3,12.0,604.8,88,low
+F438,daun mengkudu,"daun mengkudu, segar",65.0,4.0,1.7,11.4,3.9,,,90,low
+F439,daun ndusuk,"daun ndusuk, segar",166.0,1.7,0.5,38.8,10.7,40.0,310.0,100,low
+F440,daun oyong,"daun oyong, segar",22.0,1.0,0.1,5.3,2.0,40.0,295.5,65,low
+F441,daun pakis,"daun pakis, segar",39.0,4.5,0.4,6.9,2.0,20.0,201.9,70,low
+F442,daun pakis longgiho,"daun pakis longgiho, segar",54.0,2.2,3.6,3.1,2.1,70.0,500.0,70,low
+F443,daun pakis wambateu,"daun pakis wambateu, segar",53.0,3.4,1.2,7.2,4.8,20.0,200.0,70,low
+F444,daun paku,"daun paku, segar",29.0,3.4,0.1,6.5,4.3,19.0,434.0,70,low
+F445,daun pangi,"daun pangi,segar",104.0,3.9,0.6,17.9,8.3,4.0,266.0,90,low
+F446,daun pare,"daun pare, segar",49.0,2.7,1.0,8.4,3.0,7.0,498.0,100,low
+F447,daun pepaya,"daun pepaya, segar",87.0,8.0,2.0,11.9,1.5,4.0,926.6,71,moderate
+F448,daun pohpohan,"daun pohpohan, segar",37.0,2.5,0.8,6.9,2.6,,,69,low
+F449,daun selasih,"daun selasih, segar",62.0,4.0,0.5,10.5,5.3,3.0,259.0,53,low
+F450,daun semanggi,"daun semanggi, segar",45.0,4.4,0.5,8.5,1.9,64.0,520.7,90,low
+F451,daun simpur,"daun simpur, segar",53.0,3.2,2.5,7.6,1.6,,,100,low
+F452,daun singkil,"daun singkil, segar",68.0,2.0,1.0,15.2,3.3,,,70,low
+F453,daun singkong,"daun singkong, segar",50.0,6.2,1.1,7.1,2.4,16.0,23.1,87,low
+F454,daun singkong ambon,"daun singkong ambon, segar",144.0,12.7,1.2,25.2,10.2,44.0,62.2,87,low
+F455,daun singkong ampenan,"daun singkong ampenan, segar",50.0,6.2,1.1,7.1,2.4,49.0,570.0,87,low
+F456,daun singkong kopang,"daun singkong kopang, segar",74.0,6.3,0.7,10.7,4.6,32.0,382.0,87,low
+F457,daun sintrong,"daun sintrong, segar",36.0,2.6,0.9,6.1,1.7,64.0,444.4,94,low
+F458,daun talas,"daun talas, segar",59.0,3.0,0.4,13.5,3.0,4.0,854.1,80,low
+F459,daun tespong,"daun tespong, segar",70.0,2.9,0.3,13.9,2.3,72.0,,60,moderate
+F460,daun ubi kuning,"daun ubi kuning, segar",62.0,3.7,0.3,11.1,6.4,10.0,0.0,75,low
+F461,daun ubi merah,"daun ubi merah, segar",48.0,3.0,0.3,10.8,1.4,33.0,517.3,75,moderate
+F462,daun ubi putih,"daun ubi putih, segar",46.0,2.8,0.2,8.2,4.8,10.0,0.0,75,low
+F463,daun ubi tinta,"daun ubi tinta, segar",55.0,1.7,0.1,11.9,7.6,10.0,0.0,75,low
+F464,eceng,"eceng, segar",19.0,1.0,0.2,3.8,1.8,45.0,634.1,70,low
+F465,gambas (oyong),"gambas (oyong), segar",19.0,0.8,0.2,4.1,1.3,23.0,109.1,85,low
+F466,genjer,"genjer, segar",35.0,1.7,0.2,7.7,2.5,64.0,905.8,70,low
+F467,jagung muda/ semi,"jagung muda/ semi, segar",35.0,2.2,0.1,7.4,1.9,353.0,230.2,100,low
+F468,jamur encik,jamur encik,296.0,9.4,1.1,62.0,,2.0,0.0,95,high
+F469,jamur kuping,"jamur kuping, kering",294.0,16.0,0.9,64.6,46.5,174.0,726.1,100,low
+F470,jamur kuping,"jamur kuping, segar",21.0,3.8,0.6,0.9,5.1,17.0,33.4,100,low
+F471,jamur merang,"jamur merang, segar",30.0,3.5,0.2,4.0,2.4,6.0,300.0,100,low
+F472,jamur tiram,"jamur tiram, segar",30.0,1.9,0.1,5.5,3.6,22.0,226.0,100,low
+F473,jamur sagu,jamur sagu,48.0,1.9,3.2,2.8,1.0,100.0,440.0,95,low
+F474,jantung pisang,"jantung pisang, segar",32.0,1.2,0.3,7.1,3.2,3.0,524.0,25,low
+F475,jengkol,"jengkol, segar",192.0,5.4,0.3,40.7,1.5,60.0,241.0,95,moderate
+F476,jotang,"jotang, segar",34.0,1.9,0.3,7.1,3.5,58.0,388.5,70,low
+F477,kabau,"kabau, segar",130.0,6.7,0.3,25.2,2.9,1.0,397.8,95,moderate
+F478,kacang mekah,"kacang mekah, polong, segar",22.0,1.1,1.0,3.4,1.1,2.0,69.2,91,low
+F479,kacang panjang,"kacang panjang, segar",31.0,2.3,0.1,5.3,2.7,30.0,213.0,92,low
+F480,kacang ranti polong,kacang ranti polong,37.0,3.1,0.2,7.9,2.5,,,83,low
+F481,kalakai,"kalakai, segar",38.0,2.4,0.2,6.6,5.8,7.0,443.0,70,low
+F482,kangkung,"kangkung, segar",28.0,3.4,0.7,3.9,2.0,65.0,250.1,60,low
+F483,kangkung tondano,kangkung tondano,43.0,1.8,0.2,8.4,4.3,30.0,361.0,60,low
+F484,kapri muda,"kapri muda, segar",45.0,3.3,0.2,9.0,1.8,2.0,118.4,80,moderate
+F485,karawila,karawila,25.0,2.3,0.2,3.5,2.1,8.0,88.4,80,low
+F486,kecipir muda,"kecipir muda, segar",32.0,2.9,0.2,5.8,5.5,3.0,103.8,96,low
+F487,kecombrang,"kecombrang, segar",34.0,0.9,1.0,6.7,2.6,47.0,650.6,100,low
+F488,kelawi,"kelawi, kluwih, segar",118.0,1.5,0.3,27.2,5.0,2.0,500.9,77,moderate
+F489,kembang turi,"kembang turi, segar",51.0,1.8,0.6,9.6,5.0,22.0,275.3,83,low
+F490,kerokot,"kerokot, segar",26.0,1.7,0.4,3.8,1.0,4.0,240.5,80,low
+F491,ketimun,"ketimun, segar",8.0,0.2,0.2,1.4,0.3,2.0,57.1,55,low
+F492,ketimun krai,"ketimun krai, segar",10.0,0.5,0.2,2.0,0.6,10.0,82.1,82,low
+F493,ketimun madura,"ketimun madura, segar",9.0,0.5,0.1,1.9,0.7,2.0,78.9,89,low
+F494,komak,"komak, segar",99.0,3.3,0.1,21.2,10.3,15.0,567.0,80,low
+F495,kool kembang,kool kembang,25.0,2.4,0.2,4.9,1.6,46.0,187.0,57,low
+F496,kool merah,"kool merah,kool putih",29.0,1.4,0.2,5.3,1.9,28.0,236.8,75,low
+F497,koro kerupuk,"koro kerupuk, polong",128.0,8.3,0.7,22.1,,,,68,moderate
+F498,koro wedus,"koro wedus, polong",46.0,3.0,0.3,7.9,3.3,2.0,249.3,70,low
+F499,kucai,"kucai, segar",45.0,2.2,0.3,10.3,4.8,21.0,439.5,52,low
+F500,kucai muda (lokio),"kucai muda (lokio), segar",42.0,3.8,0.6,7.8,4.9,22.0,449.1,100,low
+F501,kulit melinjo,kulit melinjo,111.0,4.5,1.1,20.7,5.0,,,100,low
+F502,kundur,"kundur, segar",22.0,0.4,0.2,4.7,1.3,2.0,200.0,57,low
+F503,labu air,"labu air, segar",19.0,0.6,0.2,3.8,0.6,2.0,168.2,80,low
+F504,labu kuning,"labu kuning, segar",51.0,1.7,0.5,10.0,2.7,280.0,220.0,74,low
+F505,labu siam,"labu siam, segar",30.0,0.6,0.1,6.7,6.2,3.0,167.1,83,low
+F506,labu waluh,"labu waluh, segar",32.0,1.1,0.1,6.6,0.5,1.0,356.2,77,moderate
+F507,lantar,"lantar, segar",34.0,2.2,0.3,5.5,2.9,3.0,155.0,100,low
+F508,lobak,"lobak, segar",21.0,0.9,0.1,4.2,1.4,49.0,109.3,87,low
+F509,lumai/leunca,"lumai/leunca, segar",38.0,1.1,0.3,7.6,2.0,2.0,,95,low
+F510,melinjo,"melinjo, segar",66.0,5.0,0.7,13.3,,,,60,moderate
+F511,mostarda metan-sawi,mostarda metan-sawi,33.0,2.3,0.5,4.7,1.8,20.0,100.0,85,low
+F512,nangka muda,"nangka muda, segar",57.0,2.0,0.4,11.3,8.3,1.0,246.5,80,low
+F513,paria putih,"paria putih, segar",19.0,1.0,0.4,3.6,1.3,5.0,277.7,80,low
+F514,pepare ular,"pepare ular, segar",19.0,0.6,0.1,3.9,1.0,130.0,30.0,97,low
+F515,pepaya muda,"pepaya muda, segar",29.0,2.1,0.1,4.9,2.1,22.0,211.2,65,low
+F516,petai,"petai, segar",92.0,5.4,1.1,15.2,2.0,55.0,221.0,36,moderate
+F517,peterseli,"peterseli, segar",53.0,3.7,1.0,9.0,0.0,18.0,1125.6,95,moderate
+F518,pucuk lumai/daun leunca,"pucuk lumai/daun leunca, segar",33.0,4.5,0.4,2.8,,2.0,0.0,70,low
+F519,putri malu,"putri malu, segar",76.0,3.6,0.3,14.6,7.1,1.0,631.0,100,low
+F520,rebung,"rebung, segar",25.0,0.8,0.1,5.3,9.7,3.0,206.0,28,low
+F521,rimbang,"rimbang, segar",75.0,1.6,0.6,15.8,10.0,20.0,234.0,95,low
+F522,rumput laut,rumput laut,41.0,1.4,0.3,8.1,2.2,250.0,380.0,100,low
+F523,sawi,"sawi, segar",28.0,2.3,0.3,4.0,2.5,22.0,436.5,87,low
+F524,sawi putih/ pecai,"sawi putih/ pecai, segar",9.0,1.0,0.1,1.7,0.8,5.0,193.1,79,low
+F525,sawi taiwan,"sawi taiwan, segar",30.0,1.9,0.5,4.4,2.7,27.0,217.0,85,low
+F526,sawi tanah,"sawi tanah, segar",19.0,1.3,0.2,2.9,2.2,17.0,145.0,85,low
+F527,selada,"selada, segar",18.0,1.2,0.2,2.9,1.8,19.0,186.4,69,low
+F528,selada air,"selada air, segar",17.0,3.1,0.2,2.2,0.7,65.0,260.7,70,low
+F529,seledri,"seledri, segar",23.0,1.0,0.1,4.6,2.0,64.0,258.8,63,low
+F530,taoge,"taoge, segar",34.0,3.7,1.2,4.3,1.1,19.0,93.3,100,low
+F531,taoge kacang kedelai,"taoge kacang kedelai, segar",76.0,9.0,2.6,6.4,0.7,5.0,212.4,100,moderate
+F532,taoge kacang tunggak,"taoge kacang tunggak, segar",40.0,5.0,0.2,5.8,2.6,2.0,226.8,90,low
+F533,tebu terubuk (lilin),"tebu terubuk (lilin), segar",30.0,4.6,0.4,3.0,0.8,699.0,,20,low
+F534,tekokak,"tekokak, segar",34.0,2.0,0.1,7.9,4.9,3.0,333.3,95,low
+F535,tekokak,"tekokak, kering",302.0,8.3,1.7,72.6,21.2,8.0,0.0,100,low
+F536,terong,"terong, segar",28.0,1.1,0.2,5.5,2.1,9.0,187.0,100,low
+F537,terong asam,"terong asam, segar",37.0,2.0,0.4,6.3,3.2,3.0,155.0,100,low
+F538,terung belanda,"terung belanda, segar",52.0,2.1,1.1,8.6,1.4,,,100,moderate
+F539,terung bengkulu,"terung bengkulu, segar",52.0,1.1,0.4,11.2,3.2,14.0,,100,low
+F540,terong hintalo,"terong hintalo, segar",45.0,1.9,0.8,7.5,5.1,167.0,142.0,100,low
+F541,terung panjang,terung panjang,25.0,2.1,0.1,5.3,0.5,9.0,53.7,100,moderate
+F542,tomat,"tomat, air (sari), segar",20.0,1.0,0.2,3.5,0.4,10.0,225.2,100,low
+F543,tomat merah,"tomat merah, segar",24.0,1.3,0.5,4.7,1.5,10.0,164.9,100,low
+F544,tomat muda,"tomat muda, segar",24.0,2.0,0.7,3.3,1.8,10.0,210.0,95,low
+F545,uceng/ bunga melinjo,"uceng/ bunga melinjo, segar",82.0,5.8,1.3,11.7,4.8,,,89,low
+F546,umbut kelapa,"umbut kelapa, segar",39.0,2.0,0.2,7.2,2.5,4.0,447.0,100,low
+F547,umbut rotan,umbut rotan,34.0,2.4,0.3,5.5,2.2,8.0,552.0,100,low
+F548,wortel,"wortel, segar",36.0,1.0,0.6,7.9,1.0,70.0,245.0,80,moderate
+F549,bayam,"bayam, kukus",30.0,1.3,0.7,5.8,1.2,15.0,431.0,100,low
+F550,bayam,"bayam, rebus",23.0,1.2,0.6,3.7,1.1,16.0,308.4,100,low
+F551,buncis,"buncis, rebus",30.0,2.2,0.2,6.4,1.5,7.0,138.9,100,low
+F552,daun kacang panjang,"daun kacang panjang, kukus",40.0,3.7,0.3,8.0,1.8,6.0,419.5,100,low
+F553,daun katuk,"daun katuk, rebus",53.0,5.3,0.9,9.1,1.2,16.0,291.3,100,moderate
+F554,daun kelor,"daun kelor, rebus",61.0,6.1,0.9,10.0,0.9,45.0,181.2,100,moderate
+F555,daun mengkudu,"daun mengkudu, kukus",63.0,3.8,1.5,11.5,2.4,,,100,low
+F556,daun singkong,"daun singkong, rebus",31.0,3.7,0.6,4.8,1.6,13.0,14.0,100,low
+F557,daun talas,"daun talas, rebus",27.0,1.3,0.2,5.9,1.6,3.0,519.4,100,low
+F558,daun ubi merah,"daun ubi merah, kukus",56.0,3.1,0.3,13.0,1.5,28.0,472.8,100,moderate
+F559,kacang panjang,"kacang panjang, kukus",39.0,3.0,0.6,7.6,1.7,28.0,199.0,100,low
+F560,kacang panjang,"kacang panjang, rebus",30.0,2.3,0.4,5.8,1.4,24.0,114.5,100,low
+F561,kangkung,"kangkung, kukus",30.0,3.2,0.7,4.7,1.8,45.0,184.9,100,low
+F562,kangkung,"kangkung, rebus",22.0,2.5,0.6,3.1,1.2,31.0,98.0,100,low
+F563,paria putih,"paria putih, kukus",16.0,0.8,0.2,3.4,1.2,4.0,236.0,100,low
+F564,selada,"selada, rebus",19.0,2.7,0.2,2.9,0.7,24.0,160.7,100,low
+F565,taoge,"taoge, goreng",88.0,3.2,2.1,14.0,0.7,,,100,moderate
+F566,taoge,"taoge, seduh",28.0,3.0,0.8,4.0,1.0,18.0,58.3,87,low
+F567,terung panjang,"terung panjang, kukus",23.0,1.8,0.1,4.9,0.4,9.0,57.0,100,low
+F568,wortel,"wortel, rebus",28.0,0.7,0.5,6.3,0.8,41.0,117.3,100,moderate
+F569,wortel,"wortel, kukus",37.0,1.0,0.6,8.3,1.1,43.0,122.5,100,moderate
+F570,asinan bogor,"asinan bogor, sayuran",98.0,3.9,2.6,14.8,0.5,483.0,,100,moderate
+F571,anyang,"anyang, sayur",126.0,3.4,7.9,10.3,5.4,290.0,181.0,100,low
+F572,ares,"ares, sayur",113.0,0.9,7.2,11.2,4.7,1413.0,1030.0,100,low
+F573,arwan sirsir,arwan sirsir,277.0,2.4,25.0,10.7,4.6,240.0,320.0,100,low
+F574,beberuk,beberuk,65.0,1.1,5.2,3.5,3.1,53.0,427.0,100,low
+F575,botok lamtoro,botok lamtoro,186.0,11.7,9.7,13.0,2.1,,,100,moderate
+F576,buntil daun talas,buntil daun talas,141.0,4.4,10.2,8.0,1.8,,,100,low
+F577,cammetutu,cammetutu,102.0,3.2,6.0,8.7,4.3,443.0,518.0,100,low
+F578,cap cai,"cap cai, sayur",97.0,5.8,6.3,4.2,0.6,405.0,,100,low
+F579,gado-gado,gado-gado,137.0,6.1,3.2,21.0,1.1,,,100,moderate
+F580,gudeg,"gudeg, sayur",160.0,3.3,9.2,16.0,2.3,,,100,moderate
+F581,gulai pakis,gulai pakis,143.0,4.0,11.4,6.0,1.4,,,100,low
+F582,gulai pliek,gulai pliek,176.0,7.3,14.9,3.2,,257.0,285.0,100,low
+F583,kadada katembe,kadada katembe,110.0,4.5,6.9,7.1,3.9,178.0,131.0,100,low
+F584,kaparende,"kaparende, sayur",38.0,2.4,2.0,2.6,1.5,170.0,43.0,100,low
+F585,karedok,"karedok, sayur",92.0,2.2,3.3,14.1,1.4,,,100,moderate
+F586,keripik bayam,keripik bayam,586.0,4.9,40.6,50.2,0.5,,,100,high
+F587,kotiu hinela tawang nggole,kotiu hinela tawang nggole,46.0,2.2,1.5,6.0,3.8,316.0,103.0,100,low
+F588,lema/rebung asam,lema/rebung asam,15.0,1.0,0.4,1.9,,3.0,156.0,100,low
+F589,lilin bungkus gedi,lilin bungkus gedi,79.0,2.3,5.2,5.8,2.5,170.0,50.0,100,low
+F590,olah-olah,olah-olah,9.0,2.1,6.0,7.1,4.4,289.0,266.0,100,low
+F591,paku hinela wulelenggapaya,paku hinela wulelenggapaya,77.0,3.5,4.6,5.4,3.6,469.0,37.0,100,low
+F592,pelecing kangkung,pelecing kangkung,75.0,2.5,2.8,10.0,5.4,408.0,381.0,100,low
+F593,purundawa,purundawa,25.0,1.5,0.5,3.6,1.7,239.0,201.0,100,low
+F594,rujak cingur,rujak cingur,153.0,11.3,8.4,8.0,1.4,,,100,moderate
+F595,sayur asem,sayur asem,29.0,0.7,0.6,5.0,0.6,,,100,low
+F596,sayur bunga pepaya,sayur bunga pepaya,49.0,1.7,0.3,9.8,2.7,90.0,350.0,100,low
+F597,sayur garu,sayur garu,178.0,2.6,13.9,10.6,8.4,20.0,120.0,100,low
+F598,sayur kohu-kohu,sayur kohu-kohu,133.0,7.3,6.6,11.2,1.2,20.0,50.0,100,moderate
+F599,sayur lilin-terubuk,sayur lilin-terubuk,36.0,2.7,0.7,4.8,1.4,30.0,44.0,100,low
+F600,sayur ndusuk,sayur ndusuk,49.0,3.1,2.5,3.6,,1011.0,88.0,100,low
+F601,sayur sop,sayur sop,27.0,1.3,2.0,1.0,0.3,,,100,low
+F602,sayur umbut kelapa,sayur umbut kelapa,67.0,5.2,2.9,5.1,1.4,313.0,108.0,100,low
+F603,sayur umbut rotan,sayur umbut rotan,57.0,5.4,2.6,3.1,1.6,256.0,81.0,100,low
+F604,shabu-shabu,shabu-shabu,88.0,3.2,8.0,0.8,0.9,514.0,,100,low
+F605,semur jengkol,semur jengkol,212.0,6.0,10.0,29.1,,,,100,moderate
+F606,tinira ninahu nggaluku,tinira ninahu nggaluku,33.0,1.2,1.3,4.1,3.1,161.0,119.0,100,low
+F607,tumis bayam bersantan,tumis bayam bersantan,48.0,1.4,4.2,2.6,0.5,,,100,low
+F608,waluh balamak,waluh balamak,45.0,0.8,0.9,8.1,7.9,61.0,15.0,100,low
+F609,woku ubi,woku ubi,143.0,3.1,7.8,15.0,7.0,353.0,256.0,100,low
+F610,alpukat,"alpukat, segar",85.0,0.9,6.5,7.7,,2.0,278.0,61,moderate
+F611,anggur hutan,"anggur hutan, segar",30.0,0.5,0.2,6.8,1.2,,,100,moderate
+F612,apel malang,"apel malang, segar",57.0,0.5,0.4,12.8,0.8,4.0,175.4,88,moderate
+F613,apel,"apel, segar",58.0,0.3,0.4,14.9,2.6,2.0,130.0,88,moderate
+F614,arbai,"arbai, segar",37.0,0.8,0.5,8.3,,2.0,43.0,96,moderate
+F615,belimbing,"belimbing, segar",36.0,0.4,0.4,8.8,3.2,4.0,130.0,86,low
+F616,biwah,"biwah, segar",51.0,0.3,0.1,12.1,0.7,1.0,258.6,66,moderate
+F617,buah atung,"buah atung, segar",23.0,0.8,0.2,5.2,,,,80,moderate
+F618,buah kelenting,"buah kelenting, segar",110.0,1.4,2.1,21.4,,2.0,0.0,77,moderate
+F619,buah kom,"buah kom, segar",264.0,4.0,1.1,59.6,9.0,,,100,moderate
+F620,buah mentega (bisbul),"buah mentega (bisbul), segar",39.0,0.7,0.2,9.7,2.0,1.0,90.0,50,low
+F621,buah naga merah,"buah naga merah, segar",71.0,1.7,3.1,9.1,3.2,10.0,128.0,66,low
+F622,buah naga putih,"buah naga putih, segar",56.0,0.8,1.0,10.9,3.2,7.0,231.0,74,low
+F623,buah negri,"buah negri, segar",55.0,1.2,0.1,12.2,5.2,10.0,0.0,48,low
+F624,buah nona,"buah nona, segar",101.0,1.7,0.6,25.2,2.8,5.0,312.5,58,moderate
+F625,buah rotan,"buah rotan, segar",78.0,0.6,0.3,18.2,,7.0,495.0,100,moderate
+F626,buah rukam,"buah rukam, segar",113.0,0.8,0.3,26.8,7.7,2.0,219.0,100,low
+F627,buah ruruhi,"buah ruruhi, segar",29.0,2.1,0.7,3.6,2.6,36.0,45.0,82,low
+F628,buah tuppa,"buah tuppa, segar",67.0,0.4,0.2,15.9,,2.0,0.0,100,moderate
+F629,carica papaya,"carica papaya, segar",24.0,1.9,0.2,3.7,1.0,,,60,low
+F630,cempedak,"cempedak, segar",116.0,3.0,0.4,28.6,3.4,25.0,243.7,30,moderate
+F631,duku,"duku, segar",63.0,1.0,0.2,16.1,4.3,2.0,149.0,64,low
+F632,durian,"durian, segar",149.0,2.5,3.0,21.5,3.5,1.0,601.0,22,moderate
+F633,duwet,"duwet, segar",80.0,0.5,0.6,18.2,0.9,16.0,92.7,67,moderate
+F634,embacang,"embacang, segar",98.0,1.4,0.2,25.4,1.9,3.0,250.9,65,moderate
+F635,encung asam,"encung asam, segar",122.0,3.5,4.5,17.5,9.3,,,98,low
+F636,erbis,"erbis, segar",70.0,0.6,0.0,18.9,7.7,21.0,257.1,33,low
+F637,gandaria masak,gandaria masak,68.0,0.7,0.1,18.0,2.2,3.0,129.0,70,moderate
+F638,gatep,"gatep, segar",191.0,4.5,1.5,39.7,13.4,17.0,403.3,100,low
+F639,jambu air,"jambu air, segar",46.0,0.6,0.2,11.8,2.1,11.0,321.2,90,moderate
+F640,jambu biji,jambu biji,64.0,0.9,0.3,12.2,2.4,10.0,52.8,82,moderate
+F641,jambu bj putih tdk brbj,jambu bj putih tdk brbj,61.0,0.9,0.3,15.4,4.5,20.0,103.0,82,low
+F642,jambu bol,"jambu bol, segar",49.0,2.3,0.2,9.6,3.5,1.0,14.0,67,low
+F643,jambu monyet,"jambu monyet, segar",49.0,0.7,0.6,15.8,1.2,12.0,107.8,90,moderate
+F644,jeruk bali,"jeruk bali, segar",48.0,0.6,0.2,12.4,0.8,21.0,366.1,62,moderate
+F645,jeruk banjar,"jeruk banjar, segar",61.0,0.8,0.2,14.1,5.4,3.0,79.0,72,low
+F646,jeruk garut-keprok,jeruk garut-keprok,44.0,0.8,0.3,10.9,1.6,5.0,518.1,71,moderate
+F647,jeruk kalamansi,"jeruk kalamansi, segar",39.0,0.3,0.3,8.9,2.3,3.0,82.0,100,low
+F648,jeruk manis,"jeruk manis, segar",45.0,0.9,0.2,11.2,1.4,4.0,472.1,72,moderate
+F649,jeruk nipis,"jeruk nipis, segar",44.0,0.5,0.2,10.0,0.4,3.0,108.9,76,moderate
+F650,jeruk ragi,"jeruk ragi, segar",49.0,0.7,0.2,11.1,0.5,4.0,457.3,59,moderate
+F651,kawista,"kawista, segar",120.0,3.5,2.5,20.8,4.6,9.0,1015.6,72,low
+F652,kedondong masak,"kedondong masak, segar",46.0,1.0,0.1,10.3,2.6,2.0,216.2,58,low
+F653,kedondong,"kedondong, segar",47.0,0.5,0.2,10.4,2.7,2.0,0.0,58,low
+F654,kelapa hutan,"kelapa hutan, kering",623.0,2.0,52.1,36.5,15.3,100.0,460.0,100,low
+F655,kelapa muda,"kelapa muda, daging, segar",68.0,1.0,0.9,14.0,0.0,18.0,564.6,53,moderate
+F656,kemang,"kemang, segar",48.0,1.0,0.2,11.9,1.7,2.0,88.6,65,moderate
+F657,kesemek,"kesemek, segar",78.0,0.8,0.4,20.0,0.6,0.0,34.5,97,moderate
+F658,kokosan,"kokosan, segar",86.0,1.6,0.2,13.0,1.4,2.0,118.3,64,moderate
+F659,kranji,"kranji, segar",315.0,2.1,1.4,73.5,3.6,,,31,high
+F660,langsat,"langsat, segar",56.0,0.9,0.2,14.3,1.4,1.0,232.0,64,moderate
+F661,lemon,"lemon, segar",34.0,0.5,0.8,6.2,0.1,31.0,140.0,100,moderate
+F662,lontar,"lontar, segar",27.0,0.4,0.2,6.0,1.6,,,79,low
+F663,mangga,"mangga, segar",52.0,0.7,0.0,12.3,1.6,3.0,140.0,65,moderate
+F664,mangga benggala,"mangga benggala, segar",63.0,2.4,0.4,12.4,5.8,3.0,79.0,65,low
+F665,mangga gedung,"mangga gedung, segar",44.0,0.7,0.2,11.2,1.6,2.0,83.6,65,moderate
+F666,mangga golek,"mangga golek, segar",63.0,0.5,0.2,16.7,2.3,3.0,118.1,65,moderate
+F667,mangga harumanis,"mangga harumanis, segar",46.0,0.4,0.2,11.9,1.7,2.0,88.9,65,moderate
+F668,mangga indramayu,"mangga indramayu, segar",72.0,0.8,0.2,18.7,2.5,3.0,131.4,65,moderate
+F669,mangga kopek,"mangga kopek, segar",56.0,0.4,0.2,14.6,2.0,2.0,102.9,65,moderate
+F670,mangga kwini,"mangga kwini, segar",86.0,0.7,0.5,19.8,6.5,1.0,16.0,65,low
+F671,mangga manalagi,"mangga manalagi, segar",133.0,1.0,0.1,32.1,11.8,70.0,161.0,65,low
+F672,mangga muda,"mangga muda, segar",59.0,0.5,0.4,15.1,,2.0,108.2,73,moderate
+F673,manggis,"manggis, segar",63.0,0.6,0.6,15.6,1.5,10.0,61.9,29,moderate
+F674,markisa,"markisa, segar",144.0,3.5,1.2,29.8,11.4,37.0,453.8,48,low
+F675,matoa,"matoa, segar",90.0,1.2,0.1,21.1,0.5,10.0,190.0,40,moderate
+F676,melon,"melon, segar",37.0,0.6,0.4,7.8,1.0,27.0,167.0,58,moderate
+F677,menteng,"menteng, segar",65.0,1.7,0.3,16.1,,,,64,moderate
+F678,nanas palembang,"nanas palembang, segar",58.0,0.7,0.2,13.3,1.6,7.0,117.0,53,moderate
+F679,nanas,"nanas, segar",40.0,0.6,0.3,9.9,0.6,18.0,111.0,53,moderate
+F680,nangka masak pohon,"nangka masak pohon, segar",106.0,1.2,0.3,27.6,3.7,2.0,407.0,28,moderate
+F681,pala,"pala, daging, segar",42.0,0.3,0.2,10.9,0.5,,,30,moderate
+F682,pepaya,"pepaya, segar",46.0,0.5,0.1,12.2,1.6,4.0,221.0,75,moderate
+F683,pisang ambon,"pisang ambon, segar",108.0,1.0,0.8,24.3,1.9,10.0,356.3,75,moderate
+F684,pisang angleng (pisang ampyang),"pisang angleng (pisang ampyang), segar",68.0,1.3,0.2,17.2,0.8,23.0,215.7,75,moderate
+F685,pisang ayam,"pisang ayam, segar",120.0,1.1,0.2,26.8,4.1,6.0,392.0,75,moderate
+F686,pisang gapi,"pisang gapi, segar",131.0,1.6,0.1,31.1,11.7,6.0,392.0,75,low
+F687,pisang goroho,"pisang goroho, segar",119.0,1.5,0.2,27.9,4.6,36.0,359.0,75,moderate
+F688,pisang hijau,"pisang hijau, segar",121.0,1.0,0.1,28.9,0.4,31.0,529.4,72,moderate
+F689,pisang kayu,"pisang kayu, segar",100.0,1.4,0.5,23.6,2.6,1.0,493.0,75,moderate
+F690,pisang kepok,"pisang kepok, segar",109.0,0.8,0.5,26.3,5.7,10.0,300.0,75,low
+F691,pisang ketip,"pisang ketip, segar",145.0,1.1,0.3,34.5,6.6,4.0,726.0,75,moderate
+F692,pisang kidang,"pisang kidang, segar",96.0,1.0,0.2,22.5,0.6,6.0,418.8,70,moderate
+F693,pisang lampung,"pisang lampung, segar",99.0,1.3,0.2,25.6,4.3,28.0,475.0,75,moderate
+F694,pisang mas bali ampenan,"pisang mas bali ampenan, segar",92.0,1.4,0.2,21.0,3.7,32.0,272.0,75,moderate
+F695,pisang mas bali kopang,"pisang mas bali kopang, segar",127.0,1.4,0.2,31.8,3.7,43.0,616.0,75,moderate
+F696,pisang mas,"pisang mas, segar",127.0,1.4,0.2,33.6,1.4,42.0,392.0,85,moderate
+F697,pisang raja sereh,"pisang raja sereh, segar",108.0,1.3,0.3,28.2,0.7,31.0,522.6,86,moderate
+F698,pisang raja,"pisang raja, segar",120.0,1.2,0.2,31.8,5.3,35.0,582.2,70,moderate
+F699,pisang rotan,"pisang rotan, segar",98.0,1.3,1.2,20.5,1.0,24.0,406.9,56,moderate
+F700,pisang talas,"pisang talas, segar",113.0,1.2,0.2,26.7,4.4,29.0,48.0,75,moderate
+F701,pisang tujuh bulan,pisang tujuh bulan,94.0,0.6,0.2,22.5,3.7,0.0,4.0,75,moderate
+F702,pisang ua,"pisang ua, segar",128.0,0.8,0.5,30.2,8.1,33.0,382.0,75,low
+F703,pisang uli,"pisang uli, segar",134.0,1.1,0.5,35.5,1.4,39.0,650.3,77,moderate
+F704,purut,"purut, segar",76.0,4.1,1.1,15.2,1.7,10.0,285.2,34,moderate
+F705,rambutan binjai,"rambutan binjai, segar",76.0,0.5,0.2,18.0,3.8,22.0,120.0,40,low
+F706,rambutan,"rambutan, segar",69.0,0.9,0.1,18.1,0.8,16.0,104.2,40,moderate
+F707,salak bali,"salak bali, segar",57.0,0.5,0.1,13.6,1.3,,,93,moderate
+F708,salak medan,"salak medan, segar",55.0,0.4,0.2,12.8,3.2,39.0,113.0,93,low
+F709,salak pondoh,"salak pondoh, segar",87.0,0.8,0.4,20.1,0.0,,,59,moderate
+F710,salak,"salak, segar",77.0,0.4,,20.9,,,,93,moderate
+F711,sawo duren,"sawo duren, segar",64.0,1.0,3.1,8.0,0.8,13.0,111.4,64,moderate
+F712,sawo kecik,"sawo kecik, segar",111.0,0.9,2.3,21.6,1.0,28.0,117.8,83,moderate
+F713,sawo manila,"sawo manila, segar",92.0,0.5,1.1,22.4,9.5,26.0,110.2,79,low
+F714,semangka,"semangka, segar",28.0,0.5,0.2,6.9,0.4,7.0,93.8,46,moderate
+F715,sirsak,"sirsak, segar",65.0,1.0,0.3,16.3,3.2,2.0,298.9,68,moderate
+F716,sowa,"sowa, segar",48.0,1.6,0.6,9.1,4.5,9.0,0.0,100,low
+F717,srikaya,"srikaya, segar",63.0,1.1,0.5,13.9,2.1,,,48,moderate
+F718,sukun muda,"sukun muda, segar",119.0,1.4,0.2,28.1,1.4,24.0,414.4,84,moderate
+F719,sukun tua,"sukun tua, segar",126.0,1.6,0.2,24.5,1.5,25.0,436.0,88,moderate
+F720,vigus,"vigus, segar",44.0,2.4,0.1,8.3,,2.0,180.0,100,moderate
+F721,wani,"wani, segar",74.0,0.8,0.3,17.1,3.1,,,77,moderate
+F722,barongko,barongko,159.0,3.1,5.8,23.5,,46.0,78.0,100,moderate
+F723,dodol nanas,dodol nanas,338.0,1.5,1.2,80.3,,,,100,high
+F724,getuk pisang,getuk pisang,144.0,1.1,0.4,34.1,0.4,,,100,moderate
+F725,keripik lampung,keripik lampung,485.0,1.7,22.2,69.7,0.6,,,100,high
+F726,ledre pisang,ledre pisang,405.0,4.8,5.1,84.9,0.4,,,100,high
+F727,lempog durian,lempog durian,320.0,3.5,5.7,63.7,4.9,,,100,moderate
+F728,loka anjoro,loka anjoro,163.0,1.1,4.3,30.0,,,,100,moderate
+F729,rica-rica taipa,rica-rica taipa,49.0,1.6,0.3,10.0,,426.0,42.0,100,moderate
+F730,rujak aceh,rujak aceh,82.0,0.4,0.3,19.7,2.4,,,100,moderate
+F731,sale kesemek,sale kesemek,296.0,1.1,0.6,71.4,,,,100,high
+F732,sale pisang siam,sale pisang siam,281.0,2.4,0.7,66.1,1.0,,,100,high
+F733,sale pisang,"sale pisang, cilacap",295.0,2.3,2.1,66.9,1.3,,,100,high
+F734,sanggara belanda,sanggara belanda,242.0,6.4,7.1,38.2,,,,100,moderate
+F735,tepung pisang,tepung pisang,338.0,2.9,0.4,80.6,5.3,18.0,734.0,100,high
+F736,tepung sukun,tepung sukun,353.0,2.9,0.5,84.4,3.7,9.0,2008.0,100,high
+F737,anak sapi,"anak sapi, daging, gemuk, segar",184.0,18.8,14.0,0.0,0.0,118.0,490.1,100,low
+F738,anak sapi,"anak sapi, daging, kurus, segar",174.0,19.6,10.0,0.0,0.0,96.0,399.8,100,low
+F739,anak sapi,"anak sapi, daging, sedang, segar",190.0,19.1,12.0,0.0,0.0,99.0,412.7,100,low
+F740,angsa,"angsa, daging, segar",349.0,16.4,31.5,0.0,0.0,71.0,299.2,60,low
+F741,ayam,"ayam, daging, segar",298.0,18.2,25.0,0.0,0.0,109.0,385.9,58,low
+F742,ayam,"ayam, dideh/darah, segar",75.0,13.8,1.9,0.7,0.0,337.0,234.0,100,low
+F743,ayam,"ayam, hati, segar",261.0,27.4,16.1,1.6,0.0,1068.0,22.9,100,low
+F744,babi,"babi, daging, gemuk,segar",453.0,11.9,45.0,0.0,0.0,112.0,819.3,100,low
+F745,babi,"babi, daging, kurus, segar",371.0,14.1,35.0,0.0,0.0,97.0,706.3,100,low
+F746,babi,"babi, ginjal, segar",110.0,16.3,4.6,0.8,0.0,139.0,390.0,100,low
+F747,babi,"babi, hati, segar",129.0,19.7,4.8,1.7,0.0,110.0,447.0,100,low
+F748,bebek (itik),"bebek (itik), daging, segar",321.0,16.0,28.6,0.0,0.0,54.0,199.0,60,low
+F749,bebek alabio,"bebek alabio, daging, segar",303.0,11.3,27.0,3.7,0.0,50.0,260.0,100,low
+F750,belibis,"belibis, daging, segar",131.0,20.2,4.3,2.8,0.0,46.0,104.0,100,low
+F751,burung,"burung, sarang, segar",281.0,37.5,0.3,32.1,,,,100,moderate
+F752,domba,"domba, daging, gemuk, segar",317.0,15.7,27.7,0.0,0.0,64.0,242.1,100,low
+F753,domba,"domba, daging, kurus,  segar",202.0,17.1,14.8,0.0,0.0,90.0,355.0,100,low
+F754,domba,"domba, ginjal, segar",100.0,16.6,3.3,1.0,0.0,155.0,276.0,100,low
+F755,kambing,"kambing, daging, segar",149.0,16.6,9.2,0.0,0.0,96.0,268.7,100,low
+F756,kelinci,"kelinci, daging, segar",142.0,16.9,7.8,0.0,0.0,49.0,371.1,100,low
+F757,kerbau,"kerbau, daging, segar",79.0,18.7,0.5,0.0,0.0,91.0,273.0,100,low
+F758,kuda,"kuda, daging, segar",113.0,18.1,4.1,0.9,0.0,46.0,315.7,100,low
+F759,sapi,"sapi, babat, segar",108.0,17.6,4.2,0.0,0.0,147.0,101.4,100,low
+F760,sapi,"sapi, daging, gemuk, segar",273.0,17.5,22.0,0.0,0.0,93.0,267.0,100,low
+F761,sapi,"sapi, daging, kurus, segar",174.0,19.6,10.0,0.0,0.0,83.0,489.0,100,low
+F762,sapi,"sapi, daging, lemak sedang, segar",201.0,18.8,14.0,0.0,0.0,105.0,378.0,100,low
+F763,sapi,"sapi, daleman, segar",183.0,12.0,14.4,1.4,0.0,277.0,160.0,100,low
+F764,sapi,"sapi, dideh/darah",98.0,21.9,1.1,0.0,0.0,150.0,170.0,100,low
+F765,sapi,"sapi, ginjal, segar",137.0,15.0,8.1,0.9,0.0,200.0,230.2,100,low
+F766,sapi,"sapi, keleponan, segar",84.0,10.5,4.6,0.2,0.0,73.0,318.0,100,low
+F767,sapi,"sapi, liver, segar",132.0,19.7,3.2,6.0,0.0,110.0,213.0,100,moderate
+F768,sapi,"sapi, otak, segar",123.0,10.4,8.6,0.8,0.0,112.0,243.8,100,low
+F769,sapi,"sapi, usus, segar",126.0,14.0,7.2,1.5,0.0,,,100,low
+F770,ulat sagu segar,ulat sagu segar,241.0,5.8,21.6,5.8,2.8,210.0,210.0,100,low
+F771,ayam,"ayam, ampela, goreng",270.0,32.3,11.2,9.9,0.0,980.0,,100,moderate
+F772,ayam,"ayam, usus, goreng",473.0,45.2,26.3,13.9,0.0,,,100,moderate
+F773,bebek,"bebek, daging, goreng",300.0,24.0,20.7,4.5,0.0,34.0,6.0,100,low
+F774,buaya,"buaya, daging, dendeng, mentah",365.0,49.6,4.8,30.8,,500.0,680.0,100,moderate
+F775,ham,ham,384.0,16.9,35.0,0.3,0.0,112.0,819.3,100,low
+F776,itik alabio,"itik alabio, daging, dendeng, mentah",496.0,30.3,33.5,18.4,,1081.0,478.0,100,moderate
+F777,kerupuk urat,kerupuk urat,588.0,53.7,40.9,1.2,,1024.0,37.0,100,low
+F778,menjangan,"menjangan, daging, dendeng, mentah",322.0,55.8,2.0,22.7,,765.0,1282.0,100,moderate
+F779,punai,"punai, daging, goreng",224.0,26.2,11.3,4.4,,2.0,19.0,100,low
+F780,rusa,"rusa, daging, dendeng, mentah",536.0,40.5,41.5,0.0,,130.0,690.0,100,low
+F781,sapi,"sapi, abon",212.0,18.0,10.6,59.3,7.5,,,100,moderate
+F782,sapi,"sapi, abon, asli",358.0,14.6,16.1,38.6,2.5,,,100,moderate
+F783,sapi,"sapi, daging, asap",182.0,32.0,6.0,0.0,0.0,1620.0,485.4,100,low
+F784,sapi,"sapi, daging, dendeng, mentah",301.0,55.0,9.0,0.0,,,,100,low
+F785,sapi,"sapi, daging, kornet",289.0,16.0,25.0,0.0,0.0,794.0,94.4,100,low
+F786,sapi,"sapi, daging, sosis (worst)",448.0,14.5,42.3,2.3,,765.0,284.5,100,low
+F787,sapi,"sapi, hati, sosis (liverworst)",274.0,16.0,22.0,3.0,2.3,654.0,158.8,100,low
+F788,sapi,"sapi, paru, dendeng, mentah",360.0,57.3,6.0,19.2,,1483.0,864.0,100,moderate
+F789,sapi,"sapi, paru, goreng",268.0,23.9,12.7,14.5,,923.0,299.0,100,moderate
+F790,ulat sagu,"ulat sagu, panggang",380.0,11.9,30.3,14.9,4.8,260.0,550.0,100,low
+F791,ayam goreng church texas,"ayam goreng church texas, dada",338.0,35.2,20.6,0.4,0.0,800.0,369.5,100,low
+F792,ayam goreng church,"ayam goreng church,texas paha",287.0,31.0,15.7,1.7,0.0,723.0,257.0,100,low
+F793,ayam goreng church texas,"ayam goreng church texas, sayap",295.0,34.0,16.0,1.5,0.0,771.0,237.2,100,low
+F794,ayam goreng kalasan,"ayam goreng kalasan, paha",275.0,37.4,12.2,1.3,0.0,176.0,321.9,100,low
+F795,ayam goreng kentucky,"ayam goreng kentucky, dada",298.0,34.2,16.8,0.1,0.0,741.0,342.0,100,low
+F796,ayam goreng kentucky,"ayam goreng kentucky, paha",286.0,32.1,16.1,1.1,0.0,746.0,265.2,100,low
+F797,ayam goreng kentucky,"ayam  goreng kentucky,sayap",297.0,35.9,15.2,1.6,0.0,807.0,248.4,100,low
+F798,ayam goreng mbok berek dada,ayam goreng mbok berek dada,295.0,39.2,13.6,1.0,0.0,,,100,low
+F799,ayam goreng pasundan,"ayam goreng pasundan, dada",246.0,37.9,9.0,0.7,0.0,,,100,low
+F800,ayam goreng pasundan,"ayam goreng pasundan, paha",245.0,33.1,11.4,0.3,0.0,,,100,low
+F801,ayam goreng pioneer,"ayam goreng pioneer, dada",295.0,37.4,14.7,0.6,0.0,,,100,low
+F802,ayam goreng sukabumi,"ayam goreng sukabumi, dada",244.0,36.7,9.2,1.0,0.0,,,100,low
+F803,ayam goreng sukabumi,"ayam goreng sukabumi, paha",283.0,35.7,14.3,0.5,0.0,,,100,low
+F804,ayam taliwang,"ayam taliwang, masakan",264.0,18.2,20.1,2.7,,507.0,408.0,100,low
+F805,babi hutan masak rica,"babi hutan masak rica, masakan",491.0,24.6,16.3,0.2,,1415.0,327.0,100,low
+F806,beef burger,beef burger,258.0,10.6,9.5,32.5,0.4,572.0,189.1,100,moderate
+F807,beef teriyaki,"beef teriyaki, masakan",151.0,8.6,3.1,22.3,0.3,377.0,,100,moderate
+F808,beef yakiniku,"beef yakiniku, masakan",132.0,9.8,1.1,20.7,0.3,409.0,,100,moderate
+F809,brongkos,brongkos,141.0,15.3,3.3,12.6,1.0,,,100,moderate
+F810,bulgogi,"bulgogi, masakan",72.0,11.4,4.9,1.4,1.7,509.0,,100,low
+F811,chicken teriyaki,"chicken teriyaki, masakan",168.0,13.0,9.6,7.5,0.8,959.0,,100,moderate
+F812,chikiniku,"chikiniku, masakan",143.0,9.8,1.4,22.8,0.4,531.0,,100,moderate
+F813,coto mangkasara,"coto mangkasara, kuda, masakan",96.0,6.8,5.9,3.8,,96.0,31.0,100,low
+F814,coto mangkasara,"coto mangkasara, sapi, masakan",84.0,6.0,6.0,1.4,,90.0,25.0,100,low
+F815,djibokum,"djibokum, masakan",248.0,10.0,2.3,40.9,0.1,401.0,,100,moderate
+F816,empal (daging) goreng,"empal (daging) goreng, masakan",248.0,36.2,6.9,10.1,,848.0,,100,moderate
+F817,gulai kambing,gulai kambing,126.0,4.2,9.4,6.2,,302.0,138.0,100,moderate
+F818,jangang bintatoeng,"jangang bintatoeng, masakan",107.0,5.3,2.2,16.5,,482.0,406.0,100,moderate
+F819,kalio ayam,"kalio ayam, masakan",203.0,16.0,13.5,4.4,,534.0,,100,low
+F820,kalio jeroan,"kalio jeroan, masakan",163.0,16.5,9.0,4.1,,570.0,,100,low
+F821,kalio kikil (tunjang),"kalio kikil (tunjang), masakan",122.0,13.8,5.7,3.9,,519.0,,100,low
+F822,kalio otak,"kalio otak, masakan",157.0,8.1,8.8,11.4,,604.0,,100,moderate
+F823,lawar babi,"lawar babi, masakan",174.0,17.0,10.0,3.0,0.0,,,100,low
+F824,lawar penyu,"lawar penyu, masakan",141.0,23.0,1.5,7.6,0.0,,,100,moderate
+F825,lawara jangang,"lawara jangang, masakan",159.0,5.0,10.9,10.1,,400.0,2368.0,100,moderate
+F826,naan maran sapi,"naan maran sapi, masakan",478.0,38.3,33.9,5.1,,220.0,320.0,100,moderate
+F827,nasu likku,"nasu likku, masakan",196.0,14.5,8.3,15.9,,386.0,470.0,100,moderate
+F828,oramu ninahu ndawa olaho,"oramu ninahu ndawa olaho, masakan",117.0,13.7,5.0,4.3,,,727.0,100,low
+F829,paniki masak santan,"paniki masak santan, masakan",460.0,28.5,35.2,7.2,,2002.0,532.0,100,moderate
+F830,pelolah manuk,"pelolah manuk, masakan",219.0,19.7,13.6,4.4,,577.0,,100,low
+F831,rawon,"rawon, masakan",60.0,5.4,2.5,4.0,,,,100,low
+F832,rendang sapi,"rendang sapi, masakan",193.0,22.6,7.9,7.8,0.0,,,100,moderate
+F833,rw,"rw, anjing, masakan",198.0,24.6,10.7,0.9,,1604.0,226.0,100,low
+F834,sate,"sate, penyu, masakan",179.0,22.5,3.5,13.3,0.0,,,100,moderate
+F835,sate pusut,"sate pusut, masakan",274.0,12.9,18.6,13.6,,609.0,,100,moderate
+F836,penyu,"penyu, serapah, masakan",174.0,13.1,12.2,2.2,0.0,,507.0,100,low
+F837,sie reuboh,"sie reuboh, masakan",474.0,11.2,42.5,11.7,,677.0,176.0,100,moderate
+F838,sop buntut,"sop buntut, masakan",71.0,7.5,3.6,2.2,,490.0,,100,low
+F839,sop daging sapi,"sop daging sapi, masakan",49.0,5.8,0.5,5.3,,391.0,,100,moderate
+F840,sop kaki sapi,"sop kaki sapi, masakan",68.0,9.0,1.9,3.7,,435.0,,100,low
+F841,sop kambing,"sop kambing, masakan",34.0,5.5,0.8,1.1,,348.0,,100,low
+F842,sop konro,"sop konro, masakan",71.0,7.4,2.6,4.5,,184.0,25.0,100,low
+F843,sop saudara,"sop saudara, masakan",89.0,7.2,5.0,3.9,,274.0,50.0,100,low
+F844,soto bandung,"soto bandung, masakan",42.0,3.9,1.7,2.8,0.4,,,100,low
+F845,soto banjar,"soto banjar, masakan",110.0,2.9,9.5,3.2,,36.0,6.0,100,low
+F846,soto betawi,"soto betawi, masakan",135.0,2.5,8.8,11.5,0.5,,,100,moderate
+F847,soto jeroan,"soto jeroan, masakan",92.0,11.8,4.3,1.4,,363.0,,100,low
+F848,soto kudus,"soto kudus, masakan",38.0,2.6,2.3,1.8,0.2,,,100,low
+F849,soto madura,"soto madura, masakan",60.0,3.5,4.5,1.3,0.0,,,100,low
+F850,soto padang,"soto padang, masakan",127.0,5.9,6.6,11.0,0.7,,,100,moderate
+F851,soto pekalongan,"soto pekalongan, masakan",94.0,3.0,6.8,5.1,0.3,,,100,moderate
+F852,soto pemalang,"soto pemalang, masakan",75.0,3.6,5.2,3.5,0.0,,,100,low
+F853,soto sukaraja,"soto sukaraja, masakan",80.0,3.2,3.5,9.0,0.3,,,100,moderate
+F854,soto sulung,"soto sulung, masakan",86.0,2.3,8.5,0.0,0.0,,,100,low
+F855,sukiyaki,"sukiyaki, masakan",75.0,5.6,0.4,12.2,0.2,426.0,,100,moderate
+F856,tedong pallu basa,"tedong pallu basa, masakan",83.0,10.4,3.4,2.8,,397.0,34.0,100,low
+F857,tikus rica,"tikus rica, masakan",257.0,18.8,18.5,3.8,,1724.0,308.0,100,low
+F858,tinoransa,"tinoransa, masakan",516.0,17.7,49.5,0.0,,1307.0,320.0,100,low
+F859,belut,"belut, segar",70.0,14.6,0.8,1.0,0.0,55.0,169.0,100,low
+F860,belut,"belut, laut, segar",93.0,12.8,1.5,6.1,0.0,33.0,175.9,100,moderate
+F861,cumi-cumi,"cumi-cumi, segar",75.0,16.1,0.7,0.1,0.0,37.0,204.1,100,low
+F862,ikan bader,"ikan bader, segar",193.0,19.0,13.0,0.0,0.0,118.0,264.9,100,low
+F863,ikan balong,"ikan balong, segar",107.0,16.5,3.9,1.5,0.0,86.0,253.4,100,low
+F864,ikan bambangan,"ikan bambangan, segar",112.0,20.0,1.3,3.7,0.0,148.0,258.7,100,low
+F865,ikan bandeng,"ikan bandeng, segar",123.0,20.0,4.8,0.0,0.0,67.0,271.1,100,low
+F866,ikan banjar,"ikan banjar, segar",111.0,19.4,0.9,4.8,0.0,99.0,338.7,100,low
+F867,ikan baronang,"ikan baronang, segar",78.0,14.5,0.6,3.7,0.0,26.0,692.0,100,low
+F868,ikan batung,"ikan batung, segar",115.0,14.5,4.6,4.2,0.0,42.0,361.0,100,low
+F869,ikan baung,"ikan baung, segar",123.0,15.1,5.5,3.3,0.0,32.0,349.0,100,low
+F870,ikan bawal,"ikan bawal, segar",91.0,19.0,1.7,0.0,0.0,129.0,233.3,100,low
+F871,ikan belida,"ikan belida, segar",80.0,14.7,1.4,2.2,0.0,41.0,356.0,100,low
+F872,ikan beunteur,"ikan beunteur, segar",109.0,17.0,4.0,0.0,0.0,109.0,323.5,100,low
+F873,ikan biawan,"ikan biawan, segar",90.0,14.9,2.5,2.1,0.0,35.0,207.0,100,low
+F874,ikan bili,"ikan bili, segar",88.0,14.2,0.7,6.2,0.0,217.0,202.0,100,moderate
+F875,ikan bubara,"ikan bubara, segar",100.0,14.7,2.4,4.9,,390.0,390.0,100,low
+F876,ikan bulan-bulan,"ikan bulan-bulan, segar",134.0,25.5,1.3,5.0,,197.0,489.0,100,low
+F877,ikan cakalang,"ikan cakalang, segar",107.0,19.6,0.7,5.5,0.0,66.0,239.0,100,moderate
+F878,ikan cakalang,"ikan cakalang, hati, segar",120.0,11.3,3.9,10.0,,420.0,280.0,100,moderate
+F879,ikan cakalang,"ikan cakalang, jantung, segar",116.0,11.2,1.2,10.2,,360.0,250.0,100,moderate
+F880,ikan cakalang,"ikan cakalang, perut, segar",86.0,10.2,1.1,8.7,,230.0,210.0,100,moderate
+F881,ikan daun,"ikan daun, segar",101.0,11.5,4.1,4.6,0.0,120.0,270.0,100,low
+F882,ikan ekor kuning,"ikan ekor kuning, segar",108.0,22.3,1.2,2.1,0.0,50.0,230.0,100,low
+F883,ikan gabus,"ikan gabus, segar",80.0,16.2,0.5,2.6,0.0,65.0,254.0,100,low
+F884,ikan heu,"ikan heu, segar",81.0,10.0,1.6,6.6,,240.0,210.0,100,moderate
+F885,ikan hitam,"ikan hitam, segar",101.0,10.3,3.7,6.7,0.0,70.0,210.0,100,moderate
+F886,ikan hiu,"ikan hiu, segar",57.0,10.7,0.3,2.2,0.0,,,100,low
+F887,ikan kacangan,"ikan kacangan, segar",77.0,15.6,0.9,1.6,0.0,,,100,low
+F888,ikan kakap,"ikan kakap, segar",92.0,20.0,0.7,0.0,0.0,,,100,low
+F889,ikan kakatua,"ikan kakatua, segar",82.0,11.4,1.2,6.4,,90.0,300.0,100,moderate
+F890,ikan kalaban,"ikan kalaban, segar",77.0,16.4,0.7,1.3,0.0,40.0,334.0,100,low
+F891,ikan kamera (kakap merah),"ikan kamera (kakap merah), segar",86.0,19.7,0.8,0.0,0.0,90.0,290.0,100,low
+F892,ikan kapar,"ikan kapar, segar",132.0,17.0,6.7,0.8,0.0,78.0,229.0,100,low
+F893,ikan kawalinya,"ikan kawalinya, segar",110.0,12.6,4.2,5.4,,340.0,300.0,100,moderate
+F894,ikan keru-keru,"ikan keru-keru, segar",93.0,16.5,2.1,0.8,0.0,137.0,255.3,55,low
+F895,ikan kima,"ikan kima, segar",70.0,10.8,0.7,5.2,,342.0,101.0,100,moderate
+F896,ikan lais,"ikan lais, segar",161.0,11.9,11.5,2.4,0.0,,,62,low
+F897,ikan layang,"ikan layang, segar",109.0,22.0,1.7,0.0,0.0,,,80,low
+F898,ikan layur,"ikan layur, segar",82.0,18.0,1.0,0.4,0.0,,,49,low
+F899,ikan lehoma,"ikan lehoma, segar",90.0,20.4,0.9,0.0,,56.0,281.0,100,low
+F900,ikan lemuru,"ikan lemuru, segar",112.0,20.0,3.0,0.0,0.0,,,80,low
+F901,ikan lidah,"ikan lidah, segar",104.0,15.6,3.2,2.0,0.0,,,100,low
+F902,ikan malalugis,"ikan malalugis, segar",99.0,20.6,1.4,0.9,,76.0,282.0,100,low
+F903,ikan mamar merah,"ikan mamar merah, segar",115.0,15.3,4.0,4.4,0.0,120.0,240.0,100,low
+F904,ikan mas,"ikan mas, segar",86.0,16.0,2.0,0.0,0.0,65.0,276.7,80,low
+F905,ikan mayong,"ikan mayong, segar",97.0,17.9,2.0,0.4,0.0,,,89,low
+F906,ikan mujahir,"ikan mujahir, segar",89.0,18.7,1.0,0.0,0.0,51.0,265.8,80,low
+F907,ikan nasu metti,"ikan nasu metti, segar",154.0,16.8,5.0,10.5,,421.0,488.0,100,moderate
+F908,ikan oci,"ikan oci, kembung, segar",125.0,21.3,3.4,2.2,,214.0,245.0,80,low
+F909,ikan paling,"ikan paling, segar",303.0,14.0,27.0,0.0,0.0,43.0,,100,low
+F910,ikan papuyu/ betok,"ikan papuyu/ betok, segar",120.0,14.3,4.9,4.6,0.0,240.0,169.0,100,low
+F911,ikan patin,"ikan patin, segar",132.0,17.0,6.6,1.1,0.0,77.0,346.0,100,low
+F912,ikan pomo,"ikan pomo, segar",147.0,22.5,5.2,2.6,,,380.0,100,low
+F913,ikan puntin,"ikan puntin, segar",76.0,14.4,1.1,2.2,,,325.0,100,low
+F914,ikan saluang,"ikan saluang, segar",113.0,13.9,4.9,3.4,0.0,51.0,182.0,89,low
+F915,ikan sarden,"ikan sarden, segar",109.0,19.9,1.8,3.4,0.0,266.0,227.0,100,low
+F916,ikan selar,"ikan selar, segar",100.0,18.8,2.2,0.0,0.0,43.0,392.6,48,low
+F917,ikan sepat,"ikan sepat, segar",84.0,15.2,0.6,4.7,0.0,211.0,198.0,75,low
+F918,ikan sidat,"ikan sidat, segar",81.0,11.4,1.9,3.8,0.0,46.0,245.9,100,low
+F919,ikan sunu,"ikan sunu, segar",111.0,13.3,3.4,6.7,,91.0,197.0,70,moderate
+F920,ikan tahuman,"ikan tahuman, segar",88.0,15.9,0.9,4.1,0.0,24.0,364.0,100,low
+F921,ikan tarmon,"ikan tarmon, segar",96.0,19.5,1.1,2.0,0.0,43.0,154.0,100,low
+F922,ikan telan,"ikan telan, segar",95.0,15.8,0.7,6.5,0.0,58.0,294.0,100,moderate
+F923,ikan tembang,"ikan tembang, segar",204.0,16.0,15.0,0.0,0.0,341.0,291.0,80,low
+F924,ikan tempahas,"ikan tempahas, segar",101.0,15.1,4.1,1.0,0.0,50.0,320.0,100,low
+F925,ikan terbang,"ikan terbang, segar",98.0,19.6,1.7,1.0,0.0,90.0,320.0,100,low
+F926,ikan teri,"ikan teri, segar",74.0,10.3,1.4,4.1,0.0,554.0,126.1,100,low
+F927,ikan titang,"ikan titang, segar",82.0,17.4,0.4,2.3,0.0,110.0,275.0,100,low
+F928,ikan tongkol,"ikan tongkol, segar",100.0,13.7,1.5,8.0,0.0,202.0,227.0,100,moderate
+F929,ikan turi,"ikan turi, segar",96.0,19.2,2.0,0.2,,370.0,300.0,100,low
+F930,keong,"keong, segar",64.0,12.0,1.0,2.0,0.0,231.0,,46,low
+F931,kepiting,"kepiting, segar",151.0,13.8,3.8,14.1,0.0,,,45,moderate
+F932,kerang,"kerang, segar",101.0,14.4,2.6,3.9,0.0,,,100,low
+F933,kodok,"kodok, segar",73.0,16.4,0.3,0.0,0.0,,,65,low
+F934,kura-kura,"kura-kura, segar",83.0,19.1,0.2,0.0,0.0,,,70,low
+F935,kuro,"kuro, segar",87.0,16.0,2.2,1.0,0.0,,,52,low
+F936,lokan,"lokan, segar",217.0,11.0,1.7,5.1,,3.0,7.0,100,moderate
+F937,rajungan,"rajungan, segar",76.0,12.1,2.0,2.4,0.0,69.0,192.0,100,low
+F938,rebon,"rebon, udang kecil, segar",81.0,16.2,1.2,0.7,0.0,169.0,202.9,100,low
+F939,rusip,rusip,110.0,11.5,2.0,11.7,0.0,,,100,moderate
+F940,udang galah,"udang galah, segar",81.0,16.5,0.3,3.0,0.0,95.0,132.0,68,low
+F941,udang,"udang, besar, segar",56.0,11.4,0.6,1.2,0.0,190.0,210.0,68,low
+F942,udang,"udang, segar",91.0,21.0,0.2,0.1,0.0,178.0,222.4,68,low
+F943,bekicot,"bekicot, dendeng, mentah",441.0,48.7,20.3,15.8,0.0,,,100,moderate
+F944,belut,"belut, goreng",417.0,25.9,19.4,32.0,0.0,71.0,217.7,100,moderate
+F945,cumi-cumi,"cumi-cumi, goreng",265.0,40.6,10.1,0.0,0.0,86.0,81.9,100,low
+F946,ikan asin,"ikan asin, kering",193.0,42.0,1.5,0.0,0.0,,,70,low
+F947,ikan bandeng presto,"ikan bandeng presto, masakan",296.0,17.1,20.3,11.3,0.0,,,100,moderate
+F948,ikan baung bakar,ikan baung bakar,144.0,17.8,5.8,5.2,,168.0,236.0,100,moderate
+F949,ikan belida bakar,ikan belida bakar,128.0,18.0,3.0,7.2,0.0,293.0,198.0,100,moderate
+F950,ikan cakalang asap,"ikan cakalang asap, mentah",204.0,34.2,5.6,1.9,,176.0,588.0,70,low
+F951,ikan cakalang asin,"ikan cakalang asin, mentah",198.0,36.5,2.2,5.5,0.0,4304.0,302.1,70,moderate
+F952,ikan calo/ peda,"ikan calo/ peda, mentah",81.0,11.4,1.9,3.8,0.0,,,100,low
+F953,ikan gabus asap,"ikan gabus asap, mentah",261.0,38.1,2.3,21.9,0.0,320.0,410.0,80,moderate
+F954,ikan gabus,"ikan gabus, kering",268.0,58.0,4.0,0.0,0.0,,,80,low
+F955,ikan gete,"ikan gete, goreng",267.0,23.1,19.4,0.2,,590.0,440.0,100,low
+F956,ikan hiu,"ikan hiu, kering",298.0,46.3,3.6,20.2,,957.0,1457.0,100,moderate
+F957,ikan katombo,"ikan katombo, asin",162.0,31.7,2.8,0.3,0.0,4393.0,342.2,70,low
+F958,ikan kayu,"ikan kayu, kering",302.0,70.7,1.9,0.4,0.0,345.0,1045.0,100,low
+F959,ikan lais bakar,ikan lais bakar,147.0,17.5,6.5,5.4,,142.0,209.0,100,moderate
+F960,ikan lomak asin,"ikan lomak asin, mentah",258.0,40.3,2.3,18.9,0.0,6227.0,485.1,100,moderate
+F961,ikan mas pepes,ikan mas pepes,209.0,15.2,11.3,11.8,0.5,74.0,276.7,100,moderate
+F962,ikan mujahir goreng,ikan mujahir goreng,416.0,46.9,23.9,0.0,0.0,54.0,278.9,100,low
+F963,ikan mujahir pepes,ikan mujahir pepes,121.0,21.7,2.8,0.8,0.0,58.0,265.8,100,low
+F964,ikan mujahir,"ikan mujahir, dendeng, mentah",582.0,68.3,15.2,37.2,0.0,,,100,moderate
+F965,ikan papuyu,"ikan papuyu, bakar",152.0,17.6,6.1,6.7,0.0,320.0,224.0,100,moderate
+F966,ikan patin,"ikan patin, bakar",144.0,17.5,6.3,4.3,,379.0,230.0,100,low
+F967,ikan peda banjar,"ikan peda banjar, mentah",156.0,28.0,4.0,2.0,0.0,59.0,368.8,90,low
+F968,ikan pepetek,"ikan pepetek, mentah",176.0,32.0,4.4,2.0,0.0,79.0,1.0,100,low
+F969,ikan pindang banjar,"ikan pindang banjar, mentah",157.0,28.0,4.2,1.8,0.0,,,100,low
+F970,ikan pindang benggol,"ikan pindang benggol, mentah",170.0,31.0,4.2,0.0,0.0,,,100,low
+F971,ikan pindang layang,"ikan pindang layang, mentah",153.0,30.0,2.8,0.0,0.0,,,100,low
+F972,ikan pindang selar,"ikan pindang selar, mentah",142.0,27.0,3.0,0.0,0.0,,,100,low
+F973,ikan sale,"ikan sale, mentah",534.0,40.2,39.3,4.9,2.0,673.0,673.0,100,low
+F974,ikan sale lais,"ikan sale lais, mentah",415.0,61.3,17.6,2.9,0.0,381.0,488.0,100,low
+F975,ikan saluang,"ikan saluang, kering, mentah",284.0,34.1,9.9,14.6,0.0,1767.0,263.0,100,moderate
+F976,ikan sanggang,"ikan sanggang, masakan",240.0,21.7,7.7,20.7,,2041.0,159.0,100,moderate
+F977,ikan selar kuning,"ikan selar kuning, cue, mentah",138.0,27.0,3.3,0.0,0.0,,,90,low
+F978,ikan selar,"ikan selar, kering, mentah",194.0,38.0,3.5,0.0,0.0,,,100,low
+F979,ikan sepat,"ikan sepat, kering, mentah",289.0,38.0,14.0,0.0,0.0,,,100,low
+F980,ikan sunu,"ikan sunu, asin, mentah",199.0,34.1,3.8,7.1,,377.0,57.0,100,moderate
+F981,ikan,"ikan, tepung, mentah",316.0,60.1,6.5,22.4,0.0,,,100,moderate
+F982,ikan teri nasi,"ikan teri nasi, kering, mentah",144.0,32.5,0.6,0.0,0.0,312.0,,100,low
+F983,ikan teri,"ikan teri, bubuk, mentah",277.0,60.0,2.3,1.8,0.0,,,100,low
+F984,ikan teri,"ikan teri, kering, mentah",170.0,33.4,3.0,0.0,0.0,,,100,low
+F985,ikan teri,"ikan teri, kering, tawar, mentah",331.0,68.7,4.2,0.0,0.0,,,100,low
+F986,ikan teri,"ikan teri, tepung, mentah",347.0,48.8,6.4,19.6,0.0,,,100,moderate
+F987,kerang,"kerang, asap, mentah",393.0,38.9,13.3,29.4,,160.0,50.0,100,moderate
+F988,kerang,"kerang, dendeng, mentah",357.0,41.1,10.0,25.6,0.0,,,100,moderate
+F989,rebon,"rebon, kering, mentah",299.0,59.4,3.6,3.2,0.0,,,100,low
+F990,rebung laut,"rebung laut, mentah",320.0,7.2,4.2,63.3,,20.0,1040.0,100,high
+F991,sardines dalam kaleng,sardines dalam kaleng,338.0,21.1,27.0,1.0,0.0,,,100,low
+F992,teripang,"teripang, dendeng, mentah",462.0,39.1,32.4,3.5,0.0,315.0,402.5,100,low
+F993,udang kering,"udang kering, mentah",278.0,62.6,4.1,2.2,,540.0,360.0,100,low
+F994,udang papay,"udang papay, mentah",273.0,47.8,3.8,12.5,,651.0,802.0,100,moderate
+F995,abon haruwan,abon haruwan,513.0,23.7,37.0,21.3,,61.0,15.0,100,moderate
+F996,abon ikan,abon ikan,435.0,27.2,20.2,36.1,,,,100,moderate
+F997,betok wadi,"betok wadi, masakan",145.0,16.3,7.0,4.1,,69.0,203.0,100,low
+F998,bou ninahu ndamate,"bou ninahu ndamate, masakan",79.0,16.3,1.0,1.1,,67.0,,100,low
+F999,bouiki ninahu nggaluku,"bouiki ninahu nggaluku, masakan",94.0,7.8,2.2,10.8,,58.0,179.4,100,moderate
+F1000,cakalang asar (asap),cakalang asar (asap),155.0,20.1,3.8,10.2,,90.0,390.0,100,moderate
+F1001,dendeng belut,"dendeng belut, goreng, masakan",382.0,55.7,14.1,8.0,0.0,,,100,moderate
+F1002,dendeng mujahir,"dendeng mujahir, goreng, masakan",598.0,74.3,26.9,9.2,0.0,,,100,moderate
+F1003,fillet o-fish,fillet o-fish,270.0,12.3,15.9,19.3,0.2,439.0,,100,moderate
+F1004,gete kuah asam,"gete kuah asam, masakan",75.0,8.2,2.0,6.0,,260.0,150.0,100,moderate
+F1005,gulai asam keueung,"gulai asam keueung, masakan",52.0,10.0,0.5,1.8,,332.0,141.0,100,low
+F1006,gulai ikan,"gulai ikan, masakan",106.0,16.5,3.3,2.5,,743.0,,100,low
+F1007,gulai ikan paya,"gulai ikan paya, masakan",148.0,10.0,9.8,5.0,,525.0,256.0,100,low
+F1008,gulai keumamah,"gulai keumamah, masakan",110.0,5.9,8.2,3.2,,335.0,121.0,100,low
+F1009,gulai tiram,"gulai tiram, masakan",132.0,9.0,7.2,7.8,,285.0,133.0,100,moderate
+F1010,gurame asem manis,"gurame asem manis, masakan",192.0,12.7,10.1,12.7,0.0,,,100,moderate
+F1011,ikan asar merah,"ikan asar merah, masakan",146.0,17.7,5.9,5.6,,170.0,310.0,100,moderate
+F1012,jambal goreng,"jambal goreng, masakan",286.0,48.5,9.2,2.3,,,,100,low
+F1013,jukku pallu kaloa,"jukku pallu kaloa, masakan",15.0,15.2,4.3,8.8,,605.0,153.0,100,moderate
+F1014,kaholeo,"kaholeo, masakan",413.0,28.7,19.8,29.8,,0.0,1171.0,100,moderate
+F1015,lawara penjah,lawara penjah,207.0,7.4,15.4,9.6,,683.0,117.0,100,moderate
+F1016,model,"model, masakan",79.0,2.2,4.0,8.6,,147.0,34.0,100,moderate
+F1017,mujahir acar kuning,"mujahir acar kuning, masakan",330.0,17.8,23.4,12.1,1.1,,,100,moderate
+F1018,parede baleh,"parede baleh, masakan",87.0,10.5,2.5,5.5,,416.0,59.0,100,moderate
+F1019,pempek adaan,"pempek adaan, masakan",162.0,4.9,3.0,27.8,,488.0,119.0,100,moderate
+F1020,pempek belida,"pempek belida, masakan",156.0,4.2,1.4,31.6,0.2,,,100,moderate
+F1021,pempek kapal selam,"pempek kapal selam, masakan",152.0,4.5,2.3,28.2,,628.0,91.0,100,moderate
+F1022,pempek kelesan,"pempek kelesan, masakan",211.0,12.3,6.1,26.6,0.4,,,100,moderate
+F1023,pempek kulit,"pempek kulit, masakan",243.0,5.2,7.3,39.1,,555.0,102.0,100,moderate
+F1024,pempek telur,"pempek telur, masakan",156.0,4.7,2.7,28.3,,448.0,48.0,100,moderate
+F1025,pempek tenggiri,"pempek tenggiri, masakan",173.0,7.2,1.2,33.4,0.2,,,100,moderate
+F1026,pencok lele,"pencok lele, masakan",372.0,7.8,36.3,3.5,0.0,,,100,low
+F1027,pinda,pinda,107.0,15.9,0.6,0.4,,526.0,330.0,100,low
+F1028,pindang kenari,"pindang kenari, masakan",124.0,9.5,9.6,0.0,,370.0,270.0,100,low
+F1029,saboko gurita,"saboko gurita, masakan",87.0,15.7,1.5,2.6,,200.0,180.0,100,low
+F1030,saboko saltan,"saboko saltan, masakan",113.0,17.1,3.6,3.0,,40.0,350.0,100,low
+F1031,saboko sardin,"saboko sardin, masakan",110.0,12.9,4.3,4.9,,200.0,280.0,100,low
+F1032,sate bandeng,sate bandeng,283.0,12.1,16.8,20.9,2.0,543.0,199.0,82,moderate
+F1033,sepi,"sepi, masakan",88.0,7.9,1.6,10.6,,873.0,258.0,100,moderate
+F1034,tekwan,"tekwan, masakan",53.0,1.9,0.9,9.4,,174.0,42.0,100,moderate
+F1035,teri belado,"teri belado, masakan",365.0,23.7,22.3,17.5,0.0,,,100,moderate
+F1036,tumis bandeng,"tumis bandeng, masakan",189.0,11.3,15.7,0.6,,314.0,280.0,100,low
+F1037,tumis keumamah,tumis keumamah,300.0,14.5,20.0,15.5,4.5,,,100,low
+F1038,telur ayam kampung,"telur ayam kampung, segar",174.0,10.8,14.0,1.2,0.0,190.0,141.0,87,low
+F1039,telur ayam ras,"telur ayam ras, segar",154.0,12.4,10.8,0.7,0.0,142.0,118.5,89,low
+F1040,telur ayam ras,"telur ayam ras, bagian kuning, segar",355.0,16.3,31.9,0.7,0.0,111.0,107.5,100,low
+F1041,telur ayam ras,"telur ayam ras, bagian putih, segar",50.0,10.8,0.0,0.8,0.0,164.0,138.5,100,low
+F1042,telur bebek alabio,"telur bebek alabio, segar",187.0,11.8,14.2,3.0,0.0,115.0,80.0,90,low
+F1043,telur bebek,"telur bebek, bagian kuning, segar",386.0,17.0,35.0,0.8,0.0,106.0,90.7,100,low
+F1044,telur bebek,"telur bebek, bagian putih, segar",54.0,11.0,0.0,0.8,0.0,184.0,150.2,100,low
+F1045,telur bebek tambak,"telur bebek tambak, segar",187.0,10.9,12.4,7.9,0.0,209.0,146.0,90,moderate
+F1046,telur burung maleo,"telur burung maleo, segar",436.0,26.5,36.3,0.4,,77.0,333.0,100,low
+F1047,telur penyu,"telur penyu, segar",136.0,8.6,10.1,2.7,0.0,478.0,115.0,90,low
+F1048,telur burung puyuh,"telur burung puyuh, segar",116.0,10.7,7.0,1.6,0.0,111.0,11.0,100,low
+F1049,telur ayam,"telur ayam, dadar, masakan",251.0,16.3,19.4,1.4,0.0,,,100,low
+F1050,telur bebek,"telur bebek, asin, mentah",179.0,13.6,13.3,4.4,0.0,483.0,140.1,83,low
+F1051,telur bebek,"telur bebek, dadar, masakan",301.0,20.0,23.7,0.0,0.0,,,100,low
+F1052,ikan,"ikan, telur, asin, mentah",358.0,20.7,26.4,9.4,0.0,2684.0,59.0,100,moderate
+F1053,bayau mi balu,"bayau mi balu, masakan",313.0,6.0,12.2,44.8,,,,100,moderate
+F1054,cucuru bayau,"cucuru bayau, masakan",349.0,6.8,18.7,38.3,,,,100,moderate
+F1055,kalio telur,"kalio telur, masakan",193.0,10.6,12.4,9.7,,540.0,,100,moderate
+F1056,kepala susu - krim,"kepala susu - krim, segar",204.0,2.6,20.0,4.0,0.0,,,100,low
+F1057,susu ibu - asi,susu ibu - asi,62.0,1.5,3.2,7.0,0.0,15.0,41.0,100,moderate
+F1058,susu kambing,"susu kambing, segar",64.0,4.3,2.3,6.6,0.0,35.0,160.0,100,moderate
+F1059,susu kerbau,"susu kerbau, segar",160.0,6.3,12.0,7.1,,82.0,,100,moderate
+F1060,susu kuda,"susu kuda, segar",40.0,2.0,1.1,5.4,0.0,,37.4,100,moderate
+F1061,susu sapi,"susu sapi, segar",61.0,3.2,3.5,4.3,0.0,36.0,149.0,100,low
+F1062,es krim,es krim,210.0,4.0,12.5,20.6,0.0,78.0,193.4,100,moderate
+F1063,hangop,hangop,65.0,10.0,1.0,3.5,0.0,126.0,374.4,100,low
+F1064,keju,keju,326.0,22.8,20.3,13.1,0.0,1410.0,82.7,100,moderate
+F1065,kwark (quark),kwark (quark),242.0,19.0,17.0,3.0,0.0,37.0,72.7,100,low
+F1066,susu asam untuk bayi,"susu asam untuk bayi, bubuk",418.0,19.0,9.0,65.5,0.0,188.0,486.5,100,high
+F1067,susu bubuk,susu bubuk,513.0,24.6,30.0,36.2,0.0,380.0,1330.0,100,moderate
+F1068,susu kental manis,susu kental manis,343.0,8.2,10.0,55.0,0.0,150.0,320.0,100,high
+F1069,susu kental tak manis,susu kental tak manis,138.0,7.0,7.9,9.9,,140.0,303.0,100,moderate
+F1070,susu skim,"susu skim, bubuk",359.0,35.6,1.0,52.0,0.0,470.0,1745.0,100,high
+F1071,susu skim,"susu skim, segar",36.0,3.5,0.1,5.1,,38.0,,100,moderate
+F1072,yoghurt,"yoghurt, segar",52.0,3.3,2.5,4.0,0.0,40.0,299.0,100,low
+F1073,kelapa setengah tua,"kelapa setengah tua, daging, segar",180.0,4.0,15.0,10.0,2.4,4.0,317.7,53,low
+F1074,kelapa tua,"kelapa tua, daging, segar",359.0,3.4,34.7,14.0,4.7,3.0,293.9,53,low
+F1075,lemak babi (lard),lemak babi  (lard),902.0,0.0,100.0,0.0,0.0,0.0,0.0,100,low
+F1076,lemak babi (bacon),lemak babi (bacon),626.0,9.1,65.0,1.1,0.0,0.0,0.0,100,low
+F1077,lemak ikan,lemak ikan,372.0,12.0,29.4,14.4,0.0,60.0,52.0,100,moderate
+F1078,lemak kerbau (lemak sapi),lemak kerbau (lemak sapi),818.0,1.5,90.0,0.0,0.0,29.0,25.8,100,low
+F1079,minyak hiu,"minyak hiu, hati",902.0,0.0,100.0,0.0,0.0,0.0,0.0,100,low
+F1080,minyak ikan,minyak ikan,902.0,0.0,100.0,0.0,0.0,0.0,0.0,100,low
+F1081,minyak kacang tanah,minyak kacang tanah,902.0,0.0,100.0,0.0,0.0,0.0,0.0,100,low
+F1082,minyak kedelai,minyak kedelai,883.0,0.0,99.9,0.0,0.0,0.0,0.1,100,low
+F1083,minyak kelapa,minyak kelapa,870.0,1.0,98.0,0.0,0.0,0.0,0.0,100,low
+F1084,minyak kelapa sawit,minyak kelapa sawit,884.0,0.0,100.0,0.0,0.0,0.0,0.0,100,low
+F1085,minyak wijen,minyak wijen,881.0,0.2,99.7,0.0,0.0,2.0,20.0,100,low
+F1086,minyak zaitun,minyak zaitun,884.0,0.0,100.0,0.0,0.0,7.0,0.0,100,low
+F1087,margarin,margarin,720.0,0.6,81.0,0.4,0.0,760.0,25.9,100,low
+F1088,mentega,mentega,742.0,0.5,81.6,1.4,0.0,653.0,103.0,100,low
+F1089,santan (dengan air),santan (dengan air),122.0,2.0,10.0,7.6,1.4,9.0,162.4,100,moderate
+F1090,santan murni,santan murni,324.0,4.2,34.3,5.6,0.0,18.0,514.1,100,moderate
+F1091,coklat manis,"coklat manis, batang",527.0,2.0,29.8,62.7,6.5,6.0,499.5,100,moderate
+F1092,coklat pahit,"coklat pahit, batang",615.0,5.5,52.9,29.2,10.8,20.0,708.3,100,low
+F1093,coklat susu,"coklat susu, batang",565.0,9.0,35.0,53.6,3.4,100.0,405.5,100,moderate
+F1094,coklat bubuk,coklat bubuk,311.0,8.0,23.8,48.9,32.6,,,100,low
+F1095,gula aren,gula aren,368.0,0.0,0.0,92.0,0.0,15.0,390.4,100,high
+F1096,gula kelapa,gula kelapa,386.0,3.0,10.0,76.0,0.0,2.0,0.0,100,high
+F1097,gula putih,gula putih,394.0,0.0,0.0,94.0,0.0,1.0,4.75,100,high
+F1098,jam,"jam, selai",239.0,0.5,0.6,64.5,1.0,30.0,73.1,100,high
+F1099,kopi bubuk instan,kopi bubuk instan,129.0,12.3,0.5,35.0,0.0,72.0,3256.0,100,moderate
+F1100,madu,madu,294.0,0.3,0.0,79.5,0.2,6.0,26.9,100,high
+F1101,markisa squash,markisa squash,217.0,2.5,1.0,49.6,,14.0,65.0,100,moderate
+F1102,markisa squash,"markisa squash, bd",104.0,1.2,0.5,23.7,,40.0,40.0,100,moderate
+F1103,melase,melase,276.0,,0.1,71.0,0.0,14.0,,100,high
+F1104,sirup,sirup,213.0,0.0,0.0,55.0,0.0,3.0,4.2,100,high
+F1105,sirup pirous,sirup pirous,228.0,0.2,0.4,55.9,0.0,3.0,4.2,100,high
+F1106,teh hijau daun kering,teh hijau daun kering,300.0,28.3,4.8,53.6,9.6,60.0,5873.9,100,moderate
+F1107,teh hitam daun kering,teh hitam daun kering,293.0,24.5,2.8,58.8,8.7,50.0,5854.8,100,moderate
+F1108,teh melati daun kering,teh melati daun kering,299.0,24.1,3.5,59.0,9.7,70.0,5848.4,100,moderate
+F1109,asam arang coklat,"asam arang coklat, segar",130.0,0.5,1.1,30.9,1.5,13.0,,100,moderate
+F1110,asam arang merah,"asam arang merah, segar",99.0,0.8,1.6,20.3,2.8,2.0,96.0,100,moderate
+F1111,asan kandis,"asan kandis, kering",261.0,0.9,1.6,63.3,5.0,26.0,341.0,100,moderate
+F1112,asam kandis,"asam kandis, segar",75.0,0.2,1.1,16.1,3.4,93.0,93.2,100,low
+F1113,asam masak pohon,"asam masak pohon, segar",267.0,2.8,0.6,62.5,1.2,9.0,139.5,48,high
+F1114,asam payak,"asam payak, segar",135.0,0.8,0.4,32.1,10.0,0.0,,100,low
+F1115,bawang merah,"bawang merah, segar",46.0,1.5,0.3,9.2,1.7,7.0,178.6,90,moderate
+F1116,bawang putih,"bawang putih, segar",112.0,4.5,0.2,23.1,0.6,46.0,665.7,88,moderate
+F1117,boros kunci,"boros kunci, segar",40.0,1.0,0.8,7.2,1.0,33.0,480.0,80,moderate
+F1118,boros laja (lengkuas),"boros laja (lengkuas), segar",26.0,1.0,0.3,4.7,1.1,24.0,137.1,80,low
+F1119,cabai gembor merah,"cabai gembor merah, segar",38.0,1.6,0.8,6.3,1.6,7.0,275.3,89,low
+F1120,cabai hijau,"cabai hijau, segar",26.0,0.7,0.3,5.2,2.6,7.0,151.0,82,low
+F1121,cabai merah,"cabai merah, kering",367.0,15.9,6.2,61.8,26.9,25.0,181.5,85,low
+F1122,cabai merah,"cabai merah, segar",36.0,1.0,0.3,7.3,1.4,23.0,272.4,85,moderate
+F1123,cabai rawit,"cabai rawit, segar",120.0,4.7,2.4,19.9,15.2,34.0,706.2,85,low
+F1124,cengkeh,"cengkeh, kering",330.0,5.2,8.9,57.4,10.0,282.0,961.0,100,moderate
+F1125,daun salam,"daun salam,  bubuk",301.0,14.2,10.9,49.0,9.4,180.0,619.0,100,moderate
+F1126,jahe,"jahe, segar",51.0,1.5,1.0,10.1,12.0,12.0,441.7,97,low
+F1127,kemiri,kemiri,675.0,19.0,63.0,8.0,3.0,25.0,430.7,100,low
+F1128,ketumbar,"ketumbar, kering",418.0,14.1,16.1,54.2,12.3,91.0,1787.0,100,low
+F1129,kluwek,kluwek,310.0,10.0,24.0,13.5,,,,80,moderate
+F1130,kunyit,"kunyit, segar",69.0,2.0,2.7,9.1,0.6,6.0,406.7,78,moderate
+F1131,merica,"merica, kering",365.0,11.5,6.8,64.4,1.0,4.0,99.7,100,high
+F1132,pala,"pala, biji, kering",518.0,7.5,36.4,40.1,3.5,2.0,78.7,95,moderate
+F1133,balichong,balichong,152.0,13.2,0.8,22.9,1.5,120.0,310.0,100,moderate
+F1134,bekasam,bekasam,116.0,11.9,4.9,6.1,3.5,711.0,176.0,100,low
+F1135,bekasang,bekasang,78.0,11.4,2.0,3.6,0.4,4016.0,121.0,100,low
+F1136,cuka,cuka,21.0,0.1,0.1,5.0,0.0,21.0,37.8,100,low
+F1137,kecap,kecap,71.0,5.7,1.3,9.0,0.0,1114.0,,100,moderate
+F1138,petis ikan,petis ikan,165.0,20.0,0.2,20.8,,,,100,moderate
+F1139,petis udang kering,petis udang kering,345.0,23.8,1.4,59.3,0.0,11998.0,462.8,100,high
+F1140,petis udang pasta,petis udang pasta,220.0,15.0,0.9,38.0,2.3,7981.0,307.9,100,moderate
+F1141,saos tomat,saos tomat,110.0,2.0,0.4,24.5,0.9,890.0,129.6,100,moderate
+F1142,tempoya,tempoya,110.0,1.7,1.3,21.9,2.6,597.0,486.3,100,moderate
+F1143,terasi,terasi,155.0,22.3,2.9,9.9,2.7,1664.0,821.4,100,low
+F1144,terasi dobo,terasi dobo,191.0,33.1,3.6,6.6,1.6,650.0,1260.0,100,low
+F1145,terasi merah,terasi merah,174.0,30.0,3.5,5.6,2.2,7850.0,302.8,100,low
+F1146,kelapa muda,"kelapa muda, air, segar",16.0,0.1,0.4,3.0,0.0,1.0,149.0,100,low
+F1147,biji bunga matahari (yang) dikuliti sangrai kering,biji bunga matahari (yang) dikuliti sangrai kering,582.0,19.33,49.8,24.07,2.73,410.0,850.0,100,moderate
+F1148,biji bunga matahari sangrai kering(dengan tambahan garam),biji bunga matahari sangrai kering(dengan tambahan garam),582.0,19.33,49.8,24.07,2.73,410.0,850.0,100,moderate
+F1149,biji bunga matahari kering (tanpa garam),biji bunga matahari kering (tanpa garam),582.0,19.33,49.8,24.07,2.73,3.0,850.0,100,moderate
+F1150,biji bunga matahari (yang) dikuliti,biji bunga matahari (yang) dikuliti,570.0,22.78,49.57,18.76,2.62,3.0,689.0,100,moderate
+F1151,biji bunga matahari kering,biji bunga matahari kering,570.0,22.78,49.57,18.76,2.62,3.0,689.0,100,moderate
+F1152,biji wijen kering utuh,biji wijen kering utuh,573.0,17.73,49.67,23.45,0.3,11.0,468.0,100,moderate
+F1153,biji rami,biji rami,534.0,18.29,42.16,28.88,1.55,30.0,813.0,100,moderate
+F1154,kacang almond,kacang almond,7.0,0.26,0.61,0.24,0.06,0.0,9.0,100,low
+F1155,kacang almond panggang kering (tanpa tambahan garam),kacang almond panggang kering (tanpa tambahan garam),597.0,22.09,52.83,19.29,4.9,1.0,746.0,100,low
+F1156,almond sangrai kering (dengan tambahan garam),almond sangrai kering (dengan tambahan garam),597.0,22.09,52.83,19.29,4.9,339.0,746.0,100,low
+F1157,almond pucat,almond pucat,581.0,21.94,50.62,19.94,4.96,28.0,687.0,100,low
+F1158,kacang almond sangrai madu,kacang almond sangrai madu,162.0,5.31,13.78,7.2,3.9,85.0,176.0,100,low
+F1159,kacang campuran,kacang campuran,617.0,16.51,56.3,21.58,4.25,396.0,574.0,100,moderate
+F1160,kacang campuran sangrai kering,kacang campuran sangrai kering,594.0,17.3,51.45,25.35,4.64,669.0,597.0,100,moderate
+F1161,kacang campuran sangrai,kacang campuran sangrai,615.0,15.52,56.17,22.27,4.38,306.0,544.0,100,moderate
+F1162,kacang sangrai campuran dengan kacang tanah,kacang sangrai campuran dengan kacang tanah,86.0,2.35,7.89,3.0,0.59,59.0,81.0,100,low
+F1163,kacang campuran sangrai kering (dengan kacang tanah,"kacang campuran sangrai kering (dengan kacang tanah, dengan tambahan garam)",594.0,17.3,51.45,25.35,4.64,669.0,597.0,100,moderate
+F1164,kacang kedelai,kacang kedelai,471.0,35.22,25.4,33.55,4.2,163.0,1470.0,100,moderate
+F1165,kacang mete,kacang mete,581.0,16.84,47.77,30.16,5.01,308.0,632.0,100,moderate
+F1166,kacang mete sangrai asin,kacang mete sangrai asin,581.0,16.84,47.77,30.16,5.01,308.0,632.0,100,moderate
+F1167,kacang mete sangrai tawar,kacang mete sangrai tawar,580.0,16.84,47.77,29.87,5.01,13.0,632.0,100,moderate
+F1168,kacang mete sangrai kering,kacang mete sangrai kering,574.0,15.31,46.35,32.69,5.01,640.0,565.0,100,moderate
+F1169,kacang mete sangrai madu,kacang mete sangrai madu,87.0,2.32,6.57,6.0,2.53,42.0,88.0,100,low
+F1170,kacang tanah,kacang tanah,567.0,25.8,49.24,16.13,3.97,18.0,705.0,100,low
+F1171,kacang asin sangrai kering,kacang asin sangrai kering,585.0,23.68,49.66,21.51,4.18,813.0,658.0,100,moderate
+F1172,kacang tawar sangrai kering,kacang tawar sangrai kering,585.0,23.68,49.66,21.51,4.18,6.0,658.0,100,moderate
+F1173,kacang sangrai madu,kacang sangrai madu,561.0,24.47,45.77,23.87,14.18,279.0,640.0,100,low
+F1174,kacang rebus,kacang rebus,318.0,13.5,22.01,21.26,2.47,751.0,180.0,100,moderate
+F1175,kenari,kenari,654.0,15.23,65.21,13.71,2.61,2.0,441.0,100,moderate
+F1176,kacang kemiri,kacang kemiri,691.0,9.17,71.97,13.86,3.97,0.0,410.0,100,low
+F1177,kacang kemiri kering sangrai (tanpa tambahan gula),kacang kemiri kering sangrai (tanpa tambahan gula),710.0,9.5,74.27,13.55,4.06,1.0,424.0,100,low
+F1178,kacang kemiri sangrai kering (dengan tambahan garam),kacang kemiri sangrai kering (dengan tambahan garam),710.0,9.5,74.27,13.55,4.06,383.0,424.0,100,low
+F1179,alpukat,alpukat,160.0,2.0,14.66,8.53,0.66,7.0,485.0,100,moderate
+F1180,guacamole,guacamole,23.0,0.29,2.08,1.24,0.1,22.0,69.0,100,low
+F1181,guacamole dengan tomat,guacamole dengan tomat,116.0,1.62,9.94,7.64,1.37,201.0,393.0,100,moderate
+F1182,guacamole dengan tomat dan cabe paprika,guacamole dengan tomat dan cabe paprika,266.0,3.77,22.72,17.75,3.31,459.0,913.0,100,moderate
+F1183,buah anggur,buah anggur,3.0,0.04,0.01,0.9,0.77,0.0,10.0,100,low
+F1184,anggur (merah atau hijau,"anggur (merah atau hijau, jenis varietas eropa seperti thompson tanpa biji)",69.0,0.72,0.16,18.1,15.48,2.0,191.0,100,low
+F1185,anggur jenis amerika (kulit licin),anggur jenis amerika (kulit licin),2.0,0.02,0.01,0.41,0.39,0.0,5.0,100,low
+F1186,anggur jenis eropa,anggur jenis eropa,3.0,0.04,0.01,0.9,0.77,0.0,10.0,100,low
+F1187,apel,apel,72.0,0.36,0.23,19.06,14.34,1.0,148.0,100,low
+F1188,apel (tanpa kulit),apel (tanpa kulit),48.0,0.27,0.13,12.76,10.1,0.0,90.0,100,low
+F1189,apel emas lezat,apel emas lezat,72.0,0.36,0.23,19.06,14.33,1.0,148.0,100,low
+F1190,apel merah lezat,apel merah lezat,72.0,0.36,0.23,19.06,14.33,1.0,148.0,100,low
+F1191,apel fuji,apel fuji,52.0,0.26,0.17,13.81,10.39,1.0,107.0,100,low
+F1192,blewah melon,blewah melon,34.0,0.84,0.19,8.16,7.86,16.0,267.0,100,low
+F1193,blueberi,blueberi,57.0,0.74,0.33,14.49,9.96,1.0,77.0,100,low
+F1194,blueberry (tanpa pemanis,"blueberry (tanpa pemanis, beku)",51.0,0.42,0.64,12.17,8.45,1.0,54.0,100,low
+F1195,blueberry (manis,"blueberry (manis, beku)",81.0,0.4,0.13,21.95,19.72,1.0,60.0,100,low
+F1196,blueberry tawar dalam kemasan air (dimasak atau kalengan),blueberry tawar dalam kemasan air (dimasak atau kalengan),93.0,1.22,0.54,23.69,16.27,2.0,112.0,100,low
+F1197,beri,beri,33.0,0.68,0.3,7.98,4.87,1.0,150.0,100,low
+F1198,stroberi,stroberi,32.0,0.67,0.3,7.68,4.66,1.0,153.0,100,low
+F1199,rasberi,rasberi,52.0,1.2,0.65,11.94,4.42,1.0,151.0,100,low
+F1200,blackberry,blackberry,43.0,1.39,0.49,9.61,4.88,1.0,162.0,100,low
+F1201,campuran buah kering,campuran buah kering,244.0,2.19,0.44,64.81,47.66,17.0,746.0,100,low
+F1202,apel kering,apel kering,243.0,0.93,0.32,65.89,57.19,87.0,450.0,100,low
+F1203,cranberry kering,cranberry kering,308.0,0.07,1.37,82.36,65.0,3.0,40.0,100,low
+F1204,prune kering,prune kering,240.0,2.18,0.38,63.88,38.13,2.0,732.0,100,low
+F1205,aprikot kering,aprikot kering,241.0,3.39,0.51,62.64,53.44,10.0,1162.0,100,low
+F1206,buah pir,buah pir,58.0,0.38,0.12,15.46,9.8,1.0,119.0,100,low
+F1207,pir (dimasak atau kalengan),pir (dimasak atau kalengan),197.0,0.53,0.35,50.99,40.43,13.0,173.0,100,low
+F1208,pir asia,pir asia,51.0,0.61,0.28,12.99,8.6,0.0,148.0,100,low
+F1209,pir (padat dan cair,"pir (padat dan cair, kemasan sirup ringan, kalengan)",143.0,0.48,0.08,38.08,30.37,13.0,166.0,100,low
+F1210,ceri manis,ceri manis,4.0,0.07,0.01,1.09,0.87,0.0,15.0,100,low
+F1211,bing ceri,bing ceri,63.0,1.06,0.2,16.01,12.82,0.0,222.0,100,low
+F1212,ceri beku,ceri beku,46.0,0.92,0.44,11.02,9.02,1.0,124.0,100,low
+F1213,ceri merah asam,ceri merah asam,50.0,1.0,0.3,12.18,8.49,3.0,173.0,100,low
+F1214,jeruk,jeruk,62.0,1.23,0.16,15.39,12.25,0.0,237.0,100,low
+F1215,jeruk keprok (jeruk mandarin),jeruk keprok (jeruk mandarin),37.0,0.57,0.22,9.34,7.41,1.0,116.0,100,low
+F1216,jeruk (dengan kulit),jeruk (dengan kulit),63.0,1.3,0.3,15.5,0.002,196.0,0.0,100,moderate
+F1217,jeruk bali,jeruk bali,32.0,0.63,0.1,8.08,6.98,0.0,139.0,100,low
+F1218,jeruk bali (merah dan merah muda),jeruk bali (merah dan merah muda),42.0,0.77,0.14,10.66,6.89,0.0,135.0,100,low
+F1219,jeruk mandarin (kaleng atau beku),jeruk mandarin (kaleng atau beku),61.0,0.45,0.1,16.19,15.49,6.0,78.0,100,low
+F1220,jeruk keprok (jeruk mandarin,"jeruk keprok (jeruk mandarin, jus kemasan, kalengan)",92.0,1.54,0.07,23.83,22.09,12.0,331.0,100,low
+F1221,jeruk keprok (jeruk mandarin,"jeruk keprok (jeruk mandarin, sirup ringan kemasan, kalengan)",154.0,1.13,0.25,40.8,39.03,15.0,197.0,100,low
+F1222,kelapa,kelapa,354.0,3.33,33.49,15.23,6.23,20.0,356.0,100,low
+F1223,kelapa kering,kelapa kering,660.0,6.88,64.53,23.65,7.35,37.0,543.0,100,low
+F1224,air kelapa,air kelapa,46.0,1.73,0.48,8.9,6.26,252.0,600.0,100,low
+F1225,kismis,kismis,299.0,3.07,0.46,79.18,59.19,11.0,749.0,100,low
+F1226,kismis (tanpa biji),kismis (tanpa biji),299.0,3.07,0.46,79.18,59.19,11.0,749.0,100,low
+F1227,kismis emas (tanpa biji),kismis emas (tanpa biji),302.0,3.39,0.46,79.52,59.19,12.0,746.0,100,low
+F1228,kismis dilapisi coklat,kismis dilapisi coklat,4.0,0.04,0.15,0.68,0.62,0.0,5.0,100,low
+F1229,kismis dilapisi coklat susu,kismis dilapisi coklat susu,390.0,4.1,14.8,68.3,62.22,36.0,514.0,100,low
+F1230,kurma,kurma,23.0,0.2,0.03,6.23,5.26,0.0,54.0,100,low
+F1231,kurma medjool,kurma medjool,66.0,0.0,0.04,0.0,0.0,0.0,0.0,100,low
+F1232,mangga,mangga,65.0,0.51,0.27,17.0,14.8,2.0,156.0,100,low
+F1233,mangga kering,mangga kering,16.0,0.07,0.04,4.08,3.76,0.0,23.0,100,low
+F1234,nektar mangga,nektar mangga,145.0,0.5,0.28,37.9,35.67,5.0,140.0,100,low
+F1235,nanas,nanas,48.0,0.54,0.12,12.63,9.26,1.0,115.0,100,low
+F1236,nanas (padat dan cair,"nanas (padat dan cair, air kemasan, kalengan)",79.0,1.06,0.22,20.42,18.45,2.0,312.0,100,low
+F1237,nanas potongan (manis,"nanas potongan (manis, beku)",86.0,0.4,0.1,22.2,21.1,2.0,100.0,100,low
+F1238,nanas (padat dan cair,"nanas (padat dan cair, kemasan sirup ringan, kalengan)",131.0,0.91,0.3,33.89,31.88,3.0,265.0,100,low
+F1239,nanas (padat dan cair,"nanas (padat dan cair, jus kemasan, kalengan)",149.0,1.05,0.2,39.09,35.98,2.0,304.0,100,low
+F1240,pepaya,pepaya,39.0,0.61,0.14,9.81,5.9,3.0,257.0,100,low
+F1241,jus pepaya,jus pepaya,60.0,0.18,0.16,15.16,14.53,5.0,32.0,100,low
+F1242,pisang,pisang,89.0,1.09,0.33,22.84,12.23,1.0,358.0,100,low
+F1243,pisang apel,pisang apel,65.0,0.8,0.24,16.67,8.93,1.0,261.0,100,low
+F1244,rasberi merah,rasberi merah,52.0,1.2,0.65,11.94,4.42,1.0,151.0,100,low
+F1245,rasberi beku tanpa pemanis,rasberi beku tanpa pemanis,52.0,1.2,0.65,11.94,4.42,1.0,136.0,100,low
+F1246,rasberi beku,rasberi beku,103.0,0.7,0.16,26.16,21.76,1.0,114.0,100,low
+F1247,salad buah,salad buah,54.0,0.63,0.81,12.5,10.23,5.0,134.0,100,low
+F1248,salad buah persik,"salad buah persik, aprikot, nanas, ceri (padat dan cair, kemasan air, kaleng)",74.0,0.86,0.17,19.28,0.007,191.0,0.0,100,moderate
+F1249,jus semangka,jus semangka,30.0,0.61,0.15,7.61,6.25,1.0,113.0,100,low
+F1250,semangka,semangka,30.0,0.61,0.15,7.55,6.2,1.0,112.0,100,low
+F1251,stroberi beku tanpa pemanis,stroberi beku tanpa pemanis,35.0,0.43,0.11,9.13,4.56,2.0,148.0,100,low
+F1252,stroberi beku,stroberi beku,87.0,0.52,0.14,23.46,21.49,2.0,98.0,100,low
+F1253,stroberi beku dengan gula,stroberi beku dengan gula,222.0,1.33,0.36,59.82,54.8,5.0,250.0,100,low
+F1254,stroberi dalam sirup (dimasak atau kalengan),stroberi dalam sirup (dimasak atau kalengan),92.0,0.56,0.26,23.53,21.83,4.0,86.0,100,low
+F1255,ayam,ayam,237.0,27.07,13.49,0.0,0.0,404.0,221.0,100,low
+F1256,ayam (kulit tidak dimakan),ayam (kulit tidak dimakan),188.0,28.69,7.35,0.0,0.0,408.0,241.0,100,low
+F1257,dada ayam,dada ayam,195.0,29.55,7.72,0.0,0.0,393.0,243.0,100,low
+F1258,paha ayam,paha ayam,135.0,13.67,8.45,0.0,0.0,223.0,121.0,100,low
+F1259,sayap ayam,sayap ayam,81.0,7.46,5.4,0.0,0.0,113.0,51.0,100,low
+F1260,ayam goreng tanpa pelapis (kulit dimakan),ayam goreng tanpa pelapis (kulit dimakan),260.0,28.62,15.35,0.0,0.0,420.0,233.0,100,low
+F1261,dada ayam goreng tanpa pelapis (kulit dimakan),dada ayam goreng tanpa pelapis (kulit dimakan),216.0,31.67,9.1,0.0,0.0,430.0,267.0,100,low
+F1262,sayap ayam goreng tanpa pelapis (kulit dimakan),sayap ayam goreng tanpa pelapis (kulit dimakan),89.0,7.56,6.33,0.0,0.0,120.0,52.0,100,low
+F1263,paha ayam goreng tanpa pelapis (kulit dimakan),paha ayam goreng tanpa pelapis (kulit dimakan),119.0,13.6,6.79,0.0,0.0,211.0,116.0,100,low
+F1264,kaki ayam goreng tanpa pelapis (kulit dimakan),kaki ayam goreng tanpa pelapis (kulit dimakan),250.0,27.31,14.78,0.0,0.0,422.0,238.0,100,low
+F1265,daging ayam (panggang),daging ayam (panggang),111.0,20.33,2.7,0.0,0.0,75.0,238.0,100,low
+F1266,daging dan kulit ayam (panggang),daging dan kulit ayam (panggang),216.0,17.14,15.85,0.0,0.0,68.0,196.0,100,low
+F1267,daging babi panggang,daging babi panggang,247.0,26.98,14.59,0.0,0.0,221.0,406.0,100,low
+F1268,babi panggang (hanya daging yang dimakan),babi panggang (hanya daging yang dimakan),208.0,28.45,9.57,0.0,0.0,289.0,423.0,100,low
+F1269,bahu daging babi panggang,bahu daging babi panggang,41.0,3.25,2.98,0.0,0.0,32.0,46.0,100,low
+F1270,bakso daging sapi,bakso daging sapi,57.0,0.021,3.69,3.47,0.1,420.0,60.0,100,low
+F1271,bakso daging sapi dan babi,bakso daging sapi dan babi,25.0,0.01,1.43,1.9,0.1,200.0,34.0,100,low
+F1272,bakso ayam,bakso ayam,45.0,5.43,1.57,1.94,0.41,124.0,56.0,100,low
+F1273,bakso kalkun,bakso kalkun,42.0,5.5,1.16,1.94,0.41,121.0,65.0,100,low
+F1274,bakso daging babi,bakso daging babi,47.0,5.55,1.95,1.33,0.14,223.0,80.0,100,low
+F1275,daging bebek,daging bebek,132.0,18.28,5.95,0.0,0.0,74.0,271.0,100,low
+F1276,dada ayam (kulit tidak dimakan),dada ayam (kulit tidak dimakan),164.0,30.76,3.54,0.0,0.0,396.0,254.0,100,low
+F1277,dada ayam masak,dada ayam masak,110.0,0.058,1.24,23.09,0.0,0.0,255.0,100,moderate
+F1278,daging dada kalkun,daging dada kalkun,104.0,0.043,1.66,17.07,0.5,3510.0,302.0,100,moderate
+F1279,daging dada dan kulit kalkun,daging dada dan kulit kalkun,157.0,21.89,7.02,0.0,0.059,275.0,0.0,100,low
+F1280,daging dada kalkun (digoreng,"daging dada kalkun (digoreng, dimasak, dipanggang)",135.0,30.06,0.74,0.0,0.0,52.0,292.0,100,low
+F1281,daging dada dan kulit kalkun (dimasak,"daging dada dan kulit kalkun (dimasak, dipanggang)",189.0,28.71,7.41,0.0,0.063,288.0,0.0,100,low
+F1282,daging babi,daging babi,271.0,27.34,17.04,0.0,0.0,384.0,351.0,100,low
+F1283,daging babi giling,daging babi giling,263.0,16.88,21.19,0.0,0.056,287.0,0.0,100,low
+F1284,potongan daging babi,potongan daging babi,250.0,27.91,14.57,0.0,0.0,386.0,404.0,100,low
+F1285,iga babi,iga babi,395.0,28.94,30.17,0.0,0.0,255.0,319.0,100,low
+F1286,potongan daging domba,potongan daging domba,226.0,15.86,17.55,0.0,0.0,281.0,184.0,100,low
+F1287,potongan daging domba (hanya daging yang dimakan),potongan daging domba (hanya daging yang dimakan),215.0,28.17,10.48,0.0,0.0,403.0,327.0,100,low
+F1288,daging sapi,daging sapi,288.0,26.33,19.54,0.0,0.0,384.0,315.0,100,low
+F1289,daging sapi giling,daging sapi giling,276.0,25.35,18.58,0.0,0.0,400.0,287.0,100,low
+F1290,daging sapi giling tanpa lemak,daging sapi giling tanpa lemak,269.0,25.54,17.67,0.0,0.0,397.0,302.0,100,low
+F1291,daging sapi panggang,daging sapi panggang,267.0,25.91,17.32,0.0,0.0,217.0,292.0,100,low
+F1292,daging kornet,daging kornet,53.0,3.82,3.99,0.1,0.0,238.0,30.0,100,low
+F1293,daging sapi ekstra tanpa lemak,daging sapi ekstra tanpa lemak,248.0,25.71,15.35,0.0,0.0,394.0,315.0,100,low
+F1294,daging sapi (95% tanpa lemak / 5% lemak),daging sapi (95% tanpa lemak / 5% lemak),137.0,0.062,5.0,21.41,0.0,0.0,346.0,100,moderate
+F1295,daging sapi (85% tanpa lemak / 15% lemak),daging sapi (85% tanpa lemak / 15% lemak),215.0,0.068,15.0,18.59,0.0,0.0,295.0,100,moderate
+F1296,daging sapi (70% tidak berlemak / 30% lemak),daging sapi (70% tidak berlemak / 30% lemak),332.0,0.078,30.0,14.35,0.0,0.0,218.0,100,moderate
+F1297,daging sapi panggang (hanya bagian tanpa lemak yang dimakan),daging sapi panggang (hanya bagian tanpa lemak yang dimakan),198.0,28.32,8.52,0.0,0.0,217.0,306.0,100,low
+F1298,daging domba,daging domba,292.0,24.32,20.77,0.0,0.0,394.0,307.0,100,low
+F1299,domba giling,domba giling,282.0,16.56,23.41,0.0,0.0,59.0,222.0,100,low
+F1300,daging domba panggang,daging domba panggang,266.0,23.93,18.15,0.0,0.0,228.0,281.0,100,low
+F1301,potongan daging domba (daging dan lemak dimakan),potongan daging domba (daging dan lemak dimakan),314.0,22.03,24.37,0.0,0.0,390.0,255.0,100,low
+F1302,iga babi panggang dengan saus,iga babi panggang dengan saus,310.0,21.44,22.33,4.2,1.29,334.0,287.0,100,low
+F1303,kalkun,kalkun,187.0,28.9,7.02,0.0,0.0,69.0,291.0,100,low
+F1304,paha ayam (kulit tidak dimakan),paha ayam (kulit tidak dimakan),207.0,25.72,10.79,0.0,0.0,410.0,236.0,100,low
+F1305,daging paha ayam (ayam pedaging),daging paha ayam (ayam pedaging),119.0,19.65,3.91,0.0,,86.0,,100,low
+F1306,paha ayam panggang,paha ayam panggang,245.0,24.85,15.36,0.0,0.0,406.0,220.0,100,low
+F1307,paha ayam panggang (kulit dimakan),paha ayam panggang (kulit dimakan),135.0,13.67,8.45,0.0,0.0,223.0,121.0,100,low
+F1308,punggung sapi,punggung sapi,342.0,24.84,26.15,0.0,0.0,225.0,242.0,100,low
+F1309,daging punggung sapi (hanya bagian tanpa lemak yang dimakan),daging punggung sapi (hanya bagian tanpa lemak yang dimakan),230.0,29.63,11.53,0.0,0.0,232.0,284.0,100,low
+F1310,kornet daging punggung sapi (diawetkan),kornet daging punggung sapi (diawetkan),198.0,14.68,14.9,0.14,1.217,297.0,0.0,100,low
+F1311,sayap ayam (kulit tidak dimakan),sayap ayam (kulit tidak dimakan),201.0,30.21,8.06,0.0,0.0,414.0,208.0,100,low
+F1312,sayap ayam panggang (kulit dimakan),sayap ayam panggang (kulit dimakan),86.0,7.99,5.79,0.0,0.0,121.0,55.0,100,low
+F1313,daging dan kulit sayap ayam (ayam pedaging),daging dan kulit sayap ayam (ayam pedaging),64.0,5.23,4.63,0.0,,,,100,low
+F1314,sosis daging sapi,sosis daging sapi,42.0,1.44,3.78,0.52,0.33,146.0,21.0,100,low
+F1315,sosis ayam,sosis ayam,49.0,5.05,2.83,0.43,,205.0,,100,low
+F1316,sosis babi segar,sosis babi segar,304.0,15.09,26.53,0.0,,636.0,,100,low
+F1317,sosis kalkun,sosis kalkun,155.0,18.79,8.08,0.47,,,,100,low
+F1318,sosis italia,sosis italia,234.0,13.0,18.57,2.9,0.58,821.0,207.0,100,low
+F1319,cumi goreng,cumi goreng,125.0,15.13,2.17,9.9,0.66,335.0,234.0,100,moderate
+F1320,cumi kukus atau rebus,cumi kukus atau rebus,91.0,15.45,1.37,3.05,0.0,367.0,244.0,100,low
+F1321,cumi-cumi,cumi-cumi,92.0,15.58,1.38,3.08,0.0,44.0,246.0,100,low
+F1322,gurita,gurita,82.0,14.91,1.04,2.2,0.0,230.0,350.0,100,low
+F1323,udang,udang,144.0,27.59,2.35,1.24,0.0,613.0,176.0,100,low
+F1324,lobster,lobster,114.0,23.99,0.68,1.5,0.0,826.0,412.0,100,low
+F1325,kepiting,kepiting,101.0,20.03,1.76,0.0,0.0,600.0,321.0,100,low
+F1326,remis,remis,86.0,11.9,2.24,3.69,0.0,286.0,320.0,100,low
+F1327,ikan,ikan,84.0,17.76,0.92,0.0,0.0,81.0,351.0,100,low
+F1328,ikan panggang,ikan panggang,126.0,21.94,3.44,0.33,0.08,356.0,341.0,100,low
+F1329,ikan salmon panggang,ikan salmon panggang,171.0,23.97,7.56,0.49,0.11,467.0,395.0,100,low
+F1330,nila (ikan),nila (ikan),96.0,20.08,1.7,0.0,0.0,52.0,302.0,100,low
+F1331,mahi mahi,mahi mahi,85.0,18.5,0.7,0.0,0.088,416.0,0.0,100,low
+F1332,kakap (ikan) (spesies campuran),kakap (ikan) (spesies campuran),100.0,20.51,1.34,0.0,0.0,64.0,417.0,100,low
+F1333,ikan kembung,ikan kembung,167.0,19.32,9.36,0.0,0.0,78.0,389.0,100,low
+F1334,ikan kembung atlantik,ikan kembung atlantik,205.0,18.6,13.89,0.0,0.0,90.0,314.0,100,low
+F1335,ikan lele,ikan lele,204.0,14.93,12.35,7.26,0.72,338.0,277.0,100,moderate
+F1336,ikan lele panggang,ikan lele panggang,184.0,18.16,11.71,0.41,0.09,385.0,354.0,100,low
+F1337,ikan salmon,ikan salmon,146.0,21.62,5.93,0.0,0.0,46.0,423.0,100,low
+F1338,ikan salmon atlantik (ditambak),ikan salmon atlantik (ditambak),183.0,19.9,10.85,0.0,0.059,362.0,0.0,100,low
+F1339,salmon merah muda,salmon merah muda,116.0,19.94,3.45,0.0,0.0,67.0,323.0,100,low
+F1340,ikan salmon liar atlantik,ikan salmon liar atlantik,142.0,19.84,6.34,0.0,0.044,490.0,0.0,100,low
+F1341,ikan sarden dalam minyak (kalengan),ikan sarden dalam minyak (kalengan),25.0,2.95,1.37,0.0,0.0,61.0,48.0,100,low
+F1342,ikan sarden di dalam air,ikan sarden di dalam air,217.0,24.58,12.37,0.0,0.0,918.0,447.0,100,low
+F1343,sarden dengan saus tomat (campuran),sarden dengan saus tomat (campuran),186.0,20.86,10.46,0.74,0.43,414.0,341.0,100,low
+F1344,ikan teri (kering padat dalam minyak,"ikan teri (kering padat dalam minyak, kalengan)",42.0,5.78,1.94,0.0,0.0,734.0,109.0,100,low
+F1345,tuna dalam air (kalengan),tuna dalam air (kalengan),116.0,25.51,0.82,0.0,0.0,338.0,237.0,100,low
+F1346,tuna dalam minyak (kalengan),tuna dalam minyak (kalengan),198.0,29.13,8.21,0.0,0.0,354.0,207.0,100,low
+F1347,tuna sirip biru (ikan),tuna sirip biru (ikan),144.0,23.33,4.9,0.0,0.0,39.0,252.0,100,low
+F1348,tuna sirip kuning (ikan),tuna sirip kuning (ikan),108.0,23.38,0.95,0.0,0.0,37.0,444.0,100,low
+F1349,ikan tuna panggang,ikan tuna panggang,153.0,27.3,3.96,0.41,0.09,366.0,524.0,100,low
+F1350,kepiting panggang,kepiting panggang,136.0,18.91,6.24,0.11,0.0,539.0,304.0,100,low
+F1351,kepiting kalengan,kepiting kalengan,99.0,20.52,1.23,0.0,0.0,333.0,374.0,100,low
+F1352,kepiting biru,kepiting biru,87.0,18.06,1.08,0.04,0.293,329.0,0.0,100,low
+F1353,kerang,kerang,217.0,18.14,10.96,10.49,0.82,487.0,337.0,100,moderate
+F1354,kerang (spesies campuran),kerang (spesies campuran),88.0,16.78,0.76,2.36,0.0,161.0,322.0,100,low
+F1355,kerang panggang,kerang panggang,132.0,20.22,3.86,2.92,0.0,527.0,389.0,100,low
+F1356,kerang kukus atau rebus,kerang kukus atau rebus,106.0,16.18,3.09,2.33,0.0,422.0,280.0,100,low
+F1357,lobster kukus atau rebus,lobster kukus atau rebus,114.0,23.99,0.68,1.5,0.0,826.0,412.0,100,low
+F1358,lobster panggang,lobster panggang,137.0,23.34,3.55,1.46,0.0,743.0,401.0,100,low
+F1359,udang (karang) rebus atau kukus,udang (karang) rebus atau kukus,81.0,16.63,1.19,0.0,0.0,416.0,294.0,100,low
+F1360,dimasak hidup-hidup,dimasak hidup-hidup,133.0,22.0,4.24,0.41,0.09,417.0,427.0,100,low
+F1361,dipanggang hidup-hidup,dipanggang hidup-hidup,133.0,22.0,4.24,0.41,0.09,417.0,427.0,100,low
+F1362,tiram,tiram,68.0,7.05,2.46,3.91,0.0,211.0,156.0,100,low
+F1363,udang panggang,udang panggang,154.0,24.47,5.03,1.17,0.0,512.0,224.0,100,low
+F1364,udang kukus atau rebus,udang kukus atau rebus,138.0,26.5,2.26,1.19,0.0,589.0,169.0,100,low
+F1365,udang goreng tepung,udang goreng tepung,245.0,20.7,12.26,11.77,0.54,487.0,197.0,100,moderate
+F1366,udang scampi,udang scampi,212.0,16.87,15.83,0.01,0.01,741.0,70.0,100,low
+F1367,udang karang (udang),udang karang (udang),72.0,14.85,0.97,0.0,0.062,261.0,0.0,100,low
+F1368,buncis,buncis,31.0,1.82,0.12,7.13,1.4,6.0,209.0,100,moderate
+F1369,kacang panjang hijau,kacang panjang hijau,31.0,1.82,0.12,7.13,1.4,6.0,209.0,100,moderate
+F1370,kacang panggang,kacang panggang,151.0,5.54,5.15,21.39,0.422,358.0,0.0,100,moderate
+F1371,kacang hitam,kacang hitam,91.0,6.03,0.29,16.56,0.384,308.0,0.0,100,moderate
+F1372,kacang merah (kalengan),kacang merah (kalengan),85.0,5.25,0.34,15.59,0.22,341.0,257.0,100,moderate
+F1373,kacang belang (biji matang,"kacang belang (biji matang, kalengan)",86.0,4.86,0.81,15.25,0.22,294.0,243.0,100,moderate
+F1374,kacang belang (biji matang),kacang belang (biji matang),347.0,21.42,1.23,62.55,2.11,12.0,1393.0,100,moderate
+F1375,kacang merah (tanpa garam,"kacang merah (tanpa garam, dimasak, direbus)",127.0,8.67,0.5,22.8,0.32,1.0,405.0,100,moderate
+F1376,kacang merah (dengan garam,"kacang merah (dengan garam, dimasak, direbus)",127.0,8.67,0.5,22.8,0.238,403.0,0.0,100,moderate
+F1377,kacang panggang vegetarian,kacang panggang vegetarian,94.0,4.75,0.37,21.14,9.04,337.0,217.0,100,low
+F1378,kacang panggang dengan daging babi (kalengan),kacang panggang dengan daging babi (kalengan),268.0,13.13,3.92,50.55,1.047,782.0,0.0,100,high
+F1379,kacang panggang boston,kacang panggang boston,155.0,6.04,5.06,22.04,6.4,454.0,422.0,100,low
+F1380,keju cheddar,keju cheddar,403.0,24.9,33.14,1.28,0.52,621.0,98.0,100,low
+F1381,keju colby jack,keju colby jack,109.0,6.84,8.85,0.46,0.14,162.0,29.0,100,low
+F1382,keju amerika,keju amerika,96.0,5.37,7.39,1.97,1.83,368.0,77.0,100,low
+F1383,keju cheddar atau colby rendah lemak,keju cheddar atau colby rendah lemak,49.0,6.9,1.98,0.54,0.15,174.0,19.0,100,low
+F1384,keju provolone,keju provolone,98.0,7.16,7.45,0.6,0.16,245.0,39.0,100,low
+F1385,keju parmesan (diparut),keju parmesan (diparut),21.0,1.89,1.37,0.17,0.085,5.0,0.0,100,low
+F1386,keju parmesan (parut),keju parmesan (parut),22.0,1.92,1.43,0.2,0.04,76.0,6.0,100,low
+F1387,keju parmesan parut kering,keju parmesan parut kering,22.0,1.92,1.43,0.2,0.04,76.0,6.0,100,low
+F1388,keju parmesan keras,keju parmesan keras,392.0,35.75,25.83,3.22,0.8,1602.0,92.0,100,low
+F1389,keju krim,keju krim,51.0,1.09,5.06,0.39,0.03,43.0,17.0,100,low
+F1390,keju krim proses tanpa atau bebas lemak,keju krim proses tanpa atau bebas lemak,15.0,2.25,0.21,0.9,0.06,85.0,25.0,100,low
+F1391,keju krim (rendah lemak),keju krim (rendah lemak),35.0,1.59,2.64,1.05,0.03,44.0,25.0,100,low
+F1392,margarin (minyak nabati,"margarin (minyak nabati, 20% lemak )",26.0,0.0,2.92,0.06,0.0,110.0,4.0,100,low
+F1393,mentega (asin),mentega (asin),102.0,0.12,11.52,0.01,0.01,82.0,3.0,100,low
+F1394,mentega dikocok (asin),mentega dikocok (asin),67.0,0.08,7.62,0.01,0.01,78.0,2.0,100,low
+F1395,susu,susu,122.0,8.03,4.88,11.49,12.59,100.0,361.0,100,low
+F1396,susu murni,susu murni,62.0,3.32,3.35,4.66,5.42,41.0,147.0,100,low
+F1397,1% lemak susu,1% lemak susu,102.0,8.22,2.37,12.18,12.69,107.0,366.0,100,low
+F1398,2% lemak susu,2% lemak susu,50.0,3.3,1.97,4.68,5.06,41.0,150.0,100,low
+F1399,susu (tanpa lemak),susu (tanpa lemak),86.0,8.35,0.44,11.88,12.47,127.0,407.0,100,low
+F1400,susu rendah lemak,susu rendah lemak,102.0,8.22,2.37,12.18,12.69,107.0,366.0,100,low
+F1401,susu dengan lemak yang telah dikurangi,susu dengan lemak yang telah dikurangi,122.0,8.05,4.81,11.42,12.35,100.0,366.0,100,low
+F1402,yogurt polos,yogurt polos,63.0,5.25,1.55,7.04,7.04,70.0,234.0,100,low
+F1403,yogurt polos rendah lemak,yogurt polos rendah lemak,63.0,5.25,1.55,7.04,7.04,70.0,234.0,100,low
+F1404,yogurt polos tanpa lemak,yogurt polos tanpa lemak,56.0,5.73,0.18,7.68,7.68,77.0,255.0,100,low
+F1405,yoghurt vanila (rendah lemak),yoghurt vanila (rendah lemak),208.0,12.08,3.06,33.81,33.81,162.0,537.0,100,low
+F1406,yogurt polos (rendah lemak ),yogurt polos (rendah lemak ),63.0,5.25,1.55,7.04,7.04,70.0,234.0,100,low
+F1407,chicken nugget,chicken nugget,48.0,2.49,3.01,2.61,0.14,92.0,42.0,100,low
+F1408,ayam nugget rendah lemak,ayam nugget rendah lemak,35.0,3.47,1.14,2.48,0.1,85.0,29.0,100,low
+F1409,bubuk kari,bubuk kari,6.0,0.25,0.28,1.16,0.06,1.0,31.0,100,low
+F1410,kari ayam,kari ayam,160.0,14.8,8.6,6.11,2.67,624.0,321.0,100,low
+F1411,kari daging sapi,kari daging sapi,184.0,11.69,12.96,5.8,2.73,551.0,384.0,100,low
+F1412,kari daging domba,kari daging domba,109.0,11.96,5.86,1.57,0.54,210.0,209.0,100,low
+F1413,saus kari (kering,"saus kari (kering, dikeringkan)",427.0,9.38,23.1,50.62,0.352,0.0,0.0,100,high
+F1414,kentang goreng,kentang goreng,274.0,3.48,14.06,35.66,0.58,300.0,527.0,100,moderate
+F1415,kentang goreng dilapisi roti atau mentega,kentang goreng dilapisi roti atau mentega,322.0,5.83,19.6,31.14,4.32,409.0,321.0,100,moderate
+F1416,pizza keju,pizza keju,237.0,10.6,10.1,26.08,3.06,462.0,138.0,100,moderate
+F1417,pizza dengan daging,pizza dengan daging,265.0,10.64,12.14,27.68,1.77,610.0,181.0,100,moderate
+F1418,pizza keju dengan sayuran,pizza keju dengan sayuran,242.0,9.33,8.95,30.93,2.56,546.0,204.0,100,moderate
+F1419,pizza dengan daging dan sayuran,pizza dengan daging dan sayuran,276.0,10.97,12.61,29.61,2.45,646.0,224.0,100,moderate
+F1420,pizza dengan daging dan buah,pizza dengan daging dan buah,248.0,10.74,8.96,31.06,4.21,627.0,212.0,100,moderate
+F1421,pizza keju kerak tipis,pizza keju kerak tipis,208.0,9.25,9.27,21.79,2.63,397.0,120.0,100,moderate
+F1422,pizza keju dengan sayuran kerak tipis,pizza keju dengan sayuran kerak tipis,202.0,8.59,8.11,23.99,2.51,502.0,200.0,100,moderate
+F1423,pizza keju kerak tebal,pizza keju kerak tebal,256.0,11.47,10.02,30.07,3.38,511.0,153.0,100,moderate
+F1424,taco atau tostada dengan ayam,"taco atau tostada dengan ayam, keju, selada, tomat dan salsa",142.0,10.11,7.05,9.84,0.98,202.0,158.0,100,moderate
+F1425,taco atau tostada dengan daging sapi,"taco atau tostada dengan daging sapi, keju dan selada",221.0,10.88,12.65,16.2,0.47,462.0,179.0,100,moderate
+F1426,taco atau tostada dengan daging,"taco atau tostada dengan daging, keju, selada, tomat dan salsa",173.0,9.67,10.25,10.96,1.1,227.0,208.0,100,moderate
+F1427,taco atau tostada dengan kacang-kacangan,"taco atau tostada dengan kacang-kacangan, keju, daging, selada, tomat dan salsa",151.0,8.12,7.85,12.54,1.05,274.0,198.0,100,moderate
+F1428,taco tanpa daging atau tostada dengan kacang-kacangan dan keju,"taco tanpa daging atau tostada dengan kacang-kacangan dan keju, selada, tomat dan salsa",144.0,5.29,6.83,16.42,1.12,278.0,228.0,100,moderate
+F1429,brownies,brownies,129.0,1.62,4.68,21.26,12.5,50.0,61.0,100,low
+F1430,brownies dengan lapisan (gula),brownies dengan lapisan (gula),170.0,2.02,6.85,26.84,15.38,131.0,63.0,100,low
+F1431,brownies rendah lemak,brownies rendah lemak,110.0,1.85,1.83,23.88,18.44,79.0,91.0,100,low
+F1432,permen coklat susu,permen coklat susu,535.0,7.65,29.66,59.4,51.5,79.0,372.0,100,low
+F1433,coklat manis atau gelap,coklat manis atau gelap,505.0,3.9,34.2,59.6,51.48,16.0,290.0,100,low
+F1434,permen coklat putih,permen coklat putih,539.0,5.87,32.09,59.24,,90.0,,100,high
+F1435,kue,kue,24.0,0.27,1.07,3.45,1.38,16.0,5.0,100,low
+F1436,kue gula (termasuk vanilla),kue gula (termasuk vanilla),72.0,0.76,3.16,10.18,5.66,54.0,9.0,100,low
+F1437,kue gandum,kue gandum,112.0,1.55,4.52,17.18,6.16,96.0,36.0,100,low
+F1438,donat (tawar),donat (tawar),421.0,5.0,22.9,49.7,22.5,546.0,127.0,100,low
+F1439,donat dilapisi gula,donat dilapisi gula,192.0,2.34,10.3,22.86,0.181,46.0,0.0,100,moderate
+F1440,donat dilapisi coklat,donat dilapisi coklat,133.0,1.4,8.68,13.44,6.54,120.0,55.0,100,low
+F1441,donat dilapisi gula atau coklat mengkilat,donat dilapisi gula atau coklat mengkilat,250.0,2.7,11.94,34.44,19.15,204.0,64.0,100,low
+F1442,donat jeli,donat jeli,221.0,3.84,12.16,25.35,13.72,190.0,51.0,100,low
+F1443,es krim vanila,es krim vanila,145.0,2.52,7.92,16.99,15.28,58.0,143.0,100,low
+F1444,es krim stroberi,es krim stroberi,111.0,0.0,4.87,0.0,0.0,0.0,0.0,100,low
+F1445,es krim vanila ringan,es krim vanila ringan,125.0,3.63,3.67,19.61,16.81,56.0,158.0,100,low
+F1446,kue keju,kue keju,321.0,5.5,22.5,25.5,0.207,90.0,0.0,100,moderate
+F1447,kue coklat (dengan campuran coklat),kue coklat (dengan campuran coklat),367.0,4.1,16.4,54.6,0.334,200.0,0.0,100,high
+F1448,kue coklat (tanpa campuran),kue coklat (tanpa campuran),358.0,5.3,15.1,53.4,0.315,140.0,0.0,100,high
+F1449,kue bolu,kue bolu,297.0,7.3,4.3,57.7,0.141,0.0,0.0,100,high
+F1450,kue keju (dari campuran,"kue keju (dari campuran, tanpa jenis kue panggang)",271.0,5.44,12.57,35.14,0.376,209.0,0.0,100,moderate
+F1451,kue coklat keju,kue coklat keju,389.0,6.6,24.75,38.44,22.41,300.0,146.0,100,low
+F1452,kue keju dengan buah,kue keju dengan buah,388.0,8.88,19.1,46.72,37.91,378.0,124.0,100,low
+F1453,kue denmark,kue denmark,262.0,4.55,14.56,28.99,12.86,241.0,81.0,100,low
+F1454,kue denmark dengan buah,kue denmark dengan buah,263.0,3.83,13.14,33.94,19.55,251.0,59.0,100,low
+F1455,permen keras,permen keras,24.0,0.0,0.01,5.88,3.77,2.0,0.0,100,low
+F1456,permen coklat manis,permen coklat manis,505.0,3.9,34.2,59.6,51.48,16.0,290.0,100,low
+F1457,pai apel,pai apel,265.0,2.4,12.5,37.1,0.079,0.0,0.0,100,moderate
+F1458,pai ceri,pai ceri,260.0,2.0,11.0,39.8,14.29,246.0,81.0,100,low
+F1459,blueberry pie,blueberry pie,245.0,2.7,11.9,33.5,0.05,0.0,0.0,100,moderate
+F1460,puding coklat,puding coklat,157.0,3.05,4.52,25.99,20.17,146.0,203.0,100,low
+F1461,puding vanila,puding vanila,147.0,2.6,4.07,24.86,22.83,153.0,128.0,100,low
+F1462,puding tapioka,puding tapioka,134.0,2.26,4.18,21.92,20.0,180.0,108.0,100,low
+F1463,puding pisang,puding pisang,127.0,2.4,3.6,21.2,0.196,110.0,0.0,100,moderate
+F1464,puding roti,puding roti,153.0,5.27,4.74,23.26,14.72,236.0,216.0,100,low
+F1465,wafer coklat,wafer coklat,26.0,0.4,0.85,4.34,1.78,35.0,13.0,100,low
+F1466,wafer vanila (lemak lebih tinggi),wafer vanila (lemak lebih tinggi),28.0,0.26,1.16,4.27,0.018,6.0,0.0,100,low
+F1467,wafer vanila (lemak lebih rendah),wafer vanila (lemak lebih rendah),18.0,0.2,0.61,2.94,1.5,12.0,4.0,100,low
+F1468,dendeng sapi,dendeng sapi,82.0,6.64,5.12,2.2,1.8,443.0,119.0,100,low
+F1469,keripik jagung tawar,keripik jagung tawar,518.0,6.03,28.41,63.01,,616.0,,100,high
+F1470,keripik jagung tortilla,keripik jagung tortilla,488.0,7.79,23.36,65.32,1.0,421.0,215.0,100,high
+F1471,keripik kentang (asin),keripik kentang (asin),547.0,6.56,37.47,49.74,4.12,525.0,1642.0,100,moderate
+F1472,keripik kentang bebas lemak,keripik kentang bebas lemak,76.0,1.93,0.12,16.75,0.74,129.0,326.0,100,moderate
+F1473,keripik kentang rasa barbecue,keripik kentang rasa barbecue,491.0,7.7,32.4,52.8,0.75,1261.0,0.0,100,high
+F1474,keripik kentang dengan lemak yang dikurangi,keripik kentang dengan lemak yang dikurangi,471.0,7.1,20.8,66.9,0.22,492.0,1744.0,100,high
+F1475,kerupuk / biskuit,kerupuk / biskuit,20.0,0.3,1.01,2.44,0.07,34.0,5.0,100,low
+F1476,kerupuk asin,kerupuk asin,13.0,0.28,0.34,2.13,0.01,32.0,5.0,100,low
+F1477,kerupuk gandum,kerupuk gandum,9.0,0.17,0.41,1.3,0.26,16.0,4.0,100,low
+F1478,biskuit keju,biskuit keju,5.0,0.1,0.25,0.58,0.0,10.0,1.0,100,low
+F1479,kue beras merah,kue beras merah,35.0,0.74,0.25,7.34,0.08,29.0,26.0,100,moderate
+F1480,kue beras merah multigrain,kue beras merah multigrain,35.0,0.76,0.32,7.21,0.023,26.0,0.0,100,moderate
+F1481,permen karet (tanpa gula),permen karet (tanpa gula),5.0,0.0,0.01,1.9,0.0,0.0,0.0,100,low
+F1482,permen karet (manis),permen karet (manis),10.0,0.0,0.01,2.64,2.64,0.0,0.0,100,low
+F1483,permen karet,permen karet,7.0,0.0,0.01,1.98,1.98,0.0,0.0,100,low
+F1484,popcorn,popcorn,387.0,12.94,4.54,77.78,0.87,8.0,329.0,100,high
+F1485,selai kacang dan sandwich jeli,selai kacang dan sandwich jeli,327.0,10.32,14.23,42.23,12.11,483.0,222.0,100,low
+F1486,sandwich daging sapi panggang,sandwich daging sapi panggang,341.0,26.85,13.49,26.02,2.22,602.0,366.0,100,moderate
+F1487,sandwich ham dan keju,sandwich ham dan keju,352.0,20.69,15.48,33.35,0.291,0.0,0.0,100,moderate
+F1488,sandwich keju,sandwich keju,261.0,9.1,12.67,27.6,3.95,734.0,127.0,100,moderate
+F1489,sushi,sushi,37.0,1.12,0.11,7.77,1.63,155.0,34.0,100,low
+F1490,sushi dengan sayuran dan seafood,sushi dengan sayuran dan seafood,36.0,1.4,0.11,7.15,1.47,56.0,34.0,100,low
+F1491,sushi dengan sayuran,sushi dengan sayuran,38.0,0.8,0.07,8.24,1.7,62.0,26.0,100,low
+F1492,sushi dengan sayuran yang digulung dengan rumput laut,sushi dengan sayuran yang digulung dengan rumput laut,31.0,0.57,0.06,6.71,1.16,25.0,16.0,100,moderate
+F1493,sashimi salmon,sashimi salmon,41.0,6.13,1.68,0.0,0.0,13.0,120.0,100,low
+F1494,air,air,0.0,0.0,0.0,0.0,0.0,5.0,0.0,100,low
+F1495,air keran,air keran,0.0,0.0,0.0,0.0,0.0,5.0,0.0,100,low
+F1496,air (botol),air (botol),0.0,0.0,0.0,0.0,0.0,5.0,0.0,100,low
+F1497,bir,bir,44.0,0.47,0.0,3.6,0.0,4.0,27.0,100,low
+F1498,bir ringan,bir ringan,103.0,0.85,0.0,5.81,0.32,14.0,74.0,100,moderate
+F1499,meja anggur,meja anggur,124.0,0.1,0.0,4.03,1.17,7.0,147.0,100,low
+F1500,margarita,margarita,168.0,0.05,0.08,10.67,9.82,295.0,15.0,100,low
+F1501,vodka,vodka,231.0,0.0,0.0,0.0,0.0,1.0,2.0,100,low
+F1502,meja anggur merah,meja anggur merah,125.0,0.1,0.0,3.84,0.91,6.0,187.0,100,low
+F1503,anggur pinot noir,anggur pinot noir,122.0,0.0,0.0,0.0,0.0,0.0,0.0,100,low
+F1504,anggur zinfandel,anggur zinfandel,131.0,0.0,0.0,0.0,0.0,0.0,0.0,100,low
+F1505,anggur chianti,anggur chianti,124.0,0.1,0.0,4.01,1.17,7.0,146.0,100,low
+F1506,anggur cabernet sauvignon,anggur cabernet sauvignon,123.0,0.0,0.0,0.0,0.0,0.0,0.0,100,low
+F1507,meja anggur putih,meja anggur putih,122.0,0.1,0.0,3.82,1.41,7.0,104.0,100,low
+F1508,anggur sauvignon blanc,anggur sauvignon blanc,121.0,0.0,0.0,0.0,0.0,0.0,0.0,100,low
+F1509,anggur riesling,anggur riesling,120.0,0.0,0.0,0.0,0.0,0.0,0.0,100,low
+F1510,anggur pinot blanc,anggur pinot blanc,121.0,0.0,0.0,0.0,0.0,0.0,0.0,100,low
+F1511,anggur blanc chenin,anggur blanc chenin,120.0,0.0,0.0,0.0,0.0,0.0,0.0,100,low
+F1512,es kopi dengan krim dan gula,es kopi dengan krim dan gula,50.0,0.38,1.42,9.14,8.51,11.0,86.0,100,low
+F1513,es kopi dengan susu,es kopi dengan susu,6.0,0.33,0.15,0.84,0.22,6.0,62.0,100,low
+F1514,es kopi dengan krim,es kopi dengan krim,26.0,0.39,1.47,2.91,2.26,12.0,89.0,100,low
+F1515,es kopi dengan susu dan gula,es kopi dengan susu dan gula,30.0,0.31,0.14,7.14,6.54,6.0,60.0,100,low
+F1516,es kopi,es kopi,4.0,0.19,0.01,0.67,0.0,4.0,57.0,100,low
+F1517,es teh,es teh,90.0,0.02,0.0,23.44,22.83,6.0,74.0,100,low
+F1518,es teh tawar,es teh tawar,2.0,0.02,0.0,0.67,0.01,7.0,81.0,100,low
+F1519,jus apel,jus apel,117.0,0.15,0.27,28.97,27.03,7.0,295.0,100,low
+F1520,jus jeruk,jus jeruk,112.0,1.74,0.5,25.79,20.83,2.0,496.0,100,low
+F1521,jus cranberry,jus cranberry,137.0,0.0,0.25,34.21,30.03,5.0,35.0,100,low
+F1522,jus anggur,jus anggur,154.0,1.42,0.2,37.85,37.6,8.0,334.0,100,low
+F1523,jus jeruk bali,jus jeruk bali,94.0,1.28,0.25,22.13,21.88,2.0,378.0,100,low
+F1524,jus apel (kaleng atau botol),jus apel (kaleng atau botol),117.0,0.15,0.27,28.97,27.03,7.0,295.0,100,low
+F1525,jus apel (berkonsentrasi beku,"jus apel (berkonsentrasi beku, diencerkan dengan air)",112.0,0.33,0.24,27.58,26.12,17.0,301.0,100,low
+F1526,jus cranberry-apel (botol),jus cranberry-apel (botol),154.0,0.0,0.27,38.83,35.52,5.0,42.0,100,low
+F1527,minuman jus apel,minuman jus apel,125.0,0.05,0.07,32.27,31.77,5.0,75.0,100,low
+F1528,jus jeruk peras segar,jus jeruk peras segar,112.0,1.74,0.5,25.79,20.83,2.0,496.0,100,low
+F1529,jus jeruk (dingin,"jus jeruk (dingin, termasuk dari konsentrat)",110.0,1.99,0.67,25.05,0.002,473.0,0.0,100,moderate
+F1530,jus jeruk beku (dilarutkan dengan air),jus jeruk beku (dilarutkan dengan air),112.0,1.69,0.15,27.14,26.57,5.0,478.0,100,low
+F1531,minum jus jeruk,minum jus jeruk,134.0,0.5,0.0,33.39,23.31,5.0,105.0,100,low
+F1532,jus campuran sayuran (sayuran lain selain tomat),jus campuran sayuran (sayuran lain selain tomat),71.0,3.67,0.59,14.93,7.18,133.0,790.0,100,low
+F1533,jus tomat,jus tomat,41.0,1.85,0.12,10.3,8.65,654.0,556.0,100,low
+F1534,jus wortel,jus wortel,94.0,2.24,0.35,21.92,9.23,68.0,689.0,100,low
+F1535,jus tomat dan sayuran (sodium rendah),jus tomat dan sayuran (sodium rendah),22.0,0.61,0.1,4.69,3.88,71.0,197.0,100,low
+F1536,jus sayur koktail (kalengan),jus sayur koktail (kalengan),46.0,1.52,0.22,11.01,7.99,653.0,467.0,100,low
+F1537,kakao bubuk (tanpa gula),kakao bubuk (tanpa gula),229.0,19.6,13.7,54.3,1.75,21.0,1524.0,100,high
+F1538,kakao dan campuran gula (dengan susu skim),kakao dan campuran gula (dengan susu skim),158.0,8.6,0.7,29.97,28.65,128.0,433.0,100,low
+F1539,susu coklat panas,susu coklat panas,192.0,8.8,5.82,26.58,,110.0,,100,moderate
+F1540,kakao dan campuran gula (dengan susu rendah lemak),kakao dan campuran gula (dengan susu rendah lemak),178.0,8.6,2.75,30.1,28.95,133.0,418.0,100,low
+F1541,martini,martini,160.0,0.01,0.0,0.4,0.11,1.0,16.0,100,low
+F1542,mojito,mojito,217.0,0.14,0.04,24.94,23.47,30.0,24.0,100,low
+F1543,margarita beku,margarita beku,218.0,0.11,0.17,12.16,9.82,1638.0,36.0,100,low
+F1544,gin dan tonik,gin dan tonik,171.0,0.04,0.04,15.77,14.96,23.0,11.0,100,low
+F1545,kopi,kopi,2.0,0.28,0.05,0.09,0.0,5.0,111.0,100,low
+F1546,kopi (diseduh dari bubuk),kopi (diseduh dari bubuk),2.0,0.28,0.05,0.0,,5.0,,100,low
+F1547,kopi latte,kopi latte,135.0,8.81,5.51,12.36,13.55,126.0,555.0,100,low
+F1548,kopi espresso,kopi espresso,1.0,0.07,0.11,0.0,0.0,8.0,68.0,100,low
+F1549,kopi instan (yang terbuat dari bubuk),kopi instan (yang terbuat dari bubuk),5.0,0.26,0.0,0.9,0.0,5.0,76.0,100,low
+F1550,limun,limun,99.0,0.17,0.1,25.87,24.73,5.0,37.0,100,low
+F1551,limun rendah kalori,limun rendah kalori,5.0,0.05,0.0,1.25,0.0,5.0,0.0,100,low
+F1552,limun beku berkonsentrasi,limun beku berkonsentrasi,181.0,0.3,0.2,47.1,45.03,4.0,67.0,100,low
+F1553,minuman energi,minuman energi,108.0,0.6,0.19,26.26,24.14,202.0,7.0,100,low
+F1554,soda,soda,140.0,0.26,0.04,36.05,33.76,22.0,4.0,100,low
+F1555,diet soda,diet soda,4.0,0.39,0.07,0.84,0.0,28.0,25.0,100,low
+F1556,cola soda (dengan kafein),cola soda (dengan kafein),136.0,0.26,0.07,35.18,33.01,15.0,7.0,100,low
+F1557,soda jeruk,soda jeruk,179.0,0.0,0.0,45.76,0.045,7.0,0.0,100,moderate
+F1558,susu coklat (rendah lemak ),susu coklat (rendah lemak ),158.0,8.1,2.5,26.1,24.85,152.0,425.0,100,low
+F1559,susu coklat (lemak telah dikurangi),susu coklat (lemak telah dikurangi),190.0,7.48,4.75,30.32,23.88,165.0,422.0,100,low
+F1560,susu coklat (seluruhnya),susu coklat (seluruhnya),88.0,3.34,3.58,10.91,10.06,63.0,176.0,100,low
+F1561,susu skim coklat,susu skim coklat,140.0,8.55,0.7,27.22,25.4,98.0,462.0,100,low
+F1562,cokelat susu kedelai,cokelat susu kedelai,120.0,6.74,4.68,14.23,11.05,29.0,345.0,100,low
+F1563,susu kedelai (kalsium difortifikasi),susu kedelai (kalsium difortifikasi),98.0,7.35,3.97,8.38,0.096,225.0,0.0,100,moderate
+F1564,teh (buatan),teh (buatan),2.0,0.0,0.0,0.71,0.0,7.0,88.0,100,low
+F1565,teh tawar,teh tawar,2.0,0.02,0.0,0.76,0.0,7.0,83.0,100,low
+F1566,teh herbal,teh herbal,2.0,0.0,0.0,0.47,0.0,2.0,21.0,100,low
+F1567,teh hijau,teh hijau,2.0,0.0,0.0,0.36,0.0,2.0,16.0,100,low
+F1568,makaroni,makaroni,157.0,5.76,0.92,30.68,0.56,232.0,45.0,100,moderate
+F1569,makaroni gandum,makaroni gandum,123.0,5.3,0.54,26.38,0.8,234.0,44.0,100,moderate
+F1570,makaroni atau mie dengan keju,makaroni atau mie dengan keju,493.0,19.29,22.84,52.15,8.72,953.0,328.0,100,moderate
+F1571,makaroni atau mie dengan keju (campuran ditumbuk dengan saus keju),makaroni atau mie dengan keju (campuran ditumbuk dengan saus keju),386.0,15.28,11.59,54.29,2.45,786.0,132.0,100,moderate
+F1572,makanan pembuka makaroni dan keju (kalengan),makanan pembuka makaroni dan keju (kalengan),200.0,8.25,6.0,28.11,1.22,1027.0,205.0,100,moderate
+F1573,makaroni atau mie dengan keju (campuran kering),makaroni atau mie dengan keju (campuran kering),219.0,6.25,10.06,25.74,2.76,365.0,87.0,100,moderate
+F1574,makaroni krim dengan keju,makaroni krim dengan keju,208.0,8.13,8.59,24.09,0.52,167.0,61.0,100,moderate
+F1575,mie,mie,137.0,4.51,2.06,25.01,0.4,236.0,38.0,100,moderate
+F1576,mie telur (ditambah,"mie telur (ditambah, masak)",138.0,4.54,2.07,25.16,,5.0,,100,moderate
+F1577,mie gandum,mie gandum,120.0,5.31,1.37,23.49,0.19,158.0,140.0,100,moderate
+F1578,bihun (dimasak),bihun (dimasak),109.0,0.91,0.2,24.9,0.019,4.0,0.0,100,moderate
+F1579,mie cina chow mein,mie cina chow mein,237.0,3.77,13.84,25.89,0.12,198.0,54.0,100,moderate
+F1580,nasi putih instan,nasi putih instan,191.0,3.56,0.83,41.04,0.0,582.0,15.0,100,moderate
+F1581,nasi putih,nasi putih,129.0,2.66,0.28,27.9,0.05,365.0,35.0,100,moderate
+F1582,nasi merah,nasi merah,110.0,2.56,0.89,22.78,0.35,301.0,43.0,100,moderate
+F1583,nasi putih (butir-pendek,"nasi putih (butir-pendek, dimasak)",130.0,2.36,0.19,28.73,0.026,0.0,0.0,100,moderate
+F1584,nasi putih (butir-sedang,"nasi putih (butir-sedang, dimasak)",130.0,2.38,0.21,28.59,0.0,29.0,0.0,100,moderate
+F1585,nasi goreng,nasi goreng,168.0,6.3,6.23,21.06,0.76,415.0,102.0,100,moderate
+F1586,nasi goreng ayam,nasi goreng ayam,329.0,12.45,11.96,41.82,1.39,598.0,248.0,100,moderate
+F1587,nasi goreng tanpa daging,nasi goreng tanpa daging,151.0,4.23,5.48,20.97,1.12,425.0,93.0,100,moderate
+F1588,nasi goreng babi,nasi goreng babi,335.0,11.94,12.87,41.94,1.41,598.0,271.0,100,moderate
+F1589,nasi goreng udang,nasi goreng udang,321.0,10.95,11.6,41.88,1.5,925.0,164.0,100,moderate
+F1590,nasi merah instan,nasi merah instan,233.0,5.43,1.89,48.29,0.74,638.0,91.0,100,moderate
+F1591,nasi merah (butir-sedang,"nasi merah (butir-sedang, dimasak)",112.0,2.32,0.83,23.51,0.001,79.0,0.0,100,moderate
+F1592,nasi merah (butir-panjang,"nasi merah (butir-panjang, dimasak)",111.0,2.58,0.9,22.96,0.35,5.0,43.0,100,moderate
+F1593,nasi putih (butir-panjang,"nasi putih (butir-panjang, dimasak)",130.0,2.69,0.28,28.17,0.05,1.0,35.0,100,moderate
+F1594,spageti,spageti,157.0,5.76,0.92,30.68,0.56,232.0,45.0,100,moderate
+F1595,pasta dengan saus daging,pasta dengan saus daging,329.0,20.22,13.06,33.33,8.47,1887.0,811.0,100,low
+F1596,pasta tanpa daging dengan saus tomat,pasta tanpa daging dengan saus tomat,206.0,7.56,1.17,41.56,6.35,412.0,355.0,100,moderate
+F1597,spageti gandum,spageti gandum,123.0,5.3,0.54,26.38,0.8,234.0,44.0,100,moderate
+F1598,biskuit tawar atau mentega,biskuit tawar atau mentega,212.0,4.2,9.78,26.76,1.31,348.0,73.0,100,moderate
+F1599,biskuit gandum,biskuit gandum,44.0,1.35,1.62,6.47,0.36,126.0,43.0,100,moderate
+F1600,biskuit tawar atau dengan mentega (rendah lemak),biskuit tawar atau dengan mentega (rendah lemak),59.0,1.54,1.04,10.95,1.61,287.0,37.0,100,moderate
+F1601,biskuit tawar atau mentega (campuran kering,"biskuit tawar atau mentega (campuran kering, siap)",335.0,7.3,12.1,48.4,0.955,188.0,0.0,100,moderate
+F1602,tepung tortilla,tepung tortilla,41.0,1.08,1.01,6.68,0.25,83.0,20.0,100,moderate
+F1603,tortilla jagung,tortilla jagung,218.0,5.7,2.85,44.64,0.88,45.0,186.0,100,moderate
+F1604,gandum tortilla,gandum tortilla,92.0,3.36,0.45,19.54,0.1,170.0,84.0,100,moderate
+F1605,oatmeal,oatmeal,62.0,2.59,1.02,10.84,0.24,119.0,54.0,100,moderate
+F1606,oatmeal instan,oatmeal instan,91.0,2.46,1.2,18.22,6.58,122.0,78.0,100,low
+F1607,oatmeal cepat (1 atau 3 menit),oatmeal cepat (1 atau 3 menit),145.0,6.06,2.39,25.37,0.56,278.0,126.0,100,moderate
+F1608,oatmeal dengan buah,oatmeal dengan buah,190.0,6.18,2.29,37.81,11.14,260.0,253.0,100,low
+F1609,oatmeal multigrain,oatmeal multigrain,147.0,5.01,1.15,32.48,0.26,166.0,173.0,100,moderate
+F1610,roti gandum,roti gandum,67.0,2.37,1.07,12.26,1.43,138.0,53.0,100,moderate
+F1611,roti multigrain,roti multigrain,251.0,10.0,3.8,46.4,10.05,487.0,204.0,100,low
+F1612,roti gandum hitam,roti gandum hitam,259.0,8.5,3.3,48.3,3.85,660.0,166.0,100,moderate
+F1613,roti adonan asam,roti adonan asam,274.0,8.8,3.0,51.9,0.24,609.0,113.0,100,high
+F1614,roti bagel,roti bagel,257.0,10.02,1.62,50.5,5.05,448.0,75.0,100,moderate
+F1615,bagel gandum,bagel gandum,300.0,10.93,1.47,61.33,1.9,534.0,198.0,100,high
+F1616,bagel multigrain,bagel multigrain,272.0,11.84,1.34,55.08,3.41,520.0,389.0,100,moderate
+F1617,bagel panggang,bagel panggang,288.0,11.14,1.72,57.11,5.82,480.0,85.0,100,moderate
+F1618,bagel kismis kayu manis,bagel kismis kayu manis,243.0,8.72,1.51,49.13,5.32,287.0,132.0,100,moderate
+F1619,roti kismis,roti kismis,71.0,2.05,1.14,13.6,0.101,59.0,0.0,100,moderate
+F1620,roti kismis panggang,roti kismis panggang,71.0,2.06,1.15,13.66,1.48,102.0,59.0,100,moderate
+F1621,roti gandum panggang,roti gandum panggang,68.0,2.39,1.06,12.32,1.44,138.0,53.0,100,moderate
+F1622,roti panggang putih,roti panggang putih,64.0,1.98,0.88,11.97,1.04,130.0,29.0,100,moderate
+F1623,roti gandum hitam panggang,roti gandum hitam panggang,68.0,2.26,0.86,12.74,1.02,174.0,44.0,100,moderate
+F1624,roti panggang multigrain,roti panggang multigrain,65.0,2.62,0.98,12.1,2.62,127.0,53.0,100,low
+F1625,roti panggang texas,roti panggang texas,86.0,2.02,3.32,11.86,,,,100,moderate
+F1626,roti pita,roti pita,124.0,4.1,0.54,25.06,0.58,241.0,54.0,100,moderate
+F1627,roti gandum pita,roti gandum pita,123.0,4.71,0.64,25.11,0.12,188.0,96.0,100,moderate
+F1628,roti panggang pita,roti panggang pita,79.0,2.6,0.34,15.91,0.37,153.0,34.0,100,moderate
+F1629,roti putih (kalori dikurangi),roti putih (kalori dikurangi),48.0,2.0,0.58,10.19,1.09,104.0,17.0,100,moderate
+F1630,sereal,sereal,124.0,2.39,1.12,27.4,7.45,223.0,89.0,100,low
+F1631,corn flakes,corn flakes,101.0,1.88,0.03,24.28,1.82,266.0,33.0,100,moderate
+F1632,salad sayuran hijau campur,salad sayuran hijau campur,9.0,0.84,0.13,1.76,0.48,16.0,160.0,100,low
+F1633,salad selada dengan berbagai macam sayuran,salad selada dengan berbagai macam sayuran,11.0,0.55,0.11,2.32,1.33,15.0,120.0,100,low
+F1634,salad kentang,salad kentang,143.0,2.68,8.2,11.17,0.529,254.0,0.0,100,moderate
+F1635,salad tuna,salad tuna,383.0,29.68,22.92,14.48,6.24,807.0,356.0,100,low
+F1636,salad telur,salad telur,706.0,20.42,67.18,4.28,2.06,804.0,220.0,100,low
+F1637,salad ayam atau kalkun,salad ayam atau kalkun,417.0,29.48,31.5,2.55,0.98,288.0,319.0,100,low
+F1638,salad ayam atau kalkun dengan telur,salad ayam atau kalkun dengan telur,384.0,27.59,28.59,2.84,1.29,446.0,300.0,100,low
+F1639,salad hijau ayam atau kalkun (ayam dan/atau kalkun,"salad hijau ayam atau kalkun (ayam dan/atau kalkun, sayurn lainnya kecuali tomat dan wortel)",65.0,11.08,1.3,1.74,1.02,36.0,178.0,100,low
+F1640,salad hijau ayam atau kalkun oriental (ayam dan/atau kalkun,"salad hijau ayam atau kalkun oriental (ayam dan/atau kalkun, selada, buah, kacang-kacangan)",102.0,9.75,4.76,5.09,3.09,65.0,166.0,100,low
+F1641,salad hijau ayam atau kalkun (ayam dan/atau kalkun,"salad hijau ayam atau kalkun (ayam dan/atau kalkun, tomat dan/atau wortel, sayuran lainnya)",58.0,9.49,1.13,2.13,1.27,32.0,185.0,100,low
+F1642,salad kentang dengan telur,salad kentang dengan telur,262.0,5.35,13.61,30.8,3.17,942.0,569.0,100,moderate
+F1643,salad kentang gaya jerman,salad kentang gaya jerman,154.0,4.41,2.17,29.15,3.13,416.0,560.0,100,moderate
+F1644,lauk (makanan sampingan/tambahan) salad kentang,lauk (makanan sampingan/tambahan) salad kentang,108.0,1.45,5.73,12.85,0.256,0.0,0.0,100,moderate
+F1645,salad makaroni atau pasta,salad makaroni atau pasta,202.0,3.76,10.63,22.98,2.3,522.0,74.0,100,moderate
+F1646,salad makaroni atau pasta dengan ayam,salad makaroni atau pasta dengan ayam,391.0,17.89,23.61,26.55,3.33,830.0,212.0,100,moderate
+F1647,salad makaroni atau pasta dengan tuna,salad makaroni atau pasta dengan tuna,335.0,12.51,16.18,34.5,3.45,874.0,175.0,100,moderate
+F1648,salad pasta atau makaroni dengan daging,salad pasta atau makaroni dengan daging,172.0,6.66,8.15,17.94,1.97,735.0,128.0,100,moderate
+F1649,salad pasta atau makaroni dengan dressing minyak atau cuka,salad pasta atau makaroni dengan dressing minyak atau cuka,250.0,5.82,10.09,34.25,4.5,1179.0,175.0,100,moderate
+F1650,salad ikan tuna,salad ikan tuna,383.0,32.88,18.98,19.29,0.824,365.0,0.0,100,moderate
+F1651,salad tuna dengan keju,salad tuna dengan keju,451.0,30.04,30.62,14.29,6.95,1040.0,372.0,100,low
+F1652,salad tuna dengan telur,salad tuna dengan telur,408.0,28.52,26.89,13.02,5.68,759.0,337.0,100,low
+F1653,garam,garam,0.0,0.0,0.0,0.0,0.0,2325.0,0.0,100,low
+F1654,lada hitam,lada hitam,0.0,0.01,0.0,0.06,0.0,0.0,1.0,100,low
+F1655,bubuk cabai,bubuk cabai,24.0,0.92,1.26,4.1,0.54,76.0,144.0,100,low
+F1656,bawang putih bubuk,bawang putih bubuk,9.0,0.47,0.02,2.04,0.68,1.0,31.0,100,low
+F1657,cuka (sari apel),cuka (sari apel),3.0,0.0,0.0,0.14,,1.0,,100,low
+F1658,garam laut,garam laut,0.0,0.0,0.0,0.0,0.0,155.0,0.0,100,low
+F1659,gula,gula,16.0,0.0,0.0,4.2,4.2,0.0,0.0,100,low
+F1660,gula pasir,gula pasir,16.0,0.0,0.0,4.2,4.2,0.0,0.0,100,low
+F1661,gula merah,gula merah,377.0,0.0,0.0,97.33,96.21,39.0,346.0,100,low
+F1662,gula bubuk,gula bubuk,10.0,0.0,0.0,2.49,2.45,0.0,0.0,100,low
+F1663,gula putih (butiran atau gumpalan),gula putih (butiran atau gumpalan),16.0,0.0,0.0,4.2,4.2,0.0,0.0,100,low
+F1664,saus tomat,saus tomat,15.0,0.26,0.06,3.76,3.42,167.0,57.0,100,low
+F1665,saus koktail,saus koktail,221.0,4.12,1.17,56.87,49.63,2364.0,906.0,100,low
+F1666,kecap asin (kedelai),kecap asin (kedelai),8.0,1.0,0.01,1.22,0.27,902.0,35.0,100,low
+F1667,kecap asin (kedelai) (rendah sodium),kecap asin (kedelai) (rendah sodium),10.0,0.93,0.01,1.53,0.31,600.0,32.0,100,low
+F1668,saus kedelai dengan sodium yang dikurangi,saus kedelai dengan sodium yang dikurangi,8.0,0.83,0.01,1.36,0.27,533.0,29.0,100,low
+F1669,kecap asin (tamari),kecap asin (tamari),11.0,1.89,0.02,1.0,0.31,1005.0,38.0,100,low
+F1670,cabai merah atau rawit,cabai merah atau rawit,318.0,12.01,17.27,56.63,10.34,30.0,2014.0,100,moderate
+F1671,saus lada atau pedas,saus lada atau pedas,1.0,0.02,0.02,0.08,0.06,124.0,7.0,100,low
+F1672,madu semanggi,madu semanggi,60.0,0.06,0.0,16.23,16.18,1.0,10.0,100,low
+F1673,minyak nabati,minyak nabati,120.0,0.0,13.6,0.0,0.0,0.0,0.0,100,low
+F1674,minyak sayur canola,minyak sayur canola,124.0,0.0,14.0,0.0,0.0,0.0,0.0,100,low
+F1675,minyak bunga matahari,minyak bunga matahari,120.0,0.0,13.6,0.0,0.0,0.0,0.0,100,low
+F1676,minyak zaitun ekstra virgin,minyak zaitun ekstra virgin,119.0,0.0,13.5,0.0,0.0,0.0,0.0,100,low
+F1677,pemanis (sakarin),pemanis (sakarin),4.0,0.01,0.0,0.89,0.85,4.0,0.0,100,low
+F1678,mayones,mayones,57.0,0.13,4.91,3.51,0.94,105.0,1.0,100,low
+F1679,saus apel,saus apel,86.0,0.2,0.2,22.5,18.64,3.0,69.0,100,low
+F1680,saus pasta spageti/marinara,saus pasta spageti/marinara,74.0,1.95,2.38,11.27,8.88,481.0,376.0,100,low
+F1681,saus spageti dengan sayuran (gaya-buatan sendiri),saus spageti dengan sayuran (gaya-buatan sendiri),122.0,3.88,5.43,18.47,10.05,367.0,852.0,100,low
+F1682,pengawet selai,pengawet selai,55.0,0.11,0.03,13.99,8.95,8.0,16.0,100,low
+F1683,selai dan pengawet,selai dan pengawet,56.0,0.07,0.01,13.77,9.7,6.0,15.0,100,low
+F1684,selai,"selai, pengawet, selai jeruk (rendah gula)",26.0,0.08,0.04,6.57,6.19,0.0,17.0,100,low
+F1685,jeli (semua rasa),jeli (semua rasa),51.0,0.03,0.0,13.29,9.73,6.0,10.0,100,low
+F1686,jeli yang kadar gulanya sudah dikurangi,jeli yang kadar gulanya sudah dikurangi,34.0,0.06,0.01,8.67,8.52,0.0,13.0,100,low
+F1687,selai kacang,selai kacang,94.0,4.01,8.06,3.13,1.48,73.0,104.0,100,low
+F1688,selai kacang dengan lemak yang telah dikurangi,selai kacang dengan lemak yang telah dikurangi,94.0,4.66,6.12,6.42,1.41,97.0,120.0,100,low
+F1689,selai kacang halus (dengan garam),selai kacang halus (dengan garam),188.0,8.03,16.12,6.26,2.95,147.0,208.0,100,low
+F1690,selai kacang halus (lemak yang telah dikurangi),selai kacang halus (lemak yang telah dikurangi),520.0,25.9,34.0,35.65,7.81,540.0,669.0,100,low
+F1691,sirup maple,sirup maple,52.0,0.0,0.04,13.42,11.9,2.0,41.0,100,low
+F1692,sirup cokelat,sirup cokelat,109.0,0.82,0.44,25.39,19.36,28.0,87.0,100,low
+F1693,acar,acar,12.0,0.4,0.12,2.68,2.28,833.0,75.0,100,low
+F1694,acar mentimun manis,acar mentimun manis,117.0,0.37,0.26,31.81,14.63,939.0,32.0,100,low
+F1695,acar mentimun asam,acar mentimun asam,11.0,0.33,0.2,2.26,1.06,1208.0,23.0,100,low
+F1696,bawang,bawang,42.0,0.92,0.08,10.11,4.28,3.0,144.0,100,low
+F1697,bawang merah,bawang merah,42.0,0.92,0.08,10.11,4.28,3.0,144.0,100,low
+F1698,daun bawang (loncang),daun bawang (loncang),32.0,1.83,0.19,7.34,2.33,16.0,276.0,100,low
+F1699,bawang manis,bawang manis,32.0,0.0,0.08,0.0,0.0,0.0,0.0,100,low
+F1700,bawang hijau muda,bawang hijau muda,32.0,1.83,0.19,7.34,2.33,16.0,276.0,100,low
+F1701,bawang putih,bawang putih,4.0,0.19,0.02,0.99,0.03,1.0,12.0,100,low
+F1702,bawang putih cincang,bawang putih cincang,5.0,0.25,0.03,1.32,0.04,1.0,16.0,100,low
+F1703,bawang putih dimasak,bawang putih dimasak,3.0,0.13,0.01,0.66,0.02,0.0,8.0,100,low
+F1704,bayam,bayam,23.0,2.86,0.39,3.63,0.42,79.0,558.0,100,low
+F1705,bayam (cincang atau daun,"bayam (cincang atau daun, beku)",31.0,3.94,0.75,4.33,0.87,74.0,372.0,100,low
+F1706,bayam bayi/kecil,bayam bayi/kecil,7.0,0.86,0.12,1.09,0.13,24.0,167.0,100,low
+F1707,bayam (kering padat,"bayam (kering padat, kaleng)",49.0,6.01,1.07,7.28,0.86,58.0,740.0,100,moderate
+F1708,bayam dimasak (dari segar),bayam dimasak (dari segar),40.0,2.88,2.25,3.68,0.42,285.0,452.0,100,low
+F1709,brokoli,brokoli,34.0,2.82,0.37,6.64,1.7,33.0,316.0,100,low
+F1710,brokoli dimasak (lemak tidak ditambahkan dalam masakan),brokoli dimasak (lemak tidak ditambahkan dalam masakan),35.0,2.37,0.41,7.14,1.38,278.0,291.0,100,moderate
+F1711,brokoli cina (dimasak),brokoli cina (dimasak),22.0,1.14,0.72,3.81,0.84,7.0,261.0,100,low
+F1712,brokoli (tusuk,"brokoli (tusuk, beku)",29.0,3.06,0.34,5.35,1.47,17.0,250.0,100,low
+F1713,daun bawang,daun bawang,61.0,1.5,0.3,14.15,3.9,20.0,180.0,100,low
+F1714,bawang bombay dimasak,bawang bombay dimasak,94.0,1.51,4.0,14.24,3.9,282.0,163.0,100,low
+F1715,jagung,jagung,86.0,3.22,1.18,19.02,3.22,15.0,270.0,100,moderate
+F1716,jagung manis kuning,jagung manis kuning,86.0,3.22,1.18,19.02,3.22,15.0,270.0,100,moderate
+F1717,jagung kecil/tunas jagung,jagung kecil/tunas jagung,81.0,2.62,1.0,18.59,3.5,214.0,195.0,100,moderate
+F1718,jagung manis kuning (kernel utuh,"jagung manis kuning (kernel utuh, padat dikeringkan, kalengan)",81.0,2.62,1.0,18.59,3.5,214.0,195.0,100,moderate
+F1719,jagung dengan mentega,jagung dengan mentega,106.0,3.06,2.35,21.88,0.246,0.0,0.0,100,moderate
+F1720,jamur,jamur,22.0,3.09,0.34,3.28,1.65,5.0,318.0,100,low
+F1721,jamur (kering padat,"jamur (kering padat, kaleng)",25.0,1.87,0.29,5.09,2.2,425.0,129.0,100,low
+F1722,potongan-potongan jamur dan batang,potongan-potongan jamur dan batang,15.0,2.16,0.24,2.3,1.16,4.0,223.0,100,low
+F1723,jamur portabella,jamur portabella,26.0,2.5,0.2,5.07,1.8,6.0,484.0,100,low
+F1724,jamur tiram,jamur tiram,35.0,3.34,0.44,6.43,1.11,18.0,420.0,100,moderate
+F1725,kacang hijau,kacang hijau,81.0,5.42,0.4,14.46,5.67,5.0,244.0,100,low
+F1726,kacang polong,kacang polong,42.0,2.8,0.2,7.55,4.0,4.0,200.0,100,low
+F1727,kacang hijau (beku),kacang hijau (beku),55.0,3.75,0.27,9.87,3.87,81.0,107.0,100,low
+F1728,kacang hijau dimasak (kalengan),kacang hijau dimasak (kalengan),150.0,7.54,4.31,21.51,7.09,460.0,296.0,100,low
+F1729,kembang kol,kembang kol,25.0,1.98,0.1,5.3,2.4,30.0,303.0,100,low
+F1730,kembang kol (beku),kembang kol (beku),16.0,1.33,0.18,3.09,1.47,16.0,127.0,100,low
+F1731,kembang kol dimasak (lemak tidak ditambahkan dalam masakan),kembang kol dimasak (lemak tidak ditambahkan dalam masakan),22.0,1.75,0.37,3.96,1.28,284.0,140.0,100,low
+F1732,kembang kol dimasak (dari beku,"kembang kol dimasak (dari beku, lemak tidak ditambahkan dalam masakan)",34.0,2.88,0.4,6.71,1.87,403.0,248.0,100,low
+F1733,kembang kol dimasak (dari segar,"kembang kol dimasak (dari segar, lemak tidak ditambahkan dalam masakan)",23.0,1.83,0.45,4.08,1.4,313.0,141.0,100,low
+F1734,kentang putih (daging dan kulit),kentang putih (daging dan kulit),70.0,1.68,0.1,15.71,1.15,6.0,407.0,100,moderate
+F1735,kentang putih (daging dan kulit,"kentang putih (daging dan kulit, dipanggang)",94.0,2.1,0.15,21.08,1.53,7.0,544.0,100,moderate
+F1736,kentang tumbuk,kentang tumbuk,100.0,1.8,3.54,15.72,1.38,231.0,260.0,100,moderate
+F1737,kentang panggang,kentang panggang,149.0,2.32,7.0,20.06,0.9,101.0,483.0,100,moderate
+F1738,kentang (daging,"kentang (daging, dengan garam, direbus)",87.0,1.87,0.1,20.13,0.87,240.0,379.0,100,moderate
+F1739,kentang panggang (kulit dimakan),kentang panggang (kulit dimakan),109.0,2.43,2.2,20.53,1.14,235.0,519.0,100,moderate
+F1740,kentang panggang (kulit tidak dimakan),kentang panggang (kulit tidak dimakan),92.0,1.95,0.1,21.39,1.69,287.0,388.0,100,moderate
+F1741,kentang panggang diisi dengan krim asam (kulit dimakan),kentang panggang diisi dengan krim asam (kulit dimakan),316.0,6.14,16.0,39.11,2.12,451.0,1008.0,100,moderate
+F1742,kentang panggang yang diisi daging babi dan keju (kulit dimakan),kentang panggang yang diisi daging babi dan keju (kulit dimakan),322.0,11.86,13.72,38.92,4.13,924.0,1044.0,100,moderate
+F1743,kentang panggang diisi dengan keju (kulit dimakan),kentang panggang diisi dengan keju (kulit dimakan),288.0,9.54,11.09,38.9,4.14,778.0,1008.0,100,moderate
+F1744,kentang tumbuk (dari kentang segar),kentang tumbuk (dari kentang segar),122.0,2.11,6.96,13.22,2.24,392.0,240.0,100,moderate
+F1745,kentang tumbuk (dari kentang kering),kentang tumbuk (dari kentang kering),105.0,2.02,5.56,12.22,1.87,326.0,186.0,100,moderate
+F1746,kentang tumbuk (ditambahkan susu ),kentang tumbuk (ditambahkan susu ),83.0,1.92,0.57,17.53,1.51,302.0,298.0,100,moderate
+F1747,kentang tumbuk (ditambahkan susu dan mentega ),kentang tumbuk (ditambahkan susu dan mentega ),113.0,1.87,4.22,16.77,,231.0,,100,moderate
+F1748,mentimun (dengan kulit),mentimun (dengan kulit),15.0,0.65,0.11,3.63,1.67,2.0,147.0,100,low
+F1749,mentimun (kupas),mentimun (kupas),12.0,0.59,0.16,2.16,1.38,2.0,136.0,100,low
+F1750,kubis,kubis,24.0,1.44,0.12,5.58,3.58,18.0,246.0,100,low
+F1751,kubis merah,kubis merah,31.0,1.43,0.16,7.37,3.91,27.0,243.0,100,low
+F1752,kubis hijau,kubis hijau,24.0,1.44,0.12,5.58,3.58,18.0,246.0,100,low
+F1753,kubis savoy,kubis savoy,19.0,1.4,0.07,4.27,1.59,20.0,161.0,100,low
+F1754,kubis cina,kubis cina,13.0,1.5,0.2,2.18,1.18,65.0,252.0,100,low
+F1755,labu,labu,26.0,1.0,0.1,6.5,1.36,1.0,340.0,100,low
+F1756,labu (tanpa garam,"labu (tanpa garam, kaleng)",83.0,2.7,0.69,19.82,8.08,12.0,505.0,100,low
+F1757,labu dimasak,labu dimasak,46.0,1.08,1.75,7.94,3.22,166.0,202.0,100,low
+F1758,lobak,lobak,28.0,0.9,0.1,6.43,3.8,67.0,191.0,100,low
+F1759,lobak dimasak,lobak dimasak,42.0,0.69,2.37,4.94,2.88,265.0,171.0,100,low
+F1760,paprika hijau,paprika hijau,20.0,0.86,0.17,4.64,2.4,3.0,175.0,100,low
+F1761,paprika kuning manis,paprika kuning manis,27.0,0.0,0.21,0.0,0.0,0.0,0.0,100,low
+F1762,paprika jalapeno,paprika jalapeno,4.0,0.19,0.09,0.83,0.48,0.0,30.0,100,low
+F1763,paprika hijau pedas,paprika hijau pedas,40.0,2.0,0.2,9.46,5.1,7.0,340.0,100,low
+F1764,sayuran campur (padat dan cair,"sayuran campur (padat dan cair, kaleng)",88.0,3.48,0.61,17.44,0.549,338.0,0.0,100,moderate
+F1765,sayuran campur (kering padatan,"sayuran campur (kering padatan, kaleng)",80.0,4.22,0.41,15.09,3.99,243.0,474.0,100,low
+F1766,sayuran campur (beku),sayuran campur (beku),64.0,3.33,0.52,13.46,0.047,212.0,0.0,100,moderate
+F1767,sayuran campur matang (jagung,"sayuran campur matang (jagung, kacang lima, kacang polong, kacang hijau dan wortel)",81.0,2.78,2.12,12.74,3.06,249.0,164.0,100,low
+F1768,sayuran campur (jagung,"sayuran campur (jagung, kacang lima, kacang polong, kacang hijau, wortel) (tanpa tambahan garam, kaleng)",67.0,2.55,0.36,13.3,4.46,47.0,251.0,100,low
+F1769,selada,selada,14.0,0.9,0.14,2.97,1.76,10.0,141.0,100,low
+F1770,selada daun hijau,selada daun hijau,15.0,1.36,0.15,2.79,0.78,28.0,194.0,100,low
+F1771,selada arugula,selada arugula,25.0,2.58,0.66,3.65,2.05,27.0,369.0,100,low
+F1772,selada gunung es (termasuk jenis crisphead),selada gunung es (termasuk jenis crisphead),14.0,0.9,0.14,2.97,1.76,10.0,141.0,100,low
+F1773,seledri,seledri,14.0,0.69,0.17,2.97,1.83,80.0,260.0,100,low
+F1774,seledri dimasak,seledri dimasak,39.0,0.81,2.54,3.93,2.29,307.0,275.0,100,low
+F1775,terung,terung,24.0,1.01,0.19,5.7,2.35,2.0,230.0,100,low
+F1776,terung dimasak,terung dimasak,65.0,0.79,3.85,8.31,3.02,488.0,117.0,100,low
+F1777,terong goreng,terong goreng,148.0,2.4,10.75,11.58,2.41,62.0,222.0,100,low
+F1778,tomat,tomat,18.0,0.88,0.2,3.92,2.63,5.0,237.0,100,low
+F1779,tomat merah,tomat merah,22.0,1.08,0.25,4.82,3.23,6.0,292.0,100,low
+F1780,tomat merah (kaleng),tomat merah (kaleng),41.0,1.92,0.31,9.38,6.14,307.0,451.0,100,low
+F1781,tomat dihancurkan/dihaluskan (kaleng),tomat dihancurkan/dihaluskan (kaleng),32.0,1.64,0.28,7.29,0.132,293.0,0.0,100,moderate
+F1782,tomat ceri,tomat ceri,18.0,0.88,0.2,3.92,2.63,5.0,237.0,100,low
+F1783,ubi jalar (manis),ubi jalar (manis),86.0,1.57,0.05,20.12,4.18,55.0,337.0,100,low
+F1784,ubi jalar (tanpa kulit,"ubi jalar (tanpa kulit, dimasak, direbus)",76.0,1.37,0.14,17.72,5.74,27.0,230.0,100,low
+F1785,ubi jalar (tanpa garam,"ubi jalar (tanpa garam, dipanggang dengan kulitnya, dimasak)",90.0,2.01,0.15,20.71,8.44,36.0,475.0,100,low
+F1786,ubi jalar/manis (tumbuk,"ubi jalar/manis (tumbuk, kaleng)",101.0,1.98,0.2,23.19,5.45,75.0,210.0,100,low
+F1787,ubi rambat,ubi rambat,118.0,1.53,0.17,27.88,0.5,9.0,816.0,100,moderate
+F1788,ubi jalar (dengan garam,"ubi jalar (dengan garam, dikeringkan, dimasak, direbus)",116.0,1.49,0.14,27.58,0.49,244.0,670.0,100,moderate
+F1789,ubi rambat (tanpa garam,"ubi rambat (tanpa garam, dikeringkan, dimasak, direbus, dipanggang)",116.0,1.49,0.14,27.58,0.49,8.0,670.0,100,moderate
+F1790,wortel,wortel,41.0,0.93,0.24,9.58,,69.0,,100,moderate
+F1791,wortel bayi,wortel bayi,4.0,0.06,0.01,0.82,0.48,8.0,24.0,100,low
+F1792,wortel dimasak,wortel dimasak,54.0,0.74,2.48,7.99,3.33,306.0,227.0,100,low
+F1793,wortel (padat dan cair,"wortel (padat dan cair, kaleng)",28.0,0.71,0.17,6.61,3.03,295.0,213.0,100,low
+F1794,zaitun,zaitun,117.0,0.92,11.27,5.4,0.16,1083.0,18.0,100,moderate
+F1795,zaitun hitam,zaitun hitam,105.0,0.88,9.54,6.06,0.0,880.0,8.0,100,moderate
+F1796,zaitun hijau,zaitun hijau,42.0,0.3,4.44,1.11,0.16,451.0,12.0,100,low
+F1797,zaitun hijau isi,zaitun hijau isi,44.0,0.35,4.49,1.37,0.3,456.0,20.0,100,low
+F1798,zaitun hijau (acar,"zaitun hijau (acar, kaleng atau botol)",145.0,1.03,15.32,3.84,0.54,1556.0,42.0,100,low
+F1799,kaldu ayam,kaldu ayam,12.0,0.95,0.29,1.51,0.024,0.0,0.0,100,low
+F1800,kaldu sapi,kaldu sapi,7.0,0.84,0.19,0.8,0.63,1157.0,19.0,100,low
+F1801,kaldu jamur,kaldu jamur,7.0,0.87,0.01,0.83,0.45,1325.0,23.0,100,low
+F1802,sayuran rebus (tanpa daging),sayuran rebus (tanpa daging),56.0,2.65,0.97,9.73,1.93,226.0,220.0,100,moderate
+F1803,daging sapi rebus dengan kentang dan sayuran dalam saus tomat,daging sapi rebus dengan kentang dan sayuran dalam saus tomat,207.0,16.63,5.75,21.9,2.77,547.0,630.0,100,moderate
+F1804,sup tomat,sup tomat,102.0,3.05,2.93,17.93,10.54,705.0,307.0,100,low
+F1805,sayur sup (kalengan,"sayur sup (kalengan, terkondensasi)",145.0,4.23,3.89,24.06,7.7,1653.0,421.0,100,low
+F1806,sup mie ayam,sup mie ayam,65.0,3.18,2.39,7.4,1.06,868.0,53.0,100,moderate
+F1807,sup miso,sup miso,84.0,6.02,3.36,7.78,2.59,998.0,367.0,100,low
+F1808,sup ayam,sup ayam,75.0,4.05,2.46,9.35,0.27,1106.0,55.0,100,moderate
+F1809,sup nasi ayam,sup nasi ayam,60.0,3.54,1.9,7.16,0.19,817.0,101.0,100,moderate
+F1810,sup ayam kental (kalengan),sup ayam kental (kalengan),170.0,12.14,6.34,16.51,2.09,850.0,168.0,100,moderate
+F1811,sup ayam (dan) sayur (dengan volume air yang sama,"sup ayam (dan) sayur (dengan volume air yang sama, kalengan)",75.0,3.62,2.84,8.58,1.3,945.0,154.0,100,moderate
+F1812,sup mie daging sapi,sup mie daging sapi,83.0,4.83,3.07,8.98,2.59,954.0,100.0,100,low
+F1813,sup mie instan,sup mie instan,46.0,2.16,0.84,7.32,0.43,758.0,60.0,100,moderate
+F1814,daging sapi gaya oriental dan sup beras ( pho bo vietnam),daging sapi gaya oriental dan sup beras ( pho bo vietnam),176.0,17.35,3.86,16.81,1.05,669.0,305.0,100,moderate
+F1815,sup tomat (kalengan,"sup tomat (kalengan, terkondensasi)",151.0,4.04,1.41,33.66,20.36,1383.0,575.0,100,low
+F1816,krim sup tomat (disiapkan dengan susu),krim sup tomat (disiapkan dengan susu),136.0,6.05,3.15,22.62,16.49,742.0,469.0,100,low
+F1817,sup tomat (disiapkan dengan air),sup tomat (disiapkan dengan air),76.0,2.03,0.71,16.84,10.17,693.0,288.0,100,low
+F1818,kuning telur,kuning telur,322.0,15.86,26.54,3.59,0.56,48.0,109.0,100,low
+F1819,kuning telur matang,kuning telur matang,55.0,2.69,4.49,0.61,0.1,34.0,19.0,100,low
+F1820,telur orak-arik,telur orak-arik,199.0,13.01,15.21,1.96,1.43,211.0,138.0,100,low
+F1821,telur orak-arik (utuh,"telur orak-arik (utuh, dimasak)",101.0,6.76,7.45,1.34,1.06,171.0,84.0,100,low
+F1822,telur dadar atau telur orak-arik,telur dadar atau telur orak-arik,98.0,6.81,7.14,1.15,1.17,247.0,91.0,100,low
+F1823,telur dadar atau telur orak-arik dengan keju,telur dadar atau telur orak-arik dengan keju,140.0,9.15,10.37,2.23,2.21,411.0,129.0,100,low
+F1824,telur dadar atau telur orak-arik dengan jamur,telur dadar atau telur orak-arik dengan jamur,91.0,6.37,6.34,2.05,1.6,289.0,107.0,100,low
+F1825,putih telur,putih telur,52.0,10.9,0.17,0.73,0.71,166.0,163.0,100,low
+F1826,pengganti telur (cair),pengganti telur (cair),84.0,12.0,3.31,0.64,0.64,177.0,330.0,100,low
+F1827,putih telur matang,putih telur matang,17.0,3.58,0.06,0.24,0.23,106.0,53.0,100,low
+F1828,telur,telur,74.0,6.29,4.97,0.38,0.38,70.0,67.0,100,low
+F1829,telur rebus,telur rebus,77.0,6.26,5.28,0.56,0.56,139.0,63.0,100,low
+F1830,telur ceplok,telur ceplok,92.0,6.27,7.04,0.4,0.38,94.0,68.0,100,low
+F1831,telur dadar,telur dadar,93.0,6.48,7.33,0.42,0.4,98.0,70.0,100,low
+F1832,telur dadar atau telur orak-arik dengan sayuran,telur dadar atau telur orak-arik dengan sayuran,106.0,7.22,7.34,2.38,1.86,280.0,117.0,100,low
+F1833,telur dadar atau telur orak-arik dengan sosis,telur dadar atau telur orak-arik dengan sosis,181.0,11.13,14.26,1.29,1.31,322.0,161.0,100,low
+F1834,telur goreng,telur goreng,89.0,6.24,6.76,0.43,0.38,238.0,67.0,100,low
+F1835,telur goreng tanpa lemak,telur goreng tanpa lemak,73.0,6.24,4.93,0.38,0.38,223.0,66.0,100,low
+F1836,telur rebus lunak,telur rebus lunak,68.0,5.51,4.65,0.49,0.49,122.0,55.0,100,low
+F1837,bihun panjang,bihun panjang,84.0,0.04,0.01,20.66,0.0,4.0,2.0,100,moderate
+F1838,bihun kering,bihun kering,364.0,3.44,0.56,83.24,0.182,30.0,0.0,100,high
+F1839,sohun,sohun,351.0,0.16,0.06,86.09,0.0,10.0,10.0,100,high
+F1840,buah persik,buah persik,39.0,0.91,0.25,9.54,8.39,0.0,190.0,100,low
+F1841,bubuk pengganti makanan protein,bubuk pengganti makanan protein,107.0,5.81,0.13,20.96,20.3,121.0,280.0,100,low
+F1842,bubuk protein,bubuk protein,401.0,31.0,9.0,49.0,0.0,1540.0,400.0,100,moderate
+F1843,bubuk protein supplemen,bubuk protein supplemen,40.0,3.23,0.16,6.47,6.47,54.0,129.0,100,low
+F1844,bubur jagung,bubur jagung,109.0,2.56,0.34,23.11,0.19,317.0,39.0,100,moderate
+F1845,bubur jagung dengan keju,bubur jagung dengan keju,282.0,13.28,13.7,26.04,3.15,825.0,183.0,100,moderate
+F1846,bubur jagung instan,bubur jagung instan,161.0,3.98,0.45,37.2,0.15,519.0,69.0,100,moderate
+F1847,bubur jagung instan rasa,bubur jagung instan rasa,173.0,3.95,2.82,34.51,1.01,884.0,79.0,100,moderate
+F1848,agar-agar pencuci mulut,agar-agar pencuci mulut,62.0,1.22,0.0,14.19,13.49,75.0,1.0,100,low
+F1849,jus cranberry-anggur (botol),jus cranberry-anggur (botol),137.0,0.49,0.24,34.3,0.007,59.0,0.0,100,moderate
+F1850,jus jeruk bali merah muda,jus jeruk bali merah muda,96.0,1.24,0.25,22.72,0.4,0.0,0.0,100,moderate
+F1851,jus jeruk bali putih,jus jeruk bali putih,96.0,1.24,0.25,22.72,22.48,2.0,400.0,100,low
+F1852,jus jeruk bali segar,jus jeruk bali segar,96.0,1.24,0.25,22.72,22.48,2.0,400.0,100,low
+F1853,koktail buah atau campuran,koktail buah atau campuran,93.0,1.02,0.3,24.24,17.83,2.0,296.0,100,low
+F1854,koktail buah tanpa pemanis dalam kemasan air (dimasak atau kalengan),koktail buah tanpa pemanis dalam kemasan air (dimasak atau kalengan),78.0,1.03,0.12,20.85,18.4,10.0,230.0,100,low
+F1855,pengganti krim (bubuk),pengganti krim (bubuk),11.0,0.1,0.71,1.1,1.1,4.0,16.0,100,low
+F1856,pengganti krim (cair),pengganti krim (cair),138.0,1.01,10.11,11.54,11.54,80.0,194.0,100,low
+F1857,kue bolu coklat,kue bolu coklat,297.0,8.25,6.05,54.68,39.95,185.0,154.0,100,low
+F1858,kue wortel dengan lapisan (gula),kue wortel dengan lapisan (gula),326.0,3.09,16.7,42.37,31.3,147.0,80.0,100,low
+F1859,kue wortel tanpa lapisan (gula),kue wortel tanpa lapisan (gula),416.0,4.22,23.24,49.09,32.56,205.0,114.0,100,low
+F1860,sayur lumpia,sayur lumpia,63.0,1.99,2.84,7.44,0.75,207.0,75.0,100,moderate
+F1861,lumpia udang,lumpia udang,67.0,2.62,2.97,7.39,0.54,242.0,72.0,100,moderate
+F1862,lumpia ayam,lumpia ayam,65.0,3.03,2.61,7.12,0.37,124.0,57.0,100,moderate
+F1863,lumpia babi,lumpia babi,74.0,3.8,3.43,6.96,0.51,206.0,96.0,100,moderate
+F1864,sosis tanpa daging,sosis tanpa daging,64.0,4.63,4.54,2.46,0.0,222.0,58.0,100,low
+F1865,bakso tanpa daging,bakso tanpa daging,197.0,21.0,9.0,8.0,1.25,550.0,180.0,100,moderate
+F1866,minyak hati ikan kod,minyak hati ikan kod,41.0,0.0,4.5,0.0,0.0,0.0,0.0,100,low
+F1867,minyak ikan salmon,minyak ikan salmon,902.0,0.0,100.0,0.0,0.0,0.0,0.0,100,low
+F1868,pai apel (satu kerak),pai apel (satu kerak),242.0,1.81,9.25,39.02,24.17,195.0,56.0,100,low
+F1869,pai apel (dua kerak),pai apel (dua kerak),356.0,2.85,16.5,51.0,23.48,399.0,98.0,100,low
+F1870,rumput laut (disiapkan dengan kecap asin),rumput laut (disiapkan dengan kecap asin),41.0,3.73,0.41,7.57,0.71,1051.0,152.0,100,moderate
+F1871,rumput laut kering,rumput laut kering,298.0,31.84,4.01,52.39,3.04,575.0,1244.0,100,moderate
+F1872,sawi,sawi,30.0,2.45,0.42,5.69,0.46,20.0,169.0,100,moderate
+F1873,sawi dimasak,sawi dimasak,42.0,2.05,2.24,4.81,0.39,269.0,113.0,100,low
+F1874,sawi dimasak (dari segar),sawi dimasak (dari segar),42.0,2.05,2.24,4.81,0.39,269.0,113.0,100,low
+F1875,onion rings,onion rings,332.0,4.46,18.69,37.74,0.156,0.0,0.0,100,moderate
+F1876,pancake kentang,pancake kentang,59.0,1.33,3.24,6.14,0.4,168.0,137.0,100,moderate
+F1877,bubuk suplemen gizi,bubuk suplemen gizi,48.0,2.94,0.44,8.3,8.3,33.0,88.0,100,low
+F1878,telur gulung tanpa daging,telur gulung tanpa daging,100.0,2.6,5.8,9.73,0.99,271.0,98.0,100,moderate
+F1879,telur gulung dengan udang,telur gulung dengan udang,103.0,3.44,5.59,9.73,0.7,318.0,95.0,100,moderate
+F1880,telur gulung dengan ayam atau kalkun,telur gulung dengan ayam atau kalkun,103.0,3.96,5.5,9.31,0.48,163.0,74.0,100,moderate
+F1881,telur gulung dengan daging sapi dan / atau daging babi,telur gulung dengan daging sapi dan / atau daging babi,113.0,5.0,6.2,9.16,0.67,270.0,125.0,100,moderate
+F1882,dimsum,dimsum,112.0,11.55,2.64,9.56,0.57,435.0,188.0,100,moderate
+F1883,tempura sayur,tempura sayur,11.0,0.3,0.71,0.96,0.1,2.0,12.0,100,low
+F1884,tempura udang,tempura udang,16.0,2.0,0.31,1.14,0.05,47.0,19.0,100,low
+F1885,tepung terigu putih (semua keperluan),tepung terigu putih (semua keperluan),364.0,10.33,0.98,76.31,0.27,2.0,107.0,100,high
+F1886,tepung putih,tepung putih,364.0,10.33,0.98,76.31,0.27,2.0,107.0,100,high
+F1887,tepung gandum,tepung gandum,339.0,13.7,1.87,72.57,0.41,5.0,405.0,100,high
+F1888,ayam bakar,ayam bakar (tanpa kulit),165.0,31.0,3.0,4.0,0.0,350.0,250.0,100,low
+F1889,ayam goreng,ayam goreng,221.0,15.0,14.7,0.0,0.0,260.0,144.0,100,low
+F1890,chicken steak grill,chicken steak grill,260.0,32.0,6.0,14.0,2.0,650.0,350.0,100,moderate
+F1891,dada ayam,dada ayam,234.0,35.5,8.2,0.0,0.0,472.0,292.0,100,low
+F1892,daging sapi panggang,daging sapi panggang,210.0,26.0,10.5,0.0,0.0,60.0,350.0,100,low
+F1893,dendeng balado basah,dendeng balado basah,290.0,22.0,8.0,8.0,1.0,0.0,300.0,100,moderate
+F1894,hati ayam rebus,hati ayam rebus,84.0,12.3,2.0,0.5,0.0,35.0,130.0,100,low
+F1895,ikan barakuda,ikan barakuda,104.0,22.2,0.8,0.0,0.0,0.0,320.0,100,low
+F1896,ikan cucut,ikan cucut,130.0,21.0,3.5,0.0,0.0,0.0,0.0,100,low
+F1897,ikan dori,ikan dori,84.0,11.0,3.59999999999999,0.0,0.0,27.0,206.0,100,low
+F1898,ikan ekor kuning,ikan ekor kuning,112.0,21.0,0.8,0.0,0.0,60.0,350.0,100,low
+F1899,ikan gabus,ikan gabus,80.0,25.2,1.7,0.0,0.0,65.0,350.0,100,low
+F1900,ikan layang,ikan layang,110.0,22.0,2.0,0.0,0.0,0.0,300.0,100,low
+F1901,ikan salem,ikan salem,205.0,18.6,12.8,0.0,0.0,0.0,314.0,100,low
+F1902,jeroan sapi,"jeroan sapi (hati, paru, babat)",160.0,20.0,0.0,3.0,0.0,80.0,0.0,100,low
+F1903,kulit ayam,kulit ayam,135.0,6.1,11.1,0.0,0.0,20.0,41.0,100,low
+F1904,kuning telur rebus,kuning telur rebus,55.0,2.7,1.6,0.6,0.0,8.0,0.0,100,low
+F1905,paha atas ayam,paha atas ayam,245.0,24.9,13.8,0.0,0.0,406.0,220.0,100,low
+F1906,paha bawah ayam,paha bawah ayam,150.0,15.0,8.3,0.0,0.0,244.0,132.0,100,low
+F1907,putih telur rebus,putih telur rebus,17.0,3.6,0.0,0.2,0.0,55.0,54.0,100,low
+F1908,rendang sapi,rendang sapi,195.0,20.0,7.0,5.0,1.5,0.0,350.0,100,low
+F1909,sate ayam,sate ayam,338.0,29.3,19.2999999999999,7.3,3.0,530.0,313.0,100,low
+F1910,sayap ayam,sayap ayam,175.0,16.0,10.2,0.0,0.0,242.0,110.0,100,low
+F1911,tahu kukus,tahu kukus,78.0,8.0,4.2,1.9,0.9,120.0,120.0,100,low
+F1912,tahu rebus,tahu rebus,78.0,8.0,4.0,2.0,1.0,7.0,0.0,100,low
+F1913,telur rebus,telur rebus,77.0,6.0,4.4,0.6,0.0,62.0,63.0,100,low
+F1914,tempe goreng,tempe goreng,192.0,11.3,11.1,10.1,0.0,280.0,267.0,100,moderate
+F1915,tempe kukus,tempe kukus,96.0,9.5,4.3,4.7,1.7,5.0,206.0,100,low
+F1916,tongkol balado,tongkol balado,202.0,22.0,0.0,5.0,1.0,350.0,400.0,100,low
+F1917,udang,udang,144.0,27.6,1.7,1.2,0.0,613.0,176.0,100,low
+F1918,alpukat mentega,alpukat mentega,160.0,2.0,12.1,9.0,7.0,7.0,485.0,100,low
+F1919,anggur muscat,anggur muscat,83.0,0.7,0.0,20.0,0.9,0.0,190.0,100,moderate
+F1920,apel fuji,apel fuji,52.0,0.26,0.079,13.81,2.1,1.0,107.0,100,moderate
+F1921,apel malang,apel malang (manalagi),86.0,0.8,0.4,19.2,3.6,2.0,260.0,100,moderate
+F1922,apel potong,apel potong (segar),78.0,0.4,0.0,21.0,3.6,1.0,160.0,100,moderate
+F1923,buah leci,buah leci,66.0,0.8,0.2,16.5,1.3,0.0,171.0,100,moderate
+F1924,buah matoa,buah matoa,90.0,1.2,0.1,21.1,0.5,10.0,190.0,100,moderate
+F1925,buah naga merah,buah naga merah,90.0,1.8,0.5,19.0,4.5,0.0,290.0,100,low
+F1926,es kul-kul buah viral,es kul-kul buah viral,120.0,1.0,3.5,18.0,1.5,0.0,0.0,100,moderate
+F1927,jambu biji merah,jambu biji merah,68.0,2.6,0.7,14.3,5.4,2.0,417.0,100,low
+F1928,jambu kristal,jambu kristal (tanpa biji),55.0,0.9,0.2,15.4,5.4,2.0,417.0,100,low
+F1929,jeruk manis,jeruk manis,60.0,1.2,0.1,15.0,3.0,0.0,237.0,100,moderate
+F1930,jeruk nipis,jeruk nipis,30.0,0.7,0.0,10.5,0.4,2.0,102.0,100,moderate
+F1931,jeruk sunkist,jeruk sunkist,69.0,1.3,0.0,17.5,3.1,0.0,230.0,100,moderate
+F1932,keripik apel malang,keripik apel malang,480.0,1.5,0.0,70.0,6.0,10.0,240.0,100,high
+F1933,mangga,mangga,98.0,0.8,0.3,25.5,2.7,3.0,234.0,100,moderate
+F1934,pepaya potong,pepaya potong,55.0,0.9,0.2,13.7,2.5,5.0,260.0,100,moderate
+F1935,pir hijau,pir hijau,92.0,0.6,0.0,25.0,5.5,1.5,190.0,100,low
+F1936,pisang ambon,pisang ambon,97.0,1.3,0.2,23.0,2.6,1.0,358.0,100,moderate
+F1937,pisang ambon,pisang ambon,105.0,1.3,0.2,27.0,3.1,1.0,422.0,100,moderate
+F1938,potongan buah segar campur,potongan buah segar campur,80.0,1.2,0.3,20.0,3.0,4.0,320.0,100,moderate
+F1939,potongan nanas,potongan nanas,50.0,0.5,0.0,13.0,1.4,1.0,109.0,100,moderate
+F1940,rujak buah potong,rujak buah potong,280.0,4.0,1.0,55.0,6.0,0.0,0.0,100,moderate
+F1941,salad buah mayo,salad buah mayo,450.0,6.0,8.0,60.0,4.0,0.0,0.0,100,moderate
+F1942,semangka potong,semangka potong,46.0,0.9,0.0,11.5,0.6,1.5,170.0,100,moderate
+F1943,tart cherry,tart cherry (ceri asam),50.0,1.0,0.0,12.2,1.6,3.0,173.0,100,moderate
+F1944,capcay goreng / kuah,capcay goreng / kuah (ayam),250.0,15.0,3.0,15.0,4.0,600.0,400.0,100,low
+F1945,capcay seafood kuah,capcay seafood kuah,150.0,15.0,4.0,12.0,4.0,450.0,350.0,100,low
+F1946,kimchi,kimchi,25.0,2.0,0.0,5.0,2.5,670.0,200.0,100,low
+F1947,lalapan sayur segar,lalapan sayur segar (fresh vegetables platter),20.0,1.0,0.0,4.0,2.0,10.0,150.0,100,low
+F1948,nasi pecel,nasi pecel,530.0,14.0,5.0,65.0,8.0,580.0,550.0,100,high
+F1949,salad sayur segar,salad sayur segar,45.0,2.0,0.0,10.0,4.0,15.0,300.0,100,low
+F1950,salad timun tomat,salad timun tomat (cucumber tomato salad),120.0,1.5,9.5,6.0,1.5,50.0,250.0,100,low
+F1951,sawi hijau,sawi hijau,13.0,1.5,0.13,2.2,1.0,65.0,252.0,100,low
+F1952,sayur asem,sayur asem,80.0,3.0,0.0,13.0,4.0,550.0,400.0,100,low
+F1953,sayur lodeh,sayur lodeh (keto friendly),100.0,1.6,8.0,3.2,1.2,0.0,150.0,100,low
+F1954,sayur sop,sayur sop,75.0,2.0,0.5,12.0,3.0,400.0,300.0,100,low
+F1955,sup brenebon,sup brenebon,405.0,22.0,0.0,35.0,9.0,650.0,800.0,100,low
+F1956,sup tahu telur,sup tahu telur (egg drop soup),150.0,10.0,8.0,8.0,1.0,400.0,150.0,100,moderate
+F1957,timun,timun (lalap),8.0,0.3,0.0,1.5,0.5,0.0,0.0,100,low
+F1958,tumis buncis jagung muda,tumis buncis jagung muda,60.0,2.5,2.0,8.0,2.5,200.0,200.0,100,low
+F1959,tumis buncis jagung muda,tumis buncis jagung muda,60.0,2.5,2.0,8.0,2.5,200.0,200.0,100,low
+F1960,tumis kangkung,tumis kangkung,150.0,4.0,0.0,8.0,4.0,550.0,400.0,100,low
+F1961,tumis kol,tumis kol (kubis),50.0,1.5,2.3,6.0,2.5,150.0,170.0,100,low
+F1962,tumis wortel buncis,tumis wortel buncis,65.0,1.8,2.5,9.0,3.0,250.0,280.0,100,low
+F1963,bubur pati garut,bubur pati garut,150.0,0.5,0.0,35.0,2.5,15.0,0.0,100,moderate
+F1964,kentang rebus,kentang rebus,130.0,2.8,0.0,30.0,3.0,5.0,550.0,100,moderate
+F1965,ketupat,ketupat,160.0,3.2,0.5,30.4,0.5,5.0,0.0,100,moderate
+F1966,lontong,lontong,144.0,2.8,0.0,31.8,0.5,2.0,0.0,100,moderate
+F1967,nasi goreng,nasi goreng,336.0,12.6,10.5,42.1,1.4,830.0,204.0,100,moderate
+F1968,nasi merah,nasi merah,110.0,2.8,0.6,23.0,1.8,5.0,43.0,100,moderate
+F1969,nasi shirataki,nasi shirataki (konjac),30.0,0.0,0.0,6.0,5.0,0.0,0.0,100,low
+F1970,papeda,papeda,213.0,0.1,0.0,52.0,0.6,15.0,8.0,100,high
+F1971,roti tawar putih,roti tawar putih,100.0,3.0,0.0,18.0,1.0,150.0,0.0,100,moderate
+F1972,singkong rebus,singkong rebus,190.0,2.0,0.2,45.0,3.0,10.0,400.0,100,moderate
+F1973,ubi cilembu,ubi cilembu,115.0,1.5,0.3,25.0,3.4,1.0,250.0,100,moderate
+F1974,asinan betawi,asinan betawi,185.0,8.5,0.0,22.4,4.5,450.0,320.0,100,low
+F1975,ayam bakar,ayam bakar (tanpa kulit),165.0,31.0,3.0,4.0,0.0,350.0,250.0,100,low
+F1976,ayam bakar taliwang,ayam bakar taliwang,342.0,27.0,17.0,4.0,1.0,510.0,408.0,100,low
+F1977,ayam betutu,ayam betutu,425.0,22.6,30.5,6.3,1.2,720.0,380.0,100,moderate
+F1978,ayam geprek,ayam geprek,450.0,30.0,0.0,15.0,1.0,750.0,280.0,100,moderate
+F1979,ayam goreng,ayam goreng,221.0,15.0,14.7,0.0,0.0,260.0,144.0,100,low
+F1980,ayam sisit bali,ayam sisit bali,150.0,22.5,4.5,3.5,1.0,450.0,280.0,100,low
+F1981,bakso aci,bakso aci,450.0,8.5,0.0,78.2,1.5,1.25,0.0,100,high
+F1982,bakso sapi kuah,bakso sapi kuah (tanpa mie),280.0,15.0,13.0,15.0,1.0,900.0,200.0,100,moderate
+F1983,balado teri kacang,balado teri kacang,135.0,8.0,8.0,6.0,1.0,350.0,100.0,100,moderate
+F1984,bapmericano,bapmericano (nasi kopi viral),210.0,4.5,0.0,45.0,0.5,10.0,0.0,100,moderate
+F1985,bebek goreng,bebek goreng,600.0,25.0,0.0,8.0,1.0,800.0,0.0,100,moderate
+F1986,beberuk terong,beberuk terong,45.0,1.5,0.0,9.0,3.0,250.0,230.0,100,low
+F1987,bihun goreng sayur,bihun goreng sayur,310.0,8.0,6.0,55.0,4.0,650.0,200.0,100,moderate
+F1988,bolu kukus,bolu kukus,145.0,2.5,0.0,28.5,0.5,85.0,0.0,100,moderate
+F1989,bubur ayam,bubur ayam,298.0,15.0,0.0,40.0,2.0,0.0,0.0,100,moderate
+F1990,bubur ayam cirebon,bubur ayam cirebon,420.0,16.0,0.0,52.0,2.0,1.1,0.0,100,moderate
+F1991,bubur ayam jakarta,bubur ayam jakarta,372.0,18.0,3.0,54.0,2.0,950.0,320.0,100,moderate
+F1992,bubur manado,bubur manado (tinutuan),260.0,8.0,0.0,55.0,8.2,350.0,400.0,100,moderate
+F1993,capcay goreng / kuah,capcay goreng / kuah (ayam),250.0,15.0,3.0,15.0,4.0,600.0,400.0,100,low
+F1994,capcay seafood kuah,capcay seafood kuah,150.0,15.0,4.0,12.0,4.0,450.0,350.0,100,low
+F1995,coto makassar,coto makassar,289.0,25.4,0.0,12.9,1.2,650.0,380.0,100,moderate
+F1996,dendeng balado basah,dendeng balado basah,290.0,22.0,8.0,8.0,1.0,0.0,300.0,100,moderate
+F1997,empal gentong,empal gentong,265.0,18.2,0.0,9.4,0.8,710.0,340.0,100,moderate
+F1998,emping melinjo,emping melinjo,120.0,3.0,2.0,18.0,1.0,150.0,100.0,100,moderate
+F1999,gado-gado,gado-gado,440.0,18.0,15.0,55.0,7.0,580.0,620.0,100,moderate
+F2000,gudeg jogja,gudeg jogja,456.0,34.0,0.0,53.0,5.5,850.0,420.0,100,moderate
+F2001,gulai ayam,gulai ayam,336.0,28.6,0.0,8.0,0.5,620.0,450.0,100,moderate
+F2002,gulai daun singkong,gulai daun singkong,210.0,8.0,15.0,12.0,4.0,450.0,350.0,100,low
+F2003,gulai kambing,gulai kambing,312.0,11.8,0.0,16.1,0.8,755.0,345.0,100,moderate
+F2004,gulai otak sapi,gulai otak sapi,250.0,10.0,20.0,5.0,1.0,400.0,250.0,100,low
+F2005,gulai tunjang,gulai tunjang,380.0,28.0,26.0,8.0,1.0,650.0,300.0,100,moderate
+F2006,ikan asin,ikan asin (goreng),290.0,42.0,8.0,0.0,0.0,3.5,100.0,100,low
+F2007,ikan barakuda,ikan barakuda,104.0,22.2,0.8,0.0,0.0,0.0,320.0,100,low
+F2008,ikan cucut,ikan cucut,130.0,21.0,3.5,0.0,0.0,0.0,0.0,100,low
+F2009,ikan ekor kuning,ikan ekor kuning,112.0,21.0,0.8,0.0,0.0,60.0,350.0,100,low
+F2010,ikan gabus,ikan gabus,80.0,25.2,1.7,0.0,0.0,65.0,350.0,100,low
+F2011,ikan kembung goreng,ikan kembung goreng,215.0,21.0,0.0,2.0,0.0,350.0,245.0,100,low
+F2012,ikan kuah kuning,ikan kuah kuning,279.0,42.5,0.0,7.2,1.0,680.0,550.0,100,moderate
+F2013,ikan layang,ikan layang,110.0,22.0,2.0,0.0,0.0,0.0,300.0,100,low
+F2014,ikan pesmol,ikan pesmol (bumbu kuning),280.0,22.0,16.0,8.0,2.0,450.0,400.0,100,low
+F2015,ikan sarden,ikan sarden (kaleng),140.0,15.0,2.5,4.0,0.5,400.0,250.0,100,low
+F2016,indomie mi nyemek,indomie mi nyemek,420.0,12.0,16.3,52.0,2.0,1.2,180.0,100,moderate
+F2017,jeroan sapi,"jeroan sapi (hati, paru, babat)",160.0,20.0,0.0,3.0,0.0,80.0,0.0,100,low
+F2018,kepiting saus padang,kepiting saus padang,450.0,30.0,0.0,15.0,2.0,1.2,0.0,100,moderate
+F2019,kerak telor,kerak telor,452.0,20.1,0.0,55.6,2.1,840.0,280.0,100,moderate
+F2020,konro bakar,konro bakar,680.0,35.0,42.5,25.0,3.0,1.1,500.0,100,moderate
+F2021,lalapan sayur segar,lalapan sayur segar (fresh vegetables platter),20.0,1.0,0.0,4.0,2.0,10.0,150.0,100,low
+F2022,lele goreng,lele goreng (tanpa tepung),240.0,18.0,14.0,0.0,0.0,0.0,0.0,100,low
+F2023,lontong balap surabaya,lontong balap surabaya,480.0,16.0,9.0,80.0,8.0,850.0,0.0,100,high
+F2024,lontong sayur,lontong sayur,420.0,14.0,10.0,55.0,4.0,850.0,0.0,100,moderate
+F2025,lontong sayur medan,lontong sayur medan,520.0,18.0,0.0,68.0,4.5,1.35,0.0,100,high
+F2026,macaroni schotel,macaroni schotel (panggang),280.0,12.0,7.0,25.0,1.5,450.0,0.0,100,moderate
+F2027,mie aceh,mie aceh,238.0,14.5,0.0,28.6,3.0,890.0,310.0,100,moderate
+F2028,mie ayam,mie ayam,450.0,18.5,0.0,62.4,2.8,950.0,320.0,100,moderate
+F2029,mie ayam jamur,mie ayam jamur,420.0,18.0,4.0,55.0,3.0,950.0,350.0,100,moderate
+F2030,mie gacoan,mie gacoan (mie iblis/setan),580.0,22.4,0.0,68.5,3.2,1.35,0.0,100,high
+F2031,mie goreng jawa,mie goreng jawa,520.0,18.0,0.0,68.0,4.0,1.1,350.0,100,high
+F2032,mie kocok bandung,mie kocok bandung,388.0,20.8,0.0,40.7,2.2,1.12,280.0,100,moderate
+F2033,mie soobek,mie soobek (biang mie),530.0,18.0,0.0,72.0,4.0,950.0,0.0,100,high
+F2034,mie tek-tek,mie tek-tek (goreng/kuah),520.0,18.0,6.0,65.0,4.0,0.0,0.0,100,high
+F2035,nasi campur,nasi campur,550.0,22.5,0.0,72.0,4.5,1.05,420.0,100,high
+F2036,nasi campur bali,nasi campur bali,600.0,28.0,18.0,75.0,7.0,950.0,550.0,100,high
+F2037,nasi gila,nasi gila,720.0,28.5,0.0,82.4,2.1,1.45,0.0,100,high
+F2038,nasi goreng,nasi goreng,336.0,12.6,10.5,42.1,1.4,830.0,204.0,100,moderate
+F2039,nasi goreng spesial,nasi goreng spesial (telur + ayam),630.0,24.0,6.0,78.0,2.0,0.0,0.0,100,high
+F2040,nasi goreng tuna,nasi goreng tuna,520.0,22.0,4.0,65.0,2.0,0.0,0.0,100,high
+F2041,nasi jagung,nasi jagung,300.0,5.6,0.0,52.0,11.0,800.0,0.0,100,low
+F2042,nasi kapau ikan bakar,nasi kapau ikan bakar,470.0,32.0,12.0,55.0,4.0,600.0,400.0,100,moderate
+F2043,nasi kuning komplit,nasi kuning komplit,750.0,28.0,14.0,85.0,3.0,0.0,0.0,100,high
+F2044,nasi padang ayam pop,nasi padang ayam pop,610.0,29.0,20.0,72.0,5.0,980.0,400.0,100,high
+F2045,nasi padang keliling,nasi padang keliling (porsi),520.0,22.0,0.0,62.5,3.5,950.0,0.0,100,moderate
+F2046,nasi padang lauk rendang,nasi padang lauk rendang,720.0,32.0,34.5,78.0,6.0,1.35,500.0,100,high
+F2047,nasi pecel,nasi pecel,530.0,14.0,5.0,65.0,8.0,580.0,550.0,100,high
+F2048,nasi putih,nasi putih,194.0,4.0,0.3,43.0,0.4,1.0,35.0,100,moderate
+F2049,nasi rames,nasi rames (warteg),500.0,20.0,6.0,60.0,4.0,800.0,0.0,100,moderate
+F2050,nasi tiwul,nasi tiwul,147.0,1.5,0.0,35.0,4.0,0.0,0.0,100,moderate
+F2051,nasi tutug oncom,nasi tutug oncom,580.0,22.0,0.0,78.0,5.0,950.0,0.0,100,high
+F2052,nasi uduk,nasi uduk (porsi standar),460.0,12.0,8.0,65.0,3.0,0.0,0.0,100,high
+F2053,nasi uduk betawi,nasi uduk betawi,550.0,12.0,12.0,75.0,3.0,800.0,0.0,100,high
+F2054,nasi uduk kebon kacang,nasi uduk kebon kacang,720.0,28.0,0.0,85.0,3.5,1.2,0.0,100,high
+F2055,nasi uduk komplit,nasi uduk komplit,550.0,22.0,11.0,65.0,3.0,850.0,0.0,100,high
+F2056,opor ayam,opor ayam,392.0,26.0,18.0,13.0,1.5,0.0,0.0,100,moderate
+F2057,orek tempe basah,orek tempe basah (kecap),180.0,10.0,2.0,15.0,3.0,350.0,300.0,100,moderate
+F2058,otak-otak ikan tenggiri bakar,otak-otak ikan tenggiri bakar,180.0,10.0,1.0,25.0,1.0,0.0,150.0,100,moderate
+F2059,papeda,papeda,213.0,0.1,0.0,52.0,0.6,15.0,8.0,100,high
+F2060,pastel ayam sayur,pastel ayam sayur,240.0,7.5,5.5,22.0,1.5,290.0,110.0,100,moderate
+F2061,pecel lele,pecel lele,250.0,18.0,4.0,8.0,2.0,450.0,0.0,100,low
+F2062,pempek kapal selam,pempek kapal selam,335.0,25.8,3.5,22.5,1.0,0.0,0.0,100,moderate
+F2063,pepes ayam,pepes ayam,220.0,22.0,9.5,6.0,1.5,480.0,350.0,100,low
+F2064,pepes ikan mas,pepes ikan mas,246.0,26.0,10.0,8.0,2.0,580.0,420.0,100,low
+F2065,perkedel jagung,perkedel jagung,130.0,3.0,0.0,15.0,1.0,200.0,90.0,100,moderate
+F2066,perkedel kentang,perkedel kentang,90.0,2.0,1.5,12.0,1.0,120.0,150.0,100,moderate
+F2067,plecing kangkung,plecing kangkung,120.0,5.0,6.0,10.0,4.0,350.0,480.0,100,low
+F2068,rawon daging sapi,rawon daging sapi,320.0,22.0,8.0,10.0,2.0,0.0,0.0,100,moderate
+F2069,rendang sapi,rendang sapi,195.0,20.0,7.0,5.0,1.5,0.0,350.0,100,low
+F2070,rujak cingur,rujak cingur,249.0,13.7,0.0,22.5,3.5,580.0,420.0,100,moderate
+F2071,sambal goreng hati sapi,sambal goreng hati sapi,210.0,12.0,5.0,15.0,2.0,450.0,350.0,100,moderate
+F2072,sambal terasi,sambal terasi,25.0,0.5,0.0,3.0,0.8,180.0,0.0,100,low
+F2073,sate ayam,sate ayam,338.0,29.3,19.2999999999999,7.3,3.0,530.0,313.0,100,low
+F2074,sate ayam + lontong,sate ayam + lontong,680.0,30.0,8.0,75.0,4.0,1.1,0.0,100,high
+F2075,sate kambing,sate kambing,320.0,28.4,8.0,7.2,1.5,580.0,385.0,100,low
+F2076,sate lilit,sate lilit,255.0,19.6,0.0,3.6,1.5,420.0,310.0,100,low
+F2077,sate lilit ayam,sate lilit ayam,165.0,12.5,11.0,4.5,1.5,250.0,180.0,100,low
+F2078,sate maranggi,sate maranggi,520.0,38.5,0.0,12.4,0.8,850.0,0.0,100,moderate
+F2079,sate padang,sate padang (daging &#38; lidah),600.0,30.0,8.0,65.0,3.0,1.2,600.0,100,high
+F2080,sate ratu,sate ratu (sate merah),270.0,40.0,0.0,12.0,1.0,550.0,0.0,100,moderate
+F2081,sate rembiga,sate rembiga,220.0,22.0,10.0,8.0,1.0,450.0,350.0,100,moderate
+F2082,sate taichan,sate taichan,280.0,45.0,7.0,2.0,1.0,600.0,400.0,100,low
+F2083,sayur asem,sayur asem,80.0,3.0,0.0,13.0,4.0,550.0,400.0,100,low
+F2084,sayur bening bayam,sayur bening bayam,85.0,3.5,0.3,18.0,4.0,350.0,400.0,100,low
+F2085,sayur bening labu siam,sayur bening labu siam,22.5,0.5,0.0,5.0,1.0,0.0,125.0,100,low
+F2086,sayur bobor bayam,sayur bobor bayam,140.0,4.0,6.0,8.0,5.0,0.0,400.0,100,low
+F2087,sayur lodeh,sayur lodeh,170.0,5.0,8.0,12.0,4.0,400.0,300.0,100,low
+F2088,sayur lodeh,sayur lodeh (keto friendly),100.0,1.6,8.0,3.2,1.2,0.0,150.0,100,low
+F2089,sayur sop,sayur sop,75.0,2.0,0.5,12.0,3.0,400.0,300.0,100,low
+F2090,semur jengkol,semur jengkol,192.0,7.5,0.0,20.4,3.2,450.0,280.0,100,moderate
+F2091,semur tahu,semur tahu,130.0,8.5,5.5,12.0,1.0,650.0,180.0,100,moderate
+F2092,sop buntut,sop buntut,284.0,30.0,0.0,8.8,2.0,980.0,520.0,100,low
+F2093,sop iga sapi,sop iga sapi (bening),112.0,7.5,8.0,2.0,0.5,0.0,0.0,100,low
+F2094,sop konro,sop konro,450.0,25.0,15.0,10.0,2.0,800.0,450.0,100,moderate
+F2095,sop sapi,sop sapi (kuah bening),220.0,18.0,4.5,12.0,2.5,980.0,0.0,100,low
+F2096,soto ayam,soto ayam (lamongan/kuning),320.0,20.0,8.0,15.0,2.0,900.0,400.0,100,moderate
+F2097,soto ayam bening,soto ayam bening,250.0,18.0,11.0,15.0,2.0,980.0,350.0,100,moderate
+F2098,soto betawi,soto betawi,380.0,22.0,15.0,18.0,2.0,0.0,0.0,100,moderate
+F2099,soto lamongan,soto lamongan,380.0,22.0,10.0,18.0,2.0,950.0,350.0,100,moderate
+F2100,soto mie bogor,soto mie bogor,530.0,25.0,0.0,55.0,4.0,1.1,450.0,100,moderate
+F2101,sup brenebon,sup brenebon,405.0,22.0,0.0,35.0,9.0,650.0,800.0,100,low
+F2102,sup kimlo,sup kimlo,250.0,15.0,1.5,35.0,3.0,0.0,0.0,100,moderate
+F2103,sup tahu telur,sup tahu telur (egg drop soup),150.0,10.0,8.0,8.0,1.0,400.0,150.0,100,moderate
+F2104,tahu campur lamongan,tahu campur lamongan,550.0,25.0,20.0,60.0,4.0,1.1,0.0,100,moderate
+F2105,tahu goreng,tahu goreng,80.0,4.0,1.0,2.0,0.5,150.0,0.0,100,low
+F2106,tahu tek surabaya,tahu tek surabaya,520.0,22.0,21.0,55.0,5.0,980.0,0.0,100,moderate
+F2107,telur balado,telur balado,140.0,7.0,3.0,4.0,0.5,300.0,150.0,100,low
+F2108,tempe bakar kecap,tempe bakar kecap,210.0,19.0,7.5,14.0,3.0,320.0,400.0,100,low
+F2109,tempe goreng,tempe goreng,192.0,11.3,11.1,10.1,0.0,280.0,267.0,100,moderate
+F2110,tempe goreng tepung,tempe goreng tepung,270.0,14.0,0.0,22.0,4.0,300.0,250.0,100,moderate
+F2111,tempe kecap,tempe kecap,210.0,13.0,0.0,16.0,5.0,400.0,300.0,100,low
+F2112,tempe mendoan,tempe mendoan,160.0,5.0,8.7,12.0,1.0,280.0,100.0,100,moderate
+F2113,tongkol balado,tongkol balado,202.0,22.0,0.0,5.0,1.0,350.0,400.0,100,low
+F2114,tongseng kambing,tongseng kambing,350.0,25.0,12.0,15.0,3.0,0.0,450.0,100,moderate
+F2115,tumis buncis jagung muda,tumis buncis jagung muda,60.0,2.5,2.0,8.0,2.5,200.0,200.0,100,low
+F2116,tumis kangkung,tumis kangkung,150.0,4.0,0.0,8.0,4.0,550.0,400.0,100,low
+F2117,urap sayur,urap sayur,115.0,3.5,7.0,11.0,5.0,200.0,350.0,100,low
+F2118,bakso aci,bakso aci,450.0,8.5,0.0,78.2,1.5,1.25,0.0,100,high
+F2119,bakwan sayur,bakwan sayur,140.0,2.0,7.7,15.0,1.0,200.0,80.0,100,moderate
+F2120,batagor,batagor,522.0,18.5,0.0,52.4,2.5,820.0,460.0,100,moderate
+F2121,bubur kacang hijau,bubur kacang hijau,260.0,8.5,6.5,45.0,5.0,120.0,380.0,100,moderate
+F2122,bubur sumsum,bubur sumsum,418.0,4.7,6.0,81.0,1.0,150.0,100.0,100,high
+F2123,chiffon cake,chiffon cake,160.0,3.5,7.0,18.0,0.5,90.0,45.0,100,moderate
+F2124,cilok,cilok,310.0,4.0,0.0,50.0,2.0,550.0,80.0,100,moderate
+F2125,cimol,cimol (aci digemol),222.0,0.8,2.0,41.0,0.2,600.0,15.0,100,moderate
+F2126,cireng,cireng (aci goreng),348.0,1.2,7.0,50.0,0.5,450.0,20.0,100,high
+F2127,crispy cheese bombs,crispy cheese bombs,300.0,9.0,0.0,28.0,1.0,520.0,0.0,100,moderate
+F2128,cuanki mini,cuanki mini (viral),210.0,4.2,0.0,35.0,0.5,450.0,0.0,100,moderate
+F2129,cuanki mini,cuanki mini (viral),210.0,4.2,0.0,35.0,0.5,450.0,0.0,100,moderate
+F2130,dadar gulung,dadar gulung,160.0,2.5,4.5,25.0,1.5,100.0,80.0,100,moderate
+F2131,dimsum ayam kukus,dimsum ayam kukus,130.0,9.0,5.19999999999999,9.1,0.6,390.0,125.0,100,moderate
+F2132,dimsum goreng mentai,dimsum goreng mentai,350.0,18.0,13.7,30.0,0.5,520.0,0.0,100,moderate
+F2133,dimsum mie gacoan,dimsum mie gacoan,280.0,12.5,0.0,22.0,1.0,650.0,0.0,100,moderate
+F2134,donat gula halus,donat gula halus,250.0,4.0,5.0,30.0,1.0,150.0,0.0,100,moderate
+F2135,es kul-kul buah viral,es kul-kul buah viral,120.0,1.0,3.5,18.0,1.5,0.0,0.0,100,moderate
+F2136,gohyong ayam viral,gohyong ayam viral,450.0,18.0,12.0,35.0,2.0,850.0,300.0,100,moderate
+F2137,keju aroma,keju aroma,95.0,2.0,2.5,10.0,0.5,80.0,0.0,100,moderate
+F2138,kerak telor,kerak telor,452.0,20.1,0.0,55.6,2.1,840.0,280.0,100,moderate
+F2139,ketoprak jakarta,ketoprak jakarta,580.0,18.0,18.0,75.0,5.0,850.0,450.0,100,high
+F2140,klepon,klepon,280.0,3.0,6.0,45.0,2.0,150.0,0.0,100,moderate
+F2141,kolak pisang,kolak pisang,420.0,3.0,15.0,65.0,4.0,80.0,600.0,100,high
+F2142,kue lumpur kentang,kue lumpur kentang,130.0,2.0,3.0,18.0,0.5,50.0,0.0,100,moderate
+F2143,kue sus,kue sus,150.0,3.0,7.7,13.0,0.5,85.0,40.0,100,moderate
+F2144,lapis legit,lapis legit,350.0,4.0,15.0,28.0,0.5,150.0,0.0,100,moderate
+F2145,lemper ayam,lemper ayam,180.0,7.0,4.0,22.0,1.0,200.0,0.0,100,moderate
+F2146,lentho kacang tolo,lentho kacang tolo,125.0,4.0,5.0,15.0,2.0,150.0,0.0,100,moderate
+F2147,lontong balap surabaya,lontong balap surabaya,480.0,16.0,9.0,80.0,8.0,850.0,0.0,100,high
+F2148,lumpia basah,lumpia basah,250.0,12.0,6.0,35.0,5.0,450.0,300.0,100,moderate
+F2149,martabak manis cokelat keju,martabak manis cokelat keju,347.0,6.5,8.5,48.2,1.5,280.0,150.0,100,moderate
+F2150,martabak telur bebek spesial,martabak telur bebek spesial,396.0,18.4,6.0,40.2,1.0,450.0,0.0,100,moderate
+F2151,mie goreng jawa,mie goreng jawa,520.0,18.0,0.0,68.0,4.0,1.1,350.0,100,high
+F2152,mie tek-tek,mie tek-tek (goreng/kuah),520.0,18.0,6.0,65.0,4.0,0.0,0.0,100,high
+F2153,nagasari,nagasari (kue pisang),154.0,2.1,2.0,30.2,1.0,91.0,150.0,100,moderate
+F2154,onde-onde kacang hijau,onde-onde kacang hijau,210.0,4.0,3.2,28.5,2.1,95.0,120.0,100,moderate
+F2155,otak-otak ikan tenggiri bakar,otak-otak ikan tenggiri bakar,180.0,10.0,1.0,25.0,1.0,0.0,150.0,100,moderate
+F2156,pastel ayam sayur,pastel ayam sayur,240.0,7.5,5.5,22.0,1.5,290.0,110.0,100,moderate
+F2157,perkedel singkong,perkedel singkong (lentho singkong),95.0,1.0,2.5,18.0,1.0,120.0,0.0,100,moderate
+F2158,pie susu bali,pie susu bali,105.0,2.0,3.0,12.5,0.0,40.0,30.0,100,moderate
+F2159,pisang goreng tepung,pisang goreng tepung,114.0,1.3,2.0,16.2,1.0,100.0,200.0,100,moderate
+F2160,poffertjes,poffertjes,441.0,10.5,8.5,49.8,1.5,380.0,0.0,100,moderate
+F2161,potongan buah segar campur,potongan buah segar campur,80.0,1.2,0.3,20.0,3.0,4.0,320.0,100,moderate
+F2162,risol lumer,risol lumer,236.0,11.8,8.7,23.8,0.8,420.0,0.0,100,moderate
+F2163,risol matcha isi keju,risol matcha isi keju,200.0,8.0,8.2,20.0,0.5,280.0,0.0,100,moderate
+F2164,risoles bihun,risoles bihun,130.0,2.0,3.0,15.0,0.5,200.0,30.0,100,moderate
+F2165,risoles mayo,risoles mayo (american risol),275.0,9.0,6.8,20.5,0.8,420.0,90.0,100,moderate
+F2166,risoles ragout ayam,risoles ragout ayam,160.0,4.0,3.0,18.0,1.0,250.0,0.0,100,moderate
+F2167,risoles sayur,risoles sayur,110.0,3.0,0.0,10.0,1.0,180.0,110.0,100,moderate
+F2168,roti bakar,roti bakar (cokelat keju),450.0,10.0,10.0,55.0,2.0,0.0,0.0,100,moderate
+F2169,rujak buah potong,rujak buah potong,280.0,4.0,1.0,55.0,6.0,0.0,0.0,100,moderate
+F2170,sate ayam,sate ayam,338.0,29.3,19.2999999999999,7.3,3.0,530.0,313.0,100,low
+F2171,sate tempe,sate tempe (viral beef flavored),200.0,14.0,0.0,11.0,6.0,650.0,0.0,100,low
+F2172,seblak,seblak,360.0,10.0,0.0,45.0,2.0,1.1,150.0,100,moderate
+F2173,seblak coet,seblak coet (rafael),580.0,4.0,4.0,85.0,1.0,1.5,0.0,100,high
+F2174,siomay bandung,siomay bandung (ikan),450.0,22.0,4.0,45.0,5.0,800.0,0.0,100,moderate
+F2175,sosis solo,sosis solo,140.0,5.0,3.5,10.0,0.5,200.0,0.0,100,moderate
+F2176,tahu bacem,tahu bacem,72.0,4.8,3.0,6.5,0.5,150.0,120.0,100,moderate
+F2177,tahu gejrot,tahu gejrot,230.0,10.0,0.0,25.0,2.0,350.0,150.0,100,moderate
+F2178,tahu kocek,tahu kocek,350.0,8.0,7.0,45.0,2.0,600.0,0.0,100,moderate
+F2179,tahu petis semarang,tahu petis semarang,90.0,4.0,4.0,8.0,1.0,180.0,0.0,100,moderate
+F2180,tahu tek surabaya,tahu tek surabaya,520.0,22.0,21.0,55.0,5.0,980.0,0.0,100,moderate
+F2181,ayam goreng kfc crispy,ayam goreng kfc crispy,330.0,22.0,17.5,9.0,0.5,900.0,250.0,100,moderate
+F2182,ayam goreng kfc original,ayam goreng kfc original,280.0,19.0,16.7,8.0,0.5,800.0,230.0,100,moderate
+F2183,ayam goreng mcd - paha,ayam goreng mcd - paha (thigh),330.0,28.0,3.5,16.0,0.0,740.0,0.0,100,moderate
+F2184,ayam spicy mcd,ayam spicy mcd,341.0,24.0,15.5,13.0,1.0,1.0,280.0,100,moderate
+F2185,beef prosperity burger,beef prosperity burger,480.0,22.0,0.0,55.0,3.0,950.0,0.0,100,moderate
+F2186,beef yakiniku,beef yakiniku,320.0,18.0,10.0,12.0,1.0,850.0,0.0,100,moderate
+F2187,bento special 4,bento special 4,850.0,30.0,15.0,90.0,3.0,1.2,0.0,100,high
+F2188,big mac,big mac,550.0,25.0,29.5,45.0,3.0,960.0,0.0,100,moderate
+F2189,bubur ayam mcd,bubur ayam mcd,193.0,6.0,5.0,30.0,2.0,680.0,150.0,100,moderate
+F2190,chicken snack wrap,chicken snack wrap,330.0,14.0,11.5,33.0,2.0,780.0,200.0,100,moderate
+F2191,egg mcmuffin,egg mcmuffin,300.0,18.0,11.0,30.0,2.0,730.0,180.0,100,moderate
+F2192,hoka hemat 3,hoka hemat 3,413.0,20.0,3.0,47.0,3.0,494.0,0.0,100,moderate
+F2193,kebab turki,kebab turki (doner kebab),550.0,22.0,10.0,45.0,3.0,0.0,0.0,100,moderate
+F2194,kfc colonel burger,kfc colonel burger,381.0,13.0,12.5,39.0,2.0,680.0,200.0,100,moderate
+F2195,kfc cream soup,kfc cream soup,110.0,3.0,5.0,14.0,1.0,620.0,110.0,100,moderate
+F2196,kfc french fries,kfc french fries (large),520.0,6.0,24.5,66.0,6.0,700.0,650.0,100,high
+F2197,kfc perkedel,kfc perkedel,105.0,5.0,5.0,10.0,1.0,280.0,200.0,100,moderate
+F2198,mcdonald's ayam krispy,mcdonald's ayam krispy (original),320.0,28.0,4.7,11.0,0.5,750.0,250.0,100,moderate
+F2199,mcspaghetti pedas manis,mcspaghetti pedas manis,420.0,18.0,11.0,58.0,3.0,980.0,250.0,100,moderate
+F2200,nasi putih kfc,nasi putih kfc,208.0,4.0,0.1,45.0,0.5,5.0,0.0,100,moderate
+F2201,panas 1,panas 1 (ayam goreng mcd),635.0,29.0,0.0,78.0,1.0,1.15,0.0,100,high
+F2202,pizza hut cheese deluxe,pizza hut cheese deluxe,240.0,10.0,5.0,26.0,1.0,0.0,0.0,100,moderate
+F2203,pizza hut meat lovers,pizza hut meat lovers (pan pizza),290.0,12.0,6.0,28.0,1.5,0.0,0.0,100,moderate
+F2204,richeese fire chicken,richeese fire chicken,380.0,22.0,7.5,18.0,1.0,850.0,220.0,100,moderate
+F2205,super besar 1,super besar 1 (nasi + ayam + minum),690.0,25.0,16.5,93.0,1.0,920.0,280.0,100,high
+F2206,triple cheeseburger,triple cheeseburger,520.0,32.0,26.5,35.0,2.0,1.15,450.0,100,moderate
+F2207,ayam rebus jahe,ayam rebus jahe (pek cam kee),245.0,25.0,11.5,2.0,0.5,450.0,300.0,100,low
+F2208,bubur manado,bubur manado (tinutuan),260.0,8.0,0.0,55.0,8.2,350.0,400.0,100,moderate
+F2209,bubur pati garut,bubur pati garut,150.0,0.5,0.0,35.0,2.5,15.0,0.0,100,moderate
+F2210,ikan bakar teflon,ikan bakar teflon (diet friendly),120.0,22.0,2.3,1.0,0.0,150.0,350.0,100,low
+F2211,ikan gabus,ikan gabus,80.0,25.2,1.7,0.0,0.0,65.0,350.0,100,low
+F2212,jeruk nipis,jeruk nipis,30.0,0.7,0.0,10.5,0.4,2.0,102.0,100,moderate
+F2213,kacang almond panggang,kacang almond panggang (roasted almond),165.0,6.0,13.0,6.0,3.5,0.0,200.0,100,low
+F2214,lalapan sayur segar,lalapan sayur segar (fresh vegetables platter),20.0,1.0,0.0,4.0,2.0,10.0,150.0,100,low
+F2215,nasi goreng shirataki,nasi goreng shirataki (diet),250.0,15.0,4.0,10.0,8.0,600.0,200.0,100,low
+F2216,oatmeal gurih telur rebus,oatmeal gurih telur rebus,230.0,11.5,6.5,27.0,4.0,300.0,200.0,100,moderate
+F2217,oatmeal pisang,oatmeal pisang (vegan),280.0,8.0,3.5,52.0,7.0,0.0,550.0,100,moderate
+F2218,orak-arik tempe telur,orak-arik tempe telur,285.0,21.0,16.5,8.0,2.0,350.0,300.0,100,low
+F2219,overnight oats,overnight oats,350.0,12.0,1.5,55.0,8.0,0.0,0.0,100,moderate
+F2220,overnight oats cokelat,overnight oats cokelat,380.0,15.0,2.0,55.0,10.0,100.0,450.0,100,moderate
+F2221,pancake pisang telur,pancake pisang telur (2 bahan),260.0,13.0,8.5,25.0,3.0,140.0,450.0,100,moderate
+F2222,pepes tahu kemangi,pepes tahu kemangi,126.0,11.4,6.2,4.9,2.4,320.0,180.0,100,low
+F2223,roti gandum alpukat,roti gandum alpukat (avocado toast),220.0,6.0,13.0,18.0,7.0,180.0,400.0,100,low
+F2224,salad timun tomat,salad timun tomat (cucumber tomato salad),120.0,1.5,9.5,6.0,1.5,50.0,250.0,100,low
+F2225,salad wrap,salad wrap (chicken),350.0,25.0,2.5,35.0,5.0,0.0,0.0,100,moderate
+F2226,salad wrap ayam,salad wrap ayam (chicken caesar wrap),380.0,25.0,4.0,35.0,5.0,550.0,400.0,100,moderate
+F2227,smoothie bowl naga,smoothie bowl naga (dragon fruit),420.0,8.0,4.0,75.0,12.0,50.0,800.0,100,high
+F2228,steak tempe saus lada hitam,steak tempe saus lada hitam,280.0,18.0,11.0,22.0,4.0,650.0,400.0,100,moderate
+F2229,sup kimlo,sup kimlo,250.0,15.0,1.5,35.0,3.0,0.0,0.0,100,moderate
+F2230,sup tahu telur,sup tahu telur (egg drop soup),150.0,10.0,8.0,8.0,1.0,400.0,150.0,100,moderate
+F2231,tempe kukus,tempe kukus,96.0,9.5,4.3,4.7,1.7,5.0,206.0,100,low
+F2232,tumis kol,tumis kol (kubis),50.0,1.5,2.3,6.0,2.5,150.0,170.0,100,low
+F2233,tuna salad,tuna salad,280.0,22.0,3.0,10.0,3.0,0.0,0.0,100,low
+F2234,urap sayur,urap sayur,115.0,3.5,7.0,11.0,5.0,200.0,350.0,100,low
+F2235,yogurt buah,yogurt buah (yogurt bowl),160.0,8.0,0.0,28.0,4.0,0.0,350.0,100,moderate
+F2236,indomie mi goreng,indomie mi goreng,380.0,8.0,6.0,54.0,2.0,830.0,0.0,100,moderate
+F2237,indomie mi goreng jumbo,indomie mi goreng jumbo,570.0,13.0,21.0,80.0,3.0,1.34,0.0,100,high
+F2238,indomie mi nyemek,indomie mi nyemek,420.0,12.0,16.3,52.0,2.0,1.2,180.0,100,moderate
+F2239,indomie rasa ayam bawang,indomie rasa ayam bawang,300.0,7.0,13.0,40.0,2.0,1.33,0.0,100,moderate
+F2240,lemonilo mie goreng,lemonilo mie goreng,300.0,7.0,6.0,54.0,3.0,850.0,150.0,100,moderate
+F2241,mie instan goreng + telur,mie instan goreng + telur,490.0,14.5,9.0,54.5,2.0,980.0,0.0,100,moderate
+F2242,mie sedaap goreng,mie sedaap goreng,430.0,9.0,8.0,57.0,7.0,820.0,0.0,100,moderate
+F2243,super bubur ayam,super bubur ayam,170.0,4.0,1.0,34.0,1.0,550.0,0.0,100,moderate
+F2244,butter croissant,butter croissant,240.0,5.0,13.5,26.0,1.0,200.0,70.0,100,moderate
+F2245,kopi kenangan - cerita roti coklat klasik,kopi kenangan - cerita roti coklat klasik,420.0,7.0,0.0,52.0,2.0,300.0,0.0,100,moderate
+F2246,kopi kenangan - cerita roti daging asap keju,kopi kenangan - cerita roti daging asap keju,250.0,6.0,0.0,39.0,1.0,450.0,0.0,100,moderate
+F2247,kopi kenangan - cerita roti keju manis,kopi kenangan - cerita roti keju manis,360.0,6.0,0.0,41.0,1.0,350.0,0.0,100,moderate
+F2248,mixue ice cream cone,mixue ice cream cone,190.0,4.0,3.5,30.0,0.0,80.0,0.0,100,moderate

@@ -1,0 +1,103 @@
+[2026-10-22 09:15:00] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:15:00] [INFO] [neo4j] Test Neo4j log message
+[2026-10-22 09:17:10] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:17:10] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 09:17:11] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['dada ayam', 'ayam']
+[2026-10-22 09:17:11] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Ayam, dada, daging tanpa kulit, tanpa tulang, segar' untuk target 'ayam, dada' (Kalori: 120.0, Protein: 23.0)
+[2026-10-22 09:42:58] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:42:58] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 09:43:07] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:43:07] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 09:43:25] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:43:25] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 09:43:35] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:43:35] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 09:43:52] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:43:52] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 09:43:52] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['jagung']
+[2026-10-22 09:43:53] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Jagung kuning pipil, rebus' untuk target 'Jagung kuning pipil, rebus' (Kalori: 154.0, Protein: 3.8)
+[2026-10-22 09:43:53] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['jagung']
+[2026-10-22 09:43:53] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Jagung kuning pipil, rebus' untuk target 'Jagung kuning pipil, rebus' (Kalori: 154.0, Protein: 3.8)
+[2026-10-22 09:43:53] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['ubi']
+[2026-10-22 09:43:53] [DEBUG] [neo4j] Dataset CSV lokal tidak memiliki item untuk 'ubi rebus'
+[2026-10-22 09:43:53] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Ubi jalar manis, segar' untuk target 'ubi jalar' (Kalori: 83.0, Protein: 1.5)
+[2026-10-22 09:43:53] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['singkong']
+[2026-10-22 09:43:53] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Ketela pohon/ singkong kukus' untuk target 'Ketela pohon/ singkong kukus' (Kalori: 153.0, Protein: 1.2)
+[2026-10-22 09:55:47] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:55:47] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 09:55:57] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 09:55:57] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 10:30:31] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 10:30:31] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 10:30:38] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 10:30:38] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 10:31:01] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 10:31:01] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 11:16:25] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 11:16:25] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 11:16:25] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['nasi goreng', 'nasi']
+[2026-10-22 11:16:26] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Nasi Goreng' untuk target 'Nasi Goreng' (Kalori: 420, Protein: 12)
+[2026-10-22 11:16:26] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['telur rebus', 'telur']
+[2026-10-22 11:16:26] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Telur Rebus' untuk target 'Telur Rebus' (Kalori: 156, Protein: 12.6)
+[2026-10-22 11:31:14] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 11:31:14] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 11:34:16] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 11:34:16] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 11:34:18] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['ayam']
+[2026-10-22 11:34:18] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Ayam, dada, daging tanpa kulit, tanpa tulang, segar' untuk target 'ayam, dada' (Kalori: 120.0, Protein: 23.0)
+[2026-10-22 11:34:18] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['ayam', 'tahu']
+[2026-10-22 11:34:18] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Ayam, dada, daging tanpa kulit, tanpa tulang, segar' untuk target 'ayam, dada' (Kalori: 120.0, Protein: 23.0)
+[2026-10-22 12:16:12] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 12:16:12] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 12:16:13] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['nasi goreng', 'nasi']
+[2026-10-22 12:16:13] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Nasi Goreng' untuk target 'Nasi Goreng' (Kalori: 420, Protein: 12)
+[2026-10-22 12:21:24] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-10-22 12:21:24] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-10-22 12:21:25] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['nasi goreng', 'nasi']
+[2026-10-22 12:21:25] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Nasi Goreng' untuk target 'Nasi Goreng' (Kalori: 420, Protein: 12)
+[2026-10-22 12:21:26] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['nasi goreng', 'nasi']
+[2026-10-22 12:21:26] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Nasi Goreng' untuk target 'Nasi Goreng' (Kalori: 420, Protein: 12)
+[2026-11-02 08:56:46] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 08:56:46] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 08:57:41] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 08:57:41] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 08:59:30] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 08:59:30] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 08:59:34] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 08:59:34] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 08:59:43] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 08:59:43] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:01:21] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:01:21] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:03:58] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:03:58] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:04:19] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:04:19] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:04:52] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:04:52] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:05:28] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:05:28] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:08:52] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:08:52] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:09:03] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:09:03] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:09:21] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:09:21] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:09:29] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['bayam']
+[2026-11-02 09:09:29] [DEBUG] [neo4j] Dataset CSV lokal tidak memiliki item untuk 'bayam, segar'
+[2026-11-02 09:09:29] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'bayam' untuk target 'bayam' (Kalori: 16.0, Protein: 0.9)
+[2026-11-02 09:09:36] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['dada ayam', 'ayam']
+[2026-11-02 09:09:36] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Telur ayam, dadar, masakan' untuk target 'ayam, dada' (Kalori: 110, Protein: 6.5)
+[2026-11-02 09:11:38] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:11:38] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:11:38] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['bayam']
+[2026-11-02 09:11:38] [DEBUG] [neo4j] Dataset CSV lokal tidak memiliki item untuk 'bayam, segar'
+[2026-11-02 09:11:38] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'bayam' untuk target 'bayam' (Kalori: 16.0, Protein: 0.9)
+[2026-11-02 09:11:38] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['dada ayam', 'ayam']
+[2026-11-02 09:11:38] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Telur ayam, dadar, masakan' untuk target 'ayam, dada' (Kalori: 110, Protein: 6.5)
+[2026-11-02 09:12:18] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:12:18] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
+[2026-11-02 09:12:33] [INFO] [neo4j] Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: ['dada ayam', 'ayam']
+[2026-11-02 09:12:33] [INFO] [neo4j] DITEMUKAN di Dataset Lokal (CSV): 'Telur ayam, dadar, masakan' untuk target 'ayam, dada' (Kalori: 110, Protein: 6.5)
+[2026-11-02 09:13:02] [INFO] [neo4j] === NEO4J LOGGER INITIALIZED (Target File: D:\Kuliah\prediabeat_app\prediabeat_app\logs/neo4j.log) ===
+[2026-11-02 09:13:02] [WARNING] [neo4j] Library 'neo4j' belum terpasang atau mode standalone aktif.
