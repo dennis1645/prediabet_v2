@@ -239,6 +239,14 @@ class VLLMInferenceClient:
                 "Ada yang ingin Anda tanyakan seputar takaran makanan, resep ramah gula darah, atau ide menu hari ini?"
             )
 
+        # 2.1. Ucapan Terima Kasih & Sopan Santun (Tanpa Halusinasi Resep)
+        if any(k in q for k in ["terima kasih", "makasih", "tengkyu", "thanks", "thx", "matur nuwun", "nuhun"]):
+            return (
+                f"Sama-sama, {username}! Senang banget bisa nemenin dan ngebantu kamu hari ini. 😊\n\n"
+                "Kalau nanti ada yang mau ditanyakan lagi seputar takaran makanan, resep ramah gula darah, atau ide cemilan sehat pas nugas/kuliah, jangan ragu panggil Dr. Predi lagi ya!\n\n"
+                "Tetap semangat jaga pola hidup sehat dan kestabilan gula darahmu! ✨"
+            )
+
         # 3. Permintaan Resep Masakan Eksplisit (User secara sadar meminta resep atau langkah masak)
         is_recipe_request = any(k in q for k in ["resep", "cara buat", "cara membuat", "cara masak", "langkah masak", "bagaimana membuatnya", "gimana membuatnya", "resepnya", "bahan dan cara"])
         if is_recipe_request:

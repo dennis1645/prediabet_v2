@@ -9,6 +9,7 @@ export function initDatabase() {
       username_normalized TEXT UNIQUE NOT NULL,
       email TEXT,
       email_normalized TEXT UNIQUE,
+      phone_number TEXT,
       password_hash TEXT NOT NULL,
       role TEXT DEFAULT 'user',
       created_at TEXT NOT NULL,
@@ -114,9 +115,26 @@ export function initDatabase() {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS onboarding_progress (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER UNIQUE NOT NULL,
+      current_question_id INTEGER NOT NULL DEFAULT 1,
+      answers_json TEXT NOT NULL DEFAULT '{}',
+      is_completed INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+
     CREATE INDEX IF NOT EXISTS idx_chat_logs_session ON chat_logs(session_id);
     CREATE INDEX IF NOT EXISTS idx_chat_sessions_user ON chat_sessions(user_id, updated_at);
   `);
+
+  try {
+    db.exec("ALTER TABLE users ADD COLUMN phone_number TEXT;");
+  } catch (e) {
+    // Column already exists
+  }
 
   // Seed default demo user if table is empty
   const countStmt = db.prepare("SELECT COUNT(*) as count FROM users");

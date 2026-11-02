@@ -1,0 +1,966 @@
+[
+  {
+    "id": 1,
+    "field_key": "nama",
+    "section": "IDENTITAS RESPONDEN",
+    "question": "Siapa nama kamu?",
+    "type": "Jawaban singkat",
+    "is_multi": false,
+    "required": true,
+    "options": [],
+    "note": null
+  },
+  {
+    "id": 1.5,
+    "field_key": "phone_number",
+    "section": "IDENTITAS RESPONDEN",
+    "question": "Berapa nomor WhatsApp kamu? (Biar Predi bisa kirim pengingat jadwal makan & tips sehat harian)",
+    "type": "Jawaban singkat",
+    "is_multi": false,
+    "required": false,
+    "options": [],
+    "note": "Opsional. Format: 08xxxxxxxxxx"
+  },
+  {
+    "id": 2,
+    "field_key": "jenis_kelamin",
+    "section": "IDENTITAS RESPONDEN",
+    "question": "Apa jenis kelamin kamu?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Laki-laki",
+      "Perempuan",
+      "Prefer tidak ingin menyebutkan"
+    ],
+    "note": null
+  },
+  {
+    "id": 3,
+    "field_key": "usia",
+    "section": "IDENTITAS RESPONDEN",
+    "question": "Berapa usia kamu saat ini? (contoh: 20)",
+    "type": "Jawaban singkat (angka)",
+    "is_multi": false,
+    "required": true,
+    "options": [],
+    "note": null
+  },
+  {
+    "id": 4,
+    "field_key": "etnis",
+    "section": "IDENTITAS RESPONDEN",
+    "question": "Apa Etnis/Suku kamu? (opsional)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": false,
+    "options": [
+      "Jawa",
+      "Sunda",
+      "Batak",
+      "Melayu",
+      "Betawi",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 5,
+    "field_key": "jenjang_pendidikan",
+    "section": "IDENTITAS RESPONDEN",
+    "question": "Kamu sekarang masih pelajar/mahasiswa di jenjang apa?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "SMP (Kelas 7-9)",
+      "SMA/SMK (Kelas 10-12)",
+      "Mahasiswa S1"
+    ],
+    "note": null
+  },
+  {
+    "id": 6,
+    "field_key": "tempat_tinggal",
+    "section": "IDENTITAS RESPONDEN",
+    "question": "Di mana kamu tinggal sehari-hari?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Di rumah orang tua/keluarga",
+      "Kos/asrama/kontrakan",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 7,
+    "field_key": "berat_badan",
+    "section": "DATA TUBUH (ANTROPOMETRI)",
+    "question": "Berapa berat badan kamu saat ini?",
+    "type": "Jawaban singkat (angka)",
+    "is_multi": false,
+    "required": true,
+    "options": [],
+    "note": null
+  },
+  {
+    "id": 8,
+    "field_key": "tinggi_badan",
+    "section": "DATA TUBUH (ANTROPOMETRI)",
+    "question": "Berapa tinggi badan kamu?",
+    "type": "Jawaban singkat (angka)",
+    "is_multi": false,
+    "required": true,
+    "options": [],
+    "note": null
+  },
+  {
+    "id": 9,
+    "field_key": "lingkar_pinggang",
+    "section": "DATA TUBUH (ANTROPOMETRI)",
+    "question": "Berapa lingkar pinggang kamu?",
+    "type": "Jawaban singkat (angka)",
+    "is_multi": false,
+    "required": false,
+    "options": [],
+    "note": "Ukur di bagian pinggang tepat di atas pusar. Jika tidak punya alat ukur, boleh dikosongkan."
+  },
+  {
+    "id": 10,
+    "field_key": "riwayat_obesitas_nakes",
+    "section": "DATA TUBUH (ANTROPOMETRI)",
+    "question": "Apakah dokter atau tenaga kesehatan pernah bilang kamu kelebihan berat badan atau obesitas?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Ya, pernah",
+      "Tidak pernah",
+      "Tidak tahu/belum pernah cek ke dokter"
+    ],
+    "note": null
+  },
+  {
+    "id": 11,
+    "field_key": "tes_gula_darah_puasa",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Apakah kamu pernah tes gula darah puasa? Jika ya, bagaimana hasilnya?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Belum pernah tes",
+      "Normal (hasil <100 mg/dL)",
+      "Prediabetes (hasil 100–125 mg/dL)",
+      "Diabetes (hasil >126 mg/dL)",
+      "Pernah tes tapi tidak ingat hasilnya"
+    ],
+    "note": null
+  },
+  {
+    "id": 12,
+    "field_key": "tes_hba1c",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Apakah kamu pernah tes HbA1c?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Belum pernah tes",
+      "Normal — <5,7%",
+      "Prediabetes — 5,7–6,4%",
+      "Diabetes — ≥6,5%",
+      "Pernah tes tapi tidak ingat hasilnya"
+    ],
+    "note": null
+  },
+  {
+    "id": 13,
+    "field_key": "tekanan_darah_sistol",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Berapa tekanan darah SISTOL kamu?",
+    "type": "Jawaban singkat (angka)",
+    "is_multi": false,
+    "required": false,
+    "options": [],
+    "note": "Jika tidak tahu, dikosongkan saja."
+  },
+  {
+    "id": 14,
+    "field_key": "tekanan_darah_diastol",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Berapa tekanan darah DIASTOL kamu?",
+    "type": "Jawaban singkat (angka)",
+    "is_multi": false,
+    "required": false,
+    "options": [],
+    "note": "Jika tidak tahu, dikosongkan saja."
+  },
+  {
+    "id": 15,
+    "field_key": "riwayat_kondisi_kesehatan",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Apakah kamu memiliki riwayat kondisi kesehatan berikut? Centang yang berlaku.",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "PCOS (khusus wanita, seperti gangguan hormon perempuan, haid tidak teratur, dan muncul banyak jerawat)",
+      "Asma / alergi berat",
+      "Kolesterol tinggi",
+      "Penyakit jantung bawaan",
+      "Tidak ada dari yang di atas",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 16,
+    "field_key": "riwayat_diabetes_keluarga",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Apakah kamu sering merasakan gejala-gejala berikut akhir-akhir ini? Centang yang berlaku.",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Sering merasa sangat haus",
+      "Mudah lelah tanpa sebab jelas",
+      "Luka sulit sembuh",
+      "Kesemutan / mati rasa di tangan/kaki",
+      "Sering buang air kecil (terutama malam)",
+      "Penglihatan kadang kabur",
+      "Sering lapar meski sudah makan",
+      "Tidak ada dari yang di atas",
+      "Yang lain:"
+    ],
+    "note": "Jika kamu mencentang 3 atau lebih, segera konsultasikan ke dokter atau puskesmas."
+  },
+  {
+    "id": 17,
+    "field_key": "tingkat_kerabat_diabetes",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Apakah ada anggota keluarga yang memiliki diabetes?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Iya",
+      "Tidak ada",
+      "Tidak tahu"
+    ],
+    "note": null
+  },
+  {
+    "id": 18,
+    "field_key": "gejala_klasik",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Jika iya, siapa anggota keluarga kamu yang mempunyai riwayat sakit diabetes?",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": false,
+    "options": [
+      "Ayah / Ibu",
+      "Kakak / Adik",
+      "Kakek / Nenek",
+      "Paman / Bibi"
+    ],
+    "note": null
+  },
+  {
+    "id": 19,
+    "field_key": "konsumsi_obat_rutin",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Apakah ada riwayat penyakit jantung atau stroke di keluargamu?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": false,
+    "options": [
+      "Ya",
+      "Tidak",
+      "Tidak tahu"
+    ],
+    "note": null
+  },
+  {
+    "id": 20,
+    "field_key": "pantangan_alergi",
+    "section": "RIWAYAT KESEHATAN",
+    "question": "Apakah kamu sedang rutin mengonsumsi obat-obatan tertentu?",
+    "type": "Jawaban singkat",
+    "is_multi": false,
+    "required": true,
+    "options": [],
+    "note": "Jika tidak mengonsumsi obat, masukkan “tidak”. Jika iya, tuliskan nama obat yang sedang dikonsumsi."
+  },
+  {
+    "id": 21,
+    "field_key": "biasa_sarapan",
+    "section": "POLA MAKAN",
+    "question": "Apakah kamu biasanya sarapan sebelum sekolah atau kuliah?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Ya, hampir setiap hari",
+      "Kadang-kadang (2–3x seminggu)",
+      "Jarang atau tidak pernah sarapan"
+    ],
+    "note": null
+  },
+  {
+    "id": 22,
+    "field_key": "frekuensi_minum_manis",
+    "section": "POLA MAKAN",
+    "question": "Seberapa sering kamu minum minuman manis? (boba, kopi susu, teh manis, minuman bersoda, jus kemasan, minuman energi)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Setiap hari atau hampir setiap hari",
+      "3–5 kali seminggu",
+      "1–2 kali seminggu",
+      "Jarang (kurang dari sekali seminggu)",
+      "Tidak pernah"
+    ],
+    "note": null
+  },
+  {
+    "id": 23,
+    "field_key": "frekuensi_gorengan",
+    "section": "POLA MAKAN",
+    "question": "Seberapa sering kamu makan makanan berminyak/gorengan? (gorengan, ayam goreng, kentang goreng, dll.)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Setiap hari atau hampir setiap hari",
+      "3–5 kali seminggu",
+      "1–2 kali seminggu",
+      "Jarang (kurang dari sekali seminggu)",
+      "Tidak pernah"
+    ],
+    "note": null
+  },
+  {
+    "id": 24,
+    "field_key": "frekuensi_makanan_manis",
+    "section": "POLA MAKAN",
+    "question": "Seberapa sering kamu makan makanan manis? (kue, cokelat, permen, es krim, dll.)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Setiap hari atau hampir setiap hari",
+      "3–5 kali seminggu",
+      "1–2 kali seminggu",
+      "Jarang (kurang dari sekali seminggu)",
+      "Tidak pernah"
+    ],
+    "note": null
+  },
+  {
+    "id": 25,
+    "field_key": "frekuensi_sayuran",
+    "section": "POLA MAKAN",
+    "question": "Seberapa sering kamu makan sayuran?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Setiap hari atau hampir setiap hari",
+      "3–5 kali seminggu",
+      "1–2 kali seminggu",
+      "Jarang (kurang dari sekali seminggu)",
+      "Tidak pernah"
+    ],
+    "note": null
+  },
+  {
+    "id": 26,
+    "field_key": "frekuensi_buah",
+    "section": "POLA MAKAN",
+    "question": "Seberapa sering kamu makan buah-buahan?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Setiap hari atau hampir setiap hari",
+      "3–5 kali seminggu",
+      "1–2 kali seminggu",
+      "Jarang (kurang dari sekali seminggu)",
+      "Tidak pernah"
+    ],
+    "note": null
+  },
+  {
+    "id": 27,
+    "field_key": "jenis_makanan_pokok",
+    "section": "POLA MAKAN",
+    "question": "Berapa porsi nasi yang biasa kamu makan per hari?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Kurang dari 1 porsi",
+      "1 porsi per makan (2–3x sehari)",
+      "2 porsi per makan (2–3x sehari)",
+      "Lebih dari 2 porsi per makan"
+    ],
+    "note": null
+  },
+  {
+    "id": 28,
+    "field_key": "porsi_nasi",
+    "section": "POLA MAKAN",
+    "question": "Seberapa sering kamu ngemil di antara jam makan?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Hampir tidak pernah",
+      "1–2 kali sehari",
+      "3 kali atau lebih sehari"
+    ],
+    "note": null
+  },
+  {
+    "id": 29,
+    "field_key": "frekuensi_makanan_cepat_saji",
+    "section": "POLA MAKAN",
+    "question": "Camilan yang paling sering kamu makan?",
+    "type": "Jawaban singkat",
+    "is_multi": false,
+    "required": true,
+    "options": [],
+    "note": null
+  },
+  {
+    "id": 30,
+    "field_key": "frekuensi_ngemil_malam",
+    "section": "POLA MAKAN",
+    "question": "Di mana kamu biasanya makan sehari-hari? (boleh pilih lebih dari satu)",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Masakan rumah / dimasak sendiri",
+      "Warung / warteg",
+      "Pesan online (GoFood, ShopeeFood, dll.)",
+      "Kantin sekolah / kampus",
+      "Restoran cepat saji",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 31,
+    "field_key": "kebiasaan_baca_label_gula",
+    "section": "POLA MAKAN",
+    "question": "Apakah kamu makan larut malam (setelah pukul 21.00)?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Ya, hampir setiap malam",
+      "Kadang-kadang",
+      "Jarang / tidak pernah"
+    ],
+    "note": null
+  },
+  {
+    "id": 32,
+    "field_key": "jumlah_air_putih",
+    "section": "POLA MAKAN",
+    "question": "Apakah kamu memiliki pantangan atau batasan makanan?",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Vegetarian (tidak makan daging)",
+      "Tidak makan daging babi",
+      "Tidak ada pantangan",
+      "Tidak makan seafood / ikan",
+      "Alergi makanan tertentu",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 33,
+    "field_key": "jumlah_makan_utama",
+    "section": "POLA MAKAN",
+    "question": "Makanan Indonesia apa yang paling kamu suka? (boleh pilih lebih dari satu)",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Nasi goreng",
+      "Gado-gado/pecel",
+      "Ayam bakar/ayam kampung",
+      "Sayur asem/capcay",
+      "Soto/bakso/mie ayam",
+      "Ikan/seafood",
+      "Tempe/tahu",
+      "Bubur/oatmeal",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 34,
+    "field_key": "pola_waktu_makan",
+    "section": "POLA MAKAN",
+    "question": "Buah apa yang kamu suka dan mudah kamu temukan? (boleh pilih salah satu)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Pisang",
+      "Pepaya",
+      "Melon",
+      "Apel",
+      "Jeruk",
+      "Mangga",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 35,
+    "field_key": "sumber_makanan_harian",
+    "section": "POLA MAKAN",
+    "question": "Sayuran apa yang kamu suka dan biasa kamu makan? (boleh pilih salah satu)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Bayam",
+      "Wortel",
+      "Kangkung",
+      "Jagung",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 36,
+    "field_key": "anggaran_makan_harian",
+    "section": "POLA MAKAN",
+    "question": "Daging atau sumber protein hewani apa yang kamu suka dan biasa kamu makan? (boleh pilih salah satu)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Ayam (dada / paha)",
+      "Daging kambing / domba",
+      "Ikan air tawar (lele, nila, gurame, dll.)",
+      "Telur",
+      "Tidak makan daging (vegetarian)",
+      "Daging sapi",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 37,
+    "field_key": "pantangan_makanan_diet",
+    "section": "POLA MAKAN",
+    "question": "Berapa kira-kira uang jajan atau anggaran makananmu per hari?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Kurang dari Rp15.000,00",
+      "Rp15.000,00–Rp30.000,00",
+      "Rp30.000,00–Rp60.000,00",
+      "Lebih dari Rp60.000,00"
+    ],
+    "note": null
+  },
+  {
+    "id": 38,
+    "field_key": "hari_olahraga_seminggu",
+    "section": "AKTIVITAS FISIK",
+    "question": "Berapa hari dalam seminggu kamu berolahraga atau melakukan aktivitas fisik?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Tidak pernah (0 hari)",
+      "1–2 hari",
+      "3–4 hari",
+      "5 hari atau lebih"
+    ],
+    "note": null
+  },
+  {
+    "id": 39,
+    "field_key": "durasi_olahraga_sesi",
+    "section": "AKTIVITAS FISIK",
+    "question": "Berapa lama biasanya kamu berolahraga dalam sekali sesi?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Kurang dari 15 menit",
+      "15–30 menit",
+      "30–60 menit",
+      "Lebih dari 60 menit"
+    ],
+    "note": null
+  },
+  {
+    "id": 40,
+    "field_key": "jenis_olahraga_favorit",
+    "section": "AKTIVITAS FISIK",
+    "question": "Olahraga apa yang biasa atau paling kamu suka lakukan? (boleh pilih lebih dari satu)",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Jalan kaki",
+      "Bersepeda",
+      "Badminton",
+      "Fitness / gym / angkat beban",
+      "Dance / zumba",
+      "Martial arts / pencak silat / taekwondo",
+      "Berlari / jogging",
+      "Berenang",
+      "Basket / voli / futsal",
+      "Yoga / pilates / stretching",
+      "Senam",
+      "Yang lain:"
+    ],
+    "note": null
+  },
+  {
+    "id": 41,
+    "field_key": "ikut_ekskul_olahraga",
+    "section": "AKTIVITAS FISIK",
+    "question": "Apakah kamu mengikuti kegiatan olahraga atau ekstrakurikuler fisik di sekolah/kampus?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Ya, aktif ikut ekskul olahraga",
+      "Ada ekskul, tapi jarang hadir",
+      "Tidak ada atau tidak ikut"
+    ],
+    "note": null
+  },
+  {
+    "id": 42,
+    "field_key": "durasi_duduk_rebahan",
+    "section": "AKTIVITAS FISIK",
+    "question": "Di luar olahraga, berapa lama kamu biasanya duduk atau berbaring dalam sehari? (tidak termasuk waktu tidur)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Kurang dari 4 jam",
+      "4–6 jam",
+      "6–8 jam",
+      "Lebih dari 8 jam"
+    ],
+    "note": null
+  },
+  {
+    "id": 43,
+    "field_key": "transportasi_harian",
+    "section": "AKTIVITAS FISIK",
+    "question": "Apa hambatan terbesar kamu untuk berolahraga rutin? (boleh pilih lebih dari satu)",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Tidak ada waktu / terlalu sibuk",
+      "Tidak ada teman olahraga",
+      "Lelah setelah sekolah / kuliah",
+      "Tidak ada hambatan, sudah rutin",
+      "Malas / tidak ada motivasi",
+      "Tidak ada fasilitas / tempat",
+      "Tidak suka olahraga"
+    ],
+    "note": null
+  },
+  {
+    "id": 44,
+    "field_key": "durasi_tidur_malam",
+    "section": "POLA TIDUR",
+    "question": "Berapa jam kamu tidur per malam hari sekolah/kuliah?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Kurang dari 5 jam",
+      "5–6 jam",
+      "6–8 jam",
+      "8–10 jam"
+    ],
+    "note": null
+  },
+  {
+    "id": 45,
+    "field_key": "jam_mulai_tidur",
+    "section": "POLA TIDUR",
+    "question": "Jam berapa kamu biasanya mulai tidur di malam hari?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Sebelum pukul 21.00",
+      "Pukul 21.00–22.00",
+      "Pukul 22.00–24.00",
+      "Setelah pukul 00.00 (tengah malam)"
+    ],
+    "note": null
+  },
+  {
+    "id": 46,
+    "field_key": "gadget_sebelum_tidur",
+    "section": "POLA TIDUR",
+    "question": "Seberapa sering kamu menggunakan HP / gadget dalam 1 jam sebelum tidur?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Hampir setiap malam",
+      "Kadang-kadang",
+      "Jarang / tidak pernah"
+    ],
+    "note": null
+  },
+  {
+    "id": 47,
+    "field_key": "gangguan_tidur",
+    "section": "POLA TIDUR",
+    "question": "Apakah kamu mengalami gangguan tidur?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Tidak",
+      "Kadang-kadang",
+      "Sering",
+      "Hampir selalu"
+    ],
+    "note": "Contoh: susah tidur, sering terbangun, tidur tidak nyenyak, susah bangun pagi."
+  },
+  {
+    "id": 48,
+    "field_key": "perasaan_bangun_pagi",
+    "section": "POLA TIDUR",
+    "question": "Bagaimana perasaanmu saat bangun tidur di pagi hari?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Segar dan siap beraktivitas",
+      "Biasa saja",
+      "Masih ngantuk / kurang tidur",
+      "Sangat lelah meski sudah tidur cukup"
+    ],
+    "note": null
+  },
+  {
+    "id": 49,
+    "field_key": "tingkat_stres",
+    "section": "STRES & KESEHATAN MENTAL",
+    "question": "Bagaimana tingkat stresmu secara umum saat ini?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Rendah — merasa tenang dan santai",
+      "Sedang — ada tekanan tapi masih terkendali",
+      "Tinggi — sering khawatir dan tertekan",
+      "Sangat tinggi — merasa cemas hampir setiap hari"
+    ],
+    "note": null
+  },
+  {
+    "id": 50,
+    "field_key": "sumber_stres_utama",
+    "section": "STRES & KESEHATAN MENTAL",
+    "question": "Apa sumber stres utamamu? (boleh pilih lebih dari satu)",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Pelajaran / ujian / nilai",
+      "Masalah pertemanan / pergaulan",
+      "Penampilan fisik / berat badan",
+      "Media sosial",
+      "Tekanan dari orang tua / keluarga",
+      "Masalah percintaan",
+      "Keuangan / uang jajan",
+      "Tidak ada stres yang berarti"
+    ],
+    "note": null
+  },
+  {
+    "id": 51,
+    "field_key": "cara_atasi_stres",
+    "section": "STRES & KESEHATAN MENTAL",
+    "question": "Bagaimana kamu biasanya mengatasi stres? (boleh pilih lebih dari satu)",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "Olahraga / jalan-jalan",
+      "Main game / nonton",
+      "Ngobrol dengan teman / keluarga",
+      "Hobi (musik, gambar, dll.)",
+      "Tidur / istirahat",
+      "Makan / ngemil",
+      "Meditasi / doa / ibadah",
+      "Tidak ada cara khusus"
+    ],
+    "note": null
+  },
+  {
+    "id": 52,
+    "field_key": "merokok",
+    "section": "KEBIASAAN SEHARI-HARI",
+    "question": "Apakah kamu merokok?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Tidak",
+      "Pernah, tapi sudah berhenti",
+      "Ya, kadang-kadang (sosial)",
+      "Ya, aktif setiap hari"
+    ],
+    "note": null
+  },
+  {
+    "id": 53,
+    "field_key": "jumlah_rokok_per_hari",
+    "section": "KEBIASAAN SEHARI-HARI",
+    "question": "Jika “Ya, aktif setiap hari” — berapa batang per hari?",
+    "type": "Jawaban singkat (angka)",
+    "is_multi": false,
+    "required": false,
+    "options": [],
+    "note": null
+  },
+  {
+    "id": 54,
+    "field_key": "frekuensi_kafein",
+    "section": "KEBIASAAN SEHARI-HARI",
+    "question": "Seberapa sering kamu mengonsumsi kafein? (kopi, teh kental, minuman energi seperti Kratingdaeng, M-150)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Tidak pernah",
+      "Jarang (kurang dari sekali seminggu)",
+      "1–2 kali seminggu",
+      "Hampir setiap hari",
+      "Lebih dari sekali sehari"
+    ],
+    "note": null
+  },
+  {
+    "id": 55,
+    "field_key": "screen_time_harian",
+    "section": "KEBIASAAN SEHARI-HARI",
+    "question": "Berapa rata-rata waktu layar (screen time) kamu per hari? (HP, tablet, laptop — di luar keperluan belajar)",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Kurang dari 2 jam",
+      "2–4 jam",
+      "4–6 jam",
+      "Lebih dari 6 jam"
+    ],
+    "note": null
+  },
+  {
+    "id": 56,
+    "field_key": "dukungan_keluarga_lifestyle",
+    "section": "TUJUAN",
+    "question": "Apakah orang tua atau keluargamu mendukung jika kamu ingin mengubah pola makan atau gaya hidup?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Ya, sangat mendukung",
+      "Mendukung, tapi terbatas (makanan di rumah ditentukan orang tua)",
+      "Kurang mendukung",
+      "Saya tinggal sendiri / kos, bebas menentukan sendiri"
+    ],
+    "note": null
+  },
+  {
+    "id": 57,
+    "field_key": "kesediaan_ubah_lifestyle",
+    "section": "TUJUAN",
+    "question": "Seberapa besar kesediaanmu untuk mengubah kebiasaan makan dan gaya hidupmu?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Sangat siap — saya bisa berkomitmen penuh",
+      "Cukup siap — saya akan coba 80%, boleh sesekali tidak patuh",
+      "Fleksibel — saya coba perlahan, yang penting konsisten",
+      "Belum yakin, masih ingin tahu dulu"
+    ],
+    "note": null
+  },
+  {
+    "id": 58,
+    "field_key": "target_durasi_program",
+    "section": "TUJUAN",
+    "question": "Berapa lama kamu berencana menjalani program perubahan gaya hidup ini?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Jangka pendek (1–3 bulan)",
+      "Jangka menengah (3–6 bulan)",
+      "Jangka panjang — ingin menjadi gaya hidup permanen"
+    ],
+    "note": null
+  },
+  {
+    "id": 59,
+    "field_key": "pernah_dengar_prediabetes",
+    "section": "LITERASI KESEHATAN",
+    "question": "Sebelumnya, apakah kamu pernah mendengar tentang prediabetes?",
+    "type": "Pilihan ganda",
+    "is_multi": false,
+    "required": true,
+    "options": [
+      "Ya, dan saya cukup paham apa itu",
+      "Pernah dengar, tapi tidak terlalu paham",
+      "Belum pernah dengar sama sekali"
+    ],
+    "note": null
+  },
+  {
+    "id": 60,
+    "field_key": "sumber_info_kesehatan",
+    "section": "LITERASI KESEHATAN",
+    "question": "Dari mana kamu biasanya mencari informasi tentang kesehatan? (boleh pilih lebih dari satu)",
+    "type": "Kotak centang",
+    "is_multi": true,
+    "required": true,
+    "options": [
+      "TikTok / Instagram / YouTube",
+      "Orang tua / keluarga",
+      "Teman sebaya",
+      "Dokter / puskesmas",
+      "Google / artikel online",
+      "Guru / dosen",
+      "Aplikasi kesehatan",
+      "Jarang mencari info kesehatan"
+    ],
+    "note": null
+  }
+]

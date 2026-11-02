@@ -7,11 +7,13 @@ import foodRoutes from "./foodRoutes.js";
 import activityRoutes from "./activityRoutes.js";
 import progressRoutes from "./progressRoutes.js";
 import aiContextRoutes from "./aiContextRoutes.js";
+import onboardingRoutes from "./onboardingRoutes.js";
 
 const apiRouter = Router();
 
 apiRouter.use("/auth", authRoutes);
 apiRouter.use("/questionnaire", questionnaireRoutes);
+apiRouter.use("/onboarding", onboardingRoutes);
 apiRouter.use("/dashboard", dashboardRoutes);
 apiRouter.use("/diet", dietRoutes);
 apiRouter.use("/foods", foodRoutes);

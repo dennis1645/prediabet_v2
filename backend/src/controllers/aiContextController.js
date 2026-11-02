@@ -480,6 +480,33 @@ export async function forwardChatToAI(req, res) {
       });
     }
 
+    // 3.1. Pre-filter Ucapan Terima Kasih & Sopan Santun (Tanpa Halusinasi Resep)
+    const gratitudePatterns = [
+      /^(terima\s*kasih|makasih|tengkyu|thanks|thx|matur\s*nuwun|nuhun)(\s+(ya|yaa|banyak|banget|predi|dok|mas|kak|bro|sis))?[.!?]*$/i,
+      /^(ok|oke|okee|sip|siap|baik)\s+(terima\s*kasih|makasih|thanks)[.!?]*$/i
+    ];
+    if (gratitudePatterns.some((p) => p.test(sanitizedMessage))) {
+      const gratitudeResponse =
+        `Sama-sama, ${displayName}! Senang banget bisa nemenin dan ngebantu kamu hari ini. 😊\n\n` +
+        "Kalau nanti ada yang mau ditanyakan lagi seputar takaran makanan, resep ramah gula darah, atau ide cemilan sehat pas nugas/kuliah, jangan ragu panggil Dr. Predi lagi ya!\n\n" +
+        "Tetap semangat jaga pola hidup sehat dan kestabilan gula darahmu! ✨";
+
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+        userId, sessionId, "user", sanitizedMessage, now
+      );
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+        userId, sessionId, "assistant", gratitudeResponse, JSON.stringify({ guardrail: "Courtesy Response Handled" }), now
+      );
+
+      return res.json({
+        success: true,
+        session_id: sessionId,
+        response: gratitudeResponse,
+        guardrail: { zero_allergen_verified: true, safety_message: "Courtesy Response Handled" },
+        telemetry: { latency_ms: 5, vllm_connected: false },
+      });
+    }
+
     // 4. Pre-filter Guardrail Anti-Jailbreak & Bypass (Rule-Based & Regex)
     const jailbreakPatterns = [
       /\b(langgar|bypass|jailbreak|paksa|abaikan|hiraukan|override)\b/i,

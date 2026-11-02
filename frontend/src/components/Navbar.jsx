@@ -44,7 +44,7 @@ export default function Navbar() {
           
           {/* Kiri: Logo & Nama Aplikasi */}
           <Link
-            to={user ? (profile ? "/dashboard" : "/questionnaire") : "/"}
+            to={user ? (profile ? "/dashboard" : "/chatbot") : "/"}
             className="flex-shrink-0 flex items-center gap-3 cursor-pointer group hover:opacity-90 transition-opacity"
           >
             <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-transparent group-hover:scale-105 transition-transform">
@@ -64,11 +64,11 @@ export default function Navbar() {
             <nav className="hidden md:flex justify-center">
               {!profile ? (
                 <Link
-                  to="/questionnaire"
+                  to="/chatbot"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl text-xs lg:text-sm font-extrabold shadow-md shadow-emerald-500/25 transition-all animate-pulse"
                 >
                   <Sparkles className="w-4 h-4 text-amber-300" />
-                  <span>Lengkapi Kuesioner Profil Kesehatan</span>
+                  <span>Wawancara Intake AI Bersama Dr. Predi</span>
                 </Link>
               ) : (
                 <div className="inline-flex items-center justify-center gap-1 sm:gap-2">

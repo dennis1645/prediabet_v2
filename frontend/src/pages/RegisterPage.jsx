@@ -20,6 +20,7 @@ import { showSuccessAlert, showErrorAlert, showToast } from "../utils/alerts";
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(true);
@@ -60,15 +61,15 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      const res = await register(username.trim(), email.trim(), password);
+      const res = await register(username.trim(), email.trim(), password, phoneNumber.trim());
       setLoading(false);
 
       await showSuccessAlert(
         "Pendaftaran Berhasil!",
-        "Akun Anda telah dibuat. Sekarang mari lengkapi kuesioner medis untuk analisis risiko dan meal plan 3J Anda."
+        "Akun Anda telah dibuat! Mari mulai sesi wawancara santai bersama Dr. Predi untuk menganalisis profil kesehatan Anda."
       );
 
-      navigate("/questionnaire");
+      navigate("/chatbot");
     } catch (err) {
       setLoading(false);
       const errorMsg = err.message || "Gagal melakukan pendaftaran akun.";
@@ -165,7 +166,7 @@ export default function RegisterPage() {
                 </span>
               </div>
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200/80 bg-white/10 px-2 py-0.5 rounded-md">
-                v1.0
+                v2.0
               </span>
             </div>
           </div>
@@ -265,6 +266,24 @@ export default function RegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="nama@email.com"
+                  className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50/90 border border-slate-200 rounded-2xl text-slate-800 text-sm font-medium placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all shadow-2xs"
+                />
+              </div>
+            </div>
+
+            {/* Input WhatsApp / No Telepon (Fitur V2) */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5 ml-1 flex items-center justify-between">
+                <span>Nomor WhatsApp</span>
+                <span className="text-[10px] text-slate-400 font-semibold lowercase">(opsional / notifikasi)</span>
+              </label>
+              <div className="relative flex items-center">
+                <span className="w-4 h-4 text-slate-400 absolute left-4 pointer-events-none flex items-center justify-center font-bold text-xs">📱</span>
+                <input
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  placeholder="08xxxxxxxxxx (untuk pengingat WA harian)"
                   className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50/90 border border-slate-200 rounded-2xl text-slate-800 text-sm font-medium placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all shadow-2xs"
                 />
               </div>

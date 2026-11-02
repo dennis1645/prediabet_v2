@@ -5,7 +5,8 @@ import { config } from "../config/env.js";
 
 export function register(req, res) {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, phone_number, nomor_telepon } = req.body;
+    const finalPhone = (phone_number || nomor_telepon || "").trim() || null;
 
     if (!username || username.trim().length < 3) {
       return res.status(400).json({
@@ -48,11 +49,11 @@ export function register(req, res) {
     const now = new Date().toISOString();
 
     const insertStmt = db.prepare(`
-      INSERT INTO users (username, username_normalized, email, email_normalized, password_hash, role, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, 'user', ?, ?)
+      INSERT INTO users (username, username_normalized, email, email_normalized, phone_number, password_hash, role, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, 'user', ?, ?)
     `);
 
-    const result = insertStmt.run(username.trim(), usernameNorm, email.trim(), emailNorm, passwordHash, now, now);
+    const result = insertStmt.run(username.trim(), usernameNorm, email.trim(), emailNorm, finalPhone, passwordHash, now, now);
     const userId = result.lastInsertRowid;
 
     const token = jwt.sign(
@@ -63,13 +64,14 @@ export function register(req, res) {
 
     res.status(201).json({
       success: true,
-      message: "Registrasi berhasil! Silakan lengkapi profil kesehatan Anda.",
+      message: "Registrasi berhasil! Silakan ikuti sesi wawancara klinis santai bersama Dr. Predi.",
       data: {
         token,
         user: {
           id: userId,
           username: username.trim(),
           email: email.trim(),
+          phone_number: finalPhone,
           role: "user",
         },
         hasCompletedQuestionnaire: false,
@@ -146,6 +148,7 @@ export function login(req, res) {
           id: user.id,
           username: user.username,
           email: user.email,
+          phone_number: user.phone_number || null,
           role: user.role,
         },
         hasCompletedQuestionnaire: Boolean(profileRow),

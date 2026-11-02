@@ -107,6 +107,18 @@ export const api = {
     }),
   getWeeklyProgress: () => request("/progress/summary/weekly"),
 
+  // Conversational Onboarding Interview
+  getOnboardingState: () => request("/onboarding/state"),
+  answerOnboarding: (answer, message) =>
+    request("/onboarding/answer", {
+      method: "POST",
+      body: JSON.stringify({ answer, message }),
+    }),
+  resetOnboarding: () =>
+    request("/onboarding/reset", {
+      method: "POST",
+    }),
+
   // AI Chatbot Dr. Predi (Protected with JWT, Isolated Medical Context & Multi-Session)
   sendChatMessage: (message, sessionId, lastSuggestedRecipe) =>
     request("/ai/chat", {

@@ -29,7 +29,7 @@ function RequireQuestionnaireCompleted({ children }) {
     return <Navigate to="/login" replace />;
   }
   if (!profile) {
-    return <Navigate to="/questionnaire" replace />;
+    return <Navigate to="/chatbot" replace />;
   }
   return children;
 }
@@ -38,7 +38,7 @@ function PublicOnlyRoute({ children }) {
   const { user, token, profile, loading } = useAuth();
   if (loading) return null;
   if (token && user) {
-    return <Navigate to={profile ? "/dashboard" : "/questionnaire"} replace />;
+    return <Navigate to={profile ? "/dashboard" : "/chatbot"} replace />;
   }
   return children;
 }
@@ -70,9 +70,11 @@ export default function App() {
           {/* Halaman Kuesioner (Wajib login, dapat diakses sebelum maupun sesudah isi profil) */}
           <Route path="/questionnaire" element={<RequireAuth><QuestionnairePage /></RequireAuth>} />
 
+          {/* Halaman Chatbot (Bisa diakses untuk Onboarding Intake saat belum ada profil, maupun Konsultasi 3J reguler) */}
+          <Route path="/chatbot" element={<RequireAuth><ChatbotPage /></RequireAuth>} />
+
           {/* Halaman Fitur Utama: Mensyaratkan Kuesioner Profil Kesehatan Sudah Lengkap */}
           <Route path="/dashboard" element={<RequireQuestionnaireCompleted><DashboardPage /></RequireQuestionnaireCompleted>} />
-          <Route path="/chatbot" element={<RequireQuestionnaireCompleted><ChatbotPage /></RequireQuestionnaireCompleted>} />
           <Route path="/menu" element={<RequireQuestionnaireCompleted><MenuListPage /></RequireQuestionnaireCompleted>} />
           <Route path="/diet" element={<RequireQuestionnaireCompleted><DietListPage /></RequireQuestionnaireCompleted>} />
           <Route path="/progress" element={<RequireQuestionnaireCompleted><ProgressTrackerPage /></RequireQuestionnaireCompleted>} />

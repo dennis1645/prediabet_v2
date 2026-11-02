@@ -114,14 +114,14 @@ export function AuthProvider({ children }) {
     throw new Error(res.message || "Gagal masuk.");
   };
 
-  const register = async (username, email, password) => {
+  const register = async (username, email, password, phone_number) => {
     // Pastikan session data profil pengguna lama dibersihkan
     localStorage.removeItem("prediabeat_profile");
     localStorage.removeItem("prediabeat_analysis");
     setProfile(null);
     setAnalysis(null);
 
-    const res = await api.register({ username, email, password });
+    const res = await api.register({ username, email, password, phone_number });
     if (res.success && res.data) {
       setToken(res.data.token);
       setUser(res.data.user);
@@ -130,6 +130,17 @@ export function AuthProvider({ children }) {
       return res;
     }
     throw new Error(res.message || "Gagal mendaftar.");
+  };
+
+  const completeOnboarding = (profileData, analysisData) => {
+    setProfile(profileData);
+    setAnalysis(analysisData);
+    if (profileData) {
+      localStorage.setItem("prediabeat_profile", JSON.stringify(profileData));
+    }
+    if (analysisData) {
+      localStorage.setItem("prediabeat_analysis", JSON.stringify(analysisData));
+    }
   };
 
   const logout = () => {
@@ -197,6 +208,7 @@ export function AuthProvider({ children }) {
         logout,
         setProfile,
         setAnalysis,
+        completeOnboarding,
         updateProfileAndAnalysis,
       }}
     >
