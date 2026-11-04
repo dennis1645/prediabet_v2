@@ -203,12 +203,17 @@ class Neo4jClinicalGraphManager:
         self.database = settings.NEO4J_DATABASE
         self.driver: Optional[Driver] = None
         self._local_foods_cache: Optional[List[Dict[str, Any]]] = None
+        self._last_connect_attempt = 0.0
+        self._connect_cooldown = 45.0
         self._connect()
 
     def _connect(self):
         if not HAS_NEO4J:
             neo4j_logger.warning("Library 'neo4j' belum terpasang atau mode standalone aktif.")
             return
+
+        import time
+        self._last_connect_attempt = time.time()
 
         try:
             neo4j_logger.info("Mencoba menghubungkan driver Neo4j ke %s (user: %s)...", self.uri, self.user)
@@ -262,6 +267,10 @@ class Neo4jClinicalGraphManager:
         if not HAS_NEO4J:
             return False
         if not self.driver:
+            import time
+            now = time.time()
+            if now - getattr(self, "_last_connect_attempt", 0.0) < getattr(self, "_connect_cooldown", 45.0):
+                return False
             self._connect()
         if not self.driver:
             return False
@@ -270,6 +279,7 @@ class Neo4jClinicalGraphManager:
             return True
         except Exception as e:
             neo4j_logger.warning("Koneksi Neo4j terputus saat dicek: %s", str(e))
+            self.driver = None
             return False
 
     def execute_cypher(self, query: str, params: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:

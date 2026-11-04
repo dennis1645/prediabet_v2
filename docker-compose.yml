@@ -93,6 +93,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      - PYTHONUNBUFFERED=1
       - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN:-}
     volumes:
       - ~/.cache/huggingface:/root/.cache/huggingface
@@ -104,14 +105,17 @@ services:
               count: all
               capabilities: [gpu]
     command: >
-      --model Qwen/Qwen2.5-7B-Instruct-GPTQ-Int8
+      Qwen/Qwen2.5-7B-Instruct-GPTQ-Int8
       --port 8000
       --gpu-memory-utilization 0.85
       --max-model-len 4096
       --dtype auto
       --trust-remote-code
     networks:
-      - prediabeat-network
+      prediabeat-network:
+        aliases:
+          - vllm
+          - prediabeat-vllm
 
   # ----------------------------------------------------------------------------
   # SERVICE 4: Neo4j Medical Knowledge Graph Database
@@ -128,16 +132,15 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/prediabeat2026
       - NEO4J_PLUGINS=["apoc"]
-      - NEO4J_server_default__listen__address=0.0.0.0
-      - NEO4J_server_default__advertised__address=neo4j
-      - NEO4J_server_bolt_listen__address=0.0.0.0:7687
-      - NEO4J_server_bolt_advertised__address=neo4j:7687
     volumes:
       - prediabeat-neo4j-data:/data
       - prediabeat-neo4j-logs:/logs
       - ./server_ai/knowledge_base_new/neo4j:/var/lib/neo4j/import
     networks:
-      - prediabeat-network
+      prediabeat-network:
+        aliases:
+          - neo4j
+          - prediabeat-neo4j
 
 # ------------------------------------------------------------------------------
 # Isolated Bridge Network for Safe Inter-Service Communication

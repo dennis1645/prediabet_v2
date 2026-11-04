@@ -238,7 +238,7 @@ async def chat_stream_endpoint(request: ChatRequest):
 async def health_check():
     """Health status menyeluruh: vLLM, Neo4j, dan Dataset."""
     vllm_status = await vllm_client.check_vllm_health()
-    neo4j_ok = neo4j_manager.is_connected()
+    neo4j_ok = neo4j_manager.driver is not None
     local_foods = len(neo4j_manager._load_local_dataset())
 
     return {
