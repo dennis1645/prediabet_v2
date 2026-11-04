@@ -20,6 +20,9 @@ services:
     image: prediabeat-web:latest
     container_name: prediabeat-web
     restart: unless-stopped
+    init: true
+    security_opt:
+      - apparmor:unconfined
     ports:
       - "8080:5000"
       - "5000:5000"
@@ -48,6 +51,9 @@ services:
     image: prediabeat-server-ai:latest
     container_name: prediabeat-server-ai
     restart: unless-stopped
+    init: true
+    security_opt:
+      - apparmor:unconfined
     ports:
       - "8002:8000"
     environment:
@@ -80,6 +86,8 @@ services:
     image: vllm/vllm-openai:latest
     container_name: prediabeat-vllm
     restart: unless-stopped
+    security_opt:
+      - apparmor:unconfined
     runtime: nvidia
     ipc: host
     ports:
@@ -112,6 +120,8 @@ services:
     image: neo4j:5.18.0
     container_name: prediabeat-neo4j
     restart: unless-stopped
+    security_opt:
+      - apparmor:unconfined
     ports:
       - "7474:7474"
       - "7687:7687"
