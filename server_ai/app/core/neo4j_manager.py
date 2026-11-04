@@ -204,7 +204,7 @@ class Neo4jClinicalGraphManager:
         self.driver: Optional[Driver] = None
         self._local_foods_cache: Optional[List[Dict[str, Any]]] = None
         self._last_connect_attempt = 0.0
-        self._connect_cooldown = 45.0
+        self._connect_cooldown = 3.0
         self._connect()
 
     def _connect(self):
@@ -220,14 +220,14 @@ class Neo4jClinicalGraphManager:
             self.driver = GraphDatabase.driver(
                 self.uri,
                 auth=(self.user, self.password),
-                connection_timeout=5.0,
+                connection_timeout=3.0,
                 max_connection_lifetime=300
             )
             self.driver.verify_connectivity()
             neo4j_logger.info("SUKSES: Terhubung ke database Neo4j di %s (database: %s)", self.uri, self.database)
             self.ensure_seeded()
         except Exception as e:
-            neo4j_logger.error("GAGAL: Tidak dapat terhubung ke Neo4j di %s: %s. Mengaktifkan fallback engine CSV lokal.", self.uri, str(e))
+            neo4j_logger.warning("Neo4j belum siap di %s (%s). Fallback engine CSV aktif sambil menunggu Neo4j siap.", self.uri, str(e))
             self.driver = None
 
     def ensure_seeded(self):
@@ -269,7 +269,7 @@ class Neo4jClinicalGraphManager:
         if not self.driver:
             import time
             now = time.time()
-            if now - getattr(self, "_last_connect_attempt", 0.0) < getattr(self, "_connect_cooldown", 45.0):
+            if now - getattr(self, "_last_connect_attempt", 0.0) < getattr(self, "_connect_cooldown", 3.0):
                 return False
             self._connect()
         if not self.driver:

@@ -1,9 +1,11 @@
 import os
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.config import settings
 from app.api.routes import router
+from app.core.neo4j_manager import neo4j_manager
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -26,6 +28,25 @@ if os.path.exists(food_images_dir):
     app.mount("/food-images", StaticFiles(directory=food_images_dir), name="food-images")
 
 app.include_router(router)
+
+@app.on_event("startup")
+async def startup_event():
+    """
+    Background worker untuk menghubungkan Neo4j begitu container Neo4j selesai inisialisasi.
+    Mengatasi jeda boot 3-10 detik JVM Neo4j tanpa memblokir kesiapan server AI.
+    """
+    async def _reconnect_neo4j():
+        for _ in range(20):
+            if neo4j_manager.driver is not None:
+                break
+            await asyncio.sleep(2)
+            try:
+                neo4j_manager._connect()
+                if neo4j_manager.driver is not None:
+                    break
+            except Exception:
+                pass
+    asyncio.create_task(_reconnect_neo4j())
 
 @app.get("/")
 def root():
