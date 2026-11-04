@@ -268,6 +268,33 @@ def is_clarification_or_correction(user_query: str) -> bool:
     return any(p in ql for p in patterns)
 
 
+def is_meal_plan_query(user_query: str) -> bool:
+    """Mendeteksi apakah pertanyaan pasien menanyakan jadwal/rencana makan harian (Meal Plan) di Dashboard."""
+    ql = (user_query or "").lower().strip()
+    patterns = [
+        "meal plan", "rencana makan", "jadwal makan", "menu hari ini", "menu makan hari ini",
+        "makan apa hari ini", "sarapan apa", "sarapan saya apa", "sarapan pagi saya apa",
+        "makan siang apa", "makan siang saya apa", "makan malam apa", "makan malam saya apa",
+        "selingan apa", "selingan saya apa", "menu saya apa", "apa menu makan saya",
+        "daftar menu saya", "menu harian saya", "menu yang disarankan hari ini",
+        "menu sarapan", "menu makan siang", "menu makan malam", "menu di dashboard",
+        "pola makan saya", "diet aktif saya", "status diet", "jadwal 3j"
+    ]
+    return any(p in ql for p in patterns)
+
+
+def is_progress_tracker_query(user_query: str) -> bool:
+    """Mendeteksi pertanyaan tentang sisa kalori, kalori terbakar, progres harian/mingguan, atau health score."""
+    ql = (user_query or "").lower().strip()
+    patterns = [
+        "sisa kalori", "target makan harian", "target kalori hari ini", "kalori terbakar",
+        "progres hari ini", "progress hari ini", "progres saya", "progress tracker",
+        "health score", "skor kesehatan", "kepatuhan meal plan", "ringkasan mingguan",
+        "konsistensi makan", "aktivitas fisik saya", "catatan log", "progress mingguan"
+    ]
+    return any(p in ql for p in patterns)
+
+
 def build_vllm_messages(
     user_query: str,
     clinical_dossier: str,
@@ -469,6 +496,39 @@ def build_vllm_messages(
             f"- STRATEGI PRAKTIS & CERDAS: Sajikan panduan taktis yang bisa langsung dipraktekkan secara ber-list rapi dengan poin-poin tebal (**bold**):\n"
             f"{counseling_tips}\n"
             f"- DILARANG KERAS menutup dengan kalimat klise AI robotik ('Bagaimana informasi ini membantu Anda?' atau 'Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?'). {closing_prompt}!"
+        )
+    # 6.1. Jika pertanyaan seputar Rencana Makan (Meal Plan) Harian di Dashboard
+    elif is_meal_plan_query(user_query):
+        current_user_content = (
+            f"{clinical_dossier}\n\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Respon Rencana Makan (Meal Plan) Harian]:\n"
+            f"- Pasien menanyakan rencana makan / meal plan resminya hari ini ({user_query}).\n"
+            f"- Sapa pasien dengan hangat dan ramah: '{patient_name}'.\n"
+            f"- BACA DAN KUTIP SECARA PRESISI daftar menu dari bagian '=== RENCANA MAKAN (MEAL PLAN) RESMI HARI INI DI DASHBOARD ===' yang tercantum di dossier di atas!\n"
+            f"- Sajikan dalam format Markdown terstruktur yang rapi, dengan poin-poin jelas dan takaran kalori tebal (**bold**).\n"
+            f"- Jika pasien menanyakan waktu makan tertentu (misal: 'Sarapan saya apa?' atau 'Makan siang apa?'), fokuskan jawaban pada slot waktu tersebut secara detail beserta takaran dan kalorinya.\n"
+            f"- Jika pasien menanyakan menu harian secara keseluruhan, sebutkan kelima slot waktu (Sarapan Pagi, Selingan Pagi, Makan Siang, Selingan Sore, Makan Malam) secara berurutan dan terstruktur.\n"
+            f"- Jelaskan bahwa menu-menu tersebut telah disesuaikan dengan target kalori 3J, status diet aktif ({getattr(user_context, 'active_diet', 'Diet Seimbang')}), dan 100% bebas dari alergen pasien.\n"
+            f"- Berikan catatan ramah di akhir bahwa jika pasien ingin mengganti salah satu menu, pasien bisa langsung bilang ke Dr. Predi di chat (misal: 'Dok, ganti menu sarapan dengan bubur oatmeal') atau menekan tombol 'Ganti Menu' di Dashboard!\n"
+            f"- DILARANG KERAS berhalusinasi menu makanan di luar yang tercantum di bagian '=== RENCANA MAKAN (MEAL PLAN) RESMI HARI INI DI DASHBOARD ==='!\n"
+            f"- DILARANG menyodorkan langkah memasak atau resep panjang jika pasien belum memintanya."
+        )
+    # 6.2. Jika pertanyaan seputar Progress Tracker, Target Harian, Kalori Terbakar, atau Health Score
+    elif is_progress_tracker_query(user_query):
+        current_user_content = (
+            f"{clinical_dossier}\n\n"
+            f"Pesan Pasien: \"{user_query}\"\n\n"
+            f"[Instruksi Respon Progress Tracker Harian & Mingguan]:\n"
+            f"- Pasien menanyakan evaluasi progres klinis, sisa kalori, kalori terbakar, atau health score ({user_query}).\n"
+            f"- Sapa pasien dengan hangat dan apresiatif: '{patient_name}'.\n"
+            f"- KUTIP DAN JELASKAN ANGKA RESMI DARI BAGIAN '=== DATA REAL-TIME DASHBOARD, MEAL PLAN & PROGRESS TRACKER PASIEN ===' DI DOSSIER:\n"
+            f"  • **Target Kalori Harian:** Sebutkan target kalori, asupan makanan yang sudah tercatat hari ini, dan sisa kalori yang tersedia.\n"
+            f"  • **Kalori Terbakar:** Sebutkan estimasi kalori yang terbakar dari aktivitas fisik / olahraga hari ini.\n"
+            f"  • **Makanan Terdata:** Sebutkan catatan makanan yang sudah dikonsumsi hari ini (atau 'Belum ada catatan makanan' jika masih kosong).\n"
+            f"  • **Ringkasan Mingguan:** Sebutkan konsistensi log (misal: 5/7 hari), kepatuhan meal plan (misal: 86%), durasi olahraga (misal: 120/150 menit), dan Health Score (misal: 82/100 - Kondisi Stabil & Baik).\n"
+            f"- Berikan apresiasi klinis positif yang memotivasi dan saran langkah praktis berikutnya untuk menjaga kestabilan glukosa darah.\n"
+            f"- DILARANG menyodorkan resep masakan panjang!"
         )
     # 7. Jika ada bahan makanan spesifik atau rekomendasi menu / resep terdeteksi
     elif specific_food:

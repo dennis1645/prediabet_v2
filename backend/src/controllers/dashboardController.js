@@ -29,6 +29,17 @@ export function getDashboard(req, res) {
         allergies,
         analysis.active_diet || "mediterania"
       );
+
+      const now = new Date().toISOString();
+      try {
+        db.prepare("UPDATE profiles SET analysis_result = ?, updated_at = ? WHERE user_id = ?").run(
+          JSON.stringify(analysis),
+          now,
+          req.user.id
+        );
+      } catch (eSave) {
+        console.warn("Notice: could not auto-save initial meal plan to profiles:", eSave.message);
+      }
     }
 
     // Ambil log progress hari ini jika ada

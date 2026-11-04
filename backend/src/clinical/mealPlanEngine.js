@@ -1,6 +1,6 @@
 import referenceService from "../services/referenceService.js";
 
-const DEFAULT_MEAL_POOL = {
+export const DEFAULT_MEAL_POOL = {
   sarapan: [
     { nama: "Bubur Oatmeal Ayam Suwir", kalori: 320, porsi: "1 mangkok (200g)", gi: "Rendah (48)", kategori: "Karbo", karbo: 42, protein: 22, lemak: 6, gambar: "/food-images/bubur-oatmeal.jpg" },
     { nama: "Telur Rebus Setengah Matang", kalori: 78, porsi: "1 butir", gi: "Rendah (0)", kategori: "Lauk", karbo: 0.6, protein: 6.3, lemak: 5.3, gambar: "/food-images/telur-rebus.jpg" },

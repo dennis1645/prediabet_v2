@@ -106,6 +106,13 @@ class HybridGraphVectorFusion:
         if story_foods and story_foods.get("items"):
             specific_food = None
 
+        # JIKA PENGGUNA MENANYAKAN MEAL PLAN ATAU PROGRESS TRACKER:
+        # SUPPRESS specific_food agar tidak terdistraksi oleh resep acak
+        from app.core.prompt_templates import is_meal_plan_query, is_progress_tracker_query
+        if is_meal_plan_query(user_query) or is_progress_tracker_query(user_query):
+            specific_food = None
+            user_wants_recipe = False
+
         from app.core.neo4j_manager import resolve_food_image
 
         # Jika pengguna meminta resep / ide makan: TELUSURI RAG DOKUMEN RESEP DINAMIS (Anti-Looping)
