@@ -229,9 +229,26 @@ class ClinicalAllergenGuardrail:
         if is_generic_person and not has_health:
             return True, "Pertanyaan mengenai figur non-medis berada di luar lingkup keahlian Dr. Predi."
 
-        # Cek pertanyaan privasi pasien lain
-        if re.search(r'\b(user lain|pasien lain|orang lain|data orang|pengguna lain)\b', ql):
+        # Cek pertanyaan privasi pasien lain / rekam medis orang lain
+        if re.search(r'\b(user lain|pasien lain|orang lain|data orang|pengguna lain|pasien sebelum saya|user sebelum saya|data sebelum saya|orang sebelum saya)\b', ql):
             return True, "Data pasien lain dilindungi privasi medis dan tidak dapat dibagikan."
+
+        # Cek pertanyaan memakan tokoh publik / manusia / benda mati / non-pangan (Anti-Halusinasi Soekarno dsb.)
+        NON_FOOD_ENTITIES = [
+            r"\b(soekarno|sukarno|hatta|jokowi|joko widodo|prabowo|habibie|b\.?j\.?\s*habibie|megawati|sby|susilo bambang yudhoyono|gus dur|presiden|pahlawan|menteri|tokoh bangsa|pejabat)\b",
+            r"\b(manusia|orang|mayat|teman|musuh|tetangga)\b",
+            r"\b(batu|kayu|besi|plastik|kertas|baterai|kaca|tanah|pasir|sabun|deterjen|shampoo|odol|oli|bensin|racun|pestisida)\b",
+            r"\b(laptop|hp|komputer|meja|kursi|sepatu|baju|celana|mobil|motor|sepeda)\b"
+        ]
+        is_eating_query = any(k in ql for k in ["makan", "memakan", "konsumsi", "menelan", "minum", "santap", "icip"])
+        for non_food_pat in NON_FOOD_ENTITIES:
+            match = re.search(non_food_pat, ql, re.IGNORECASE)
+            if match:
+                entity = match.group(0).title()
+                if is_eating_query:
+                    return True, f"'{entity}' adalah figur tokoh/benda non-makanan dan bukan bahan konsumsi pangan."
+                if not any(k in ql for k in ["gula darah", "diabetes", "makan sehat", "nutrisi"]):
+                    return True, f"Topik mengenai '{entity}' berada di luar lingkup keahlian nutrisi klinis Dr. Predi."
         
         return False, None
 
@@ -333,19 +350,31 @@ class ClinicalAllergenGuardrail:
         if detected_violations:
             unique_violations = list(dict.fromkeys(detected_violations))
             
-            # Gantikan bahan pantangan di dalam teks secara cerdas (Zero-Allergen Enforcement)
-            sanitized = text
-            for v in unique_violations:
-                if "kacang panjang" in v:
-                    sanitized = re.sub(r'\b100\s*gram\s*kacang\s*panjang\b', '100 gram buncis manis segar', sanitized, flags=re.IGNORECASE)
-                    sanitized = re.sub(r'\bkacang\s*panjang\b', 'buncis manis segar', sanitized, flags=re.IGNORECASE)
-                elif "kacang" in v:
-                    sanitized = re.sub(r'\b(?:bumbu|saus|sambal)?\s*kacang\b', 'bumbu rempah bawang kemiri rendah lemak', sanitized, flags=re.IGNORECASE)
-                    sanitized = re.sub(r'\bkacang\b', 'biji chia / wijen', sanitized, flags=re.IGNORECASE)
-                elif any(s in v for s in ["udang", "cumi", "seafood", "kepiting"]):
-                    sanitized = re.sub(r'\b(udang|cumi|kepiting|seafood)\b', 'daging ayam dada tanpa kulit', sanitized, flags=re.IGNORECASE)
-                elif "santan" in v:
-                    sanitized = re.sub(r'\b(?:kuah\s*)?santan\b', 'kuah kaldu bening alami tanpa santan', sanitized, flags=re.IGNORECASE)
+            # Gantikan bahan pantangan di dalam baris/kalimat non-negasi secara aman (Zero-Allergen Enforcement)
+            lines = text.split('\n')
+            sanitized_lines = []
+            for line in lines:
+                line_lower = line.lower()
+                # Jika baris ini merupakan penegasan edukasi pantangan / negasi, biarkan utuh!
+                is_line_negated = any(re.search(pat, line_lower, re.IGNORECASE) for pat in NEGATION_PATTERNS)
+                if is_line_negated:
+                    sanitized_lines.append(line)
+                    continue
+
+                mod_line = line
+                # 1. Ganti frasa majemuk spesifik terlebih dahulu
+                mod_line = re.sub(r'\b100\s*gram\s*kacang\s*panjang\b', '100 gram buncis manis segar', mod_line, flags=re.IGNORECASE)
+                mod_line = re.sub(r'\bkacang\s*panjang\b', 'buncis manis segar', mod_line, flags=re.IGNORECASE)
+                mod_line = re.sub(r'\b(?:bumbu|saus|sambal)\s*kacang\b', 'saus wijen gurih rendah lemak', mod_line, flags=re.IGNORECASE)
+                mod_line = re.sub(r'\bsaus\s*tiram\b', 'kecap asin kedelai non-seafood', mod_line, flags=re.IGNORECASE)
+                mod_line = re.sub(r'\b(?:kuah\s*)?santan\b', 'kuah kaldu bening alami tanpa santan', mod_line, flags=re.IGNORECASE)
+                mod_line = re.sub(r'\b(udang|cumi-cumi|cumi|kepiting|seafood)\b', 'daging ayam dada tanpa kulit', mod_line, flags=re.IGNORECASE)
+                
+                # 2. Ganti kata dasar tunggal hanya jika masih tersisa
+                mod_line = re.sub(r'\bkacang\s*(?:tanah|babi|garing|goreng)?\b', 'biji wijen sangrai', mod_line, flags=re.IGNORECASE)
+                sanitized_lines.append(mod_line)
+
+            sanitized = '\n'.join(sanitized_lines)
 
             # Tambahkan penegasan bahwa menu ini telah disanitasi & dijamin aman
             safety_note = (

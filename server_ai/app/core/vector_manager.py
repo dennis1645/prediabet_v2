@@ -223,6 +223,15 @@ class ClinicalVectorStoreManager:
                     gi_val = 25.0 if gi_risk == "low" else (45.0 if gi_risk == "moderate" else 70.0)
                     safe_predia = bool(meta.get("safe_for_prediabetes", True))
 
+                    # Saring makanan siap saji cepat (Fast Food), kerupuk/keripik, atau camilan tinggi lemak/gula
+                    name_lower = name.lower()
+                    if any(junk in name_lower for junk in [
+                        "pizza", "kfc", "mcdonald", "burger", "french fries", "starbucks",
+                        "dunkin", "wendys", "kerupuk", "keripik", "kerupik", "lanting", "kue putu",
+                        "chiki", "taro", "lays"
+                    ]):
+                        continue
+
                     # Ekstraksi bumbu & bahan dari dokumen markdown
                     bahan_str = ""
                     if "## Komposisi Bahan:" in doc_text:
@@ -231,12 +240,29 @@ class ClinicalVectorStoreManager:
                     else:
                         bahan_str = f"Bahan baku alami bernutrisi seimbang ({name})"
 
-                    # Ekstraksi tips klinis
+                    # Ekstraksi tips klinis secara bersih dan utuh (Anti Cut-off)
                     tips_str = ""
                     if "## Panduan Klinis Pola 3J" in doc_text:
-                        tips_str = doc_text.split("## Panduan Klinis Pola 3J")[1].strip()
+                        tips_section = doc_text.split("## Panduan Klinis Pola 3J")[1].strip()
+                        tips_lines = [l.strip().lstrip("-* ").strip() for l in tips_section.split("\n") if l.strip()]
+                        clean_bullets = []
+                        for bl in tips_lines:
+                            if ":" in bl:
+                                k, v = bl.split(":", 1)
+                                if v.strip():
+                                    clean_bullets.append(f"{k.strip()}: {v.strip()}")
+                            elif len(bl) > 5:
+                                clean_bullets.append(bl)
+                        tips_str = ". ".join(clean_bullets) if clean_bullets else tips_section
                     else:
                         tips_str = f"Kaya serat dan protein seimbang, menjaga kurva glukosa postprandial stabil ({cal} kkal)."
+
+                    if len(tips_str) > 260:
+                        last_period = tips_str[:260].rfind(".")
+                        if last_period > 80:
+                            tips_str = tips_str[:last_period+1]
+                        else:
+                            tips_str = tips_str[:260].rsplit(" ", 1)[0] + "."
 
                     # Hasilkan kata kunci pencarian otomatis
                     keywords = set()
@@ -349,14 +375,30 @@ class ClinicalVectorStoreManager:
         full_query = f"{query or ''} {context_theme or ''}".lower()
         query_words = [w for w in re.findall(r'\w+', full_query) if len(w) > 2]
 
-        # 0. Jika pengguna secara eksplisit menyebut judul resep (misal: "resep sayur bening bayam gimana?")
+        # 0. Jika pengguna secara eksplisit menyebut judul/nama resep
+        explicit_matches = []
         for r in self._recipes_catalog:
             title_lower = r["nama_makanan"].lower()
+            r_text = f"{r['nama_makanan']} {r.get('bahan', '')}".lower()
+            if any(alg in r_text for alg in allergens):
+                continue
+
+            # Cocok substring judul utuh
             if len(title_lower) >= 6 and title_lower in full_query:
-                # Pastikan bebas alergen
-                r_text = f"{r['nama_makanan']} {r.get('bahan', '')}".lower()
-                if not any(alg in r_text for alg in allergens):
-                    return dict(r)
+                explicit_matches.append((100, r))
+                continue
+
+            # Cocok 2-kata berturut-turut dari query ke judul resep (misal: 'capcay kuah' di 'Capcay Kuah Bening Sayuran')
+            query_tokens = [w for w in re.findall(r'[a-zA-Z0-9]+', full_query) if len(w) >= 3]
+            for i in range(len(query_tokens) - 1):
+                phrase = f"{query_tokens[i]} {query_tokens[i+1]}"
+                if phrase in title_lower and phrase not in ["cara masak", "cara buat", "resep lengkap", "bikin resep", "resep cara"]:
+                    explicit_matches.append((85, r))
+                    break
+
+        if explicit_matches:
+            explicit_matches.sort(key=lambda x: x[0], reverse=True)
+            return dict(explicit_matches[0][1])
 
         candidates = []
         for r in self._recipes_catalog:
@@ -405,17 +447,16 @@ class ClinicalVectorStoreManager:
             candidates.append((score, r))
 
         if not candidates:
-            # Jika semua kandidat habis atau ter-exclude, reset exclude dan ambil yang belum sama persis dengan yang terakhir
-            for r in self._recipes_catalog:
-                r_text = f"{r['nama_makanan']} {r.get('bahan', '')}".lower()
-                if not any(alg in r_text for alg in allergens):
-                    if not excluded or r["nama_makanan"].lower() != excluded[-1]:
-                        return dict(r)
-            return dict(self._recipes_catalog[0])
+            return None
 
         # Urutkan berdasarkan skor tertinggi
         candidates.sort(key=lambda x: x[0], reverse=True)
         top_score = candidates[0][0]
+
+        # Jika skor tertinggi <= 0 (artinya query tidak berhubungan dengan resep), JANGAN sodorkan resep acak!
+        if top_score <= 0:
+            return None
+
         # Pilih bervariasi dari kandidat dengan skor optimal agar tidak monoton
         top_candidates = [c[1] for c in candidates if c[0] >= max(top_score - 4, 1)]
         if top_candidates:

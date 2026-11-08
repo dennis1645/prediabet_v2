@@ -214,8 +214,16 @@ class VLLMInferenceClient:
         gdp = getattr(user_context, "gula_darah_puasa", "100") if user_context else "100"
         hba1c = getattr(user_context, "hba1c", "5.7") if user_context else "5.7"
 
-        # 1. Pertanyaan seputar Alergi / Pantangan / Profil Medis
-        if any(k in q for k in ["alergi", "pantangan", "profil", "rekam medis", "gula darah", "hba1c"]):
+        # 1. Pertanyaan seputar Alergi / Pantangan / Profil Medis Murni
+        is_profile_query = any(k in q for k in [
+            "profil saya", "rekam medis", "data medis", "pantangan saya", "alergi saya",
+            "apa pantangan", "apa alergi", "riwayat medis", "data klinis", "cek profil", "data saya"
+        ]) or (
+            any(k in q for k in ["gula darah", "hba1c"])
+            and not any(k in q for k in ["makan", "minum", "buah", "durian", "duren", "lauk", "resep", "boleh", "apakah boleh", "bisa", "konsumsi", "takaran", "sarapan", "siang", "malam", "tempe", "ayam", "tahu"])
+            and any(k in q for k in ["berapa", "catatan", "hasil", "cek", "saya"])
+        )
+        if is_profile_query:
             return (
                 f"Halo {username}! Berdasarkan rekam medis klinis Anda yang terintegrasi di PrediaBeat:\n\n"
                 f"📋 **Data Klinis & Pantangan Pribadi Anda:**\n"
@@ -226,6 +234,39 @@ class VLLMInferenceClient:
                 f"• **Pola Diet Terpilih:** {diet}\n\n"
                 "Seluruh rekomendasi nutrisi dan konsultasi Dr. Predi secara otomatis disaring agar **100% bebas dari pantangan alergen** Anda demi menjaga respon insulin dan mencegah lonjakan glukosa."
             )
+
+        # 1.1. Konseling Khusus Buah Durian / Makanan Tinggi Glikemik
+        if "durian" in q or "duren" in q:
+            return (
+                f"Halo {username}! Terkait konsumsi **buah durian** dengan kadar gula darah Anda ({gdp} mg/dL):\n\n"
+                f"⚠️ **Pertimbangan Klinis Glikemik (PERKENI 2021):**\n"
+                f"• Buah durian mengandung karbohidrat sederhana pekat (fruktosa, sukrosa, dan glukosa) serta kalori padat (~149 kkal dan 21.5g karbohidrat per 100g daging buah).\n"
+                f"• Kondisi gula darah puasa {gdp} mg/dL berada dalam rentang prediabetes yang memerlukan kehati-hatian agar tidak memicu lonjakan glukosa (*glycemic spike*) secara mendadak.\n\n"
+                f"📋 **Panduan Konsumsi Aman:**\n"
+                f"1. **Batasi Porsi Ketat:** Maksimal **1–2 biji kecil (sekitar 30–50 gram)** dalam satu kesempatan, jangan satu buah utuh.\n"
+                f"2. **Hindari Campuran Manis:** Jangan dikonsumsi bersama ketan, es krim, susu kental manis, atau kopi manis.\n"
+                f"3. **Waktu Terbaik:** Nikmati di siang hari setelah mengonsumsi sayuran tinggi serat atau diimbangi jalan santai 15–20 menit untuk membantu sel otot menyerap glukosa darah."
+            )
+
+        # 1.2. Perbandingan Gizi Klinis (Mentah vs Goreng / Kukus)
+        if specific_food and specific_food.get("is_comparison"):
+            items = specific_food.get("items", [])
+            lines = [f"Halo {username}! Berdasarkan basis data gizi klinis PrediaBeat, berikut perbandingan kandungan gizi per 100 gram antara bahan makanan yang Anda tanyakan:\n"]
+            for it in items:
+                lines.append(
+                    f"📊 **{it.get('nama', 'Bahan')} (per 100g):**\n"
+                    f"• **Kalori:** ~**{it.get('kalori', 0)} kkal**\n"
+                    f"• **Protein:** **{it.get('protein', 0)}g**\n"
+                    f"• **Lemak:** **{it.get('lemak', 0)}g**\n"
+                    f"• **Karbohidrat:** **{it.get('karbohidrat', 0)}g**\n"
+                    f"• **Cara Olah Rekomendasi:** {it.get('cara_olah', 'Kukus/Rebus')}\n"
+                )
+            lines.append(
+                "💡 **Catatan Nutrisi Dr. Predi (PERKENI 2021):**\n"
+                "Metode menggoreng (*deep fry*) menyerap minyak dalam jumlah signifikan sehingga melipatgandakan kadar kalori dan lemak jenuh. "
+                "Untuk menjaga sensitivitas insulin dan profil lipid darah yang prima, sangat disarankan memprioritaskan teknik **kukus, rebus, pepes, atau tumis air** tanpa minyak jelantah."
+            )
+            return "\n".join(lines)
 
         # 2. Pertanyaan seputar Identitas / Sapaan (Siapa kamu / Halo)
         if any(k in q for k in ["siapa", "kamu siapa", "kenalan", "halo", "hai", "assalamu", "selamat pagi", "selamat siang", "selamat sore", "selamat malam"]):
@@ -297,6 +338,10 @@ class VLLMInferenceClient:
             carb = specific_food.get("karbohidrat", 0)
             fat = specific_food.get("lemak", 0)
             reason = specific_food.get("alasan_klinis", "Kaya antioksidan dan serat larut yang efektif menstabilkan penyerapan glukosa darah.")
+            if "- Jenis" in reason:
+                reason = reason.split("- Jenis")[0].strip()
+            if not reason.endswith((".", "!", "?")):
+                reason += "."
             return (
                 f"Halo {username}!\n\n"
                 f"Berikut rekomendasi hidangan lezat dan aman untuk respon insulin Anda hari ini:\n\n"
@@ -311,6 +356,20 @@ class VLLMInferenceClient:
             )
 
         # 5. Pertanyaan seputar Kandungan Nutrisi Bahan Makanan Spesifik
+        if specific_food and not is_recipe_request and not is_menu_suggestion:
+            f_name = specific_food.get("nama_makanan") or specific_food.get("nama") or "Bahan Makanan"
+            p_label = specific_food.get("porsi_label") or f"{f_name} (per 100 gram)"
+            return (
+                f"Halo {username}! Berdasarkan basis data gizi klinis PrediaBeat:\n\n"
+                f"🍗 **Informasi Nilai Gizi: {p_label}**\n"
+                f"• **Kandungan Protein:** ~**{specific_food.get('protein', 0)} gram**\n"
+                f"• **Total Energi (Kalori):** **{specific_food.get('kalori', 0)} kkal**\n"
+                f"• **Kandungan Karbohidrat:** **{specific_food.get('karbohidrat', 0)} gram**\n"
+                f"• **Kandungan Lemak:** **{specific_food.get('lemak', 0)} gram**\n"
+                f"• **Indeks Glikemik (GI):** {specific_food.get('gi_category', 'GI Rendah (< 55)')}\n\n"
+                f"💡 **Rekomendasi Cara Olah Sehat:** {specific_food.get('cara_olah', 'Kukus/Rebus tanpa minyak jelantah')}."
+            )
+
         try:
             from app.core.neo4j_manager import neo4j_manager
             raw_foods = neo4j_manager._load_local_dataset()
@@ -356,22 +415,17 @@ class VLLMInferenceClient:
                 f"💡 **Rekomendasi Cara Olah Sehat:** Disarankan diolah dengan teknik {matched_food.get('cara_olah', 'Kukus/Rebus')} menggunakan bumbu rempah alami tanpa minyak jelantah."
             )
 
-        # 6. Pertanyaan Menu / Rekomendasi Makanan Umum (3J Fallback)
-        menu_items = safe_food_names[:3] if safe_food_names and len(safe_food_names) >= 3 else [
-            "Pepes Ikan Mas Bumbu Kuning Kemangi (180 kkal)",
-            "Sayur Bening Bayam Oyong (65 kkal)",
-            "Nasi Beras Merah Pulen (145 kkal)"
-        ]
+        # 6. Pertanyaan Menu / Rekomendasi Makanan Umum (3J Fallback Medis Teruji)
         return (
             f"Halo {username}! Berdasarkan prinsip 3J Kemenkes RI dan pedoman PERKENI 2021 untuk target harian {kalori_target} kkal:\n\n"
             f"🍽️ **Rekomendasi Menu 3J Terverifikasi:**\n"
-            f"1. **Lauk Protein Rendah Lemak:** {menu_items[0]}\n"
-            f"2. **Sayuran Serat Tinggi (GI Rendah):** {menu_items[1]}\n"
-            f"3. **Karbohidrat Kompleks Pelepasan Lambat:** {menu_items[2]}\n\n"
+            f"1. **Lauk Protein Rendah Lemak:** Pepes Ikan Mas Bumbu Kuning Kemangi (~180 kkal) atau Dada Ayam Rebus/Kukus (~165 kkal)\n"
+            f"2. **Sayuran Serat Tinggi (GI Rendah):** Sayur Bening Bayam Oyong Jagung Manis (~65 kkal) atau Tumis Buncis Tahu Air (~120 kkal)\n"
+            f"3. **Karbohidrat Kompleks Pelepasan Lambat:** Nasi Beras Merah Pulen (~145 kkal) atau Nasi Shirataki Sayur (~120 kkal)\n\n"
             f"👨‍🍳 **Tips Pengolahan Sehat:**\n"
-            "Utamakan metode kukus, rebus, atau panggang rempah alami. Hindari penggunaan minyak jelantah, gula rafinasi tersembunyi, dan penyedap kemasan berlebih.\n\n"
+            "Utamakan metode kukus, rebus, atau pepes rempah alami. Hindari penggunaan minyak jelantah, gula rafinasi tersembunyi, dan penyedap kemasan berlebih.\n\n"
             "🛡️ **Jaminan Keamanan:**\n"
-            "Seluruh susunan menu di atas telah diverifikasi melalui sistem Guardrail dan dijamin bebas dari seluruh bahan pantangan medis Anda."
+            f"Seluruh susunan menu di atas telah diverifikasi melalui sistem Guardrail dan dijamin bebas dari pantangan alergen Anda ({allergens_str})."
         )
 
 vllm_client = VLLMInferenceClient()

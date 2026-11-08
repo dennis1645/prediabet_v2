@@ -597,17 +597,45 @@ class Neo4jClinicalGraphManager:
             "telur rebus": ["Telur Rebus", "telur ayam"],
             "mie goreng": ["Bihun goreng instan", "Mie goreng"],
             "bihun goreng": ["Bihun goreng instan", "bihun goreng"],
-            "dada ayam": ["dada ayam", "ayam dada", "daging dada ayam", "fillet dada ayam"],
+            "dada ayam mentah": ["dada ayam (kulit tidak dimakan)", "dada ayam"],
+            "dada ayam rebus": ["dada ayam (kulit tidak dimakan)", "dada ayam"],
+            "dada ayam kukus": ["dada ayam (kulit tidak dimakan)", "dada ayam"],
+            "dada ayam panggang": ["daging ayam (panggang)", "ayam bakar", "dada ayam"],
+            "dada ayam bakar": ["ayam bakar", "dada ayam"],
+            "dada ayam goreng": ["dada ayam goreng tanpa pelapis (kulit dimakan)", "ayam goreng"],
+            "dada ayam fillet": ["dada ayam (kulit tidak dimakan)", "dada ayam"],
+            "dada ayam": ["dada ayam (kulit tidak dimakan)", "dada ayam", "ayam dada", "daging dada ayam", "fillet dada ayam"],
             "dada aym": ["dada ayam", "ayam dada"],
             "aym": ["dada ayam", "ayam, daging", "ayam"],
             "ayam": ["dada ayam", "ayam, daging", "ayam"],
             "telur": ["telur ayam", "telur rebus", "telur"],
             "telor": ["telur ayam", "telur rebus", "telur"],
             "tlr": ["telur ayam", "telur rebus", "telur"],
-            "tempe": ["tempe, segar", "tempe kedelai murni", "tempe"],
-            "tahu": ["Tahu Kukus", "Tahu Rebus", "Tahu, mentah", "tahu putih", "tahu"],
-            "tahu putih": ["Tahu Kukus", "Tahu Rebus", "Tahu, mentah"],
+            "tempe mentah": ["tempe kedelai murni", "tempe, segar", "tempe pasar"],
+            "tempe segar": ["tempe kedelai murni", "tempe, segar"],
+            "tempe goreng": ["tempe goreng", "tempe pasar goreng", "tempe mendoan"],
+            "tempe kukus": ["tempe kukus", "tempe rebus"],
+            "tempe rebus": ["tempe kukus", "tempe rebus"],
+            "tempe bakar": ["tempe bakar kecap", "sate tempe"],
+            "orek tempe": ["orek tempe basah"],
+            "tempe orek": ["orek tempe basah"],
+            "tempe": ["tempe kedelai murni", "tempe, segar", "tempe goreng", "tempe"],
+            "tahu goreng": ["tahu goreng"],
+            "tahu mentah": ["tahu, mentah", "tahu putih"],
             "tahu kukus": ["Tahu Kukus", "Tahu Rebus"],
+            "tahu rebus": ["Tahu Rebus", "Tahu Kukus"],
+            "tahu sutra": ["tahu sutra", "tahu putih"],
+            "tahu putih": ["Tahu Kukus", "Tahu Rebus", "Tahu, mentah"],
+            "tahu": ["Tahu Kukus", "Tahu Rebus", "Tahu, mentah", "tahu putih", "tahu"],
+            "yogurt polos": ["yogurt polos rendah lemak", "yogurt polos", "yogurt"],
+            "yogurt": ["yogurt polos rendah lemak", "yogurt polos", "yogurt"],
+            "yoghurt": ["yogurt polos rendah lemak", "yogurt polos", "yogurt"],
+            "durian": ["durian", "buah durian"],
+            "alpukat": ["alpukat"],
+            "brokoli": ["brokoli", "brokoli rebus"],
+            "kembang kol": ["kembang kol"],
+            "labu siam": ["labu siam"],
+            "kangkung": ["kangkung"],
             "sawi": ["Sawi, segar", "Sawi Hijau", "Sawi putih / pecai, segar", "sawi"],
             "sawi hijau": ["Sawi Hijau", "Sawi, segar"],
             "sawi putih": ["Sawi putih / pecai, segar", "Sawi, segar"],
@@ -645,16 +673,6 @@ class Neo4jClinicalGraphManager:
             "singkong": ["Ketela pohon/ singkong kukus", "singkong"],
         }
 
-        # DILARANG menganggap follow-up jika pertanyaan berkaitan dengan tubuh/profil medis (berat badan, tinggi, umur, dll.)
-        is_medical_body_query = any(k in q for k in [
-            "berat badan", "berat", "tinggi", "bb", "tb", "bmi", "usia", "umur",
-            "gula darah", "gula", "hba1c", "kolesterol", "tensi", "tekanan darah",
-            "alergi", "pantangan", "lingkar pinggang", "profil", "makan berapa kali", "jadwal",
-            "sehat", "ideal", "apakah sehat", "apakah ideal", "normal"
-        ])
-        if is_medical_body_query:
-            return None
-
         # 1. PRIORITAS UTAMA: Cari kecocokan frasa makanan langsung di query pasien saat ini!
         # Deteksi negasi/koreksi pasien: contoh 'itu mah nasi putih bukan nasi padang' -> abaikan 'nasi putih'
         negated_terms = set()
@@ -673,15 +691,36 @@ class Neo4jClinicalGraphManager:
             if re.search(pattern, q, re.IGNORECASE) and alias_key not in search_terms:
                 search_terms.append(alias_key)
 
-        # 2. HANYA JIKA TIDAK ADA MAKANAN DI QUERY, baru periksa apakah ini follow-up murni (misal: 'berapa gram?', 'kalau proteinnya?')
+        # 2. HANYA JIKA TIDAK ADA MAKANAN DI QUERY, periksa apakah ini follow-up atau pertanyaan profil/tubuh murni
         if not search_terms:
-            food_nutri_keywords = ["protein", "kalori", "gram", "karbo", "lemak", "gi", "gizi", "nutrisi", "takaran"]
+            # Cegah follow-up jika pertanyaan saat ini berkaitan dengan tubuh / profil medis (tensi, gula darah, berat badan)
+            is_medical_body_query = any(k in q for k in [
+                "berat badan", "tinggi", "bb", "tb", "bmi", "usia", "umur",
+                "gula darah", "hba1c", "kolesterol", "tensi", "tekanan darah",
+                "alergi", "pantangan", "lingkar pinggang", "profil", "makan berapa kali", "jadwal",
+                "sehat", "ideal", "apakah sehat", "apakah ideal", "normal"
+            ]) and not any(k in q for k in ["makan", "protein", "kalori", "karbo", "lemak", "gizi"])
+            if is_medical_body_query:
+                return None
+
+            food_nutri_keywords = ["protein", "kalori", "gram", "karbo", "lemak", "gi", "gizi", "nutrisi", "takaran", "kandungan", "gula", "serat"]
             is_follow_up = (
-                any(q.startswith(k) for k in ["berapa gram", "berapa banyak", "berapa kalori", "berapa protein", "berapa jumlah", "berapa lemak", "berapa karbo", "berapa gi"])
+                any(q.startswith(k) for k in [
+                    "berapa gram", "berapa banyak", "berapa kalori", "berapa protein", "berapa jumlah", 
+                    "berapa lemak", "berapa karbo", "berapa gi", "berapa nya", "berapa protein nya", 
+                    "berapa proteinnya", "berapa kalorinya", "kalau proteinnya", "kalau kalorinya",
+                    "bagaimana proteinnya", "gimana kalorinya", "kandungan gizinya", "gizinya apa"
+                ])
                 or (q.startswith("berapa") and any(w in q for w in food_nutri_keywords))
-                or q in ["berapa?", "berapa gram?", "berapa banyak?", "berapa kalori?", "berapa protein?"]
+                or q in [
+                    "berapa?", "berapa gram?", "berapa banyak?", "berapa kalori?", "berapa protein?", 
+                    "berapa protein nya?", "berapa proteinnya?", "berapa kalorinya?", "berapa karbonya?", 
+                    "berapa lemaknya?", "protein nya?", "proteinnya?", "kalorinya?", "kandungannya?"
+                ]
+                or any(k in q for k in ["protein nya", "proteinnya", "kalorinya", "karbonya", "lemaknya", "kandungannya"])
             )
             if is_follow_up and chat_history:
+                # Periksa dari pesan paling akhir mundur ke belakang
                 for turn in reversed(chat_history):
                     text = (turn.content if hasattr(turn, "content") else turn.get("content", "")).lower()
                     for alias_key in sorted(COMMON_FOOD_ALIASES.keys(), key=len, reverse=True):
@@ -698,6 +737,28 @@ class Neo4jClinicalGraphManager:
         def rank_food_match(item_name: str, target_keyword: str) -> tuple:
             lower = str(item_name or "").lower()
             tk = str(target_keyword or "").lower()
+
+            # Cegah keripik / kerupuk / olahan kering terpilih jika user tidak menanyakannya
+            if any(bad in lower for bad in ["keripik", "kerupik", "kerupuk", "kering"]) and not any(bad in tk for bad in ["keripik", "kerupik", "kerupuk", "kering"]):
+                return (9999, len(lower))
+
+            # Prioritas Pengolahan Spesifik (Mentah vs Goreng vs Kukus/Rebus)
+            if "goreng" in tk:
+                if "goreng" in lower and not any(bad in lower for bad in ["kering", "keripik", "kerupik", "kerupuk", "tepung", "kulit"]):
+                    return (-10, len(lower))
+                if "goreng" in lower:
+                    return (-8, len(lower))
+                return (999, len(lower))
+            elif any(m in tk for m in ["mentah", "segar", "murni"]):
+                if any(m in lower for m in ["mentah", "segar", "murni"]) and not any(bad in lower for bad in ["goreng", "keripik", "kerupik", "kerupuk"]):
+                    return (-10, len(lower))
+                if "goreng" in lower:
+                    return (999, len(lower))
+            elif any(m in tk for m in ["kukus", "rebus"]):
+                if any(m in lower for m in ["kukus", "rebus"]) and "goreng" not in lower:
+                    return (-10, len(lower))
+                if "goreng" in lower:
+                    return (999, len(lower))
 
             # Cegah kontaminasi silang (Cross-contamination prevention: Ayam vs Telur)
             if any(k in tk for k in ["ayam", "dada", "unggas"]) and "telur" in lower and "telur" not in tk:
@@ -760,14 +821,93 @@ class Neo4jClinicalGraphManager:
                     pass
 
             if "dada ayam" in f_name_lower or "dada ayam" in user_q:
-                item_copy["porsi_label"] = f"{qty} Potong Dada Ayam (~{qty * 100} gram)" if qty > 1 else "1 Potong Dada Ayam (~100 gram)"
-                item_copy["kalori"] = 165 * qty
-                item_copy["protein"] = round(31.0 * qty, 1)
-                item_copy["karbohidrat"] = 0
-                item_copy["lemak"] = round(3.6 * qty, 1)
-                item_copy["gi"] = 0
-                item_copy["cara_olah"] = "Kukus/Panggang tanpa kulit dan tanpa minyak jelantah"
-                item_copy["alasan_klinis"] = "Dada ayam tanpa kulit merupakan sumber protein murni berkualitas tinggi (lean protein) bebas karbohidrat dan sangat ramah respon insulin."
+                is_goreng = "goreng" in f_name_lower or "goreng" in user_q
+                is_mentah = "mentah" in f_name_lower or "mentah" in user_q or "fillet" in f_name_lower or "fillet" in user_q
+                if is_goreng:
+                    item_copy["nama"] = "Dada Ayam Goreng"
+                    item_copy["nama_makanan"] = "Dada Ayam Goreng"
+                    item_copy["porsi_label"] = f"{qty} Potong Dada Ayam Goreng (~{qty * 100} gram)" if qty > 1 else "1 Potong Dada Ayam Goreng (~100 gram)"
+                    item_copy["kalori"] = 216 * qty
+                    item_copy["protein"] = round(31.7 * qty, 1)
+                    item_copy["karbohidrat"] = 0
+                    item_copy["lemak"] = round(9.1 * qty, 1)
+                    item_copy["gi"] = 0
+                    item_copy["cara_olah"] = "Goreng minyak (Disarankan batasi agar lemak jenuh tidak menurunkan sensitivitas insulin)"
+                    item_copy["alasan_klinis"] = "Dada ayam goreng mengandung kalori dan lemak lebih tinggi (~9.1g lemak per 100g) dibandingkan dada ayam kukus/rebus akibat serapan minyak."
+                elif is_mentah:
+                    item_copy["nama"] = "Dada Ayam Mentah Fillet"
+                    item_copy["nama_makanan"] = "Dada Ayam Mentah Fillet"
+                    item_copy["porsi_label"] = f"{qty} Potong Dada Ayam Mentah Fillet (~{qty * 100} gram)" if qty > 1 else "1 Potong Dada Ayam Mentah Fillet (~100 gram)"
+                    item_copy["kalori"] = 120 * qty
+                    item_copy["protein"] = round(26.0 * qty, 1)
+                    item_copy["karbohidrat"] = 0
+                    item_copy["lemak"] = round(1.5 * qty, 1)
+                    item_copy["gi"] = 0
+                    item_copy["cara_olah"] = "Mentah segar (Wajib dimasak hingga matang sempurna sebelum dikonsumsi)"
+                    item_copy["alasan_klinis"] = "Dada ayam fillet mentah tanpa kulit sangat rendah lemak (hanya ~1.5g) dan padat protein berkualitas tinggi."
+                else:
+                    item_copy["nama"] = "Dada Ayam Rebus/Kukus"
+                    item_copy["nama_makanan"] = "Dada Ayam Rebus/Kukus"
+                    item_copy["porsi_label"] = f"{qty} Potong Dada Ayam Rebus/Kukus (~{qty * 100} gram)" if qty > 1 else "1 Potong Dada Ayam (~100 gram)"
+                    item_copy["kalori"] = 165 * qty
+                    item_copy["protein"] = round(31.0 * qty, 1)
+                    item_copy["karbohidrat"] = 0
+                    item_copy["lemak"] = round(3.6 * qty, 1)
+                    item_copy["gi"] = 0
+                    item_copy["cara_olah"] = "Kukus/Panggang tanpa kulit dan tanpa minyak jelantah"
+                    item_copy["alasan_klinis"] = "Dada ayam tanpa kulit merupakan sumber protein murni berkualitas tinggi (lean protein) bebas karbohidrat dan sangat ramah respon insulin."
+            elif "tempe" in f_name_lower or "tempe" in user_q:
+                is_goreng = "goreng" in f_name_lower or "goreng" in user_q or "mendoan" in f_name_lower
+                is_mentah = "mentah" in f_name_lower or "mentah" in user_q or "murni" in f_name_lower or "segar" in f_name_lower
+                if is_goreng:
+                    item_copy["nama"] = "Tempe Goreng"
+                    item_copy["nama_makanan"] = "Tempe Goreng"
+                    unit_gram = 50 if is_potong else 100
+                    scale = (unit_gram / 100.0) * qty
+                    item_copy["porsi_label"] = f"{qty} Potong Tempe Goreng (~{qty * 50}g)" if is_potong else f"Tempe Goreng (~{qty * 100}g)"
+                    item_copy["kalori"] = round(236 * scale)
+                    item_copy["protein"] = round(11.3 * scale * (100/50) if is_potong else 11.3 * qty, 1)
+                    item_copy["karbohidrat"] = round(10.1 * scale, 1)
+                    item_copy["lemak"] = round(14.0 * scale, 1)
+                    item_copy["gi"] = 45
+                    item_copy["cara_olah"] = "Digoreng (Minyak meningkatkan lemak total & beban inflamasi)"
+                    item_copy["alasan_klinis"] = "Tempe goreng menyerap minyak cukup tinggi sehingga lemaknya melonjak menjadi ~11-14g. Untuk menjaga kestabilan glukosa, batasi frekuensi gorengan dan utamakan tempe kukus/bacem tanpa gula."
+                elif is_mentah:
+                    item_copy["nama"] = "Tempe Mentah (Segar)"
+                    item_copy["nama_makanan"] = "Tempe Mentah (Segar)"
+                    unit_gram = 50 if is_potong else 100
+                    scale = (unit_gram / 100.0) * qty
+                    item_copy["porsi_label"] = f"{qty} Potong Tempe Mentah / Segar (~{qty * 50}g)" if is_potong else f"Tempe Mentah Kedelai Murni (~{qty * 100}g)"
+                    item_copy["kalori"] = round(201 * scale)
+                    item_copy["protein"] = round(20.8 * scale, 1)
+                    item_copy["karbohidrat"] = round(13.5 * scale, 1)
+                    item_copy["lemak"] = round(8.8 * scale, 1)
+                    item_copy["gi"] = 30
+                    item_copy["cara_olah"] = "Segar/Mentah (Olah dengan dikukus, pepes, atau direbus)"
+                    item_copy["alasan_klinis"] = "Tempe kedelai murni kaya protein nabati, isoflavon, dan serat pangan prebiotik yang memperlambat laju penyerapan gula darah."
+                else:
+                    item_copy["nama"] = "Tempe Kukus"
+                    item_copy["nama_makanan"] = "Tempe Kukus"
+                    unit_gram = 50 if is_potong else 100
+                    scale = (unit_gram / 100.0) * qty
+                    item_copy["porsi_label"] = f"{qty} Potong Tempe Kukus (~{qty * 50}g)" if is_potong else f"Tempe Kukus (~{qty * 100}g)"
+                    item_copy["kalori"] = round(96 * scale)
+                    item_copy["protein"] = round(9.5 * scale, 1)
+                    item_copy["karbohidrat"] = round(4.7 * scale, 1)
+                    item_copy["lemak"] = round(4.3 * scale, 1)
+                    item_copy["lemak"] = round(4.3 * scale, 1)
+                    item_copy["gi"] = 25
+                    item_copy["cara_olah"] = "Kukus/Rebus ramah respon insulin"
+                    item_copy["alasan_klinis"] = "Tempe kukus sangat ideal bagi penderita prediabetes karena rendah lemak (hanya ~4.3g) dan bebas minyak jelantah."
+            elif "yogurt" in f_name_lower or "yoghurt" in f_name_lower or "yogurt" in user_q:
+                item_copy["porsi_label"] = f"{qty} Cup Yogurt Rendah Lemak (~{qty * 150} gram)" if qty > 1 else "1 Cup Yogurt Rendah Lemak (~150 gram)"
+                item_copy["kalori"] = 95 * qty
+                item_copy["protein"] = round(8.0 * qty, 1)
+                item_copy["karbohidrat"] = round(10.5 * qty, 1)
+                item_copy["lemak"] = round(2.3 * qty, 1)
+                item_copy["gi"] = 28
+                item_copy["cara_olah"] = "Konsumsi langsung tanpa sirup gula atau kental manis"
+                item_copy["alasan_klinis"] = "Yogurt plain rendah lemak kaya probiotik untuk kesehatan mikrobiota usus dan asam laktat yang membantu memperlambat pengosongan lambung serta meredam lonjakan glukosa."
             elif "nasi padang" in f_name_lower or "padang" in f_name_lower or "padang" in user_q:
                 item_copy["porsi_label"] = f"{qty} Porsi Nasi Padang (~{qty * 350} gram)" if qty > 1 else "1 Porsi Nasi Padang (~350 gram)"
                 item_copy["kalori"] = 580 * qty
@@ -825,6 +965,46 @@ class Neo4jClinicalGraphManager:
                 item_copy["lemak"] = 8 * qty
 
             return item_copy
+
+        # 0. Cek apakah pengguna meminta perbandingan dua atau lebih bahan makanan / olahan
+        is_comparative = len(search_terms) >= 2 and any(w in q for w in ["beda", "perbedaan", "dibanding", "bandingkan", "vs", "versus", "antara", "mana yang lebih", "ataukah", "atau"])
+        if is_comparative:
+            neo4j_logger.info("Permintaan perbandingan nutrisi terdeteksi untuk terms: %s", search_terms)
+            foods = self._load_local_dataset()
+            comparison_items = []
+            seen_names = set()
+            for term in search_terms[:3]:
+                best_match = None
+                for target in COMMON_FOOD_ALIASES.get(term, [term]):
+                    target_lower = str(target or "").lower()
+                    matches = [f for f in foods if target_lower in str(f.get("nama") or "").lower()]
+                    if matches:
+                        matches.sort(key=lambda x: rank_food_match(x.get("nama") or "", target))
+                        m = dict(matches[0])
+                        m["nama_makanan"] = m.get("nama")
+                        m["gambar"] = resolve_food_image(m.get("nama") or "")
+                        m = apply_portion_scaling(m, term)
+                        best_match = m
+                        break
+                if best_match and best_match.get("nama") not in seen_names:
+                    comparison_items.append(best_match)
+                    seen_names.add(best_match.get("nama"))
+
+            if len(comparison_items) >= 2:
+                names = [it.get("nama") for it in comparison_items]
+                return {
+                    "nama_makanan": f"Perbandingan: {' vs '.join(names)}",
+                    "nama": f"Perbandingan: {' vs '.join(names)}",
+                    "is_comparison": True,
+                    "items": comparison_items,
+                    "kalori": comparison_items[0].get("kalori", 0),
+                    "protein": comparison_items[0].get("protein", 0),
+                    "karbohidrat": comparison_items[0].get("karbohidrat", 0),
+                    "lemak": comparison_items[0].get("lemak", 0),
+                    "gi_category": "Perbandingan Metode Pengolahan",
+                    "cara_olah": "Mentah vs Goreng / Rebus",
+                    "alasan_klinis": "Perbedaan metode pengolahan (menggoreng vs merebus/mengukus) sangat memengaruhi densitas kalori dan kadar lemak akibat penyerapan minyak."
+                }
 
         # 1. Coba cari di Neo4j jika aktif
         if self.is_connected():

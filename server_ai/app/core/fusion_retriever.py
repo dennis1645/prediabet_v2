@@ -93,13 +93,18 @@ class HybridGraphVectorFusion:
             "saranin", "sarankan", "sarapan apa", "makan siang apa", "makan malam apa",
             "ide makan", "olah", "olahan", "selain itu", "yang lain", "ada menu lain", "opsi lain", "pilihan lain",
             "pengen makan", "ingin makan", "berkuah", "hangat", "sop", "sup", "soto",
-            "basis", "bahan dasar", "enaknya dimasak apa", "punya", "masak apa", "dimasak apa", "bikin apa",
+            "basis", "bahan dasar", "enaknya dimasak apa", "punya bahan", "masak apa", "dimasak apa", "bikin apa",
             "kalau basis", "kalau bahan", "makan siang", "makan malam", "sarapan"
         ]
         user_wants_recipe = any(k in ql for k in recipe_keywords)
         user_asks_nutrient_only = any(k in ql for k in ["berapa", "gizi"]) and not any(k in ql for k in [
             "resep", "cara buat", "cara masak", "bikin", "langkah", "basis", "bahan dasar", "olahan", "masak apa", "dimasak apa", "menu", "saran"
         ])
+
+        # Pertanyaan keamanan / pantangan alergi (misal: "Gado-gado kalau alergi kacang bisa gak?") bukan permintaan resep
+        is_dietary_safety_inquiry = any(k in ql for k in ["alergi", "pantangan", "boleh gak", "bisa gak", "aman gak", "bahaya gak"]) and not any(k in ql for k in ["resep", "cara masak", "cara buat", "langkah masak", "bumbu"])
+        if is_dietary_safety_inquiry:
+            user_wants_recipe = False
 
         # JIKA PENGGUNA MENCERITAKAN KONSUMSI MAKANAN (STORY FOODS):
         # SUPPRESS specific_food mentah agar tidak menimpa menu konsumsi nyata (misal 'ayam goreng + nasi')
@@ -130,6 +135,13 @@ class HybridGraphVectorFusion:
             if last_suggested_recipe and last_suggested_recipe.get("nama_makanan"):
                 if last_suggested_recipe["nama_makanan"] not in already_suggested:
                     already_suggested.append(last_suggested_recipe["nama_makanan"])
+
+            # JANGAN blacklist resep jika user sekarang justru secara spesifik meminta resep hidangan tersebut!
+            import re
+            already_suggested = [
+                name for name in already_suggested
+                if not any(token in ql for token in re.findall(r'\w+', name.lower()) if len(token) >= 4 and token not in ["resep", "ayam", "sayur", "kuah", "masak", "goreng"])
+            ]
 
             # 2. Cek apakah ini pertanyaan kelanjutan ("ada yang lain?", "selain itu ada ngga?", "ada lagi?")
             context_theme = ""

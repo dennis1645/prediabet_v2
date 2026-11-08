@@ -329,17 +329,18 @@ def build_vllm_messages(
                 messages.append({"role": role, "content": content})
                 has_prior_chat = True
 
-    # 1. Pengecekan Guardrail Out-of-Scope (Topik di Luar Nutrisi/Kesehatan)
-    is_out, _ = allergen_guardrail.is_out_of_scope(user_query)
+    # 1. Pengecekan Guardrail Out-of-Scope (Topik di Luar Nutrisi/Kesehatan / Non-Pangan / Privasi)
+    is_out, out_reason = allergen_guardrail.is_out_of_scope(user_query)
     if is_out:
+        specific_refusal = out_reason if out_reason else "Saya tidak dapat menjawab pertanyaan di luar konteks gizi dan kesehatan metabolik."
         current_user_content = (
             f"[Profil Pasien]: Pasien bernama {patient_name}.\n"
             f"Pesan Pasien: \"{user_query}\"\n\n"
-            f"[Instruksi Guardrail Out-of-Scope]:\n"
-            f"- Pertanyaan pasien berada DI LUAR LINGKUP klinis nutrisi atau kesehatan prediabetes.\n"
-            f"- Tolak secara santun dan profesional sebagai Dr. Predi:\n"
+            f"[Instruksi Guardrail Out-of-Scope / Privasi / Non-Pangan]:\n"
+            f"- Pertanyaan pasien berada DI LUAR LINGKUP klinis nutrisi atau melanggar batasan etika/privasi.\n"
+            f"- Tolak secara santun, tegas, dan profesional sebagai Dr. Predi:\n"
             f"  'Halo {patient_name}! Sebagai Dr. Predi, dokter konsultan nutrisi klinis pribadi {salutation} di PrediaBeat, fokus keahlian saya didedikasikan khusus untuk pendampingan pola makan ramah gula darah, takaran gizi 3J, dan pencegahan prediabetes/diabetes.\n\n"
-            f"  Saya tidak dapat menjawab pertanyaan di luar konteks gizi dan kesehatan metabolik.\n\n"
+            f"  {specific_refusal}\n\n"
             f"  Apakah ada pertanyaan seputar kandungan gizi makanan, takaran karbohidrat/protein, atau rekomendasi menu sehat yang ingin {salutation} konsultasikan hari ini?'\n"
             f"- DILARANG menjawab pertanyaan non-medis tersebut!"
         )
@@ -477,6 +478,14 @@ def build_vllm_messages(
                 f"  • **Pilihan Minuman:** Dampingi dengan air putih atau teh tawar hangat, hindari es teh manis atau jus buah dengan kental manis."
             )
             closing_prompt = f"Tanyakan santai seputar lauk favorit yang biasa dipilih {salutation} saat makan di rumah makan Padang."
+        elif "durian" in food_name.lower() or "duren" in ql:
+            counseling_tips = (
+                f"  • **Batasi Porsi Ketat (Jumlah):** Maksimal **1–2 biji kecil (sekitar 30–50 gram)** dalam satu kesempatan, jangan satu buah utuh. Durian memiliki karbohidrat sederhana pekat (~21.5g per 100g) dan kalori cukup padat (~149 kkal).\n"
+                f"  • **Hindari Kombinasi Karbohidrat Tambahan:** Jangan santap durian bersama ketan, es krim, susu kental manis, atau minuman manis.\n"
+                f"  • **Waktu Terbaik (Jadwal):** Nikmati di siang hari setelah mengonsumsi sayuran tinggi serat, jangan dikonsumsi malam hari menjelang tidur saat metabolisme melambat.\n"
+                f"  • **Aktivitas Fisik:** Luangkan waktu jalan santai ringan selama 15–20 menit setelahnya untuk membantu sel otot menyerap glukosa darah."
+            )
+            closing_prompt = f"Tanyakan santai apakah {salutation} menyukai buah lokal lain dengan indeks glikemik lebih rendah seperti apel malang, jambu biji, atau alpukat."
         else:
             counseling_tips = (
                 f"  • **Kontrol Porsi (Jumlah):** Nikmati '{food_name}' dalam porsi terukur (porsi kecil/sedang), jangan berlebihan agar tidak memicu lonjakan glukosa tinggi.\n"
@@ -552,7 +561,24 @@ def build_vllm_messages(
         food_title = specific_food.get("nama_makanan") or specific_food.get("nama") or "Menu Sehat"
         porsi_label = specific_food.get("porsi_label")
 
-        if is_multi_menu_request:
+        if specific_food.get("is_comparison"):
+            items = specific_food.get("items", [])
+            items_desc = "\n".join([
+                f"- **{it.get('nama', 'Bahan')} (per 100g):** ~**{it.get('kalori', 0)} kkal** | Protein: **{it.get('protein', 0)}g** | Lemak: **{it.get('lemak', 0)}g** | Karbo: **{it.get('karbohidrat', 0)}g** | Cara Olah: {it.get('cara_olah', 'Kukus/Rebus')}"
+                for it in items
+            ])
+            current_user_content = (
+                f"Pesan Pasien: \"{user_query}\"\n\n"
+                f"[Data Perbandingan Gizi Resmi PrediaBeat per 100 gram]:\n"
+                f"{items_desc}\n\n"
+                f"[Instruksi Respon Perbandingan Nutrisi]:\n"
+                f"- Pasien menanyakan perbandingan kandungan gizi atau cara olah antara bahan makanan di atas ({user_query}).\n"
+                f"- Sajikan perbandingan nilai gizi (Kalori, Protein, Lemak, Karbohidrat) secara berdampingan dengan jelas dan rapi menggunakan poin-poin tebal (**bold**).\n"
+                f"- Jelaskan secara klinis (PERKENI 2021) dampak metode pengolahan: menggoreng menyerap minyak sehingga melipatgandakan kalori dan lemak jenuh yang dapat memperberat kerja insulin, sedangkan merebus/mengukus mempertahankan protein utuh dengan lemak sangat rendah.\n"
+                f"- Berikan rekomendasi cara olah terbaik yang paling ramah untuk respon insulin pasien.\n"
+                f"- Selesaikan dengan ramah tanpa kalimat klise robotik AI."
+            )
+        elif is_multi_menu_request:
             multi_items = specific_food.get("multi_menu_candidates") or []
             multi_desc = ""
             if multi_items:

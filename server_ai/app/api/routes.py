@@ -109,15 +109,16 @@ async def chat_endpoint(request: ChatRequest):
             telemetry={"latency_ms": 5, "tokens_per_second": 0, "vllm_connected": False}
         )
 
-    # 1.2. Guardrail Out-of-Scope (Non-Medis / Non-Nutrisi)
-    is_out, _ = allergen_guardrail.is_out_of_scope(request.message)
+    # 1.2. Guardrail Out-of-Scope (Non-Medis / Non-Nutrisi / Non-Pangan / Privasi)
+    is_out, out_reason = allergen_guardrail.is_out_of_scope(request.message)
     if is_out:
+        reason_explanation = out_reason if out_reason else "Saya tidak dapat menjawab pertanyaan di luar konteks gizi, kesehatan metabolik, atau rekomendasi menu makanan ramah gula darah."
         out_msg = (
             f"Halo {display_name}! Sebagai Dr. Predi, dokter konsultan nutrisi klinis pribadi Anda di PrediaBeat, "
-            "fokus keahlian saya didedikasikan khusus untuk pendampingan pola makan ramah gula darah, takaran gizi 3J, "
-            "dan pencegahan prediabetes/diabetes sesuai panduan klinis PERKENI & Kemenkes RI.\n\n"
-            "Saya tidak dapat menjawab pertanyaan di luar konteks gizi, kesehatan metabolik, atau rekomendasi menu makanan ramah gula darah.\n\n"
-            "Apakah ada pertanyaan seputar kandungan gizi bahan makanan, takaran karbohidrat/protein, atau rekomendasi menu sehat yang ingin dikonsultasikan hari ini? 😊"
+            f"fokus keahlian saya didedikasikan khusus untuk pendampingan pola makan ramah gula darah, takaran gizi 3J, "
+            f"dan pencegahan prediabetes/diabetes sesuai panduan klinis PERKENI & Kemenkes RI.\n\n"
+            f"{reason_explanation}\n\n"
+            f"Apakah ada pertanyaan seputar kandungan gizi bahan makanan, takaran karbohidrat/protein, atau rekomendasi menu sehat yang ingin dikonsultasikan hari ini? 😊"
         )
         return ChatResponse(
             success=True,
