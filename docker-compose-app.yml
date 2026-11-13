@@ -1,0 +1,54 @@
+# ==============================================================================
+# PrediaBeat Application Stack (Frontend + Backend)
+# Service : prediabeat-web (Combined React Frontend + Express Backend)
+# Ports   : 8080 & 5000
+# Network : prediabeat-network (Docker Bridge, shared with Server AI)
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # SERVICE: Frontend + Backend (Combined Single Container)
+  # ----------------------------------------------------------------------------
+  prediabeat-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    image: prediabeat-web:latest
+    container_name: prediabeat-web
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - apparmor:unconfined
+    ports:
+      - "8080:5000"
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - JWT_SECRET=prediabeat_super_secure_jwt_token_key_2026!
+      - JWT_EXPIRES_IN=7d
+      - DATABASE_FILE=./data/prediabeat.db
+      - CLIENT_ORIGIN=http://localhost:5000
+      - AI_SERVER_URL=http://prediabeat-server-ai:8000/api/chat
+    volumes:
+      - prediabeat-db-data:/app/backend/data
+    networks:
+      prediabeat-network:
+        aliases:
+          - prediabeat-web
+          - web
+
+# ------------------------------------------------------------------------------
+# Shared Bridge Network (Connects to Server AI stack)
+# ------------------------------------------------------------------------------
+networks:
+  prediabeat-network:
+    name: prediabeat-network
+    driver: bridge
+
+# ------------------------------------------------------------------------------
+# Persistent Storage Volumes
+# ------------------------------------------------------------------------------
+volumes:
+  prediabeat-db-data:
+    name: prediabeat-db-data
