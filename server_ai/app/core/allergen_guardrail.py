@@ -318,6 +318,62 @@ class ClinicalAllergenGuardrail:
 
         return None
 
+    def detect_medical_diagnosis_or_medication_query(self, query: str, patient_name: str = "Bapak/Ibu") -> Optional[Dict[str, str]]:
+        """
+        Guardrail Keselamatan Klinis:
+        Mencegah AI bertindak sebagai dokter pemeriksa yang mendiagnosis penyakit berat,
+        mengurangi/menghentikan dosis obat dokter, atau menangani kondisi gawat darurat.
+        """
+        ql = (query or "").lower().strip()
+        if not ql:
+            return None
+
+        # 1. Pola Permintaan Mengubah / Mengurangi / Menghentikan Obat Dokter
+        medication_patterns = [
+            r"\b(berhenti|stop|lepas|putus|tinggal(?:kan)?|tidak\s+usah|gak\s+usah|ngga\s+usah)\s+(?:minum\s+)?(?:obat|metformin|insulin|glibenklamid|glimepiride|amlodipine|captopril|obat\s+gula|obat\s+diabetes|obat\s+tensi|obat\s+darah\s+tinggi)\b",
+            r"\b(kurang(?:i|in)?|turun(?:in|kan)?|potong|ubah|ganti|tambah(?:in|kan)?|naik(?:in|kan)?)\s+(?:dosis\s+)?(?:obat|metformin|insulin|glibenklamid|glimepiride|amlodipine|captopril|obat\s+gula|obat\s+diabetes|obat\s+tensi)\b",
+            r"\b(boleh\s+(?:gak|tidak|ngga)|aman\s+(?:gak|tidak))\s+(?:berhenti|stop|kurangi|kurangin|lepas)\s+(?:minum\s+)?obat\b",
+            r"\b(dosis\s+(?:metformin|insulin|obat)|ganti\s+obat\s+dengan\s+herbal|lepas\s+obat\s+dokter)\b",
+        ]
+
+        if any(re.search(pat, ql, re.IGNORECASE) for pat in medication_patterns):
+            return {
+                "type": "medication_modification",
+                "response": (
+                    f"Mohon maaf {patient_name}, sebagai **asisten pendamping nutrisi klinis (Dr. Predi)**, "
+                    f"saya **TIDAK berwenang** untuk menganjurkan pengurangan, penggantian, ataupun penghentian dosis obat medis Anda.\n\n"
+                    f"🚨 **Peringatan Keselamatan Pengobatan:**\n"
+                    f"• **Dilarang keras menghentikan atau mengurangi obat resep** (seperti obat diabetes/Metformin, insulin, atau obat hipertensi) secara sepihak tanpa pemeriksaan dokter.\n"
+                    f"• Pola makan sehat 3J berperan sebagai **pendamping terapi**, bukan pengganti obat yang sudah diresepkan.\n\n"
+                    f"🩺 **Langkah yang Harus Anda Lakukan:**\n"
+                    f"Silakan **hubungi dokter yang merawat Anda atau kunjungi fasilitas kesehatan / rumah sakit terdekat** untuk evaluasi kadar gula darah dan penyesuaian dosis obat secara aman."
+                ),
+            }
+
+        # 2. Pola Permintaan Diagnosis Medis atau Gejala Klinis Berat / Darurat
+        diagnosis_or_severe_patterns = [
+            r"\b(diagnos(?:a|is)|mendiagnos(?:a|is)|vonis\s+penyakit)\b",
+            r"\b(apakah\s+(?:saya|aku|gue|gw|ibu|bapak)\s+(?:kena|mengidap|menderita|positif|sakit|terkena)\s+(?:diabetes|ginjal|jantung|stroke|hipertensi|komplikasi|neuropati|ketoasidosis))\b",
+            r"\b(nyeri\s+dada|sakit\s+dada|sesak\s+napas|nafas\s+sesak|pingsan|hilang\s+kesadaran|kejang|muntah\s+terus|koma)\b",
+            r"\b(luka\s+(?:tidak\s+sembuh|membusuk|bernanah|gangren|diabetik)|kaki\s+(?:mati\s+rasa|bengkak\s+parah|menghitam)|pandangan\s+kabur\s+mendadak)\b",
+            r"\b(gula\s+darah\s+(?:di\s+atas\s+)?(?:300|350|400|450|500|600)|gula\s+darah\s+(?:drop|turun\s+drastis|di\s+bawah\s+60|di\s+bawah\s+70))\b",
+        ]
+
+        if any(re.search(pat, ql, re.IGNORECASE) for pat in diagnosis_or_severe_patterns):
+            return {
+                "type": "diagnosis_or_severe_symptom",
+                "response": (
+                    f"Halo {patient_name}, perlu saya tegaskan bahwa Dr. Predi adalah **asisten edukasi nutrisi dan pola makan 3J**, "
+                    f"**BUKAN dokter pemeriksa langsung** dan **tidak dapat menegakkan diagnosis medis** ataupun menangani keluhan klinis berat.\n\n"
+                    f"🏥 **Anjuran Medis Segera:**\n"
+                    f"• Apabila Anda mengalami keluhan berat, luka sulit sembuh, nyeri dada, sesak napas, gula darah sangat tinggi (>300 mg/dL) atau terlalu rendah (<70 mg/dL), **segera hubungi dokter Anda atau langsung pergi ke klinik / IGD rumah sakit terdekat**.\n"
+                    f"• Diagnosis resmi hanya dapat ditegakkan oleh dokter melalui pemeriksaan fisik dan hasil laboratorium klinis yang sah.\n\n"
+                    f"Setelah kondisi Anda ditangani dokter, saya siap membantu mendampingi pengaturan menu harian yang sesuai dengan anjuran dokter Anda. 🙏"
+                ),
+            }
+
+        return None
+
     def expand_allergen_keywords(self, user_allergens: List[str]) -> List[str]:
         expanded = set()
         for item in user_allergens:

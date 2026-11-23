@@ -135,7 +135,32 @@ async def chat_endpoint(request: ChatRequest):
             telemetry={"latency_ms": 5, "tokens_per_second": 0, "vllm_connected": False}
         )
 
-    # 1.3. Guardrail Kontraindikasi Klinis Fatal/Ketat (Knowledge Base P016 Belimbing, P017 Jengkol, P012 Jeroan)
+    # 1.3. Guardrail Anti-Diagnosis & Anti-Modifikasi Obat (Hanya Asisten Nutrisi, Bukan Dokter Pemeriksa)
+    med_guard = allergen_guardrail.detect_medical_diagnosis_or_medication_query(request.message, display_name)
+    if med_guard:
+        return ChatResponse(
+            success=True,
+            response=med_guard["response"],
+            user_id=user_context.userId,
+            safe_foods_recommended=[],
+            guardrail=GuardrailReport(
+                zero_allergen_verified=True,
+                allergens_checked=[],
+                allergens_detected_and_blocked=[med_guard["type"]],
+                deterministic_graph_used=True,
+                safety_message="Guardrail Anti-Diagnosis & Rujukan Dokter/RS Aktif"
+            ),
+            telemetry={"latency_ms": 6, "tokens_per_second": 0, "vllm_connected": False}
+        )
+
+    # 1.4. Guardrail Kontraindikasi Klinis Fatal/Ketat (Knowledge Base P016 Belimbing, P017 Jengkol, P012 Jeroan)
+    med_guard = allergen_guardrail.detect_medical_diagnosis_or_medication_query(request.message, display_name)
+    if med_guard:
+        async def med_stream():
+            yield f"data: {med_guard['response']}\n\n"
+            yield "data: [DONE]\n\n"
+        return StreamingResponse(med_stream(), media_type="text/event-stream")
+
     contra = allergen_guardrail.detect_clinical_contraindication(request.message, display_name)
     if contra:
         return ChatResponse(
@@ -250,6 +275,13 @@ async def chat_stream_endpoint(request: ChatRequest):
             yield f"data: {msg}\n\n"
             yield "data: [DONE]\n\n"
         return StreamingResponse(out_stream(), media_type="text/event-stream")
+
+    med_guard = allergen_guardrail.detect_medical_diagnosis_or_medication_query(request.message, display_name)
+    if med_guard:
+        async def med_stream():
+            yield f"data: {med_guard['response']}\n\n"
+            yield "data: [DONE]\n\n"
+        return StreamingResponse(med_stream(), media_type="text/event-stream")
 
     contra = allergen_guardrail.detect_clinical_contraindication(request.message, display_name)
     if contra:

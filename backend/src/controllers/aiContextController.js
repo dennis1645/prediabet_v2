@@ -460,7 +460,7 @@ export async function forwardChatToAI(req, res) {
       analysis.meal_plan = generateDailyMealPlan(
         analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2437),
         allergies,
-        analysis.active_diet || "mediterania"
+        analysis.active_diet || ""
       );
       if (hasProfile) {
         try {
@@ -1062,7 +1062,7 @@ export async function forwardChatToAI(req, res) {
       `• Kalori Terbakar Hari Ini: ${burnedCal} kkal (Aktivitas Fisik & Olahraga)\n` +
       `• Makanan Terdata Hari Ini: ${loggedMealsNotes}\n` +
       `• Pola Makan Pasien   : ${analysis.pola_waktu_makan || profile.pola_waktu_makan || "Normal 3J (3 kali makan utama + 2 kali selingan)"}\n` +
-      `• Status Diet Aktif   : ${analysis.active_diet_label || "Diet Mediterania (Ramah Glukosa)"}\n` +
+      `• Status Diet Aktif   : ${analysis.active_diet_label || "Belum Dipilih (Pola Seimbang 3J)"}\n` +
       `• Target Makronutrien : Karbohidrat ${analysis.target_karbo || 274}g, Protein ${analysis.target_protein || 152}g, Lemak ${analysis.target_lemak || 81}g\n` +
       `• Ringkasan Progress Mingguan (7 Hari Terakhir): Catatan Log ${daysLoggedCount}/7 hari, Kepatuhan Meal Plan ${avgAdherence}%, Aktivitas Fisik ${finalExerciseMinutes}/150 mnt, Health Score ${healthScore}/100 (Kondisi Stabil & Baik)\n\n` +
       `=== RENCANA MAKAN (MEAL PLAN) RESMI HARI INI DI DASHBOARD ===\n` +
