@@ -86,6 +86,10 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ dietId }),
     }),
+  deactivateDiet: () =>
+    request("/diet/deactivate", {
+      method: "POST",
+    }),
 
   // Foods & Activities
   getFoods: (params = {}) => {
@@ -152,6 +156,43 @@ export const api = {
       method: "POST",
       body: JSON.stringify(data),
     }),
+
+  // Admin Dashboard (Evaluasi & Manajemen User)
+  adminGetUsers: () => request("/admin/users"),
+  adminUpdateUserRole: (id, role) =>
+    request(`/admin/users/${id}/role`, {
+      method: "PATCH",
+      body: JSON.stringify({ role }),
+    }),
+  adminResetPassword: (id, newPassword) =>
+    request(`/admin/users/${id}/reset-password`, {
+      method: "POST",
+      body: JSON.stringify({ newPassword }),
+    }),
+  adminDeleteUser: (id) =>
+    request(`/admin/users/${id}`, {
+      method: "DELETE",
+    }),
+  adminGetUserChats: (id) => request(`/admin/users/${id}/chats`),
+  adminDownloadChats: async (format = "csv", userId = null) => {
+    const query = `format=${encodeURIComponent(format)}${userId ? `&userId=${encodeURIComponent(userId)}` : ""}`;
+    const response = await fetch(`${API_BASE_URL}/admin/chats/export?${query}`, {
+      headers: getAuthHeader(),
+    });
+    if (!response.ok) {
+      throw new Error("Gagal mengunduh file percakapan.");
+    }
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    const dateStamp = new Date().toISOString().split("T")[0];
+    a.download = `prediabeat_chats_${userId ? `user_${userId}` : "all_users"}_${dateStamp}.${format}`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  },
 };
 
 export default api;

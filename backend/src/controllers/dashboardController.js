@@ -27,7 +27,7 @@ export function getDashboard(req, res) {
       analysis.meal_plan = generateDailyMealPlan(
         analysis.target_kalori || 1850,
         allergies,
-        analysis.active_diet || "mediterania"
+        analysis.active_diet || ""
       );
 
       const now = new Date().toISOString();
@@ -87,7 +87,7 @@ export function regenerateMealPlan(req, res) {
     const newMealPlan = generateDailyMealPlan(
       analysis.target_kalori || 1850,
       allergies,
-      analysis.active_diet || "mediterania"
+      analysis.active_diet || ""
     );
 
     analysis.meal_plan = newMealPlan;

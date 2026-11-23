@@ -22,8 +22,8 @@ export const initialProfile = {
   komorbiditas: "Hipertensi Derajat 1",
   pantangan_alergi: "Kacang Tanah & Olahannya",
   penyakit_lain_obat: "Metformin 500mg bila perlu",
-  active_diet: "mediterania",
-  active_diet_label: "Diet Mediterania",
+  active_diet: "",
+  active_diet_label: "Belum Dipilih (Pola Seimbang 3J)",
 };
 
 export const initialAnalysis = {
@@ -36,8 +36,8 @@ export const initialAnalysis = {
   target_karbo: 231, // g
   target_protein: 92, // g
   target_lemak: 62, // g
-  active_diet: "mediterania",
-  active_diet_label: "Diet Mediterania",
+  active_diet: "",
+  active_diet_label: "Belum Dipilih (Pola Seimbang 3J)",
   frekuensi_makan: "3x makan utama + 2x selingan",
   catatan_pola_makan: [
     "Konsumsi sayur atau serat larut terlebih dahulu sebelum karbohidrat untuk memperlambat penyerapan glukosa.",

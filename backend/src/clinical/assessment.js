@@ -54,6 +54,22 @@ export const DIET_CATALOG = {
     dianjurkan: ["Sayuran segar", "Buah segar kaya kalium", "Kacang-kacangan tanpa garam", "Daging tanpa lemak"],
     dibatasi: ["Makanan kaleng berpengawet", "Keripik asin & camilan gurih", "Kecap asin berlebih", "Bumbu instan MSG tinggi"],
   },
+  intermittent_fasting: {
+    id: "intermittent_fasting",
+    nama: "Intermittent Fasting (Jendela Makan 16:8)",
+    slug: "intermittent-fasting",
+    gambar: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=1200&q=80",
+    ringkas: "Mengatur jendela waktu makan selama 8 jam (misal 12:00–20:00) dan puasa 16 jam untuk meningkatkan sensitivitas insulin basal.",
+    untuk_apa: "Membantu menurunkan kadar insulin puasa dan memperbaiki resistensi insulin apabila tidak disertai riwayat maag akut atau hipoglikemia.",
+    efek_makro: "Total kebutuhan kalori harian tetap terpenuhi penuh dalam 3 sesi makan terstruktur di jendela 12:00–20:00.",
+    komposisi: [
+      "Jendela makan aktif 8 jam (12:00–20:00), puasa air putih/teh tawar 16 jam.",
+      "Saat buka puasa (12:00), utamakan serat dan protein terlebih dahulu sebelum karbohidrat kompleks.",
+      "Tetap penuhi target protein dan hidrasi 2 liter air per hari.",
+    ],
+    dianjurkan: ["Air putih & teh tawar saat puasa", "Protein tanpa lemak saat buka", "Sayuran berserat tinggi", "Karbohidrat kompleks porsi terukur"],
+    dibatasi: ["Balas dendam makan berlebih saat buka", "Minuman manis saat berbuka", "Tidur langsung setelah makan malam"],
+  },
 };
 
 /**
@@ -307,8 +323,8 @@ export function prosesAnalisisKlinis(profil) {
 
   const { skor: skorRisiko, kategori: kategoriRisiko } = hitungSkorRisiko(profil, bmi);
 
-  const activeDiet = profil.active_diet || "mediterania";
-  const dietInfo = DIET_CATALOG[activeDiet] || DIET_CATALOG.mediterania;
+  const activeDiet = profil.active_diet || "";
+  const dietInfo = activeDiet ? DIET_CATALOG[activeDiet] : null;
 
   const { targetKalori, karboGram, proteinGram, lemakGram, catatanDiet } = hitungTargetKaloriMakro(
     tdee,
@@ -341,7 +357,7 @@ export function prosesAnalisisKlinis(profil) {
     target_protein: proteinGram,
     target_lemak: lemakGram,
     active_diet: activeDiet,
-    active_diet_label: dietInfo.nama,
+    active_diet_label: dietInfo ? dietInfo.nama : "Belum Dipilih (Pola Seimbang 3J)",
     pola_waktu_makan: profil.pola_waktu_makan || "makan_biasa",
     frekuensi_makan: profil.frekuensi_makan || "3 kali makan utama + 2 kali selingan",
     catatan_pola_makan: catatanPolaMakan,

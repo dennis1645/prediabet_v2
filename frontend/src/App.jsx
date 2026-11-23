@@ -12,12 +12,25 @@ import ChatbotPage from "./pages/ChatbotPage";
 import MenuListPage from "./pages/MenuListPage";
 import DietListPage from "./pages/DietListPage";
 import ProgressTrackerPage from "./pages/ProgressTrackerPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 
 function RequireAuth({ children }) {
   const { user, token, loading } = useAuth();
   if (loading) return null;
   if (!token || !user) {
     return <Navigate to="/login" replace />;
+  }
+  return children;
+}
+
+function RequireAdmin({ children }) {
+  const { user, token, loading } = useAuth();
+  if (loading) return null;
+  if (!token || !user) {
+    return <Navigate to="/login" replace />;
+  }
+  if (user.role !== "admin") {
+    return <Navigate to="/dashboard" replace />;
   }
   return children;
 }
@@ -38,6 +51,9 @@ function PublicOnlyRoute({ children }) {
   const { user, token, profile, loading } = useAuth();
   if (loading) return null;
   if (token && user) {
+    if (user.role === "admin") {
+      return <Navigate to="/admin" replace />;
+    }
     return <Navigate to={profile ? "/dashboard" : "/chatbot"} replace />;
   }
   return children;
@@ -78,6 +94,7 @@ export default function App() {
           <Route path="/menu" element={<RequireQuestionnaireCompleted><MenuListPage /></RequireQuestionnaireCompleted>} />
           <Route path="/diet" element={<RequireQuestionnaireCompleted><DietListPage /></RequireQuestionnaireCompleted>} />
           <Route path="/progress" element={<RequireQuestionnaireCompleted><ProgressTrackerPage /></RequireQuestionnaireCompleted>} />
+          <Route path="/admin" element={<RequireAdmin><AdminDashboardPage /></RequireAdmin>} />
 
           {/* Catch-all redirect to home */}
           <Route path="*" element={<Navigate to="/" replace />} />

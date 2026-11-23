@@ -14,13 +14,25 @@ import api from "../services/api";
 import { showSuccessAlert, showErrorAlert } from "../utils/alerts";
 
 export default function DietListPage() {
-  const { analysis, updateProfileAndAnalysis } = useAuth();
-  const [activeDietId, setActiveDietId] = useState(analysis?.active_diet || "mediterania");
+  const { analysis, setAnalysis, updateProfileAndAnalysis } = useAuth();
+  const [activeDietId, setActiveDietId] = useState(analysis?.active_diet || "");
+
+  React.useEffect(() => {
+    setActiveDietId(analysis?.active_diet || "");
+  }, [analysis?.active_diet]);
 
   const handleActivateDiet = async (diet) => {
     try {
       setActiveDietId(diet.id);
-      await api.activateDiet(diet.id);
+      const res = await api.activateDiet(diet.id);
+      if (res?.data?.analysis && setAnalysis) {
+        setAnalysis(res.data.analysis);
+      } else {
+        updateProfileAndAnalysis({
+          active_diet: diet.id,
+          active_diet_label: diet.nama,
+        });
+      }
       await showSuccessAlert(
         "Program Diet Aktif!",
         `Program diet berhasil diubah ke "${diet.nama}". Target makronutrien dan meal plan Anda telah disesuaikan.`
@@ -39,17 +51,25 @@ export default function DietListPage() {
 
   const handleDeactivateDiet = async () => {
     try {
-      setActiveDietId("mediterania");
-      await api.activateDiet("mediterania");
+      setActiveDietId("");
+      const res = await api.deactivateDiet();
+      if (res?.data?.analysis && setAnalysis) {
+        setAnalysis(res.data.analysis);
+      } else {
+        updateProfileAndAnalysis({
+          active_diet: "",
+          active_diet_label: "Belum Dipilih (Pola Seimbang 3J)",
+        });
+      }
       await showSuccessAlert(
         "Kembali ke Pola Standar",
-        "Program diet dinonaktifkan. Sistem kembali ke pola makan seimbang bawaan PrediaBeat."
+        "Program diet khusus dinonaktifkan. Sistem kembali ke pola makan seimbang 3J bawaan PrediaBeat."
       );
     } catch (err) {
       setActiveDietId("");
       updateProfileAndAnalysis({
         active_diet: "",
-        active_diet_label: "Pola Seimbang Umum (Bawaan PrediBeat)",
+        active_diet_label: "Belum Dipilih (Pola Seimbang 3J)",
       });
       await showSuccessAlert(
         "Kembali ke Pola Standar",
@@ -112,7 +132,10 @@ export default function DietListPage() {
               </p>
             </div>
             <div className="mt-4 pt-4 border-t border-slate-100 text-xs font-bold text-slate-600">
-              Diet Aktif: <span className="text-emerald-700 font-extrabold">{analysis.active_diet_label}</span>
+              Diet Aktif:{" "}
+              <span className="text-emerald-700 font-extrabold">
+                {activeDietId ? (analysis?.active_diet_label || "Diet Aktif") : "Belum Dipilih (Pola Seimbang 3J)"}
+              </span>
             </div>
           </div>
 

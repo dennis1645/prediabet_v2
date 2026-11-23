@@ -243,4 +243,26 @@ export function initDatabase() {
   } else {
     console.log("Database initialized. Existing user records found.");
   }
+
+  // Pastikan selalu ada minimal 1 akun admin untuk Dashboard Evaluasi Admin
+  const existingAdmin = db.prepare("SELECT id FROM users WHERE role = 'admin' LIMIT 1").get();
+  if (!existingAdmin) {
+    const salt = bcrypt.genSaltSync(10);
+    const adminHash = bcrypt.hashSync("AdminPrediaBeat2026!", salt);
+    const now = new Date().toISOString();
+    db.prepare(`
+      INSERT OR IGNORE INTO users (username, username_normalized, email, email_normalized, password_hash, role, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      "admin",
+      "admin",
+      "admin@prediabeat.id",
+      "admin@prediabeat.id",
+      adminHash,
+      "admin",
+      now,
+      now
+    );
+    console.log("Default Admin account seeded: admin / AdminPrediaBeat2026!");
+  }
 }

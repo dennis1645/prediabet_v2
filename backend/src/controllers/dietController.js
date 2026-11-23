@@ -116,23 +116,31 @@ export function deactivateDiet(req, res) {
     const profile = JSON.parse(profileRow.full_profile_data);
     const analysis = JSON.parse(profileRow.analysis_result);
 
-    // Reset to Mediterania as baseline
-    profile.active_diet = "mediterania";
-    profile.active_diet_label = "Diet Mediterania";
-    analysis.active_diet = "mediterania";
-    analysis.active_diet_label = "Diet Mediterania";
+    // Nonaktifkan diet khusus -> kembali ke belum memilih diet (Pola Seimbang 3J Standar)
+    profile.active_diet = "";
+    profile.active_diet_label = "Belum Dipilih (Pola Seimbang 3J)";
+    analysis.active_diet = "";
+    analysis.active_diet_label = "Belum Dipilih (Pola Seimbang 3J)";
 
     const macro = hitungTargetKaloriMakro(
       analysis.tdee,
       analysis.kategori_risiko,
       analysis.bmi,
       profile.jenis_kelamin,
-      "mediterania"
+      ""
     );
 
     analysis.target_karbo = macro.karboGram;
     analysis.target_protein = macro.proteinGram;
     analysis.target_lemak = macro.lemakGram;
+
+    const allergies = Array.isArray(profile.pantangan_alergi)
+      ? profile.pantangan_alergi
+      : typeof profile.pantangan_alergi === "string"
+      ? profile.pantangan_alergi.split(",").map((s) => s.trim())
+      : [];
+
+    analysis.meal_plan = generateDailyMealPlan(analysis.target_kalori, allergies, "");
 
     const now = new Date().toISOString();
     db.prepare("UPDATE profiles SET full_profile_data = ?, analysis_result = ?, updated_at = ? WHERE user_id = ?").run(
@@ -144,8 +152,10 @@ export function deactivateDiet(req, res) {
 
     res.json({
       success: true,
-      message: "Program diet khusus dinonaktifkan. Kembali ke pola diet seimbang standar.",
+      message: "Program diet khusus dinonaktifkan. Kembali ke pola seimbang 3J standar.",
       data: {
+        active_diet: "",
+        active_diet_label: "Belum Dipilih (Pola Seimbang 3J)",
         analysis,
       },
     });

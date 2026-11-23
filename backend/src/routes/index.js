@@ -8,6 +8,7 @@ import activityRoutes from "./activityRoutes.js";
 import progressRoutes from "./progressRoutes.js";
 import aiContextRoutes from "./aiContextRoutes.js";
 import onboardingRoutes from "./onboardingRoutes.js";
+import adminRoutes from "./adminRoutes.js";
 
 const apiRouter = Router();
 
@@ -20,5 +21,6 @@ apiRouter.use("/foods", foodRoutes);
 apiRouter.use("/activities", activityRoutes);
 apiRouter.use("/progress", progressRoutes);
 apiRouter.use("/ai", aiContextRoutes);
+apiRouter.use("/admin", adminRoutes);
 
 export default apiRouter;

@@ -1,7 +1,7 @@
 import db from "../database/connection.js";
 import { detectAndCalculateExercise } from "../utils/metCalculator.js";
 import { prosesAnalisisKlinis } from "../clinical/assessment.js";
-import { generateDailyMealPlan, DEFAULT_MEAL_POOL } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, DEFAULT_MEAL_POOL, containsAllergen } from "../clinical/mealPlanEngine.js";
 
 /**
  * Menentukan kategori jadwal makan berdasarkan input pengguna atau jam aktual WIB (UTC+7).
@@ -119,7 +119,7 @@ export function getUserAIContext(req, res) {
             )
           ),
           komorbiditas: profile.komorbiditas || [],
-          active_diet: analysis.active_diet_label || "Diet Seimbang Ramah Glukosa",
+          active_diet: analysis.active_diet_label || "Belum Dipilih (Pola Seimbang 3J)",
           target_kalori: analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2000),
           target_karbo: analysis.target_karbo || 225,
           target_protein: analysis.target_protein || 100,
@@ -651,7 +651,7 @@ export async function forwardChatToAI(req, res) {
       const newPlan = generateDailyMealPlan(
         analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2437),
         allergies,
-        analysis.active_diet || "mediterania"
+        analysis.active_diet || ""
       );
 
       analysis.meal_plan = newPlan;
@@ -761,6 +761,14 @@ export async function forwardChatToAI(req, res) {
       const targetSlot = analysis.meal_plan[targetSlotIdx] || analysis.meal_plan[0];
       const slotItems = targetSlot.items || [];
 
+      const allergies = Array.isArray(profile.pantangan_alergi)
+        ? profile.pantangan_alergi
+        : Array.isArray(profile.pantangan_makanan)
+        ? profile.pantangan_makanan
+        : typeof profile.pantangan_alergi === "string"
+        ? profile.pantangan_alergi.split(",").map((s) => s.trim()).filter(Boolean)
+        : [];
+
       let replacementFoodCandidate = "";
       const replacementMatches = lowerMessage.match(/(?:dengan|jadi|ke|menjadi|ganti|makan)\s+([a-zA-Z0-9\s]+?)(?:$|[.,!?\n]|aja|dong|ya)/i);
       if (replacementMatches && replacementMatches[1]) {
@@ -771,6 +779,29 @@ export async function forwardChatToAI(req, res) {
         }
       }
 
+      // Guardrail Alergen Mutlak sebelum mengganti meal plan
+      if (replacementFoodCandidate && containsAllergen(replacementFoodCandidate, allergies)) {
+        const blockedResponse =
+          `Mohon maaf ${displayName}, Dr. Predi **menolak penggantian menu** ke **${replacementFoodCandidate}** karena terdeteksi mengandung bahan pantangan alergi Anda (${allergies.join(", ")}). 🛡️\n\n` +
+          `Demi keselamatan klinis, menu **${targetSlot.waktu}** di Dashboard Anda tetap dipertahankan aman. Sebutkan bahan alternatif lain yang bebas dari alergen Anda ya!`;
+
+        db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+          userId, sessionId, "user", sanitizedMessage, now
+        );
+        db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+          userId, sessionId, "assistant", blockedResponse, JSON.stringify({ guardrail: "Zero-Allergen Guardrail Memblokir Penggantian Menu" }), now
+        );
+
+        return res.json({
+          success: true,
+          session_id: sessionId,
+          response: blockedResponse,
+          meal_plan: analysis.meal_plan,
+          guardrail: { zero_allergen_verified: true, safety_message: "Penggantian Menu Diblokir Guardrail Alergen" },
+          telemetry: { latency_ms: 8, vllm_connected: false },
+        });
+      }
+
       let replacementItem = null;
       const allPoolItems = [
         ...(DEFAULT_MEAL_POOL[slotPoolKey] || []),
@@ -779,14 +810,14 @@ export async function forwardChatToAI(req, res) {
         ...DEFAULT_MEAL_POOL.makan_malam,
         ...DEFAULT_MEAL_POOL.selingan_pagi,
         ...DEFAULT_MEAL_POOL.selingan_sore,
-      ];
+      ].filter((p) => !containsAllergen(p.nama, allergies));
 
       if (replacementFoodCandidate) {
         replacementItem = allPoolItems.find(p => p.nama.toLowerCase().includes(replacementFoodCandidate.toLowerCase()) || replacementFoodCandidate.toLowerCase().includes(p.nama.toLowerCase()));
       }
 
       if (!replacementItem) {
-        const poolForSlot = DEFAULT_MEAL_POOL[slotPoolKey] || DEFAULT_MEAL_POOL.sarapan;
+        const poolForSlot = (DEFAULT_MEAL_POOL[slotPoolKey] || DEFAULT_MEAL_POOL.sarapan).filter((p) => !containsAllergen(p.nama, allergies));
         const currentNames = slotItems.map(it => it.nama.toLowerCase());
         const availablePool = poolForSlot.filter(p => !currentNames.some(cn => cn.includes(p.nama.toLowerCase()) || p.nama.toLowerCase().includes(cn)));
         if (availablePool.length > 0) {
@@ -805,7 +836,7 @@ export async function forwardChatToAI(req, res) {
             gambar: "/food-images/bubur-oatmeal.jpg"
           };
         } else {
-          replacementItem = poolForSlot[0];
+          replacementItem = poolForSlot[0] || DEFAULT_MEAL_POOL.sarapan[0];
         }
       }
 
@@ -1104,7 +1135,7 @@ export async function forwardChatToAI(req, res) {
         )
       ),
       komorbiditas: profile.komorbiditas || [],
-      active_diet: analysis.active_diet_label || "Diet Seimbang Ramah Glukosa",
+      active_diet: analysis.active_diet_label || "Belum Dipilih (Pola Seimbang 3J)",
       database_progress_cache: databaseProgressCacheText,
     };
 
@@ -1197,7 +1228,7 @@ export async function forwardChatToAI(req, res) {
       aiData.exercise_logged = detectedExercise;
     }
 
-    // Auto-log resep kontekstual ke daily_progress_logs jika pengguna menyetujui rekomendasi resep
+    // Auto-log resep kontekstual ke daily_progress_logs DAN sinkronkan ke analysis.meal_plan Dashboard
     if (aiData.meal_logged && aiData.meal_logged.nama_makanan && aiData.meal_logged.nama_makanan !== "Menu Sehat 3J") {
       try {
         const todayDate = new Date().toISOString().split("T")[0];
@@ -1224,6 +1255,38 @@ export async function forwardChatToAI(req, res) {
             INSERT INTO daily_progress_logs (user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
           `).run(userId, todayDate, rCal, rProt, rCarb, rFat, entryNote, now, now);
+        }
+
+        // Sinkronisasi ke slot meal_plan Dashboard jika belum ada
+        if (Array.isArray(analysis.meal_plan) && analysis.meal_plan.length > 0) {
+          let targetIdx = analysis.meal_plan.findIndex((s) =>
+            (s.waktu || "").toLowerCase().includes(mealTime.toLowerCase())
+          );
+          if (targetIdx === -1) targetIdx = 0;
+          const targetSlot = analysis.meal_plan[targetIdx];
+          if (targetSlot && Array.isArray(targetSlot.items)) {
+            const alreadyInSlot = targetSlot.items.some((it) => (it.nama || "").toLowerCase() === rName.toLowerCase());
+            if (!alreadyInSlot) {
+              targetSlot.items[0] = {
+                nama: rName,
+                kalori: rCal,
+                porsi: "1 porsi",
+                gi: aiData.meal_logged.gi_category || "Rendah (< 55)",
+                kategori: "Rekomendasi Dr. Predi",
+                karbo: rCarb,
+                protein: rProt,
+                lemak: rFat,
+                gambar: aiData.meal_logged.gambar || "/food-images/bubur-oatmeal.jpg",
+              };
+              targetSlot.total_kalori_slot = targetSlot.items.reduce((sum, it) => sum + (it.kalori || 0), 0);
+              db.prepare("UPDATE profiles SET analysis_result = ?, updated_at = ? WHERE user_id = ?").run(
+                JSON.stringify(analysis),
+                now,
+                userId
+              );
+            }
+          }
+          aiData.meal_plan = analysis.meal_plan;
         }
       } catch (errLog) {
         console.error("Auto-log contextual meal error:", errLog);

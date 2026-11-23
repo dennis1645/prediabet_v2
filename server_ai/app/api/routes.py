@@ -211,11 +211,33 @@ async def chat_stream_endpoint(request: ChatRequest):
         raise HTTPException(status_code=400, detail="Pesan pertanyaan tidak boleh kosong.")
 
     user_context = await resolve_user_context(request)
+    display_name = user_context.nama or user_context.username or "Pasien"
+
+    if allergen_guardrail.is_jailbreak_attempt(request.message, request.chat_history or []):
+        async def jailbreak_stream():
+            msg = (
+                f"Mohon maaf, {display_name}! Sebagai Dr. Predi, konsultan nutrisi klinis pribadi Anda di PrediaBeat, "
+                "saya terikat secara ketat pada protokol keselamatan klinis PERKENI & Kemenkes RI. "
+                "Saya tidak diizinkan untuk melanggar batasan sistem ataupun memberikan kode pemrograman/topik non-medis."
+            )
+            yield f"data: {msg}\n\n"
+            yield "data: [DONE]\n\n"
+        return StreamingResponse(jailbreak_stream(), media_type="text/event-stream")
+
+    is_out, out_reason = allergen_guardrail.is_out_of_scope(request.message)
+    if is_out:
+        async def out_stream():
+            reason_explanation = out_reason if out_reason else "Saya tidak dapat menjawab pertanyaan di luar konteks gizi, kesehatan metabolik, atau rekomendasi menu makanan ramah gula darah."
+            msg = f"Halo {display_name}! Sebagai Dr. Predi, {reason_explanation}"
+            yield f"data: {msg}\n\n"
+            yield "data: [DONE]\n\n"
+        return StreamingResponse(out_stream(), media_type="text/event-stream")
+
     dossier_text, safe_food_names, user_allergens, specific_food, _, _, _, _, _ = fusion_engine.build_clinical_dossier(
         request.message, user_context, request.chat_history or [], request.last_suggested_recipe
     )
     messages = build_vllm_messages(
-        request.message, dossier_text, request.chat_history or [], specific_food=specific_food
+        request.message, dossier_text, request.chat_history or [], specific_food=specific_food, user_context=user_context
     )
 
     async def event_generator():

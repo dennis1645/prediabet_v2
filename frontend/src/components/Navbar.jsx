@@ -10,6 +10,7 @@ import {
   LogOut,
   ChevronDown,
   Sparkles,
+  Shield,
 } from "lucide-react";
 
 export default function Navbar() {
@@ -119,6 +120,20 @@ export default function Navbar() {
                     <TrendingUp className="w-4 h-4" />
                     Progress
                   </Link>
+
+                  {user.role === "admin" && (
+                    <Link
+                      to="/admin"
+                      className={`inline-flex items-center justify-center gap-2 px-3.5 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-bold transition-all ${
+                        currentPath.startsWith("/admin")
+                          ? "bg-amber-600 text-white shadow-xs"
+                          : "text-amber-700 bg-amber-50 hover:bg-amber-100"
+                      }`}
+                    >
+                      <Shield className="w-4 h-4" />
+                      Admin
+                    </Link>
+                  )}
                 </div>
               )}
             </nav>
@@ -211,6 +226,19 @@ export default function Navbar() {
                       Progress
                     </Link>
                   </div>
+
+                  {user.role === "admin" && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setDropdownOpen(false)}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-extrabold text-amber-700 hover:bg-amber-50 transition"
+                    >
+                      <span className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                        <Shield className="w-4 h-4" />
+                      </span>
+                      Dashboard Admin
+                    </Link>
+                  )}
 
                   <Link
                     to="/questionnaire"

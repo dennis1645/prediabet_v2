@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 
 export default function ChatbotPage() {
-  const { user, profile, analysis } = useAuth();
+  const { user, profile, analysis, setAnalysis } = useAuth();
   const [isOnboardingMode, setIsOnboardingMode] = useState(!profile);
 
   useEffect(() => {
@@ -278,6 +278,15 @@ export default function ChatbotPage() {
         const meal_logged = res.meal_logged || null;
         const sugar_verification = res.sugar_verification || null;
         const story_log = res.story_log || null;
+
+        // Sinkronisasi langsung meal_plan terbaru ke state Dashboard (AuthContext)
+        const updatedMealPlan = res.meal_plan || res.data?.meal_plan;
+        if (Array.isArray(updatedMealPlan) && updatedMealPlan.length > 0 && setAnalysis) {
+          setAnalysis((prev) => ({
+            ...(prev || {}),
+            meal_plan: updatedMealPlan,
+          }));
+        }
 
         if (food_card) {
           setLastSuggestedRecipe(food_card);
