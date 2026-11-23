@@ -135,6 +135,24 @@ async def chat_endpoint(request: ChatRequest):
             telemetry={"latency_ms": 5, "tokens_per_second": 0, "vllm_connected": False}
         )
 
+    # 1.3. Guardrail Kontraindikasi Klinis Fatal/Ketat (Knowledge Base P016 Belimbing, P017 Jengkol, P012 Jeroan)
+    contra = allergen_guardrail.detect_clinical_contraindication(request.message, display_name)
+    if contra:
+        return ChatResponse(
+            success=True,
+            response=contra["response"],
+            user_id=user_context.userId,
+            safe_foods_recommended=[],
+            guardrail=GuardrailReport(
+                zero_allergen_verified=True,
+                allergens_checked=[],
+                allergens_detected_and_blocked=[contra["nama"]],
+                deterministic_graph_used=True,
+                safety_message=f"Guardrail Kontraindikasi Klinis {contra['kode']} ({contra['tingkat']}) Aktif"
+            ),
+            telemetry={"latency_ms": 8, "tokens_per_second": 0, "vllm_connected": False}
+        )
+
     try:
         # 2. Bangun Dossier Klinis Hybrid GraphRAG (dengan deteksi gizi makanan spesifik, typo normalizer, sugar verification, contextual recipe, & MET kalkulator)
         dossier_text, safe_food_names, user_allergens, specific_food, confirmation, exercise_logged, sugar_verification, contextual_recipe, story_foods = fusion_engine.build_clinical_dossier(
@@ -232,6 +250,13 @@ async def chat_stream_endpoint(request: ChatRequest):
             yield f"data: {msg}\n\n"
             yield "data: [DONE]\n\n"
         return StreamingResponse(out_stream(), media_type="text/event-stream")
+
+    contra = allergen_guardrail.detect_clinical_contraindication(request.message, display_name)
+    if contra:
+        async def contra_stream():
+            yield f"data: {contra['response']}\n\n"
+            yield "data: [DONE]\n\n"
+        return StreamingResponse(contra_stream(), media_type="text/event-stream")
 
     dossier_text, safe_food_names, user_allergens, specific_food, _, _, _, _, _ = fusion_engine.build_clinical_dossier(
         request.message, user_context, request.chat_history or [], request.last_suggested_recipe

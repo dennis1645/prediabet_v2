@@ -770,7 +770,7 @@ export async function forwardChatToAI(req, res) {
         : [];
 
       let replacementFoodCandidate = "";
-      const replacementMatches = lowerMessage.match(/(?:dengan|jadi|ke|menjadi|ganti|makan)\s+([a-zA-Z0-9\s]+?)(?:$|[.,!?\n]|aja|dong|ya)/i);
+      const replacementMatches = lowerMessage.match(/(?:dengan|jadi|ke|menjadi|ganti|makan)\s+([a-zA-Z0-9\s-]+?)(?:$|[.,!?\n]|aja|dong|ya)/i);
       if (replacementMatches && replacementMatches[1]) {
         const candidateRaw = replacementMatches[1].trim();
         const nonFoodWords = ["menu", "yang lain", "lain", "ini", "itu", "dong", "ya", "apa", "sarapan", "siang", "malam", "selingan"];

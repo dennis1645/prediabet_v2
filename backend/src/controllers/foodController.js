@@ -6,12 +6,29 @@ export function searchFoods(req, res) {
 
     const excludeFlags = exclude ? exclude.split(",").map((s) => s.trim()) : [];
 
-    const foods = referenceService.getFoods({
+    let foods = referenceService.getFoods({
       search: q,
       kelompok: kategori,
       maxGI: maxGI ? parseFloat(maxGI) : undefined,
       excludeFlags,
     });
+
+    // Jika user belum mengetik pencarian, prioritaskan makanan alami ramah 3J (bukan bumbu kemasan/ABC/ultra-proses di urutan atas)
+    if (!q || !q.trim()) {
+      const scoreFoodForBrowse = (f) => {
+        const k = (f.kelompok || "").toLowerCase();
+        const n = (f.nama || "").toLowerCase();
+        const tp = (f.tingkat_proses || "").toLowerCase();
+        if (k.includes("bumbu") || /\b(abc|sarden|sardines|terasi|kecap|saus|keripik|kornet|sosis)\b/i.test(n) || tp.includes("ultra")) {
+          return 2;
+        }
+        if ((f.gi || 35) <= 55 && !f.flags?.gorengan && (f.natrium || 0) <= 350 && (f.gula || 0) <= 8) {
+          return 0;
+        }
+        return 1;
+      };
+      foods = [...foods].sort((a, b) => scoreFoodForBrowse(a) - scoreFoodForBrowse(b));
+    }
 
     // Limit to 50 results for optimal response payload
     const paginated = foods.slice(0, 50);

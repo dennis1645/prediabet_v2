@@ -262,6 +262,62 @@ class ClinicalAllergenGuardrail:
                 return info
         return None
 
+    def detect_clinical_contraindication(self, query: str, patient_name: str = "Bapak/Ibu") -> Optional[Dict[str, str]]:
+        """
+        Deteksi kontraindikasi klinis berat/fatal sesuai knowledge_base_new (P016 Belimbing, P017 Jengkol, P012 Jeroan).
+        Mengembalikan peringatan medis deterministik agar LLM tidak pernah menyarankan konsumsi aman.
+        """
+        ql = (query or "").lower().strip()
+        if not ql:
+            return None
+
+        if re.search(r"\b(belimbing|averrhoa\s*carambola)\b", ql):
+            return {
+                "kode": "P016",
+                "nama": "Buah Belimbing (Averrhoa carambola)",
+                "tingkat": "hindari_total",
+                "response": (
+                    f"Halo {patient_name}! Terkait konsumsi **buah belimbing** sebagai terapi herbal atau konsumsi rutin diabetes/prediabetes, "
+                    f"Dr. Predi **TIDAK MEREKOMENDASIKAN** dan menegaskan untuk **MENGHINDARI TOTAL** buah belimbing sebagai terapi gula darah.\n\n"
+                    f"🚨 **Peringatan Klinis Keamanan Ginjal & Saraf (Protokol P016):**\n"
+                    f"• **Mengandung Neurotoksin (*Caramboxin*) & Asam Oksalat Tinggi:** Buah belimbing mengandung zat karamboksin dan oksalat pekat.\n"
+                    f"• **Risiko Fatal pada Gangguan Ginjal:** Pada pasien diabetes/prediabetes yang rentan mengalami penurunan fungsi ginjal (meski belum bergejala), konsumsi belimbing dapat memicu **nefropati oksalat akut (gagal ginjal akut)** hingga **ensefalopati uremik** (cegukan terus-menerus, bingung, kejang, hingga koma).\n"
+                    f"• **Bukan Obat Herbal Diabetes:** Secara medis tidak direkomendasikan dijadikan terapi penurun gula darah.\n\n"
+                    f"🍏 **Alternatif Buah Aman Ramah Glukosa:**\n"
+                    f"Anda jauh lebih aman mengonsumsi **Apel Malang**, **Jambu Biji**, **Pir**, atau **Alpukat** dalam porsi terukur (1 porsi buah = ±15g karbohidrat) sesuai pedoman PERKENI & Kemenkes RI."
+                ),
+            }
+
+        if re.search(r"\b(jengkol|archidendron\s*jiringa)\b", ql):
+            return {
+                "kode": "P017",
+                "nama": "Jengkol (Archidendron jiringa)",
+                "tingkat": "batasi_ketat",
+                "response": (
+                    f"Halo {patient_name}! Terkait **jengkol**, status klinisnya adalah **BATASI KETAT / HINDARI** terutama jika terdapat risiko penurunan fungsi ginjal (Protokol P017).\n\n"
+                    f"⚠️ **Alasan Klinis:**\n"
+                    f"• **Asam Jengkolat (0,3–1,3 g/100g):** Dapat mengkristal menjadi jarum di tubulus ginjal dan memicu sumbatan/gagal ginjal akut (*djenkolism*).\n"
+                    f"• **Karbohidrat Cukup Padat (~40,7 g/100g):** Berpotensi menaikkan beban glikemik bila dikonsumsi bersama nasi dalam porsi besar.\n\n"
+                    f"💡 **Saran Aman:** Utamakan sumber protein nabati yang aman bagi ginjal dan gula darah seperti **Tempe Kukus** atau **Tahu Putih Kukus**."
+                ),
+            }
+
+        if re.search(r"\b(jeroan|hati\s*ayam|hati\s*sapi|ampela|usus\s*ayam|babat|otak\s*sapi|paru\s*goreng)\b", ql):
+            return {
+                "kode": "P012",
+                "nama": "Jeroan & Lemak Jenuh Hewani Pekat",
+                "tingkat": "hindari_total",
+                "response": (
+                    f"Halo {patient_name}! Jeroan (hati, ampela, usus, babat, otak, paru) berstatus **HINDARI TOTAL** dalam panduan klinis prediabetes & komorbiditas (Protokol P012).\n\n"
+                    f"⚠️ **Alasan Klinis:**\n"
+                    f"• **Kolesterol Ekstrem (280–350 mg/100g):** Jauh melampaui batas aman harian penderita diabetes/dislipidemia (<200 mg/hari).\n"
+                    f"• **Tinggi Lemak Jenuh & Purin:** Memicu lonjakan kolesterol LDL, memperburuk resistensi insulin, serta memicu serangan asam urat (*gout*).\n\n"
+                    f"🍗 **Alternatif Protein Aman:** Pilih **Dada Ayam Tanpa Kulit (Rebus/Kukus)**, **Pepes Ikan Mas**, atau **Putih Telur Rebus**."
+                ),
+            }
+
+        return None
+
     def expand_allergen_keywords(self, user_allergens: List[str]) -> List[str]:
         expanded = set()
         for item in user_allergens:

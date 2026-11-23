@@ -49,8 +49,10 @@ export default function LoginPage() {
         `Selamat datang kembali, ${res.data?.user?.username || username}!`
       );
       
-      // Jika pengguna belum mengisi kuesioner profil kesehatan, arahkan ke /questionnaire
-      if (res.data?.hasCompletedQuestionnaire && res.data?.profile) {
+      // Jika admin, langsung arahkan ke Dashboard Admin; jika user biasa, cek profil kuesioner
+      if (res.data?.user?.role === "admin") {
+        navigate("/admin");
+      } else if (res.data?.hasCompletedQuestionnaire && res.data?.profile) {
         navigate("/dashboard");
       } else {
         navigate("/questionnaire");

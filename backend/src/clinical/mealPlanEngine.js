@@ -16,7 +16,7 @@ export const DEFAULT_MEAL_POOL = {
     { nama: "Nasi Beras Merah Pulen", kalori: 215, porsi: "1 centong (150g)", gi: "Sedang (55)", kategori: "Karbo", karbo: 45, protein: 4.5, lemak: 1.6, gambar: "/food-images/nasi-merah.jpg", tags: ["mediterania", "dash", "standar"] },
     { nama: "Pepes Ikan Mas Bumbu Kuning", kalori: 180, porsi: "1 ekor sedang", gi: "Rendah (0)", kategori: "Lauk", karbo: 2, protein: 26, lemak: 7.5, gambar: "/food-images/pepes-ikan.jpg", tags: ["mediterania", "rendah_karbo", "dash", "standar"] },
     { nama: "Dada Ayam Bakar Bumbu Rujak", kalori: 210, porsi: "1 potong (120g)", gi: "Rendah (0)", kategori: "Lauk", karbo: 3, protein: 31, lemak: 8, gambar: "/food-images/dada-ayam.jpg", tags: ["rendah_karbo", "mediterania", "dash", "standar"] },
-    { nama: "Ayam Goreng Lengkuas Tanpa Kulit", kalori: 235, porsi: "1 potong dada", gi: "Rendah (0)", kategori: "Lauk", karbo: 2, protein: 28, lemak: 12, gambar: "/food-images/ayam-goreng.jpg", tags: ["rendah_karbo", "standar"] },
+    { nama: "Ayam Ungkep Panggang Lengkuas Tanpa Kulit", kalori: 195, porsi: "1 potong dada", gi: "Rendah (0)", kategori: "Lauk", karbo: 2, protein: 29, lemak: 7.5, gambar: "/food-images/ayam-goreng.jpg", tags: ["rendah_karbo", "mediterania", "dash", "standar"] },
     { nama: "Sayur Bening Bayam Oyong Jagung", kalori: 85, porsi: "1 mangkuk kecil", gi: "Rendah (35)", kategori: "Sayur", karbo: 14, protein: 3.5, lemak: 0.8, gambar: "/food-images/sayur-bening.jpg", tags: ["dash", "mediterania", "rendah_karbo", "standar"] },
     { nama: "Tempe Bacem Kukus Tanpa Minyak", kalori: 95, porsi: "2 potong sedang", gi: "Rendah (20)", kategori: "Lauk", karbo: 6, protein: 9, lemak: 4, gambar: "/food-images/tempe.jpg", tags: ["mediterania", "dash", "rendah_karbo", "standar"] },
     { nama: "Gado-Gado Sayur Saus Sedang", kalori: 190, porsi: "1 porsi", gi: "Rendah (40)", kategori: "Sayur", karbo: 16, protein: 8, lemak: 9, gambar: "/food-images/gado-gado.jpg", tags: ["standar", "mediterania"] },
@@ -38,7 +38,7 @@ export const DEFAULT_MEAL_POOL = {
 };
 
 const ALLERGEN_SYNONYMS = {
-  kacang: ["kacang", "almond", "mete", "kenari", "gado-gado", "gado gado", "pecel", "ketoprak", "satay", "bumbu kacang", "selai kacang"],
+  kacang: ["kacang", "almond", "mete", "kenari", "gado-gado", "gado gado", "gado", "pecel", "ketoprak", "satay", "bumbu kacang", "selai kacang"],
   "kacang tanah": ["kacang tanah", "kacang", "gado-gado", "gado gado", "pecel", "ketoprak"],
   telur: ["telur", "telor", "omelet", "dadar", "ceplok", "orak-arik", "mayones"],
   seafood: ["seafood", "ikan", "udang", "cumi", "kepiting", "kerang", "tongkol", "kembung", "nila", "mas", "tuna", "salmon", "teri", "ebi", "saus tiram"],
@@ -107,6 +107,48 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
     return shuffled.slice(0, count);
   };
 
+  const pickBalancedMainMeal = (arr, isLunch = true) => {
+    const safeItems = arr.filter((item) => !containsAllergen(item.nama, allergies));
+    const filterDiet = (list) => {
+      if (dietKey === "rendah_karbo") {
+        const lowCarb = list.filter((item) => item.tags?.includes("rendah_karbo") || (item.karbo || 0) <= 18);
+        return lowCarb.length > 0 ? lowCarb : list;
+      }
+      if (dietKey !== "standar" && dietKey !== "intermittent_fasting") {
+        const tagged = list.filter((item) => item.tags?.includes(dietKey));
+        return tagged.length > 0 ? tagged : list;
+      }
+      return list;
+    };
+
+    const pickOne = (catList, fallbackList) => {
+      const pool = filterDiet(catList.length > 0 ? catList : fallbackList);
+      return pool[Math.floor(Math.random() * pool.length)];
+    };
+
+    const karboPool = safeItems.filter((i) => i.kategori === "Karbo");
+    const laukPool = safeItems.filter((i) => i.kategori === "Lauk");
+    const sayurPool = safeItems.filter((i) => i.kategori === "Sayur");
+
+    const picked = [];
+    if (dietKey !== "rendah_karbo" && karboPool.length > 0) {
+      picked.push(pickOne(karboPool, safeItems));
+    }
+    if (laukPool.length > 0) {
+      picked.push(pickOne(laukPool, safeItems));
+    }
+    if (sayurPool.length > 0) {
+      picked.push(pickOne(sayurPool, safeItems));
+    }
+    // Lengkapi hingga 3 item jika masih kurang (misal rendah_karbo skip karbo tinggi)
+    while (picked.length < 3 && safeItems.length > picked.length) {
+      const remaining = filterDiet(safeItems).filter((it) => !picked.some((p) => p.nama === it.nama));
+      if (remaining.length === 0) break;
+      picked.push(remaining[Math.floor(Math.random() * remaining.length)]);
+    }
+    return picked.filter(Boolean);
+  };
+
   let slots;
   if (dietKey === "intermittent_fasting") {
     // Jendela Makan 16:8 (12:00 - 20:00)
@@ -115,7 +157,7 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
         waktu: "Makan Siang (Buka Jendela 12:00)",
         jam: "12:00",
         target_kalori_slot: Math.round(targetKalori * 0.42),
-        items: pickByDiet(DEFAULT_MEAL_POOL.makan_siang, 3),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
       },
       {
         waktu: "Selingan Sore",
@@ -127,7 +169,7 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
         waktu: "Makan Malam (Tutup Jendela 19:30)",
         jam: "19:30",
         target_kalori_slot: Math.round(targetKalori * 0.42),
-        items: pickByDiet(DEFAULT_MEAL_POOL.makan_malam, 3),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
       },
     ];
   } else {
@@ -148,7 +190,7 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
         waktu: "Makan Siang",
         jam: "12:30",
         target_kalori_slot: Math.round(targetKalori * 0.35),
-        items: pickByDiet(DEFAULT_MEAL_POOL.makan_siang, 3),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
       },
       {
         waktu: "Selingan Sore",
@@ -160,7 +202,7 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
         waktu: "Makan Malam",
         jam: "19:00",
         target_kalori_slot: Math.round(targetKalori * 0.27),
-        items: pickByDiet(DEFAULT_MEAL_POOL.makan_malam, 3),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
       },
     ];
   }

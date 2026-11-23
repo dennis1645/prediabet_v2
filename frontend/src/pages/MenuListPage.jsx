@@ -40,23 +40,55 @@ export default function MenuListPage() {
 
         const res = await api.getFoods(params);
         if (!isCancelled && res.success && res.data && res.data.length > 0) {
-          // Normalize backend items to match component format
-          const mapped = res.data.map((item) => ({
-            id: item.id,
-            nama: item.nama,
-            kategori: item.kelompok || "Bahan Makanan",
-            kalori: item.kalori || 0,
-            karbo: item.karbo || 0,
-            protein: item.protein || 0,
-            lemak: item.lemak || 0,
-            gula: item.gula || 0,
-            natrium: item.natrium || 0,
-            gi: item.gi ?? 35,
-            is_recommended: (item.gi ?? 35) <= 55 && !item.flags?.gorengan,
-            alasan: (item.gi ?? 35) <= 55
-              ? "Indeks glikemik bersahabat untuk kestabilan respon insulin"
-              : "Indeks glikemik tinggi atau olahan tepung/minyak tinggi",
-          }));
+          // Normalize backend items to match component format (selaras dengan knowledge_base_new P001-P025)
+          const mapped = res.data.map((item) => {
+            const giVal = item.gi ?? 35;
+            const natriumVal = item.natrium || 0;
+            const gulaVal = item.gula || 0;
+            const kelompokLower = (item.kelompok || "").toLowerCase();
+            const prosesLower = (item.tingkat_proses || "").toLowerCase();
+            const namaLower = (item.nama || "").toLowerCase();
+
+            const isUltraProcessed =
+              kelompokLower.includes("bumbu") ||
+              prosesLower.includes("ultra") ||
+              prosesLower.includes("kemasan") ||
+              /\b(abc|sarden|sardines|terasi|kecap|saus|kental manis|keripik|kornet|sosis|nugget)\b/i.test(namaLower);
+            const isContraindicated = /\b(belimbing|jengkol|jeroan|hati|ampela|usus|babat|otak)\b/i.test(namaLower);
+            const isHighSodiumOrSugar = natriumVal > 350 || gulaVal > 8;
+
+            const isSafeRecommended =
+              giVal <= 55 &&
+              !item.flags?.gorengan &&
+              !item.flags?.alkohol &&
+              !isUltraProcessed &&
+              !isContraindicated &&
+              !isHighSodiumOrSugar;
+
+            let reasonText = "Indeks glikemik bersahabat & minim proses untuk kestabilan respon insulin";
+            if (isContraindicated) {
+              reasonText = "Kontraindikasi klinis (P012/P016/P017): hindari atau batasi sangat ketat";
+            } else if (isUltraProcessed || isHighSodiumOrSugar) {
+              reasonText = "Produk ultra-proses atau tinggi natrium/gula — perlu dibatasi sesuai pedoman PERKENI & DASH";
+            } else if (giVal > 55 || item.flags?.gorengan) {
+              reasonText = "Indeks glikemik tinggi atau olahan gorengan/minyak jenuh";
+            }
+
+            return {
+              id: item.id,
+              nama: item.nama,
+              kategori: item.kelompok || "Bahan Makanan",
+              kalori: item.kalori || 0,
+              karbo: item.karbo || 0,
+              protein: item.protein || 0,
+              lemak: item.lemak || 0,
+              gula: gulaVal,
+              natrium: natriumVal,
+              gi: giVal,
+              is_recommended: isSafeRecommended,
+              alasan: reasonText,
+            };
+          });
           setFoods(mapped);
         } else if (!isCancelled && (!searchTerm && selectedCategory === "Semua")) {
           setFoods(sampleFoods);
