@@ -132,28 +132,44 @@ export default function DietListPage() {
             </div>
           </div>
 
-          {/* Card Paling Direkomendasikan */}
-          <div className="lg:col-span-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl shadow-xl shadow-emerald-900/10 p-6 md:p-8 text-white relative overflow-hidden">
-            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <div className="inline-flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider text-emerald-100 mb-3 border border-white/20">
-                  <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
-                  Kesesuaian Tertinggi (95% Match)
-                </div>
-                <h2 className="text-2xl md:text-3xl font-black">Diet Mediterania</h2>
-                <p className="text-sm text-emerald-100 mt-1 max-w-xl leading-relaxed">
-                  Pola makan paling terbukti secara uji klinis dalam meningkatkan sensitivitas insulin dan menurunkan kolesterol pada pasien prediabetes.
-                </p>
-              </div>
+          {/* Card Paling Direkomendasikan (Dinamis dari hasil skrining klinis) */}
+          {(() => {
+            const recs = Array.isArray(analysis?.diet_recommendations) && analysis.diet_recommendations.length > 0
+              ? analysis.diet_recommendations
+              : [
+                  {
+                    id: "mediterania",
+                    nama: "Diet Mediterania",
+                    match_score: 88,
+                    reason: "Pola makan seimbang berbasis sayuran, lemak sehat, dan biji-bijian utuh untuk sensitivitas insulin.",
+                  },
+                ];
+            const topRec = recs[0];
+            const topDietObj = sampleDiets.find((d) => d.id === topRec.id) || sampleDiets[0];
+            return (
+              <div className="lg:col-span-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl shadow-xl shadow-emerald-900/10 p-6 md:p-8 text-white relative overflow-hidden">
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider text-emerald-100 mb-3 border border-white/20">
+                      <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+                      Kesesuaian Tertinggi ({topRec.match_score}% Match)
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-black">{topDietObj.nama}</h2>
+                    <p className="text-sm text-emerald-100 mt-1 max-w-xl leading-relaxed">
+                      {topRec.reason}
+                    </p>
+                  </div>
 
-              <button
-                onClick={() => handleActivateDiet(sampleDiets[0])}
-                className="bg-white text-emerald-700 px-6 py-3 rounded-2xl font-black hover:bg-emerald-50 transition-all shadow-md text-sm shrink-0 cursor-pointer"
-              >
-                Gunakan Diet Ini
-              </button>
-            </div>
-          </div>
+                  <button
+                    onClick={() => handleActivateDiet(topDietObj)}
+                    className="bg-white text-emerald-700 px-6 py-3 rounded-2xl font-black hover:bg-emerald-50 transition-all shadow-md text-sm shrink-0 cursor-pointer"
+                  >
+                    Gunakan Diet Ini
+                  </button>
+                </div>
+              </div>
+            );
+          })()}
 
         </div>
 

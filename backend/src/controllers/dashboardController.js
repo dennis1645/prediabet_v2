@@ -1,5 +1,6 @@
 import db from "../database/connection.js";
-import { generateDailyMealPlan, MEAL_FREQUENCY_OPTIONS } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, MEAL_FREQUENCY_OPTIONS, resolveMealFrequencyConfig } from "../clinical/mealPlanEngine.js";
+import { hitungKesesuaianDiet } from "../clinical/assessment.js";
 
 export function getDashboard(req, res) {
   try {
@@ -15,6 +16,10 @@ export function getDashboard(req, res) {
 
     const profile = JSON.parse(profileRow.full_profile_data);
     const analysis = JSON.parse(profileRow.analysis_result);
+
+    if (!Array.isArray(analysis.diet_recommendations) || analysis.diet_recommendations.length === 0) {
+      analysis.diet_recommendations = hitungKesesuaianDiet(profile, analysis.bmi, analysis.kategori_risiko);
+    }
 
     // Pastikan meal plan selalu terisi
     if (!analysis.meal_plan || analysis.meal_plan.length === 0) {
@@ -83,6 +88,10 @@ export function regenerateMealPlan(req, res) {
     const profile = JSON.parse(profileRow.full_profile_data);
     const analysis = JSON.parse(profileRow.analysis_result);
 
+    if (!Array.isArray(analysis.diet_recommendations) || analysis.diet_recommendations.length === 0) {
+      analysis.diet_recommendations = hitungKesesuaianDiet(profile, analysis.bmi, analysis.kategori_risiko);
+    }
+
     const allergies = Array.isArray(profile.pantangan_alergi)
       ? profile.pantangan_alergi
       : typeof profile.pantangan_alergi === "string"
@@ -121,12 +130,20 @@ export function regenerateMealPlan(req, res) {
 
 export function updateMealFrequency(req, res) {
   try {
-    const { frequency } = req.body;
-    const option = MEAL_FREQUENCY_OPTIONS[frequency];
+    const { frequency, mainMeals, snacks } = req.body;
+    let freqKey = frequency;
+    if (mainMeals !== undefined && snacks !== undefined) {
+      const m = Math.max(1, Math.min(3, parseInt(mainMeals, 10) || 3));
+      const s = Math.max(0, Math.min(3, parseInt(snacks, 10) || 0));
+      freqKey = `custom_${m}_${s}`;
+    }
+    const option = freqKey && (MEAL_FREQUENCY_OPTIONS[freqKey] || freqKey.startsWith("custom_"))
+      ? resolveMealFrequencyConfig(freqKey)
+      : null;
     if (!option) {
       return res.status(400).json({
         success: false,
-        message: "Pilihan frekuensi makan tidak valid.",
+        message: "Pilihan frekuensi makan tidak valid (minimal 1x makan 0x selingan, maksimal 3x makan 3x selingan).",
       });
     }
 
@@ -137,6 +154,10 @@ export function updateMealFrequency(req, res) {
 
     const profile = JSON.parse(profileRow.full_profile_data);
     const analysis = JSON.parse(profileRow.analysis_result);
+
+    if (!Array.isArray(analysis.diet_recommendations) || analysis.diet_recommendations.length === 0) {
+      analysis.diet_recommendations = hitungKesesuaianDiet(profile, analysis.bmi, analysis.kategori_risiko);
+    }
 
     profile.meal_frequency = option.id;
     profile.pola_waktu_makan = option.label;

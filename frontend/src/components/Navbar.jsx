@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Swal from "sweetalert2";
+import { showToast } from "../utils/alerts";
 import {
   Home,
   Utensils,
@@ -33,9 +35,28 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
+  const handleLogout = async () => {
+    setDropdownOpen(false);
+    const result = await Swal.fire({
+      title: "Keluar dari PrediaBeat?",
+      text: "Sesi Anda akan ditutup dengan aman. Anda bisa masuk kembali kapan saja.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#059669",
+      cancelButtonColor: "#94a3b8",
+      confirmButtonText: "Ya, Keluar",
+      cancelButtonText: "Batal",
+      customClass: {
+        popup: "rounded-[1.75rem]",
+        confirmButton: "rounded-xl font-bold px-5 py-2.5",
+        cancelButton: "rounded-xl font-bold px-5 py-2.5",
+      },
+    });
+    if (result.isConfirmed) {
+      logout();
+      showToast("Berhasil keluar dari akun.", "success");
+      navigate("/login");
+    }
   };
 
   return (

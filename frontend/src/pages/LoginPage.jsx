@@ -150,7 +150,7 @@ export default function LoginPage() {
                 </span>
               </div>
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200/80 bg-white/10 px-2 py-0.5 rounded-md">
-                v1.0
+                v2.0
               </span>
             </div>
           </div>

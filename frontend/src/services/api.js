@@ -69,10 +69,10 @@ export const api = {
       method: "POST",
     }),
 
-  updateMealFrequency: (frequency) =>
+  updateMealFrequency: (payload) =>
     request("/dashboard/meal-frequency", {
       method: "PUT",
-      body: JSON.stringify({ frequency }),
+      body: JSON.stringify(typeof payload === "string" ? { frequency: payload } : payload),
     }),
 
   // Questionnaire

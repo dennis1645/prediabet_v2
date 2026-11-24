@@ -310,6 +310,94 @@ export function hitungTargetKaloriMakro(tdee, kategoriRisiko, bmi, jenisKelamin,
   };
 }
 
+export function hitungKesesuaianDiet(profil = {}, bmi = 23, kategoriRisiko = "") {
+  const sistol = parseFloat(profil.tekanan_darah_sistolik || profil.tekanan_darah_sistol) || 0;
+  const diastol = parseFloat(profil.tekanan_darah_diastolik || profil.tekanan_darah_diastol) || 0;
+  const gdp = parseFloat(profil.gula_darah_puasa || profil.tes_gula_darah_puasa) || 0;
+  const hba1c = parseFloat(profil.hba1c || profil.tes_hba1c) || 0;
+  const kolesterol = parseFloat(profil.kolesterol_total) || 0;
+  const asamUrat = parseFloat(profil.asam_urat) || 0;
+  const usia = parseFloat(profil.usia) || 30;
+
+  const komorbidRaw = Array.isArray(profil.komorbiditas)
+    ? profil.komorbiditas.join(" ").toLowerCase()
+    : String(profil.komorbiditas || profil.riwayat_kondisi_kesehatan || "").toLowerCase();
+  const alergiRaw = Array.isArray(profil.pantangan_alergi)
+    ? profil.pantangan_alergi.join(" ").toLowerCase()
+    : String(profil.pantangan_alergi || profil.pantangan_makanan || "").toLowerCase();
+
+  const hasHypertension = sistol >= 130 || diastol >= 80 || /hipertensi|darah tinggi|jantung/.test(komorbidRaw);
+  const hasHighGlucose = gdp >= 110 || hba1c >= 6.0 || /prediabetes|diabetes|tinggi/.test(String(kategoriRisiko).toLowerCase());
+  const hasDyslipidemia = kolesterol >= 200 || /kolesterol|dislipidemia|fatty liver/.test(komorbidRaw);
+  const isOverweight = bmi >= 25;
+  const hasGout = asamUrat >= 7.0 || /asam urat|gout/.test(komorbidRaw);
+  const hasGerds = /maag|gerd|asam lambung/.test(komorbidRaw);
+  const hasNutOrFishAllergy = /kacang|seafood|ikan/.test(alergiRaw);
+
+  const clamp = (n) => Math.max(62, Math.min(98, Math.round(n)));
+
+  const scores = [
+    {
+      id: "dash",
+      nama: DIET_CATALOG.dash.nama,
+      match_score: clamp(
+        76 +
+          (hasHypertension ? 18 : 0) +
+          (isOverweight ? 5 : 0) +
+          (hasDyslipidemia ? 4 : 0) -
+          (hasHighGlucose && !hasHypertension ? 3 : 0)
+      ),
+      reason: hasHypertension
+        ? "Terindikasi hipertensi/tekanan darah tinggi pada skrining Anda: Diet DASH adalah standar emas ADA & AHA untuk menurunkan tekanan darah dan resistensi insulin."
+        : "Membatasi natrium (<2.000 mg/hari) serta kaya kalium & serat untuk menjaga kesehatan pembuluh darah dan metabolisme.",
+    },
+    {
+      id: "rendah_karbo",
+      nama: DIET_CATALOG.rendah_karbo.nama,
+      match_score: clamp(
+        74 +
+          (hasHighGlucose ? 17 : 0) +
+          (isOverweight ? 6 : 0) -
+          (hasDyslipidemia ? 7 : 0) -
+          (hasGout ? 4 : 0)
+      ),
+      reason: hasHighGlucose
+        ? "GDP/HbA1c atau skor risiko glikemik Anda tinggi: membatasi karbohidrat sederhana membantu menekan lonjakan gula darah pasca makan lebih cepat."
+        : "Efektif mengendalikan fluktuasi glukosa harian dengan tetap memantau profil lipid dan asupan lemak sehat.",
+    },
+    {
+      id: "mediterania",
+      nama: DIET_CATALOG.mediterania.nama,
+      match_score: clamp(
+        81 +
+          (hasDyslipidemia ? 11 : 0) +
+          (hasHighGlucose ? 7 : 0) +
+          (hasHypertension ? 4 : 0) -
+          (hasNutOrFishAllergy ? 4 : 0)
+      ),
+      reason: hasDyslipidemia
+        ? "Profil kolesterol/lipid perlu perhatian: Diet Mediterania kaya MUFA & Omega-3 terbukti klinis memperbaiki profil lipid dan sensitivitas insulin."
+        : "Pola makan seimbang berkelanjutan berbasis sayuran, lemak sehat, dan biji-bijian utuh yang terbukti klinis pada studi PREDIMED.",
+    },
+    {
+      id: "intermittent_fasting",
+      nama: DIET_CATALOG.intermittent_fasting.nama,
+      match_score: clamp(
+        72 +
+          (isOverweight ? 13 : 0) +
+          (hasHighGlucose ? 6 : 0) -
+          (usia >= 60 || usia < 18 || bmi < 18.5 ? 8 : 0) -
+          (hasGerds ? 7 : 0)
+      ),
+      reason: isOverweight
+        ? "BMI berada pada kategori berlebih: jendela makan 16/8 membantu defisit kalori terstruktur dan efisiensi hormon insulin."
+        : "Mengatur ritme waktu makan 8 jam untuk memberi jeda pemulihan insulin harian.",
+    },
+  ];
+
+  return scores.sort((a, b) => b.match_score - a.match_score);
+}
+
 /**
  * 5. Eksekusi Analisis Lengkap Pengguna
  */
@@ -344,6 +432,8 @@ export function prosesAnalisisKlinis(profil) {
     catatanPolaMakan.unshift(catatanDiet);
   }
 
+  const dietRecommendations = hitungKesesuaianDiet(profil, bmi, kategoriRisiko);
+
   return {
     bmi,
     kategori_bmi: kategoriBMI,
@@ -358,6 +448,7 @@ export function prosesAnalisisKlinis(profil) {
     target_lemak: lemakGram,
     active_diet: activeDiet,
     active_diet_label: dietInfo ? dietInfo.nama : "Belum Dipilih (Pola Seimbang 3J)",
+    diet_recommendations: dietRecommendations,
     pola_waktu_makan: profil.pola_waktu_makan || "makan_biasa",
     frekuensi_makan: profil.frekuensi_makan || "3 kali makan utama + 2 kali selingan",
     catatan_pola_makan: catatanPolaMakan,

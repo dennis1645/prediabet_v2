@@ -22,11 +22,68 @@ export default function MenuListPage() {
   const categories = [
     "Semua",
     "Karbohidrat",
-    "Lauk Pauk",
-    "Sayuran",
+    "Lauk Hewani",
+    "Lauk Nabati",
+    "Sayur",
     "Buah",
+    "Snack",
     "Minuman",
+    "Dairy",
+    "Biji/Kacang",
+    "Dessert",
+    "Bumbu & Pelengkap",
   ];
+
+  const resolveMenuImage = (nama = "", kategori = "") => {
+    const n = nama.toLowerCase();
+    const k = kategori.toLowerCase();
+    if (n.includes("oatmeal") || n.includes("oat")) return "/food-images/oatmeal.jpg";
+    if (n.includes("nasi merah")) return "/food-images/nasi-merah.jpg";
+    if (n.includes("nasi goreng")) return "/food-images/nasi-goreng.jpg";
+    if (n.includes("nasi")) return "/food-images/nasi-putih.jpg";
+    if (n.includes("roti")) return "/food-images/roti-gandum.jpg";
+    if (n.includes("kentang")) return "/food-images/kentang-rebus.jpg";
+    if (n.includes("ubi")) return "/food-images/ubi-rebus.jpg";
+    if (n.includes("jagung")) return "/food-images/jagung-rebus.jpg";
+    if (n.includes("mie")) return "/food-images/mie-ayam.jpg";
+    if (n.includes("soto")) return "/food-images/soto-ayam.jpg";
+    if (n.includes("sop") || n.includes("sup")) return "/food-images/sop-ayam.jpg";
+    if (n.includes("rawon")) return "/food-images/rawon.jpg";
+    if (n.includes("gudeg")) return "/food-images/gudeg.jpg";
+    if (n.includes("taliwang")) return "/food-images/ayam-taliwang.jpg";
+    if (n.includes("dada ayam")) return "/food-images/dada-ayam.jpg";
+    if (n.includes("ayam")) return "/food-images/ayam-goreng.jpg";
+    if (n.includes("kembung")) return "/food-images/ikan-kembung.jpg";
+    if (n.includes("pepes")) return "/food-images/pepes-ikan.jpg";
+    if (n.includes("ikan") || n.includes("patin") || n.includes("salmon") || n.includes("tuna") || n.includes("mackerel") || n.includes("sardines")) return "/food-images/ikan-bakar.jpg";
+    if (n.includes("omelet")) return "/food-images/omelet.jpg";
+    if (n.includes("dadar")) return "/food-images/telur-dadar.jpg";
+    if (n.includes("telur")) return "/food-images/telur-rebus.jpg";
+    if (n.includes("tempe")) return "/food-images/tempe.jpg";
+    if (n.includes("tahu")) return "/food-images/tahu.jpg";
+    if (n.includes("gado")) return "/food-images/gado-gado.jpg";
+    if (n.includes("capcay")) return "/food-images/capcay.jpg";
+    if (n.includes("kangkung")) return "/food-images/kangkung.jpg";
+    if (n.includes("bayam")) return "/food-images/sayur-bayam.jpg";
+    if (n.includes("salad")) return "/food-images/salad-sayur.jpg";
+    if (n.includes("apel")) return "/food-images/buah-apel.jpg";
+    if (n.includes("pir")) return "/food-images/buah-pir.jpg";
+    if (n.includes("pepaya")) return "/food-images/buah-pepaya.jpg";
+    if (n.includes("alpukat")) return "/food-images/alpukat.jpg";
+    if (n.includes("pisang")) return "/food-images/pisang.jpg";
+    if (n.includes("almond") || n.includes("pecan") || n.includes("kacang")) return "/food-images/almond.jpg";
+    if (n.includes("kopi")) return "/food-images/kopi.jpg";
+    if (n.includes("teh")) return "/food-images/es-teh.jpg";
+    if (n.includes("jus")) return "/food-images/jus-buah.jpg";
+    if (k.includes("karbohidrat")) return "/food-images/nasi-merah.jpg";
+    if (k.includes("lauk hewani")) return "/food-images/pepes-ikan.jpg";
+    if (k.includes("lauk nabati")) return "/food-images/tempe.jpg";
+    if (k.includes("sayur")) return "/food-images/sayur-bening.jpg";
+    if (k.includes("buah")) return "/food-images/buah-apel.jpg";
+    if (k.includes("biji") || k.includes("snack")) return "/food-images/almond.jpg";
+    if (k.includes("minuman") || k.includes("dairy")) return "/food-images/jus-buah.jpg";
+    return "/food-images/salad-sayur.jpg";
+  };
 
   // Fetch foods from backend API with debounce
   useEffect(() => {
@@ -88,6 +145,7 @@ export default function MenuListPage() {
               gi: giVal,
               is_recommended: isSafeRecommended,
               alasan: reasonText,
+              gambar: item.gambar ? `/food-images/${item.gambar}` : resolveMenuImage(item.nama, item.kelompok),
             };
           });
           setFoods(mapped);
@@ -225,9 +283,24 @@ export default function MenuListPage() {
           {filteredFoods.map((food) => (
             <div
               key={food.id}
-              className="bg-white/90 backdrop-blur-xl border border-slate-100 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between"
+              className="bg-white/90 backdrop-blur-xl border border-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between"
             >
               <div>
+                <div className="relative h-40 bg-slate-100 overflow-hidden">
+                  <img
+                    src={food.gambar || resolveMenuImage(food.nama, food.kategori)}
+                    alt={food.nama}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.src = "/food-images/salad-sayur.jpg";
+                    }}
+                    className="w-full h-full object-cover"
+                  />
+                  <span className="absolute top-3 right-3 text-xs font-black text-emerald-700 bg-white/95 backdrop-blur px-2.5 py-1 rounded-xl shadow-xs">
+                    {food.kalori} kkal
+                  </span>
+                </div>
+                <div className="p-6 pb-2">
                 {/* Header Card */}
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
@@ -238,9 +311,6 @@ export default function MenuListPage() {
                       {food.nama}
                     </h3>
                   </div>
-                  <span className="text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-xl shrink-0">
-                    {food.kalori} kkal
-                  </span>
                 </div>
 
                 {/* Badge Rekomendasi Medis */}
@@ -276,10 +346,11 @@ export default function MenuListPage() {
                     <p className="text-xs font-black text-slate-700">{food.lemak} g</p>
                   </div>
                 </div>
+                </div>
               </div>
 
               {/* Indikator Glikemik & Gula */}
-              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs font-semibold text-slate-500">
+              <div className="flex items-center justify-between px-6 pb-5 pt-3 border-t border-slate-100 text-xs font-semibold text-slate-500">
                 <span>Gula: <strong className="text-slate-800">{food.gula} g</strong></span>
                 <span>GI: <strong className="text-emerald-700 font-extrabold">{food.gi}</strong></span>
               </div>

@@ -108,16 +108,41 @@ export const MEAL_FREQUENCY_OPTIONS = {
   },
 };
 
+export function resolveMealFrequencyConfig(mealFrequency = "", activeDiet = "") {
+  if (typeof mealFrequency === "string" && mealFrequency.startsWith("custom_")) {
+    const parts = mealFrequency.split("_");
+    const mainMeals = Math.max(1, Math.min(3, parseInt(parts[1], 10) || 3));
+    const snacks = Math.max(0, Math.min(3, parseInt(parts[2], 10) ?? 2));
+    return {
+      id: `custom_${mainMeals}_${snacks}`,
+      mainMeals,
+      snacks,
+      label: `${mainMeals}x Makan Utama + ${snacks}x Selingan`,
+      short: `${mainMeals}x makan utama + ${snacks}x selingan`,
+    };
+  }
+  const presetMap = {
+    normal_3j: { mainMeals: 3, snacks: 2, label: "Makan Biasa Teratur (3J)", short: "3x makan utama + 2x selingan" },
+    "3_kali": { mainMeals: 3, snacks: 0, label: "3 Kali Makan Utama (Tanpa Selingan)", short: "3x makan utama + 0x selingan" },
+    "2_kali": { mainMeals: 2, snacks: 1, label: "2 Kali Makan Utama + 1 Selingan", short: "2x makan utama + 1x selingan" },
+    "2_kali_ketat": { mainMeals: 2, snacks: 0, label: "2 Kali Makan Utama (Tanpa Selingan)", short: "2x makan utama + 0x selingan" },
+  };
+  if (mealFrequency && presetMap[mealFrequency]) {
+    return { id: mealFrequency, ...presetMap[mealFrequency] };
+  }
+  if (activeDiet === "intermittent_fasting") {
+    return { id: "2_kali", ...presetMap["2_kali"] };
+  }
+  return { id: "normal_3j", ...presetMap.normal_3j };
+}
+
 export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activeDiet = "", mealFrequency = "") {
   const dietKey = activeDiet && ["mediterania", "rendah_karbo", "dash", "intermittent_fasting"].includes(activeDiet)
     ? activeDiet
     : "standar";
 
-  const freqKey = mealFrequency && MEAL_FREQUENCY_OPTIONS[mealFrequency]
-    ? mealFrequency
-    : dietKey === "intermittent_fasting"
-    ? "2_kali"
-    : "normal_3j";
+  const freqCfg = resolveMealFrequencyConfig(mealFrequency, dietKey);
+  const { mainMeals, snacks } = freqCfg;
 
   const pickByDiet = (arr, count) => {
     const safeItems = arr.filter((item) => !containsAllergen(item.nama, allergies));
@@ -182,99 +207,60 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
     return picked.filter(Boolean);
   };
 
-  let slots;
-  if (freqKey === "2_kali_ketat") {
-    slots = [
-      {
-        waktu: dietKey === "intermittent_fasting" ? "Makan Siang (Buka Jendela 12:00)" : "Makan Siang",
-        jam: "12:00",
-        target_kalori_slot: Math.round(targetKalori * 0.50),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
-      },
-      {
-        waktu: dietKey === "intermittent_fasting" ? "Makan Malam (Tutup Jendela 19:30)" : "Makan Malam",
-        jam: "19:30",
-        target_kalori_slot: Math.round(targetKalori * 0.50),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
-      },
-    ];
-  } else if (freqKey === "2_kali" || dietKey === "intermittent_fasting") {
-    // Jendela Makan 16:8 (12:00 - 20:00) atau pola 2x makan utama + 1x selingan
-    slots = [
-      {
-        waktu: dietKey === "intermittent_fasting" ? "Makan Siang (Buka Jendela 12:00)" : "Makan Siang",
-        jam: "12:00",
-        target_kalori_slot: Math.round(targetKalori * 0.42),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
-      },
-      {
-        waktu: "Selingan Sore",
-        jam: "15:30",
-        target_kalori_slot: Math.round(targetKalori * 0.16),
-        items: pickByDiet(DEFAULT_MEAL_POOL.selingan_sore, 1),
-      },
-      {
-        waktu: dietKey === "intermittent_fasting" ? "Makan Malam (Tutup Jendela 19:30)" : "Makan Malam",
-        jam: "19:30",
-        target_kalori_slot: Math.round(targetKalori * 0.42),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
-      },
-    ];
-  } else if (freqKey === "3_kali") {
-    slots = [
-      {
-        waktu: "Sarapan Pagi",
-        jam: "07:00",
-        target_kalori_slot: Math.round(targetKalori * 0.28),
-        items: pickByDiet(DEFAULT_MEAL_POOL.sarapan, 2),
-      },
-      {
-        waktu: "Makan Siang",
-        jam: "12:30",
-        target_kalori_slot: Math.round(targetKalori * 0.40),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
-      },
-      {
-        waktu: "Makan Malam",
-        jam: "19:00",
-        target_kalori_slot: Math.round(targetKalori * 0.32),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
-      },
-    ];
-  } else {
-    slots = [
-      {
-        waktu: "Sarapan Pagi",
-        jam: "07:00",
-        target_kalori_slot: Math.round(targetKalori * 0.22),
-        items: pickByDiet(DEFAULT_MEAL_POOL.sarapan, 2),
-      },
-      {
-        waktu: "Selingan Pagi",
-        jam: "10:00",
-        target_kalori_slot: Math.round(targetKalori * 0.08),
-        items: pickByDiet(DEFAULT_MEAL_POOL.selingan_pagi, 1),
-      },
-      {
-        waktu: "Makan Siang",
-        jam: "12:30",
-        target_kalori_slot: Math.round(targetKalori * 0.35),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
-      },
-      {
-        waktu: "Selingan Sore",
-        jam: "16:00",
-        target_kalori_slot: Math.round(targetKalori * 0.08),
-        items: pickByDiet(DEFAULT_MEAL_POOL.selingan_sore, 1),
-      },
-      {
-        waktu: "Makan Malam",
-        jam: "19:00",
-        target_kalori_slot: Math.round(targetKalori * 0.27),
-        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
-      },
-    ];
+  // Susun slot secara fleksibel berdasarkan mainMeals (1-3) dan snacks (0-3)
+  const mainWeightTotal = mainMeals * 3;
+  const snackWeightTotal = snacks * 1;
+  const totalWeight = Math.max(1, mainWeightTotal + snackWeightTotal);
+
+  const mainSlotDefs =
+    mainMeals === 1
+      ? [{ waktu: "Makan Siang Utama", jam: "12:30", pool: DEFAULT_MEAL_POOL.makan_siang, isBalanced: true }]
+      : mainMeals === 2
+      ? [
+          { waktu: dietKey === "intermittent_fasting" ? "Makan Siang (Buka Jendela 12:00)" : "Makan Siang", jam: "12:00", pool: DEFAULT_MEAL_POOL.makan_siang, isBalanced: true },
+          { waktu: dietKey === "intermittent_fasting" ? "Makan Malam (Tutup Jendela 19:30)" : "Makan Malam", jam: "19:30", pool: DEFAULT_MEAL_POOL.makan_malam, isBalanced: false },
+        ]
+      : [
+          { waktu: "Sarapan Pagi", jam: "07:00", pool: DEFAULT_MEAL_POOL.sarapan, isBreakfast: true },
+          { waktu: "Makan Siang", jam: "12:30", pool: DEFAULT_MEAL_POOL.makan_siang, isBalanced: true },
+          { waktu: "Makan Malam", jam: "19:00", pool: DEFAULT_MEAL_POOL.makan_malam, isBalanced: false },
+        ];
+
+  const snackSlotDefs = [
+    { waktu: "Selingan Pagi", jam: "10:00", pool: DEFAULT_MEAL_POOL.selingan_pagi },
+    { waktu: "Selingan Sore", jam: "16:00", pool: DEFAULT_MEAL_POOL.selingan_sore },
+    { waktu: "Selingan Malam", jam: "21:00", pool: DEFAULT_MEAL_POOL.selingan_pagi },
+  ].slice(0, snacks);
+
+  const combinedSlots = [];
+  mainSlotDefs.forEach((def, idx) => {
+    combinedSlots.push({
+      waktu: def.waktu,
+      jam: def.jam,
+      target_kalori_slot: Math.round((targetKalori * 3) / totalWeight),
+      items: def.isBreakfast ? pickByDiet(def.pool, 2) : pickBalancedMainMeal(def.pool, def.isBalanced),
+    });
+    if (snackSlotDefs[idx]) {
+      combinedSlots.push({
+        waktu: snackSlotDefs[idx].waktu,
+        jam: snackSlotDefs[idx].jam,
+        target_kalori_slot: Math.round(targetKalori / totalWeight),
+        items: pickByDiet(snackSlotDefs[idx].pool, 1),
+      });
+    }
+  });
+
+  // Jika snacks > mainMeals (misal 1 makan + 3 selingan), tambahkan sisa selingan
+  for (let i = mainSlotDefs.length; i < snackSlotDefs.length; i++) {
+    combinedSlots.push({
+      waktu: snackSlotDefs[i].waktu,
+      jam: snackSlotDefs[i].jam,
+      target_kalori_slot: Math.round(targetKalori / totalWeight),
+      items: pickByDiet(snackSlotDefs[i].pool, 1),
+    });
   }
+
+  const slots = combinedSlots;
 
   // Recalculate total calories per slot
   for (const slot of slots) {

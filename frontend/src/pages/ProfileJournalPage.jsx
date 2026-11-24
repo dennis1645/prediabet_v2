@@ -14,11 +14,15 @@ import {
   ChevronRight,
   CheckCircle2,
   ShieldCheck,
+  ShieldAlert,
   Clock,
   Activity,
-  Sparkles,
   FileText,
   Save,
+  Plus,
+  X,
+  Check,
+  Minus,
 } from "lucide-react";
 import { showSuccessAlert, showErrorAlert, showToast } from "../utils/alerts";
 
@@ -42,34 +46,63 @@ const JOURNAL_CHAPTERS = [
   {
     id: 2,
     num: "03",
-    tab: "Catatan Klinis 3J",
-    title: "Preferensi & Data Fisik",
-    subtitle: "Atur jumlah makan harian Anda dan periksa ringkasan profil kesehatan terkini.",
-    icon: Activity,
+    tab: "Frekuensi Makan 3J",
+    title: "Preferensi Jadwal Makan",
+    subtitle: "Bebas atur jumlah makan utama (1–3x) dan selingan (0–3x) sesuai ritme harian Anda.",
+    icon: Clock,
+  },
+  {
+    id: 3,
+    num: "04",
+    tab: "Alergi & Komorbid",
+    title: "Alergi & Kondisi Klinis",
+    subtitle: "Catat pantangan alergi dan riwayat penyakit penyerta agar Dr. Predi & Meal Plan 100% aman.",
+    icon: ShieldAlert,
   },
 ];
 
-const MEAL_FREQ_CHOICES = [
-  { id: "normal_3j", title: "3x Utama + 2x Selingan", desc: "Pola Seimbang 3J Standar" },
-  { id: "3_kali", title: "3x Makan Utama", desc: "Tanpa camilan selingan" },
-  { id: "2_kali", title: "2x Utama + 1x Selingan", desc: "Cocok untuk jendela 16/8" },
-  { id: "2_kali_ketat", title: "2x Makan Utama", desc: "Intensitas ringan tanpa selingan" },
+const PRESET_PANTANGAN = [
+  { label: "Tidak Ada", value: "Tidak Ada" },
+  { label: "Kacang-kacangan", value: "Kacang" },
+  { label: "Seafood & Udang", value: "Seafood" },
+  { label: "Telur", value: "Telur" },
+  { label: "Susu & Laktosa", value: "Susu" },
+  { label: "Daging Sapi", value: "Daging Sapi" },
+  { label: "Santan", value: "Santan" },
+  { label: "Gluten / Terigu", value: "Gluten" },
+  { label: "Gorengan", value: "Gorengan" },
 ];
 
+const PRESET_KOMORBID = [
+  { label: "Tidak Ada", value: "Tidak Ada" },
+  { label: "Hipertensi", value: "Hipertensi" },
+  { label: "Kolesterol Tinggi", value: "Kolesterol" },
+  { label: "Asam Urat", value: "Asam Urat" },
+  { label: "PCOS", value: "PCOS" },
+  { label: "Penyakit Jantung", value: "Jantung" },
+  { label: "Fatty Liver", value: "Fatty Liver" },
+];
+
+const parseList = (val) => {
+  if (!val) return [];
+  if (Array.isArray(val)) return val.map((s) => String(s).trim()).filter(Boolean);
+  return String(val).split(",").map((s) => s.trim()).filter(Boolean);
+};
+
 export default function ProfileJournalPage() {
-  const { user, profile, analysis, setAnalysis, setProfile, updateAccount } = useAuth();
+  const { user, profile, analysis, setAnalysis, setProfile, updateAccount, updateProfileAndAnalysis } = useAuth();
 
   const [activePage, setActivePage] = useState(0);
   const [slideDir, setSlideDir] = useState("next");
   const touchStartX = useRef(null);
 
-  // Halaman 1: Identitas
+  // Bab 1: Identitas
   const [nama, setNama] = useState(profile?.nama || user?.username || "");
   const [email, setEmail] = useState(user?.email || "");
   const [phoneNumber, setPhoneNumber] = useState(user?.phone_number || profile?.phone_number || "");
   const [savingIdentity, setSavingIdentity] = useState(false);
 
-  // Halaman 2: Keamanan & Password
+  // Bab 2: Keamanan & Password
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -77,8 +110,32 @@ export default function ProfileJournalPage() {
   const [showNew, setShowNew] = useState(false);
   const [savingPassword, setSavingPassword] = useState(false);
 
-  // Halaman 3: Frekuensi Makan
+  // Bab 3: Frekuensi Makan Fleksibel (1-3 makan utama, 0-3 selingan)
+  const parseInitialFreq = () => {
+    const f = analysis?.meal_frequency || profile?.meal_frequency || "normal_3j";
+    if (typeof f === "string" && f.startsWith("custom_")) {
+      const parts = f.split("_");
+      return {
+        main: Math.max(1, Math.min(3, parseInt(parts[1], 10) || 3)),
+        snacks: Math.max(0, Math.min(3, parseInt(parts[2], 10) ?? 2)),
+      };
+    }
+    if (f === "3_kali") return { main: 3, snacks: 0 };
+    if (f === "2_kali") return { main: 2, snacks: 1 };
+    if (f === "2_kali_ketat") return { main: 2, snacks: 0 };
+    return { main: 3, snacks: 2 };
+  };
+  const initFreq = parseInitialFreq();
+  const [mainMeals, setMainMeals] = useState(initFreq.main);
+  const [snacks, setSnacks] = useState(initFreq.snacks);
   const [savingFreq, setSavingFreq] = useState(false);
+
+  // Bab 4: Alergi & Komorbiditas
+  const [selectedPantangan, setSelectedPantangan] = useState(() => parseList(profile?.pantangan_alergi || profile?.pantangan_makanan));
+  const [selectedKomorbid, setSelectedKomorbid] = useState(() => parseList(profile?.komorbiditas || profile?.riwayat_kondisi_kesehatan));
+  const [customPantangan, setCustomPantangan] = useState("");
+  const [customKomorbid, setCustomKomorbid] = useState("");
+  const [savingClinical, setSavingClinical] = useState(false);
 
   const goToPage = (nextIdx) => {
     if (nextIdx === activePage || nextIdx < 0 || nextIdx >= JOURNAL_CHAPTERS.length) return;
@@ -158,19 +215,75 @@ export default function ProfileJournalPage() {
     }
   };
 
-  const handleSelectMealFreq = async (freqId) => {
+  const handleSaveMealFreq = async () => {
     setSavingFreq(true);
     try {
-      const res = await api.updateMealFrequency(freqId);
+      const res = await api.updateMealFrequency({ mainMeals, snacks });
       if (res.success && res.data?.analysis) {
         setAnalysis(res.data.analysis);
         if (res.data.profile) setProfile(res.data.profile);
-        showToast(res.message || "Frekuensi makan berhasil diperbarui!", "success");
+        await showSuccessAlert(
+          "Jadwal Makan Diperbarui",
+          `Pola makan Anda diatur ke ${mainMeals}x makan utama + ${snacks}x selingan dan meal plan Dashboard telah disesuaikan.`
+        );
       }
     } catch (err) {
-      showToast(err.message || "Gagal memperbarui frekuensi makan.", "error");
+      showErrorAlert("Gagal Menyimpan", err.message || "Gagal memperbarui frekuensi makan.");
     } finally {
       setSavingFreq(false);
+    }
+  };
+
+  const toggleChip = (val, currentList, setter) => {
+    if (val === "Tidak Ada") {
+      setter(["Tidak Ada"]);
+      return;
+    }
+    const filtered = currentList.filter((item) => item !== "Tidak Ada");
+    if (filtered.includes(val)) {
+      setter(filtered.filter((item) => item !== val));
+    } else {
+      setter([...filtered, val]);
+    }
+  };
+
+  const handleAddCustomPantangan = (e) => {
+    if (e) e.preventDefault();
+    const clean = customPantangan.trim();
+    if (clean && !selectedPantangan.includes(clean)) {
+      setSelectedPantangan((prev) => [...prev.filter((p) => p !== "Tidak Ada"), clean]);
+      setCustomPantangan("");
+    }
+  };
+
+  const handleAddCustomKomorbid = (e) => {
+    if (e) e.preventDefault();
+    const clean = customKomorbid.trim();
+    if (clean && !selectedKomorbid.includes(clean)) {
+      setSelectedKomorbid((prev) => [...prev.filter((k) => k !== "Tidak Ada"), clean]);
+      setCustomKomorbid("");
+    }
+  };
+
+  const handleSaveClinicalLists = async () => {
+    setSavingClinical(true);
+    try {
+      const cleanPantangan = selectedPantangan.filter((p) => p !== "Tidak Ada");
+      const cleanKomorbid = selectedKomorbid.filter((k) => k !== "Tidak Ada");
+      const updatedPayload = {
+        ...(profile || {}),
+        pantangan_alergi: cleanPantangan,
+        komorbiditas: cleanKomorbid,
+      };
+      await updateProfileAndAnalysis(updatedPayload);
+      await showSuccessAlert(
+        "Catatan Klinis Tersimpan!",
+        "Alergi/pantangan dan komorbiditas Anda berhasil diperbarui. Dr. Predi dan Meal Plan langsung menyesuaikannya."
+      );
+    } catch (err) {
+      showErrorAlert("Gagal Menyimpan", err.message || "Gagal menyimpan alergi & komorbiditas.");
+    } finally {
+      setSavingClinical(false);
     }
   };
 
@@ -197,7 +310,7 @@ export default function ProfileJournalPage() {
               Buku Catatan Kesehatan &amp; Akun
             </h1>
             <p className="text-sm text-slate-600 mt-1">
-              Geser halaman atau pilih pembatas buku di bawah untuk memperbarui identitas, sandi, dan pola makan Anda.
+              Geser halaman atau pilih pembatas buku di bawah untuk memperbarui identitas, sandi, jadwal makan, serta alergi &amp; komorbiditas Anda.
             </p>
           </div>
 
@@ -206,7 +319,7 @@ export default function ProfileJournalPage() {
           </div>
         </div>
 
-        {/* Bookmark Tabs (Pembatas Buku) */}
+        {/* Bookmark Tabs */}
         <div className="flex flex-wrap gap-2 mb-4" role="tablist" aria-label="Bab Jurnal Profil">
           {JOURNAL_CHAPTERS.map((ch) => {
             const isActive = ch.id === activePage;
@@ -218,7 +331,7 @@ export default function ProfileJournalPage() {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => goToPage(ch.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-t-2xl rounded-b-lg text-xs sm:text-sm font-extrabold transition-all cursor-pointer border ${
+                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-t-2xl rounded-b-lg text-xs sm:text-sm font-extrabold transition-all cursor-pointer border ${
                   isActive
                     ? "bg-[#FCFBF7] text-emerald-900 border-stone-300 shadow-sm -translate-y-0.5 border-b-emerald-600 border-b-2"
                     : "bg-[#EAE5D9]/80 text-slate-600 border-stone-300/60 hover:bg-[#FCFBF7]/70"
@@ -242,17 +355,15 @@ export default function ProfileJournalPage() {
               "repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(16, 185, 129, 0.06) 32px)",
           }}
         >
-          {/* Animated Page Container */}
           <div
             key={activePage}
-            className="grid grid-cols-1 md:grid-cols-[0.88fr_1.12fr] min-h-[470px] transition-all duration-300 ease-out animate-fade-in"
+            className="grid grid-cols-1 md:grid-cols-[0.86fr_1.14fr] min-h-[490px]"
             style={{
               animation: `${slideDir === "next" ? "journalSlideNext" : "journalSlidePrev"} 240ms cubic-bezier(0.22, 1, 0.36, 1)`,
             }}
           >
-            {/* LEFT PAGE: Ringkasan Bab & Stempel Identitas */}
+            {/* LEFT PAGE */}
             <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-[#F7F4EB] to-[#EFEAE0] border-b md:border-b-0 md:border-r border-stone-300/80 relative flex flex-col justify-between">
-              {/* Spine highlight */}
               <div className="hidden md:block absolute top-0 right-0 bottom-0 w-6 bg-gradient-to-l from-stone-400/15 to-transparent pointer-events-none" />
 
               <div>
@@ -274,7 +385,6 @@ export default function ProfileJournalPage() {
                   {currentChapter.subtitle}
                 </p>
 
-                {/* Stamp Card: Ringkasan Pemilik Jurnal */}
                 <div className="rounded-2xl bg-white/85 border border-stone-200/90 p-4 space-y-2.5 shadow-2xs">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black flex items-center justify-center uppercase">
@@ -295,9 +405,11 @@ export default function ProfileJournalPage() {
                       </span>
                     </div>
                     <div>
-                      <span className="text-stone-400 block text-[10px] font-bold uppercase">Diet Aktif</span>
-                      <span className="font-extrabold text-emerald-700 truncate block">
-                        {analysis?.active_diet_label || "Pola Seimbang 3J"}
+                      <span className="text-stone-400 block text-[10px] font-bold uppercase">Alergi Aktif</span>
+                      <span className="font-extrabold text-rose-700 truncate block">
+                        {selectedPantangan.filter((p) => p !== "Tidak Ada").length > 0
+                          ? selectedPantangan.filter((p) => p !== "Tidak Ada").join(", ")
+                          : "Tidak ada"}
                       </span>
                     </div>
                   </div>
@@ -310,7 +422,7 @@ export default function ProfileJournalPage() {
               </div>
             </div>
 
-            {/* RIGHT PAGE: Form Aktif */}
+            {/* RIGHT PAGE */}
             <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
               {activePage === 0 && (
                 <form onSubmit={handleSaveIdentity} className="space-y-5">
@@ -488,57 +600,227 @@ export default function ProfileJournalPage() {
               {activePage === 2 && (
                 <div className="space-y-5">
                   <div>
-                    <h3 className="text-lg font-extrabold text-slate-900">Frekuensi Makan &amp; Data Klinis</h3>
+                    <h3 className="text-lg font-extrabold text-slate-900">Atur Frekuensi Makan Bebas</h3>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Pilih berapa kali Anda makan dalam sehari. Slot rencana makan di Dashboard akan otomatis menyesuaikan.
+                      Minimal <strong>1x makan utama &amp; 0x selingan</strong>, maksimal <strong>3x makan utama &amp; 3x selingan</strong>. Kalori harian akan dibagi otomatis.
                     </p>
                   </div>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-2xl bg-white border border-stone-300 space-y-2">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                        Makan Utama / Hari
+                      </span>
+                      <div className="flex items-center justify-between">
+                        <button
+                          type="button"
+                          onClick={() => setMainMeals((m) => Math.max(1, m - 1))}
+                          disabled={mainMeals <= 1}
+                          aria-label="Kurangi makan utama"
+                          className="w-10 h-10 rounded-xl border border-stone-300 flex items-center justify-center text-slate-700 hover:bg-stone-100 disabled:opacity-40 cursor-pointer"
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <div className="text-center">
+                          <div className="text-2xl font-black text-emerald-800">{mainMeals}x</div>
+                          <div className="text-[11px] text-slate-500">Min 1 · Max 3</div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setMainMeals((m) => Math.min(3, m + 1))}
+                          disabled={mainMeals >= 3}
+                          aria-label="Tambah makan utama"
+                          className="w-10 h-10 rounded-xl border border-stone-300 flex items-center justify-center text-slate-700 hover:bg-stone-100 disabled:opacity-40 cursor-pointer"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-white border border-stone-300 space-y-2">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                        Selingan / Camilan
+                      </span>
+                      <div className="flex items-center justify-between">
+                        <button
+                          type="button"
+                          onClick={() => setSnacks((s) => Math.max(0, s - 1))}
+                          disabled={snacks <= 0}
+                          aria-label="Kurangi selingan"
+                          className="w-10 h-10 rounded-xl border border-stone-300 flex items-center justify-center text-slate-700 hover:bg-stone-100 disabled:opacity-40 cursor-pointer"
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <div className="text-center">
+                          <div className="text-2xl font-black text-teal-700">{snacks}x</div>
+                          <div className="text-[11px] text-slate-500">Min 0 · Max 3</div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setSnacks((s) => Math.min(3, s + 1))}
+                          disabled={snacks >= 3}
+                          aria-label="Tambah selingan"
+                          className="w-10 h-10 rounded-xl border border-stone-300 flex items-center justify-center text-slate-700 hover:bg-stone-100 disabled:opacity-40 cursor-pointer"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3 text-xs font-bold text-emerald-900">
+                    Ringkasan Jadwal: {mainMeals}x Makan Utama + {snacks}x Selingan ({mainMeals + snacks} slot waktu makan di Dashboard)
+                  </div>
+
+                  <button
+                    type="button"
+                    disabled={savingFreq}
+                    onClick={handleSaveMealFreq}
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-sm shadow-sm transition cursor-pointer disabled:opacity-60"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>{savingFreq ? "Menyimpan..." : "Simpan Frekuensi Makan"}</span>
+                  </button>
+                </div>
+              )}
+
+              {activePage === 3 && (
+                <div className="space-y-4">
                   <div>
-                    <p className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-emerald-700" />
-                      <span>Frekuensi Makan Harian</span>
+                    <h3 className="text-lg font-extrabold text-slate-900">Alergi &amp; Penyakit Komorbiditas</h3>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Ubah pantangan alergi atau riwayat penyakit penyerta kapan saja. Dr. Predi otomatis memblokir makanan pemicu.
                     </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {MEAL_FREQ_CHOICES.map((opt) => {
-                        const selected = (analysis?.meal_frequency || "normal_3j") === opt.id;
+                  </div>
+
+                  {/* Alergi / Pantangan */}
+                  <div>
+                    <p className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                      Pantangan &amp; Alergi Makanan
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      {PRESET_PANTANGAN.map((item) => {
+                        const active = selectedPantangan.includes(item.value);
                         return (
                           <button
-                            key={opt.id}
+                            key={item.value}
                             type="button"
-                            disabled={savingFreq}
-                            onClick={() => handleSelectMealFreq(opt.id)}
-                            className={`text-left p-3.5 rounded-xl border transition cursor-pointer ${
-                              selected
-                                ? "bg-emerald-700 text-white border-emerald-700 shadow-sm"
-                                : "bg-white text-slate-800 border-stone-300 hover:border-emerald-500"
+                            onClick={() => toggleChip(item.value, selectedPantangan, setSelectedPantangan)}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1 ${
+                              active
+                                ? "bg-rose-600 text-white border-rose-600"
+                                : "bg-white text-slate-700 border-stone-300 hover:bg-rose-50"
                             }`}
                           >
-                            <div className="text-xs font-extrabold">{opt.title}</div>
-                            <div className={`text-[11px] mt-0.5 ${selected ? "text-emerald-100" : "text-slate-500"}`}>
-                              {opt.desc}
-                            </div>
+                            {active && <Check className="w-3 h-3" />}
+                            <span>{item.label}</span>
                           </button>
                         );
                       })}
                     </div>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={customPantangan}
+                        onChange={(e) => setCustomPantangan(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleAddCustomPantangan(e)}
+                        placeholder="Tambah alergi lain (misal: Kerang, Udang)..."
+                        className="flex-1 px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs font-semibold text-slate-800"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAddCustomPantangan}
+                        className="px-3 py-2 bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Tambah</span>
+                      </button>
+                    </div>
+                    {selectedPantangan.filter((p) => !PRESET_PANTANGAN.some((pr) => pr.value === p)).length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mt-2">
+                        {selectedPantangan
+                          .filter((p) => !PRESET_PANTANGAN.some((pr) => pr.value === p))
+                          .map((p) => (
+                            <span
+                              key={p}
+                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-rose-100 text-rose-800 text-xs font-bold"
+                            >
+                              {p}
+                              <button
+                                type="button"
+                                onClick={() => setSelectedPantangan((prev) => prev.filter((x) => x !== p))}
+                                className="cursor-pointer"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            </span>
+                          ))}
+                      </div>
+                    )}
                   </div>
 
-                  <div className="rounded-2xl bg-amber-50/90 border border-amber-200 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-extrabold text-amber-900 flex items-center gap-1.5">
-                        <FileText className="w-4 h-4 text-amber-700" />
-                        <span>Data Fisik, Lab &amp; Pantangan Alergi</span>
-                      </p>
-                      <p className="text-xs text-amber-800/90 mt-1">
-                        Berat badan, tinggi, hasil HbA1c/GDP, serta daftar alergen dapat diperbarui lengkap lewat Kuesioner Klinis.
-                      </p>
+                  {/* Komorbiditas */}
+                  <div>
+                    <p className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                      Riwayat Penyakit Penyerta (Komorbiditas)
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      {PRESET_KOMORBID.map((item) => {
+                        const active = selectedKomorbid.includes(item.value);
+                        return (
+                          <button
+                            key={item.value}
+                            type="button"
+                            onClick={() => toggleChip(item.value, selectedKomorbid, setSelectedKomorbid)}
+                            className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1 ${
+                              active
+                                ? "bg-teal-700 text-white border-teal-700"
+                                : "bg-white text-slate-700 border-stone-300 hover:bg-teal-50"
+                            }`}
+                          >
+                            {active && <Check className="w-3 h-3" />}
+                            <span>{item.label}</span>
+                          </button>
+                        );
+                      })}
                     </div>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={customKomorbid}
+                        onChange={(e) => setCustomKomorbid(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleAddCustomKomorbid(e)}
+                        placeholder="Tambah kondisi lain (misal: GERD, Maag)..."
+                        className="flex-1 px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs font-semibold text-slate-800"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAddCustomKomorbid}
+                        className="px-3 py-2 bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Tambah</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
+                    <button
+                      type="button"
+                      disabled={savingClinical}
+                      onClick={handleSaveClinicalLists}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-sm transition cursor-pointer disabled:opacity-60"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>{savingClinical ? "Menyimpan..." : "Simpan Alergi & Komorbid"}</span>
+                    </button>
+
                     <Link
                       to="/questionnaire"
-                      className="shrink-0 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold text-center transition"
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-extrabold transition"
                     >
-                      Buka Kuesioner Klinis
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>Edit Data Fisik &amp; Lab</span>
                     </Link>
                   </div>
                 </div>
@@ -585,7 +867,6 @@ export default function ProfileJournalPage() {
         </div>
       </div>
 
-      {/* Keyframe animasi balik halaman jurnal */}
       <style>{`
         @keyframes journalSlideNext {
           from { opacity: 0; transform: translateX(18px); }
