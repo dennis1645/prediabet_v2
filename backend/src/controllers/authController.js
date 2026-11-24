@@ -11,7 +11,7 @@ export function register(req, res) {
     if (!username || username.trim().length < 3) {
       return res.status(400).json({
         success: false,
-        message: "Username minimal 3 karakter.",
+        message: "Nama minimal 3 karakter.",
       });
     }
 
@@ -40,7 +40,7 @@ export function register(req, res) {
     if (existing) {
       return res.status(400).json({
         success: false,
-        message: "Username atau email sudah terdaftar. Silakan gunakan yang lain.",
+        message: "Nama atau email sudah terdaftar. Silakan gunakan yang lain.",
       });
     }
 

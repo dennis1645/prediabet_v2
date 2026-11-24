@@ -35,7 +35,7 @@ export default function RegisterPage() {
     setError("");
 
     if (username.trim().length < 3) {
-      const msg = "Username minimal 3 karakter.";
+      const msg = "Nama minimal 3 karakter.";
       setError(msg);
       showErrorAlert("Validasi Gagal", msg);
       return;
@@ -81,7 +81,7 @@ export default function RegisterPage() {
   // Demo auto-fill helper for quick registration testing
   const handleQuickDemo = () => {
     const randomId = Math.floor(100 + Math.random() * 900);
-    setUsername(`pengguna_${randomId}`);
+    setUsername(`Pengguna ${randomId}`);
     setEmail(`pengguna${randomId}@example.com`);
     setPassword("PrediaBeat2026!");
     setAgreeTerms(true);
@@ -235,10 +235,10 @@ export default function RegisterPage() {
           {/* Form Utama */}
           <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
             
-            {/* Input Username */}
+            {/* Input Nama */}
             <div>
               <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5 ml-1">
-                Username
+                Nama
               </label>
               <div className="relative flex items-center">
                 <User className="w-4 h-4 text-slate-400 absolute left-4 pointer-events-none" />
@@ -247,7 +247,7 @@ export default function RegisterPage() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Pilih nama pengguna unik (min. 3 huruf)"
+                  placeholder="Masukkan nama Anda (min. 3 huruf)"
                   className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50/90 border border-slate-200 rounded-2xl text-slate-800 text-sm font-medium placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all shadow-2xs"
                 />
               </div>

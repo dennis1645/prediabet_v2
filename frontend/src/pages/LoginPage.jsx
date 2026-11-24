@@ -32,7 +32,7 @@ export default function LoginPage() {
     setError("");
 
     if (!username.trim() || !password) {
-      const msg = "Silakan masukkan username/email dan password Anda.";
+      const msg = "Silakan masukkan nama/email dan password Anda.";
       setError(msg);
       showErrorAlert("Input Kurang Lengkap", msg);
       return;
@@ -219,10 +219,10 @@ export default function LoginPage() {
           {/* Form Utama */}
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-4.5">
             
-            {/* Input Username / Email */}
+            {/* Input Nama / Email */}
             <div>
               <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5 ml-1">
-                Username / Email
+                Nama / Email
               </label>
               <div className="relative flex items-center">
                 <User className="w-4 h-4 text-slate-400 absolute left-4 pointer-events-none" />

@@ -204,6 +204,26 @@ export function getUserOnboardingState(userId, userObj = {}) {
   }
 
   const answers = JSON.parse(progress.answers_json || "{}");
+  let answersModified = false;
+
+  // Ambil data registrasi pengguna dari tabel users agar tidak ditanyakan ulang di kuesioner
+  const userRow = db.prepare("SELECT username, email, phone_number FROM users WHERE id = ?").get(userId);
+  const regName = (userRow?.username || userObj?.username || "").trim();
+  const regEmail = (userRow?.email || userObj?.email || "").trim();
+  const regPhone = (userRow?.phone_number || userObj?.phone_number || "").trim();
+
+  if (regName && !answers.nama) {
+    answers.nama = regName;
+    answersModified = true;
+  }
+  if (regEmail && !answers.email) {
+    answers.email = regEmail;
+    answersModified = true;
+  }
+  if (regPhone && !answers.phone_number) {
+    answers.phone_number = regPhone;
+    answersModified = true;
+  }
 
   // Jika sudah completed
   if (progress.is_completed) {
@@ -221,10 +241,36 @@ export function getUserOnboardingState(userId, userObj = {}) {
   let currentQIndex = ONBOARDING_QUESTIONS.findIndex((q) => q.id === progress.current_question_id);
   if (currentQIndex === -1) currentQIndex = 0;
 
-  // Lewati pertanyaan yang sudah terisi otomatis dari registrasi jika ada
+  // Lewati pertanyaan yang sudah terisi otomatis dari registrasi (nama, phone_number, email)
+  let indexSkipped = false;
+  while (currentQIndex < ONBOARDING_QUESTIONS.length) {
+    const candidateKey = ONBOARDING_QUESTIONS[currentQIndex].field_key;
+    const alreadyFilled =
+      (candidateKey === "nama" && Boolean(answers.nama)) ||
+      (candidateKey === "phone_number" && Boolean(answers.phone_number)) ||
+      (candidateKey === "email" && Boolean(answers.email));
+
+    if (alreadyFilled) {
+      currentQIndex++;
+      indexSkipped = true;
+    } else {
+      break;
+    }
+  }
+
+  if (currentQIndex >= ONBOARDING_QUESTIONS.length) {
+    currentQIndex = ONBOARDING_QUESTIONS.length - 1;
+  }
+
   let activeQuestion = ONBOARDING_QUESTIONS[currentQIndex];
 
-  // Jika pertanyaan nama dan nama sudah ada di userObj atau answers, lewati jika sudah dijawab
+  if (answersModified || indexSkipped) {
+    db.prepare(`
+      UPDATE onboarding_progress
+      SET current_question_id = ?, answers_json = ?, updated_at = ?
+      WHERE user_id = ?
+    `).run(activeQuestion.id, JSON.stringify(answers), now, userId);
+  }
   const total = ONBOARDING_QUESTIONS.length;
   const progressPercent = Math.min(Math.round((currentQIndex / total) * 100), 99);
 

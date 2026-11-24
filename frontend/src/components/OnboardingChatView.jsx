@@ -93,7 +93,9 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
           });
         } else {
           // Inisialisasi bubble sambutan / pertanyaan aktif
-          const hasPriorAnswers = Object.keys(res.data.answers || {}).length > 0;
+          const hasPriorAnswers = Object.keys(res.data.answers || {}).some(
+            (k) => !["nama", "email", "phone_number"].includes(k)
+          );
           const introContent = hasPriorAnswers
             ? `Halo lagi, **${user?.username || "Sobat Predi"}**! 👋 Senang kamu kembali.\n\nYuk kita lanjutin sesi wawancara intake medis awal kamu. Sedikit lagi selesai kok!\n\n**${res.data.genz_prompt}**`
             : `Halo **${user?.username || "Sobat Predi"}**! Selamat datang di **PrediaBeat V2.0**! 🌟\n\nGue **Dr. Predi**, asisten nutrisi klinis & pencegahan prediabetes pribadi lo.\n\nBiar rekomendasi menu harian dan program pencegahan prediabetes lo beneran akurat dan pas di tubuh lo, kita ngobrol santai dulu ya buat bikin **Rekam Medis Awal** lo.\n\nGak usah tegang, jawab santai & jujur aja ya! Yuk mulai dari pertanyaan pertama:\n\n**${res.data.genz_prompt}**`;

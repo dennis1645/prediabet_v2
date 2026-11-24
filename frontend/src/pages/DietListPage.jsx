@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { sampleDiets } from "../services/mockData";
 import {
@@ -91,13 +90,7 @@ export default function DietListPage() {
         {/* Header Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div>
-            <Link
-              to="/dashboard"
-              className="text-sm font-bold text-emerald-700 hover:text-emerald-800"
-            >
-              ← Kembali ke Dashboard
-            </Link>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800 mt-3">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-800">
               Pilih Program Pola Makan
             </h1>
             <p className="text-slate-500 mt-2 max-w-3xl text-sm">
