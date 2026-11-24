@@ -27,9 +27,41 @@ export default function DashboardPage() {
   const { user, profile, analysis, setAnalysis, loading } = useAuth();
   const navigate = useNavigate();
   const [shuffling, setShuffling] = useState(false);
-  const [liveData, setLiveData] = useState({ profile, analysis });
+  const [liveData, setLiveData] = useState({ profile, analysis, needsUpdate: false });
   const [mealPlan, setMealPlan] = useState(analysis?.meal_plan || []);
   const [shuffleToast, setShuffleToast] = useState("");
+  const [editingFreq, setEditingFreq] = useState(false);
+  const [savingFreq, setSavingFreq] = useState(false);
+
+  const formatDisplayName = (rawName) =>
+    (rawName || "Sahabat Sehat")
+      .replace(/[_.-]+/g, " ")
+      .trim()
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const handleUpdateFrequency = async (frequencyKey) => {
+    setSavingFreq(true);
+    try {
+      const res = await api.updateMealFrequency(frequencyKey);
+      if (res.success && res.data?.analysis) {
+        setAnalysis(res.data.analysis);
+        setLiveData((prev) => ({
+          ...prev,
+          profile: res.data.profile || prev.profile,
+          analysis: res.data.analysis,
+        }));
+        if (Array.isArray(res.data.analysis.meal_plan)) {
+          setMealPlan(res.data.analysis.meal_plan);
+        }
+        setEditingFreq(false);
+        showToast(res.message || "Pola waktu makan diperbarui!", "success");
+      }
+    } catch (err) {
+      showToast(err.message || "Gagal mengubah pola waktu makan.", "error");
+    } finally {
+      setSavingFreq(false);
+    }
+  };
 
   // Jika pengguna belum mengisi kuesioner kesehatan, wajib dialihkan ke kuesioner terlebih dahulu
   React.useEffect(() => {
@@ -203,33 +235,35 @@ export default function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 w-full relative z-10">
         
         {/* ========================================================= */}
-        {/* 1. REMINDER UPDATE PROFIL (Sesuai dashboard.html)          */}
+        {/* 1. REMINDER UPDATE PROFIL (Hanya muncul >= 30 hari)        */}
         {/* ========================================================= */}
-        <div className="mb-8 bg-white/80 backdrop-blur-xl rounded-[1.75rem] p-5 md:p-6 border-l-4 border-amber-400 border border-slate-200/60 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-5 animate-fade-in">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl shrink-0 shadow-xs">
-              <Bell className="w-6 h-6 text-amber-600" />
-            </div>
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-amber-600 mb-1">
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                <span>Reminder Profil Klinis</span>
+        {liveData?.needsUpdate && (
+          <div className="mb-8 bg-white/80 backdrop-blur-xl rounded-[1.75rem] p-5 md:p-6 border-l-4 border-amber-400 border border-slate-200/60 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-5 animate-fade-in">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl shrink-0 shadow-xs">
+                <Bell className="w-6 h-6 text-amber-600" />
               </div>
-              <h3 className="text-amber-950 font-extrabold text-base md:text-lg">
-                Waktunya Update Profil Kesehatanmu
-              </h3>
-              <p className="text-amber-800/90 text-sm mt-0.5 leading-relaxed max-w-2xl">
-                Kondisi metabolisme tubuh selalu berkembang. Perbarui berat badan dan data lab terkini agar target kalori 3J serta menu harian tetap presisi.
-              </p>
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-amber-600 mb-1">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                  <span>Reminder Profil Klinis</span>
+                </div>
+                <h3 className="text-amber-950 font-extrabold text-base md:text-lg">
+                  Waktunya Update Profil Kesehatanmu
+                </h3>
+                <p className="text-amber-800/90 text-sm mt-0.5 leading-relaxed max-w-2xl">
+                  Kondisi metabolisme tubuh selalu berkembang. Perbarui berat badan dan data lab terkini agar target kalori 3J serta menu harian tetap presisi.
+                </p>
+              </div>
             </div>
+            <Link
+              to="/questionnaire"
+              className="shrink-0 w-full md:w-auto text-center bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl font-extrabold text-sm transition-all shadow-lg shadow-amber-500/20 hover:-translate-y-0.5"
+            >
+              Perbarui Sekarang
+            </Link>
           </div>
-          <Link
-            to="/questionnaire"
-            className="shrink-0 w-full md:w-auto text-center bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-2xl font-extrabold text-sm transition-all shadow-lg shadow-amber-500/20 hover:-translate-y-0.5"
-          >
-            Perbarui Sekarang
-          </Link>
-        </div>
+        )}
 
         {/* ========================================================= */}
         {/* 2. HERO GREETING (Sesuai dashboard.html)                  */}
@@ -247,7 +281,7 @@ export default function DashboardPage() {
                 <span>Dashboard Kesehatan Aktif</span>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
-                Halo, {user ? user.username : "Sahabat Sehat"} 👋<br />
+                Halo, {formatDisplayName(profile?.nama || user?.username)} 👋<br />
                 <span className="text-emerald-100">menu harianmu siap.</span>
               </h1>
               <p className="mt-4 text-emerald-50/90 text-sm md:text-base leading-relaxed max-w-2xl font-normal">
@@ -509,15 +543,52 @@ export default function DashboardPage() {
               {/* Pola Waktu Makan */}
               <div className="rounded-3xl bg-slate-50/80 border border-slate-200/70 p-5">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-white text-teal-600 flex items-center justify-center text-xl shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-white text-teal-600 flex items-center justify-center text-xl shadow-xs shrink-0">
                     <Clock className="w-6 h-6 text-teal-600" />
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <p className="text-xs font-black text-slate-400 uppercase tracking-wider mb-1">
                       Pola Waktu Makan
                     </p>
-                    <h3 className="font-black text-slate-800 text-lg">Makan Biasa Teratur (3J)</h3>
-                    <p className="text-xs text-slate-500 mt-1">3 kali makan utama + 2 kali selingan sehat.</p>
+                    <h3 className="font-black text-slate-800 text-lg">
+                      {analysis.pola_waktu_makan || "Makan Biasa Teratur (3J)"}
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-1">
+                      {analysis.frekuensi_makan || "3 kali makan utama + 2 kali selingan sehat."}
+                    </p>
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        onClick={() => setEditingFreq((v) => !v)}
+                        className="text-[11px] bg-white border border-slate-200 text-slate-700 font-black px-3.5 py-1.5 rounded-xl hover:bg-slate-100 transition shadow-2xs cursor-pointer"
+                      >
+                        {editingFreq ? "Tutup Pilihan" : "Ubah Frekuensi Makan"}
+                      </button>
+                    </div>
+                    {editingFreq && (
+                      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {[
+                          { id: "normal_3j", label: "3x Utama + 2x Selingan (Normal 3J)" },
+                          { id: "3_kali", label: "3x Makan Utama (Tanpa Selingan)" },
+                          { id: "2_kali", label: "2x Makan Utama + 1x Selingan" },
+                          { id: "2_kali_ketat", label: "2x Makan Utama (Tanpa Selingan)" },
+                        ].map((opt) => (
+                          <button
+                            key={opt.id}
+                            type="button"
+                            disabled={savingFreq}
+                            onClick={() => handleUpdateFrequency(opt.id)}
+                            className={`text-left px-3 py-2 rounded-xl text-xs font-bold border transition cursor-pointer ${
+                              (analysis.meal_frequency || "normal_3j") === opt.id
+                                ? "bg-teal-600 text-white border-teal-600"
+                                : "bg-white text-slate-700 border-slate-200 hover:bg-teal-50"
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

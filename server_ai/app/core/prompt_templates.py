@@ -646,13 +646,24 @@ def build_vllm_messages(
             carb_val = specific_food.get('karbohidrat', 10)
             fat_val = specific_food.get('lemak', 4)
             clinical_tips = specific_food.get('alasan_klinis') or "Kaya serat dan protein seimbang, menjaga kurva glukosa tetap stabil."
+            daily_cal = int(getattr(user_context, 'target_kalori', 1850) or 1850)
+            is_snack_query = any(k in ql for k in ["selingan", "cemilan", "camilan", "ngemil", "snack", "kudapan"])
+            slot_budget_note = (
+                f"- PERHATIAN KHUSUS SELINGAN: Pasien meminta **SELINGAN / CAMILAN** (BUKAN makan berat). "
+                f"Rekomendasikan HANYA camilan ringan ramah glukosa (~**{round(daily_cal * 0.08)}–{round(daily_cal * 0.12)} kkal** per porsi, misal buah rendah GI, edamame, atau kacang panggang bila tidak alergi). "
+                f"DILARANG KERAS menyarankan nasi, ikan bakar, ayam goreng, sop daging, atau makanan berat!\n"
+                if is_snack_query else
+                f"- SESUAI TARGET KALORI PASIEN: Target harian pasien adalah **{daily_cal} kkal/hari** (Sarapan ~{round(daily_cal * 0.22)} kkal, Makan Siang ~{round(daily_cal * 0.35)} kkal, Makan Malam ~{round(daily_cal * 0.27)} kkal). Pastikan takaran porsi yang disarankan sesuai dengan kebutuhan kalori ini.\n"
+            )
 
             current_user_content = (
                 f"Pesan Pasien: \"{user_query}\"\n\n"
                 f"[Rekomendasi Menu Ramah 3J]:\n"
                 f"- Nama Hidangan Rekomendasi: {food_title}\n"
                 f"- Estimasi Kalori: ~{cal_val} kkal | Protein: ~{prot_val}g | Karbo: ~{carb_val}g | Lemak: ~{fat_val}g\n"
-                f"- Keunggulan Klinis: {clinical_tips}\n\n"
+                f"- Target Kalori Harian Pasien: {daily_cal} kkal/hari\n"
+                f"- Keunggulan Klinis: {clinical_tips}\n"
+                f"{slot_budget_note}\n"
                 f"[Instruksi Respon Saran Menu Cantik]: \n"
                 f"- Pasien meminta ide/saran menu hidangan ({user_query}). Sajikan secara elegan dan terstruktur per-list:\n\n"
                 f"  Halo {patient_name}! Berikut rekomendasi hidangan lezat dan ramah respon insulin Anda hari ini:\n\n"

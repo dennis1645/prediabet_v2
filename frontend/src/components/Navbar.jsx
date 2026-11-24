@@ -150,7 +150,7 @@ export default function Navbar() {
                   User
                 </span>
                 <span className="text-sm font-bold text-slate-700 leading-none max-w-[140px] truncate">
-                  {user.username}
+                  {(user.username || "User").replace(/[_.-]+/g, " ").trim().replace(/\b\w/g, (c) => c.toUpperCase())}
                 </span>
               </div>
 

@@ -30,6 +30,8 @@ export default function AdminDashboardPage() {
   });
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_SIZE = 10;
   const [downloading, setDownloading] = useState(false);
 
   // Chat preview modal
@@ -164,6 +166,10 @@ export default function AdminDashboardPage() {
     );
   });
 
+  const totalPages = Math.max(1, Math.ceil(filteredUsers.length / PAGE_SIZE));
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedUsers = filteredUsers.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -250,7 +256,10 @@ export default function AdminDashboardPage() {
               <input
                 type="text"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setCurrentPage(1);
+                }}
                 placeholder="Cari username, nama, atau email..."
                 className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               />
@@ -282,7 +291,7 @@ export default function AdminDashboardPage() {
                     </td>
                   </tr>
                 ) : (
-                  filteredUsers.map((u) => {
+                  paginatedUsers.map((u) => {
                     const isSelf = currentUser?.id === u.id;
                     return (
                       <tr key={u.id} className="hover:bg-slate-50/60 transition-colors">
@@ -376,6 +385,50 @@ export default function AdminDashboardPage() {
               </tbody>
             </table>
           </div>
+
+          {!loading && filteredUsers.length > 0 && (
+            <div className="px-5 py-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+              <div>
+                Menampilkan{" "}
+                <span className="font-bold text-slate-700">
+                  {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(safePage * PAGE_SIZE, filteredUsers.length)}
+                </span>{" "}
+                dari <span className="font-bold text-slate-700">{filteredUsers.length}</span> pengguna
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  disabled={safePage <= 1}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
+                >
+                  Sebelumnya
+                </button>
+                {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    type="button"
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`w-8 h-8 rounded-lg font-bold cursor-pointer ${
+                      pageNum === safePage
+                        ? "bg-emerald-600 text-white"
+                        : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  disabled={safePage >= totalPages}
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-bold text-slate-700 hover:bg-slate-50 disabled:opacity-40 cursor-pointer"
+                >
+                  Berikutnya
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

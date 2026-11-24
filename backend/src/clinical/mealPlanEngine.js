@@ -81,10 +81,43 @@ export function containsAllergen(foodName = "", allergies = []) {
   return false;
 }
 
-export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activeDiet = "") {
+export const MEAL_FREQUENCY_OPTIONS = {
+  normal_3j: {
+    id: "normal_3j",
+    label: "Makan Biasa Teratur (3J)",
+    description: "3 kali makan utama + 2 kali selingan sehat.",
+    short: "3x makan utama + 2x selingan",
+  },
+  "3_kali": {
+    id: "3_kali",
+    label: "3 Kali Makan Utama (Tanpa Selingan)",
+    description: "3 kali makan utama teratur tanpa camilan selingan.",
+    short: "3x makan utama (tanpa selingan)",
+  },
+  "2_kali": {
+    id: "2_kali",
+    label: "2 Kali Makan Utama + 1 Selingan",
+    description: "Pola intensitas sedang / Jendela 16:8 (2x makan utama + 1x selingan).",
+    short: "2x makan utama + 1x selingan",
+  },
+  "2_kali_ketat": {
+    id: "2_kali_ketat",
+    label: "2 Kali Makan Utama (Tanpa Selingan)",
+    description: "Pola intensitas rendah (2x makan utama per hari, tanpa selingan).",
+    short: "2x makan utama (tanpa selingan)",
+  },
+};
+
+export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activeDiet = "", mealFrequency = "") {
   const dietKey = activeDiet && ["mediterania", "rendah_karbo", "dash", "intermittent_fasting"].includes(activeDiet)
     ? activeDiet
     : "standar";
+
+  const freqKey = mealFrequency && MEAL_FREQUENCY_OPTIONS[mealFrequency]
+    ? mealFrequency
+    : dietKey === "intermittent_fasting"
+    ? "2_kali"
+    : "normal_3j";
 
   const pickByDiet = (arr, count) => {
     const safeItems = arr.filter((item) => !containsAllergen(item.nama, allergies));
@@ -150,11 +183,26 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
   };
 
   let slots;
-  if (dietKey === "intermittent_fasting") {
-    // Jendela Makan 16:8 (12:00 - 20:00)
+  if (freqKey === "2_kali_ketat") {
     slots = [
       {
-        waktu: "Makan Siang (Buka Jendela 12:00)",
+        waktu: dietKey === "intermittent_fasting" ? "Makan Siang (Buka Jendela 12:00)" : "Makan Siang",
+        jam: "12:00",
+        target_kalori_slot: Math.round(targetKalori * 0.50),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
+      },
+      {
+        waktu: dietKey === "intermittent_fasting" ? "Makan Malam (Tutup Jendela 19:30)" : "Makan Malam",
+        jam: "19:30",
+        target_kalori_slot: Math.round(targetKalori * 0.50),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
+      },
+    ];
+  } else if (freqKey === "2_kali" || dietKey === "intermittent_fasting") {
+    // Jendela Makan 16:8 (12:00 - 20:00) atau pola 2x makan utama + 1x selingan
+    slots = [
+      {
+        waktu: dietKey === "intermittent_fasting" ? "Makan Siang (Buka Jendela 12:00)" : "Makan Siang",
         jam: "12:00",
         target_kalori_slot: Math.round(targetKalori * 0.42),
         items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
@@ -163,12 +211,33 @@ export function generateDailyMealPlan(targetKalori = 1850, allergies = [], activ
         waktu: "Selingan Sore",
         jam: "15:30",
         target_kalori_slot: Math.round(targetKalori * 0.16),
-        items: pickByDiet(DEFAULT_MEAL_POOL.selingan_sore, 2),
+        items: pickByDiet(DEFAULT_MEAL_POOL.selingan_sore, 1),
       },
       {
-        waktu: "Makan Malam (Tutup Jendela 19:30)",
+        waktu: dietKey === "intermittent_fasting" ? "Makan Malam (Tutup Jendela 19:30)" : "Makan Malam",
         jam: "19:30",
         target_kalori_slot: Math.round(targetKalori * 0.42),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
+      },
+    ];
+  } else if (freqKey === "3_kali") {
+    slots = [
+      {
+        waktu: "Sarapan Pagi",
+        jam: "07:00",
+        target_kalori_slot: Math.round(targetKalori * 0.28),
+        items: pickByDiet(DEFAULT_MEAL_POOL.sarapan, 2),
+      },
+      {
+        waktu: "Makan Siang",
+        jam: "12:30",
+        target_kalori_slot: Math.round(targetKalori * 0.40),
+        items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_siang, true),
+      },
+      {
+        waktu: "Makan Malam",
+        jam: "19:00",
+        target_kalori_slot: Math.round(targetKalori * 0.32),
         items: pickBalancedMainMeal(DEFAULT_MEAL_POOL.makan_malam, false),
       },
     ];

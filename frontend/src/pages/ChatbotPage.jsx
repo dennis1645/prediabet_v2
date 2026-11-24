@@ -279,9 +279,12 @@ export default function ChatbotPage() {
         const sugar_verification = res.sugar_verification || null;
         const story_log = res.story_log || null;
 
-        // Sinkronisasi langsung meal_plan terbaru ke state Dashboard (AuthContext)
+        // Sinkronisasi langsung analysis / meal_plan terbaru ke state Dashboard (AuthContext)
+        const updatedAnalysis = res.analysis || res.data?.analysis;
         const updatedMealPlan = res.meal_plan || res.data?.meal_plan;
-        if (Array.isArray(updatedMealPlan) && updatedMealPlan.length > 0 && setAnalysis) {
+        if (updatedAnalysis && setAnalysis) {
+          setAnalysis(updatedAnalysis);
+        } else if (Array.isArray(updatedMealPlan) && updatedMealPlan.length > 0 && setAnalysis) {
           setAnalysis((prev) => ({
             ...(prev || {}),
             meal_plan: updatedMealPlan,

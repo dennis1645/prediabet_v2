@@ -1,5 +1,5 @@
 import { DIET_CATALOG, hitungTargetKaloriMakro } from "../clinical/assessment.js";
-import { generateDailyMealPlan } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, MEAL_FREQUENCY_OPTIONS } from "../clinical/mealPlanEngine.js";
 import db from "../database/connection.js";
 
 export function getAllDiets(req, res) {
@@ -84,7 +84,15 @@ export function activateDiet(req, res) {
       ? profile.pantangan_alergi.split(",").map((s) => s.trim())
       : [];
 
-    analysis.meal_plan = generateDailyMealPlan(analysis.target_kalori, allergies, dietId);
+    const nextFreq = dietId === "intermittent_fasting" ? "2_kali" : (profile.meal_frequency || "normal_3j");
+    const freqMeta = MEAL_FREQUENCY_OPTIONS[nextFreq] || MEAL_FREQUENCY_OPTIONS.normal_3j;
+    profile.meal_frequency = nextFreq;
+    profile.pola_waktu_makan = freqMeta.label;
+    analysis.meal_frequency = nextFreq;
+    analysis.pola_waktu_makan = freqMeta.label;
+    analysis.frekuensi_makan = freqMeta.short;
+
+    analysis.meal_plan = generateDailyMealPlan(analysis.target_kalori, allergies, dietId, nextFreq);
 
     const now = new Date().toISOString();
     db.prepare("UPDATE profiles SET full_profile_data = ?, analysis_result = ?, updated_at = ? WHERE user_id = ?").run(
@@ -146,7 +154,15 @@ export function deactivateDiet(req, res) {
       ? profile.pantangan_alergi.split(",").map((s) => s.trim())
       : [];
 
-    analysis.meal_plan = generateDailyMealPlan(analysis.target_kalori, allergies, "");
+    const resetFreq = "normal_3j";
+    const resetFreqMeta = MEAL_FREQUENCY_OPTIONS[resetFreq];
+    profile.meal_frequency = resetFreq;
+    profile.pola_waktu_makan = resetFreqMeta.label;
+    analysis.meal_frequency = resetFreq;
+    analysis.pola_waktu_makan = resetFreqMeta.label;
+    analysis.frekuensi_makan = resetFreqMeta.short;
+
+    analysis.meal_plan = generateDailyMealPlan(analysis.target_kalori, allergies, "", resetFreq);
 
     const now = new Date().toISOString();
     db.prepare("UPDATE profiles SET full_profile_data = ?, analysis_result = ?, updated_at = ? WHERE user_id = ?").run(

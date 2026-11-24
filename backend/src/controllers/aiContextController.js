@@ -2,7 +2,7 @@ import db from "../database/connection.js";
 import referenceService from "../services/referenceService.js";
 import { detectAndCalculateExercise } from "../utils/metCalculator.js";
 import { prosesAnalisisKlinis } from "../clinical/assessment.js";
-import { generateDailyMealPlan, DEFAULT_MEAL_POOL, containsAllergen } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, DEFAULT_MEAL_POOL, containsAllergen, MEAL_FREQUENCY_OPTIONS } from "../clinical/mealPlanEngine.js";
 
 /**
  * Menentukan kategori jadwal makan berdasarkan input pengguna atau jam aktual WIB (UTC+7).
@@ -692,6 +692,72 @@ export async function forwardChatToAI(req, res) {
       });
     }
 
+    // A2. Deteksi Ubah Frekuensi / Jumlah Makan Sehari via Chat
+    const freqChangeVerb = /\b(?:ubah|ganti|atur|set|jadikan|mau|pengen|kurangi|tambah)\b/i.test(lowerMessage);
+    const freqMatch = lowerMessage.match(/(?:makan\s*(?:jadi|menjadi|ke)?\s*|pola\s*makan\s*(?:jadi|menjadi|ke)?\s*)(2|3|normal)(?:\s*(?:kali|x))?/i);
+    if (freqChangeVerb && freqMatch && profileRow) {
+      const targetNum = freqMatch[1].toLowerCase();
+      const noSnack = /\b(?:tanpa\s*selingan|gak\s*pakai\s*selingan|ga\s*usah\s*selingan|ketat)\b/i.test(lowerMessage);
+      let nextFreqKey = "normal_3j";
+      if (targetNum === "2") {
+        nextFreqKey = noSnack ? "2_kali_ketat" : "2_kali";
+      } else if (targetNum === "3") {
+        nextFreqKey = noSnack ? "3_kali" : "normal_3j";
+      }
+
+      const freqOpt = MEAL_FREQUENCY_OPTIONS[nextFreqKey];
+      let profObj = {};
+      try { profObj = JSON.parse(profileRow.full_profile_data || "{}"); } catch (e) {}
+
+      const allergies = Array.isArray(profObj.pantangan_alergi)
+        ? profObj.pantangan_alergi
+        : typeof profObj.pantangan_alergi === "string"
+        ? profObj.pantangan_alergi.split(",").map((s) => s.trim())
+        : [];
+
+      profObj.meal_frequency = freqOpt.id;
+      profObj.pola_waktu_makan = freqOpt.label;
+      analysis.meal_frequency = freqOpt.id;
+      analysis.pola_waktu_makan = freqOpt.label;
+      analysis.frekuensi_makan = freqOpt.short;
+      analysis.meal_plan = generateDailyMealPlan(
+        analysis.target_kalori || 1850,
+        allergies,
+        analysis.active_diet || "",
+        freqOpt.id
+      );
+
+      db.prepare("UPDATE profiles SET full_profile_data = ?, analysis_result = ?, updated_at = ? WHERE user_id = ?").run(
+        JSON.stringify(profObj),
+        JSON.stringify(analysis),
+        now,
+        userId
+      );
+
+      const slotsSummary = analysis.meal_plan.map((s) => `• **${s.waktu}** (~${s.target_kalori_slot} kkal)`).join("\n");
+      const freqResponse =
+        `Siap ${displayName}! Dr. Predi sudah mengubah pola waktu makan Anda menjadi **${freqOpt.label}** (${freqOpt.short}) dan menyesuaikan meal plan di Dashboard! 🍽️✨\n\n` +
+        `📋 **Jadwal Slot Makan Baru Anda:**\n${slotsSummary}\n\n` +
+        `Total kebutuhan kalori harian Anda (**${analysis.target_kalori || 1850} kkal**) tetap terbagi proporsional sesuai jadwal baru ini.`;
+
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, created_at) VALUES (?, ?, ?, ?, ?)").run(
+        userId, sessionId, "user", sanitizedMessage, now
+      );
+      db.prepare("INSERT INTO chat_logs (user_id, session_id, role, content, metadata, created_at) VALUES (?, ?, ?, ?, ?, ?)").run(
+        userId, sessionId, "assistant", freqResponse, JSON.stringify({ guardrail: "Pola Frekuensi Makan Diperbarui", meal_plan: analysis.meal_plan }), now
+      );
+
+      return res.json({
+        success: true,
+        session_id: sessionId,
+        response: freqResponse,
+        meal_plan: analysis.meal_plan,
+        analysis,
+        guardrail: { zero_allergen_verified: true, safety_message: "Pola Makan Harian Diperbarui" },
+        telemetry: { latency_ms: 10, vllm_connected: false },
+      });
+    }
+
     // B. Deteksi Ganti / Tukar Menu Spesifik (Slot atau Bahan Tertentu)
     const changeVerbPattern = /\b(?:ganti|ubah|tukar|gamau|gak mau|ngga mau|tidak mau|jangan|mau makan yang lain)\b/i;
     const mealTimeTerms = ["sarapan", "selingan pagi", "makan siang", "selingan sore", "makan malam"];
@@ -771,9 +837,11 @@ export async function forwardChatToAI(req, res) {
         : [];
 
       let replacementFoodCandidate = "";
-      const replacementMatches = lowerMessage.match(/(?:dengan|jadi|ke|menjadi|ganti|makan)\s+([a-zA-Z0-9\s-]+?)(?:$|[.,!?\n]|aja|dong|ya)/i);
-      if (replacementMatches && replacementMatches[1]) {
-        const candidateRaw = replacementMatches[1].trim();
+      const withConnectorMatch = lowerMessage.match(/(?:dengan|jadi|menjadi|ke)\s+([a-zA-Z0-9\s-]+?)(?:$|[.,!?\n]|aja|dong|ya)/i);
+      const fallbackVerbMatch = lowerMessage.match(/(?:ganti|ubah|tukar)\s+(?:sarapan|makan siang|makan malam|selingan pagi|selingan sore|menu)?\s*(?:dengan|jadi|menjadi|ke)?\s*([a-zA-Z0-9\s-]+?)(?:$|[.,!?\n]|aja|dong|ya)/i);
+      const pickedMatch = withConnectorMatch || fallbackVerbMatch;
+      if (pickedMatch && pickedMatch[1]) {
+        const candidateRaw = pickedMatch[1].trim();
         const nonFoodWords = ["menu", "yang lain", "lain", "ini", "itu", "dong", "ya", "apa", "sarapan", "siang", "malam", "selingan"];
         if (!nonFoodWords.includes(candidateRaw)) {
           replacementFoodCandidate = candidateRaw;

@@ -88,13 +88,15 @@ class HybridGraphVectorFusion:
 
         # Deteksi apakah pengguna memang meminta resep / menu masakan (bukan sekadar tanya gizi per 100g)
         ql = (user_query or "").lower()
+        is_snack_request = any(k in ql for k in ["selingan", "cemilan", "camilan", "ngemil", "snack", "kudapan"])
         recipe_keywords = [
             "resep", "menu", "masak", "makanan apa", "saran makanan", "rekomendasi makanan",
             "saranin", "sarankan", "sarapan apa", "makan siang apa", "makan malam apa",
             "ide makan", "olah", "olahan", "selain itu", "yang lain", "ada menu lain", "opsi lain", "pilihan lain",
             "pengen makan", "ingin makan", "berkuah", "hangat", "sop", "sup", "soto",
             "basis", "bahan dasar", "enaknya dimasak apa", "punya bahan", "masak apa", "dimasak apa", "bikin apa",
-            "kalau basis", "kalau bahan", "makan siang", "makan malam", "sarapan"
+            "kalau basis", "kalau bahan", "makan siang", "makan malam", "sarapan",
+            "selingan", "cemilan", "camilan", "ngemil", "snack", "kudapan"
         ]
         user_wants_recipe = any(k in ql for k in recipe_keywords)
         user_asks_nutrient_only = any(k in ql for k in ["berapa", "gizi"]) and not any(k in ql for k in [
@@ -155,55 +157,86 @@ class HybridGraphVectorFusion:
                             context_theme = u_text
                             break
 
-            # 3. Panggil RAG Resep Masakan (Bebas Alergen & Anti-Looping)
-            patient_id_seed = f"{getattr(user_context, 'userId', '')}_{patient_name}"
-            chosen = self.vector.query_recipes(
-                query=user_query,
-                exclude_titles=already_suggested,
-                user_allergens=allergens,
-                context_theme=context_theme,
-                user_conditions=conditions,
-                patient_seed=patient_id_seed
-            )
-
-            if chosen:
-                dish_name = chosen["nama_makanan"]
-                cal = chosen["kalori"]
-                prot = chosen["protein"]
-                carb = chosen["karbohidrat"]
-                fat = chosen["lemak"]
-                gi_val = chosen["gi_val"]
-                cara = chosen["cara_olah"]
-
+            # 3. Khusus permintaan SELINGAN / CEMILAN: wajib camilan ringan (~65-115 kkal), BUKAN makan berat
+            if is_snack_request:
+                snack_pool = [
+                    {"nama": "Apel Malang Segar", "nama_makanan": "Apel Malang Segar", "kategori": "Cemilan / Selingan", "kalori": 65, "protein": 0.3, "karbohidrat": 15.0, "lemak": 0.2, "gi": 36, "alasan_klinis": "Buah rendah GI kaya pektin, pas untuk selingan ~65 kkal tanpa memicu lonjakan gula."},
+                    {"nama": "Pir Hijau Potong", "nama_makanan": "Pir Hijau Potong", "kategori": "Cemilan / Selingan", "kalori": 75, "protein": 0.5, "karbohidrat": 18.0, "lemak": 0.2, "gi": 38, "alasan_klinis": "Serat larut tinggi memperlambat absorbsi glukosa, cocok sebagai camilan segar ~75 kkal."},
+                    {"nama": "Pepaya Potong Jeruk Nipis", "nama_makanan": "Pepaya Potong Jeruk Nipis", "kategori": "Cemilan / Selingan", "kalori": 70, "protein": 0.8, "karbohidrat": 16.0, "lemak": 0.3, "gi": 40, "alasan_klinis": "Ringan di lambung dan kaya antioksidan dengan kalori terkontrol ~70 kkal."},
+                    {"nama": "Edamame Rebus", "nama_makanan": "Edamame Rebus", "kategori": "Cemilan / Selingan", "kalori": 95, "protein": 9.0, "karbohidrat": 8.0, "lemak": 4.0, "gi": 18, "alasan_klinis": "Camilan tinggi protein nabati & serat (GI 18), menjaga rasa kenyang di antara jam makan."},
+                    {"nama": "Alpukat Kocok Tawar", "nama_makanan": "Alpukat Kocok Tawar", "kategori": "Cemilan / Selingan", "kalori": 110, "protein": 1.5, "karbohidrat": 6.0, "lemak": 9.0, "gi": 15, "alasan_klinis": "Lemak tak jenuh tunggal membantu sensitivitas insulin tanpa tambahan gula."},
+                    {"nama": "Pisang Kepok Kukus", "nama_makanan": "Pisang Kepok Kukus", "kategori": "Cemilan / Selingan", "kalori": 90, "protein": 1.1, "karbohidrat": 22.0, "lemak": 0.3, "gi": 45, "alasan_klinis": "Camilan Nusantara dikukus tanpa minyak/gula, pas untuk energi ringan ~90 kkal."},
+                    {"nama": "Kacang Almond Panggang Tawar", "nama_makanan": "Kacang Almond Panggang Tawar", "kategori": "Cemilan / Selingan", "kalori": 95, "protein": 3.5, "karbohidrat": 3.0, "lemak": 8.0, "gi": 15, "alasan_klinis": "Camilan rendah karbohidrat (3g) kaya magnesium untuk kestabilan glukosa."},
+                ]
+                safe_snacks = allergen_guardrail.filter_safe_food_candidates(snack_pool, allergens)
+                fresh_snacks = [s for s in safe_snacks if s["nama"] not in already_suggested]
+                chosen_snack = (fresh_snacks or safe_snacks or snack_pool)[0]
                 specific_food = {
-                    "nama_makanan": dish_name,
-                    "nama": dish_name,
-                    "kategori": chosen.get("kategori", "Resep Masakan 3J"),
-                    "kalori": cal,
-                    "protein": prot,
-                    "karbohidrat": carb,
-                    "lemak": fat,
-                    "gi": gi_val,
-                    "gi_category": f"GI Rendah ({gi_val})" if gi_val < 55 else f"GI Sedang ({gi_val})",
-                    "gambar": resolve_food_image(dish_name),
-                    "bahan": chosen.get("bahan", ""),
-                    "langkah": chosen.get("langkah", ""),
-                    "cara_olah": cara,
-                    "alasan_klinis": chosen.get("tips", f"Hidangan bergizi seimbang ramah respon insulin ({cal} kkal, bebas minyak jelantah).")
+                    **chosen_snack,
+                    "gi_category": f"GI Rendah ({chosen_snack['gi']})",
+                    "gambar": resolve_food_image(chosen_snack["nama"]),
+                    "bahan": f"1 porsi {chosen_snack['nama']} segar",
+                    "langkah": "Cuci bersih atau kukus sebentar tanpa tambahan gula/garam berlebih, lalu sajikan sesuai porsi selingan.",
+                    "cara_olah": "Segar / Kukus",
+                    "meal_time": "Selingan",
                 }
+            else:
+                # 3. Panggil RAG Resep Masakan (Bebas Alergen & Anti-Looping)
+                patient_id_seed = f"{getattr(user_context, 'userId', '')}_{patient_name}"
+                chosen = self.vector.query_recipes(
+                    query=user_query,
+                    exclude_titles=already_suggested,
+                    user_allergens=allergens,
+                    context_theme=context_theme,
+                    user_conditions=conditions,
+                    patient_seed=patient_id_seed
+                )
 
-                # Jika pengguna meminta multi-menu (misal: "sarankan 3 menu dulu"), lampirkan multi-candidates ke specific_food
-                is_multi_req = any(k in ql for k in ["3 menu", "tiga menu", "2 menu", "dua menu", "beberapa menu", "pilihan menu", "opsi menu"])
-                if is_multi_req:
-                    multi_candidates = self.vector.get_multi_recipe_candidates(
-                        query=user_query,
-                        limit=3,
-                        exclude_titles=already_suggested,
-                        user_allergens=allergens
+                if chosen:
+                    dish_name = chosen["nama_makanan"]
+                    cal = chosen["kalori"]
+                    prot = chosen["protein"]
+                    carb = chosen["karbohidrat"]
+                    fat = chosen["lemak"]
+                    gi_val = chosen["gi_val"]
+                    cara = chosen["cara_olah"]
+                    inferred_meal_time = (
+                        "Makan Malam" if "makan malam" in ql else
+                        "Makan Siang" if "makan siang" in ql else
+                        "Sarapan" if "sarapan" in ql else
+                        None
                     )
-                    specific_food["multi_menu_candidates"] = multi_candidates
 
-                rag_logger.info("RAG Resep Dinamis Terpilih: '%s' (Kalori: %s, Excluded: %s)", dish_name, cal, already_suggested)
+                    specific_food = {
+                        "nama_makanan": dish_name,
+                        "nama": dish_name,
+                        "kategori": chosen.get("kategori", "Resep Masakan 3J"),
+                        "kalori": cal,
+                        "protein": prot,
+                        "karbohidrat": carb,
+                        "lemak": fat,
+                        "gi": gi_val,
+                        "gi_category": f"GI Rendah ({gi_val})" if gi_val < 55 else f"GI Sedang ({gi_val})",
+                        "gambar": resolve_food_image(dish_name),
+                        "bahan": chosen.get("bahan", ""),
+                        "langkah": chosen.get("langkah", ""),
+                        "cara_olah": cara,
+                        "meal_time": inferred_meal_time,
+                        "alasan_klinis": chosen.get("tips", f"Hidangan bergizi seimbang ramah respon insulin ({cal} kkal, bebas minyak jelantah).")
+                    }
+
+                    # Jika pengguna meminta multi-menu (misal: "sarankan 3 menu dulu"), lampirkan multi-candidates ke specific_food
+                    is_multi_req = any(k in ql for k in ["3 menu", "tiga menu", "2 menu", "dua menu", "beberapa menu", "pilihan menu", "opsi menu"])
+                    if is_multi_req:
+                        multi_candidates = self.vector.get_multi_recipe_candidates(
+                            query=user_query,
+                            limit=3,
+                            exclude_titles=already_suggested,
+                            user_allergens=allergens
+                        )
+                        specific_food["multi_menu_candidates"] = multi_candidates
+
+                    rag_logger.info("RAG Resep Dinamis Terpilih: '%s' (Kalori: %s, Excluded: %s)", dish_name, cal, already_suggested)
 
         # 4. Penelusuran Semantik Dokumen Panduan Medis
         guideline_texts = []

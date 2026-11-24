@@ -63,6 +63,12 @@ export const api = {
       method: "POST",
     }),
 
+  updateMealFrequency: (frequency) =>
+    request("/dashboard/meal-frequency", {
+      method: "PUT",
+      body: JSON.stringify({ frequency }),
+    }),
+
   // Questionnaire
   getQuestionnaireDraft: () => request("/questionnaire/draft"),
 
