@@ -13,6 +13,7 @@ import MenuListPage from "./pages/MenuListPage";
 import DietListPage from "./pages/DietListPage";
 import ProgressTrackerPage from "./pages/ProgressTrackerPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
+import ProfileJournalPage from "./pages/ProfileJournalPage";
 
 function RequireAuth({ children }) {
   const { user, token, loading } = useAuth();
@@ -83,8 +84,9 @@ export default function App() {
           <Route path="/login" element={<PublicOnlyRoute><LoginPage /></PublicOnlyRoute>} />
           <Route path="/register" element={<PublicOnlyRoute><RegisterPage /></PublicOnlyRoute>} />
 
-          {/* Halaman Kuesioner (Wajib login, dapat diakses sebelum maupun sesudah isi profil) */}
+          {/* Halaman Kuesioner & Edit Profil Jurnal */}
           <Route path="/questionnaire" element={<RequireAuth><QuestionnairePage /></RequireAuth>} />
+          <Route path="/profile" element={<RequireAuth><ProfileJournalPage /></RequireAuth>} />
 
           {/* Halaman Chatbot (Bisa diakses untuk Onboarding Intake saat belum ada profil, maupun Konsultasi 3J reguler) */}
           <Route path="/chatbot" element={<RequireAuth><ChatbotPage /></RequireAuth>} />

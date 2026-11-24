@@ -195,6 +195,17 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updateAccount = async (payload) => {
+    const res = await api.updateAccountProfile(payload);
+    if (res.success && res.data) {
+      if (res.data.token) setToken(res.data.token);
+      if (res.data.user) setUser(res.data.user);
+      if (res.data.profile) setProfile(res.data.profile);
+      return res;
+    }
+    throw new Error(res.message || "Gagal memperbarui akun.");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -206,10 +217,12 @@ export function AuthProvider({ children }) {
         login,
         register,
         logout,
+        setUser,
         setProfile,
         setAnalysis,
         completeOnboarding,
         updateProfileAndAnalysis,
+        updateAccount,
       }}
     >
       {children}

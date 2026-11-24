@@ -175,7 +175,7 @@ export default function Navbar() {
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-extrabold text-slate-800 truncate">
-                        {user.username}
+                        {(user.username || "User").replace(/[_.-]+/g, " ").trim().replace(/\b\w/g, (c) => c.toUpperCase())}
                       </p>
                       <p className="text-[11px] text-slate-400 font-semibold truncate">
                         Kelola profil & akun
@@ -241,7 +241,7 @@ export default function Navbar() {
                   )}
 
                   <Link
-                    to="/questionnaire"
+                    to="/profile"
                     onClick={() => setDropdownOpen(false)}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm font-extrabold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition"
                   >

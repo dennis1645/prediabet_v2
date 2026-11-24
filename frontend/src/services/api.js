@@ -55,6 +55,12 @@ export const api = {
 
   getMe: () => request("/auth/me"),
 
+  updateAccountProfile: (payload) =>
+    request("/auth/profile", {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    }),
+
   // Dashboard & Meal Plan
   getDashboard: () => request("/dashboard"),
 
