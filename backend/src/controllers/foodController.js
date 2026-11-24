@@ -13,16 +13,24 @@ export function searchFoods(req, res) {
       excludeFlags,
     });
 
-    // Jika user belum mengetik pencarian, prioritaskan makanan alami ramah 3J (bukan bumbu kemasan/ABC/ultra-proses di urutan atas)
+    // Jika user belum mengetik pencarian, prioritaskan makanan alami ramah 3J (bukan bumbu/minuman kemasan/ultra-proses di urutan atas)
     if (!q || !q.trim()) {
       const scoreFoodForBrowse = (f) => {
         const k = (f.kelompok || "").toLowerCase();
         const n = (f.nama || "").toLowerCase();
         const tp = (f.tingkat_proses || "").toLowerCase();
-        if (k.includes("bumbu") || /\b(abc|sarden|sardines|terasi|kecap|saus|keripik|kornet|sosis)\b/i.test(n) || tp.includes("ultra")) {
+        if (
+          k.includes("bumbu") ||
+          k.includes("dessert") ||
+          /\b(abc|chatime|cimory|boba|sarden|sardines|terasi|kecap|saus|kental manis|keripik|kornet|sosis|nugget)\b/i.test(n) ||
+          tp.includes("ultra") ||
+          tp.includes("kemasan") ||
+          (f.gula || 0) >= 8 ||
+          (f.natrium || 0) > 350
+        ) {
           return 2;
         }
-        if ((f.gi || 35) <= 55 && !f.flags?.gorengan && (f.natrium || 0) <= 350 && (f.gula || 0) <= 8) {
+        if ((f.gi || 35) <= 55 && !f.flags?.gorengan && (f.natrium || 0) <= 350 && (f.gula || 0) <= 5 && !k.includes("dairy")) {
           return 0;
         }
         return 1;

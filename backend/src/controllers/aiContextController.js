@@ -1,4 +1,5 @@
 import db from "../database/connection.js";
+import referenceService from "../services/referenceService.js";
 import { detectAndCalculateExercise } from "../utils/metCalculator.js";
 import { prosesAnalisisKlinis } from "../clinical/assessment.js";
 import { generateDailyMealPlan, DEFAULT_MEAL_POOL, containsAllergen } from "../clinical/mealPlanEngine.js";
@@ -813,7 +814,46 @@ export async function forwardChatToAI(req, res) {
       ].filter((p) => !containsAllergen(p.nama, allergies));
 
       if (replacementFoodCandidate) {
-        replacementItem = allPoolItems.find(p => p.nama.toLowerCase().includes(replacementFoodCandidate.toLowerCase()) || replacementFoodCandidate.toLowerCase().includes(p.nama.toLowerCase()));
+        const candLow = replacementFoodCandidate.toLowerCase();
+        replacementItem = allPoolItems.find(
+          (p) => p.nama.toLowerCase().includes(candLow) || candLow.includes(p.nama.toLowerCase())
+        );
+
+        // Jika tidak ada di pool template, cari di database makanan (4376+ item)
+        if (!replacementItem) {
+          const dbMatches = (referenceService.getFoods({ search: replacementFoodCandidate }) || []).filter(
+            (f) => !containsAllergen(f.nama, allergies)
+          );
+          if (dbMatches.length > 0) {
+            const m = dbMatches[0];
+            const giNum = m.gi ?? 50;
+            replacementItem = {
+              nama: m.nama,
+              kalori: Math.round(m.kalori || 180),
+              porsi: m.porsi || "1 porsi (100g)",
+              gi: giNum <= 55 ? `Rendah (${giNum})` : giNum <= 69 ? `Sedang (${giNum})` : `Tinggi (${giNum})`,
+              kategori: m.kelompok || "Menu Sehat",
+              karbo: Math.round(m.karbo || 25),
+              protein: Math.round(m.protein || 6),
+              lemak: Math.round(m.lemak || 3),
+              gambar: "/food-images/bubur-oatmeal.jpg",
+            };
+          } else {
+            // Gunakan nama makanan yang diminta user secara literal agar tidak diganti menu acak
+            const titleCaseName = replacementFoodCandidate.replace(/\b\w/g, (c) => c.toUpperCase());
+            replacementItem = {
+              nama: titleCaseName,
+              kalori: 180,
+              porsi: "1 porsi sedang",
+              gi: "Rendah (< 55)",
+              kategori: "Menu Sehat",
+              karbo: 25,
+              protein: 8,
+              lemak: 4,
+              gambar: "/food-images/bubur-oatmeal.jpg",
+            };
+          }
+        }
       }
 
       if (!replacementItem) {
@@ -822,19 +862,6 @@ export async function forwardChatToAI(req, res) {
         const availablePool = poolForSlot.filter(p => !currentNames.some(cn => cn.includes(p.nama.toLowerCase()) || p.nama.toLowerCase().includes(cn)));
         if (availablePool.length > 0) {
           replacementItem = availablePool[Math.floor(Math.random() * availablePool.length)];
-        } else if (replacementFoodCandidate) {
-          const titleCaseName = replacementFoodCandidate.replace(/\b\w/g, c => c.toUpperCase());
-          replacementItem = {
-            nama: titleCaseName,
-            kalori: 180,
-            porsi: "1 porsi sedang",
-            gi: "Rendah (< 55)",
-            kategori: "Menu Sehat",
-            karbo: 20,
-            protein: 15,
-            lemak: 5,
-            gambar: "/food-images/bubur-oatmeal.jpg"
-          };
         } else {
           replacementItem = poolForSlot[0] || DEFAULT_MEAL_POOL.sarapan[0];
         }

@@ -51,11 +51,12 @@ export default function MenuListPage() {
 
             const isUltraProcessed =
               kelompokLower.includes("bumbu") ||
+              kelompokLower.includes("dessert") ||
               prosesLower.includes("ultra") ||
               prosesLower.includes("kemasan") ||
-              /\b(abc|sarden|sardines|terasi|kecap|saus|kental manis|keripik|kornet|sosis|nugget)\b/i.test(namaLower);
+              /\b(abc|chatime|cimory|boba|grass jelly|milk tea|fresh milk chocolate|susu coklat|sarden|sardines|terasi|kecap|saus|kental manis|keripik|kornet|sosis|nugget)\b/i.test(namaLower);
             const isContraindicated = /\b(belimbing|jengkol|jeroan|hati|ampela|usus|babat|otak)\b/i.test(namaLower);
-            const isHighSodiumOrSugar = natriumVal > 350 || gulaVal > 8;
+            const isHighSodiumOrSugar = natriumVal > 350 || gulaVal >= 8;
 
             const isSafeRecommended =
               giVal <= 55 &&

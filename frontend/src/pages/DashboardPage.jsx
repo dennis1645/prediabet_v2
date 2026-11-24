@@ -559,12 +559,18 @@ export default function DashboardPage() {
                   <div>
                     <h4 className="text-sm font-black text-amber-900 mb-2">Catatan Adaptasi Klinis</h4>
                     <ul className="space-y-1.5">
-                      {analysis.catatan_pola_makan.map((catatan, i) => (
-                        <li key={i} className="text-xs text-amber-800 leading-relaxed flex items-start gap-2">
-                          <span className="text-amber-500 font-bold">•</span>
-                          <span>{catatan}</span>
-                        </li>
-                      ))}
+                      {analysis.catatan_pola_makan.map((catatan, i) => {
+                        const displayNote =
+                          !analysis.active_diet && typeof catatan === "string" && catatan.startsWith("Diet ")
+                            ? "Pola seimbang 3J standar aktif: Atur jadwal teratur, jumlah kalori terukur, dan pilih jenis makanan rendah indeks glikemik."
+                            : catatan;
+                        return (
+                          <li key={i} className="text-xs text-amber-800 leading-relaxed flex items-start gap-2">
+                            <span className="text-amber-500 font-bold">•</span>
+                            <span>{displayNote}</span>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>

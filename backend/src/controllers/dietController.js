@@ -71,6 +71,9 @@ export function activateDiet(req, res) {
     analysis.target_karbo = macro.karboGram;
     analysis.target_protein = macro.proteinGram;
     analysis.target_lemak = macro.lemakGram;
+    if (Array.isArray(analysis.catatan_pola_makan) && analysis.catatan_pola_makan.length > 0 && macro.catatanDiet) {
+      analysis.catatan_pola_makan[0] = macro.catatanDiet;
+    }
     analysis.active_diet = dietId;
     analysis.active_diet_label = selectedDiet.nama;
 
@@ -133,6 +136,9 @@ export function deactivateDiet(req, res) {
     analysis.target_karbo = macro.karboGram;
     analysis.target_protein = macro.proteinGram;
     analysis.target_lemak = macro.lemakGram;
+    if (Array.isArray(analysis.catatan_pola_makan) && analysis.catatan_pola_makan.length > 0 && macro.catatanDiet) {
+      analysis.catatan_pola_makan[0] = macro.catatanDiet;
+    }
 
     const allergies = Array.isArray(profile.pantangan_alergi)
       ? profile.pantangan_alergi
