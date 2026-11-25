@@ -4,7 +4,7 @@ import httpx
 from app.config import settings
 from app.models.schemas import ChatRequest, ChatResponse, GuardrailReport, UserClinicalContext
 from app.core.fusion_retriever import fusion_engine
-from app.core.prompt_templates import build_vllm_messages
+from app.core.prompt_templates import build_vllm_messages, is_other_patient_privacy_query
 from app.core.vllm_client import vllm_client
 from app.core.neo4j_manager import neo4j_manager
 from app.core.allergen_guardrail import allergen_guardrail
@@ -107,6 +107,28 @@ async def chat_endpoint(request: ChatRequest):
                 safety_message="Guardrail Anti-Jailbreak Aktif"
             ),
             telemetry={"latency_ms": 5, "tokens_per_second": 0, "vllm_connected": False}
+        )
+
+    # 1.2b. Guardrail Privasi Pasien Lain (DILARANG menjawab umur/data milik pasien lain)
+    if is_other_patient_privacy_query(request.message, user_context):
+        privacy_msg = (
+            f"Mohon maaf {display_name}, demi menjaga privasi dan kerahasiaan rekam medis pasien di PrediaBeat, "
+            f"saya hanya dapat mengakses dan menjawab informasi profil atau usia milik Anda sendiri.\n\n"
+            f"Jika Anda ingin menanyakan kebutuhan gizi, target kalori, atau rekomendasi menu yang sesuai dengan profil Anda, silakan beri tahu saya ya!"
+        )
+        return ChatResponse(
+            success=True,
+            response=privacy_msg,
+            user_id=user_context.userId,
+            safe_foods_recommended=[],
+            guardrail=GuardrailReport(
+                zero_allergen_verified=True,
+                allergens_checked=[],
+                allergens_detected_and_blocked=[],
+                deterministic_graph_used=False,
+                safety_message="Guardrail Privasi Pasien Aktif"
+            ),
+            telemetry={"latency_ms": 4, "tokens_per_second": 0, "vllm_connected": False}
         )
 
     # 1.2. Guardrail Out-of-Scope (Non-Medis / Non-Nutrisi / Non-Pangan / Privasi)

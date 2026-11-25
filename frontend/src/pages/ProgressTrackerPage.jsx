@@ -5,7 +5,6 @@ import { showToast } from "../utils/alerts";
 import {
   BookOpen,
   Plus,
-  Flame,
   Activity,
   Calendar,
   Utensils,
@@ -14,6 +13,7 @@ import {
   ChevronRight,
   Clock,
   CheckCircle2,
+  Bookmark,
 } from "lucide-react";
 
 const getLocalDateStr = (d = new Date()) => {
@@ -197,326 +197,377 @@ export default function ProgressTrackerPage() {
   };
 
   return (
-    <div className="relative min-h-screen py-8 bg-gradient-to-br from-amber-50/40 via-slate-50 to-emerald-50/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="relative min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-[#EAE4D7]">
+      <div className="max-w-7xl mx-auto">
 
-        {/* HEADER BUKU JURNAL & NAVIGATOR TANGGAL KALENDER */}
-        <section className="bg-[#FCFBF7] rounded-[2rem] border-2 border-amber-200/70 p-6 md:p-8 mb-8 shadow-[0_18px_50px_rgba(120,53,15,0.06)] relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 text-amber-900 text-xs font-black uppercase tracking-wider mb-3 border border-amber-200">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>Buku Jurnal Harian 3J</span>
-              </div>
-              <h1 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight">
-                Jurnal Makan & Aktivitas Harian
-              </h1>
-              <p className="text-slate-600 font-medium text-sm mt-2 max-w-2xl">
-                Catat dan tinjau kembali setiap waktu makan, jam konsumsi, serta aktivitas fisik Anda dari hari ke hari.
-              </p>
+        {/* BAR ATAS: JUDUL & NAVIGATOR TANGGAL BUKU */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/10 text-amber-950 text-xs font-black uppercase tracking-wider mb-1.5">
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Buku Jurnal Harian 3J</span>
             </div>
-
-            {/* KARTU KALENDER TANGGAL JURNAL */}
-            <div className="flex items-center gap-3 bg-white border-2 border-amber-200/80 rounded-3xl p-4 shadow-sm self-start lg:self-auto">
-              <button
-                type="button"
-                onClick={() => shiftDate(-1)}
-                className="w-9 h-9 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 flex items-center justify-center transition cursor-pointer"
-                title="Hari Sebelumnya"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-
-              <div className="flex items-center gap-3 px-2">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex flex-col items-center justify-center shadow-md">
-                  <span className="text-[10px] font-bold uppercase tracking-wider opacity-90">{dateInfo.bulan.slice(0, 3)}</span>
-                  <span className="text-2xl font-black leading-none">{dateInfo.tanggal}</span>
-                </div>
-                <div>
-                  <p className="text-sm font-black text-slate-900">{dateInfo.hari}</p>
-                  <p className="text-xs font-semibold text-slate-500">
-                    {dateInfo.tanggal} {dateInfo.bulan} {dateInfo.tahun}
-                  </p>
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => e.target.value && setSelectedDate(e.target.value)}
-                    className="mt-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-2 py-0.5 cursor-pointer"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => shiftDate(1)}
-                className="w-9 h-9 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 flex items-center justify-center transition cursor-pointer"
-                title="Hari Berikutnya"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
+            <h1 className="text-2xl md:text-3xl font-black text-stone-900 tracking-tight">
+              Jurnal Makan &amp; Aktivitas Harian
+            </h1>
           </div>
 
-          {/* Strip Ringkasan Kalori & Riwayat Tanggal */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-amber-200/60">
-            <div className="bg-white rounded-2xl p-3.5 border border-amber-100">
-              <span className="text-[10px] font-black uppercase text-slate-400">Target Kalori</span>
-              <p className="text-xl font-black text-slate-800">{targetKalori} <span className="text-xs font-semibold text-slate-400">kkal</span></p>
-            </div>
-            <div className="bg-white rounded-2xl p-3.5 border border-emerald-100">
-              <span className="text-[10px] font-black uppercase text-slate-400">Masuk ({dateInfo.tanggal} {dateInfo.bulan.slice(0,3)})</span>
-              <p className="text-xl font-black text-emerald-700">{totalCaloriesIn} <span className="text-xs font-semibold text-slate-400">kkal</span></p>
-            </div>
-            <div className="bg-white rounded-2xl p-3.5 border border-orange-100">
-              <span className="text-[10px] font-black uppercase text-slate-400">Terbakar Olahraga</span>
-              <p className="text-xl font-black text-orange-600">{totalCaloriesOut} <span className="text-xs font-semibold text-slate-400">kkal</span></p>
-            </div>
-            <div className="bg-white rounded-2xl p-3.5 border border-slate-200">
-              <span className="text-[10px] font-black uppercase text-slate-400">Sisa Anggaran</span>
-              <p className={`text-xl font-black ${remainingCalories >= 0 ? "text-teal-700" : "text-rose-600"}`}>
-                {remainingCalories} <span className="text-xs font-semibold text-slate-400">kkal</span>
-              </p>
-            </div>
+          <div className="flex items-center gap-2 bg-white/90 border border-stone-300 rounded-2xl p-2 shadow-xs self-start md:self-auto">
+            <button
+              type="button"
+              onClick={() => shiftDate(-1)}
+              className="w-8 h-8 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 flex items-center justify-center transition cursor-pointer"
+              title="Halaman Hari Sebelumnya"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => e.target.value && setSelectedDate(e.target.value)}
+              className="text-xs font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-1.5 cursor-pointer"
+            />
+            <button
+              type="button"
+              onClick={() => shiftDate(1)}
+              className="w-8 h-8 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 flex items-center justify-center transition cursor-pointer"
+              title="Halaman Hari Berikutnya"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
-        </section>
+        </div>
 
-        {/* HALAMAN BUKU JURNAL 2 SISI: KIRI (CATATAN MAKANAN) & KANAN (AKTIVITAS & ARSIP TANGGAL) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-7">
+        {/* SAMPUL BUKU KULIT & BUKU TERBUKA 2 HALAMAN (OPEN BOOK SPREAD) */}
+        <div className="bg-[#5C4033] p-2.5 sm:p-4 rounded-[2.2rem] shadow-[0_28px_70px_rgba(41,25,15,0.28)] border-b-8 border-[#3E2723] relative">
+          {/* Pita Pembatas Buku */}
+          <div className="hidden sm:flex absolute -top-2 right-14 z-20 items-center gap-1 bg-rose-700 text-white px-3 py-1.5 rounded-b-xl shadow-md text-[10px] font-black uppercase tracking-wider">
+            <Bookmark className="w-3 h-3" />
+            <span>{dateInfo.tanggal} {dateInfo.bulan.slice(0, 3)}</span>
+          </div>
 
-          {/* SISI KIRI BUKU JURNAL (7 KOLOM): TIMELINE & INPUT MAKANAN */}
-          <div className="lg:col-span-7 bg-[#FCFBF7] rounded-[2rem] border-2 border-amber-200/70 p-6 md:p-8 shadow-sm flex flex-col justify-between relative">
-            <div>
-              <div className="flex items-center justify-between gap-3 mb-5 pb-3 border-b border-amber-200/70">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
-                    <Utensils className="w-5 h-5" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 bg-[#FCF9F2] rounded-[1.7rem] overflow-hidden relative shadow-inner">
+            {/* JILID TENGAH BUKU (SPINE & RING BINDER) */}
+            <div className="hidden lg:flex flex-col justify-evenly items-center absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-8 z-20 pointer-events-none">
+              <div className="w-full h-full bg-gradient-to-r from-black/10 via-stone-400/30 to-black/10 absolute inset-0" />
+              {[1, 2, 3, 4, 5, 6].map((ring) => (
+                <div
+                  key={ring}
+                  className="relative z-10 w-6 h-3 rounded-full bg-gradient-to-b from-stone-300 to-stone-500 border border-stone-600/40 shadow-sm"
+                />
+              ))}
+            </div>
+
+            {/* ========================================================= */}
+            {/* HALAMAN KIRI: KERTAS BERGARIS + CATATAN MAKAN & AKTIVITAS */}
+            {/* ========================================================= */}
+            <div
+              className="p-6 sm:p-8 lg:pr-12 border-b lg:border-b-0 lg:border-r border-stone-300 relative flex flex-col justify-between min-h-[580px]"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(148, 163, 184, 0.22) 32px)",
+              }}
+            >
+              {/* Garis Margin Merah Tipis ala Buku Tulis */}
+              <div className="hidden sm:block absolute top-0 bottom-0 left-10 w-[1px] bg-rose-300/60 pointer-events-none" />
+
+              <div className="sm:pl-6 relative z-10">
+                {/* Header Halaman Kiri dengan Stempel Tanggal Kalender */}
+                <div className="flex items-start justify-between gap-3 pb-4 mb-5 border-b-2 border-stone-300/80">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-14 rounded-xl bg-white border-2 border-emerald-700 overflow-hidden shadow-xs flex flex-col items-center justify-center shrink-0">
+                      <span className="w-full text-center bg-emerald-700 text-white text-[9px] font-black uppercase py-0.5">
+                        {dateInfo.bulan.slice(0, 3)}
+                      </span>
+                      <span className="text-xl font-black text-stone-900 leading-tight my-auto">{dateInfo.tanggal}</span>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Halaman Kiri • Catatan</p>
+                      <h2 className="text-lg sm:text-xl font-black text-stone-900">
+                        {dateInfo.hari}, {dateInfo.tanggal} {dateInfo.bulan} {dateInfo.tahun}
+                      </h2>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="font-black text-slate-900 text-lg">Catatan Asupan Makanan</h2>
-                    <p className="text-xs text-slate-500">Halaman tanggal {dateInfo.tanggal} {dateInfo.bulan} {dateInfo.tahun}</p>
-                  </div>
-                </div>
-                {foodLogs.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      if (window.confirm("Apakah Anda yakin ingin mereset catatan progres makanan?")) {
-                        try {
-                          await api.resetProgress();
-                          showToast("success", "Catatan jurnal berhasil direset!");
-                          loadJournalData(selectedDate);
-                        } catch (err) {
-                          showToast("error", err.message || "Gagal mereset.");
+
+                  {foodLogs.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        if (window.confirm("Apakah Anda yakin ingin mereset catatan progres makanan?")) {
+                          try {
+                            await api.resetProgress();
+                            showToast("success", "Catatan jurnal berhasil direset!");
+                            loadJournalData(selectedDate);
+                          } catch (err) {
+                            showToast("error", err.message || "Gagal mereset.");
+                          }
                         }
-                      }
-                    }}
-                    className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 hover:bg-rose-50 px-2.5 py-1 rounded-lg transition cursor-pointer"
-                  >
-                    <RotateCcw className="w-3 h-3" />
-                    <span>Reset</span>
-                  </button>
-                )}
+                      }}
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 hover:bg-rose-50 px-2.5 py-1 rounded-lg transition cursor-pointer bg-white/80 border border-rose-200"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                      <span>Reset</span>
+                    </button>
+                  )}
+                </div>
+
+                {/* Stiker Ringkasan Kalori Hari Ini */}
+                <div className="grid grid-cols-3 gap-2.5 mb-5">
+                  <div className="bg-white/95 rounded-xl p-2.5 border border-emerald-200 shadow-2xs">
+                    <span className="text-[9px] font-black uppercase text-stone-400 block">Masuk</span>
+                    <span className="text-sm font-black text-emerald-700">{totalCaloriesIn} kkal</span>
+                  </div>
+                  <div className="bg-white/95 rounded-xl p-2.5 border border-orange-200 shadow-2xs">
+                    <span className="text-[9px] font-black uppercase text-stone-400 block">Olahraga</span>
+                    <span className="text-sm font-black text-orange-600">-{totalCaloriesOut} kkal</span>
+                  </div>
+                  <div className="bg-white/95 rounded-xl p-2.5 border border-stone-200 shadow-2xs">
+                    <span className="text-[9px] font-black uppercase text-stone-400 block">Sisa ({targetKalori})</span>
+                    <span className={`text-sm font-black ${remainingCalories >= 0 ? "text-teal-700" : "text-rose-600"}`}>
+                      {remainingCalories} kkal
+                    </span>
+                  </div>
+                </div>
+
+                {/* Daftar Catatan Makanan */}
+                <div className="mb-5">
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <Utensils className="w-4 h-4 text-emerald-700" />
+                    <h3 className="text-xs font-black uppercase tracking-wider text-stone-700">
+                      Catatan Makanan Tercatat
+                    </h3>
+                  </div>
+
+                  {loading ? (
+                    <div className="py-6 text-center text-xs text-stone-400 font-semibold">Membuka halaman jurnal...</div>
+                  ) : foodLogs.length === 0 ? (
+                    <div className="py-7 text-center text-xs text-stone-500 font-semibold bg-white/75 rounded-2xl border border-dashed border-stone-300">
+                      Halaman masih kosong untuk {dateInfo.tanggal} {dateInfo.bulan}.<br />
+                      Tulis catatan makan di halaman kanan atau lapor ke Dr. Predi!
+                    </div>
+                  ) : (
+                    <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+                      {foodLogs.map((item) => (
+                        <div
+                          key={item.id}
+                          className="flex items-center justify-between p-3 rounded-xl bg-white/95 border border-stone-200 shadow-2xs"
+                        >
+                          <div className="flex items-start gap-2.5">
+                            <div className="mt-1.5 w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
+                            <div>
+                              <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
+                                <span className="text-[10px] font-black text-emerald-800 uppercase bg-emerald-100 px-2 py-0.5 rounded">
+                                  {item.waktu}
+                                </span>
+                                {item.jam && (
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
+                                    <Clock className="w-2.5 h-2.5" />
+                                    {item.jam} WIB
+                                  </span>
+                                )}
+                              </div>
+                              <p className="font-bold text-stone-800 text-sm">{item.nama}</p>
+                            </div>
+                          </div>
+                          <span className="font-black text-emerald-700 text-sm shrink-0">{item.kalori} kkal</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Daftar Aktivitas Fisik */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Activity className="w-4 h-4 text-orange-600" />
+                    <h3 className="text-xs font-black uppercase tracking-wider text-stone-700">
+                      Catatan Olahraga
+                    </h3>
+                  </div>
+                  {activities.length === 0 ? (
+                    <p className="text-xs text-stone-400 italic bg-white/60 px-3 py-2 rounded-xl border border-dashed border-stone-300">
+                      Belum ada aktivitas fisik tercatat pada halaman ini.
+                    </p>
+                  ) : (
+                    <div className="space-y-2">
+                      {activities.map((act) => (
+                        <div key={act.id} className="flex items-center justify-between p-3 rounded-xl bg-white/95 border border-orange-200 text-xs">
+                          <div>
+                            <span className="font-bold text-stone-800">{act.nama}</span>
+                            <span className="text-stone-400 ml-1.5">({act.durasi} mnt)</span>
+                          </div>
+                          <span className="font-black text-orange-600">-{act.kaloriTerbakar} kkal</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* Form Catat Makanan dengan Jam */}
-              <form onSubmit={handleAddFood} className="bg-white rounded-2xl border border-amber-200/60 p-4 mb-6 space-y-3 shadow-2xs">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <div>
-                    <label className="block text-[10px] font-black text-slate-500 uppercase mb-1">Waktu Makan</label>
-                    <select
-                      value={inputFoodMeal}
-                      onChange={(e) => setInputFoodMeal(e.target.value)}
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800"
-                    >
-                      <option value="Sarapan">Sarapan Pagi</option>
-                      <option value="Selingan Pagi">Selingan Pagi</option>
-                      <option value="Makan Siang">Makan Siang</option>
-                      <option value="Selingan Sore">Selingan Sore</option>
-                      <option value="Makan Malam">Makan Malam</option>
-                    </select>
+              <div className="sm:pl-6 mt-6 pt-3 border-t border-stone-300/70 flex justify-between items-center text-[11px] font-bold text-stone-400">
+                <span>Hal. 1 — Catatan Harian</span>
+                <span className="text-emerald-800 font-black">Total: {totalCaloriesIn} kkal</span>
+              </div>
+            </div>
+
+            {/* ========================================================= */}
+            {/* HALAMAN KANAN: FORM TULIS CATATAN & ARSIP TANGGAL         */}
+            {/* ========================================================= */}
+            <div
+              className="p-6 sm:p-8 lg:pl-12 relative flex flex-col justify-between min-h-[580px]"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(148, 163, 184, 0.22) 32px)",
+              }}
+            >
+              <div className="space-y-6 relative z-10">
+                <div className="pb-3 border-b-2 border-stone-300/80">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Halaman Kanan • Tulis Entri</p>
+                  <h2 className="text-lg sm:text-xl font-black text-stone-900">
+                    Tambah Catatan Baru
+                  </h2>
+                </div>
+
+                {/* Form Catat Makanan */}
+                <form onSubmit={handleAddFood} className="bg-white/95 rounded-2xl border border-stone-300/80 p-4 space-y-3 shadow-xs">
+                  <p className="text-xs font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
+                    <Utensils className="w-3.5 h-3.5" />
+                    <span>Catat Asupan Makanan</span>
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    <div>
+                      <label className="block text-[10px] font-black text-stone-500 uppercase mb-1">Waktu</label>
+                      <select
+                        value={inputFoodMeal}
+                        onChange={(e) => setInputFoodMeal(e.target.value)}
+                        className="w-full px-2.5 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-800"
+                      >
+                        <option value="Sarapan">Sarapan Pagi</option>
+                        <option value="Selingan Pagi">Selingan Pagi</option>
+                        <option value="Makan Siang">Makan Siang</option>
+                        <option value="Selingan Sore">Selingan Sore</option>
+                        <option value="Makan Malam">Makan Malam</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-stone-500 uppercase mb-1">Jam (WIB)</label>
+                      <input
+                        type="time"
+                        value={inputFoodTime}
+                        onChange={(e) => setInputFoodTime(e.target.value)}
+                        className="w-full px-2.5 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-800"
+                      />
+                    </div>
+                    <div className="col-span-2 sm:col-span-1">
+                      <label className="block text-[10px] font-black text-stone-500 uppercase mb-1">Kalori</label>
+                      <input
+                        type="number"
+                        value={inputFoodCal}
+                        onChange={(e) => setInputFoodCal(e.target.value)}
+                        placeholder="350"
+                        className="w-full px-2.5 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-800"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-black text-slate-500 uppercase mb-1">Jam Konsumsi</label>
+                  <div className="flex gap-2">
                     <input
-                      type="time"
-                      value={inputFoodTime}
-                      onChange={(e) => setInputFoodTime(e.target.value)}
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800"
+                      type="text"
+                      value={inputFoodName}
+                      onChange={(e) => setInputFoodName(e.target.value)}
+                      placeholder="Contoh: Nasi merah + pepes ikan..."
+                      className="flex-1 px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-semibold text-stone-800"
                     />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs rounded-xl transition cursor-pointer flex items-center gap-1 shrink-0"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Tulis</span>
+                    </button>
                   </div>
-                  <div className="col-span-2 sm:col-span-1">
-                    <label className="block text-[10px] font-black text-slate-500 uppercase mb-1">Kalori (kkal)</label>
+                </form>
+
+                {/* Form Catat Olahraga */}
+                <form onSubmit={handleAddActivity} className="bg-white/95 rounded-2xl border border-stone-300/80 p-4 space-y-2.5 shadow-xs">
+                  <p className="text-xs font-black text-orange-700 uppercase tracking-wider flex items-center gap-1.5">
+                    <Activity className="w-3.5 h-3.5" />
+                    <span>Catat Aktivitas Fisik</span>
+                  </p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <select
+                      value={inputActivityName}
+                      onChange={(e) => setInputActivityName(e.target.value)}
+                      className="col-span-2 px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-800"
+                    >
+                      <option value="Jalan Kaki Cepat">Jalan Kaki Cepat</option>
+                      <option value="Bersepeda Santai">Bersepeda Santai</option>
+                      <option value="Senam / Aerobik">Senam / Aerobik Ringan</option>
+                      <option value="Berenang">Berenang</option>
+                      <option value="Latihan Kekuatan Otot">Latihan Beban</option>
+                    </select>
                     <input
                       type="number"
-                      value={inputFoodCal}
-                      onChange={(e) => setInputFoodCal(e.target.value)}
-                      placeholder="350"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800"
+                      min="5"
+                      max="180"
+                      value={inputDuration}
+                      onChange={(e) => setInputDuration(e.target.value)}
+                      className="px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-800"
+                      placeholder="Menit"
                     />
                   </div>
-                </div>
-
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={inputFoodName}
-                    onChange={(e) => setInputFoodName(e.target.value)}
-                    placeholder="Tulis makanan yang dimakan (misal: Nasi merah + pepes ikan)..."
-                    className="flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800"
-                  />
                   <button
                     type="submit"
-                    className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl transition cursor-pointer flex items-center gap-1.5 shrink-0"
+                    className="w-full py-2 bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-xs rounded-xl transition cursor-pointer flex items-center justify-center gap-1.5"
                   >
-                    <Plus className="w-4 h-4" />
-                    <span>Catat</span>
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>Simpan Olahraga ({inputDuration} menit)</span>
                   </button>
-                </div>
-              </form>
+                </form>
 
-              {/* Timeline Catatan Jurnal */}
-              <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
-                {loading ? (
-                  <div className="py-8 text-center text-xs text-slate-400 font-semibold">Membuka halaman jurnal...</div>
-                ) : foodLogs.length === 0 ? (
-                  <div className="py-10 text-center text-xs text-slate-400 font-semibold bg-white/70 rounded-2xl border border-dashed border-amber-300">
-                    Belum ada catatan makan pada {dateInfo.tanggal} {dateInfo.bulan} {dateInfo.tahun}.
+                {/* Arsip Pembatas Halaman 7 Hari Terakhir */}
+                <div className="bg-white/90 rounded-2xl border border-stone-300/80 p-4 shadow-2xs">
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <Calendar className="w-4 h-4 text-emerald-700" />
+                    <h3 className="text-xs font-black uppercase tracking-wider text-stone-800">
+                      Arsip Halaman 7 Hari Terakhir
+                    </h3>
                   </div>
-                ) : (
-                  foodLogs.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-amber-100 shadow-2xs"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="mt-0.5 w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-                        <div>
-                          <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
-                            <span className="text-[10px] font-black text-emerald-800 uppercase bg-emerald-100 px-2 py-0.5 rounded-md">
-                              {item.waktu}
-                            </span>
-                            {item.jam && (
-                              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-800 bg-amber-100/70 px-2 py-0.5 rounded-md">
-                                <Clock className="w-2.5 h-2.5" />
-                                {item.jam} WIB
-                              </span>
-                            )}
-                          </div>
-                          <p className="font-bold text-slate-800 text-sm">{item.nama}</p>
-                        </div>
-                      </div>
-                      <span className="font-black text-emerald-700 text-sm shrink-0">{item.kalori} kkal</span>
+                  {weeklyLogs.length === 0 ? (
+                    <p className="text-xs text-stone-400">Belum ada arsip halaman minggu ini.</p>
+                  ) : (
+                    <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+                      {weeklyLogs.map((wl) => (
+                        <button
+                          key={wl.tanggal}
+                          type="button"
+                          onClick={() => setSelectedDate(wl.tanggal)}
+                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl border text-xs transition cursor-pointer ${
+                            selectedDate === wl.tanggal
+                              ? "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold"
+                              : "bg-stone-50 border-stone-200 text-stone-700 hover:bg-amber-50"
+                          }`}
+                        >
+                          <span className="flex items-center gap-1.5">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>{wl.tanggal}</span>
+                          </span>
+                          <span className="font-mono text-[11px]">
+                            {Math.round(wl.actual_kalori || 0)} kkal • {wl.duration_minutes || 0} mnt
+                          </span>
+                        </button>
+                      ))}
                     </div>
-                  ))
-                )}
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-6 pt-3 border-t border-stone-300/70 flex justify-between items-center text-[11px] font-bold text-stone-400">
+                <span>PrediaBeat Daily Journal</span>
+                <span>Hal. 2 — Entri &amp; Arsip</span>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-amber-200/70 flex justify-between items-center text-sm font-black text-slate-800">
-              <span>Total Kalori Tercatat:</span>
-              <span className="text-lg text-emerald-700">{totalCaloriesIn} kkal</span>
-            </div>
           </div>
-
-          {/* SISI KANAN BUKU JURNAL (5 KOLOM): AKTIVITAS FISIK & ARSIP TANGGAL */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="bg-[#FCFBF7] rounded-[2rem] border-2 border-amber-200/70 p-6 shadow-sm">
-              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-amber-200/70">
-                <div className="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center">
-                  <Activity className="w-5 h-5" />
-                </div>
-                <div>
-                  <h2 className="font-black text-slate-900 text-lg">Catatan Aktivitas Fisik</h2>
-                  <p className="text-xs text-slate-500">Meningkatkan sensitivitas insulin harian</p>
-                </div>
-              </div>
-
-              <form onSubmit={handleAddActivity} className="space-y-3 mb-4">
-                <div className="grid grid-cols-3 gap-2">
-                  <select
-                    value={inputActivityName}
-                    onChange={(e) => setInputActivityName(e.target.value)}
-                    className="col-span-2 px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800"
-                  >
-                    <option value="Jalan Kaki Cepat">Jalan Kaki Cepat</option>
-                    <option value="Bersepeda Santai">Bersepeda Santai</option>
-                    <option value="Senam / Aerobik">Senam / Aerobik Ringan</option>
-                    <option value="Berenang">Berenang</option>
-                    <option value="Latihan Kekuatan Otot">Latihan Beban</option>
-                  </select>
-                  <input
-                    type="number"
-                    min="5"
-                    max="180"
-                    value={inputDuration}
-                    onChange={(e) => setInputDuration(e.target.value)}
-                    className="px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800"
-                    placeholder="Menit"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-xs rounded-xl transition cursor-pointer flex items-center justify-center gap-1.5"
-                >
-                  <Plus className="w-4 h-4" />
-                  <span>Catat Olahraga ({inputDuration} menit)</span>
-                </button>
-              </form>
-
-              <div className="space-y-2">
-                {activities.length === 0 ? (
-                  <p className="text-center text-xs text-slate-400 py-4 bg-white/70 rounded-xl border border-dashed border-amber-300">
-                    Belum ada aktivitas fisik tercatat pada tanggal ini.
-                  </p>
-                ) : (
-                  activities.map((act) => (
-                    <div key={act.id} className="flex items-center justify-between p-3 rounded-xl bg-white border border-orange-100 text-xs">
-                      <div>
-                        <span className="font-bold text-slate-800">{act.nama}</span>
-                        <span className="text-slate-400 ml-1.5">({act.durasi} mnt)</span>
-                      </div>
-                      <span className="font-black text-orange-600">-{act.kaloriTerbakar} kkal</span>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-
-            {/* Arsip Riwayat Tanggal 7 Hari Terakhir */}
-            <div className="bg-white rounded-[2rem] border border-slate-200/80 p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-3">
-                <Calendar className="w-4 h-4 text-emerald-600" />
-                <h3 className="text-sm font-black text-slate-900">Arsip Catatan 7 Hari Terakhir</h3>
-              </div>
-              {weeklyLogs.length === 0 ? (
-                <p className="text-xs text-slate-400">Belum ada arsip catatan minggu ini.</p>
-              ) : (
-                <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
-                  {weeklyLogs.map((wl) => (
-                    <button
-                      key={wl.tanggal}
-                      type="button"
-                      onClick={() => setSelectedDate(wl.tanggal)}
-                      className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border text-xs transition cursor-pointer ${
-                        selectedDate === wl.tanggal
-                          ? "bg-emerald-50 border-emerald-300 text-emerald-900 font-bold"
-                          : "bg-slate-50 border-slate-200/70 text-slate-700 hover:bg-amber-50/60"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>{wl.tanggal}</span>
-                      </span>
-                      <span className="font-mono text-[11px]">
-                        {Math.round(wl.actual_kalori || 0)} kkal • {wl.duration_minutes || 0} mnt
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
         </div>
       </div>
     </div>

@@ -424,7 +424,18 @@ export default function DashboardPage() {
                   <div className="rounded-2xl bg-white border border-slate-200/80 p-4 shadow-2xs">
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-wide">Kualitas Makanan</p>
                     <p className="text-base font-black text-purple-700 mt-2">
-                      Sangat Baik ({healthScore.breakdown.food_quality}/10)
+                      {(() => {
+                        const fq = Number(healthScore.breakdown?.food_quality || 0);
+                        const label =
+                          fq <= 0
+                            ? "Belum Ada Data"
+                            : fq >= 8
+                            ? "Sangat Baik"
+                            : fq >= 6
+                            ? "Cukup Baik"
+                            : "Perlu Perbaikan";
+                        return `${label} (${fq}/10)`;
+                      })()}
                     </p>
                   </div>
                 </div>
