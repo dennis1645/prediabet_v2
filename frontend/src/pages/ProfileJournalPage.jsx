@@ -357,7 +357,8 @@ export default function ProfileJournalPage() {
     e.preventDefault();
     setSavingWa(true);
     try {
-      const res = await api.saveWaReminders(waSettings);
+      const syncedPhone = (user?.phone_number || profile?.phone_number || waSettings.phone_number || "").trim();
+      const res = await api.saveWaReminders({ ...waSettings, phone_number: syncedPhone });
       if (res?.success && res.data) {
         setWaSettings((prev) => ({ ...prev, ...res.data }));
       }
@@ -1109,18 +1110,29 @@ export default function ProfileJournalPage() {
                     </label>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">
-                      Nomor WhatsApp Tujuan
-                    </label>
-                    <input
-                      type="tel"
-                      value={waSettings.phone_number}
-                      onChange={(e) => setWaSettings((p) => ({ ...p, phone_number: e.target.value }))}
-                      placeholder="08xxxxxxxxxx / 628xxxxxxxxxx"
-                      className="w-full px-4 py-2.5 bg-white border border-stone-300 rounded-xl text-sm font-semibold text-slate-800"
-                    />
-                  </div>
+                  {/* Nomor WhatsApp diambil otomatis dari Bab 01 (Identitas Akun) */}
+                  {(() => {
+                    const activePhone = (user?.phone_number || profile?.phone_number || waSettings.phone_number || "").trim();
+                    return (
+                      <div className="p-3.5 rounded-2xl bg-white border border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <div>
+                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider">
+                            Nomor WhatsApp Tujuan (Otomatis dari Profil)
+                          </p>
+                          <p className="text-sm font-extrabold text-slate-800 mt-0.5">
+                            {activePhone ? activePhone : <span className="text-amber-700">Belum diisi di Identitas Akun</span>}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => goToPage(0)}
+                          className="px-3 py-1.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 text-[11px] font-extrabold transition cursor-pointer self-start sm:self-auto"
+                        >
+                          {activePhone ? "Ubah di Bab 01" : "Isi Nomor di Bab 01"}
+                        </button>
+                      </div>
+                    );
+                  })()}
 
                   {/* Jadwal Jam Makan */}
                   <div className="p-4 rounded-2xl bg-white border border-stone-200">

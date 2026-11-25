@@ -315,6 +315,16 @@ export function updateAccountProfile(req, res) {
       } catch (e) {}
     }
 
+    // Sinkronkan nomor WhatsApp ke pengaturan pengingat WA
+    try {
+      ensureWaReminderTable();
+      db.prepare("UPDATE whatsapp_reminders SET phone_number = ?, updated_at = ? WHERE user_id = ?").run(
+        nextPhone || "",
+        now,
+        userId
+      );
+    } catch (e) {}
+
     const token = jwt.sign(
       { id: userId, username: nextName, role: userRow.role },
       config.jwtSecret,
@@ -408,6 +418,16 @@ export function getWaReminders(req, res) {
       row.link_code = code;
     }
 
+    // Sinkronkan otomatis nomor WhatsApp dari profil jika di tabel pengingat masih kosong
+    if ((!row.phone_number || !row.phone_number.trim()) && userRow?.phone_number) {
+      db.prepare("UPDATE whatsapp_reminders SET phone_number = ?, updated_at = ? WHERE user_id = ?").run(
+        userRow.phone_number,
+        now,
+        userId
+      );
+      row.phone_number = userRow.phone_number;
+    }
+
     let customReminders = [];
     try {
       customReminders = JSON.parse(row.custom_reminders_json || "[]");
@@ -461,8 +481,9 @@ export function saveWaReminders(req, res) {
 
     const now = new Date().toISOString();
     const existing = db.prepare("SELECT * FROM whatsapp_reminders WHERE user_id = ?").get(userId);
+    const userRow = db.prepare("SELECT phone_number FROM users WHERE id = ?").get(userId);
     const linkCode = existing?.link_code || generateLinkCode(userId);
-    const cleanPhone = (phone_number || "").trim();
+    const cleanPhone = (phone_number || userRow?.phone_number || "").trim();
     const safeCustomReminders = Array.isArray(custom_reminders)
       ? custom_reminders
           .filter((item) => item && typeof item === "object" && /^\d{2}:\d{2}$/.test(String(item.time || "")))
