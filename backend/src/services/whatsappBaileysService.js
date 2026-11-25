@@ -354,6 +354,37 @@ async function runReminderTick() {
           }
         }
       }
+
+      // Cek juga pengingat kustom milik user (tambah/edit/hapus sendiri)
+      let customList = [];
+      try {
+        customList = JSON.parse(r.custom_reminders_json || "[]");
+      } catch {
+        customList = [];
+      }
+      if (Array.isArray(customList)) {
+        for (const cr of customList) {
+          if (!cr || cr.enabled === false || cr.time !== wibTime) continue;
+          const customType = `custom_${cr.id}`;
+          const existingLog = db
+            .prepare("SELECT * FROM wa_reminder_logs WHERE user_id = ? AND tanggal = ? AND reminder_type = ?")
+            .get(r.user_id, wibDate, customType);
+          if (!existingLog) {
+            const icon = cr.type === "medicine" ? "💊" : cr.type === "exercise" ? "🏃" : "🍽️";
+            const noteLine = cr.note ? `\nCatatan: _${cr.note}_` : "";
+            const msg = `${icon} Pengingat *${cr.label}* (${cr.time} WIB) untuk ${r.username}.${noteLine}\n\nBalas *"SUDAH"* atau *"OKE"* jika sudah dilakukan ya!`;
+            try {
+              await sendWhatsAppMessage(r.phone_number, msg);
+              db.prepare(`
+                INSERT INTO wa_reminder_logs (user_id, tanggal, reminder_type, reminder_label, scheduled_time, last_sent_at, retry_count, confirmed)
+                VALUES (?, ?, ?, ?, ?, ?, 1, 0)
+              `).run(r.user_id, wibDate, customType, cr.label, cr.time, nowIso);
+            } catch (err) {
+              console.warn(`Gagal kirim WA custom reminder (${r.user_id}/${customType}):`, err.message);
+            }
+          }
+        }
+      }
     }
 
     // 2. Follow-up Cerdas: Ingatkan ulang setiap 10 menit (maks 3x follow-up) jika user belum konfirmasi!

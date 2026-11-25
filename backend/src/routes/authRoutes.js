@@ -12,6 +12,7 @@ import {
   connectWaBot,
   disconnectWaBot,
   testSendWaReminder,
+  uploadAvatar,
 } from "../controllers/authController.js";
 import { authenticateJWT, requireRole } from "../middleware/authMiddleware.js";
 
@@ -21,6 +22,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/me", authenticateJWT, getMe);
 router.put("/profile", authenticateJWT, updateAccountProfile);
+router.post("/avatar", authenticateJWT, uploadAvatar);
 router.get("/wa-reminders", authenticateJWT, getWaReminders);
 router.put("/wa-reminders", authenticateJWT, saveWaReminders);
 router.get("/wa-bot/status", authenticateJWT, getWaBotStatus);

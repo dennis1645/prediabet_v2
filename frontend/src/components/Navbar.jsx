@@ -181,8 +181,12 @@ export default function Navbar() {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="group flex items-center gap-2 rounded-2xl bg-white border border-emerald-100 p-1.5 pr-2 md:pr-3 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer"
               >
-                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-extrabold uppercase shadow-sm shadow-emerald-500/20">
-                  {user.username ? user.username[0] : "U"}
+                <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-extrabold uppercase shadow-sm shadow-emerald-500/20 overflow-hidden">
+                  {user.avatar_url ? (
+                    <img src={user.avatar_url} alt={user.username} className="w-full h-full object-cover" />
+                  ) : (
+                    user.username ? user.username[0] : "U"
+                  )}
                 </div>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600 transition-colors" />
               </button>
@@ -191,8 +195,12 @@ export default function Navbar() {
               {dropdownOpen && (
                 <div className="absolute right-0 top-14 md:top-16 w-72 rounded-3xl bg-white border border-slate-100 shadow-2xl shadow-slate-900/10 p-3 z-[60] animate-fade-in">
                   <div className="flex items-center gap-3 px-3 py-3 border-b border-slate-100 mb-2">
-                    <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-extrabold uppercase shadow-sm">
-                      {user.username ? user.username[0] : "U"}
+                    <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-extrabold uppercase shadow-sm overflow-hidden shrink-0">
+                      {user.avatar_url ? (
+                        <img src={user.avatar_url} alt={user.username} className="w-full h-full object-cover" />
+                      ) : (
+                        user.username ? user.username[0] : "U"
+                      )}
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-extrabold text-slate-800 truncate">

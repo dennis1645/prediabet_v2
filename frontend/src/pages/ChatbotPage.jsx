@@ -957,28 +957,28 @@ export default function ChatbotPage() {
               <div ref={chatBottomRef} />
             </div>
 
-            {/* Quick Suggestion Chips (Prompt Cepat) */}
-            <div className="px-4 py-2.5 bg-slate-50/70 border-t border-slate-100 flex items-center gap-2 overflow-x-auto text-xs">
-              <span className="text-[11px] font-bold text-slate-400 flex-shrink-0 mr-1">Contoh:</span>
-              {[
-                "Hari ini saya makan ayam goreng sama nasi, dan es teh manis",
-                "Lagi pengen makan yang berkuah & hangat",
-                "Berapa protein pada dada ayam?",
-                "Saranin resep makan siang ramah glukosa dong",
-              ].map((suggestion, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => {
-                    setInput(suggestion);
-                    inputRef.current?.focus();
-                  }}
-                  className="flex-shrink-0 bg-white hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 text-slate-600 border border-slate-200 rounded-full px-3.5 py-1.5 font-medium text-[11px] transition-all shadow-2xs cursor-pointer active:scale-95"
-                >
-                  {suggestion}
-                </button>
-              ))}
-            </div>
+            {/* Quick Suggestion Chips (Prompt Cepat) - langsung kirim saat diklik */}
+            {messages.length <= 2 && (
+              <div className="px-4 py-2.5 bg-slate-50/70 border-t border-slate-100 flex items-center gap-2 overflow-x-auto text-xs">
+                <span className="text-[11px] font-bold text-slate-400 flex-shrink-0 mr-1">Coba tanya:</span>
+                {[
+                  "Hari ini saya makan ayam goreng sama nasi, dan es teh manis",
+                  "Lagi pengen makan yang berkuah & hangat",
+                  "Berapa protein pada dada ayam?",
+                  "Saranin resep makan siang ramah glukosa dong",
+                ].map((suggestion, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    disabled={isTyping}
+                    onClick={() => sendMessage(suggestion)}
+                    className="flex-shrink-0 bg-white hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300 text-slate-600 border border-slate-200 rounded-full px-3.5 py-1.5 font-medium text-[11px] transition-all shadow-2xs cursor-pointer active:scale-95 disabled:opacity-50"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Input Bar */}
             <div className="p-3 sm:p-4 bg-white border-t border-slate-100">

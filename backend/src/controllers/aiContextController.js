@@ -1345,17 +1345,89 @@ export async function forwardChatToAI(req, res) {
       aiData.exercise_logged = detectedExercise;
     }
 
+    // Fallback deterministik: jika user bilang sudah/barusan makan sesuatu (misal: "aku sudah makan bubur nya")
+    // namun server AI tidak mengisi meal_logged, cocokkan dengan meal_plan hari ini, last_suggested_recipe, atau DB makanan!
+    if (!aiData.meal_logged) {
+      const qLow = sanitizedMessage.toLowerCase();
+      const ateMatch = /\b(sudah|udah|barusan|baru saja|selesai|habis|tadi)\s+(makan|sarapan|minum|konsumsi|ngemil)\b/i.test(qLow);
+      if (ateMatch) {
+        let matchedItem = null;
+        const planSlots = Array.isArray(analysis.meal_plan) ? analysis.meal_plan : [];
+        const cleanWords = qLow
+          .replace(/\b(aku|saya|gue|gw|sudah|udah|barusan|baru|saja|selesai|habis|tadi|makan|sarapan|minum|konsumsi|ngemil|nya|yg|yang|ini|itu|ya|dong|nih|predi|dr)\b/g, " ")
+          .replace(/[^\w\s]/g, " ")
+          .split(/\s+/)
+          .filter((w) => w.length >= 3);
+
+        for (const slot of planSlots) {
+          for (const it of slot.items || []) {
+            const nameLow = String(it.nama || "").toLowerCase();
+            if (cleanWords.some((w) => nameLow.includes(w))) {
+              matchedItem = {
+                nama_makanan: it.nama,
+                kalori: it.kalori || 250,
+                protein: it.protein || 12,
+                karbohidrat: it.karbo || 30,
+                lemak: it.lemak || 8,
+                meal_time: slot.waktu || resolveMealTime(sanitizedMessage, null),
+                gi_category: it.gi || "Rendah (< 55)",
+                gambar: it.gambar || "/food-images/bubur-oatmeal.jpg",
+              };
+              break;
+            }
+          }
+          if (matchedItem) break;
+        }
+
+        if (!matchedItem && req.body.last_suggested_recipe?.nama_makanan) {
+          const rec = req.body.last_suggested_recipe;
+          matchedItem = {
+            nama_makanan: rec.nama_makanan,
+            kalori: rec.kalori || 250,
+            protein: rec.protein || 12,
+            karbohidrat: rec.karbohidrat || 30,
+            lemak: rec.lemak || 8,
+            meal_time: resolveMealTime(sanitizedMessage, null),
+            gi_category: rec.gi_category || "Rendah (< 55)",
+            gambar: rec.gambar || "/food-images/bubur-oatmeal.jpg",
+          };
+        }
+
+        if (!matchedItem && cleanWords.length > 0) {
+          const searchTerm = cleanWords.join(" ");
+          const foundFoods = referenceService.searchFoods(searchTerm, 1);
+          if (foundFoods && foundFoods.length > 0) {
+            const f = foundFoods[0];
+            matchedItem = {
+              nama_makanan: f.nama,
+              kalori: Math.round(f.energi || 220),
+              protein: Math.round(f.protein || 10),
+              karbohidrat: Math.round(f.karbohidrat || 28),
+              lemak: Math.round(f.lemak || 6),
+              meal_time: resolveMealTime(sanitizedMessage, null),
+              gi_category: f.gi_category || "Rendah (< 55)",
+            };
+          }
+        }
+
+        if (matchedItem) {
+          aiData.meal_logged = matchedItem;
+        }
+      }
+    }
+
     // Auto-log resep kontekstual ke daily_progress_logs DAN sinkronkan ke analysis.meal_plan Dashboard
     if (aiData.meal_logged && aiData.meal_logged.nama_makanan && aiData.meal_logged.nama_makanan !== "Menu Sehat 3J") {
       try {
         const todayDate = new Date().toISOString().split("T")[0];
         const mealTime = resolveMealTime(sanitizedMessage, aiData.meal_logged.meal_time || null);
+        const wibClock = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
         const rName = aiData.meal_logged.nama_makanan;
         const rCal = Math.round(aiData.meal_logged.kalori || 250);
         const rProt = Math.round(aiData.meal_logged.protein || 15);
         const rCarb = Math.round(aiData.meal_logged.karbohidrat || 30);
         const rFat = Math.round(aiData.meal_logged.lemak || 8);
-        const entryNote = `[${mealTime}] ${rName} (${rCal} kkal)`;
+        const entryNote = `[${mealTime} • ${wibClock}] ${rName} (${rCal} kkal)`;
 
         const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);
         if (existingLog) {

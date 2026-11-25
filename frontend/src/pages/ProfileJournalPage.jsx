@@ -25,6 +25,9 @@ import {
   Minus,
   Bell,
   Copy,
+  Camera,
+  Trash2,
+  Pencil,
 } from "lucide-react";
 import { showSuccessAlert, showErrorAlert, showToast } from "../utils/alerts";
 
@@ -100,7 +103,9 @@ const parseList = (val) => {
 };
 
 export default function ProfileJournalPage() {
-  const { user, profile, analysis, setAnalysis, setProfile, updateAccount, updateProfileAndAnalysis } = useAuth();
+  const { user, setUser, profile, analysis, setAnalysis, setProfile, updateAccount, updateProfileAndAnalysis } = useAuth();
+  const avatarInputRef = useRef(null);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
   const [activePage, setActivePage] = useState(0);
   const [slideDir, setSlideDir] = useState("next");
@@ -160,12 +165,115 @@ export default function ProfileJournalPage() {
     medicine_note: "Obat / Suplemen Harian",
     exercise_enabled: false,
     exercise_time: "17:00",
+    custom_reminders: [],
     bot_linked: false,
     link_code: "",
   });
   const [savingWa, setSavingWa] = useState(false);
   const [botStatus, setBotStatus] = useState({ status: "disconnected", connected: false, qr_data_url: null, connected_phone: null });
   const [botLoading, setBotLoading] = useState(false);
+  const [newRemType, setNewRemType] = useState("medicine");
+  const [newRemLabel, setNewRemLabel] = useState("");
+  const [newRemTime, setNewRemTime] = useState("09:00");
+  const [newRemNote, setNewRemNote] = useState("");
+  const [editingRemId, setEditingRemId] = useState(null);
+
+  const handleAvatarUpload = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowedTypes.includes(file.type)) {
+      showErrorAlert("Format Ditolak", "Hanya foto format JPG, PNG, atau WEBP yang diperbolehkan.");
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      showErrorAlert("Ukuran Terlalu Besar", "Ukuran foto profil maksimal 2 MB.");
+      return;
+    }
+
+    setUploadingAvatar(true);
+    try {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("Gagal membaca file gambar."));
+        reader.readAsDataURL(file);
+      });
+      const res = await api.uploadAvatar(dataUrl);
+      if (res?.success && res.data?.user) {
+        setUser(res.data.user);
+        showToast("Foto profil berhasil diperbarui!", "success");
+      }
+    } catch (err) {
+      showErrorAlert("Upload Gagal", err.message || "File tidak valid atau ditolak pemeriksaan keamanan.");
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
+
+  const handleAddOrUpdateCustomReminder = () => {
+    if (!newRemLabel.trim() || !/^\d{2}:\d{2}$/.test(newRemTime)) {
+      showErrorAlert("Validasi Jadwal", "Isi nama pengingat dan jam yang valid (HH:MM).");
+      return;
+    }
+    setWaSettings((prev) => {
+      const list = Array.isArray(prev.custom_reminders) ? [...prev.custom_reminders] : [];
+      if (editingRemId) {
+        return {
+          ...prev,
+          custom_reminders: list.map((item) =>
+            item.id === editingRemId
+              ? { ...item, type: newRemType, label: newRemLabel.trim(), time: newRemTime, note: newRemNote.trim() }
+              : item
+          ),
+        };
+      }
+      list.push({
+        id: `rem_${Date.now()}`,
+        type: newRemType,
+        label: newRemLabel.trim(),
+        time: newRemTime,
+        note: newRemNote.trim(),
+        enabled: true,
+      });
+      return { ...prev, custom_reminders: list };
+    });
+    setEditingRemId(null);
+    setNewRemLabel("");
+    setNewRemNote("");
+    showToast(editingRemId ? "Jadwal diperbarui (klik Simpan untuk menyimpan permanen)." : "Jadwal ditambahkan (klik Simpan untuk menyimpan permanen).", "info");
+  };
+
+  const handleEditCustomReminder = (item) => {
+    setEditingRemId(item.id);
+    setNewRemType(item.type || "medicine");
+    setNewRemLabel(item.label || "");
+    setNewRemTime(item.time || "09:00");
+    setNewRemNote(item.note || "");
+  };
+
+  const handleDeleteCustomReminder = (id) => {
+    setWaSettings((prev) => ({
+      ...prev,
+      custom_reminders: (prev.custom_reminders || []).filter((x) => x.id !== id),
+    }));
+    if (editingRemId === id) {
+      setEditingRemId(null);
+      setNewRemLabel("");
+      setNewRemNote("");
+    }
+  };
+
+  const handleToggleCustomReminder = (id) => {
+    setWaSettings((prev) => ({
+      ...prev,
+      custom_reminders: (prev.custom_reminders || []).map((x) =>
+        x.id === id ? { ...x, enabled: !x.enabled } : x
+      ),
+    }));
+  };
 
   const fetchBotStatus = async () => {
     try {
@@ -507,14 +615,44 @@ export default function ProfileJournalPage() {
 
                 <div className="rounded-2xl bg-white/85 border border-stone-200/90 p-4 space-y-2.5 shadow-2xs">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black flex items-center justify-center uppercase">
-                      {formatName(user?.username)[0]}
+                    <div className="relative group shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black flex items-center justify-center uppercase overflow-hidden border border-stone-200">
+                        {user?.avatar_url ? (
+                          <img src={user.avatar_url} alt={user.username} className="w-full h-full object-cover" />
+                        ) : (
+                          formatName(user?.username)[0]
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        disabled={uploadingAvatar}
+                        onClick={() => avatarInputRef.current?.click()}
+                        title="Ganti foto profil (JPG/PNG/WEBP, maks 2MB)"
+                        className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-slate-900 hover:bg-emerald-700 text-white flex items-center justify-center shadow-sm cursor-pointer disabled:opacity-50"
+                      >
+                        <Camera className="w-3 h-3" />
+                      </button>
+                      <input
+                        ref={avatarInputRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        onChange={handleAvatarUpload}
+                        className="hidden"
+                      />
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-sm font-extrabold text-slate-800 truncate">
                         {formatName(profile?.nama || user?.username)}
                       </p>
                       <p className="text-xs text-slate-500 truncate">{user?.email || "-"}</p>
+                      <button
+                        type="button"
+                        disabled={uploadingAvatar}
+                        onClick={() => avatarInputRef.current?.click()}
+                        className="mt-1 text-[10px] font-bold text-emerald-700 hover:underline cursor-pointer"
+                      >
+                        {uploadingAvatar ? "Memverifikasi & mengunggah..." : "Ubah Foto Profil (JPG/PNG/WEBP, maks 2MB)"}
+                      </button>
                     </div>
                   </div>
                   <div className="pt-2 border-t border-stone-100 grid grid-cols-2 gap-2 text-xs">
@@ -1070,12 +1208,110 @@ export default function ProfileJournalPage() {
                     </div>
                   </div>
 
+                  {/* Pengingat Kustom Bebas (Tambah / Edit / Hapus Jadwal Makan, Obat, Olahraga) */}
+                  <div className="p-4 rounded-2xl bg-white border border-stone-200 space-y-3">
+                    <div>
+                      <p className="text-xs font-black text-slate-800 uppercase tracking-wider">
+                        Jadwal Pengingat Kustom Saya (Bebas Tambah / Edit / Hapus)
+                      </p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        Tambahkan jadwal minum obat tambahan, jam makan khusus, atau pengingat olahraga pada jam berapa saja.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                      <select
+                        value={newRemType}
+                        onChange={(e) => setNewRemType(e.target.value)}
+                        className="sm:col-span-3 px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                      >
+                        <option value="medicine">Minum Obat</option>
+                        <option value="meal">Jam Makan</option>
+                        <option value="exercise">Olahraga</option>
+                      </select>
+                      <input
+                        type="text"
+                        value={newRemLabel}
+                        onChange={(e) => setNewRemLabel(e.target.value)}
+                        placeholder="Nama jadwal (misal: Metformin Malam)"
+                        className="sm:col-span-4 px-3 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-semibold"
+                      />
+                      <input
+                        type="time"
+                        value={newRemTime}
+                        onChange={(e) => setNewRemTime(e.target.value)}
+                        className="sm:col-span-2 px-2 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleAddOrUpdateCustomReminder}
+                        className="sm:col-span-3 px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold transition cursor-pointer flex items-center justify-center gap-1"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>{editingRemId ? "Update" : "Tambah"}</span>
+                      </button>
+                    </div>
+
+                    <input
+                      type="text"
+                      value={newRemNote}
+                      onChange={(e) => setNewRemNote(e.target.value)}
+                      placeholder="Catatan tambahan opsional (misal: 1 tablet setelah makan malam)..."
+                      className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 rounded-xl text-xs font-medium"
+                    />
+
+                    {(waSettings.custom_reminders || []).length > 0 && (
+                      <div className="space-y-2 pt-1 max-h-44 overflow-y-auto">
+                        {(waSettings.custom_reminders || []).map((cr) => (
+                          <div
+                            key={cr.id}
+                            className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-stone-50 border border-stone-200 text-xs"
+                          >
+                            <div className="flex items-center gap-2 min-w-0">
+                              <input
+                                type="checkbox"
+                                checked={cr.enabled !== false}
+                                onChange={() => handleToggleCustomReminder(cr.id)}
+                                className="w-4 h-4 accent-emerald-600 cursor-pointer shrink-0"
+                              />
+                              <span className="font-mono font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+                                {cr.time}
+                              </span>
+                              <div className="min-w-0">
+                                <p className="font-bold text-slate-800 truncate">{cr.label}</p>
+                                {cr.note && <p className="text-[10px] text-slate-500 truncate">{cr.note}</p>}
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1 shrink-0">
+                              <button
+                                type="button"
+                                onClick={() => handleEditCustomReminder(cr)}
+                                className="p-1.5 rounded-lg text-slate-600 hover:bg-amber-100 hover:text-amber-800 cursor-pointer"
+                                title="Edit jadwal"
+                              >
+                                <Pencil className="w-3.5 h-3.5" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteCustomReminder(cr.id)}
+                                className="p-1.5 rounded-lg text-rose-600 hover:bg-rose-100 cursor-pointer"
+                                title="Hapus jadwal"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   {/* Status Bot WhatsApp Server & Tautan Akun Pasien */}
                   <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-2.5">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-black text-amber-950">Status Bot Pengingat Cerdas WhatsApp</span>
+                          <span className="text-xs font-black text-amber-950">Bot Pengingat Cerdas WhatsApp</span>
                           <span
                             className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
                               botStatus.connected
@@ -1083,11 +1319,11 @@ export default function ProfileJournalPage() {
                                 : "bg-amber-200 text-amber-900"
                             }`}
                           >
-                            {botStatus.connected ? "Server Bot Aktif" : "Menunggu Aktivasi Admin"}
+                            {botStatus.connected ? "Bot WA Server Aktif" : "Bot WA Server Belum Dihubungkan Admin"}
                           </span>
                         </div>
                         <p className="text-[11px] text-amber-900 mt-1">
-                          Bot akan mengirimkan pengingat berkala setiap 10 menit hingga Anda membalas konfirmasi (contoh: <em>&ldquo;Oke saya sudah minum&rdquo;</em> atau <em>&ldquo;Sudah makan&rdquo;</em>) via WhatsApp.
+                          Anda bebas mengatur, menambah, mengedit, dan menghapus jadwal di atas kapan saja. Saat aktif, bot mengirim pengingat setiap 10 menit hingga Anda membalas konfirmasi (contoh: <em>&ldquo;Oke saya sudah minum&rdquo;</em> atau <em>&ldquo;Sudah makan&rdquo;</em>).
                         </p>
                       </div>
 

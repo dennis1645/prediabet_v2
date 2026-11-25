@@ -60,6 +60,11 @@ export const api = {
       method: "PUT",
       body: JSON.stringify(payload),
     }),
+  uploadAvatar: (image_base64) =>
+    request("/auth/avatar", {
+      method: "POST",
+      body: JSON.stringify({ image_base64 }),
+    }),
 
   // Dashboard & Meal Plan
   getDashboard: () => request("/dashboard"),

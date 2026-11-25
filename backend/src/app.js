@@ -11,6 +11,8 @@ import { errorHandler } from "./middleware/errorHandler.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicPath = path.resolve(__dirname, "../public");
+const avatarsPath = path.resolve(__dirname, "../uploads/avatars");
+fs.mkdirSync(avatarsPath, { recursive: true });
 
 const app = express();
 
@@ -60,6 +62,17 @@ app.get("/api/health", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// Serve uploaded avatars safely with strict nosniff header
+app.use(
+  "/uploads/avatars",
+  (req, res, next) => {
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("Cache-Control", "public, max-age=86400");
+    next();
+  },
+  express.static(avatarsPath)
+);
 
 // Main API Router
 app.use("/api", apiRouter);

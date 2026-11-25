@@ -11,6 +11,7 @@ export function initDatabase() {
       email_normalized TEXT UNIQUE,
       phone_number TEXT,
       usia INTEGER,
+      avatar_url TEXT,
       password_hash TEXT NOT NULL,
       role TEXT DEFAULT 'user',
       created_at TEXT NOT NULL,

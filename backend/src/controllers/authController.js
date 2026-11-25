@@ -1,5 +1,9 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import fs from "fs";
+import path from "path";
+import crypto from "crypto";
+import { fileURLToPath } from "url";
 import db from "../database/connection.js";
 import { config } from "../config/env.js";
 import {
@@ -8,6 +12,15 @@ import {
   disconnectWhatsAppBot,
   sendWhatsAppMessage,
 } from "../services/whatsappBaileysService.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const AVATAR_DIR = path.resolve(__dirname, "../../uploads/avatars");
+
+function ensureUsersExtraColumns() {
+  try { db.exec("ALTER TABLE users ADD COLUMN usia INTEGER;"); } catch (e) {}
+  try { db.exec("ALTER TABLE users ADD COLUMN avatar_url TEXT;"); } catch (e) {}
+}
 
 export function register(req, res) {
   try {
@@ -169,6 +182,7 @@ export function login(req, res) {
           email: user.email,
           phone_number: user.phone_number || null,
           usia: user.usia ?? (profile?.usia ? parseInt(profile.usia, 10) : null),
+          avatar_url: user.avatar_url || null,
           role: user.role,
         },
         hasCompletedQuestionnaire: Boolean(profileRow),
@@ -187,6 +201,8 @@ export function login(req, res) {
 
 export function getMe(req, res) {
   try {
+    ensureUsersExtraColumns();
+    const userRow = db.prepare("SELECT id, username, email, phone_number, usia, avatar_url, role FROM users WHERE id = ?").get(req.user.id);
     const profileRow = db.prepare("SELECT * FROM profiles WHERE user_id = ?").get(req.user.id);
 
     let profile = null;
@@ -204,7 +220,7 @@ export function getMe(req, res) {
     res.json({
       success: true,
       data: {
-        user: req.user,
+        user: userRow || req.user,
         hasCompletedQuestionnaire: Boolean(profileRow),
         profile,
         analysis,
@@ -342,12 +358,16 @@ function ensureWaReminderTable() {
       medicine_note TEXT DEFAULT 'Obat / Suplemen Harian',
       exercise_enabled INTEGER NOT NULL DEFAULT 0,
       exercise_time TEXT NOT NULL DEFAULT '17:00',
+      custom_reminders_json TEXT NOT NULL DEFAULT '[]',
       bot_linked INTEGER NOT NULL DEFAULT 0,
       link_code TEXT,
       updated_at TEXT NOT NULL,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
   `);
+  try {
+    db.exec("ALTER TABLE whatsapp_reminders ADD COLUMN custom_reminders_json TEXT NOT NULL DEFAULT '[]';");
+  } catch (e) {}
 }
 
 function generateLinkCode(userId) {
@@ -376,6 +396,13 @@ export function getWaReminders(req, res) {
       row.link_code = code;
     }
 
+    let customReminders = [];
+    try {
+      customReminders = JSON.parse(row.custom_reminders_json || "[]");
+    } catch {
+      customReminders = [];
+    }
+
     res.json({
       success: true,
       data: {
@@ -384,6 +411,7 @@ export function getWaReminders(req, res) {
         medicine_enabled: Boolean(row.medicine_enabled),
         exercise_enabled: Boolean(row.exercise_enabled),
         bot_linked: Boolean(row.bot_linked),
+        custom_reminders: Array.isArray(customReminders) ? customReminders : [],
       },
     });
   } catch (error) {
@@ -408,19 +436,33 @@ export function saveWaReminders(req, res) {
       medicine_note,
       exercise_enabled,
       exercise_time,
+      custom_reminders,
     } = req.body;
 
     const now = new Date().toISOString();
     const existing = db.prepare("SELECT * FROM whatsapp_reminders WHERE user_id = ?").get(userId);
     const linkCode = existing?.link_code || generateLinkCode(userId);
     const cleanPhone = (phone_number || "").trim();
+    const safeCustomReminders = Array.isArray(custom_reminders)
+      ? custom_reminders
+          .filter((item) => item && typeof item === "object" && /^\d{2}:\d{2}$/.test(String(item.time || "")))
+          .slice(0, 30)
+          .map((item) => ({
+            id: String(item.id || `rem_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`),
+            type: ["meal", "medicine", "exercise"].includes(item.type) ? item.type : "medicine",
+            label: String(item.label || "Pengingat Kustom").trim().slice(0, 60),
+            time: String(item.time).trim(),
+            note: String(item.note || "").trim().slice(0, 120),
+            enabled: item.enabled !== false,
+          }))
+      : JSON.parse(existing?.custom_reminders_json || "[]");
 
     db.prepare(`
       INSERT INTO whatsapp_reminders (
         user_id, phone_number, enabled, breakfast_time, snack_time, lunch_time, dinner_time,
         medicine_enabled, medicine_time, medicine_note, exercise_enabled, exercise_time,
-        bot_linked, link_code, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        custom_reminders_json, bot_linked, link_code, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON CONFLICT(user_id) DO UPDATE SET
         phone_number = excluded.phone_number,
         enabled = excluded.enabled,
@@ -433,6 +475,7 @@ export function saveWaReminders(req, res) {
         medicine_note = excluded.medicine_note,
         exercise_enabled = excluded.exercise_enabled,
         exercise_time = excluded.exercise_time,
+        custom_reminders_json = excluded.custom_reminders_json,
         updated_at = excluded.updated_at
     `).run(
       userId,
@@ -447,6 +490,7 @@ export function saveWaReminders(req, res) {
       (medicine_note || "Obat / Suplemen Harian").trim(),
       exercise_enabled ? 1 : 0,
       exercise_time || "17:00",
+      JSON.stringify(safeCustomReminders),
       existing?.bot_linked ? 1 : 0,
       linkCode,
       now
@@ -468,6 +512,7 @@ export function saveWaReminders(req, res) {
         medicine_enabled: Boolean(updated.medicine_enabled),
         exercise_enabled: Boolean(updated.exercise_enabled),
         bot_linked: Boolean(updated.bot_linked),
+        custom_reminders: safeCustomReminders,
       },
     });
   } catch (error) {
@@ -593,5 +638,106 @@ export async function testSendWaReminder(req, res) {
     res.json({ success: true, message: `Pesan uji coba terkirim ke ${targetPhone}!` });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message || "Gagal mengirim pesan WhatsApp." });
+  }
+}
+
+function detectImageTypeFromMagicBytes(buf) {
+  if (!buf || buf.length < 12) return null;
+  // JPEG: FF D8 FF
+  if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) {
+    return "jpg";
+  }
+  // PNG: 89 50 4E 47 0D 0A 1A 0A
+  if (
+    buf[0] === 0x89 &&
+    buf[1] === 0x50 &&
+    buf[2] === 0x4e &&
+    buf[3] === 0x47 &&
+    buf[4] === 0x0d &&
+    buf[5] === 0x0a &&
+    buf[6] === 0x1a &&
+    buf[7] === 0x0a
+  ) {
+    return "png";
+  }
+  // WEBP: RIFF....WEBP
+  if (
+    buf.subarray(0, 4).toString("ascii") === "RIFF" &&
+    buf.subarray(8, 12).toString("ascii") === "WEBP"
+  ) {
+    return "webp";
+  }
+  return null;
+}
+
+export function uploadAvatar(req, res) {
+  try {
+    ensureUsersExtraColumns();
+    const userId = req.user.id;
+    const { image_base64 } = req.body;
+
+    if (!image_base64 || typeof image_base64 !== "string") {
+      return res.status(400).json({ success: false, message: "Data gambar wajib dikirim." });
+    }
+
+    const match = image_base64.match(/^data:image\/(jpeg|jpg|png|webp);base64,([A-Za-z0-9+/=\s]+)$/i);
+    if (!match) {
+      return res.status(400).json({
+        success: false,
+        message: "Format ditolak. Hanya gambar JPG, PNG, atau WEBP yang diizinkan.",
+      });
+    }
+
+    const rawBase64 = match[2].replace(/\s+/g, "");
+    const buffer = Buffer.from(rawBase64, "base64");
+
+    const MAX_BYTES = 2 * 1024 * 1024; // 2 MB
+    if (!buffer.length || buffer.length > MAX_BYTES) {
+      return res.status(400).json({
+        success: false,
+        message: "Ukuran foto maksimal 2 MB.",
+      });
+    }
+
+    const verifiedExt = detectImageTypeFromMagicBytes(buffer);
+    if (!verifiedExt) {
+      return res.status(400).json({
+        success: false,
+        message: "File ditolak oleh pemeriksaan keamanan: bukan gambar JPG/PNG/WEBP yang valid.",
+      });
+    }
+
+    fs.mkdirSync(AVATAR_DIR, { recursive: true });
+
+    // Hapus file avatar lama milik user jika ada
+    const oldUser = db.prepare("SELECT avatar_url FROM users WHERE id = ?").get(userId);
+    if (oldUser?.avatar_url && oldUser.avatar_url.startsWith("/uploads/avatars/")) {
+      const oldFilename = path.basename(oldUser.avatar_url);
+      const oldFullPath = path.join(AVATAR_DIR, oldFilename);
+      if (fs.existsSync(oldFullPath)) {
+        try { fs.unlinkSync(oldFullPath); } catch {}
+      }
+    }
+
+    const safeName = `avatar_${userId}_${crypto.randomBytes(6).toString("hex")}.${verifiedExt}`;
+    const destPath = path.join(AVATAR_DIR, safeName);
+    fs.writeFileSync(destPath, buffer);
+
+    const avatarUrl = `/uploads/avatars/${safeName}`;
+    const now = new Date().toISOString();
+    db.prepare("UPDATE users SET avatar_url = ?, updated_at = ? WHERE id = ?").run(avatarUrl, now, userId);
+
+    const updatedUser = db
+      .prepare("SELECT id, username, email, phone_number, usia, avatar_url, role FROM users WHERE id = ?")
+      .get(userId);
+
+    res.json({
+      success: true,
+      message: "Foto profil berhasil diperbarui dan terverifikasi aman!",
+      data: { avatar_url: avatarUrl, user: updatedUser },
+    });
+  } catch (error) {
+    console.error("uploadAvatar error:", error);
+    res.status(500).json({ success: false, message: "Gagal mengunggah foto profil." });
   }
 }
