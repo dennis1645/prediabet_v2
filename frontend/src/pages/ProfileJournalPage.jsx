@@ -1070,86 +1070,39 @@ export default function ProfileJournalPage() {
                     </div>
                   </div>
 
-                  {/* Integrasi Bot WhatsApp (Baileys QR Scan) */}
-                  <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-3">
+                  {/* Status Bot WhatsApp Server & Tautan Akun Pasien */}
+                  <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-2.5">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-black text-amber-950">Bot WhatsApp Baileys (Scan Barcode)</span>
+                          <span className="text-xs font-black text-amber-950">Status Bot Pengingat Cerdas WhatsApp</span>
                           <span
                             className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
                               botStatus.connected
                                 ? "bg-emerald-100 text-emerald-800"
-                                : botStatus.status === "qr_ready"
-                                ? "bg-blue-100 text-blue-800"
                                 : "bg-amber-200 text-amber-900"
                             }`}
                           >
-                            {botStatus.connected
-                              ? `Terhubung (${botStatus.connected_phone || "Aktif"})`
-                              : botStatus.status === "qr_ready"
-                              ? "Siap Scan QR"
-                              : botStatus.status === "connecting"
-                              ? "Menyiapkan QR..."
-                              : "Belum Terhubung"}
+                            {botStatus.connected ? "Server Bot Aktif" : "Menunggu Aktivasi Admin"}
                           </span>
                         </div>
-                        <p className="text-[11px] text-amber-900 mt-0.5">
-                          Hubungkan WhatsApp server PrediaBeat menggunakan Baileys untuk mengirim pengingat otomatis.
+                        <p className="text-[11px] text-amber-900 mt-1">
+                          Bot akan mengirimkan pengingat berkala setiap 10 menit hingga Anda membalas konfirmasi (contoh: <em>&ldquo;Oke saya sudah minum&rdquo;</em> atau <em>&ldquo;Sudah makan&rdquo;</em>) via WhatsApp.
                         </p>
                       </div>
 
-                      <div className="flex flex-wrap gap-2">
-                        {!botStatus.connected ? (
-                          <button
-                            type="button"
-                            disabled={botLoading}
-                            onClick={() => handleConnectBaileys(botStatus.status !== "qr_ready")}
-                            className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
-                          >
-                            {botLoading ? "Memuat..." : botStatus.qr_data_url ? "Refresh Barcode QR" : "Tampilkan Barcode QR"}
-                          </button>
-                        ) : (
-                          <>
-                            <button
-                              type="button"
-                              disabled={botLoading}
-                              onClick={handleTestWaSend}
-                              className="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
-                            >
-                              Tes Kirim WA
-                            </button>
-                            <button
-                              type="button"
-                              disabled={botLoading}
-                              onClick={handleDisconnectBaileys}
-                              className="px-3 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-800 text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
-                            >
-                              Putuskan
-                            </button>
-                          </>
-                        )}
-                      </div>
+                      {botStatus.connected && (
+                        <button
+                          type="button"
+                          disabled={botLoading}
+                          onClick={handleTestWaSend}
+                          className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold transition cursor-pointer disabled:opacity-50 shrink-0"
+                        >
+                          Kirim Tes Pengingat
+                        </button>
+                      )}
                     </div>
 
-                    {/* Tampilkan QR Barcode jika qr_data_url tersedia */}
-                    {!botStatus.connected && botStatus.qr_data_url && (
-                      <div className="bg-white rounded-2xl border border-amber-200 p-4 flex flex-col sm:flex-row items-center gap-4">
-                        <img
-                          src={botStatus.qr_data_url}
-                          alt="QR Barcode WhatsApp Baileys"
-                          className="w-44 h-44 rounded-xl border border-slate-200 p-1.5 bg-white shadow-xs"
-                        />
-                        <div className="text-xs text-slate-700 space-y-1.5">
-                          <p className="font-black text-slate-900">Cara Scan Barcode WhatsApp:</p>
-                          <p>1. Buka aplikasi <strong>WhatsApp</strong> di ponsel Anda.</p>
-                          <p>2. Pilih menu <strong>Perangkat Tertaut (Linked Devices)</strong> &rarr; <strong>Tautkan Perangkat</strong>.</p>
-                          <p>3. Arahkan kamera ke barcode di samping hingga status berubah menjadi <strong>Terhubung</strong>.</p>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Kode Tautan Akun Pasien */}
                     {waSettings.link_code && (
                       <div className="pt-2 border-t border-amber-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <p className="text-[11px] text-amber-900">

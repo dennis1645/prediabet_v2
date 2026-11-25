@@ -39,6 +39,68 @@ export default function AdminDashboardPage() {
   const [selectedUserChats, setSelectedUserChats] = useState({ user: null, logs: [] });
   const [loadingChats, setLoadingChats] = useState(false);
 
+  // WhatsApp Baileys Bot Management (Admin)
+  const [botStatus, setBotStatus] = useState({ status: "disconnected", connected: false, qr_data_url: null, connected_phone: null });
+  const [botLoading, setBotLoading] = useState(false);
+  const [testWaPhone, setTestWaPhone] = useState("");
+
+  const fetchBotStatus = async () => {
+    try {
+      const res = await api.getWaBotStatus();
+      if (res?.success && res.data) {
+        setBotStatus(res.data);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    fetchBotStatus();
+    const timer = setInterval(fetchBotStatus, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleConnectBaileys = async (forceReset = false) => {
+    setBotLoading(true);
+    try {
+      const res = await api.connectWaBot(forceReset);
+      if (res?.success && res.data) setBotStatus(res.data);
+      setTimeout(fetchBotStatus, 1200);
+    } catch (err) {
+      showErrorAlert("Gagal Memulai Bot WA", err.message || "Tidak dapat menghubungkan Baileys.");
+    } finally {
+      setBotLoading(false);
+    }
+  };
+
+  const handleDisconnectBaileys = async () => {
+    setBotLoading(true);
+    try {
+      const res = await api.disconnectWaBot();
+      if (res?.success && res.data) setBotStatus(res.data);
+      await showSuccessAlert("Diputuskan", "Koneksi Bot WhatsApp berhasil diputuskan.");
+    } catch (err) {
+      showErrorAlert("Gagal", err.message || "Gagal memutus koneksi.");
+    } finally {
+      setBotLoading(false);
+    }
+  };
+
+  const handleTestWaSend = async () => {
+    if (!testWaPhone.trim()) {
+      showErrorAlert("Nomor Kosong", "Masukkan nomor WhatsApp tujuan uji coba.");
+      return;
+    }
+    setBotLoading(true);
+    try {
+      const res = await api.testSendWaReminder(testWaPhone.trim());
+      await showSuccessAlert("Terkirim!", res?.message || "Pesan uji coba terkirim.");
+    } catch (err) {
+      showErrorAlert("Gagal Mengirim", err.message || "Pastikan Bot WA terhubung dan nomor valid.");
+    } finally {
+      setBotLoading(false);
+    }
+  };
+
   const loadUsers = async () => {
     setLoading(true);
     try {
@@ -245,6 +307,92 @@ export default function AdminDashboardPage() {
             </div>
             <div className="text-3xl font-black text-slate-800">{stats.total_admins}</div>
           </div>
+        </div>
+
+        {/* Panel Manajemen Bot WhatsApp Baileys (Admin) */}
+        <div className="bg-white p-6 rounded-3xl border border-emerald-200/80 shadow-xs space-y-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2.5">
+                <h2 className="text-lg font-black text-slate-800">Manajemen Bot WhatsApp (Baileys)</h2>
+                <span
+                  className={`text-[11px] font-black px-2.5 py-0.5 rounded-full ${
+                    botStatus.connected
+                      ? "bg-emerald-100 text-emerald-800"
+                      : botStatus.status === "qr_ready"
+                      ? "bg-blue-100 text-blue-800"
+                      : "bg-amber-100 text-amber-800"
+                  }`}
+                >
+                  {botStatus.connected
+                    ? `Terhubung (${botStatus.connected_phone || "Aktif"})`
+                    : botStatus.status === "qr_ready"
+                    ? "Siap Scan Barcode QR"
+                    : botStatus.status === "connecting"
+                    ? "Menyiapkan QR..."
+                    : "Belum Terhubung"}
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1">
+                Scan barcode WhatsApp di bawah untuk mengaktifkan pengiriman pengingat cerdas (jam makan, minum obat, olahraga) & follow-up otomatis sampai pasien membalas konfirmasi.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {!botStatus.connected ? (
+                <button
+                  type="button"
+                  disabled={botLoading}
+                  onClick={() => handleConnectBaileys(botStatus.status !== "qr_ready")}
+                  className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
+                >
+                  {botLoading ? "Memuat..." : botStatus.qr_data_url ? "Refresh Barcode QR" : "Tampilkan Barcode QR"}
+                </button>
+              ) : (
+                <>
+                  <input
+                    type="tel"
+                    value={testWaPhone}
+                    onChange={(e) => setTestWaPhone(e.target.value)}
+                    placeholder="No WA uji coba (08xxx)"
+                    className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800"
+                  />
+                  <button
+                    type="button"
+                    disabled={botLoading}
+                    onClick={handleTestWaSend}
+                    className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
+                  >
+                    Tes Kirim WA
+                  </button>
+                  <button
+                    type="button"
+                    disabled={botLoading}
+                    onClick={handleDisconnectBaileys}
+                    className="px-3.5 py-2 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded-xl text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
+                  >
+                    Putuskan
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
+          {!botStatus.connected && botStatus.qr_data_url && (
+            <div className="bg-emerald-50/50 rounded-2xl border border-emerald-200 p-4 flex flex-col sm:flex-row items-center gap-5">
+              <img
+                src={botStatus.qr_data_url}
+                alt="QR Barcode WhatsApp Baileys"
+                className="w-44 h-44 rounded-xl border border-slate-200 p-1.5 bg-white shadow-xs"
+              />
+              <div className="text-xs text-slate-700 space-y-1.5">
+                <p className="font-black text-slate-900 text-sm">Panduan Scan Barcode Bot WhatsApp:</p>
+                <p>1. Buka aplikasi <strong>WhatsApp</strong> di ponsel server/admin.</p>
+                <p>2. Masuk ke <strong>Perangkat Tertaut (Linked Devices)</strong> &rarr; <strong>Tautkan Perangkat</strong>.</p>
+                <p>3. Scan QR Code di samping. Setelah terhubung, scheduler otomatis akan mengirim pengingat dan memantau balasan pasien.</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Users Table */}

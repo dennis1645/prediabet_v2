@@ -19,7 +19,6 @@ let latestQrDataUrl = null;
 let connectedPhone = null;
 let lastError = null;
 let schedulerTimer = null;
-const sentLogCache = new Set(); // key: `${date}_${time}_${userId}_${type}`
 
 const noopLogger = {
   level: "silent",
@@ -31,6 +30,24 @@ const noopLogger = {
   fatal: () => {},
   child: () => noopLogger,
 };
+
+function ensureReminderLogsTable() {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS wa_reminder_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      tanggal TEXT NOT NULL,
+      reminder_type TEXT NOT NULL,
+      reminder_label TEXT NOT NULL,
+      scheduled_time TEXT NOT NULL,
+      last_sent_at TEXT NOT NULL,
+      retry_count INTEGER NOT NULL DEFAULT 1,
+      confirmed INTEGER NOT NULL DEFAULT 0,
+      confirmed_at TEXT,
+      UNIQUE(user_id, tanggal, reminder_type)
+    );
+  `);
+}
 
 export function normalizeWaJid(phone) {
   const digits = String(phone || "").replace(/\D/g, "");
@@ -44,6 +61,14 @@ export function normalizeWaJid(phone) {
   return `${normalized}@s.whatsapp.net`;
 }
 
+function normalizeDigits(phone) {
+  const digits = String(phone || "").replace(/\D/g, "");
+  if (!digits) return "";
+  if (digits.startsWith("0")) return "62" + digits.slice(1);
+  if (digits.startsWith("62")) return digits;
+  return "62" + digits;
+}
+
 export function getWhatsAppBotStatus() {
   return {
     status: connectionStatus,
@@ -52,6 +77,28 @@ export function getWhatsAppBotStatus() {
     connected_phone: connectedPhone,
     last_error: lastError,
   };
+}
+
+function findUserByPhoneDigits(senderDigits) {
+  const normSender = normalizeDigits(senderDigits);
+  if (!normSender) return null;
+
+  const reminders = db
+    .prepare("SELECT w.user_id, w.phone_number, u.username FROM whatsapp_reminders w JOIN users u ON u.id = w.user_id")
+    .all();
+  for (const r of reminders) {
+    if (normalizeDigits(r.phone_number) === normSender) {
+      return r;
+    }
+  }
+
+  const users = db.prepare("SELECT id as user_id, phone_number, username FROM users WHERE phone_number IS NOT NULL").all();
+  for (const u of users) {
+    if (normalizeDigits(u.phone_number) === normSender) {
+      return u;
+    }
+  }
+  return null;
 }
 
 export async function connectWhatsAppBot(forceReset = false) {
@@ -144,17 +191,24 @@ export async function connectWhatsAppBot(forceReset = false) {
 
     sock.ev.on("messages.upsert", async ({ messages }) => {
       if (!Array.isArray(messages)) return;
+      ensureReminderLogsTable();
+
       for (const msg of messages) {
         if (!msg.message || msg.key.fromMe) continue;
-        const text =
+        const text = (
           msg.message.conversation ||
           msg.message.extendedTextMessage?.text ||
-          "";
-        const match = String(text).trim().match(/^LINK\s+(PB-[A-Z0-9]+)$/i);
-        if (match) {
-          const code = match[1].toUpperCase();
-          const senderJid = msg.key.remoteJid || "";
-          const senderDigits = senderJid.split("@")[0];
+          ""
+        ).trim();
+        if (!text) continue;
+
+        const senderJid = msg.key.remoteJid || "";
+        const senderDigits = senderJid.split("@")[0];
+
+        // 1. Cek perintah LINK PB-XXXX
+        const linkMatch = text.match(/^LINK\s+(PB-[A-Z0-9]+)$/i);
+        if (linkMatch) {
+          const code = linkMatch[1].toUpperCase();
           try {
             const row = db
               .prepare("SELECT user_id, phone_number FROM whatsapp_reminders WHERE UPPER(link_code) = ?")
@@ -166,11 +220,41 @@ export async function connectWhatsAppBot(forceReset = false) {
               ).run(row.phone_number || senderDigits, now, row.user_id);
 
               await sock.sendMessage(senderJid, {
-                text: `Halo! Akun PrediaBeat Anda (${code}) berhasil terhubung dengan Bot WhatsApp. Pengingat jadwal makan, obat, dan olahraga sekarang aktif! 🌟`,
+                text: `Halo! Akun PrediaBeat Anda (${code}) berhasil terhubung dengan Bot WhatsApp. Pengingat cerdas jadwal makan, obat, dan olahraga sekarang aktif! 🌟`,
               });
             }
           } catch (e) {
             console.warn("Gagal proses LINK WA:", e.message);
+          }
+          continue;
+        }
+
+        // 2. Cek konfirmasi user ("okee saya udah minum", "sudah makan", "sudah", "done", "oke", dll)
+        const low = text.toLowerCase();
+        const isConfirmation = /\b(sudah|udah|done|selesai|beres|oke|okee|ok|siap|sampun)\b/.test(low);
+        if (isConfirmation) {
+          const matchedUser = findUserByPhoneDigits(senderDigits);
+          if (matchedUser) {
+            const wibDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta" }).format(new Date());
+            const pendingLogs = db
+              .prepare("SELECT * FROM wa_reminder_logs WHERE user_id = ? AND tanggal = ? AND confirmed = 0")
+              .all(matchedUser.user_id, wibDate);
+
+            if (pendingLogs.length > 0) {
+              const nowIso = new Date().toISOString();
+              db.prepare(
+                "UPDATE wa_reminder_logs SET confirmed = 1, confirmed_at = ? WHERE user_id = ? AND tanggal = ? AND confirmed = 0"
+              ).run(nowIso, matchedUser.user_id, wibDate);
+
+              const labels = pendingLogs.map((l) => l.reminder_label).join(", ");
+              await sock.sendMessage(senderJid, {
+                text: `Terima kasih ${matchedUser.username}! ✅ Konfirmasi *${labels}* sudah kami catat. Pengingat untuk jadwal ini dihentikan hari ini. Tetap jaga pola 3J & kesehatan Anda! 🌟`,
+              });
+            } else {
+              await sock.sendMessage(senderJid, {
+                text: `Siap ${matchedUser.username}! 👍 Semua pengingat aktif hari ini sudah tercatat selesai. Semangat terus jaga gula darah stabil!`,
+              });
+            }
           }
         }
       }
@@ -208,7 +292,7 @@ export async function disconnectWhatsAppBot() {
 
 export async function sendWhatsAppMessage(phoneNumber, text) {
   if (!sock || connectionStatus !== "connected") {
-    throw new Error("Bot WhatsApp belum terhubung. Silakan scan barcode QR terlebih dahulu.");
+    throw new Error("Bot WhatsApp belum terhubung. Admin perlu scan barcode QR di Dashboard Admin terlebih dahulu.");
   }
   const jid = normalizeWaJid(phoneNumber);
   if (!jid) {
@@ -221,7 +305,9 @@ export async function sendWhatsAppMessage(phoneNumber, text) {
 async function runReminderTick() {
   if (!sock || connectionStatus !== "connected") return;
   try {
+    ensureReminderLogsTable();
     const nowDate = new Date();
+    const nowIso = nowDate.toISOString();
     const wibDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta" }).format(nowDate);
     const wibTime = new Intl.DateTimeFormat("en-GB", {
       timeZone: "Asia/Jakarta",
@@ -239,36 +325,75 @@ async function runReminderTick() {
       `)
       .all();
 
+    // 1. Kirim pengingat awal saat jam jadwal tiba
     for (const r of rows) {
       const checks = [
-        { cond: r.breakfast_time === wibTime, type: "breakfast", msg: `Halo ${r.username}! 🌅 Waktunya Sarapan Pagi sesuai jadwal 3J PrediaBeat Anda.` },
-        { cond: r.lunch_time === wibTime, type: "lunch", msg: `Halo ${r.username}! ☀️ Waktunya Makan Siang teratur sesuai target kalori 3J Anda.` },
-        { cond: r.snack_time === wibTime, type: "snack", msg: `Halo ${r.username}! 🍎 Saatnya Selingan Sehat. Pilih buah potong atau camilan rendah glikemik.` },
-        { cond: r.dinner_time === wibTime, type: "dinner", msg: `Halo ${r.username}! 🌙 Waktunya Makan Malam sehat. Utamakan sayur terlebih dahulu sebelum karbohidrat.` },
-        { cond: r.medicine_enabled && r.medicine_time === wibTime, type: "medicine", msg: `💊 Pengingat Minum Obat/Suplemen (${r.medicine_note || "Harian"}) untuk ${r.username}. Jangan sampai terlewat!` },
-        { cond: r.exercise_enabled && r.exercise_time === wibTime, type: "exercise", msg: `🏃 Halo ${r.username}! Waktunya olahraga ringan 20–30 menit hari ini untuk menjaga sensitivitas insulin.` },
+        { cond: r.breakfast_time === wibTime, type: "breakfast", label: "Sarapan Pagi", time: r.breakfast_time, msg: `Halo ${r.username}! 🌅 Waktunya *Sarapan Pagi* sesuai pola 3J PrediaBeat Anda.\n\nBalas *"SUDAH"* atau *"OKE SUDAH MAKAN"* jika sudah sarapan ya!` },
+        { cond: r.lunch_time === wibTime, type: "lunch", label: "Makan Siang", time: r.lunch_time, msg: `Halo ${r.username}! ☀️ Waktunya *Makan Siang* teratur sesuai target kalori 3J Anda.\n\nBalas *"SUDAH"* atau *"OKE SUDAH MAKAN"* jika sudah selesai makan ya!` },
+        { cond: r.snack_time === wibTime, type: "snack", label: "Selingan Sehat", time: r.snack_time, msg: `Halo ${r.username}! 🍎 Saatnya *Selingan Sehat*. Pilih buah potong atau camilan rendah glikemik.\n\nBalas *"SUDAH"* setelah selesai ya!` },
+        { cond: r.dinner_time === wibTime, type: "dinner", label: "Makan Malam", time: r.dinner_time, msg: `Halo ${r.username}! 🌙 Waktunya *Makan Malam* sehat. Utamakan sayur sebelum karbohidrat.\n\nBalas *"SUDAH"* jika sudah makan malam ya!` },
+        { cond: r.medicine_enabled && r.medicine_time === wibTime, type: "medicine", label: `Minum Obat (${r.medicine_note || "Harian"})`, time: r.medicine_time, msg: `💊 Pengingat *Minum Obat / Suplemen (${r.medicine_note || "Harian"})* untuk ${r.username}.\n\nJangan lupa diminum tepat waktu, lalu balas *"OKE SUDAH MINUM"* agar pengingat berhenti ya!` },
+        { cond: r.exercise_enabled && r.exercise_time === wibTime, type: "exercise", label: "Olahraga Harian", time: r.exercise_time, msg: `🏃 Halo ${r.username}! Waktunya *olahraga ringan 20–30 menit* hari ini untuk menjaga sensitivitas insulin.\n\nBalas *"SUDAH"* jika sudah berolahraga ya!` },
       ];
 
       for (const item of checks) {
         if (!item.cond) continue;
-        const key = `${wibDate}_${wibTime}_${r.user_id}_${item.type}`;
-        if (sentLogCache.has(key)) continue;
-        sentLogCache.add(key);
+        const existingLog = db
+          .prepare("SELECT * FROM wa_reminder_logs WHERE user_id = ? AND tanggal = ? AND reminder_type = ?")
+          .get(r.user_id, wibDate, item.type);
+
+        if (!existingLog) {
+          try {
+            await sendWhatsAppMessage(r.phone_number, item.msg);
+            db.prepare(`
+              INSERT INTO wa_reminder_logs (user_id, tanggal, reminder_type, reminder_label, scheduled_time, last_sent_at, retry_count, confirmed)
+              VALUES (?, ?, ?, ?, ?, ?, 1, 0)
+            `).run(r.user_id, wibDate, item.type, item.label, item.time, nowIso);
+          } catch (err) {
+            console.warn(`Gagal kirim WA reminder (${r.user_id}/${item.type}):`, err.message);
+          }
+        }
+      }
+    }
+
+    // 2. Follow-up Cerdas: Ingatkan ulang setiap 10 menit (maks 3x follow-up) jika user belum konfirmasi!
+    const pendingFollowups = db
+      .prepare(`
+        SELECT l.*, w.phone_number, w.enabled, u.username
+        FROM wa_reminder_logs l
+        JOIN whatsapp_reminders w ON w.user_id = l.user_id
+        JOIN users u ON u.id = l.user_id
+        WHERE l.tanggal = ? AND l.confirmed = 0 AND l.retry_count < 4 AND w.enabled = 1 AND w.phone_number IS NOT NULL AND w.phone_number != ''
+      `)
+      .all(wibDate);
+
+    for (const p of pendingFollowups) {
+      const elapsedMinutes = (nowDate.getTime() - new Date(p.last_sent_at).getTime()) / (1000 * 60);
+      if (elapsedMinutes >= 10) {
+        const nextRetry = p.retry_count + 1;
+        const followupMsg =
+          `⏰ *Pengingat Lanjutan (#${nextRetry})*\n` +
+          `Halo ${p.username}, kami belum menerima konfirmasi untuk jadwal *${p.reminder_label}* (${p.scheduled_time} WIB).\n\n` +
+          `Jika sudah dilakukan, silakan balas *"SUDAH"* atau *"OKE SUDAH MINUM/MAKAN"* agar pengingat berhenti otomatis ya! 😊`;
         try {
-          await sendWhatsAppMessage(r.phone_number, item.msg);
+          await sendWhatsAppMessage(p.phone_number, followupMsg);
+          db.prepare("UPDATE wa_reminder_logs SET last_sent_at = ?, retry_count = ? WHERE id = ?").run(
+            nowIso,
+            nextRetry,
+            p.id
+          );
         } catch (err) {
-          console.warn(`Gagal kirim WA reminder (${key}):`, err.message);
+          console.warn(`Gagal kirim WA follow-up (${p.user_id}/${p.reminder_type}):`, err.message);
         }
       }
     }
   } catch (err) {
-    // Abaikan jika tabel belum terbentuk
+    // Abaikan error sementara
   }
 }
 
 export function initWhatsAppScheduler() {
   if (schedulerTimer) clearInterval(schedulerTimer);
-  // Auto-reconnect jika kredensial Baileys sudah pernah tersimpan sebelumnya
   if (fs.existsSync(AUTH_DIR) && fs.readdirSync(AUTH_DIR).length > 0) {
     connectWhatsAppBot(false).catch(() => {});
   }
