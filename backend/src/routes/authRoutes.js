@@ -13,7 +13,7 @@ import {
   disconnectWaBot,
   testSendWaReminder,
 } from "../controllers/authController.js";
-import { authenticateJWT, requireAdmin } from "../middleware/authMiddleware.js";
+import { authenticateJWT, requireRole } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
@@ -24,8 +24,8 @@ router.put("/profile", authenticateJWT, updateAccountProfile);
 router.get("/wa-reminders", authenticateJWT, getWaReminders);
 router.put("/wa-reminders", authenticateJWT, saveWaReminders);
 router.get("/wa-bot/status", authenticateJWT, getWaBotStatus);
-router.post("/wa-bot/connect", authenticateJWT, requireAdmin, connectWaBot);
-router.post("/wa-bot/disconnect", authenticateJWT, requireAdmin, disconnectWaBot);
+router.post("/wa-bot/connect", authenticateJWT, requireRole("admin"), connectWaBot);
+router.post("/wa-bot/disconnect", authenticateJWT, requireRole("admin"), disconnectWaBot);
 router.post("/wa-bot/test-send", authenticateJWT, testSendWaReminder);
 router.get("/wa-bot/due", getDueWaReminders);
 router.post("/wa-bot/verify-link", verifyWaBotLink);
