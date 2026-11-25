@@ -203,7 +203,13 @@ export async function connectWhatsAppBot(forceReset = false) {
         if (!text) continue;
 
         const senderJid = msg.key.remoteJid || "";
-        const senderDigits = senderJid.split("@")[0];
+        const phoneSourceJid = msg.key.remoteJidAlt || msg.key.participant || senderJid;
+        const senderDigits = phoneSourceJid.split("@")[0].split(":")[0];
+
+        // Tandai pesan sebagai sudah dibaca (Centang 2 Biru)
+        try {
+          await sock.readMessages([msg.key]);
+        } catch {}
 
         // 1. Cek perintah LINK PB-XXXX
         const linkMatch = text.match(/^LINK\s+(PB-[A-Z0-9]+)$/i);
@@ -219,9 +225,13 @@ export async function connectWhatsAppBot(forceReset = false) {
                 "UPDATE whatsapp_reminders SET bot_linked = 1, enabled = 1, phone_number = ?, updated_at = ? WHERE user_id = ?"
               ).run(row.phone_number || senderDigits, now, row.user_id);
 
-              await sock.sendMessage(senderJid, {
-                text: `Halo! Akun PrediaBeat Anda (${code}) berhasil terhubung dengan Bot WhatsApp. Pengingat cerdas jadwal makan, obat, dan olahraga sekarang aktif! 🌟`,
-              });
+              await sock.sendMessage(
+                senderJid,
+                {
+                  text: `Halo! Akun PrediaBeat Anda (${code}) berhasil terhubung dengan Bot WhatsApp. Pengingat cerdas jadwal makan, obat, dan olahraga sekarang aktif! 🌟`,
+                },
+                { quoted: msg }
+              );
             }
           } catch (e) {
             console.warn("Gagal proses LINK WA:", e.message);
@@ -247,14 +257,30 @@ export async function connectWhatsAppBot(forceReset = false) {
               ).run(nowIso, matchedUser.user_id, wibDate);
 
               const labels = pendingLogs.map((l) => l.reminder_label).join(", ");
-              await sock.sendMessage(senderJid, {
-                text: `Terima kasih ${matchedUser.username}! ✅ Konfirmasi *${labels}* sudah kami catat. Pengingat untuk jadwal ini dihentikan hari ini. Tetap jaga pola 3J & kesehatan Anda! 🌟`,
-              });
+              await sock.sendMessage(
+                senderJid,
+                {
+                  text: `Terima kasih ${matchedUser.username}! ✅ Konfirmasi *${labels}* sudah kami catat. Pengingat untuk jadwal ini dihentikan hari ini. Tetap jaga pola 3J & kesehatan Anda! 🌟`,
+                },
+                { quoted: msg }
+              );
             } else {
-              await sock.sendMessage(senderJid, {
-                text: `Siap ${matchedUser.username}! 👍 Semua pengingat aktif hari ini sudah tercatat selesai. Semangat terus jaga gula darah stabil!`,
-              });
+              await sock.sendMessage(
+                senderJid,
+                {
+                  text: `Siap ${matchedUser.username}! 👍 Konfirmasi Anda telah diterima dan semua pengingat aktif hari ini sudah tercatat selesai. Semangat terus jaga gula darah stabil!`,
+                },
+                { quoted: msg }
+              );
             }
+          } else {
+            await sock.sendMessage(
+              senderJid,
+              {
+                text: `Terima kasih! ✅ Konfirmasi Anda sudah terbaca oleh Bot PrediaBeat. Jika nomor ini belum ditautkan, pastikan nomor WA Anda sudah disimpan di halaman Profil PrediaBeat ya! 🌟`,
+              },
+              { quoted: msg }
+            );
           }
         }
       }

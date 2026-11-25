@@ -115,7 +115,7 @@ export default function Navbar() {
                     }`}
                   >
                     <Utensils className="w-4 h-4" />
-                    Daftar Menu
+                    Daftar Makanan
                   </Link>
 
                   <Link
@@ -232,7 +232,7 @@ export default function Navbar() {
                       <span className="w-8 h-8 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600">
                         <Utensils className="w-4 h-4" />
                       </span>
-                      Daftar Menu
+                      Daftar Makanan
                     </Link>
                     <Link
                       to="/diet"

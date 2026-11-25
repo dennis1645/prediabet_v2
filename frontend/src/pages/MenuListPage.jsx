@@ -197,7 +197,7 @@ export default function MenuListPage() {
               Database Nutrisi Makanan Nusantara
             </div>
             <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-              Daftar Menu &{" "}
+              Daftar Makanan &{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">
                 Detail Nutrisi
               </span>
