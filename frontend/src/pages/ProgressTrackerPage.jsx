@@ -188,15 +188,16 @@ export default function ProgressTrackerPage() {
   };
 
   const handleSelectSuggestion = (food) => {
+    const kcal = Math.round(food.kalori ?? food.energi ?? 0);
     setInputFoodName(food.nama);
-    setInputFoodCal(String(Math.round(food.energi || 0)));
+    setInputFoodCal(String(kcal));
     setSelectedMacros({
       protein: Math.round(food.protein || 0),
-      karbo: Math.round(food.karbohidrat || 0),
+      karbo: Math.round(food.karbo ?? food.karbohidrat ?? 0),
       lemak: Math.round(food.lemak || 0),
     });
     setShowSuggestions(false);
-    showToast("info", `Kalori "${food.nama}" terisi otomatis (${Math.round(food.energi || 0)} kkal)`);
+    showToast("info", `Kalori "${food.nama}" terisi otomatis (${kcal} kkal)`);
   };
 
   const shiftDate = (delta) => {
@@ -253,10 +254,10 @@ export default function ProgressTrackerPage() {
         const items = Array.isArray(res?.data) ? res.data : (res?.data?.items || []);
         const top = items[0];
         if (top && top.nama.toLowerCase() === cleanName.toLowerCase()) {
-          calVal = Math.round(top.energi || 0);
+          calVal = Math.round(top.kalori ?? top.energi ?? 0);
           macros = {
             protein: Math.round(top.protein || 0),
-            karbo: Math.round(top.karbohidrat || 0),
+            karbo: Math.round(top.karbo ?? top.karbohidrat ?? 0),
             lemak: Math.round(top.lemak || 0),
           };
         }
@@ -670,7 +671,7 @@ export default function ProgressTrackerPage() {
                               >
                                 <span className="font-bold text-stone-800 truncate pr-2">{f.nama}</span>
                                 <span className="font-mono font-black text-emerald-700 shrink-0">
-                                  {Math.round(f.energi || 0)} kkal
+                                  {Math.round(f.kalori ?? f.energi ?? 0)} kkal
                                 </span>
                               </button>
                             ))}
