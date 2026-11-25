@@ -164,6 +164,17 @@ export default function ProfileJournalPage() {
     link_code: "",
   });
   const [savingWa, setSavingWa] = useState(false);
+  const [botStatus, setBotStatus] = useState({ status: "disconnected", connected: false, qr_data_url: null, connected_phone: null });
+  const [botLoading, setBotLoading] = useState(false);
+
+  const fetchBotStatus = async () => {
+    try {
+      const res = await api.getWaBotStatus();
+      if (res?.success && res.data) {
+        setBotStatus(res.data);
+      }
+    } catch {}
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -174,10 +185,61 @@ export default function ProfileJournalPage() {
         }
       })
       .catch(() => {});
+    fetchBotStatus();
     return () => {
       mounted = false;
     };
   }, []);
+
+  // Polling QR code / status Baileys saat Bab 05 aktif
+  useEffect(() => {
+    if (activePage !== 4) return;
+    fetchBotStatus();
+    const timer = setInterval(fetchBotStatus, 3000);
+    return () => clearInterval(timer);
+  }, [activePage]);
+
+  const handleConnectBaileys = async (forceReset = false) => {
+    setBotLoading(true);
+    try {
+      const res = await api.connectWaBot(forceReset);
+      if (res?.success && res.data) {
+        setBotStatus(res.data);
+      }
+      setTimeout(fetchBotStatus, 1200);
+    } catch (err) {
+      showErrorAlert("Gagal Memulai Bot WA", err.message || "Tidak dapat menghubungkan Baileys.");
+    } finally {
+      setBotLoading(false);
+    }
+  };
+
+  const handleDisconnectBaileys = async () => {
+    setBotLoading(true);
+    try {
+      const res = await api.disconnectWaBot();
+      if (res?.success && res.data) {
+        setBotStatus(res.data);
+      }
+      showToast("Koneksi Bot WhatsApp diputuskan.", "info");
+    } catch (err) {
+      showErrorAlert("Gagal", err.message || "Gagal memutus koneksi.");
+    } finally {
+      setBotLoading(false);
+    }
+  };
+
+  const handleTestWaSend = async () => {
+    setBotLoading(true);
+    try {
+      const res = await api.testSendWaReminder(waSettings.phone_number);
+      showToast(res?.message || "Pesan uji coba terkirim!", "success");
+    } catch (err) {
+      showErrorAlert("Gagal Mengirim", err.message || "Pastikan Bot WA sudah scan barcode dan nomor valid.");
+    } finally {
+      setBotLoading(false);
+    }
+  };
 
   const handleSaveWaReminders = async (e) => {
     e.preventDefault();
@@ -1008,31 +1070,103 @@ export default function ProfileJournalPage() {
                     </div>
                   </div>
 
-                  {/* Integrasi Bot WhatsApp (WAHA / Baileys) */}
-                  <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-black text-amber-950">Koneksi Bot WhatsApp (WAHA / Baileys)</span>
-                        <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${waSettings.bot_linked ? "bg-emerald-100 text-emerald-800" : "bg-amber-200 text-amber-900"}`}>
-                          {waSettings.bot_linked ? "Terhubung" : "Menunggu Tautan"}
-                        </span>
+                  {/* Integrasi Bot WhatsApp (Baileys QR Scan) */}
+                  <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-black text-amber-950">Bot WhatsApp Baileys (Scan Barcode)</span>
+                          <span
+                            className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
+                              botStatus.connected
+                                ? "bg-emerald-100 text-emerald-800"
+                                : botStatus.status === "qr_ready"
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-amber-200 text-amber-900"
+                            }`}
+                          >
+                            {botStatus.connected
+                              ? `Terhubung (${botStatus.connected_phone || "Aktif"})`
+                              : botStatus.status === "qr_ready"
+                              ? "Siap Scan QR"
+                              : botStatus.status === "connecting"
+                              ? "Menyiapkan QR..."
+                              : "Belum Terhubung"}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-amber-900 mt-0.5">
+                          Hubungkan WhatsApp server PrediaBeat menggunakan Baileys untuk mengirim pengingat otomatis.
+                        </p>
                       </div>
-                      <p className="text-[11px] text-amber-900 mt-1">
-                        Kirim pesan <code className="bg-white px-1.5 py-0.5 rounded font-bold">LINK {waSettings.link_code || "PB-..."}</code> ke Bot WhatsApp PrediaBeat untuk verifikasi nomor Anda.
-                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {!botStatus.connected ? (
+                          <button
+                            type="button"
+                            disabled={botLoading}
+                            onClick={() => handleConnectBaileys(botStatus.status !== "qr_ready")}
+                            className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
+                          >
+                            {botLoading ? "Memuat..." : botStatus.qr_data_url ? "Refresh Barcode QR" : "Tampilkan Barcode QR"}
+                          </button>
+                        ) : (
+                          <>
+                            <button
+                              type="button"
+                              disabled={botLoading}
+                              onClick={handleTestWaSend}
+                              className="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
+                            >
+                              Tes Kirim WA
+                            </button>
+                            <button
+                              type="button"
+                              disabled={botLoading}
+                              onClick={handleDisconnectBaileys}
+                              className="px-3 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-800 text-xs font-extrabold transition cursor-pointer disabled:opacity-50"
+                            >
+                              Putuskan
+                            </button>
+                          </>
+                        )}
+                      </div>
                     </div>
+
+                    {/* Tampilkan QR Barcode jika qr_data_url tersedia */}
+                    {!botStatus.connected && botStatus.qr_data_url && (
+                      <div className="bg-white rounded-2xl border border-amber-200 p-4 flex flex-col sm:flex-row items-center gap-4">
+                        <img
+                          src={botStatus.qr_data_url}
+                          alt="QR Barcode WhatsApp Baileys"
+                          className="w-44 h-44 rounded-xl border border-slate-200 p-1.5 bg-white shadow-xs"
+                        />
+                        <div className="text-xs text-slate-700 space-y-1.5">
+                          <p className="font-black text-slate-900">Cara Scan Barcode WhatsApp:</p>
+                          <p>1. Buka aplikasi <strong>WhatsApp</strong> di ponsel Anda.</p>
+                          <p>2. Pilih menu <strong>Perangkat Tertaut (Linked Devices)</strong> &rarr; <strong>Tautkan Perangkat</strong>.</p>
+                          <p>3. Arahkan kamera ke barcode di samping hingga status berubah menjadi <strong>Terhubung</strong>.</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Kode Tautan Akun Pasien */}
                     {waSettings.link_code && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard?.writeText(`LINK ${waSettings.link_code}`);
-                          showToast("Kode tautan WhatsApp disalin!", "success");
-                        }}
-                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-amber-300 text-amber-900 text-xs font-extrabold hover:bg-amber-100 transition cursor-pointer shrink-0"
-                      >
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>Salin Kode</span>
-                      </button>
+                      <div className="pt-2 border-t border-amber-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <p className="text-[11px] text-amber-900">
+                          Kode tautan akun Anda: <code className="bg-white px-1.5 py-0.5 rounded font-bold">LINK {waSettings.link_code}</code>
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigator.clipboard?.writeText(`LINK ${waSettings.link_code}`);
+                            showToast("Kode tautan WhatsApp disalin!", "success");
+                          }}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-amber-300 text-amber-900 text-[11px] font-extrabold hover:bg-amber-100 transition cursor-pointer self-start sm:self-auto"
+                        >
+                          <Copy className="w-3 h-3" />
+                          <span>Salin Kode</span>
+                        </button>
+                      </div>
                     )}
                   </div>
 

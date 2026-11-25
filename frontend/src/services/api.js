@@ -169,6 +169,21 @@ export const api = {
       method: "PUT",
       body: JSON.stringify(data),
     }),
+  getWaBotStatus: () => request("/auth/wa-bot/status"),
+  connectWaBot: (forceReset = false) =>
+    request("/auth/wa-bot/connect", {
+      method: "POST",
+      body: JSON.stringify({ forceReset }),
+    }),
+  disconnectWaBot: () =>
+    request("/auth/wa-bot/disconnect", {
+      method: "POST",
+    }),
+  testSendWaReminder: (phone_number) =>
+    request("/auth/wa-bot/test-send", {
+      method: "POST",
+      body: JSON.stringify({ phone_number }),
+    }),
   logFoodDirect: (data) =>
     request("/ai/log-food-direct", {
       method: "POST",

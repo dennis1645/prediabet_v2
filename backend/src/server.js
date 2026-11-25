@@ -2,6 +2,7 @@ import app from "./app.js";
 import { config } from "./config/env.js";
 import { initDatabase } from "./database/initSchema.js";
 import referenceService from "./services/referenceService.js";
+import { initWhatsAppScheduler } from "./services/whatsappBaileysService.js";
 
 async function startServer() {
   try {
@@ -14,6 +15,9 @@ async function startServer() {
 
     // 2. Load Reference Datasets ke Memory
     referenceService.init();
+
+    // 3. Jalankan Scheduler Pengingat WhatsApp (Baileys)
+    initWhatsAppScheduler();
 
     // 3. Jalankan HTTP Server
     app.listen(config.port, () => {

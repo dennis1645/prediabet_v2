@@ -2,6 +2,12 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import db from "../database/connection.js";
 import { config } from "../config/env.js";
+import {
+  getWhatsAppBotStatus,
+  connectWhatsAppBot,
+  disconnectWhatsAppBot,
+  sendWhatsAppMessage,
+} from "../services/whatsappBaileysService.js";
 
 export function register(req, res) {
   try {
@@ -541,5 +547,51 @@ export function verifyWaBotLink(req, res) {
   } catch (error) {
     console.error("verifyWaBotLink error:", error);
     res.status(500).json({ success: false, message: "Gagal verifikasi bot WhatsApp." });
+  }
+}
+
+export function getWaBotStatus(req, res) {
+  res.json({ success: true, data: getWhatsAppBotStatus() });
+}
+
+export async function connectWaBot(req, res) {
+  try {
+    const forceReset = Boolean(req.body?.forceReset);
+    const status = await connectWhatsAppBot(forceReset);
+    res.json({ success: true, data: status });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message || "Gagal memulai sesi Baileys." });
+  }
+}
+
+export async function disconnectWaBot(req, res) {
+  try {
+    const status = await disconnectWhatsAppBot();
+    res.json({ success: true, message: "Koneksi Bot WhatsApp diputuskan.", data: status });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message || "Gagal memutus sesi Baileys." });
+  }
+}
+
+export async function testSendWaReminder(req, res) {
+  try {
+    ensureWaReminderTable();
+    const userId = req.user.id;
+    const row = db.prepare("SELECT phone_number FROM whatsapp_reminders WHERE user_id = ?").get(userId);
+    const userRow = db.prepare("SELECT username, phone_number FROM users WHERE id = ?").get(userId);
+    const targetPhone = (req.body?.phone_number || row?.phone_number || userRow?.phone_number || "").trim();
+
+    if (!targetPhone) {
+      return res.status(400).json({ success: false, message: "Nomor WhatsApp belum diisi." });
+    }
+
+    await sendWhatsAppMessage(
+      targetPhone,
+      `Halo ${userRow?.username || "Sahabat PrediBeat"}! 🌟 Ini adalah pesan uji coba dari Bot WhatsApp PrediaBeat (Baileys). Pengingat jadwal makan, obat, dan olahraga Anda sudah siap!`
+    );
+
+    res.json({ success: true, message: `Pesan uji coba terkirim ke ${targetPhone}!` });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message || "Gagal mengirim pesan WhatsApp." });
   }
 }
