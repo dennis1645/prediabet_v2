@@ -156,9 +156,13 @@ export default function ProfileJournalPage() {
   const [waSettings, setWaSettings] = useState({
     phone_number: user?.phone_number || profile?.phone_number || "",
     enabled: false,
+    breakfast_enabled: true,
     breakfast_time: "07:00",
+    snack_enabled: true,
     snack_time: "15:30",
+    lunch_enabled: true,
     lunch_time: "12:30",
+    dinner_enabled: true,
     dinner_time: "18:30",
     medicine_enabled: false,
     medicine_time: "08:00",
@@ -1120,44 +1124,52 @@ export default function ProfileJournalPage() {
 
                   {/* Jadwal Jam Makan */}
                   <div className="p-4 rounded-2xl bg-white border border-stone-200">
-                    <p className="text-xs font-black text-slate-700 uppercase tracking-wider mb-3">Jadwal Pengingat Jam Makan (WIB)</p>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Sarapan</label>
-                        <input
-                          type="time"
-                          value={waSettings.breakfast_time}
-                          onChange={(e) => setWaSettings((p) => ({ ...p, breakfast_time: e.target.value }))}
-                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Makan Siang</label>
-                        <input
-                          type="time"
-                          value={waSettings.lunch_time}
-                          onChange={(e) => setWaSettings((p) => ({ ...p, lunch_time: e.target.value }))}
-                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Selingan</label>
-                        <input
-                          type="time"
-                          value={waSettings.snack_time}
-                          onChange={(e) => setWaSettings((p) => ({ ...p, snack_time: e.target.value }))}
-                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Makan Malam</label>
-                        <input
-                          type="time"
-                          value={waSettings.dinner_time}
-                          onChange={(e) => setWaSettings((p) => ({ ...p, dinner_time: e.target.value }))}
-                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
-                        />
-                      </div>
+                    <div className="mb-3">
+                      <p className="text-xs font-black text-slate-700 uppercase tracking-wider">Jadwal Pengingat Jam Makan (WIB)</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
+                        Jam di bawah bisa diklik untuk diubah sesuai kebiasaan Anda, atau matikan centang jika jadwal makan tersebut tidak ingin diingatkan.
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                      {[
+                        { key: "breakfast", label: "Sarapan" },
+                        { key: "lunch", label: "Makan Siang" },
+                        { key: "snack", label: "Selingan" },
+                        { key: "dinner", label: "Makan Malam" },
+                      ].map((slot) => {
+                        const isOn = waSettings[`${slot.key}_enabled`] !== false;
+                        return (
+                          <div
+                            key={slot.key}
+                            className={`p-2.5 rounded-xl border transition ${
+                              isOn ? "bg-slate-50 border-stone-200" : "bg-stone-100/70 border-stone-200/70 opacity-65"
+                            }`}
+                          >
+                            <label className="flex items-center justify-between gap-2 mb-1.5 cursor-pointer">
+                              <span className="text-[10px] font-black text-slate-600 uppercase">{slot.label}</span>
+                              <input
+                                type="checkbox"
+                                checked={isOn}
+                                onChange={(e) =>
+                                  setWaSettings((p) => ({ ...p, [`${slot.key}_enabled`]: e.target.checked }))
+                                }
+                                className="w-3.5 h-3.5 accent-emerald-600 cursor-pointer"
+                                title={`Aktifkan/nonaktifkan pengingat ${slot.label}`}
+                              />
+                            </label>
+                            <input
+                              type="time"
+                              disabled={!isOn}
+                              value={waSettings[`${slot.key}_time`] || "07:00"}
+                              onClick={(e) => isOn && e.currentTarget.showPicker?.()}
+                              onChange={(e) =>
+                                setWaSettings((p) => ({ ...p, [`${slot.key}_time`]: e.target.value }))
+                              }
+                              className="w-full px-2.5 py-2 bg-white border border-stone-200 hover:border-emerald-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 rounded-lg text-xs font-bold text-slate-800 cursor-pointer disabled:cursor-not-allowed"
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -1176,8 +1188,9 @@ export default function ProfileJournalPage() {
                       <input
                         type="time"
                         value={waSettings.medicine_time}
+                        onClick={(e) => e.currentTarget.showPicker?.()}
                         onChange={(e) => setWaSettings((p) => ({ ...p, medicine_time: e.target.value }))}
-                        className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                        className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 hover:border-emerald-400 focus:border-emerald-500 rounded-xl text-xs font-bold cursor-pointer"
                       />
                       <input
                         type="text"
@@ -1201,8 +1214,9 @@ export default function ProfileJournalPage() {
                       <input
                         type="time"
                         value={waSettings.exercise_time}
+                        onClick={(e) => e.currentTarget.showPicker?.()}
                         onChange={(e) => setWaSettings((p) => ({ ...p, exercise_time: e.target.value }))}
-                        className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                        className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 hover:border-emerald-400 focus:border-emerald-500 rounded-xl text-xs font-bold cursor-pointer"
                       />
                       <p className="text-[11px] text-slate-500">Pengingat harian jalan santai / olahraga ringan 20–30 menit.</p>
                     </div>

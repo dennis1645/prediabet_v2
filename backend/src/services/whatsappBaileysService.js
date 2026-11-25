@@ -354,10 +354,10 @@ async function runReminderTick() {
     // 1. Kirim pengingat awal saat jam jadwal tiba
     for (const r of rows) {
       const checks = [
-        { cond: r.breakfast_time === wibTime, type: "breakfast", label: "Sarapan Pagi", time: r.breakfast_time, msg: `Halo ${r.username}! 🌅 Waktunya *Sarapan Pagi* sesuai pola 3J PrediaBeat Anda.\n\nBalas *"SUDAH"* atau *"OKE SUDAH MAKAN"* jika sudah sarapan ya!` },
-        { cond: r.lunch_time === wibTime, type: "lunch", label: "Makan Siang", time: r.lunch_time, msg: `Halo ${r.username}! ☀️ Waktunya *Makan Siang* teratur sesuai target kalori 3J Anda.\n\nBalas *"SUDAH"* atau *"OKE SUDAH MAKAN"* jika sudah selesai makan ya!` },
-        { cond: r.snack_time === wibTime, type: "snack", label: "Selingan Sehat", time: r.snack_time, msg: `Halo ${r.username}! 🍎 Saatnya *Selingan Sehat*. Pilih buah potong atau camilan rendah glikemik.\n\nBalas *"SUDAH"* setelah selesai ya!` },
-        { cond: r.dinner_time === wibTime, type: "dinner", label: "Makan Malam", time: r.dinner_time, msg: `Halo ${r.username}! 🌙 Waktunya *Makan Malam* sehat. Utamakan sayur sebelum karbohidrat.\n\nBalas *"SUDAH"* jika sudah makan malam ya!` },
+        { cond: r.breakfast_enabled !== 0 && r.breakfast_time === wibTime, type: "breakfast", label: "Sarapan Pagi", time: r.breakfast_time, msg: `Halo ${r.username}! 🌅 Waktunya *Sarapan Pagi* sesuai pola 3J PrediaBeat Anda.\n\nBalas *"SUDAH"* atau *"OKE SUDAH MAKAN"* jika sudah sarapan ya!` },
+        { cond: r.lunch_enabled !== 0 && r.lunch_time === wibTime, type: "lunch", label: "Makan Siang", time: r.lunch_time, msg: `Halo ${r.username}! ☀️ Waktunya *Makan Siang* teratur sesuai target kalori 3J Anda.\n\nBalas *"SUDAH"* atau *"OKE SUDAH MAKAN"* jika sudah selesai makan ya!` },
+        { cond: r.snack_enabled !== 0 && r.snack_time === wibTime, type: "snack", label: "Selingan Sehat", time: r.snack_time, msg: `Halo ${r.username}! 🍎 Saatnya *Selingan Sehat*. Pilih buah potong atau camilan rendah glikemik.\n\nBalas *"SUDAH"* setelah selesai ya!` },
+        { cond: r.dinner_enabled !== 0 && r.dinner_time === wibTime, type: "dinner", label: "Makan Malam", time: r.dinner_time, msg: `Halo ${r.username}! 🌙 Waktunya *Makan Malam* sehat. Utamakan sayur sebelum karbohidrat.\n\nBalas *"SUDAH"* jika sudah makan malam ya!` },
         { cond: r.medicine_enabled && r.medicine_time === wibTime, type: "medicine", label: `Minum Obat (${r.medicine_note || "Harian"})`, time: r.medicine_time, msg: `💊 Pengingat *Minum Obat / Suplemen (${r.medicine_note || "Harian"})* untuk ${r.username}.\n\nJangan lupa diminum tepat waktu, lalu balas *"OKE SUDAH MINUM"* agar pengingat berhenti ya!` },
         { cond: r.exercise_enabled && r.exercise_time === wibTime, type: "exercise", label: "Olahraga Harian", time: r.exercise_time, msg: `🏃 Halo ${r.username}! Waktunya *olahraga ringan 20–30 menit* hari ini untuk menjaga sensitivitas insulin.\n\nBalas *"SUDAH"* jika sudah berolahraga ya!` },
       ];

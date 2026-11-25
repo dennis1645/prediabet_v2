@@ -349,9 +349,13 @@ function ensureWaReminderTable() {
       user_id INTEGER UNIQUE NOT NULL,
       phone_number TEXT,
       enabled INTEGER NOT NULL DEFAULT 0,
+      breakfast_enabled INTEGER NOT NULL DEFAULT 1,
       breakfast_time TEXT NOT NULL DEFAULT '07:00',
+      snack_enabled INTEGER NOT NULL DEFAULT 1,
       snack_time TEXT NOT NULL DEFAULT '15:30',
+      lunch_enabled INTEGER NOT NULL DEFAULT 1,
       lunch_time TEXT NOT NULL DEFAULT '12:30',
+      dinner_enabled INTEGER NOT NULL DEFAULT 1,
       dinner_time TEXT NOT NULL DEFAULT '18:30',
       medicine_enabled INTEGER NOT NULL DEFAULT 0,
       medicine_time TEXT NOT NULL DEFAULT '08:00',
@@ -365,9 +369,17 @@ function ensureWaReminderTable() {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
   `);
-  try {
-    db.exec("ALTER TABLE whatsapp_reminders ADD COLUMN custom_reminders_json TEXT NOT NULL DEFAULT '[]';");
-  } catch (e) {}
+  for (const col of [
+    "custom_reminders_json TEXT NOT NULL DEFAULT '[]'",
+    "breakfast_enabled INTEGER NOT NULL DEFAULT 1",
+    "snack_enabled INTEGER NOT NULL DEFAULT 1",
+    "lunch_enabled INTEGER NOT NULL DEFAULT 1",
+    "dinner_enabled INTEGER NOT NULL DEFAULT 1",
+  ]) {
+    try {
+      db.exec(`ALTER TABLE whatsapp_reminders ADD COLUMN ${col};`);
+    } catch (e) {}
+  }
 }
 
 function generateLinkCode(userId) {
@@ -408,6 +420,10 @@ export function getWaReminders(req, res) {
       data: {
         ...row,
         enabled: Boolean(row.enabled),
+        breakfast_enabled: row.breakfast_enabled !== 0,
+        snack_enabled: row.snack_enabled !== 0,
+        lunch_enabled: row.lunch_enabled !== 0,
+        dinner_enabled: row.dinner_enabled !== 0,
         medicine_enabled: Boolean(row.medicine_enabled),
         exercise_enabled: Boolean(row.exercise_enabled),
         bot_linked: Boolean(row.bot_linked),
@@ -427,9 +443,13 @@ export function saveWaReminders(req, res) {
     const {
       phone_number,
       enabled,
+      breakfast_enabled,
       breakfast_time,
+      snack_enabled,
       snack_time,
+      lunch_enabled,
       lunch_time,
+      dinner_enabled,
       dinner_time,
       medicine_enabled,
       medicine_time,
@@ -459,16 +479,21 @@ export function saveWaReminders(req, res) {
 
     db.prepare(`
       INSERT INTO whatsapp_reminders (
-        user_id, phone_number, enabled, breakfast_time, snack_time, lunch_time, dinner_time,
+        user_id, phone_number, enabled,
+        breakfast_enabled, breakfast_time, snack_enabled, snack_time, lunch_enabled, lunch_time, dinner_enabled, dinner_time,
         medicine_enabled, medicine_time, medicine_note, exercise_enabled, exercise_time,
         custom_reminders_json, bot_linked, link_code, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON CONFLICT(user_id) DO UPDATE SET
         phone_number = excluded.phone_number,
         enabled = excluded.enabled,
+        breakfast_enabled = excluded.breakfast_enabled,
         breakfast_time = excluded.breakfast_time,
+        snack_enabled = excluded.snack_enabled,
         snack_time = excluded.snack_time,
+        lunch_enabled = excluded.lunch_enabled,
         lunch_time = excluded.lunch_time,
+        dinner_enabled = excluded.dinner_enabled,
         dinner_time = excluded.dinner_time,
         medicine_enabled = excluded.medicine_enabled,
         medicine_time = excluded.medicine_time,
@@ -481,9 +506,13 @@ export function saveWaReminders(req, res) {
       userId,
       cleanPhone,
       enabled ? 1 : 0,
+      breakfast_enabled !== false ? 1 : 0,
       breakfast_time || "07:00",
+      snack_enabled !== false ? 1 : 0,
       snack_time || "15:30",
+      lunch_enabled !== false ? 1 : 0,
       lunch_time || "12:30",
+      dinner_enabled !== false ? 1 : 0,
       dinner_time || "18:30",
       medicine_enabled ? 1 : 0,
       medicine_time || "08:00",
@@ -509,6 +538,10 @@ export function saveWaReminders(req, res) {
       data: {
         ...updated,
         enabled: Boolean(updated.enabled),
+        breakfast_enabled: updated.breakfast_enabled !== 0,
+        snack_enabled: updated.snack_enabled !== 0,
+        lunch_enabled: updated.lunch_enabled !== 0,
+        dinner_enabled: updated.dinner_enabled !== 0,
         medicine_enabled: Boolean(updated.medicine_enabled),
         exercise_enabled: Boolean(updated.exercise_enabled),
         bot_linked: Boolean(updated.bot_linked),
