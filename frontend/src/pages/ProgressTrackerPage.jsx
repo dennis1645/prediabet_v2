@@ -374,25 +374,51 @@ export default function ProgressTrackerPage() {
         {/* SAMPUL BUKU KULIT & BUKU TERBUKA 2 HALAMAN (OPEN BOOK SPREAD) */}
         <div
           className="bg-[#5C4033] p-2.5 sm:p-4 rounded-[2.2rem] shadow-[0_28px_70px_rgba(41,25,15,0.28)] border-b-8 border-[#3E2723] relative"
-          style={{ perspective: "1600px" }}
         >
           {/* Pita Pembatas Buku */}
-          <div className="hidden sm:flex absolute -top-2 right-14 z-20 items-center gap-1 bg-rose-700 text-white px-3 py-1.5 rounded-b-xl shadow-md text-[10px] font-black uppercase tracking-wider">
+          <div className="hidden sm:flex absolute -top-2 right-14 z-30 items-center gap-1 bg-rose-700 text-white px-3 py-1.5 rounded-b-xl shadow-md text-[10px] font-black uppercase tracking-wider">
             <Bookmark className="w-3 h-3" />
             <span>{dateInfo.tanggal} {dateInfo.bulan.slice(0, 3)}</span>
           </div>
 
           <div
-            key={flipKey}
-            style={{
-              animation:
-                flipKey > 0
-                  ? `${flipDir === "next" ? "bookPageFlipNext" : "bookPageFlipPrev"} 0.42s cubic-bezier(0.22, 1, 0.36, 1)`
-                  : undefined,
-              transformStyle: "preserve-3d",
-            }}
             className="grid grid-cols-1 lg:grid-cols-2 bg-[#FCF9F2] rounded-[1.7rem] overflow-hidden relative shadow-inner"
+            style={{ perspective: "2200px" }}
           >
+            {/* LEMBARAN KERTAS MELENTIK SAAT PINDAH TANGGAL (HANYA KERTASNYA, BUKAN BUKUNYA) */}
+            {flipKey > 0 && (
+              <div
+                key={`sheet-${flipKey}`}
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-y-0 z-30 w-full lg:w-1/2 ${
+                  flipDir === "next" ? "right-0 lg:left-1/2 origin-left" : "left-0 lg:right-1/2 origin-right"
+                }`}
+                style={{
+                  backgroundColor: "#FCF9F2",
+                  backgroundImage:
+                    "repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(148, 163, 184, 0.22) 32px)",
+                  boxShadow:
+                    flipDir === "next"
+                      ? "-14px 0 32px rgba(41, 25, 15, 0.16), inset 10px 0 22px rgba(120, 113, 108, 0.12)"
+                      : "14px 0 32px rgba(41, 25, 15, 0.16), inset -10px 0 22px rgba(120, 113, 108, 0.12)",
+                  backfaceVisibility: "hidden",
+                  transformStyle: "preserve-3d",
+                  animation: `${
+                    flipDir === "next" ? "paperSheetTurnNext" : "paperSheetTurnPrev"
+                  } 0.56s cubic-bezier(0.32, 0.72, 0, 1) forwards`,
+                }}
+              >
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      flipDir === "next"
+                        ? "linear-gradient(to right, rgba(41,25,15,0.08), transparent 28%, rgba(255,255,255,0.45) 75%, rgba(41,25,15,0.04))"
+                        : "linear-gradient(to left, rgba(41,25,15,0.08), transparent 28%, rgba(255,255,255,0.45) 75%, rgba(41,25,15,0.04))",
+                  }}
+                />
+              </div>
+            )}
             {/* JILID TENGAH BUKU (SPINE & RING BINDER) */}
             <div className="hidden lg:flex flex-col justify-evenly items-center absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-8 z-20 pointer-events-none">
               <div className="w-full h-full bg-gradient-to-r from-black/10 via-stone-400/30 to-black/10 absolute inset-0" />
@@ -416,7 +442,13 @@ export default function ProgressTrackerPage() {
             >
               <div className="hidden sm:block absolute top-0 bottom-0 left-10 w-[1px] bg-rose-300/60 pointer-events-none" />
 
-              <div className="sm:pl-6 relative z-10">
+              <div
+                key={`left-ink-${flipKey}`}
+                className="sm:pl-6 relative z-10"
+                style={{
+                  animation: flipKey > 0 ? "paperInkSettle 0.42s ease-out" : undefined,
+                }}
+              >
                 <div className="flex items-start justify-between gap-3 pb-4 mb-5 border-b-2 border-stone-300/80">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-14 rounded-xl bg-white border-2 border-emerald-700 overflow-hidden shadow-xs flex flex-col items-center justify-center shrink-0">
@@ -564,7 +596,13 @@ export default function ProgressTrackerPage() {
                   "repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(148, 163, 184, 0.22) 32px)",
               }}
             >
-              <div className="space-y-5 relative z-10">
+              <div
+                key={`right-ink-${flipKey}`}
+                className="space-y-5 relative z-10"
+                style={{
+                  animation: flipKey > 0 ? "paperInkSettle 0.42s ease-out" : undefined,
+                }}
+              >
                 <div className="pb-3 border-b-2 border-stone-300/80">
                   <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Halaman Kanan • Tulis Entri</p>
                   <h2 className="text-lg sm:text-xl font-black text-stone-900">
@@ -767,13 +805,51 @@ export default function ProgressTrackerPage() {
       </div>
 
       <style>{`
-        @keyframes bookPageFlipNext {
-          0% { opacity: 0.45; transform: rotateY(-8deg) scale(0.985); }
-          100% { opacity: 1; transform: rotateY(0deg) scale(1); }
+        @keyframes paperSheetTurnNext {
+          0% {
+            opacity: 0.96;
+            transform: rotateY(0deg) skewY(0deg);
+          }
+          35% {
+            opacity: 0.94;
+            transform: rotateY(-58deg) skewY(-1.8deg) scaleX(0.98);
+          }
+          75% {
+            opacity: 0.55;
+            transform: rotateY(-138deg) skewY(1.2deg);
+          }
+          100% {
+            opacity: 0;
+            transform: rotateY(-178deg) skewY(0deg);
+          }
         }
-        @keyframes bookPageFlipPrev {
-          0% { opacity: 0.45; transform: rotateY(8deg) scale(0.985); }
-          100% { opacity: 1; transform: rotateY(0deg) scale(1); }
+        @keyframes paperSheetTurnPrev {
+          0% {
+            opacity: 0.96;
+            transform: rotateY(0deg) skewY(0deg);
+          }
+          35% {
+            opacity: 0.94;
+            transform: rotateY(58deg) skewY(1.8deg) scaleX(0.98);
+          }
+          75% {
+            opacity: 0.55;
+            transform: rotateY(138deg) skewY(-1.2deg);
+          }
+          100% {
+            opacity: 0;
+            transform: rotateY(178deg) skewY(0deg);
+          }
+        }
+        @keyframes paperInkSettle {
+          0% {
+            opacity: 0.35;
+            transform: translateY(3px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         @media (prefers-reduced-motion: reduce) {
           * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
