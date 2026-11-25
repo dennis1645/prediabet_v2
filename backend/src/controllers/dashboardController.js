@@ -54,6 +54,94 @@ export function getDashboard(req, res) {
       .prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?")
       .get(req.user.id, today);
 
+    // Hitung Health Score & Ringkasan Progress Mingguan secara dinamis dari 7 hari terakhir
+    const sevenDaysAgoDate = new Date();
+    sevenDaysAgoDate.setDate(sevenDaysAgoDate.getDate() - 6);
+    const sevenDaysAgoStr = sevenDaysAgoDate.toISOString().split("T")[0];
+
+    const weeklyLogs = db
+      .prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal >= ? ORDER BY tanggal DESC")
+      .all(req.user.id, sevenDaysAgoStr);
+
+    const activeLogs = weeklyLogs.filter(
+      (l) => (l.actual_kalori || 0) > 0 || (l.duration_minutes || 0) > 0 || (l.notes && l.notes.trim().length > 0)
+    );
+    const daysLogged = activeLogs.length;
+    const totalExerciseMinutes = Math.round(
+      weeklyLogs.reduce((sum, l) => sum + (parseFloat(l.duration_minutes) || 0), 0)
+    );
+
+    const targetKal = analysis.target_kalori || 1850;
+    let avgAdherence = 0;
+    let foodQuality = 0;
+
+    if (daysLogged > 0) {
+      const adherenceList = activeLogs.map((l) => {
+        if (l.meal_plan_adherence_percent > 0) return Math.min(100, l.meal_plan_adherence_percent);
+        if ((l.actual_kalori || 0) > 0) {
+          const diffRatio = Math.abs(l.actual_kalori - targetKal) / Math.max(targetKal, 1);
+          return Math.max(40, Math.round((1 - Math.min(diffRatio, 0.6)) * 100));
+        }
+        return 70;
+      });
+      avgAdherence = Math.round(adherenceList.reduce((a, b) => a + b, 0) / adherenceList.length);
+
+      const sweetAvg =
+        activeLogs.reduce((sum, l) => sum + (parseFloat(l.sweet_drink_count) || 0), 0) / daysLogged;
+      const baseQuality = (avgAdherence / 100) * 9.5 - Math.min(sweetAvg * 1.2, 3);
+      foodQuality = Math.max(4.0, Math.min(10.0, Math.round(baseQuality * 10) / 10));
+    }
+
+    const scoreVal =
+      daysLogged === 0
+        ? 0
+        : Math.min(
+            100,
+            Math.round(
+              (Math.min(daysLogged, 7) / 7) * 25 +
+                (avgAdherence / 100) * 35 +
+                Math.min(totalExerciseMinutes / 150, 1) * 25 +
+                (foodQuality / 10) * 15
+            )
+          );
+
+    let scoreStatus = "Belum Ada Catatan Minggu Ini";
+    let insightMsg =
+      "Belum ada catatan asupan atau aktivitas fisik pada minggu ini. Mulai catat makanan atau olahraga pertama Anda di Jurnal Harian untuk memantau Health Score secara real-time.";
+    const priorities = [];
+
+    if (daysLogged > 0) {
+      if (scoreVal >= 80) scoreStatus = "Kondisi Stabil & Baik";
+      else if (scoreVal >= 60) scoreStatus = "Cukup Baik (Terus Tingkatkan)";
+      else scoreStatus = "Perlu Konsistensi";
+
+      insightMsg = `Tercatat ${daysLogged} hari log aktif pada minggu ini dengan rata-rata kepatuhan ${avgAdherence}% dan total aktivitas fisik ${totalExerciseMinutes} menit.`;
+      if (totalExerciseMinutes < 150) {
+        priorities.push(
+          `Tambahkan ${150 - totalExerciseMinutes} menit aktivitas fisik ringan-sedang minggu ini untuk mencapai target 150 menit/minggu PERKENI.`
+        );
+      } else {
+        priorities.push("Target 150 menit olahraga mingguan sudah tercapai! Pertahankan konsistensi Anda.");
+      }
+    } else {
+      priorities.push("Catat menu makan hari ini di Dashboard atau Jurnal Harian untuk mengaktifkan perhitungan Health Score.");
+    }
+
+    analysis.health_score = {
+      score: scoreVal,
+      status: scoreStatus,
+      metrics: {
+        days_logged: daysLogged,
+        avg_adherence: avgAdherence,
+        total_exercise_minutes: totalExerciseMinutes,
+      },
+      breakdown: { food_quality: foodQuality },
+    };
+    analysis.weekly_insight = {
+      message: insightMsg,
+      priorities,
+    };
+
     const lastProfileDate = new Date(profileRow.questionnaire_completed_at || profileRow.updated_at || Date.now());
     const daysSinceUpdate = (Date.now() - lastProfileDate.getTime()) / (1000 * 60 * 60 * 24);
     const needsUpdate = Number.isFinite(daysSinceUpdate) && daysSinceUpdate >= 30;

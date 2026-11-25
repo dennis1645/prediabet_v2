@@ -91,6 +91,17 @@ export function getUserAIContext(req, res) {
       .prepare("SELECT role, content, created_at FROM chat_logs WHERE user_id = ? ORDER BY id DESC LIMIT 5")
       .all(userId);
 
+    const toNumOrNull = (val) => {
+      if (val === null || val === undefined || val === "") return null;
+      const n = parseFloat(String(val).replace(",", "."));
+      return Number.isFinite(n) ? n : null;
+    };
+
+    const rawKomorbid = profile.komorbiditas || profile.riwayat_kondisi_kesehatan || [];
+    const komorbidList = Array.isArray(rawKomorbid)
+      ? rawKomorbid.map((s) => String(s).trim()).filter(Boolean)
+      : String(rawKomorbid).split(",").map((s) => s.trim()).filter(Boolean);
+
     res.json({
       success: true,
       data: {
@@ -99,14 +110,17 @@ export function getUserAIContext(req, res) {
         medicalContext: {
           nama: (profile.nama || req.user.username || "Bapak/Ibu").replace(/[_.-]+/g, " ").trim().replace(/\b\w/g, (c) => c.toUpperCase()),
           has_profile: hasProfile,
-          usia: profile.usia || null,
+          usia: toNumOrNull(profile.usia),
           jenis_kelamin: profile.jenis_kelamin || "Laki-laki",
-          bmi: analysis.bmi || null,
+          tinggi_badan: toNumOrNull(profile.tinggi_badan),
+          berat_badan: toNumOrNull(profile.berat_badan),
+          lingkar_pinggang: toNumOrNull(profile.lingkar_pinggang),
+          bmi: toNumOrNull(analysis.bmi),
           kategori_bmi: analysis.status_bmi || analysis.kategori_bmi || (hasProfile ? "Normal" : "Belum diisi"),
-          skor_risiko: analysis.skor_risiko || null,
+          skor_risiko: toNumOrNull(analysis.skor_risiko),
           kategori_risiko: analysis.kategori_risiko || (hasProfile ? "Normal" : "Belum diisi"),
-          gula_darah_puasa: profile.gula_darah_puasa || "Belum ada tes lab",
-          hba1c: profile.hba1c || "Belum ada tes lab",
+          gula_darah_puasa: profile.gula_darah_puasa || profile.tes_gula_darah_puasa || "Belum ada tes lab",
+          hba1c: profile.hba1c || profile.tes_hba1c || "Belum ada tes lab",
           pantangan_alergi: Array.from(
             new Set(
               (Array.isArray(profile.pantangan_alergi)
@@ -119,13 +133,13 @@ export function getUserAIContext(req, res) {
                 .filter(Boolean)
             )
           ),
-          komorbiditas: profile.komorbiditas || [],
+          komorbiditas: komorbidList,
           active_diet: analysis.active_diet_label || "Belum Dipilih (Pola Seimbang 3J)",
-          target_kalori: analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2000),
-          target_karbo: analysis.target_karbo || 225,
-          target_protein: analysis.target_protein || 100,
-          target_lemak: analysis.target_lemak || 60,
-          tdee: analysis.tdee || 2200,
+          target_kalori: toNumOrNull(analysis.target_kalori) || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2000),
+          target_karbo: toNumOrNull(analysis.target_karbo) || 225,
+          target_protein: toNumOrNull(analysis.target_protein) || 100,
+          target_lemak: toNumOrNull(analysis.target_lemak) || 60,
+          tdee: toNumOrNull(analysis.tdee) || 2200,
           pola_waktu_makan: analysis.pola_waktu_makan || profile.pola_waktu_makan || "Normal 3J (3 kali makan utama + 2 kali selingan)",
           meal_plan: analysis.meal_plan || [],
         },
@@ -264,12 +278,14 @@ export function deleteChatSession(req, res) {
 export function logFoodDirect(req, res) {
   try {
     const userId = req.user.id;
-    const { food_name, calories, meal_time, protein, karbo, lemak } = req.body;
+    const { food_name, calories, meal_time, protein, karbo, lemak, tanggal } = req.body;
     if (!food_name) {
       return res.status(400).json({ success: false, message: "Nama makanan wajib diisi." });
     }
 
-    const today = new Date().toISOString().split("T")[0];
+    const targetDate = tanggal && /^\d{4}-\d{2}-\d{2}$/.test(String(tanggal))
+      ? String(tanggal)
+      : new Date().toISOString().split("T")[0];
     const now = new Date().toISOString();
     const timeLabel = meal_time || "Makan Siang";
     const calVal = Math.round(parseFloat(calories) || 0);
@@ -277,7 +293,7 @@ export function logFoodDirect(req, res) {
     const carbVal = Math.round(parseFloat(karbo) || 0);
     const fatVal = Math.round(parseFloat(lemak) || 0);
 
-    const existing = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, today);
+    const existing = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, targetDate);
     const entryNote = `[${timeLabel}] ${food_name} (${calVal} kkal)`;
 
     if (existing) {
@@ -297,7 +313,7 @@ export function logFoodDirect(req, res) {
         INSERT INTO daily_progress_logs (
           user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `).run(userId, today, calVal, protVal, carbVal, fatVal, entryNote, now, now);
+      `).run(userId, targetDate, calVal, protVal, carbVal, fatVal, entryNote, now, now);
     }
 
     res.json({
@@ -1189,28 +1205,34 @@ export async function forwardChatToAI(req, res) {
       }
     }
 
+    const cleanNum = (v) => {
+      if (v === null || v === undefined || v === "") return null;
+      const n = parseFloat(String(v).replace(",", "."));
+      return Number.isFinite(n) ? n : null;
+    };
+
     const userContext = {
       userId,
       username: req.user.username,
       nama: displayName,
       has_profile: hasProfile,
-      usia: profile.usia || null,
+      usia: cleanNum(profile.usia),
       jenis_kelamin: profile.jenis_kelamin || "Laki-laki",
-      tinggi_badan: profile.tinggi_badan || null,
-      berat_badan: profile.berat_badan || null,
-      lingkar_pinggang: profile.lingkar_pinggang || null,
+      tinggi_badan: cleanNum(profile.tinggi_badan),
+      berat_badan: cleanNum(profile.berat_badan),
+      lingkar_pinggang: cleanNum(profile.lingkar_pinggang),
       aktivitas: profile.aktivitas || "sedang",
-      bmi: analysis.bmi || null,
+      bmi: cleanNum(analysis.bmi),
       kategori_bmi: analysis.status_bmi || analysis.kategori_bmi || (hasProfile ? "Normal" : "Belum diisi"),
-      skor_risiko: analysis.skor_risiko || null,
+      skor_risiko: cleanNum(analysis.skor_risiko),
       kategori_risiko: analysis.kategori_risiko || (hasProfile ? "Prediabetes" : "Belum diisi"),
-      gula_darah_puasa: profile.gula_darah_puasa || null,
-      hba1c: profile.hba1c || null,
+      gula_darah_puasa: profile.gula_darah_puasa || profile.tes_gula_darah_puasa || null,
+      hba1c: profile.hba1c || profile.tes_hba1c || null,
       target_kalori: targetCal,
-      target_karbo: analysis.target_karbo || 274,
-      target_protein: analysis.target_protein || 152,
-      target_lemak: analysis.target_lemak || 81,
-      tdee: analysis.tdee || 2937,
+      target_karbo: cleanNum(analysis.target_karbo) || 274,
+      target_protein: cleanNum(analysis.target_protein) || 152,
+      target_lemak: cleanNum(analysis.target_lemak) || 81,
+      tdee: cleanNum(analysis.tdee) || 2937,
       pola_waktu_makan: analysis.pola_waktu_makan || profile.pola_waktu_makan || "Normal 3J (3 kali makan utama + 2 kali selingan)",
       meal_plan: analysis.meal_plan || [],
       pantangan_alergi: Array.from(

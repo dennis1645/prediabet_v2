@@ -63,10 +63,19 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [selectedMulti, setSelectedMulti] = useState([]);
+  const [customOtherActive, setCustomOtherActive] = useState(false);
+  const [customOtherText, setCustomOtherText] = useState("");
   const [assessmentResult, setAssessmentResult] = useState(null);
 
   const chatBottomRef = useRef(null);
   const inputRef = useRef(null);
+  const otherInputRef = useRef(null);
+
+  const isFormalMode = (() => {
+    if (onboardingState?.tone_mode) return onboardingState.tone_mode === "formal";
+    const age = parseInt(onboardingState?.answers?.usia ?? user?.usia, 10);
+    return Number.isFinite(age) && age >= 30;
+  })();
 
   // Auto-scroll
   useEffect(() => {
@@ -94,11 +103,17 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
         } else {
           // Inisialisasi bubble sambutan / pertanyaan aktif
           const hasPriorAnswers = Object.keys(res.data.answers || {}).some(
-            (k) => !["nama", "email", "phone_number"].includes(k)
+            (k) => !["nama", "email", "phone_number", "usia"].includes(k)
           );
+          const formal = res.data.tone_mode === "formal";
+          const displayPrompt = formal ? (res.data.formal_prompt || res.data.genz_prompt) : res.data.genz_prompt;
           const introContent = hasPriorAnswers
-            ? `Halo lagi, **${user?.username || "Sobat Predi"}**! 👋 Senang kamu kembali.\n\nYuk kita lanjutin sesi wawancara intake medis awal kamu. Sedikit lagi selesai kok!\n\n**${res.data.genz_prompt}**`
-            : `Halo **${user?.username || "Sobat Predi"}**! Selamat datang di **PrediaBeat V2.0**! 🌟\n\nGue **Dr. Predi**, asisten nutrisi klinis & pencegahan prediabetes pribadi lo.\n\nBiar rekomendasi menu harian dan program pencegahan prediabetes lo beneran akurat dan pas di tubuh lo, kita ngobrol santai dulu ya buat bikin **Rekam Medis Awal** lo.\n\nGak usah tegang, jawab santai & jujur aja ya! Yuk mulai dari pertanyaan pertama:\n\n**${res.data.genz_prompt}**`;
+            ? formal
+              ? `Selamat datang kembali, **${user?.username || "Bapak/Ibu"}**. 👋\n\nMari kita lanjutkan sesi wawancara rekam medis awal Anda.\n\n**${displayPrompt}**`
+              : `Halo lagi, **${user?.username || "Sobat Predi"}**! 👋 Senang kamu kembali.\n\nYuk kita lanjutin sesi wawancara intake medis awal kamu. Sedikit lagi selesai kok!\n\n**${displayPrompt}**`
+            : formal
+            ? `Halo **${user?.username || "Bapak/Ibu"}**, selamat datang di **PrediaBeat V2.0**. 🌟\n\nSaya **Dr. Predi**, asisten nutrisi klinis dan pencegahan prediabetes pribadi Anda.\n\nAgar rekomendasi menu harian dan program pencegahan prediabetes Anda akurat serta sesuai dengan kondisi tubuh Anda, mari kita lakukan wawancara singkat untuk menyusun **Rekam Medis Awal** Anda.\n\nSilakan jawab dengan santai dan jujur sesuai kondisi Anda saat ini. Kita mulai dari pertanyaan pertama:\n\n**${displayPrompt}**`
+            : `Halo **${user?.username || "Sobat Predi"}**! Selamat datang di **PrediaBeat V2.0**! 🌟\n\nSaya **Dr. Predi**, asisten nutrisi klinis & pencegahan prediabetes pribadi kamu.\n\nBiar rekomendasi menu harian dan program pencegahan prediabetes kamu beneran akurat dan pas di tubuh kamu, kita ngobrol santai dulu ya buat bikin **Rekam Medis Awal** kamu.\n\nGak usah tegang, jawab santai & jujur aja ya! Yuk mulai dari pertanyaan pertama:\n\n**${displayPrompt}**`;
 
           setMessages([
             {
@@ -181,17 +196,16 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
             },
           ]);
 
-          // Update context
+          // Update context tanpa langsung menutup layar kartu evaluasi
           if (data.profile && data.analysis) {
             completeOnboarding(data.profile, data.analysis);
-            if (onFinished) {
-              onFinished(data.profile, data.analysis);
-            }
           }
 
           Swal.fire({
             title: "🎉 Rekam Medis Selesai!",
-            text: "Profil nutrisi dan hasil evaluasi klinis kamu telah berhasil disimpan.",
+            text: isFormalMode
+              ? "Profil nutrisi dan hasil evaluasi klinis Anda telah berhasil disimpan."
+              : "Profil nutrisi dan hasil evaluasi klinis kamu telah berhasil disimpan.",
             icon: "success",
             confirmButtonColor: "#059669",
             confirmButtonText: "Lihat Hasil Evaluasi",
@@ -208,8 +222,12 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
         // 3. Kasus Maju ke Pertanyaan Berikutnya
         const nextState = data.next_state;
         setOnboardingState(nextState);
+        setCustomOtherActive(false);
+        setCustomOtherText("");
 
-        const botReply = `${data.bot_feedback || "Keren, jawaban lo udah Predi catet! 👍"}\n\n**${nextState.genz_prompt}**`;
+        const nextFormal = nextState.tone_mode === "formal";
+        const nextPrompt = nextFormal ? (nextState.formal_prompt || nextState.genz_prompt) : nextState.genz_prompt;
+        const botReply = `${data.bot_feedback || (nextFormal ? "Baik, jawaban Anda telah tercatat. 👍" : "Sip, jawaban kamu udah Predi catat! 👍")}\n\n**${nextPrompt}**`;
 
         setMessages((prev) => [
           ...prev,
@@ -430,7 +448,7 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
                 </span>
               </div>
               <p className="text-[10px] text-slate-500 mt-2">
-                Ramah toleransi glukosa mahasiswa
+                Ramah toleransi glukosa harian
               </p>
             </div>
           </div>
@@ -442,7 +460,15 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
               Catatan Evaluasi Klinis Dr. Predi:
             </h4>
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-              Halo <strong>{profileData.nama || user?.username}</strong>! Berdasarkan data yang lo berikan, sistem PrediaBeat V2 telah mengalibrasi target nutrisi harian kamu. Profil kamu kini tersimpan di database dan dijadikan pedoman utama bagi chatbot konsultasi, rekomendasi resep otomatis, serta pemantauan gula darah berkala.
+              {isFormalMode ? (
+                <>
+                  Halo <strong>{profileData.nama || user?.username}</strong>. Berdasarkan data rekam medis yang Anda sampaikan, sistem PrediaBeat V2.0 telah mengalibrasi target nutrisi harian serta skor risiko klinis Anda sesuai pedoman PERKENI 2021. Profil Anda kini tersimpan aman dan menjadi acuan utama bagi Dr. Predi dalam menyusun rekomendasi menu maupun konsultasi harian Anda.
+                </>
+              ) : (
+                <>
+                  Halo <strong>{profileData.nama || user?.username}</strong>! Berdasarkan data yang kamu berikan, sistem PrediaBeat V2.0 telah mengalibrasi target nutrisi harian kamu sesuai pedoman PERKENI 2021. Profil kamu kini tersimpan rapi dan menjadi pedoman utama bagi Dr. Predi dalam menyusun rekomendasi menu dan konsultasi gula darah harian kamu.
+                </>
+              )}
             </p>
             {profileData.phone_number && (
               <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl">
@@ -619,7 +645,7 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
                 </h3>
               </div>
               <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                Gen Z Conversational Mode
+                {isFormalMode ? "Formal Clinical Mode" : "Gen Z Conversational Mode"}
               </span>
             </div>
 
@@ -706,27 +732,35 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
 
                 <div className="flex flex-wrap gap-2 max-h-36 overflow-y-auto pr-1">
                   {options.map((opt, i) => {
-                    const isSelected = selectedMulti.includes(opt);
+                    const isOtherOpt = /^yang lain:?$/i.test(String(opt).trim());
+                    const isSelected = isOtherOpt ? customOtherActive : selectedMulti.includes(opt);
                     return (
                       <button
                         key={i}
                         type="button"
                         onClick={() => {
+                          if (isOtherOpt) {
+                            setCustomOtherActive((prev) => !prev);
+                            setTimeout(() => otherInputRef.current?.focus(), 60);
+                            return;
+                          }
                           if (isMulti) {
                             toggleMultiOption(opt);
                           } else {
+                            setCustomOtherActive(false);
+                            setCustomOtherText("");
                             handleAnswer(opt, opt);
                           }
                         }}
                         className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-2xs cursor-pointer flex items-center gap-1.5 active:scale-95 ${
-                          isMulti
+                          isMulti || isOtherOpt
                             ? isSelected
                               ? "bg-emerald-600 text-white border border-emerald-600 shadow-xs"
                               : "bg-white hover:bg-emerald-50 text-slate-700 border border-slate-200"
                             : "bg-white hover:bg-emerald-600 hover:text-white text-slate-700 border border-slate-200 hover:border-emerald-600"
                         }`}
                       >
-                        {isMulti && (
+                        {(isMulti || isOtherOpt) && (
                           <span
                             className={`w-3.5 h-3.5 rounded flex items-center justify-center text-[10px] ${
                               isSelected ? "bg-white text-emerald-700" : "border border-slate-300"
@@ -735,11 +769,50 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
                             {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                           </span>
                         )}
-                        <span>{opt}</span>
+                        <span>{isOtherOpt ? "Yang lain (tulis sendiri)" : opt}</span>
                       </button>
                     );
                   })}
                 </div>
+
+                {/* Input Kustom ketika user memilih "Yang lain:" */}
+                {customOtherActive && (
+                  <div className="mt-2.5 flex items-center gap-2 bg-white border border-emerald-300 rounded-xl p-2 shadow-2xs">
+                    <input
+                      ref={otherInputRef}
+                      type="text"
+                      value={customOtherText}
+                      onChange={(e) => setCustomOtherText(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !isMulti && customOtherText.trim()) {
+                          e.preventDefault();
+                          const val = customOtherText.trim();
+                          setCustomOtherActive(false);
+                          setCustomOtherText("");
+                          handleAnswer(val, val);
+                        }
+                      }}
+                      placeholder="Tuliskan jawaban spesifik Anda di sini..."
+                      className="flex-1 px-3 py-1.5 text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-500"
+                    />
+                    {!isMulti && (
+                      <button
+                        type="button"
+                        disabled={!customOtherText.trim()}
+                        onClick={() => {
+                          const val = customOtherText.trim();
+                          if (!val) return;
+                          setCustomOtherActive(false);
+                          setCustomOtherText("");
+                          handleAnswer(val, val);
+                        }}
+                        className="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-40 cursor-pointer"
+                      >
+                        Kirim
+                      </button>
+                    )}
+                  </div>
+                )}
 
                 {/* Confirm Multi Choice or Skip Button */}
                 <div className="flex items-center justify-between gap-2 mt-2.5 pt-2 border-t border-emerald-100/60">
@@ -756,11 +829,24 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
                   {isMulti && (
                     <button
                       type="button"
-                      onClick={submitMultiChoice}
-                      disabled={selectedMulti.length === 0}
+                      onClick={() => {
+                        const finalList = [...selectedMulti];
+                        if (customOtherActive && customOtherText.trim()) {
+                          finalList.push(customOtherText.trim());
+                        }
+                        if (finalList.length === 0) {
+                          showToast("Pilih minimal satu jawaban atau isi kolom 'Yang lain'.", "warning");
+                          return;
+                        }
+                        const combined = finalList.join(", ");
+                        setCustomOtherActive(false);
+                        setCustomOtherText("");
+                        handleAnswer(combined, combined);
+                      }}
+                      disabled={selectedMulti.length === 0 && !(customOtherActive && customOtherText.trim())}
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition shadow-sm cursor-pointer disabled:opacity-40"
                     >
-                      <span>Kirim Pilihan ({selectedMulti.length})</span>
+                      <span>Kirim Pilihan ({selectedMulti.length + (customOtherActive && customOtherText.trim() ? 1 : 0)})</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   )}

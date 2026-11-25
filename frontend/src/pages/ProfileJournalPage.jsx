@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
@@ -23,6 +23,8 @@ import {
   X,
   Check,
   Minus,
+  Bell,
+  Copy,
 } from "lucide-react";
 import { showSuccessAlert, showErrorAlert, showToast } from "../utils/alerts";
 
@@ -58,6 +60,14 @@ const JOURNAL_CHAPTERS = [
     title: "Alergi & Kondisi Klinis",
     subtitle: "Catat pantangan alergi dan riwayat penyakit penyerta agar Dr. Predi & Meal Plan 100% aman.",
     icon: ShieldAlert,
+  },
+  {
+    id: 4,
+    num: "05",
+    tab: "Pengingat WhatsApp",
+    title: "Notifikasi & Bot WhatsApp",
+    subtitle: "Atur jadwal pengingat jam makan, minum obat, dan olahraga otomatis via Bot WhatsApp.",
+    icon: Bell,
   },
 ];
 
@@ -136,6 +146,54 @@ export default function ProfileJournalPage() {
   const [customPantangan, setCustomPantangan] = useState("");
   const [customKomorbid, setCustomKomorbid] = useState("");
   const [savingClinical, setSavingClinical] = useState(false);
+
+  // Bab 5: Pengingat & Bot WhatsApp
+  const [waSettings, setWaSettings] = useState({
+    phone_number: user?.phone_number || profile?.phone_number || "",
+    enabled: false,
+    breakfast_time: "07:00",
+    snack_time: "15:30",
+    lunch_time: "12:30",
+    dinner_time: "18:30",
+    medicine_enabled: false,
+    medicine_time: "08:00",
+    medicine_note: "Obat / Suplemen Harian",
+    exercise_enabled: false,
+    exercise_time: "17:00",
+    bot_linked: false,
+    link_code: "",
+  });
+  const [savingWa, setSavingWa] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    api.getWaReminders()
+      .then((res) => {
+        if (mounted && res?.success && res.data) {
+          setWaSettings((prev) => ({ ...prev, ...res.data }));
+        }
+      })
+      .catch(() => {});
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const handleSaveWaReminders = async (e) => {
+    e.preventDefault();
+    setSavingWa(true);
+    try {
+      const res = await api.saveWaReminders(waSettings);
+      if (res?.success && res.data) {
+        setWaSettings((prev) => ({ ...prev, ...res.data }));
+      }
+      await showSuccessAlert("Pengingat Tersimpan", res?.message || "Jadwal pengingat WhatsApp berhasil disimpan.");
+    } catch (err) {
+      showErrorAlert("Gagal Menyimpan", err.message || "Tidak dapat menyimpan pengaturan pengingat WhatsApp.");
+    } finally {
+      setSavingWa(false);
+    }
+  };
 
   const goToPage = (nextIdx) => {
     if (nextIdx === activePage || nextIdx < 0 || nextIdx >= JOURNAL_CHAPTERS.length) return;
@@ -824,6 +882,169 @@ export default function ProfileJournalPage() {
                     </Link>
                   </div>
                 </div>
+              )}
+
+              {/* BAB 05: PENGINGAT & BOT WHATSAPP */}
+              {activePage === 4 && (
+                <form onSubmit={handleSaveWaReminders} className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
+                    <div>
+                      <p className="text-xs font-black text-emerald-900 uppercase tracking-wider">Aktifkan Pengingat WhatsApp</p>
+                      <p className="text-[11px] text-emerald-800 mt-0.5">Kirim pengingat jam makan, obat, dan olahraga otomatis ke WA Anda.</p>
+                    </div>
+                    <label className="inline-flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={waSettings.enabled}
+                        onChange={(e) => setWaSettings((p) => ({ ...p, enabled: e.target.checked }))}
+                        className="w-5 h-5 accent-emerald-600 rounded cursor-pointer"
+                      />
+                      <span className="text-xs font-extrabold text-emerald-900">
+                        {waSettings.enabled ? "Aktif" : "Nonaktif"}
+                      </span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">
+                      Nomor WhatsApp Tujuan
+                    </label>
+                    <input
+                      type="tel"
+                      value={waSettings.phone_number}
+                      onChange={(e) => setWaSettings((p) => ({ ...p, phone_number: e.target.value }))}
+                      placeholder="08xxxxxxxxxx / 628xxxxxxxxxx"
+                      className="w-full px-4 py-2.5 bg-white border border-stone-300 rounded-xl text-sm font-semibold text-slate-800"
+                    />
+                  </div>
+
+                  {/* Jadwal Jam Makan */}
+                  <div className="p-4 rounded-2xl bg-white border border-stone-200">
+                    <p className="text-xs font-black text-slate-700 uppercase tracking-wider mb-3">Jadwal Pengingat Jam Makan (WIB)</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Sarapan</label>
+                        <input
+                          type="time"
+                          value={waSettings.breakfast_time}
+                          onChange={(e) => setWaSettings((p) => ({ ...p, breakfast_time: e.target.value }))}
+                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Makan Siang</label>
+                        <input
+                          type="time"
+                          value={waSettings.lunch_time}
+                          onChange={(e) => setWaSettings((p) => ({ ...p, lunch_time: e.target.value }))}
+                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Selingan</label>
+                        <input
+                          type="time"
+                          value={waSettings.snack_time}
+                          onChange={(e) => setWaSettings((p) => ({ ...p, snack_time: e.target.value }))}
+                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Makan Malam</label>
+                        <input
+                          type="time"
+                          value={waSettings.dinner_time}
+                          onChange={(e) => setWaSettings((p) => ({ ...p, dinner_time: e.target.value }))}
+                          className="w-full px-2.5 py-2 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pengingat Obat & Olahraga */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="p-4 rounded-2xl bg-white border border-stone-200 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-black text-slate-800">Pengingat Minum Obat</span>
+                        <input
+                          type="checkbox"
+                          checked={waSettings.medicine_enabled}
+                          onChange={(e) => setWaSettings((p) => ({ ...p, medicine_enabled: e.target.checked }))}
+                          className="w-4 h-4 accent-emerald-600 cursor-pointer"
+                        />
+                      </div>
+                      <input
+                        type="time"
+                        value={waSettings.medicine_time}
+                        onChange={(e) => setWaSettings((p) => ({ ...p, medicine_time: e.target.value }))}
+                        className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                      />
+                      <input
+                        type="text"
+                        value={waSettings.medicine_note}
+                        onChange={(e) => setWaSettings((p) => ({ ...p, medicine_note: e.target.value }))}
+                        placeholder="Nama obat / vitamin..."
+                        className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 rounded-xl text-xs font-semibold"
+                      />
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-white border border-stone-200 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-black text-slate-800">Pengingat Olahraga</span>
+                        <input
+                          type="checkbox"
+                          checked={waSettings.exercise_enabled}
+                          onChange={(e) => setWaSettings((p) => ({ ...p, exercise_enabled: e.target.checked }))}
+                          className="w-4 h-4 accent-emerald-600 cursor-pointer"
+                        />
+                      </div>
+                      <input
+                        type="time"
+                        value={waSettings.exercise_time}
+                        onChange={(e) => setWaSettings((p) => ({ ...p, exercise_time: e.target.value }))}
+                        className="w-full px-3 py-1.5 bg-slate-50 border border-stone-200 rounded-xl text-xs font-bold"
+                      />
+                      <p className="text-[11px] text-slate-500">Pengingat harian jalan santai / olahraga ringan 20–30 menit.</p>
+                    </div>
+                  </div>
+
+                  {/* Integrasi Bot WhatsApp (WAHA / Baileys) */}
+                  <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-black text-amber-950">Koneksi Bot WhatsApp (WAHA / Baileys)</span>
+                        <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${waSettings.bot_linked ? "bg-emerald-100 text-emerald-800" : "bg-amber-200 text-amber-900"}`}>
+                          {waSettings.bot_linked ? "Terhubung" : "Menunggu Tautan"}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-amber-900 mt-1">
+                        Kirim pesan <code className="bg-white px-1.5 py-0.5 rounded font-bold">LINK {waSettings.link_code || "PB-..."}</code> ke Bot WhatsApp PrediaBeat untuk verifikasi nomor Anda.
+                      </p>
+                    </div>
+                    {waSettings.link_code && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard?.writeText(`LINK ${waSettings.link_code}`);
+                          showToast("Kode tautan WhatsApp disalin!", "success");
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-amber-300 text-amber-900 text-xs font-extrabold hover:bg-amber-100 transition cursor-pointer shrink-0"
+                      >
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Salin Kode</span>
+                      </button>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={savingWa}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-sm transition cursor-pointer disabled:opacity-60"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>{savingWa ? "Menyimpan..." : "Simpan Pengaturan Pengingat WA"}</span>
+                  </button>
+                </form>
               )}
 
               {/* Bottom Page Flip Navigation */}

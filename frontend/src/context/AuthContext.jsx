@@ -114,14 +114,14 @@ export function AuthProvider({ children }) {
     throw new Error(res.message || "Gagal masuk.");
   };
 
-  const register = async (username, email, password, phone_number) => {
+  const register = async (username, email, password, phone_number, usia) => {
     // Pastikan session data profil pengguna lama dibersihkan
     localStorage.removeItem("prediabeat_profile");
     localStorage.removeItem("prediabeat_analysis");
     setProfile(null);
     setAnalysis(null);
 
-    const res = await api.register({ username, email, password, phone_number });
+    const res = await api.register({ username, email, password, phone_number, usia });
     if (res.success && res.data) {
       setToken(res.data.token);
       setUser(res.data.user);

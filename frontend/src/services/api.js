@@ -163,6 +163,12 @@ export const api = {
       method: "DELETE",
     }),
   getAIContext: () => request("/ai/context"),
+  getWaReminders: () => request("/auth/wa-reminders"),
+  saveWaReminders: (data) =>
+    request("/auth/wa-reminders", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
   logFoodDirect: (data) =>
     request("/ai/log-food-direct", {
       method: "POST",

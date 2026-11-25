@@ -135,15 +135,38 @@ export function hitungTDEE(profil) {
 export function hitungSkorRisiko(profil, bmi) {
   let skor = 0;
   const hasilLab = (profil.hasil_lab || "").toLowerCase();
-  const gdp = parseFloat(profil.gula_darah_puasa) || 0;
-  const hba1c = parseFloat(profil.hba1c) || 0;
+  const tesGdpStr = String(profil.tes_gula_darah_puasa || "").toLowerCase();
+  const tesHba1cStr = String(profil.tes_hba1c || "").toLowerCase();
+  const gdp = parseFloat(profil.gula_darah_puasa) || parseFloat(tesGdpStr.match(/(\d+(?:\.\d+)?)/)?.[1]) || 0;
+  const hba1c = parseFloat(profil.hba1c) || parseFloat(tesHba1cStr.match(/(\d+(?:\.\d+)?)/)?.[1]) || 0;
 
-  // 1. Validasi Lab Klinis Langsung jika tersedia
-  if (gdp >= 126 || hba1c >= 6.5 || hasilLab.includes("diabetes")) {
-    return { skor: 100, kategori: "Diabetes Terkonfirmasi Klinis" };
+  // 1. Validasi Lab Klinis Langsung (Standar PERKENI 2021)
+  const isLabDiabetes =
+    (gdp >= 126 && !tesGdpStr.includes("<")) ||
+    (hba1c >= 6.5 && !tesHba1cStr.includes("<")) ||
+    hasilLab.includes("diabetes") && !hasilLab.includes("pre") ||
+    tesGdpStr.includes("diabetes") ||
+    tesGdpStr.includes(">= 126") ||
+    tesGdpStr.includes("≥ 126") ||
+    tesHba1cStr.includes("diabetes") ||
+    tesHba1cStr.includes(">= 6.5") ||
+    tesHba1cStr.includes("≥ 6.5");
+
+  if (isLabDiabetes) {
+    return { skor: 100, kategori: "Diabetes Terkonfirmasi Klinis (PERKENI 2021)" };
   }
-  if ((gdp >= 100 && gdp <= 125) || (hba1c >= 5.7 && hba1c <= 6.4) || hasilLab.includes("prediabetes")) {
-    return { skor: 75, kategori: "Prediabetes (Impaired Fasting Glucose / IFG)" };
+
+  const isLabPrediabetes =
+    (gdp >= 100 && gdp <= 125) ||
+    (hba1c >= 5.7 && hba1c <= 6.4) ||
+    hasilLab.includes("prediabetes") ||
+    tesGdpStr.includes("prediabetes") ||
+    tesGdpStr.includes("100") ||
+    tesHba1cStr.includes("prediabetes") ||
+    tesHba1cStr.includes("5.7");
+
+  if (isLabPrediabetes) {
+    return { skor: 75, kategori: "Prediabetes (GDP 100–125 mg/dL / HbA1c 5,7–6,4%)" };
   }
 
   // 2. Faktor Usia

@@ -122,15 +122,15 @@ export default function DashboardPage() {
   const diffCal = (currentAnalysis.target_kalori || 1850) - (currentAnalysis.tdee || 2150);
 
   const healthScore = currentAnalysis.health_score || {
-    score: 82,
-    status: "Kondisi Stabil & Baik",
-    metrics: { days_logged: 5, avg_adherence: 86, total_exercise_minutes: 120 },
-    breakdown: { food_quality: 8.5 },
+    score: 0,
+    status: "Belum Ada Catatan Minggu Ini",
+    metrics: { days_logged: 0, avg_adherence: 0, total_exercise_minutes: 0 },
+    breakdown: { food_quality: 0 },
   };
 
   const weeklyInsight = currentAnalysis.weekly_insight || {
-    message: "Pola makan 3J Anda sangat konsisten minggu ini! Pertahankan variasi sayuran tinggi serat untuk kestabilan glukosa darah.",
-    priorities: ["Tingkatkan jalan santai 15–20 menit pasca makan malam untuk mengoptimalkan sensitivitas insulin."],
+    message: "Mulai catat asupan makanan dan aktivitas fisik Anda di Jurnal Harian untuk mengaktifkan evaluasi Health Score mingguan.",
+    priorities: ["Catat menu makan atau olahraga hari ini untuk melihat skor progres mingguan Anda."],
   };
 
   const waktuIcons = {
@@ -551,7 +551,9 @@ export default function DashboardPage() {
                       Pola Waktu Makan
                     </p>
                     <h3 className="font-black text-slate-800 text-lg">
-                      {analysis.pola_waktu_makan || "Makan Biasa Teratur (3J)"}
+                      {!analysis.pola_waktu_makan || analysis.pola_waktu_makan === "makan_biasa"
+                        ? "Pola Makan Teratur (3J)"
+                        : String(analysis.pola_waktu_makan).replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                     </h3>
                     <p className="text-xs text-slate-500 mt-1">
                       {analysis.frekuensi_makan || "3 kali makan utama + 2 kali selingan sehat."}
@@ -648,47 +650,70 @@ export default function DashboardPage() {
               </div>
             )}
 
-            {/* 3 Makronutrien Bar Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-3xl bg-white border border-slate-200/80 p-5 shadow-2xs">
-                <div className="flex justify-between items-end mb-3">
-                  <div>
-                    <p className="text-xs font-black text-slate-400 uppercase tracking-wider">Karbohidrat</p>
-                    <h4 className="text-2xl font-black text-slate-800">{analysis.target_karbo}g</h4>
-                  </div>
-                  <span className="text-xs font-black text-emerald-600">{karboPct}%</span>
-                </div>
-                <div className="h-2.5 rounded-full bg-slate-200/80 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-500" style={{ width: `${karboPct}%` }}></div>
-                </div>
-              </div>
+            {/* 3 Makronutrien Bar Cards (Realisasi Tercatat vs Target Harian) */}
+            {(() => {
+              const actualKarbo = Math.round(liveData.todayLog?.actual_karbo || 0);
+              const actualProtein = Math.round(liveData.todayLog?.actual_protein || 0);
+              const actualLemak = Math.round(liveData.todayLog?.actual_lemak || 0);
+              const targetKarbo = Math.max(analysis.target_karbo || 250, 1);
+              const targetProtein = Math.max(analysis.target_protein || 90, 1);
+              const targetLemak = Math.max(analysis.target_lemak || 65, 1);
+              const karboProgress = Math.min(100, Math.round((actualKarbo / targetKarbo) * 100));
+              const proteinProgress = Math.min(100, Math.round((actualProtein / targetProtein) * 100));
+              const lemakProgress = Math.min(100, Math.round((actualLemak / targetLemak) * 100));
 
-              <div className="rounded-3xl bg-white border border-slate-200/80 p-5 shadow-2xs">
-                <div className="flex justify-between items-end mb-3">
-                  <div>
-                    <p className="text-xs font-black text-slate-400 uppercase tracking-wider">Protein</p>
-                    <h4 className="text-2xl font-black text-slate-800">{analysis.target_protein}g</h4>
+              return (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="rounded-3xl bg-white border border-slate-200/80 p-5 shadow-2xs">
+                    <div className="flex justify-between items-end mb-2">
+                      <div>
+                        <p className="text-xs font-black text-slate-400 uppercase tracking-wider">Karbohidrat Hari Ini</p>
+                        <h4 className="text-2xl font-black text-slate-800">
+                          {actualKarbo}g <span className="text-sm font-bold text-slate-400">/ {targetKarbo}g</span>
+                        </h4>
+                      </div>
+                      <span className="text-xs font-black text-emerald-600">{karboProgress}%</span>
+                    </div>
+                    <div className="h-2.5 rounded-full bg-slate-200/80 overflow-hidden mb-1.5">
+                      <div className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 transition-all" style={{ width: `${karboProgress}%` }}></div>
+                    </div>
+                    <p className="text-[11px] text-slate-400 font-medium">Porsi target: {karboPct}% energi harian</p>
                   </div>
-                  <span className="text-xs font-black text-emerald-600">{proteinPct}%</span>
-                </div>
-                <div className="h-2.5 rounded-full bg-slate-200/80 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-teal-400 to-cyan-500" style={{ width: `${proteinPct}%` }}></div>
-                </div>
-              </div>
 
-              <div className="rounded-3xl bg-white border border-slate-200/80 p-5 shadow-2xs">
-                <div className="flex justify-between items-end mb-3">
-                  <div>
-                    <p className="text-xs font-black text-slate-400 uppercase tracking-wider">Lemak Sehat</p>
-                    <h4 className="text-2xl font-black text-slate-800">{analysis.target_lemak}g</h4>
+                  <div className="rounded-3xl bg-white border border-slate-200/80 p-5 shadow-2xs">
+                    <div className="flex justify-between items-end mb-2">
+                      <div>
+                        <p className="text-xs font-black text-slate-400 uppercase tracking-wider">Protein Hari Ini</p>
+                        <h4 className="text-2xl font-black text-slate-800">
+                          {actualProtein}g <span className="text-sm font-bold text-slate-400">/ {targetProtein}g</span>
+                        </h4>
+                      </div>
+                      <span className="text-xs font-black text-emerald-600">{proteinProgress}%</span>
+                    </div>
+                    <div className="h-2.5 rounded-full bg-slate-200/80 overflow-hidden mb-1.5">
+                      <div className="h-full rounded-full bg-gradient-to-r from-teal-400 to-cyan-500 transition-all" style={{ width: `${proteinProgress}%` }}></div>
+                    </div>
+                    <p className="text-[11px] text-slate-400 font-medium">Porsi target: {proteinPct}% energi harian</p>
                   </div>
-                  <span className="text-xs font-black text-emerald-600">{lemakPct}%</span>
+
+                  <div className="rounded-3xl bg-white border border-slate-200/80 p-5 shadow-2xs">
+                    <div className="flex justify-between items-end mb-2">
+                      <div>
+                        <p className="text-xs font-black text-slate-400 uppercase tracking-wider">Lemak Sehat Hari Ini</p>
+                        <h4 className="text-2xl font-black text-slate-800">
+                          {actualLemak}g <span className="text-sm font-bold text-slate-400">/ {targetLemak}g</span>
+                        </h4>
+                      </div>
+                      <span className="text-xs font-black text-emerald-600">{lemakProgress}%</span>
+                    </div>
+                    <div className="h-2.5 rounded-full bg-slate-200/80 overflow-hidden mb-1.5">
+                      <div className="h-full rounded-full bg-gradient-to-r from-amber-400 to-emerald-500 transition-all" style={{ width: `${lemakProgress}%` }}></div>
+                    </div>
+                    <p className="text-[11px] text-slate-400 font-medium">Porsi target: {lemakPct}% energi harian</p>
+                  </div>
                 </div>
-                <div className="h-2.5 rounded-full bg-slate-200/80 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-amber-400 to-emerald-500" style={{ width: `${lemakPct}%` }}></div>
-                </div>
-              </div>
-            </div>
+              );
+            })()}
           </div>
 
           {/* Kanan (1 Kolom): ASIDE MASCOT & CHAT (Sesuai aside dashboard.html) */}

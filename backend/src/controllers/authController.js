@@ -5,13 +5,21 @@ import { config } from "../config/env.js";
 
 export function register(req, res) {
   try {
-    const { username, email, password, phone_number, nomor_telepon } = req.body;
+    const { username, email, password, phone_number, nomor_telepon, usia } = req.body;
     const finalPhone = (phone_number || nomor_telepon || "").trim() || null;
+    const parsedAge = usia !== undefined && usia !== null && String(usia).trim() !== "" ? parseInt(usia, 10) : null;
 
     if (!username || username.trim().length < 3) {
       return res.status(400).json({
         success: false,
         message: "Nama minimal 3 karakter.",
+      });
+    }
+
+    if (parsedAge !== null && (!Number.isFinite(parsedAge) || parsedAge < 10 || parsedAge > 120)) {
+      return res.status(400).json({
+        success: false,
+        message: "Usia tidak valid (harus antara 10 – 120 tahun).",
       });
     }
 
@@ -48,12 +56,16 @@ export function register(req, res) {
     const passwordHash = bcrypt.hashSync(password, salt);
     const now = new Date().toISOString();
 
+    try {
+      db.exec("ALTER TABLE users ADD COLUMN usia INTEGER;");
+    } catch (e) {}
+
     const insertStmt = db.prepare(`
-      INSERT INTO users (username, username_normalized, email, email_normalized, phone_number, password_hash, role, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, 'user', ?, ?)
+      INSERT INTO users (username, username_normalized, email, email_normalized, phone_number, usia, password_hash, role, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 'user', ?, ?)
     `);
 
-    const result = insertStmt.run(username.trim(), usernameNorm, email.trim(), emailNorm, finalPhone, passwordHash, now, now);
+    const result = insertStmt.run(username.trim(), usernameNorm, email.trim(), emailNorm, finalPhone, parsedAge, passwordHash, now, now);
     const userId = result.lastInsertRowid;
 
     const token = jwt.sign(
@@ -64,7 +76,7 @@ export function register(req, res) {
 
     res.status(201).json({
       success: true,
-      message: "Registrasi berhasil! Silakan ikuti sesi wawancara klinis santai bersama Dr. Predi.",
+      message: "Registrasi berhasil! Silakan ikuti sesi wawancara klinis bersama Dr. Predi.",
       data: {
         token,
         user: {
@@ -72,6 +84,7 @@ export function register(req, res) {
           username: username.trim(),
           email: email.trim(),
           phone_number: finalPhone,
+          usia: parsedAge,
           role: "user",
         },
         hasCompletedQuestionnaire: false,
@@ -149,6 +162,7 @@ export function login(req, res) {
           username: user.username,
           email: user.email,
           phone_number: user.phone_number || null,
+          usia: user.usia ?? (profile?.usia ? parseInt(profile.usia, 10) : null),
           role: user.role,
         },
         hasCompletedQuestionnaire: Boolean(profileRow),
@@ -303,5 +317,229 @@ export function updateAccountProfile(req, res) {
   } catch (error) {
     console.error("updateAccountProfile error:", error);
     res.status(500).json({ success: false, message: "Gagal memperbarui profil akun." });
+  }
+}
+
+function ensureWaReminderTable() {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS whatsapp_reminders (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER UNIQUE NOT NULL,
+      phone_number TEXT,
+      enabled INTEGER NOT NULL DEFAULT 0,
+      breakfast_time TEXT NOT NULL DEFAULT '07:00',
+      snack_time TEXT NOT NULL DEFAULT '15:30',
+      lunch_time TEXT NOT NULL DEFAULT '12:30',
+      dinner_time TEXT NOT NULL DEFAULT '18:30',
+      medicine_enabled INTEGER NOT NULL DEFAULT 0,
+      medicine_time TEXT NOT NULL DEFAULT '08:00',
+      medicine_note TEXT DEFAULT 'Obat / Suplemen Harian',
+      exercise_enabled INTEGER NOT NULL DEFAULT 0,
+      exercise_time TEXT NOT NULL DEFAULT '17:00',
+      bot_linked INTEGER NOT NULL DEFAULT 0,
+      link_code TEXT,
+      updated_at TEXT NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+  `);
+}
+
+function generateLinkCode(userId) {
+  const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `PB-${userId}${rand}`;
+}
+
+export function getWaReminders(req, res) {
+  try {
+    ensureWaReminderTable();
+    const userId = req.user.id;
+    let row = db.prepare("SELECT * FROM whatsapp_reminders WHERE user_id = ?").get(userId);
+    const userRow = db.prepare("SELECT phone_number FROM users WHERE id = ?").get(userId);
+    const now = new Date().toISOString();
+
+    if (!row) {
+      const code = generateLinkCode(userId);
+      db.prepare(`
+        INSERT INTO whatsapp_reminders (user_id, phone_number, link_code, updated_at)
+        VALUES (?, ?, ?, ?)
+      `).run(userId, userRow?.phone_number || "", code, now);
+      row = db.prepare("SELECT * FROM whatsapp_reminders WHERE user_id = ?").get(userId);
+    } else if (!row.link_code) {
+      const code = generateLinkCode(userId);
+      db.prepare("UPDATE whatsapp_reminders SET link_code = ? WHERE user_id = ?").run(code, userId);
+      row.link_code = code;
+    }
+
+    res.json({
+      success: true,
+      data: {
+        ...row,
+        enabled: Boolean(row.enabled),
+        medicine_enabled: Boolean(row.medicine_enabled),
+        exercise_enabled: Boolean(row.exercise_enabled),
+        bot_linked: Boolean(row.bot_linked),
+      },
+    });
+  } catch (error) {
+    console.error("getWaReminders error:", error);
+    res.status(500).json({ success: false, message: "Gagal memuat pengaturan pengingat WhatsApp." });
+  }
+}
+
+export function saveWaReminders(req, res) {
+  try {
+    ensureWaReminderTable();
+    const userId = req.user.id;
+    const {
+      phone_number,
+      enabled,
+      breakfast_time,
+      snack_time,
+      lunch_time,
+      dinner_time,
+      medicine_enabled,
+      medicine_time,
+      medicine_note,
+      exercise_enabled,
+      exercise_time,
+    } = req.body;
+
+    const now = new Date().toISOString();
+    const existing = db.prepare("SELECT * FROM whatsapp_reminders WHERE user_id = ?").get(userId);
+    const linkCode = existing?.link_code || generateLinkCode(userId);
+    const cleanPhone = (phone_number || "").trim();
+
+    db.prepare(`
+      INSERT INTO whatsapp_reminders (
+        user_id, phone_number, enabled, breakfast_time, snack_time, lunch_time, dinner_time,
+        medicine_enabled, medicine_time, medicine_note, exercise_enabled, exercise_time,
+        bot_linked, link_code, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(user_id) DO UPDATE SET
+        phone_number = excluded.phone_number,
+        enabled = excluded.enabled,
+        breakfast_time = excluded.breakfast_time,
+        snack_time = excluded.snack_time,
+        lunch_time = excluded.lunch_time,
+        dinner_time = excluded.dinner_time,
+        medicine_enabled = excluded.medicine_enabled,
+        medicine_time = excluded.medicine_time,
+        medicine_note = excluded.medicine_note,
+        exercise_enabled = excluded.exercise_enabled,
+        exercise_time = excluded.exercise_time,
+        updated_at = excluded.updated_at
+    `).run(
+      userId,
+      cleanPhone,
+      enabled ? 1 : 0,
+      breakfast_time || "07:00",
+      snack_time || "15:30",
+      lunch_time || "12:30",
+      dinner_time || "18:30",
+      medicine_enabled ? 1 : 0,
+      medicine_time || "08:00",
+      (medicine_note || "Obat / Suplemen Harian").trim(),
+      exercise_enabled ? 1 : 0,
+      exercise_time || "17:00",
+      existing?.bot_linked ? 1 : 0,
+      linkCode,
+      now
+    );
+
+    if (cleanPhone) {
+      try {
+        db.prepare("UPDATE users SET phone_number = ?, updated_at = ? WHERE id = ?").run(cleanPhone, now, userId);
+      } catch (e) {}
+    }
+
+    const updated = db.prepare("SELECT * FROM whatsapp_reminders WHERE user_id = ?").get(userId);
+    res.json({
+      success: true,
+      message: "Pengaturan pengingat WhatsApp berhasil disimpan!",
+      data: {
+        ...updated,
+        enabled: Boolean(updated.enabled),
+        medicine_enabled: Boolean(updated.medicine_enabled),
+        exercise_enabled: Boolean(updated.exercise_enabled),
+        bot_linked: Boolean(updated.bot_linked),
+      },
+    });
+  } catch (error) {
+    console.error("saveWaReminders error:", error);
+    res.status(500).json({ success: false, message: "Gagal menyimpan pengaturan pengingat WhatsApp." });
+  }
+}
+
+export function getDueWaReminders(req, res) {
+  try {
+    ensureWaReminderTable();
+    const wibNow = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Jakarta",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(new Date());
+    const targetTime = req.query.time || wibNow;
+
+    const rows = db
+      .prepare(`
+        SELECT w.*, u.username
+        FROM whatsapp_reminders w
+        JOIN users u ON u.id = w.user_id
+        WHERE w.enabled = 1 AND w.phone_number IS NOT NULL AND w.phone_number != ''
+      `)
+      .all();
+
+    const due = [];
+    for (const r of rows) {
+      if (r.breakfast_time === targetTime) {
+        due.push({ user_id: r.user_id, username: r.username, phone_number: r.phone_number, type: "breakfast", time: targetTime, message: `Halo ${r.username}! Waktunya Sarapan Pagi sesuai pola 3J PrediaBeat Anda.` });
+      }
+      if (r.snack_time === targetTime) {
+        due.push({ user_id: r.user_id, username: r.username, phone_number: r.phone_number, type: "snack", time: targetTime, message: `Halo ${r.username}! Saatnya Selingan Sehat sore ini. Pilih buah atau camilan rendah glikemik ya.` });
+      }
+      if (r.lunch_time === targetTime) {
+        due.push({ user_id: r.user_id, username: r.username, phone_number: r.phone_number, type: "lunch", time: targetTime, message: `Halo ${r.username}! Waktunya Makan Siang teratur sesuai target kalori 3J Anda.` });
+      }
+      if (r.dinner_time === targetTime) {
+        due.push({ user_id: r.user_id, username: r.username, phone_number: r.phone_number, type: "dinner", time: targetTime, message: `Halo ${r.username}! Waktunya Makan Malam sehat. Utamakan sayur terlebih dahulu sebelum karbohidrat.` });
+      }
+      if (r.medicine_enabled && r.medicine_time === targetTime) {
+        due.push({ user_id: r.user_id, username: r.username, phone_number: r.phone_number, type: "medicine", time: targetTime, message: `Pengingat Minum Obat/Suplemen (${r.medicine_note}) untuk ${r.username}. Jangan sampai terlewat ya!` });
+      }
+      if (r.exercise_enabled && r.exercise_time === targetTime) {
+        due.push({ user_id: r.user_id, username: r.username, phone_number: r.phone_number, type: "exercise", time: targetTime, message: `Halo ${r.username}! Waktunya olahraga ringan hari ini (misal jalan santai 20–30 menit) untuk menjaga sensitivitas insulin!` });
+      }
+    }
+
+    res.json({ success: true, time_wib: targetTime, count: due.length, due });
+  } catch (error) {
+    console.error("getDueWaReminders error:", error);
+    res.status(500).json({ success: false, message: "Gagal mengambil jadwal pengingat." });
+  }
+}
+
+export function verifyWaBotLink(req, res) {
+  try {
+    ensureWaReminderTable();
+    const { link_code, phone_number } = req.body;
+    if (!link_code) {
+      return res.status(400).json({ success: false, message: "link_code wajib diisi." });
+    }
+    const row = db.prepare("SELECT * FROM whatsapp_reminders WHERE UPPER(link_code) = UPPER(?)").get(String(link_code).trim());
+    if (!row) {
+      return res.status(404).json({ success: false, message: "Kode hubung tidak ditemukan." });
+    }
+    const now = new Date().toISOString();
+    const nextPhone = (phone_number || row.phone_number || "").trim();
+    db.prepare("UPDATE whatsapp_reminders SET bot_linked = 1, enabled = 1, phone_number = ?, updated_at = ? WHERE user_id = ?").run(
+      nextPhone,
+      now,
+      row.user_id
+    );
+    res.json({ success: true, message: "Bot WhatsApp berhasil terhubung dengan akun PrediaBeat Anda!" });
+  } catch (error) {
+    console.error("verifyWaBotLink error:", error);
+    res.status(500).json({ success: false, message: "Gagal verifikasi bot WhatsApp." });
   }
 }

@@ -10,6 +10,7 @@ export function initDatabase() {
       email TEXT,
       email_normalized TEXT UNIQUE,
       phone_number TEXT,
+      usia INTEGER,
       password_hash TEXT NOT NULL,
       role TEXT DEFAULT 'user',
       created_at TEXT NOT NULL,

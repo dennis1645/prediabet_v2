@@ -36,33 +36,35 @@ export default function ChatbotPage() {
     }
   }, [profile]);
 
-  if (!profile || isOnboardingMode) {
-    return (
-      <OnboardingChatView
-        allowBack={!!profile}
-        onBackToChat={() => setIsOnboardingMode(false)}
-        onFinished={() => setIsOnboardingMode(false)}
-      />
-    );
-  }
-
-  const getGreetingName = () => {
-    if (profile?.nama) {
-      const salutation = profile.jenis_kelamin === "Perempuan" ? "Ibu" : "Pak";
-      return `${salutation} ${profile.nama}`;
-    }
-    if (user?.username) {
-      return `Bapak/Ibu ${user.username}`;
-    }
-    return "Sahabat Sehat";
+  const getUserAge = () => {
+    const raw = profile?.usia ?? user?.usia;
+    const parsed = parseInt(raw, 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 25;
   };
 
-  const createInitialWelcomeMessage = (name) => ({
-    role: "assistant",
-    content: `Halo ${name}! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi Anda.\n\nBagaimana perasaan dan kondisi tubuh Anda hari ini? Apakah sedang ingin makan sesuatu yang hangat, segar, atau ada makanan spesifik yang sedang Anda idamkan? Ceritakan kepada saya, dan saya akan bantu evaluasi atau rekomendasikan menu sehat ramah gula darah!`,
-    source: "Dr. Predi Clinical AI",
-    guardrail: "100% Bebas Alergen & Sesuai Pedoman PERKENI",
-  });
+  const getGreetingName = () => {
+    const rawName = (profile?.nama || user?.username || "").replace(/[_.-]+/g, " ").trim();
+    if (!rawName) return "Sahabat Sehat";
+    const age = getUserAge();
+    const isFemale = String(profile?.jenis_kelamin || "").toLowerCase().includes("perempuan");
+    if (age >= 30) {
+      return `${isFemale ? "Ibu" : "Bapak"} ${rawName}`;
+    }
+    return rawName;
+  };
+
+  const createInitialWelcomeMessage = (name) => {
+    const age = getUserAge();
+    const isFormal = age >= 30;
+    return {
+      role: "assistant",
+      content: isFormal
+        ? `Halo ${name}! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi Anda.\n\nBagaimana kondisi tubuh Anda hari ini? Apakah ada makanan tertentu yang ingin Anda evaluasi nilai gizinya, atau Anda membutuhkan rekomendasi menu sehat yang ramah gula darah sesuai prinsip 3J?`
+        : `Halo ${name}! Selamat datang di ruang konsultasi PrediaBeat. 👋\n\nSaya **Dr. Predi**, konsultan nutrisi klinis pribadi kamu.\n\nGimana kondisi tubuh kamu hari ini? Lagi pengen makan sesuatu yang hangat, segar, atau mau cek keamanan makanan favorit kamu? Cerita aja ya, nanti saya bantu hitungkan gizi & rekomendasi menu ramah gula darahnya!`,
+      source: "Dr. Predi Clinical AI",
+      guardrail: "100% Bebas Alergen & Sesuai Pedoman PERKENI",
+    };
+  };
 
   // State percakapan & sesi multi-thread (mirip ChatGPT / Gemini)
   const [sessions, setSessions] = useState([]);
@@ -84,8 +86,9 @@ export default function ChatbotPage() {
   const chatBottomRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Muat daftar sesi pengguna saat halaman pertama dibuka
+  // Muat daftar sesi pengguna saat halaman pertama dibuka (hanya saat sudah ada profil)
   const loadSessions = async () => {
+    if (!profile) return;
     try {
       const res = await api.getChatSessions();
       if (res.success && Array.isArray(res.data)) {
@@ -97,8 +100,17 @@ export default function ChatbotPage() {
   };
 
   useEffect(() => {
-    loadSessions();
-  }, [user]);
+    if (profile && !isOnboardingMode) {
+      loadSessions();
+    }
+  }, [user, profile, isOnboardingMode]);
+
+  // Sinkronkan pesan pembuka jika profil baru selesai dibuat
+  useEffect(() => {
+    if (profile && !activeSessionId && messages.length <= 1) {
+      setMessages([createInitialWelcomeMessage(getGreetingName())]);
+    }
+  }, [profile]);
 
   // Muat riwayat pesan ketika sesi aktif berubah
   const loadSessionMessages = async (sessionId) => {
@@ -241,6 +253,16 @@ export default function ChatbotPage() {
   useEffect(() => {
     chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
+
+  if (!profile || isOnboardingMode) {
+    return (
+      <OnboardingChatView
+        allowBack={!!profile}
+        onBackToChat={() => setIsOnboardingMode(false)}
+        onFinished={() => setIsOnboardingMode(false)}
+      />
+    );
+  }
 
   // Kirim Pertanyaan (bisa dipanggil dari form submit atau action chip konfirmasi)
   const sendMessage = async (rawQuery) => {

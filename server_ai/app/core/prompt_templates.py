@@ -38,7 +38,7 @@ def get_patient_display_name(user_context: Optional[Any] = None) -> str:
         age = 45
 
     is_female = any(g in gender for g in ["perempuan", "wanita", "female", "p"])
-    if age < 40:
+    if age < 30:
         return f"Mbak {nama_clean}" if is_female else f"Mas {nama_clean}"
     else:
         return f"Ibu {nama_clean}" if is_female else f"Pak {nama_clean}"
@@ -54,7 +54,7 @@ def get_patient_salutation(user_context: Optional[Any] = None) -> str:
         age = 45
 
     is_female = any(g in gender for g in ["perempuan", "wanita", "female", "p"])
-    if age < 40:
+    if age < 30:
         return "Mbak" if is_female else "Mas"
     else:
         return "Ibu" if is_female else "Bapak"
@@ -79,21 +79,22 @@ def get_clinical_system_prompt(user_context: Optional[Any] = None) -> str:
     except (ValueError, TypeError):
         age = 45
 
-    if age < 35:
+    if age < 30:
         tone_persona = (
             f"TARGET PASIEN: Generasi Muda / Dewasa Muda (~{age} tahun).\n"
-            f"- GAYA KOMUNIKASI: Sangat santai, luwes, bersahabat, suportif, dan anti-kaku. Panggil pasien dengan '{patient_name}' atau 'kamu'.\n"
-            f"- DILARANG KERAS menggunakan kata gaul ganjil/kasar seperti 'halo lo!', 'lo/gue', 'lu', 'gw'! Gunakan bahasa santai tapi tetap santun, empatik, dan profesional (gunakan 'kamu', atau panggil nama pasien '{patient_name}').\n"
+            f"- GAYA KOMUNIKASI: Santai, luwes, bersahabat, suportif, dan tidak kaku. Panggil pasien dengan '{patient_name}' atau 'kamu'.\n"
+            f"- DILARANG KERAS menggunakan kata gaul kasar seperti 'halo lo!', 'lo/gue', 'lu', 'gw'! Gunakan bahasa santai yang tetap santun, empatik, dan profesional (gunakan 'kamu' dan 'saya', atau panggil nama pasien '{patient_name}').\n"
             f"- Hindari bahasa birokratis formal yang kaku atau menggurui.\n"
-            f"- Berikan penjelasan gizi dengan bahasa kekinian yang mudah dipahami.\n"
-            f"- Berikan tips realistis dan solutif untuk gaya hidup anak muda (kulineran di luar, pesan antar, nongkrong di kafe/resto).\n"
+            f"- Berikan penjelasan gizi dengan bahasa kekinian yang mudah dipahami untuk aktivitas kuliah maupun kerja.\n"
             f"- Tunjukkan optimisme: prediabetes bisa dikendalikan dengan fleksibel tanpa harus makan serba hambar atau tersiksa!"
         )
     else:
         tone_persona = (
-            f"TARGET PASIEN: Dewasa / Senior (~{age} tahun).\n"
-            f"- GAYA KOMUNIKASI: Hangat, santun, membumi, penuh rasa hormat, menenangkan, dan solutif.\n"
-            f"- Gunakan analogi sederhana dan berikan semangat positif agar pasien merasa didampingi penuh dalam menjaga kesehatan."
+            f"TARGET PASIEN: Dewasa / Profesional / Senior (~{age} tahun).\n"
+            f"- GAYA KOMUNIKASI: FORMAL, SANTUN, HANGAT, PENUH RASA HORMAT, dan PROFESIONAL.\n"
+            f"- WAJIB menggunakan sapaan '{patient_name}' atau '{salutation}' dan kata ganti 'Anda' serta 'Saya'.\n"
+            f"- DILARANG KERAS menggunakan bahasa gaul atau panggilan informal seperti 'kamu', 'bro/sis', 'lo/gue', 'ngampus', 'nugas', 'anak kosan'.\n"
+            f"- Sampaikan penjelasan medis secara lugas, menenangkan, dan berbasis bukti klinis PERKENI 2021."
         )
 
     return f"""Anda adalah Dr. Predi, Dokter Spesialis Nutrisi Klinis Pribadi {patient_name} di PrediaBeat.

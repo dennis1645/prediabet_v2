@@ -19,6 +19,7 @@ import { showSuccessAlert, showErrorAlert, showToast } from "../utils/alerts";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
+  const [usia, setUsia] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -36,6 +37,13 @@ export default function RegisterPage() {
 
     if (username.trim().length < 3) {
       const msg = "Nama minimal 3 karakter.";
+      setError(msg);
+      showErrorAlert("Validasi Gagal", msg);
+      return;
+    }
+    const usiaNum = parseInt(usia, 10);
+    if (!Number.isFinite(usiaNum) || usiaNum < 10 || usiaNum > 120) {
+      const msg = "Mohon isi usia yang valid (10 – 120 tahun).";
       setError(msg);
       showErrorAlert("Validasi Gagal", msg);
       return;
@@ -61,12 +69,14 @@ export default function RegisterPage() {
 
     setLoading(true);
     try {
-      const res = await register(username.trim(), email.trim(), password, phoneNumber.trim());
+      await register(username.trim(), email.trim(), password, phoneNumber.trim(), usiaNum);
       setLoading(false);
 
       await showSuccessAlert(
         "Pendaftaran Berhasil!",
-        "Akun Anda telah dibuat! Mari mulai sesi wawancara santai bersama Dr. Predi untuk menganalisis profil kesehatan Anda."
+        usiaNum >= 30
+          ? "Akun Anda telah dibuat. Mari mulai sesi wawancara rekam medis awal bersama Dr. Predi."
+          : "Akun kamu berhasil dibuat! Yuk mulai obrolan santai bareng Dr. Predi untuk menyusun profil kesehatan kamu."
       );
 
       navigate("/chatbot");
@@ -82,6 +92,7 @@ export default function RegisterPage() {
   const handleQuickDemo = () => {
     const randomId = Math.floor(100 + Math.random() * 900);
     setUsername(`Pengguna ${randomId}`);
+    setUsia("22");
     setEmail(`pengguna${randomId}@example.com`);
     setPassword("PrediaBeat2026!");
     setAgreeTerms(true);
@@ -235,20 +246,38 @@ export default function RegisterPage() {
           {/* Form Utama */}
           <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
             
-            {/* Input Nama */}
-            <div>
-              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5 ml-1">
-                Nama
-              </label>
-              <div className="relative flex items-center">
-                <User className="w-4 h-4 text-slate-400 absolute left-4 pointer-events-none" />
+            {/* Input Nama & Umur */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5 ml-1">
+                  Nama
+                </label>
+                <div className="relative flex items-center">
+                  <User className="w-4 h-4 text-slate-400 absolute left-4 pointer-events-none" />
+                  <input
+                    type="text"
+                    required
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Masukkan nama Anda (min. 3 huruf)"
+                    className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50/90 border border-slate-200 rounded-2xl text-slate-800 text-sm font-medium placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all shadow-2xs"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5 ml-1">
+                  Umur (Tahun)
+                </label>
                 <input
-                  type="text"
+                  type="number"
                   required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Masukkan nama Anda (min. 3 huruf)"
-                  className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50/90 border border-slate-200 rounded-2xl text-slate-800 text-sm font-medium placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all shadow-2xs"
+                  min={10}
+                  max={120}
+                  value={usia}
+                  onChange={(e) => setUsia(e.target.value)}
+                  placeholder="Misal: 24"
+                  className="w-full px-4 py-3 sm:py-3.5 bg-slate-50/90 border border-slate-200 rounded-2xl text-slate-800 text-sm font-medium placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all shadow-2xs"
                 />
               </div>
             </div>

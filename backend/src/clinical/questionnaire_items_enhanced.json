@@ -69,14 +69,17 @@
     "id": 5,
     "field_key": "jenjang_pendidikan",
     "section": "IDENTITAS RESPONDEN",
-    "question": "Kamu sekarang masih pelajar/mahasiswa di jenjang apa?",
+    "question": "Apa jenjang pendidikan atau status aktivitas Anda saat ini?",
     "type": "Pilihan ganda",
     "is_multi": false,
     "required": true,
     "options": [
       "SMP (Kelas 7-9)",
       "SMA/SMK (Kelas 10-12)",
-      "Mahasiswa S1"
+      "Mahasiswa (D3/S1/S2)",
+      "Sudah Lulus (D3/S1/S2/S3)",
+      "Sudah Bekerja (Karyawan / Profesional / Wirausaha)",
+      "Yang lain:"
     ],
     "note": null
   },

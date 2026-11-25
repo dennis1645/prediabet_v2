@@ -7,25 +7,25 @@ class UserClinicalContext(BaseModel):
     username: str
     nama: Optional[str] = None
     has_profile: Optional[bool] = True
-    usia: Optional[Union[int, float]] = None
+    usia: Optional[Union[int, float, str]] = None
     jenis_kelamin: Optional[str] = "Laki-laki"
-    tinggi_badan: Optional[Union[float, int]] = None
-    berat_badan: Optional[Union[float, int]] = None
-    lingkar_pinggang: Optional[Union[float, int]] = None
+    tinggi_badan: Optional[Union[float, int, str]] = None
+    berat_badan: Optional[Union[float, int, str]] = None
+    lingkar_pinggang: Optional[Union[float, int, str]] = None
     aktivitas: Optional[str] = "sedang"
     bmi: Optional[Union[float, str]] = None
     kategori_bmi: Optional[str] = None
-    skor_risiko: Optional[Union[int, float]] = None
+    skor_risiko: Optional[Union[int, float, str]] = None
     kategori_risiko: Optional[str] = None
     gula_darah_puasa: Optional[Union[float, str]] = None
     hba1c: Optional[Union[float, str]] = None
     pantangan_alergi: List[str] = Field(default_factory=list)
     komorbiditas: Union[List[str], str] = Field(default_factory=list)
     active_diet: Optional[str] = "Diet Seimbang Ramah Glukosa"
-    target_kalori: Optional[Union[int, float]] = 1900
-    target_karbo: Optional[int] = 225
-    target_protein: Optional[int] = 100
-    target_lemak: Optional[int] = 60
+    target_kalori: Optional[Union[int, float, str]] = 1900
+    target_karbo: Optional[Union[int, float, str]] = 225
+    target_protein: Optional[Union[int, float, str]] = 100
+    target_lemak: Optional[Union[int, float, str]] = 60
     pola_waktu_makan: Optional[str] = "3 kali makan utama + 2 kali selingan"
 
     class Config:

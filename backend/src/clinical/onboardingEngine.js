@@ -54,7 +54,7 @@ const GENZ_PROMPTS = {
   tingkat_kerabat_diabetes: "Kalau ada, siapa anggota keluarga kamu yang punya riwayat diabetes?",
   riwayat_kardiovaskular_keluarga: "Kalau riwayat penyakit jantung atau stroke di keluarga, ada juga gak nih?",
   konsumsi_obat_rutin: "Apakah kamu saat ini lagi rutin konsumsi obat medis tertentu?",
-  biasa_sarapan: "Masuk ke pola makan nih! Kamu tipe yang rutin sarapan pagi sebelum ngampus/aktivitas gak?",
+  biasa_sarapan: "Masuk ke pola makan nih! Kamu tipe yang rutin sarapan pagi sebelum beraktivitas/ngampus gak?",
   frekuensi_minum_manis: "Seberapa sering kamu jajan minuman manis? (Kayak boba, kopi susu gula aren, es teh manis, soda)",
   frekuensi_gorengan: "Seberapa sering makan gorengan atau cemilan berminyak dalam seminggu?",
   frekuensi_makanan_manis: "Seberapa sering ngemil makanan manis kayak kue, cokelat, atau dessert?",
@@ -62,9 +62,9 @@ const GENZ_PROMPTS = {
   frekuensi_buah: "Kalau makan buah-buahan segar, seberapa sering biasanya?",
   porsi_nasi: "Berapa porsi nasi yang biasa kamu makan per hari?",
   frekuensi_ngemil: "Seberapa sering kamu ngemil di antara jam makan utama?",
-  jenis_camilan: "Camilan apa nih yang paling sering kamu makan pas santai atau nugas?",
+  jenis_camilan: "Camilan apa nih yang paling sering kamu makan pas santai, nugas, atau bekerja?",
   tempat_makan_harian: "Makanan sehari-hari kamu kebanyakan dari mana nih? (Boleh pilih lebih dari satu)",
-  makan_larut_malam: "Pernah gak makan larut malam (setelah jam 9 malam) pas nugas atau begadang?",
+  makan_larut_malam: "Pernah gak makan larut malam (setelah jam 9 malam) pas lagi nugas, kerja, atau begadang?",
   pantangan_makanan: "Apakah kamu memiliki pantangan atau batasan makanan? (Boleh pilih lebih dari satu)",
   makanan_favorit: "Makanan khas Indonesia apa nih yang paling kamu suka? (Boleh pilih lebih dari satu)",
   buah_favorit: "Buah segar apa yang paling kamu suka dan mudah ditemukan di sekitarmu?",
@@ -96,17 +96,88 @@ const GENZ_PROMPTS = {
   sumber_info_kesehatan: "Terakhir nih! Biasanya kamu paling sering cari info seputar kesehatan dari mana?"
 };
 
+const FORMAL_PROMPTS = {
+  nama: "Perkenalkan, saya Dr. Predi. Boleh saya ketahui nama panggilan Anda?",
+  phone_number: "Berapa nomor WhatsApp aktif Anda? (Opsional, untuk pengingat jadwal makan & kesehatan harian)",
+  jenis_kelamin: "Apa jenis kelamin Anda? (Diperlukan untuk perhitungan metabolisme basal / BMR Anda)",
+  usia: "Berapa usia Anda saat ini dalam tahun? (Ketik angkanya saja, misalnya: 35)",
+  etnis: "Jika berkenan, apa etnis atau suku Anda? (Opsional, dapat dilewati)",
+  jenjang_pendidikan: "Apa jenjang pendidikan terakhir atau status aktivitas Anda saat ini?",
+  tempat_tinggal: "Di mana Anda tinggal sehari-hari saat ini?",
+  berat_badan: "Berapa berat badan Anda saat ini dalam kg? (Misalnya: 65 — diperlukan untuk menghitung Indeks Massa Tubuh)",
+  tinggi_badan: "Berapa tinggi badan Anda saat ini dalam cm? (Misalnya: 170)",
+  lingkar_pinggang: "Berapa ukuran lingkar pinggang Anda (diukur di atas pusar dalam cm)? Jika belum mengetahui, Anda dapat mengetik 'skip' atau memilih Lewati.",
+  riwayat_obesitas_nakes: "Apakah dokter atau tenaga kesehatan pernah menyampaikan bahwa Anda memiliki kelebihan berat badan atau obesitas?",
+  tes_gula_darah_puasa: "Apakah Anda pernah menjalani pemeriksaan Gula Darah Puasa (GDP) di laboratorium atau fasilitas kesehatan?",
+  tes_hba1c: "Apakah Anda pernah menjalani pemeriksaan HbA1c (rata-rata gula darah 3 bulan terakhir)?",
+  tekanan_darah_sistol: "Berapa angka tekanan darah SISTOL (angka atas) Anda? (Contoh: 120. Ketik 'skip' jika belum pernah memeriksa)",
+  tekanan_darah_diastol: "Berapa angka tekanan darah DIASTOL (angka bawah) Anda? (Contoh: 80. Ketik 'skip' jika belum tahu)",
+  riwayat_kondisi_kesehatan: "Apakah Anda memiliki riwayat kondisi kesehatan berikut? (Dapat memilih lebih dari satu)",
+  gejala_klasik: "Akhir-akhir ini, apakah Anda merasakan salah satu dari gejala berikut? (Dapat memilih lebih dari satu)",
+  riwayat_diabetes_keluarga: "Apakah ada anggota keluarga kandung atau kerabat yang memiliki riwayat diabetes?",
+  tingkat_kerabat_diabetes: "Jika ada, siapa anggota keluarga Anda yang memiliki riwayat diabetes?",
+  riwayat_kardiovaskular_keluarga: "Apakah terdapat riwayat penyakit jantung atau stroke di keluarga Anda?",
+  konsumsi_obat_rutin: "Apakah Anda saat ini sedang rutin mengonsumsi obat medis tertentu?",
+  biasa_sarapan: "Sekarang masuk ke pola makan. Apakah Anda terbiasa sarapan pagi sebelum memulai aktivitas atau bekerja?",
+  frekuensi_minum_manis: "Seberapa sering Anda mengonsumsi minuman manis (seperti kopi susu manis, teh manis, boba, atau minuman bersoda)?",
+  frekuensi_gorengan: "Seberapa sering Anda mengonsumsi gorengan atau makanan berminyak dalam seminggu?",
+  frekuensi_makanan_manis: "Seberapa sering Anda mengonsumsi makanan manis seperti kue, cokelat, atau hidangan penutup?",
+  frekuensi_sayuran: "Seberapa sering Anda mengonsumsi sayuran dalam seminggu?",
+  frekuensi_buah: "Seberapa sering Anda mengonsumsi buah-buahan segar?",
+  porsi_nasi: "Berapa porsi nasi yang biasa Anda konsumsi per hari?",
+  frekuensi_ngemil: "Seberapa sering Anda mengonsumsi camilan di antara waktu makan utama?",
+  jenis_camilan: "Camilan apa yang paling sering Anda konsumsi saat bersantai atau di sela waktu bekerja?",
+  tempat_makan_harian: "Dari mana biasanya sumber makanan Anda sehari-hari? (Dapat memilih lebih dari satu)",
+  makan_larut_malam: "Apakah Anda sering makan larut malam (setelah pukul 21.00)?",
+  pantangan_makanan: "Apakah Anda memiliki pantangan atau alergi makanan tertentu? (Dapat memilih lebih dari satu)",
+  makanan_favorit: "Menu masakan Indonesia apa yang paling Anda sukai? (Dapat memilih lebih dari satu)",
+  buah_favorit: "Buah segar apa yang paling Anda sukai dan mudah Anda peroleh?",
+  sayur_favorit: "Sayuran segar apa yang paling Anda sukai dan biasa Anda konsumsi?",
+  protein_favorit: "Sumber protein hewani apa yang paling Anda sukai?",
+  anggaran_makan_harian: "Berapa perkiraan anggaran makan harian Anda?",
+  hari_olahraga_seminggu: "Masuk ke aktivitas fisik. Berapa hari dalam seminggu Anda meluangkan waktu untuk berolahraga?",
+  durasi_olahraga_sesi: "Saat berolahraga, berapa lama durasi rata-rata per sesi?",
+  jenis_olahraga_favorit: "Jenis olahraga apa yang paling Anda sukai? (Dapat memilih lebih dari satu)",
+  ikut_ekskul_olahraga: "Apakah Anda rutin mengikuti klub atau komunitas olahraga?",
+  durasi_duduk_rebahan: "Di luar waktu tidur, berapa jam sehari rata-rata Anda duduk bekerja atau beristirahat?",
+  hambatan_olahraga: "Apa kendala utama Anda untuk berolahraga secara rutin? (Dapat memilih lebih dari satu)",
+  durasi_tidur_malam: "Mengenai pola tidur, berapa jam rata-rata Anda tidur malam pada hari kerja?",
+  jam_mulai_tidur: "Pukul berapa Anda biasanya mulai tidur di malam hari?",
+  gadget_sebelum_tidur: "Apakah Anda sering menggunakan ponsel atau laptop dalam 1 jam sebelum tidur?",
+  gangguan_tidur: "Apakah Anda sering mengalami kesulitan tidur (insomnia) atau sering terbangun di tengah malam?",
+  perasaan_bangun_pagi: "Bagaimana kondisi tubuh Anda saat bangun pagi?",
+  tingkat_stres: "Bagaimana tingkat stres atau beban pikiran Anda akhir-akhir ini (pekerjaan maupun aktivitas harian)?",
+  sumber_stres_utama: "Apa yang biasanya menjadi sumber stres utama Anda? (Dapat memilih lebih dari satu)",
+  cara_atasi_stres: "Saat menghadapi stres atau kelelahan, bagaimana cara Anda mengatasinya?",
+  merokok: "Apakah Anda merokok atau menggunakan rokok elektrik (vape)?",
+  jumlah_rokok_per_hari: "Jika merokok, kira-kira berapa batang atau sesi per hari? (Ketik 0 jika tidak)",
+  frekuensi_kafein: "Seberapa sering Anda mengonsumsi kafein seperti kopi, teh pekat, atau minuman berenergi?",
+  screen_time_harian: "Berapa jam perkiraan penggunaan layar gawai Anda per hari di luar jam kerja?",
+  dukungan_keluarga_lifestyle: "Apakah keluarga atau lingkungan terdekat Anda mendukung perubahan pola hidup sehat?",
+  kesediaan_ubah_lifestyle: "Seberapa siap Anda untuk mulai mengatur pola makan dan gaya hidup sehat bersama PrediaBeat?",
+  target_durasi_program: "Berapa lama target komitmen Anda dalam menjalankan program nutrisi ramah glukosa ini?",
+  pernah_dengar_prediabetes: "Sebelumnya, apakah Anda sudah pernah mendengar tentang kondisi 'prediabetes'?",
+  sumber_info_kesehatan: "Terakhir, dari mana biasanya Anda mencari informasi seputar kesehatan?"
+};
+
 export const ONBOARDING_QUESTIONS = RAW_QUESTIONS.map((q) => {
   return {
     ...q,
-    genz_prompt: GENZ_PROMPTS[q.field_key] || q.question
+    genz_prompt: GENZ_PROMPTS[q.field_key] || q.question,
+    formal_prompt: FORMAL_PROMPTS[q.field_key] || q.question
   };
 });
+
+function resolveIsFormal(answers = {}, userRow = {}) {
+  const rawAge = answers?.usia ?? userRow?.usia;
+  const parsed = parseInt(rawAge, 10);
+  return Number.isFinite(parsed) && parsed >= 30;
+}
 
 /**
  * Deteksi respon defensif, lupa, terima kasih, atau percakapan santai (Intelligent Guardrail)
  */
-export function handleSpecialConversationalIntent(userMessage, currentQuestion) {
+export function handleSpecialConversationalIntent(userMessage, currentQuestion, isFormal = false) {
   const msg = (userMessage || "").trim().toLowerCase();
 
   // 1. Defensif / Sarcastic / Skeptis
@@ -118,11 +189,11 @@ export function handleSpecialConversationalIntent(userMessage, currentQuestion) 
   if (defensiveKeywords.some((k) => msg.includes(k))) {
     return {
       is_special: true,
-      bot_response:
-        "Haha santai bro/sis, Predi gak lagi ngepoin privasi lo kok! 😉 " +
-        `Alasan Predi nanya soal **${currentQuestion.question}** ini penting banget, karena data ini bakal jadi kunci perhitungan sensitivitas insulin dan batas toleransi glukosa tubuh lo. ` +
-        "Tenang, semua data medis lo terenkripsi aman dan cuma dipake biar rekomendasi makanan lo nanti beneran pas di badan lo. " +
-        "Yuk, spill dikit dong biar Predi bisa bantuin analisis kesehatan lo dengan presisi! ✨",
+      bot_response: isFormal
+        ? `Mohon maaf atas ketidaknyamanannya. Pertanyaan mengenai **${currentQuestion.question}** diperlukan semata-mata untuk menghitung sensitivitas insulin dan kebutuhan gizi Anda secara presisi. Seluruh data Anda terenkripsi aman dan hanya digunakan untuk evaluasi klinis pribadi Anda.`
+        : "Tenang ya, Dr. Predi gak berniat kepo kok! 😉 " +
+          `Pertanyaan soal **${currentQuestion.question}** ini penting banget untuk menghitung sensitivitas insulin dan batas toleransi glukosa tubuh kamu. ` +
+          "Semua data medis kamu terenkripsi aman dan cuma dipakai supaya rekomendasi makanan kamu beneran pas. Yuk diisi pelan-pelan ya! ✨",
       repeat_question: true
     };
   }
@@ -135,17 +206,24 @@ export function handleSpecialConversationalIntent(userMessage, currentQuestion) 
   if (forgetKeywords.some((k) => msg.includes(k))) {
     const isOptional = !currentQuestion.required || ["lingkar_pinggang", "tekanan_darah_sistol", "tekanan_darah_diastol", "etnis", "phone_number"].includes(currentQuestion.field_key);
     
-    let advice = "Gak masalah banget kalau lupa! Lo boleh masukin angka perkiraan pas terakhir cek kesehatan atau yang ada di data SIM/KTP.";
+    let advice = isFormal
+      ? "Tidak masalah apabila Anda lupa. Anda dapat memasukkan angka perkiraan terakhir saat pemeriksaan kesehatan."
+      : "Gak masalah kok kalau lupa! Kamu boleh masukin angka perkiraan saat terakhir cek kesehatan.";
     if (isOptional) {
-      advice += " Karena pertanyaan ini opsional, lo juga boleh langsung ketik **'skip'** atau klik tombol **'Lewati Dulu'** ya!";
+      advice += isFormal
+        ? " Karena pertanyaan ini bersifat opsional, Anda juga dapat mengetik **'skip'** atau menekan tombol **'Lewati Pertanyaan Ini'**."
+        : " Karena pertanyaan ini opsional, kamu juga boleh langsung ketik **'skip'** atau klik tombol **'Lewati Pertanyaan Ini'** ya!";
     } else {
-      advice += " Masukin angka estimasi terbaik lo aja ya, bro/sis!";
+      advice += isFormal
+        ? " Mohon masukkan angka estimasi terbaik Anda."
+        : " Masukin angka estimasi terbaik kamu aja ya!";
     }
 
     return {
       is_special: true,
-      bot_response:
-        `Santai bro/sis, wajar banget kok kalau lupa! 😊\n\n${advice}\n\nGimana, mau pakai estimasi berapa nih atau mau kita lewati?`,
+      bot_response: isFormal
+        ? `Baik, tidak masalah jika belum mengingat angkanya. 😊\n\n${advice}\n\nSilakan masukkan angka perkiraan Anda atau lewati jika opsional.`
+        : `Santai aja, wajar kok kalau lupa! 😊\n\n${advice}\n\nMau pakai estimasi berapa atau kita lewati dulu?`,
       repeat_question: true
     };
   }
@@ -155,8 +233,9 @@ export function handleSpecialConversationalIntent(userMessage, currentQuestion) 
   if (gratitudeKeywords.some((k) => msg === k || msg.startsWith(k + " ") || msg.endsWith(" " + k))) {
     return {
       is_special: true,
-      bot_response:
-        "Sama-sama bro/sis! Senang banget bisa jadi health buddy lo. 🌟 Yuk kita lanjutin beberapa pertanyaan lagi ya biar profil kesehatan lo lengkap!",
+      bot_response: isFormal
+        ? "Sama-sama. Senang dapat mendampingi Anda. Mari kita lanjutkan beberapa pertanyaan berikutnya agar evaluasi medis Anda lengkap."
+        : "Sama-sama! Senang banget bisa bantu kamu. 🌟 Yuk kita lanjutin beberapa pertanyaan lagi biar profil kesehatan kamu lengkap!",
       repeat_question: true
     };
   }
@@ -166,8 +245,9 @@ export function handleSpecialConversationalIntent(userMessage, currentQuestion) 
   if (greetingKeywords.some((k) => msg === k || msg.startsWith(k + " "))) {
     return {
       is_special: true,
-      bot_response:
-        "Halo juga bro/sis! 👋 Senang banget kamu ada di sini. Yuk kita lanjutin sesi wawancara santai kita ya!",
+      bot_response: isFormal
+        ? "Halo, selamat datang kembali. Mari kita lanjutkan sesi wawancara rekam medis Anda."
+        : "Halo juga! 👋 Senang kamu di sini. Yuk kita lanjutin sesi wawancaranya ya!",
       repeat_question: true
     };
   }
@@ -207,10 +287,11 @@ export function getUserOnboardingState(userId, userObj = {}) {
   let answersModified = false;
 
   // Ambil data registrasi pengguna dari tabel users agar tidak ditanyakan ulang di kuesioner
-  const userRow = db.prepare("SELECT username, email, phone_number FROM users WHERE id = ?").get(userId);
+  const userRow = db.prepare("SELECT username, email, phone_number, usia FROM users WHERE id = ?").get(userId);
   const regName = (userRow?.username || userObj?.username || "").trim();
   const regEmail = (userRow?.email || userObj?.email || "").trim();
   const regPhone = (userRow?.phone_number || userObj?.phone_number || "").trim();
+  const regAge = userRow?.usia ?? userObj?.usia ?? null;
 
   if (regName && !answers.nama) {
     answers.nama = regName;
@@ -224,6 +305,12 @@ export function getUserOnboardingState(userId, userObj = {}) {
     answers.phone_number = regPhone;
     answersModified = true;
   }
+  if (regAge !== null && regAge !== undefined && !answers.usia) {
+    answers.usia = String(regAge);
+    answersModified = true;
+  }
+
+  const isFormal = resolveIsFormal(answers, userRow);
 
   // Jika sudah completed
   if (progress.is_completed) {
@@ -232,6 +319,7 @@ export function getUserOnboardingState(userId, userObj = {}) {
       progress_percent: 100,
       current_step: ONBOARDING_QUESTIONS.length,
       total_steps: ONBOARDING_QUESTIONS.length,
+      tone_mode: isFormal ? "formal" : "casual",
       message: "Profil rekam medis Anda telah lengkap dan seluruh fitur PrediaBeat telah aktif!",
       answers
     };
@@ -241,14 +329,15 @@ export function getUserOnboardingState(userId, userObj = {}) {
   let currentQIndex = ONBOARDING_QUESTIONS.findIndex((q) => q.id === progress.current_question_id);
   if (currentQIndex === -1) currentQIndex = 0;
 
-  // Lewati pertanyaan yang sudah terisi otomatis dari registrasi (nama, phone_number, email)
+  // Lewati pertanyaan yang sudah terisi otomatis dari registrasi (nama, phone_number, email, usia)
   let indexSkipped = false;
   while (currentQIndex < ONBOARDING_QUESTIONS.length) {
     const candidateKey = ONBOARDING_QUESTIONS[currentQIndex].field_key;
     const alreadyFilled =
       (candidateKey === "nama" && Boolean(answers.nama)) ||
       (candidateKey === "phone_number" && Boolean(answers.phone_number)) ||
-      (candidateKey === "email" && Boolean(answers.email));
+      (candidateKey === "email" && Boolean(answers.email)) ||
+      (candidateKey === "usia" && Boolean(answers.usia));
 
     if (alreadyFilled) {
       currentQIndex++;
@@ -279,11 +368,13 @@ export function getUserOnboardingState(userId, userObj = {}) {
     progress_percent: progressPercent,
     current_step: currentQIndex + 1,
     total_steps: total,
+    tone_mode: isFormal ? "formal" : "casual",
     section: activeQuestion.section,
     question_id: activeQuestion.id,
     field_key: activeQuestion.field_key,
     question_text: activeQuestion.question,
-    genz_prompt: activeQuestion.genz_prompt,
+    genz_prompt: isFormal ? activeQuestion.formal_prompt : activeQuestion.genz_prompt,
+    formal_prompt: activeQuestion.formal_prompt,
     type: activeQuestion.type,
     is_multi: activeQuestion.is_multi,
     required: activeQuestion.required,
@@ -308,7 +399,8 @@ export function submitAnswerAndAdvance(userId, rawAnswer, textMessage = "", user
   }
 
   // Cek apakah user mengirim respon defensif/lupa/terima kasih
-  const specialCheck = handleSpecialConversationalIntent(textMessage || String(rawAnswer), currentQ);
+  const currentIsFormal = state.tone_mode === "formal";
+  const specialCheck = handleSpecialConversationalIntent(textMessage || String(rawAnswer), currentQ, currentIsFormal);
   if (specialCheck.is_special) {
     return {
       is_special_reaction: true,
@@ -419,15 +511,24 @@ export function submitAnswerAndAdvance(userId, rawAnswer, textMessage = "", user
   `).run(nextQ.id, JSON.stringify(answers), now, userId);
 
   const updatedState = getUserOnboardingState(userId, userObj);
+  const nextFormal = updatedState.tone_mode === "formal";
 
-  // Buat respon feedback suportif dari Dr. Predi
-  let feedback = "Keren, jawaban lo udah Predi catat ya! 👍";
+  // Buat respon feedback suportif dari Dr. Predi sesuai usia
+  let feedback = nextFormal
+    ? "Baik, jawaban Anda telah saya catat dengan baik. 👍"
+    : "Sip, jawaban kamu udah Predi catat ya! 👍";
   if (currentQ.field_key === "berat_badan" || currentQ.field_key === "tinggi_badan") {
-    feedback = "Sip, data fisik lo udah kesimpan rapi! Lanjut ke detail berikutnya ya:";
+    feedback = nextFormal
+      ? "Baik, data antropometri Anda sudah tersimpan. Mari lanjut ke detail berikutnya:"
+      : "Sip, data fisik kamu udah kesimpan rapi! Lanjut ke detail berikutnya ya:";
   } else if (currentQ.field_key === "frekuensi_minum_manis") {
-    feedback = "Noted banget soal minuman manis! Nanti Predi kasih trik biar gak gampang sugar craving pas nugas:";
+    feedback = nextFormal
+      ? "Baik, catatan konsumsi minuman manis Anda sudah tercatat. Nanti saya bantu susun alternatif yang lebih aman bagi gula darah:"
+      : "Noted soal minuman manis! Nanti Predi kasih trik biar gak gampang sugar craving pas beraktivitas:";
   } else if (currentQ.field_key === "durasi_tidur_malam") {
-    feedback = "Oke paham soal jam tidur lo! Pola tidur emang ngaruh banget ke sensitivitas insulin keesokan harinya:";
+    feedback = nextFormal
+      ? "Terima kasih, pola tidur Anda sudah tercatat. Kualitas tidur berperan penting dalam menjaga sensitivitas insulin:"
+      : "Oke paham soal jam tidur kamu! Pola tidur emang ngaruh banget ke sensitivitas insulin keesokan harinya:";
   }
 
   return {
