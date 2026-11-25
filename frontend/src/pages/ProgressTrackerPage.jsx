@@ -172,8 +172,9 @@ export default function ProgressTrackerPage() {
     searchTimerRef.current = setTimeout(async () => {
       try {
         const res = await api.getFoods({ q: val.trim(), limit: 6 });
-        if (res?.success && Array.isArray(res.data?.items) && res.data.items.length > 0) {
-          setFoodSuggestions(res.data.items);
+        const items = Array.isArray(res?.data) ? res.data : (res?.data?.items || []);
+        if (res?.success && items.length > 0) {
+          setFoodSuggestions(items.slice(0, 6));
           setShowSuggestions(true);
         } else {
           setFoodSuggestions([]);
@@ -249,7 +250,8 @@ export default function ProgressTrackerPage() {
     if (!Number.isFinite(calVal) || calVal <= 0) {
       try {
         const res = await api.getFoods({ q: cleanName, limit: 1 });
-        const top = res?.data?.items?.[0];
+        const items = Array.isArray(res?.data) ? res.data : (res?.data?.items || []);
+        const top = items[0];
         if (top && top.nama.toLowerCase() === cleanName.toLowerCase()) {
           calVal = Math.round(top.energi || 0);
           macros = {
