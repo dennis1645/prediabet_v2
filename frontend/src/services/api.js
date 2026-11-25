@@ -117,6 +117,7 @@ export const api = {
 
   // Progress Tracker
   getDailyLog: (date) => request(`/progress/${date || ""}`),
+  getWeeklySummary: () => request("/progress/summary/weekly"),
   saveDailyLog: (logData) =>
     request("/progress/log", {
       method: "POST",
