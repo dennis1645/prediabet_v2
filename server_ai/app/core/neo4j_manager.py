@@ -707,24 +707,72 @@ class Neo4jClinicalGraphManager:
             "singkong": ["Ketela pohon/ singkong kukus", "singkong"],
         }
 
-        # 0b. Deteksi item populer yang memang BELUM tersedia di dataset (misal: nasi bakar)
-        UNAVAILABLE_DISH_ALTERNATIVES = {
-            "nasi bakar": ["Nasi Putih", "Nasi Merah (Beras merah, Nasi)", "Nasi Uduk"],
+        # 0b. Deteksi umum makanan/minuman yang BELUM tersedia di dataset (bukan cuma nasi bakar, tapi semua hidangan yang 0 hasil di database!)
+        foods = self._load_local_dataset()
+        DISH_BASES = {
+            "nasi", "mie", "mi", "bihun", "kwetiau", "sate", "soto", "bakso", "sop", "sup",
+            "bubur", "lontong", "ketupat", "rendang", "gulai", "opor", "rawon", "pempek",
+            "siomay", "batagor", "martabak", "seblak", "dimsum", "sushi", "ramen", "udon",
+            "pasta", "pizza", "burger", "kebab", "roti", "kue", "bolu", "brownies", "donat",
+            "cromboloni", "croissant", "boba", "kopi", "teh", "jus", "es", "yogurt", "yoghurt"
         }
-        for missing_dish, alts in UNAVAILABLE_DISH_ALTERNATIVES.items():
-            if re.search(rf"\b{re.escape(missing_dish)}\b", q, re.IGNORECASE):
-                return {
-                    "nama": f"{missing_dish.title()} (Belum Tersedia di Dataset)",
-                    "nama_makanan": missing_dish.title(),
-                    "not_found_item": missing_dish,
-                    "available_alternatives": alts,
-                    "kalori": 0,
-                    "protein": 0,
-                    "karbohidrat": 0,
-                    "lemak": 0,
-                    "gi": None,
-                    "cara_olah": "Pilih varian nasi yang tersedia di database (seperti Nasi Putih atau Nasi Merah).",
-                }
+        NON_MODIFIERS = {
+            "ini", "itu", "yang", "dan", "atau", "untuk", "buat", "pada", "dari", "ke", "di",
+            "apa", "apakah", "berapa", "gimana", "bagaimana", "kenapa", "boleh", "bisa", "aman",
+            "sehat", "bagus", "cocok", "baik", "buruk", "bahaya", "harus", "perlu", "wajib",
+            "hari", "pagi", "siang", "sore", "malam", "besok", "kemarin", "minggu", "bulan",
+            "saya", "aku", "gue", "gw", "anda", "kamu", "kita", "kami", "orang", "pasien",
+            "banyak", "sedikit", "porsi", "piring", "mangkok", "gelas", "cup", "gram", "kkal",
+            "kalori", "makro", "protein", "karbo", "karbohidrat", "lemak", "gula", "serat",
+            "biasa", "aja", "saja", "dong", "nih", "ya", "kah", "lah", "kan", "nya", "satu", "dua"
+        }
+
+        # Cek 1: Frasa 2-kata <base> <modifier> (misal "nasi bakar", "nasi liwet", "sate taichan", "es boba")
+        q_tokens = re.findall(r"[a-zA-Z]+", q)
+        for idx in range(len(q_tokens) - 1):
+            w1, w2 = q_tokens[idx], q_tokens[idx + 1]
+            if w1 in DISH_BASES and w2 not in NON_MODIFIERS and len(w2) >= 3:
+                phrase = f"{w1} {w2}"
+                # Lewati jika frasa sudah punya alias resmi atau memang ada item yang cocok di dataset
+                if phrase in COMMON_FOOD_ALIASES:
+                    continue
+                has_exact = any(w1 in (f.get("nama") or "").lower() and w2 in (f.get("nama") or "").lower() for f in foods)
+                if not has_exact:
+                    base_alts = [
+                        f.get("nama") for f in foods
+                        if re.search(rf"\b{re.escape(w1)}\b", (f.get("nama") or "").lower())
+                    ][:3]
+                    return {
+                        "nama": f"{phrase.title()} (Belum Tersedia di Dataset)",
+                        "nama_makanan": phrase.title(),
+                        "not_found_item": phrase,
+                        "available_alternatives": base_alts or ["Nasi Putih", "Nasi Merah", "Pepes Ikan Mas"],
+                        "kalori": 0,
+                        "protein": 0,
+                        "karbohidrat": 0,
+                        "lemak": 0,
+                        "gi": None,
+                        "cara_olah": "Pilih varian makanan yang tersedia di database PrediaBeat.",
+                    }
+
+        # Cek 2: Hidangan tunggal khas yang tidak ada sama sekali di dataset (misal "seblak", "cromboloni", "boba")
+        SINGLE_MISSING_CHECK = ["seblak", "cromboloni", "takoyaki", "okonomiyaki", "gyoza", "topokki", "tteokbokki", "bibimbap"]
+        for single_dish in SINGLE_MISSING_CHECK:
+            if re.search(rf"\b{re.escape(single_dish)}\b", q, re.IGNORECASE):
+                has_single = any(single_dish in (f.get("nama") or "").lower() for f in foods)
+                if not has_single:
+                    return {
+                        "nama": f"{single_dish.title()} (Belum Tersedia di Dataset)",
+                        "nama_makanan": single_dish.title(),
+                        "not_found_item": single_dish,
+                        "available_alternatives": ["Nasi Beras Merah Pulen", "Sup Ayam Kampung", "Tahu Kukus"],
+                        "kalori": 0,
+                        "protein": 0,
+                        "karbohidrat": 0,
+                        "lemak": 0,
+                        "gi": None,
+                        "cara_olah": "Pilih varian makanan yang tersedia di database PrediaBeat.",
+                    }
 
         # 1. PRIORITAS UTAMA: Cari kecocokan frasa makanan langsung di query pasien saat ini!
         # Deteksi negasi/koreksi pasien: contoh 'itu mah nasi putih bukan nasi padang' -> abaikan 'nasi putih'
