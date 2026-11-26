@@ -761,6 +761,10 @@ def build_vllm_messages(
             else:
                 nutrisi_utama = f"kandungan proteinnya adalah sekitar {prot_val} gram, dengan kalori sekitar {cal_val} kkal"
 
+            ambig_instr = ""
+            if specific_food.get("ambiguous_choices"):
+                ambig_instr = f"\n- WAJIB di akhir respon tanyakan dengan ramah varian sate mana yang dimaksud pasien ({', '.join(specific_food['ambiguous_choices'])}) agar lebih akurat."
+
             current_user_content = (
                 f"Pesan Pasien: \"{user_query}\"\n\n"
                 f"[Data Gizi Spesifik dari Graf Database Neo4j]:\n"
@@ -776,7 +780,7 @@ def build_vllm_messages(
                 f"- JAWAB LANGSUNG KANDUNGAN NUTRISINYA: 'Untuk {portion_prefix} {food_title}, {nutrisi_utama}.'\n"
                 f"- DILARANG KERAS menyodorkan resep masakan panjang atau jadwal makan!\n"
                 f"- DILARANG KERAS menutup dengan kalimat klise AI robotik seperti 'Bagaimana informasi ini membantu Anda?' atau 'Apakah ada hal lain yang ingin Anda tanyakan tentang diet Anda?'!\n"
-                f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat."
+                f"- Selesaikan jawaban dalam 1-2 kalimat lugas, cerdas, dan bersahabat.{ambig_instr}"
             )
     # 6. Pesan konsultasi mengalir umum
     else:

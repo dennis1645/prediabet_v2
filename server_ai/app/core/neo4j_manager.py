@@ -1048,11 +1048,13 @@ class Neo4jClinicalGraphManager:
                     "alasan_klinis": "Perbedaan metode pengolahan (menggoreng vs merebus/mengukus) sangat memengaruhi densitas kalori dan kadar lemak akibat penyerapan minyak."
                 }
 
-        # 1. Coba cari di Neo4j jika aktif
-        if self.is_connected():
-            neo4j_logger.info("Mencari bahan makanan spesifik di graf Neo4j untuk terms: %s", search_terms)
-            for term in search_terms:
-                for target in COMMON_FOOD_ALIASES.get(term, [term]):
+        # 1. Cari per-term secara berurutan (Neo4j lalu CSV lokal untuk term tsb) agar term spesifik seperti "yogurt cimory" tidak kalah oleh term generik "yogurt" di Neo4j!
+        foods = self._load_local_dataset()
+        for term in search_terms:
+            targets = COMMON_FOOD_ALIASES.get(term, [term])
+            if self.is_connected():
+                neo4j_logger.info("Mencari bahan makanan spesifik di graf Neo4j untuk term: %s", term)
+                for target in targets:
                     cypher = """
                     MATCH (m)
                     WHERE (m:FoodItem OR m:Recipe OR m:Food)
@@ -1084,18 +1086,15 @@ class Neo4jClinicalGraphManager:
                                 matched["nama_makanan"] = matched.get("nama")
                                 matched["gambar"] = resolve_food_image(matched.get("nama") or "")
                                 matched = apply_portion_scaling(matched, q)
+                                if is_generic_sate:
+                                    matched["ambiguous_choices"] = ["Sate Ayam", "Sate Kambing", "Sate Sapi"]
                                 neo4j_logger.info("DITEMUKAN di Neo4j: '%s' cocok dengan target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                                 return matched
-                            else:
-                                neo4j_logger.debug("Tidak ada record di Neo4j untuk target '%s'", target)
                     except Exception as e:
                         neo4j_logger.error("Gagal menjalankan Cypher query spesifik untuk '%s': %s", target, str(e))
 
-        # 2. Cari di dataset lokal (fallback deterministik)
-        neo4j_logger.info("Neo4j offline atau record tidak ditemukan. Mencari di CSV dataset lokal untuk terms: %s", search_terms)
-        foods = self._load_local_dataset()
-        for term in search_terms:
-            for target in COMMON_FOOD_ALIASES.get(term, [term]):
+            # Fallback ke CSV lokal untuk term ini sebelum turun ke term yang lebih generik
+            for target in targets:
                 target_lower = str(target or "").lower()
                 matches = [f for f in foods if target_lower in str(f.get("nama") or "").lower()]
                 if matches:
@@ -1108,8 +1107,6 @@ class Neo4jClinicalGraphManager:
                         matched["ambiguous_choices"] = ["Sate Ayam", "Sate Kambing", "Sate Sapi"]
                     neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                     return matched
-                else:
-                    neo4j_logger.debug("Dataset CSV lokal tidak memiliki item untuk '%s'", target_lower)
 
         neo4j_logger.warning("Tidak ditemukan bahan makanan spesifik untuk search terms: %s", search_terms)
         return None
