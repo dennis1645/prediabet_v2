@@ -70,6 +70,14 @@ export function containsAllergen(foodName = "", allergies = []) {
     const a = String(rawAllergen || "").toLowerCase().trim();
     if (!a) continue;
 
+    // Spesifik: "tidak makan daging babi" HANYA memblokir babi (bukan ayam/ikan/sapi, bukan vegetarian/vegan!)
+    if (a.includes("babi") || a.includes("pork")) {
+      if (ALLERGEN_SYNONYMS.babi?.some((syn) => lower.includes(syn)) || lower.includes("babi") || lower.includes("pork")) {
+        return true;
+      }
+      continue;
+    }
+
     // Cek kata utama langsung (dengan pengecualian aman kacang panjang jika hanya alergi kacang tanah)
     if (lower.includes(a)) {
       if (a === "kacang" && lower.includes("kacang panjang") && !lower.includes("bumbu kacang")) {
@@ -80,7 +88,13 @@ export function containsAllergen(foodName = "", allergies = []) {
 
     // Cek sinonim & produk turunannya
     for (const [key, syns] of Object.entries(ALLERGEN_SYNONYMS)) {
-      if (a.includes(key) || key.includes(a)) {
+      if (key === "tidak makan daging" && (a.includes("babi") || a.includes("sapi") || a.includes("kambing") || a.includes("ayam"))) {
+        continue;
+      }
+      if (key === "vegan" && !a.includes("vegan")) {
+        continue;
+      }
+      if (a.includes(key) || (a.length >= 3 && key.includes(a))) {
         if (syns.some((syn) => lower.includes(syn))) {
           return true;
         }

@@ -603,6 +603,9 @@ class Neo4jClinicalGraphManager:
             "rendang sapi": ["Rendang sapi, masakan", "Rendang Sapi", "Rumah makan sederhana, Rendang"],
             "rendang": ["Rendang sapi, masakan", "Rendang Sapi", "Rumah makan sederhana, Rendang"],
             "sate kambing": ["Sate Kambing", "Kambing, daging, segar"],
+            "sate ayam": ["Sate Ayam", "Sate Lilit Ayam"],
+            "sate sapi": ["Sate", "Empal (daging) goreng"],
+            "sate": ["Sate Ayam", "Sate Kambing", "Sate"],
             "daging kambing": ["Kambing, daging, segar", "Sate Kambing"],
             "kambing": ["Sate Kambing", "Kambing, daging, segar", "Gulai kambing"],
             "kfc": ["KFC, Dada ayam", "KFC, Chicken breast original recipe", "KFC"],
@@ -761,6 +764,11 @@ class Neo4jClinicalGraphManager:
 
         if not search_terms:
             return None
+
+        is_generic_sate = (
+            "sate" in search_terms
+            and not any(sp in q for sp in ["sate ayam", "sate kambing", "sate sapi", "sate lilit", "sate bandeng", "sate taichan", "sate padang", "sate tempe", "sate pusut", "sate penyu"])
+        )
 
         def rank_food_match(item_name: str, target_keyword: str) -> tuple:
             lower = str(item_name or "").lower()
@@ -1096,6 +1104,8 @@ class Neo4jClinicalGraphManager:
                     matched["nama_makanan"] = matched.get("nama")
                     matched["gambar"] = resolve_food_image(matched.get("nama") or "")
                     matched = apply_portion_scaling(matched, q)
+                    if is_generic_sate:
+                        matched["ambiguous_choices"] = ["Sate Ayam", "Sate Kambing", "Sate Sapi"]
                     neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                     return matched
                 else:

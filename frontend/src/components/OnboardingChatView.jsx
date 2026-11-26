@@ -518,33 +518,33 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
   const CurrentSectionIcon = SECTION_ICONS[currentSection] || Activity;
 
   return (
-    <div className="relative min-h-[calc(100vh-80px)] flex flex-col justify-between py-3 sm:py-6">
+    <div className="relative min-h-[calc(100dvh-72px)] flex flex-col justify-between py-2.5 sm:py-6 overflow-x-hidden">
       {/* Background Ambience */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" />
         <div className="absolute top-1/2 right-[-100px] w-80 h-80 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full flex-grow flex flex-col relative z-10">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 w-full flex-grow flex flex-col relative z-10 min-w-0">
         {/* Onboarding Header Banner */}
-        <div className="mb-4 bg-white/90 backdrop-blur-xl border border-emerald-100 rounded-3xl p-4 sm:p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shadow-xs flex-shrink-0">
+        <div className="mb-3 sm:mb-4 bg-white/90 backdrop-blur-xl border border-emerald-100 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shadow-xs flex-shrink-0">
               <img src="/WajahMaskot2.png" alt="Dr. Predi" className="w-full h-full object-contain p-1" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200 whitespace-nowrap">
                   Gerbang Onboarding Klinis
                 </span>
-                <span className="text-[11px] font-bold text-slate-400">
+                <span className="text-[11px] font-bold text-slate-400 whitespace-nowrap">
                   Langkah {currentStep} dari {totalSteps}
                 </span>
               </div>
-              <h2 className="text-base sm:text-lg font-black text-slate-800 mt-0.5">
+              <h2 className="text-sm sm:text-lg font-black text-slate-800 mt-0.5 leading-snug">
                 Wawancara Rekam Medis Bersama Dr. Predi
               </h2>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium truncate">
                 Tahap Aktif: <strong className="text-emerald-700">{currentSection}</strong>
               </p>
             </div>
@@ -576,7 +576,7 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
         </div>
 
         {/* 2-Column Layout: Sidebar Roadmap & Main Chat Intake */}
-        <div className="flex-grow flex gap-5 h-[620px] relative">
+        <div className="flex-grow flex gap-3 sm:gap-5 h-[calc(100dvh-230px)] min-h-[400px] sm:h-[620px] relative min-w-0">
           {/* LEFT SIDEBAR: Roadmap Tahapan Wawancara (10 Bagian) */}
           <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col bg-white/80 backdrop-blur-xl border border-slate-200/80 rounded-[2rem] p-4 shadow-[0_10px_35px_rgb(0,0,0,0.03)] overflow-hidden">
             <div className="pb-3 border-b border-slate-100 flex items-center justify-between">
@@ -634,17 +634,17 @@ export default function OnboardingChatView({ onFinished, allowBack = false, onBa
           </aside>
 
           {/* RIGHT PANEL: Chatbot Interactive Conversation */}
-          <main className="flex-1 flex flex-col bg-white/85 backdrop-blur-xl border border-white rounded-[2rem] shadow-[0_10px_40px_rgb(0,0,0,0.04)] overflow-hidden">
+          <main className="flex-1 min-w-0 flex flex-col bg-white/85 backdrop-blur-xl border border-white rounded-2xl sm:rounded-[2rem] shadow-[0_10px_40px_rgb(0,0,0,0.04)] overflow-hidden">
             {/* Top Bar of Active Conversation */}
-            <div className="px-5 py-3.5 border-b border-slate-100/90 flex items-center justify-between bg-white/60">
+            <div className="px-3.5 sm:px-5 py-2.5 sm:py-3.5 border-b border-slate-100/90 flex flex-wrap items-center justify-between gap-2 bg-white/60">
               <div className="flex items-center gap-2 min-w-0">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
-                <h3 className="text-xs sm:text-sm font-bold text-slate-800 truncate flex items-center gap-2">
-                  <CurrentSectionIcon className="w-4 h-4 text-emerald-600" />
-                  <span>Sesi Wawancara Intake Medis Awal</span>
+                <h3 className="text-xs sm:text-sm font-bold text-slate-800 truncate flex items-center gap-1.5">
+                  <CurrentSectionIcon className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="truncate">Sesi Wawancara Intake Medis Awal</span>
                 </h3>
               </div>
-              <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+              <span className="text-[10px] sm:text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 sm:py-1 rounded-full border border-emerald-200 whitespace-nowrap shrink-0">
                 {isFormalMode ? "Formal Clinical Mode" : "Gen Z Conversational Mode"}
               </span>
             </div>

@@ -312,6 +312,9 @@ class HybridGraphVectorFusion:
             if specific_food.get("not_found_item"):
                 alts = ", ".join(specific_food.get("available_alternatives") or ["Nasi Putih", "Nasi Merah"])
                 extra_notes.append(f"[INFO DATASET]: '{specific_food['not_found_item']}' TIDAK ADA di database PrediaBeat. Jelaskan jujur bahwa item tersebut tidak tersedia dan tawarkan pilihan yang ada: {alts}.")
+            if specific_food.get("ambiguous_choices"):
+                choices_str = ", ".join(specific_food["ambiguous_choices"])
+                extra_notes.append(f"[KLARIFIKASI SATE]: Pasien menyebut 'sate' secara umum. Tampilkan acuan {food_display_name}, lalu TANYAKAN dengan ramah sate mana yang dimaksud ({choices_str}) karena nilai kalori, lemak, dan keamanan hipertensinya berbeda.")
             if specific_food.get("allergen_conflict"):
                 extra_notes.append(f"[PERINGATAN ALERGI KERAS]: Makanan '{food_display_name}' MENGANDUNG pantangan/alergi pasien ({', '.join(allergens)}). DILARANG menyarankan makan ini; peringatkan pasien dan beri alternatif aman!")
             if is_goat and has_htn:

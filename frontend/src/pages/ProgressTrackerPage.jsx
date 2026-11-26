@@ -67,7 +67,14 @@ export default function ProgressTrackerPage() {
   const [inputActivityName, setInputActivityName] = useState("Jalan Kaki Cepat");
   const [inputDuration, setInputDuration] = useState(30);
 
+  const yesterdayStr = (() => {
+    const dt = new Date();
+    dt.setDate(dt.getDate() - 1);
+    return getLocalDateStr(dt);
+  })();
   const isToday = selectedDate === todayStr;
+  const isYesterday = selectedDate === yesterdayStr;
+  const canEditDate = isToday || isYesterday;
   const isFuture = selectedDate > todayStr;
 
   const navigateToDate = (nextDate) => {
@@ -237,8 +244,8 @@ export default function ProgressTrackerPage() {
 
   const handleAddFood = async (e) => {
     e.preventDefault();
-    if (!isToday) {
-      showToast("warning", "Pencatatan hanya dapat dilakukan pada hari ini.");
+    if (!canEditDate) {
+      showToast("warning", "Pencatatan hanya dapat dilakukan untuk hari ini atau kemarin (maksimal 1 hari lalu).");
       return;
     }
     const cleanName = inputFoodName.trim();
@@ -295,8 +302,8 @@ export default function ProgressTrackerPage() {
 
   const handleAddActivity = async (e) => {
     e.preventDefault();
-    if (!isToday) {
-      showToast("warning", "Pencatatan olahraga hanya dapat dilakukan pada hari ini.");
+    if (!canEditDate) {
+      showToast("warning", "Pencatatan olahraga hanya dapat dilakukan untuk hari ini atau kemarin (maksimal 1 hari lalu).");
       return;
     }
     const dur = parseInt(inputDuration, 10) || 15;
@@ -603,24 +610,37 @@ export default function ProgressTrackerPage() {
                   animation: flipKey > 0 ? "paperInkSettle 0.42s ease-out" : undefined,
                 }}
               >
-                <div className="pb-3 border-b-2 border-stone-300/80">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Halaman Kanan • Tulis Entri</p>
-                  <h2 className="text-lg sm:text-xl font-black text-stone-900">
-                    {isToday ? "Tambah Catatan Hari Ini" : isFuture ? "Halaman Hari Esok (Terkunci)" : "Arsip Halaman Lalu (Terkunci)"}
-                  </h2>
+                <div className="pb-3 border-b-2 border-stone-300/80 flex items-center justify-between gap-2">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Halaman Kanan • Tulis Entri</p>
+                    <h2 className="text-lg sm:text-xl font-black text-stone-900">
+                      {isToday
+                        ? "Tambah Catatan Hari Ini"
+                        : isYesterday
+                        ? "Catat Susulan Kemarin"
+                        : isFuture
+                        ? "Halaman Hari Esok (Terkunci)"
+                        : "Arsip Halaman Lalu (Terkunci)"}
+                    </h2>
+                  </div>
+                  {isYesterday && (
+                    <span className="text-[10px] font-black bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full border border-amber-200 shrink-0">
+                      Batas 1 Hari Lalu
+                    </span>
+                  )}
                 </div>
 
-                {!isToday ? (
+                {!canEditDate ? (
                   <div className="bg-amber-50/95 border-2 border-amber-300 rounded-2xl p-5 text-center space-y-3 shadow-xs">
                     <div className="w-11 h-11 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center mx-auto">
                       <Lock className="w-5 h-5" />
                     </div>
                     <div>
                       <h3 className="text-sm font-black text-amber-950">
-                        {isFuture ? "Belum Waktunya Mencatat Hari Esok" : "Halaman Arsip Masa Lalu"}
+                        {isFuture ? "Belum Waktunya Mencatat Hari Esok" : "Halaman Arsip Terkunci (> 1 Hari Lalu)"}
                       </h3>
                       <p className="text-xs text-amber-900 mt-1 leading-relaxed">
-                        Demi akurasi klinis, pencatatan asupan makanan dan olahraga hanya dapat diisi untuk <strong>hari ini ({todayStr})</strong>. Anda tidak dapat mengisi tanggal kemarin maupun besok.
+                        Demi akurasi klinis, pencatatan asupan makanan dan olahraga hanya dapat diisi untuk <strong>hari ini ({todayStr})</strong> atau susulan <strong>kemarin ({yesterdayStr})</strong>. Tanggal lebih dari 1 hari lalu maupun hari esok terkunci.
                       </p>
                     </div>
                     <button

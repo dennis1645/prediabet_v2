@@ -233,24 +233,27 @@ class ClinicalAllergenGuardrail:
         if re.search(r'\b(user lain|pasien lain|orang lain|data orang|pengguna lain|pasien sebelum saya|user sebelum saya|data sebelum saya|orang sebelum saya)\b', ql):
             return True, "Data pasien lain dilindungi privasi medis dan tidak dapat dibagikan."
 
-        # Cek pertanyaan memakan tokoh publik / manusia / benda mati / non-pangan (Anti-Halusinasi Soekarno dsb.)
+        # Cek pertanyaan memakan tokoh publik / manusia / benda mati / non-pangan (Anti-Halusinasi Soekarno, meja, kursi, ban motor dsb.)
         # Catatan: JANGAN masukkan kata "orang" berdiri sendiri agar "untuk orang diabetes/prediabetes" tidak ditolak!
         NON_FOOD_ENTITIES = [
             r"\b(soekarno|sukarno|hatta|jokowi|joko widodo|prabowo|habibie|b\.?j\.?\s*habibie|megawati|sby|susilo bambang yudhoyono|gus dur|presiden|pahlawan|menteri|tokoh bangsa|pejabat)\b",
             r"\b(manusia|mayat|teman|musuh|tetangga)\b",
             r"\b(?:makan|memakan|daging)\s+orang\b",
-            r"\b(batu|kayu|besi|plastik|kertas|baterai|kaca|tanah|pasir|sabun|deterjen|shampoo|odol|oli|bensin|racun|pestisida)\b",
-            r"\b(laptop|hp|komputer|meja|kursi|sepatu|baju|celana|mobil|motor|sepeda)\b"
+            r"\b(batu|kerikil|kayu|besi|baja|logam|aluminium|tembaga|plastik|styrofoam|kertas|kardus|karet|baterai|aki|kaca|tanah|pasir|aspal|semen|genteng|cat|lem|paku|kawat|kabel|sabun|deterjen|shampoo|odol|tisu|oli|bensin|solar|racun|pestisida)\b",
+            r"\b(laptop|hp|handphone|komputer|tv|kulkas|kompor|meja|kursi|krusi|sofa|kasur|bantal|lemari|sepatu|sandal|sendal|baju|celana|tas|buku|pensil|pulpen|uang|koin|helm|gembok|kunci|gunting|pisau|sendok|garpu|piring|gelas|mangkok|botol|kaleng|mobil|motor|sepeda|ban\s*motor|ban\s*mobil|ban|velg|knalpot|roda)\b"
         ]
-        is_eating_query = any(k in ql for k in ["makan", "memakan", "konsumsi", "menelan", "minum", "santap", "icip"])
+        is_eating_query = any(k in ql for k in ["makan", "memakan", "konsumsi", "menelan", "minum", "santap", "icip", "kunyah", "gigit"])
         for non_food_pat in NON_FOOD_ENTITIES:
             match = re.search(non_food_pat, ql, re.IGNORECASE)
             if match:
                 entity = match.group(0).title()
                 if is_eating_query:
-                    return True, f"'{entity}' adalah figur tokoh/benda non-makanan dan bukan bahan konsumsi pangan."
+                    return True, (
+                        f"'{entity}' adalah benda mati/komponen non-pangan yang tidak memiliki nilai gizi, tidak dapat dicerna tubuh, "
+                        f"dan berbahaya bila tertelan. Sebagai asisten edukasi nutrisi (bukan dokter pemeriksa), saya hanya dapat membahas bahan makanan/minuman yang layak konsumsi."
+                    )
                 if not any(k in ql for k in ["gula darah", "diabetes", "makan sehat", "nutrisi"]):
-                    return True, f"Topik mengenai '{entity}' berada di luar lingkup keahlian nutrisi klinis Dr. Predi."
+                    return True, f"Topik mengenai '{entity}' berada di luar lingkup asisten edukasi nutrisi PrediaBeat."
         
         return False, None
 
@@ -383,10 +386,24 @@ class ClinicalAllergenGuardrail:
             if not item_clean:
                 continue
             expanded.add(item_clean)
+
+            # Spesifik: "tidak makan daging babi" HANYA memblokir babi (bukan ayam/sapi/ikan, bukan vegan!)
+            if "babi" in item_clean or "pork" in item_clean:
+                expanded.update(ALLERGEN_SYNONYMS["babi"])
+                continue
+
+            # Spesifik: "vegetarian" / "tidak makan daging" (tanpa babi/sapi/kambing) -> blokir hewani daging/ikan, bukan telur/susu
+            if "vegetarian" in item_clean or item_clean in ["tidak makan daging", "pantangan daging"]:
+                expanded.update(["ayam", "ikan", "daging", "sapi", "kambing", "babi", "bebek", "udang", "cumi", "kepiting", "kerang", "seafood"])
+                continue
+
+            if "vegan" in item_clean:
+                expanded.update(["ayam", "ikan", "daging", "sapi", "kambing", "babi", "bebek", "udang", "cumi", "seafood", "telur", "susu", "keju", "yogurt", "yoghurt", "mentega", "butter", "madu"])
+                continue
             
             # Cocokkan dengan sinonim kamus medis
             for category, syns in ALLERGEN_SYNONYMS.items():
-                if category in item_clean or any(s in item_clean for s in syns):
+                if category in item_clean or any(re.search(rf"\b{re.escape(s)}\b", item_clean) for s in syns):
                     expanded.update(syns)
         return list(expanded)
 

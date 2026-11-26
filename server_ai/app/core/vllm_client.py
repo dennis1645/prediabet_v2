@@ -387,6 +387,10 @@ class VLLMInferenceClient:
             htn_warn = ""
             if "kambing" in f_name.lower() or "kambing" in q:
                 htn_warn = "\n\n⚠️ **Catatan Hipertensi & Kolesterol:** Daging/sate kambing tinggi lemak jenuh dan sering memakai bumbu kecap/garam tinggi natrium. Wajib batasi porsi (maks 3–5 tusuk tanpa gajih & kurangi kecap) terutama jika memiliki hipertensi."
+            ambig_note = ""
+            if specific_food.get("ambiguous_choices"):
+                choices_str = ", ".join(specific_food["ambiguous_choices"])
+                ambig_note = f"\n\n🍢 **Klarifikasi Varian Sate:** Di database kami tersedia beberapa varian ({choices_str}). Sate mana yang Anda maksud agar perhitungan kalori, lemak, dan keamanan komorbidnya lebih akurat?"
             return (
                 f"Halo {username}! Berdasarkan basis data gizi klinis PrediaBeat:\n\n"
                 f"🍽️ **Evaluasi Nutrisi: {p_label}**\n"
@@ -394,7 +398,7 @@ class VLLMInferenceClient:
                 f"• **2. Kadar Gula:** **{specific_food.get('gula', 0)}g** *(tetap perhatikan total konsumsi gula harian Anda hari ini)*\n"
                 f"• **3. Indeks Glikemik (Opsional):** {gi_text}\n\n"
                 f"💡 **Rekomendasi Cara Olah Sehat:** {specific_food.get('cara_olah', 'Kukus/Rebus tanpa minyak jelantah')}."
-                f"{htn_warn}"
+                f"{htn_warn}{ambig_note}"
             )
 
         try:
