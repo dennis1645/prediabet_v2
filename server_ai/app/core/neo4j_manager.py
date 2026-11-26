@@ -425,16 +425,23 @@ class Neo4jClinicalGraphManager:
 
         items = []
 
-        # 1. Baca nodes_food.csv (Basis Data Pangan Kemenkes)
-        csv_path = os.path.join(settings.KNOWLEDGE_BASE_DIR, "neo4j", "nodes_food.csv")
-        if os.path.exists(csv_path):
+        # 1. Baca nodes_food.csv (knowledge_base_new + fallback knowledge_base agar semua merk seperti Cimory terbaca!)
+        seen_names = set()
+        csv_candidates = [
+            os.path.join(settings.KNOWLEDGE_BASE_DIR, "neo4j", "nodes_food.csv"),
+            os.path.join(os.path.dirname(settings.KNOWLEDGE_BASE_DIR), "knowledge_base", "neo4j", "nodes_food.csv"),
+        ]
+        for csv_path in csv_candidates:
+            if not os.path.exists(csv_path):
+                continue
             try:
                 with open(csv_path, mode="r", encoding="utf-8") as f:
                     reader = csv.DictReader(f)
                     for row in reader:
                         nama = (row.get("nama_kanonik") or row.get("nama_asli") or row.get("nama_makanan") or "").strip()
-                        if not nama:
+                        if not nama or nama.lower() in seen_names:
                             continue
+                        seen_names.add(nama.lower())
 
                         def get_val(key_base):
                             for k in [key_base, f"{key_base}:float", f"{key_base}:int"]:
@@ -487,7 +494,7 @@ class Neo4jClinicalGraphManager:
                             "gambar": resolve_food_image(nama)
                         })
             except Exception as e:
-                print(f"[Neo4j Manager] Gagal membaca nodes_food.csv: {e}")
+                print(f"[Neo4j Manager] Gagal membaca {csv_path}: {e}")
 
         # 2. Baca nodes_recipe.csv (453 Resep Masakan Nusantara)
         recipe_csv_path = os.path.join(settings.KNOWLEDGE_BASE_DIR, "neo4j", "nodes_recipe.csv")
