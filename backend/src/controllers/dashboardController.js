@@ -1,5 +1,5 @@
 import db from "../database/connection.js";
-import { generateDailyMealPlan, MEAL_FREQUENCY_OPTIONS, resolveMealFrequencyConfig } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, containsAllergen, MEAL_FREQUENCY_OPTIONS, resolveMealFrequencyConfig } from "../clinical/mealPlanEngine.js";
 import { hitungKesesuaianDiet } from "../clinical/assessment.js";
 
 export function getDashboard(req, res) {
@@ -21,14 +21,20 @@ export function getDashboard(req, res) {
       analysis.diet_recommendations = hitungKesesuaianDiet(profile, analysis.bmi, analysis.kategori_risiko);
     }
 
-    // Pastikan meal plan selalu terisi
-    if (!analysis.meal_plan || analysis.meal_plan.length === 0) {
-      const allergies = Array.isArray(profile.pantangan_alergi)
-        ? profile.pantangan_alergi
-        : typeof profile.pantangan_alergi === "string"
-        ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-        : [];
+    // Pastikan meal plan selalu terisi & bebas dari alergen/pantangan terbaru (misal vegetarian)
+    const allergies = Array.isArray(profile.pantangan_alergi)
+      ? profile.pantangan_alergi
+      : typeof profile.pantangan_alergi === "string"
+      ? profile.pantangan_alergi.split(",").map((s) => s.trim()).filter(Boolean)
+      : [];
 
+    const hasAllergenViolation =
+      Array.isArray(analysis.meal_plan) &&
+      analysis.meal_plan.some(
+        (slot) => Array.isArray(slot.items) && slot.items.some((item) => containsAllergen(item.nama, allergies))
+      );
+
+    if (!analysis.meal_plan || analysis.meal_plan.length === 0 || hasAllergenViolation) {
       analysis.meal_plan = generateDailyMealPlan(
         analysis.target_kalori || 1850,
         allergies,

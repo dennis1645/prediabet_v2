@@ -469,12 +469,21 @@ class VLLMInferenceClient:
                 f"rekomendasi menu sehat, atau progres harian Anda ya!"
             )
 
-        # 7. Pertanyaan Menu / Rekomendasi Makanan Umum (3J Fallback Medis Teruji)
+        # 7. Pertanyaan Menu / Rekomendasi Makanan Umum (3J Fallback Medis Teruji - Dinamis Bebas Alergen/Vegetarian)
+        expanded_block = allergen_guardrail.expand_allergen_keywords(user_allergens or [])
+        is_meat_blocked = any(k in expanded_block for k in ["ayam", "ikan", "daging", "seafood"])
+        is_soy_blocked = any(k in expanded_block for k in ["kedelai", "tahu", "tempe"])
+        if is_meat_blocked:
+            lauk_line = "Pepes Tahu Jamur Kemangi (~135 kkal) atau Tempe Bacem Kukus Tanpa Minyak (~95 kkal)" if not is_soy_blocked else "Sup Kacang Merah & Jamur Kancing (~140 kkal)"
+        else:
+            lauk_line = "Pepes Ikan Mas Bumbu Kuning Kemangi (~180 kkal) atau Dada Ayam Rebus/Kukus (~165 kkal)"
+        sayur_line = "Sayur Bening Bayam Oyong Jagung Manis (~65 kkal) atau Tumis Brokoli & Wortel (~85 kkal)" if is_soy_blocked else "Sayur Bening Bayam Oyong Jagung Manis (~65 kkal) atau Tumis Buncis Tahu Air (~120 kkal)"
+
         return (
             f"Halo {username}! Berdasarkan prinsip 3J Kemenkes RI dan pedoman PERKENI 2021 untuk target harian {kalori_target} kkal:\n\n"
             f"🍽️ **Rekomendasi Menu 3J Terverifikasi:**\n"
-            f"1. **Lauk Protein Rendah Lemak:** Pepes Ikan Mas Bumbu Kuning Kemangi (~180 kkal) atau Dada Ayam Rebus/Kukus (~165 kkal)\n"
-            f"2. **Sayuran Serat Tinggi (GI Rendah):** Sayur Bening Bayam Oyong Jagung Manis (~65 kkal) atau Tumis Buncis Tahu Air (~120 kkal)\n"
+            f"1. **Lauk Protein Sehat:** {lauk_line}\n"
+            f"2. **Sayuran Serat Tinggi (GI Rendah):** {sayur_line}\n"
             f"3. **Karbohidrat Kompleks Pelepasan Lambat:** Nasi Beras Merah Pulen (~145 kkal) atau Nasi Shirataki Sayur (~120 kkal)\n\n"
             f"👨‍🍳 **Tips Pengolahan Sehat:**\n"
             "Utamakan metode kukus, rebus, atau pepes rempah alami. Hindari penggunaan minyak jelantah, gula rafinasi tersembunyi, dan penyedap kemasan berlebih.\n\n"
