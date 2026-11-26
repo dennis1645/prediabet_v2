@@ -624,6 +624,8 @@ class Neo4jClinicalGraphManager:
             "cimory": ["Cimory, yogurt", "Cimory, yogurt original", "Cimory, yogurt plain", "Cimory, yoghurt"],
             "rendang sapi": ["Rendang sapi, masakan", "Rendang Sapi", "Rumah makan sederhana, Rendang"],
             "rendang": ["Rendang sapi, masakan", "Rendang Sapi", "Rumah makan sederhana, Rendang"],
+            "sate taichan": ["Sate Taichan", "sate taichan"],
+            "seblak": ["Seblak", "seblak", "Seblak Coet"],
             "sate kambing": ["Sate Kambing", "Kambing, daging, segar"],
             "sate ayam": ["Sate Ayam", "Sate Lilit Ayam"],
             "sate sapi": ["Sate", "Empal (daging) goreng"],
@@ -736,7 +738,7 @@ class Neo4jClinicalGraphManager:
                 # Lewati jika frasa sudah punya alias resmi atau memang ada item yang cocok di dataset
                 if phrase in COMMON_FOOD_ALIASES:
                     continue
-                has_exact = any(w1 in (f.get("nama") or "").lower() and w2 in (f.get("nama") or "").lower() for f in foods)
+                has_exact = any(re.search(rf"\b{re.escape(phrase)}\b", (f.get("nama") or "").lower()) for f in foods)
                 if not has_exact:
                     base_alts = [
                         f.get("nama") for f in foods
