@@ -27,6 +27,18 @@ ALLERGEN_SYNONYMS = {
     "babi": [
         "babi", "pork", "lard", "minyak babi", "bacon", "ham"
     ],
+    "sapi": [
+        "sapi", "daging sapi", "beef", "kornet", "sop daging", "sup daging", "rawon", "empal", "rendang", "bakso sapi"
+    ],
+    "kambing": [
+        "kambing", "daging kambing", "sate kambing", "gulai kambing", "tongseng"
+    ],
+    "ayam": [
+        "ayam", "daging ayam", "dada ayam", "paha ayam", "soto ayam", "sup ayam", "ayam goreng", "ayam bakar"
+    ],
+    "ikan": [
+        "ikan", "pepes ikan", "ikan mas", "ikan nila", "ikan kembung", "lele", "patin", "tongkol", "tuna", "salmon"
+    ],
     "alkohol": [
         "alkohol", "arak", "mirin", "rum", "tuak"
     ]
@@ -387,9 +399,21 @@ class ClinicalAllergenGuardrail:
                 continue
             expanded.add(item_clean)
 
-            # Spesifik: "tidak makan daging babi" HANYA memblokir babi (bukan ayam/sapi/ikan, bukan vegan!)
+            # Spesifik per jenis daging agar tidak saling tumpang tindih
             if "babi" in item_clean or "pork" in item_clean:
                 expanded.update(ALLERGEN_SYNONYMS["babi"])
+                continue
+            if "sapi" in item_clean or "beef" in item_clean:
+                expanded.update(ALLERGEN_SYNONYMS["sapi"])
+                continue
+            if "kambing" in item_clean:
+                expanded.update(ALLERGEN_SYNONYMS["kambing"])
+                continue
+            if "ayam" in item_clean:
+                expanded.update(ALLERGEN_SYNONYMS["ayam"])
+                continue
+            if "ikan" in item_clean:
+                expanded.update(ALLERGEN_SYNONYMS["ikan"])
                 continue
 
             # Spesifik: "vegetarian" / "tidak makan daging" (tanpa babi/sapi/kambing) -> blokir hewani daging/ikan, bukan telur/susu
@@ -504,6 +528,11 @@ class ClinicalAllergenGuardrail:
                     mod_line = re.sub(r'\btelur(?:\s+(?:ayam|bebek|rebus|ceplok|dadar|asin|puyuh))?\b', 'tahu sutra kukus', mod_line, flags=re.IGNORECASE)
                 if any("babi" in a for a in expanded):
                     mod_line = re.sub(r'\b(?:daging\s+)?(?:babi|pork|bacon|ham|lard)\b', 'daging sapi tanpa lemak', mod_line, flags=re.IGNORECASE)
+                if any("sapi" in a for a in expanded):
+                    mod_line = re.sub(r'\b(?:sop|sup)\s+daging\s+sapi\b', 'sop tahu jamur sayuran', mod_line, flags=re.IGNORECASE)
+                    mod_line = re.sub(r'\b(?:daging\s+)?(?:sapi|beef|kornet|rendang|rawon|empal)\b', 'tahu/tempe kukus', mod_line, flags=re.IGNORECASE)
+                if any("ayam" in a for a in expanded):
+                    mod_line = re.sub(r'\b(?:dada|paha|daging|sup|soto)?\s*ayam(?:\s+(?:goreng|bakar|rebus|kukus|suwir))?\b', 'tempe/tahu kukus', mod_line, flags=re.IGNORECASE)
                 
                 # 2. Ganti kata dasar tunggal hanya jika masih tersisa
                 if any("kacang" in a for a in expanded):
@@ -511,6 +540,9 @@ class ClinicalAllergenGuardrail:
                 sanitized_lines.append(mod_line)
 
             sanitized = '\n'.join(sanitized_lines)
+
+            if "VERIFIKASI MEDIS ZERO-ALLERGEN" in sanitized:
+                return sanitized, unique_violations
 
             # Tambahkan penegasan bahwa menu ini telah disanitasi & dijamin aman
             safety_note = (

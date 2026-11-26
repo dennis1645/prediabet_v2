@@ -15,18 +15,23 @@ import {
 } from "lucide-react";
 import { showSuccessAlert, showErrorAlert } from "../utils/alerts";
 
-// Preset opsi pantangan makanan ramah prediabetes
+// Preset opsi pantangan makanan ramah prediabetes (spesifik per jenis daging & alergen)
 const PRESET_PANTANGAN = [
   { label: "Tidak Ada", value: "Tidak Ada", icon: "✨" },
-  { label: "Seafood & Udang", value: "Seafood", icon: "🦐" },
-  { label: "Kacang-kacangan", value: "Kacang", icon: "🥜" },
-  { label: "Susu & Laktosa", value: "Susu", icon: "🥛" },
-  { label: "Telur Ayam / Bebek", value: "Telur", icon: "🥚" },
   { label: "Daging Sapi", value: "Daging Sapi", icon: "🥩" },
+  { label: "Daging Kambing", value: "Daging Kambing", icon: "🐐" },
+  { label: "Daging Ayam", value: "Daging Ayam", icon: "🍗" },
   { label: "Daging Babi", value: "Daging Babi", icon: "🥓" },
+  { label: "Ikan", value: "Ikan", icon: "🐟" },
+  { label: "Seafood & Udang", value: "Seafood", icon: "🦐" },
+  { label: "Telur Ayam / Bebek", value: "Telur", icon: "🥚" },
+  { label: "Susu & Laktosa", value: "Susu", icon: "🥛" },
+  { label: "Kacang-kacangan", value: "Kacang", icon: "🥜" },
   { label: "Santan Kelapa", value: "Santan", icon: "🥥" },
   { label: "Gluten / Tepung Terigu", value: "Gluten", icon: "🌾" },
   { label: "Gorengan Minyak Jelantah", value: "Gorengan", icon: "🍟" },
+  { label: "Vegetarian (Tanpa Daging & Ikan)", value: "Vegetarian", icon: "🥗" },
+  { label: "Vegan (Tanpa Produk Hewani)", value: "Vegan", icon: "🌱" },
 ];
 
 // Preset opsi riwayat komorbiditas / penyakit penyerta

@@ -225,24 +225,45 @@ async def chat_endpoint(request: ChatRequest):
             )
 
         if specific_food and specific_food.get("allergen_conflict"):
+            ql_req = (request.message or "").lower()
             f_name = specific_food.get("nama_makanan") or specific_food.get("nama") or "Makanan tersebut"
             conflict_list = ", ".join(specific_food.get("allergen_conflict") or [])
-            conflict_msg = (
-                f"Halo {display_name}! Mohon perhatikan bahwa **{f_name}** mengandung bahan pantangan/alergi Anda (**{conflict_list}**), "
-                f"sehingga **tidak disarankan** untuk dikonsumsi.\n\n"
-                f"Sebagai alternatif aman yang bebas dari {conflict_list}, Anda bisa memilih menu nabati/protein aman lainnya sesuai pola 3J Anda."
+            is_macro_inquiry = (
+                any(k in ql_req for k in ["berapa", "makro", "kalori", "protein", "karbo", "lemak", "gizi", "nutrisi"])
+                and not any(k in ql_req for k in ["boleh", "aman", "saran", "rekomendasi", "menu"])
             )
+
+            if is_macro_inquiry:
+                p_label = specific_food.get("porsi_label") or f"{f_name} (per 100 gram)"
+                raw_gi = specific_food.get("gi")
+                gi_line = f"{raw_gi} ({'GI Rendah' if raw_gi < 55 else 'GI Sedang' if raw_gi < 70 else 'GI Tinggi'})" if raw_gi else "Opsional / Tidak tersedia"
+                conflict_msg = (
+                    f"Halo {display_name}! Berikut informasi nilai gizi **{p_label}**:\n\n"
+                    f"• **1. Makronutrisi:** Energi **{specific_food.get('kalori', 0)} kkal** | Karbohidrat **{specific_food.get('karbohidrat', 0)}g** | Protein **~{specific_food.get('protein', 0)}g** | Lemak **{specific_food.get('lemak', 0)}g**\n"
+                    f"• **2. Kadar Gula:** **{specific_food.get('gula', 0)}g**\n"
+                    f"• **3. Indeks Glikemik (Opsional):** {gi_line}\n\n"
+                    f"⚠️ **Peringatan Pantangan/Alergi:** Makanan ini mengandung bahan yang termasuk dalam pantangan Anda (**{conflict_list}**), sehingga **tidak disarankan** untuk dikonsumsi."
+                )
+            else:
+                safe_alts = ", ".join(safe_food_names[:3]) if safe_food_names else "Tahu Kukus, Tempe Bacem Kukus, Sayur Bening Bayam"
+                conflict_msg = (
+                    f"Halo {display_name}! Mohon perhatikan bahwa **{f_name}** mengandung bahan pantangan/alergi Anda (**{conflict_list}**), "
+                    f"sehingga **tidak disarankan** untuk dikonsumsi.\n\n"
+                    f"Sebagai alternatif aman yang sesuai profil dan pantangan Anda, Anda dapat memilih: **{safe_alts}**."
+                )
+
             return ChatResponse(
                 success=True,
                 response=conflict_msg,
                 user_id=user_context.userId,
                 safe_foods_recommended=safe_food_names,
+                food_card=specific_food if is_macro_inquiry else None,
                 guardrail=GuardrailReport(
                     zero_allergen_verified=True,
                     allergens_checked=user_allergens,
                     allergens_detected_and_blocked=list(specific_food.get("allergen_conflict") or []),
                     deterministic_graph_used=True,
-                    safety_message="Bahan pantangan berhasil disaring dan diblokir oleh Guardrail"
+                    safety_message="Peringatan pantangan/alergi aktif"
                 ),
                 telemetry={"latency_ms": 8, "tokens_per_second": 0, "vllm_connected": False}
             )

@@ -76,14 +76,20 @@ const JOURNAL_CHAPTERS = [
 
 const PRESET_PANTANGAN = [
   { label: "Tidak Ada", value: "Tidak Ada" },
-  { label: "Kacang-kacangan", value: "Kacang" },
+  { label: "Daging Sapi", value: "Daging Sapi" },
+  { label: "Daging Kambing", value: "Daging Kambing" },
+  { label: "Daging Ayam", value: "Daging Ayam" },
+  { label: "Daging Babi", value: "Daging Babi" },
+  { label: "Ikan", value: "Ikan" },
   { label: "Seafood & Udang", value: "Seafood" },
   { label: "Telur", value: "Telur" },
   { label: "Susu & Laktosa", value: "Susu" },
-  { label: "Daging Sapi", value: "Daging Sapi" },
+  { label: "Kacang-kacangan", value: "Kacang" },
   { label: "Santan", value: "Santan" },
   { label: "Gluten / Terigu", value: "Gluten" },
   { label: "Gorengan", value: "Gorengan" },
+  { label: "Vegetarian (Tanpa Daging & Ikan)", value: "Vegetarian" },
+  { label: "Vegan (Tanpa Produk Hewani)", value: "Vegan" },
 ];
 
 const PRESET_KOMORBID = [
