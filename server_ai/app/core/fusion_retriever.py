@@ -103,8 +103,11 @@ class HybridGraphVectorFusion:
             "resep", "cara buat", "cara masak", "bikin", "langkah", "basis", "bahan dasar", "olahan", "masak apa", "dimasak apa", "menu", "saran"
         ])
 
-        # Pertanyaan keamanan / pantangan alergi (misal: "Gado-gado kalau alergi kacang bisa gak?") bukan permintaan resep
-        is_dietary_safety_inquiry = any(k in ql for k in ["alergi", "pantangan", "boleh gak", "bisa gak", "aman gak", "bahaya gak"]) and not any(k in ql for k in ["resep", "cara masak", "cara buat", "langkah masak", "bumbu"])
+        # Pertanyaan keamanan / pantangan alergi (misal: "Gado-gado kalau alergi kacang bisa gak?", "apakah saya boleh makan sop daging sapi?") bukan permintaan resep
+        is_dietary_safety_inquiry = any(k in ql for k in [
+            "alergi", "pantangan", "boleh", "bolehkah", "diperbolehkan",
+            "bisa gak", "bisa makan", "aman", "bahaya"
+        ]) and not any(k in ql for k in ["resep", "cara masak", "cara buat", "langkah masak", "bumbu"])
         if is_dietary_safety_inquiry:
             user_wants_recipe = False
 
