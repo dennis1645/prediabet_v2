@@ -762,8 +762,12 @@ class Neo4jClinicalGraphManager:
                         "cara_olah": "Pilih varian makanan yang tersedia di database PrediaBeat.",
                     }
 
-        # Cek 2: Hidangan tunggal khas yang tidak ada sama sekali di dataset (misal "seblak", "cromboloni", "boba")
-        SINGLE_MISSING_CHECK = ["seblak", "cromboloni", "takoyaki", "okonomiyaki", "gyoza", "topokki", "tteokbokki", "bibimbap"]
+        # Cek 2: Hidangan tunggal khas yang tidak ada sama sekali di dataset (misal "seblak", "cromboloni", "boba", "risol")
+        SINGLE_MISSING_CHECK = [
+            "seblak", "cromboloni", "takoyaki", "okonomiyaki", "gyoza",
+            "topokki", "tteokbokki", "bibimbap", "risol", "risoles",
+            "cilok", "cireng", "batagor", "siomay"
+        ]
         for single_dish in SINGLE_MISSING_CHECK:
             if re.search(rf"\b{re.escape(single_dish)}\b", q, re.IGNORECASE):
                 has_single = any(single_dish in (f.get("nama") or "").lower() for f in foods)

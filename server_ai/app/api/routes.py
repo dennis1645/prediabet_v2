@@ -199,7 +199,39 @@ async def chat_endpoint(request: ChatRequest):
             request.message, user_context, request.chat_history or [], request.last_suggested_recipe
         )
 
-        # 2.1. Short-circuit deterministik jika makanan tidak ada di dataset (misal nasi bakar) atau konflik alergen keras (misal semur telur saat alergi telur)
+        # 2.1. Short-circuit deterministik jika makanan tidak ada di dataset (misal nasi bakar / risol lumer) atau konflik alergen keras
+        if not specific_food:
+            import re as _re
+            ql_nf = (request.message or "").lower().strip()
+            asks_food_nutrition = any(k in ql_nf for k in [
+                "berapa kalori", "berapa makro", "kalori dari", "makro dari",
+                "nilai gizi", "kandungan gizi", "nutrisi dari"
+            ])
+            not_personal_metric = not any(k in ql_nf for k in ["harian", "target", "sisa kalori", "terbakar", "hari ini", "berat badan", "tinggi"])
+            if asks_food_nutrition and not_personal_metric:
+                m_food = _re.search(r"(?:kalori|makro|gizi|nutrisi)\s+(?:dari\s+)?([a-zA-Z0-9\s\-]{3,40})", ql_nf)
+                missing_guess = (m_food.group(1).strip(" ?!.,") if m_food else "makanan tersebut").title()
+                alts = ", ".join(safe_food_names[:3]) if safe_food_names else "Nasi Merah, Tahu Kukus, Tempe Bacem Kukus"
+                return ChatResponse(
+                    success=True,
+                    response=(
+                        f"Halo {display_name}! Maaf, **{missing_guess}** belum tersedia di database nutrisi PrediaBeat saat ini, "
+                        f"sehingga data kalori dan makronutrisinya tidak dapat ditampilkan (saya tidak ingin menebak angka).\n\n"
+                        f"Sebagai gantinya, pilihan yang tersedia di dataset kami antara lain: **{alts}**. "
+                        f"Silakan sebutkan salah satu pilihan tersebut jika ingin melihat detail makro, gula, dan porsinya ya!"
+                    ),
+                    user_id=user_context.userId,
+                    safe_foods_recommended=safe_food_names,
+                    guardrail=GuardrailReport(
+                        zero_allergen_verified=True,
+                        allergens_checked=user_allergens,
+                        allergens_detected_and_blocked=[],
+                        deterministic_graph_used=True,
+                        safety_message="Item Tidak Tersedia di Dataset"
+                    ),
+                    telemetry={"latency_ms": 8, "tokens_per_second": 0, "vllm_connected": False}
+                )
+
         if specific_food and specific_food.get("not_found_item"):
             missing = specific_food.get("not_found_item")
             alts = ", ".join(specific_food.get("available_alternatives") or ["Nasi Putih", "Nasi Merah"])

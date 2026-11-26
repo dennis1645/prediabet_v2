@@ -307,6 +307,8 @@ def is_dietary_counseling_query(user_query: str) -> bool:
     ql = (user_query or "").lower().strip()
     patterns = [
         "boleh gak", "boleh tidak", "bolehkah", "apakah boleh", "bisa gak", "bisa tidak", "bisakah",
+        "bisa di makan", "bisa dimakan", "boleh dimakan", "boleh di makan", "aman dimakan", "aman di makan",
+        "termasuk kategori", "kategori boleh", "kategori aman",
         "aman gak", "aman tidak", "amankah", "bahaya gak", "bahayakah", "pantangan gak",
         "gimana kalau mau makan", "bagaimana kalau makan", "boleh makan", "boleh konsumsi",
         "apakah aman", "apakah berbahaya", "apakah penderita prediabetes boleh", "kalo makan", "kalau makan",
@@ -388,13 +390,16 @@ def build_vllm_messages(
     ]
 
     has_prior_chat = False
-    # Sertakan riwayat percakapan sebelumnya agar percakapan terus mengalir
+    # Sertakan riwayat percakapan sebelumnya agar percakapan terus mengalir (dibatasi agar tidak melebihi context window 4096 token)
     if chat_history:
-        for turn in chat_history[-6:]:
+        for turn in chat_history[-4:]:
             role = getattr(turn, "role", None) or (turn.get("role") if isinstance(turn, dict) else None)
             content = getattr(turn, "content", None) or (turn.get("content") if isinstance(turn, dict) else None)
             if role in ["user", "assistant"] and content:
-                messages.append({"role": role, "content": content})
+                trimmed = content.strip()
+                if len(trimmed) > 450:
+                    trimmed = trimmed[:450] + "..."
+                messages.append({"role": role, "content": trimmed})
                 has_prior_chat = True
 
     # 1. Pengecekan Guardrail Out-of-Scope (Topik di Luar Nutrisi/Kesehatan / Non-Pangan / Privasi)

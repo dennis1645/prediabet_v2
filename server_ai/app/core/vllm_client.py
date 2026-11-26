@@ -86,19 +86,43 @@ class VLLMInferenceClient:
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.api_key}"
         }
+
+        def _est_tokens(msgs: List[Dict[str, str]]) -> int:
+            return sum(max(8, int(len(m.get("content", "")) / 2.6) + 8) for m in msgs)
+
+        # Jaga agar input_tokens + max_tokens selalu muat dalam context window vLLM (4096)
+        fitted_messages = list(messages)
+        while len(fitted_messages) > 2 and _est_tokens(fitted_messages) > 2600:
+            fitted_messages.pop(1)  # Hapus giliran chat_history tertua
+
+        est_in = _est_tokens(fitted_messages)
+        if est_in > 2800 and len(fitted_messages[-1].get("content", "")) > 3000:
+            fitted_messages[-1] = {
+                **fitted_messages[-1],
+                "content": fitted_messages[-1]["content"][:3000] + "\n\n[Ringkasan konteks dipadatkan agar jawaban lengkap.]"
+            }
+            est_in = _est_tokens(fitted_messages)
+
+        safe_max_tokens = min(max_tokens, max(512, 4096 - est_in - 140))
         payload = {
             "model": target_model,
-            "messages": messages,
-            "max_tokens": max_tokens,
+            "messages": fitted_messages,
+            "max_tokens": safe_max_tokens,
             "temperature": temperature,
             "top_p": settings.VLLM_TOP_P,
             "stream": False
         }
 
         try:
-            vllm_logger.info("Mengirim payload chat completion ke %s (Max Tokens: %d, Temp: %s)...", url, max_tokens, temperature)
+            vllm_logger.info("Mengirim payload chat completion ke %s (Max Tokens: %d, Est In: %d, Temp: %s)...", url, safe_max_tokens, est_in, temperature)
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 res = await client.post(url, headers=headers, json=payload)
+                if res.status_code == 400 and "maximum context length" in res.text.lower() and len(fitted_messages) > 2:
+                    vllm_logger.warning("Context overflow di vLLM, mencoba ulang tanpa chat_history...")
+                    compact_msgs = [fitted_messages[0], fitted_messages[-1]]
+                    compact_payload = {**payload, "messages": compact_msgs, "max_tokens": 900}
+                    res = await client.post(url, headers=headers, json=compact_payload)
+
                 if res.status_code == 200:
                     data = res.json()
                     raw_text = data["choices"][0]["message"]["content"]

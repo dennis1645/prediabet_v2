@@ -1395,10 +1395,15 @@ export async function forwardChatToAI(req, res) {
       }
     }
 
+    const getWibDateStr = (offsetDays = 0) => {
+      const dt = new Date(Date.now() + offsetDays * 86400000);
+      return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta" }).format(dt);
+    };
+
     // Auto-log resep kontekstual ke daily_progress_logs DAN sinkronkan ke analysis.meal_plan Dashboard
     if (aiData.meal_logged && aiData.meal_logged.nama_makanan && aiData.meal_logged.nama_makanan !== "Menu Sehat 3J") {
       try {
-        const todayDate = new Date().toISOString().split("T")[0];
+        const todayDate = getWibDateStr(0);
         const mealTime = resolveMealTime(sanitizedMessage, aiData.meal_logged.meal_time || null);
         const wibClock = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
         const rName = aiData.meal_logged.nama_makanan;
@@ -1464,8 +1469,10 @@ export async function forwardChatToAI(req, res) {
     // Auto-log otomatis makanan yang terdeteksi dari cerita pasien (misal 'Hari ini saya makan ayam goreng sama nasi')
     if (aiData.story_log && Array.isArray(aiData.story_log.items) && aiData.story_log.items.length > 0) {
       try {
-        const todayDate = new Date().toISOString().split("T")[0];
+        const isYesterdayMentioned = /\b(kemarin|kemaren|semalam|tadi malam)\b/i.test(sanitizedMessage);
+        const targetDate = getWibDateStr(isYesterdayMentioned ? -1 : 0);
         const mealTime = resolveMealTime(sanitizedMessage, aiData.story_log.meal_time || null);
+        const wibClock = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
 
         let totalCal = 0;
         let totalProt = 0;
@@ -1479,14 +1486,14 @@ export async function forwardChatToAI(req, res) {
           totalProt += Math.round(item.protein || 0);
           totalCarb += Math.round(item.karbo || 0);
           totalFat += Math.round(item.lemak || 0);
-          entryNotesList.push(`[${mealTime}] ${item.nama} (${itemCal} kkal)`);
+          entryNotesList.push(`[${mealTime} • ${wibClock}] ${item.nama} (${itemCal} kkal)`);
         }
 
         const entryNotesJoined = entryNotesList.join("\n");
 
-        const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, todayDate);
+        const existingLog = db.prepare("SELECT * FROM daily_progress_logs WHERE user_id = ? AND tanggal = ?").get(userId, targetDate);
         if (existingLog) {
-          // Cegah duplikasi jika teks catatan yang persis sama sudah ada di notes hari ini
+          // Cegah duplikasi jika teks catatan yang persis sama sudah ada di notes tanggal target
           const newEntriesToAdd = entryNotesList.filter(note => !existingLog.notes || !existingLog.notes.includes(note));
           if (newEntriesToAdd.length > 0) {
             const updatedNotes = existingLog.notes ? `${existingLog.notes}\n${newEntriesToAdd.join("\n")}` : newEntriesToAdd.join("\n");
@@ -1500,9 +1507,10 @@ export async function forwardChatToAI(req, res) {
           db.prepare(`
             INSERT INTO daily_progress_logs (user_id, tanggal, actual_kalori, actual_protein, actual_karbo, actual_lemak, notes, created_at, updated_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-          `).run(userId, todayDate, totalCal, totalProt, totalCarb, totalFat, entryNotesJoined, now, now);
+          `).run(userId, targetDate, totalCal, totalProt, totalCarb, totalFat, entryNotesJoined, now, now);
         }
         aiData.story_log.auto_logged = true;
+        aiData.story_log.logged_date = targetDate;
       } catch (errStoryLog) {
         console.error("Auto-log story meal error:", errStoryLog);
       }
@@ -1522,7 +1530,7 @@ export async function forwardChatToAI(req, res) {
           drinkName = "Es Teh Tawar";
         }
 
-        const todayDate = new Date().toISOString().split("T")[0];
+        const todayDate = getWibDateStr(0);
         const mealTime = resolveMealTime(sanitizedMessage, null);
         const drinkNote = `[${mealTime}] ${drinkName} (${drinkCal} kkal)`;
 
