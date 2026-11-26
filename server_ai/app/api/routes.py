@@ -199,6 +199,54 @@ async def chat_endpoint(request: ChatRequest):
             request.message, user_context, request.chat_history or [], request.last_suggested_recipe
         )
 
+        # 2.1. Short-circuit deterministik jika makanan tidak ada di dataset (misal nasi bakar) atau konflik alergen keras (misal semur telur saat alergi telur)
+        if specific_food and specific_food.get("not_found_item"):
+            missing = specific_food.get("not_found_item")
+            alts = ", ".join(specific_food.get("available_alternatives") or ["Nasi Putih", "Nasi Merah"])
+            not_found_msg = (
+                f"Halo {display_name}! Maaf, **{missing.title()}** belum tersedia di database nutrisi PrediaBeat saat ini, "
+                f"sehingga data kalori dan makronutrisinya tidak dapat ditampilkan.\n\n"
+                f"Sebagai gantinya, pilihan yang tersedia di dataset kami antara lain: **{alts}**. "
+                f"Silakan sebutkan salah satu pilihan tersebut jika ingin melihat detail makro, gula, dan porsinya ya!"
+            )
+            return ChatResponse(
+                success=True,
+                response=not_found_msg,
+                user_id=user_context.userId,
+                safe_foods_recommended=safe_food_names,
+                guardrail=GuardrailReport(
+                    zero_allergen_verified=True,
+                    allergens_checked=user_allergens,
+                    allergens_detected_and_blocked=[],
+                    deterministic_graph_used=True,
+                    safety_message="Item Tidak Tersedia di Dataset"
+                ),
+                telemetry={"latency_ms": 8, "tokens_per_second": 0, "vllm_connected": False}
+            )
+
+        if specific_food and specific_food.get("allergen_conflict"):
+            f_name = specific_food.get("nama_makanan") or specific_food.get("nama") or "Makanan tersebut"
+            conflict_list = ", ".join(specific_food.get("allergen_conflict") or [])
+            conflict_msg = (
+                f"Halo {display_name}! Mohon perhatikan bahwa **{f_name}** mengandung bahan pantangan/alergi Anda (**{conflict_list}**), "
+                f"sehingga **tidak disarankan** untuk dikonsumsi.\n\n"
+                f"Sebagai alternatif aman yang bebas dari {conflict_list}, Anda bisa memilih menu nabati/protein aman lainnya sesuai pola 3J Anda."
+            )
+            return ChatResponse(
+                success=True,
+                response=conflict_msg,
+                user_id=user_context.userId,
+                safe_foods_recommended=safe_food_names,
+                guardrail=GuardrailReport(
+                    zero_allergen_verified=True,
+                    allergens_checked=user_allergens,
+                    allergens_detected_and_blocked=list(specific_food.get("allergen_conflict") or []),
+                    deterministic_graph_used=True,
+                    safety_message="Bahan pantangan berhasil disaring dan diblokir oleh Guardrail"
+                ),
+                telemetry={"latency_ms": 8, "tokens_per_second": 0, "vllm_connected": False}
+            )
+
         # 3. Format prompt sesuai template resmi Qwen/vLLM
         messages = build_vllm_messages(
             request.message, dossier_text, request.chat_history or [], specific_food=specific_food, user_context=user_context

@@ -608,6 +608,18 @@ class Neo4jClinicalGraphManager:
             "mie goreng": ["Indomie, mie goreng", "ABC, mie goreng spesial", "mie goreng", "mi goreng"],
             "mi goreng": ["Indomie, mie goreng", "ABC, mie goreng spesial", "mi goreng", "mie goreng"],
             "bihun goreng": ["Bihun goreng instan", "bihun goreng"],
+            "yogurt cimory plain": ["Cimory, yogurt plain", "Cimory, yogurt plain thick and creamy"],
+            "cimory plain": ["Cimory, yogurt plain", "Cimory, yogurt plain thick and creamy"],
+            "yogurt cimory original": ["Cimory, yogurt original", "Cimory, Squeeze Yoghurt Original (ml)"],
+            "cimory original": ["Cimory, yogurt original", "Cimory, Squeeze Yoghurt Original (ml)"],
+            "yogurt cimory stroberi": ["Cimory, yogurt stroberi", "Cimory, yogurt strawberry", "Cimory, Squeeze Yogurt Strawberry"],
+            "cimory stroberi": ["Cimory, yogurt stroberi", "Cimory, yogurt strawberry"],
+            "cimory strawberry": ["Cimory, yogurt strawberry", "Cimory, Squeeze Yogurt Strawberry"],
+            "cimory blueberry": ["Cimory, yogurt blueberry", "Cimory, Squeeze Yogurt Blueberry"],
+            "cimory mango": ["Cimory, yogurt mango", "Cimory, Yogurt Squeeze Mango Sticky Rice"],
+            "cimory lychee": ["Cimory, yogurt lychee"],
+            "cimory squeeze": ["Cimory, Squeeze Yoghurt Original (ml)", "Cimory, Squeeze Yogurt Blueberry", "Cimory, Squeeze Yogurt Strawberry"],
+            "cimory low fat": ["Cimory, yogurt set low fat"],
             "yogurt cimory": ["Cimory, yogurt", "Cimory, yogurt original", "Cimory, yogurt plain", "Cimory, yoghurt"],
             "cimory": ["Cimory, yogurt", "Cimory, yogurt original", "Cimory, yogurt plain", "Cimory, yoghurt"],
             "rendang sapi": ["Rendang sapi, masakan", "Rendang Sapi", "Rumah makan sederhana, Rendang"],
@@ -778,6 +790,10 @@ class Neo4jClinicalGraphManager:
         is_generic_sate = (
             "sate" in search_terms
             and not any(sp in q for sp in ["sate ayam", "sate kambing", "sate sapi", "sate lilit", "sate bandeng", "sate taichan", "sate padang", "sate tempe", "sate pusut", "sate penyu"])
+        )
+        is_generic_cimory = (
+            ("yogurt cimory" in search_terms or "cimory" in search_terms)
+            and not any(v in q for v in ["plain", "original", "stroberi", "strawberry", "blueberry", "mango", "lychee", "markisa", "mixed", "squeeze", "low fat", "set", "thick"])
         )
 
         def rank_food_match(item_name: str, target_keyword: str) -> tuple:
@@ -1118,6 +1134,12 @@ class Neo4jClinicalGraphManager:
                     matched = apply_portion_scaling(matched, q)
                     if is_generic_sate:
                         matched["ambiguous_choices"] = ["Sate Ayam", "Sate Kambing", "Sate Sapi"]
+                    if is_generic_cimory:
+                        cimory_vars = [
+                            f["nama"] for f in foods
+                            if "cimory" in (f.get("nama") or "").lower() and ("yogurt" in (f.get("nama") or "").lower() or "yoghurt" in (f.get("nama") or "").lower())
+                        ]
+                        matched["variant_choices"] = cimory_vars[:8] or ["Cimory, yogurt original", "Cimory, yogurt plain", "Cimory, yogurt stroberi", "Cimory, yogurt blueberry", "Cimory, yogurt set low fat"]
                     if term != search_terms[0]:
                         matched["requested_variant"] = search_terms[0]
                     neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
