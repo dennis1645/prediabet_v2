@@ -450,6 +450,7 @@ class Neo4jClinicalGraphManager:
                         protein = get_val("protein_g")
                         lemak = get_val("lemak_g")
                         serat = get_val("serat_g")
+                        gula = get_val("gula_g")
                         sodium = get_val("natrium_mg") or get_val("sodium_mg")
 
                         gi_risk = (row.get("glikemik_risk") or "moderate").lower()
@@ -478,6 +479,7 @@ class Neo4jClinicalGraphManager:
                             "protein": protein,
                             "lemak": lemak,
                             "serat": serat,
+                            "gula": gula,
                             "sodium_mg": sodium,
                             "gi": gi_val,
                             "kategori": kat_display,
@@ -525,6 +527,7 @@ class Neo4jClinicalGraphManager:
                             "protein": protein,
                             "lemak": lemak,
                             "serat": serat,
+                            "gula": gula,
                             "sodium_mg": sodium,
                             "gi": gi_val,
                             "kategori": "Resep Masakan 3J",
@@ -941,7 +944,7 @@ class Neo4jClinicalGraphManager:
                     item_copy["gi"] = 25
                     item_copy["cara_olah"] = "Kukus/Rebus ramah respon insulin"
                     item_copy["alasan_klinis"] = "Tempe kukus sangat ideal bagi penderita prediabetes karena rendah lemak (hanya ~4.3g) dan bebas minyak jelantah."
-            elif "yogurt" in f_name_lower or "yoghurt" in f_name_lower or "yogurt" in user_q:
+            elif ("yogurt" in f_name_lower or "yoghurt" in f_name_lower) and "cimory" not in f_name_lower and "cimory" not in user_q:
                 item_copy["porsi_label"] = f"{qty} Cup Yogurt Rendah Lemak (~{qty * 150} gram)" if qty > 1 else "1 Cup Yogurt Rendah Lemak (~150 gram)"
                 item_copy["kalori"] = 95 * qty
                 item_copy["protein"] = round(8.0 * qty, 1)
@@ -1066,6 +1069,7 @@ class Neo4jClinicalGraphManager:
                            m.protein_g AS protein,
                            m.lemak_g AS lemak,
                            m.serat_g AS serat,
+                           coalesce(m.gula_g, 0.0) AS gula,
                            coalesce(m.natrium_mg, m.sodium_mg) AS sodium_mg,
                            coalesce(m.glikemik_indeks, CASE WHEN m.glikemik_risk = 'low' THEN 25.0 WHEN m.glikemik_risk = 'high' THEN 70.0 ELSE 45.0 END) AS gi,
                            coalesce(m.kategori_spesifik, 'Bahan Makanan') AS kategori,
