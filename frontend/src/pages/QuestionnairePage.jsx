@@ -220,25 +220,25 @@ export default function QuestionnairePage() {
   };
 
   return (
-    <div className="relative min-h-screen py-10 font-sans">
+    <div className="relative min-h-screen py-5 sm:py-10 font-sans overflow-x-hidden">
       {/* Background Orbs */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -left-20 w-96 h-96 rounded-full bg-emerald-200/40 blur-3xl"></div>
         <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-teal-200/40 blur-3xl"></div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider mb-3">
+        <div className="text-center mb-6 sm:mb-10">
+          <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-black uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Skrining Klinis Nutrisi 3J</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
             Kuesioner Profil &amp; Parameter Medis
           </h1>
-          <p className="text-slate-500 text-sm sm:text-base mt-2 max-w-xl mx-auto">
+          <p className="text-slate-500 text-xs sm:text-base mt-2 max-w-xl mx-auto">
             Lengkapi data di bawah untuk menghitung skor risiko, kebutuhan kalori harian, serta meal plan yang dipersonalisasi.
           </p>
         </div>
@@ -246,7 +246,7 @@ export default function QuestionnairePage() {
         {/* Form Container */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white/90 backdrop-blur-2xl border border-white rounded-[2.5rem] p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.06)] space-y-10"
+          className="bg-white/90 backdrop-blur-2xl border border-white rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-10 shadow-[0_20px_50px_rgba(15,23,42,0.06)] space-y-7 sm:space-y-10"
         >
           
           {/* ========================================================= */}
@@ -413,23 +413,23 @@ export default function QuestionnairePage() {
                 <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
                   Tekanan Darah (Sistolik / Diastolik)
                 </label>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
                   <input
                     type="number"
                     name="tekanan_darah_sistolik"
                     value={formData.tekanan_darah_sistolik}
                     onChange={handleChange}
                     placeholder="Sistolik (120)"
-                    className="w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
+                    className="w-full sm:w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
                   />
-                  <span className="text-slate-400 font-bold">/</span>
+                  <span className="hidden sm:inline text-slate-400 font-bold">/</span>
                   <input
                     type="number"
                     name="tekanan_darah_diastolik"
                     value={formData.tekanan_darah_diastolik}
                     onChange={handleChange}
                     placeholder="Diastolik (80)"
-                    className="w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
+                    className="w-full sm:w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
                   />
                 </div>
               </div>
@@ -438,7 +438,7 @@ export default function QuestionnairePage() {
                 <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
                   Asam Urat &amp; Kolesterol Total
                 </label>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
                   <input
                     type="number"
                     step="0.1"
@@ -446,7 +446,7 @@ export default function QuestionnairePage() {
                     value={formData.asam_urat}
                     onChange={handleChange}
                     placeholder="Asam Urat (6.8)"
-                    className="w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
+                    className="w-full sm:w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
                   />
                   <input
                     type="number"
@@ -454,7 +454,7 @@ export default function QuestionnairePage() {
                     value={formData.kolesterol_total}
                     onChange={handleChange}
                     placeholder="Kolesterol (210)"
-                    className="w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
+                    className="w-full sm:w-1/2 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800"
                   />
                 </div>
               </div>

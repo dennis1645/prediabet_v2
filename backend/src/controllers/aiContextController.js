@@ -283,6 +283,24 @@ export function logFoodDirect(req, res) {
       return res.status(400).json({ success: false, message: "Nama makanan wajib diisi." });
     }
 
+    // Guardrail Alergi: Cegah pencatatan makanan yang mengandung alergen/pantangan user
+    const profRow = db.prepare("SELECT pantangan_alergi FROM profiles WHERE user_id = ?").get(userId);
+    let userAllergies = [];
+    if (profRow?.pantangan_alergi) {
+      try {
+        const parsed = JSON.parse(profRow.pantangan_alergi);
+        userAllergies = Array.isArray(parsed) ? parsed : [String(parsed)];
+      } catch {
+        userAllergies = String(profRow.pantangan_alergi).split(",").map((s) => s.trim()).filter(Boolean);
+      }
+    }
+    if (userAllergies.length > 0 && containsAllergen(food_name, userAllergies)) {
+      return res.status(400).json({
+        success: false,
+        message: `Guardrail Keamanan: "${food_name}" mengandung bahan pantangan/alergi Anda (${userAllergies.join(", ")}) sehingga tidak dapat dicatat ke menu harian.`,
+      });
+    }
+
     const targetDate = tanggal && /^\d{4}-\d{2}-\d{2}$/.test(String(tanggal))
       ? String(tanggal)
       : new Date().toISOString().split("T")[0];

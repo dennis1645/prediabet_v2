@@ -725,6 +725,11 @@ export default function DashboardPage() {
                 </div>
               );
             })()}
+            {analysis.active_diet === "rendah_karbo" && (
+              <div className="mt-4 p-3.5 rounded-2xl bg-emerald-50/80 border border-emerald-200 text-xs text-emerald-900 font-medium">
+                <strong>Info Makro Diet Rendah Karbohidrat:</strong> Karbohidrat dibatasi ≤130g/hari (&lt;26% energi), protein ditingkatkan ke ~30%, dan lemak sehat mengisi sisa target kalori. Komposisi ini <strong>normal secara klinis</strong> agar kebutuhan energi tetap terpenuhi tanpa lonjakan glukosa darah.
+              </div>
+            )}
           </div>
 
           {/* Kanan (1 Kolom): ASIDE MASCOT & CHAT (Sesuai aside dashboard.html) */}

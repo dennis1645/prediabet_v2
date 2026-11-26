@@ -35,15 +35,15 @@ ALLERGEN_SYNONYMS = {
 # Pola Pertanyaan di Luar Lingkup Medis & Gizi PrediaBeat (Out-of-Scope Guardrail)
 OUT_OF_SCOPE_PATTERNS = [
     # Politik, Pemerintahan & Tokoh Negara (termasuk variasi/typo menteri/mentri/menter)
-    r"\b(presiden|wakil presiden|wapres|menteri|mentri|menter|kementerian|kemendikbud|mendikbud|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah|pejabat)\b",
+    r"\b(presiden|wakil presiden|wapres|menteri|mentri|menter|kementerian|kemendikbud|mendikbud|dpr|mpr|pemilu|pilpres|pilkada|parpol|partai politik|kabinet|gubernur|walikota|bupati|konstitusi|ikn|pemerintah|pejabat|korupsi|kpk)\b",
     # Koding & Komputer Teknis Non-Medis
-    r"\b(koding|coding|programming|source code|python|javascript|typescript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|debugging code|bikin program|script bash|buatkan saya code|buatkan kode|tuliskan kode|buat program)\b",
+    r"\b(koding|coding|programming|source code|python|javascript|typescript|golang|c\+\+|html|css|react|sql query|fungsi sort|algorithm|algoritma|algorithma|debugging code|bikin program|script bash|buatkan saya code|buatkan kode|tuliskan kode|buat program)\b",
     # Olahraga Komersial / Sepak Bola
     r"\b(sepak bola|liga champions|liga inggris|piala dunia|world cup|persib|persija|manchester united|real madrid|barcelona|skor bola|hasil pertandingan)\b",
     # Hiburan, Gosip, Film, Game, Anime
     r"\b(film bioskop|aktor|aktris|artis|konser musik|k-pop|anime|manga|mobile legends|free fire|dota|game steam|gosip|selebriti|sinetron)\b",
     # Finansial, Crypto, Saham, Hukum Umum
-    r"\b(cryptocurrency|crypto|bitcoin|ethereum|trading saham|forex|pinjaman online|pinjol|hukum pidana|pasal kuhp|investasi bodong)\b",
+    r"\b(cryptocurrency|crypto|kripto|bitcoin|btc|ethereum|eth|ihsg|trading saham|saham|forex|pinjaman online|pinjol|hukum pidana|pasal kuhp|investasi bodong)\b",
     # Sains & Matematika Murni Non-Kesehatan
     r"\b(teori relativitas|rumus integral|rumus fisika|kecepatan cahaya|tatasurya|astronomi|dinosaurus)\b",
 ]
@@ -234,9 +234,11 @@ class ClinicalAllergenGuardrail:
             return True, "Data pasien lain dilindungi privasi medis dan tidak dapat dibagikan."
 
         # Cek pertanyaan memakan tokoh publik / manusia / benda mati / non-pangan (Anti-Halusinasi Soekarno dsb.)
+        # Catatan: JANGAN masukkan kata "orang" berdiri sendiri agar "untuk orang diabetes/prediabetes" tidak ditolak!
         NON_FOOD_ENTITIES = [
             r"\b(soekarno|sukarno|hatta|jokowi|joko widodo|prabowo|habibie|b\.?j\.?\s*habibie|megawati|sby|susilo bambang yudhoyono|gus dur|presiden|pahlawan|menteri|tokoh bangsa|pejabat)\b",
-            r"\b(manusia|orang|mayat|teman|musuh|tetangga)\b",
+            r"\b(manusia|mayat|teman|musuh|tetangga)\b",
+            r"\b(?:makan|memakan|daging)\s+orang\b",
             r"\b(batu|kayu|besi|plastik|kertas|baterai|kaca|tanah|pasir|sabun|deterjen|shampoo|odol|oli|bensin|racun|pestisida)\b",
             r"\b(laptop|hp|komputer|meja|kursi|sepatu|baju|celana|mobil|motor|sepeda)\b"
         ]
@@ -481,9 +483,14 @@ class ClinicalAllergenGuardrail:
                 mod_line = re.sub(r'\bsaus\s*tiram\b', 'kecap asin kedelai non-seafood', mod_line, flags=re.IGNORECASE)
                 mod_line = re.sub(r'\b(?:kuah\s*)?santan\b', 'kuah kaldu bening alami tanpa santan', mod_line, flags=re.IGNORECASE)
                 mod_line = re.sub(r'\b(udang|cumi-cumi|cumi|kepiting|seafood)\b', 'daging ayam dada tanpa kulit', mod_line, flags=re.IGNORECASE)
+                if any("telur" in a for a in expanded):
+                    mod_line = re.sub(r'\btelur(?:\s+(?:ayam|bebek|rebus|ceplok|dadar|asin|puyuh))?\b', 'tahu sutra kukus', mod_line, flags=re.IGNORECASE)
+                if any("babi" in a for a in expanded):
+                    mod_line = re.sub(r'\b(?:daging\s+)?(?:babi|pork|bacon|ham|lard)\b', 'daging sapi tanpa lemak', mod_line, flags=re.IGNORECASE)
                 
                 # 2. Ganti kata dasar tunggal hanya jika masih tersisa
-                mod_line = re.sub(r'\bkacang\s*(?:tanah|babi|garing|goreng)?\b', 'biji wijen sangrai', mod_line, flags=re.IGNORECASE)
+                if any("kacang" in a for a in expanded):
+                    mod_line = re.sub(r'\bkacang\s*(?:tanah|babi|garing|goreng)?\b', 'biji wijen sangrai', mod_line, flags=re.IGNORECASE)
                 sanitized_lines.append(mod_line)
 
             sanitized = '\n'.join(sanitized_lines)

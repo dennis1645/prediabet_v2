@@ -291,20 +291,43 @@ class HybridGraphVectorFusion:
 
         if specific_food and not specific_food.get("bahan"):
             food_display_name = specific_food.get('nama_makanan') or specific_food.get('nama') or 'Bahan Makanan'
-            food_gi = specific_food.get('gi') if specific_food.get('gi') is not None else specific_food.get('gi_category', 'Rendah')
+            # Cek konflik alergen pada specific_food agar tidak pernah lolos dengan badge aman!
+            if allergens and not allergen_guardrail.verify_food_item_is_safe(food_display_name, allergen_guardrail.expand_allergen_keywords(allergens)):
+                specific_food["allergen_conflict"] = allergens
+
+            raw_gi = specific_food.get('gi')
+            if raw_gi is not None and isinstance(raw_gi, (int, float)) and raw_gi > 0:
+                gi_cat = "Rendah" if raw_gi < 55 else ("Sedang" if raw_gi < 70 else "Tinggi - Perlu Dibatasi")
+                gi_line = f"• Indeks Glikemik (GI) : {raw_gi} (Kategori {gi_cat})"
+            else:
+                gi_line = "• Indeks Glikemik (GI) : Data GI spesifik tidak tersedia (opsional)"
+
             porsi_label = specific_food.get('porsi_label') or '100 gram'
+            sugar_val = specific_food.get('gula', 0)
+            comorbid_str = ", ".join(conditions).lower()
+            has_htn = any(k in comorbid_str or k in ql for k in ["hipertensi", "darah tinggi", "tensi"])
+            is_goat = any(k in food_display_name.lower() or k in ql for k in ["kambing", "sate kambing", "gulai"])
+
+            extra_notes = []
+            if specific_food.get("not_found_item"):
+                alts = ", ".join(specific_food.get("available_alternatives") or ["Nasi Putih", "Nasi Merah"])
+                extra_notes.append(f"[INFO DATASET]: '{specific_food['not_found_item']}' TIDAK ADA di database PrediaBeat. Jelaskan jujur bahwa item tersebut tidak tersedia dan tawarkan pilihan yang ada: {alts}.")
+            if specific_food.get("allergen_conflict"):
+                extra_notes.append(f"[PERINGATAN ALERGI KERAS]: Makanan '{food_display_name}' MENGANDUNG pantangan/alergi pasien ({', '.join(allergens)}). DILARANG menyarankan makan ini; peringatkan pasien dan beri alternatif aman!")
+            if is_goat and has_htn:
+                extra_notes.append("[PERINGATAN HIPERTENSI]: Pasien memiliki komorbid hipertensi/darah tinggi. Sate kambing/daging kambing tinggi lemak jenuh & natrium bumbu kecap — WAJIB diwaspadai, batasi porsi maksimal 3-5 tusuk tanpa lemak/gajih dan tanpa kecap/garam berlebih!")
+
             dossier_lines.extend([
                 "",
-                f"=== DATA GIZI KLINIS SPESIFIK HASIL QUERY DETERMINISTIK NEO4J (ACUAN {porsi_label.upper()}) ===",
+                f"=== DATA GIZI KLINIS SPESIFIK HASIL QUERY DETERMINISTIK (ACUAN {porsi_label.upper()}) ===",
                 f"• Nama Bahan Makanan  : {food_display_name}",
                 f"• Takaran Acuan        : {porsi_label}",
-                f"• Kandungan Protein    : {specific_food.get('protein', 0)} gram",
-                f"• Total Energi (Kalori): {specific_food.get('kalori', 0)} kkal",
-                f"• Kandungan Karbohidrat: {specific_food.get('karbohidrat', 0)} gram",
-                f"• Kandungan Lemak      : {specific_food.get('lemak', 0)} gram",
-                f"• Indeks Glikemik (GI) : {food_gi} (Kategori Rendah - Sangat Aman bagi Respon Insulin)",
+                f"• [1. MAKRO UTAMA]     : Kalori {specific_food.get('kalori', 0)} kkal | Karbo {specific_food.get('karbohidrat', 0)}g | Protein {specific_food.get('protein', 0)}g | Lemak {specific_food.get('lemak', 0)}g",
+                f"• [2. GULA MAKANAN]    : {sugar_val}g (cek juga total asupan harian pasien hari ini sebelum menyarankan)",
+                gi_line,
                 f"• Rekomendasi Olah     : {specific_food.get('cara_olah', 'Kukus/Rebus')} tanpa minyak jelantah",
-                f"[INSTRUKSI KHUSUS GIZI]: Pasien menanyakan kandungan bahan ini. WAJIB MENJAWAB LANGSUNG ANGKA GIZI PER {porsi_label.upper()} DI AWAL KALIMAT! DILARANG memberikan resep jika tidak diminta.",
+                *extra_notes,
+                f"[INSTRUKSI KHUSUS GIZI]: Evaluasi berurutan: (1) Makronutrisi utama dibanding diet/target, (2) Kadar gula & asupan gula harian pasien, (3) GI sebagai pemberat opsional hanya jika datanya ada. Sebutkan data sesuai nama item di database ({food_display_name}); jika merk/varian yang ditanya tidak ada, jelaskan jujur.",
             ])
 
         # Hanya injeksikan daftar makanan Neo4j jika pengguna memang meminta menu/resep

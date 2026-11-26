@@ -461,55 +461,56 @@ export default function ChatbotPage() {
     sessions.find((s) => s.id === activeSessionId)?.title || "Percakapan Baru";
 
   return (
-    <div className="relative min-h-[calc(100vh-80px)] flex flex-col justify-between py-4 sm:py-6">
+    <div className="relative min-h-[calc(100dvh-72px)] flex flex-col justify-between py-2.5 sm:py-6 overflow-x-hidden">
       {/* Background Ambience */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
         <div className="absolute top-1/2 right-[-100px] w-80 h-80 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full flex-grow flex flex-col relative z-10">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 w-full flex-grow flex flex-col relative z-10 min-w-0">
         {/* Top Header Bar */}
-        <div className="mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="mb-3 sm:mb-4 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             {/* Mobile Sidebar Toggle Button */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer shadow-2xs"
+              className="lg:hidden p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition cursor-pointer shadow-2xs shrink-0"
               title="Buka Riwayat Percakapan"
             >
               <Menu className="w-5 h-5 text-emerald-700" />
             </button>
 
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shadow-md shadow-emerald-500/10 overflow-hidden">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shadow-md shadow-emerald-500/10 overflow-hidden shrink-0">
               <img src="/WajahMaskot2.png" alt="Predi" className="w-full h-full object-contain p-0.5" />
             </div>
-            <div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
+            <div className="min-w-0">
+              <h2 className="text-base sm:text-2xl font-extrabold text-slate-800 tracking-tight flex items-center gap-1.5 sm:gap-2 truncate">
                 Konsultasi Predi AI
-                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full border border-emerald-200">
+                <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-100/80 px-1.5 sm:px-2 py-0.5 rounded-full border border-emerald-200 shrink-0">
                   Online
                 </span>
               </h2>
-              <p className="text-slate-500 font-medium text-xs mt-0.5">
+              <p className="hidden sm:block text-slate-500 font-medium text-xs mt-0.5">
                 Konsultan Nutrisi Klinis & Pola 3J Ramah Prediabetes
               </p>
             </div>
           </div>
 
-          {/* Action Buttons on Desktop */}
-          <div className="flex items-center gap-2">
+          {/* Action Buttons */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={() => setIsOnboardingMode(true)}
-              className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs sm:text-sm font-bold px-3.5 py-2.5 rounded-xl transition shadow-2xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs sm:text-sm font-bold px-2.5 py-2 sm:px-3.5 sm:py-2.5 rounded-xl transition shadow-2xs cursor-pointer"
               title="Buka status rekam medis intake klinis"
             >
               <Activity className="w-4 h-4 text-emerald-600" />
-              <span>Rekam Medis & Profil</span>
+              <span className="hidden sm:inline">Rekam Medis &amp; Profil</span>
+              <span className="sm:hidden">Profil</span>
             </button>
             <button
               onClick={handleNewChat}
-              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-xl transition shadow-md shadow-emerald-600/20 cursor-pointer"
+              className="inline-flex items-center gap-1.5 sm:gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl transition shadow-md shadow-emerald-600/20 cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Chat Baru</span>
@@ -518,7 +519,7 @@ export default function ChatbotPage() {
         </div>
 
         {/* 2-Column Chat Layout (ChatGPT / Gemini Model) */}
-        <div className="flex-grow flex gap-5 h-[620px] relative">
+        <div className="flex-grow flex gap-3 sm:gap-5 h-[calc(100dvh-165px)] min-h-[440px] sm:h-[620px] relative min-w-0">
           {/* Overlay Backdrop for Mobile Sidebar */}
           {sidebarOpen && (
             <div
@@ -625,7 +626,7 @@ export default function ChatbotPage() {
           </aside>
 
           {/* RIGHT PANEL: Ruang Chat Utama */}
-          <main className="flex-1 flex flex-col bg-white/85 backdrop-blur-xl border border-white rounded-[2rem] shadow-[0_10px_40px_rgb(0,0,0,0.04)] overflow-hidden">
+          <main className="flex-1 min-w-0 flex flex-col bg-white/85 backdrop-blur-xl border border-white rounded-2xl sm:rounded-[2rem] shadow-[0_10px_40px_rgb(0,0,0,0.04)] overflow-hidden">
             {/* Top Bar of Active Conversation */}
             <div className="px-5 py-3.5 border-b border-slate-100/90 flex items-center justify-between bg-white/60">
               <div className="flex items-center gap-2 min-w-0">

@@ -355,19 +355,46 @@ class VLLMInferenceClient:
                 f"Apakah Bapak/Ibu ingin saya bagikan resep dan cara membuatnya?"
             )
 
+        # 4.5. Penolakan/Peringatan Keras jika specific_food berkonflik dengan alergi/pantangan user atau tidak tersedia di dataset
+        if specific_food and specific_food.get("not_found_item"):
+            missing = specific_food.get("not_found_item")
+            alts = ", ".join(specific_food.get("available_alternatives") or ["Nasi Putih", "Nasi Merah"])
+            return (
+                f"Halo {username}! Menu **{missing}** belum tersedia di database nutrisi PrediaBeat saat ini.\n\n"
+                f"Sebagai gantinya, pilihan yang tersedia di dataset kami adalah: **{alts}**.\n"
+                f"Jika Anda ingin cek makro dan porsi aman dari salah satu pilihan tersebut, beri tahu saya ya!"
+            )
+
+        if specific_food and specific_food.get("allergen_conflict"):
+            f_name = specific_food.get("nama_makanan") or specific_food.get("nama") or "Makanan tersebut"
+            conflict_list = ", ".join(specific_food.get("allergen_conflict") or [])
+            return (
+                f"Halo {username}! Mohon perhatikan bahwa **{f_name}** mengandung bahan pantangan/alergi Anda (**{conflict_list}**), "
+                f"sehingga **tidak disarankan** untuk dikonsumsi.\n\n"
+                f"Sebagai alternatif aman yang bebas dari {conflict_list}, Anda bisa memilih **Tahu/Tempe Kukus** atau **Sayuran Hijau Rebus** sesuai porsi 3J Anda."
+            )
+
         # 5. Pertanyaan seputar Kandungan Nutrisi Bahan Makanan Spesifik
         if specific_food and not is_recipe_request and not is_menu_suggestion:
             f_name = specific_food.get("nama_makanan") or specific_food.get("nama") or "Bahan Makanan"
             p_label = specific_food.get("porsi_label") or f"{f_name} (per 100 gram)"
+            gi_val = specific_food.get("gi")
+            if gi_val is not None and isinstance(gi_val, (int, float)) and gi_val > 0:
+                gi_cat = "GI Rendah (< 55)" if gi_val < 55 else ("GI Sedang (55–69)" if gi_val < 70 else "GI Tinggi (≥ 70 - Batasi Porsi)")
+                gi_text = f"{gi_val} ({gi_cat})"
+            else:
+                gi_text = "Tidak tersedia (opsional)"
+            htn_warn = ""
+            if "kambing" in f_name.lower() or "kambing" in q:
+                htn_warn = "\n\n⚠️ **Catatan Hipertensi & Kolesterol:** Daging/sate kambing tinggi lemak jenuh dan sering memakai bumbu kecap/garam tinggi natrium. Wajib batasi porsi (maks 3–5 tusuk tanpa gajih & kurangi kecap) terutama jika memiliki hipertensi."
             return (
                 f"Halo {username}! Berdasarkan basis data gizi klinis PrediaBeat:\n\n"
-                f"🍗 **Informasi Nilai Gizi: {p_label}**\n"
-                f"• **Kandungan Protein:** ~**{specific_food.get('protein', 0)} gram**\n"
-                f"• **Total Energi (Kalori):** **{specific_food.get('kalori', 0)} kkal**\n"
-                f"• **Kandungan Karbohidrat:** **{specific_food.get('karbohidrat', 0)} gram**\n"
-                f"• **Kandungan Lemak:** **{specific_food.get('lemak', 0)} gram**\n"
-                f"• **Indeks Glikemik (GI):** {specific_food.get('gi_category', 'GI Rendah (< 55)')}\n\n"
+                f"🍽️ **Evaluasi Nutrisi: {p_label}**\n"
+                f"• **1. Makronutrisi Utama:** Energi **{specific_food.get('kalori', 0)} kkal** | Karbohidrat **{specific_food.get('karbohidrat', 0)}g** | Protein **~{specific_food.get('protein', 0)}g** | Lemak **{specific_food.get('lemak', 0)}g**\n"
+                f"• **2. Kadar Gula:** **{specific_food.get('gula', 0)}g** *(tetap perhatikan total konsumsi gula harian Anda hari ini)*\n"
+                f"• **3. Indeks Glikemik (Opsional):** {gi_text}\n\n"
                 f"💡 **Rekomendasi Cara Olah Sehat:** {specific_food.get('cara_olah', 'Kukus/Rebus tanpa minyak jelantah')}."
+                f"{htn_warn}"
             )
 
         try:
@@ -392,7 +419,10 @@ class VLLMInferenceClient:
                 "lagi", "pengen", "ingin", "mau", "yang", "dan", "sama", "dengan", "ke", "di", "dari",
                 "buat", "resep", "cara", "hangat", "berkuah", "kuah", "dingin", "minum", "minuman",
                 "ada", "apa", "ini", "itu", "saya", "aku", "anda", "bisa", "tolong", "mohon", "kasih",
-                "saran", "rekomendasi", "dong", "selain", "gimana", "bagaimana", "saja"
+                "saran", "rekomendasi", "dong", "selain", "gimana", "bagaimana", "saja",
+                "satu", "dua", "tiga", "empat", "lima", "hari", "minggu", "bulan", "tahun",
+                "kenapa", "turun", "naik", "orang", "udah", "sudah", "engga", "ngga", "gak", "tidak",
+                "kalo", "kalau", "terjadi", "gue", "gw", "lu", "kamu", "yuk"
             }
             words = [w.strip("?,.!") for w in q.split() if len(w.strip("?,.!")) >= 3 and w.strip("?,.!") not in stop_words]
             for w in words:
@@ -404,6 +434,12 @@ class VLLMInferenceClient:
                     break
 
         if matched_food:
+            m_gi = matched_food.get("gi")
+            if m_gi is not None and isinstance(m_gi, (int, float)) and m_gi > 0:
+                m_gi_cat = "Rendah" if m_gi < 55 else ("Sedang" if m_gi < 70 else "Tinggi - Batasi Porsi")
+                m_gi_line = f"• **Indeks Glikemik (GI):** {m_gi} (Kategori {m_gi_cat})\n\n"
+            else:
+                m_gi_line = "• **Indeks Glikemik (GI):** Tidak tersedia (opsional)\n\n"
             return (
                 f"Halo {username}! Berdasarkan basis data gizi klinis PrediaBeat:\n\n"
                 f"🍗 **Informasi Nilai Gizi: {matched_food['nama']} (per 100 gram)**\n"
@@ -411,11 +447,25 @@ class VLLMInferenceClient:
                 f"• **Total Energi (Kalori):** {matched_food.get('kalori', 0)} kkal\n"
                 f"• **Kandungan Karbohidrat:** {matched_food.get('karbohidrat', 0)} gram\n"
                 f"• **Kandungan Lemak:** {matched_food.get('lemak', 0)} gram\n"
-                f"• **Indeks Glikemik (GI):** {matched_food.get('gi', 0)} (Kategori Rendah - Sangat Aman bagi respon insulin)\n\n"
+                f"{m_gi_line}"
                 f"💡 **Rekomendasi Cara Olah Sehat:** Disarankan diolah dengan teknik {matched_food.get('cara_olah', 'Kukus/Rebus')} menggunakan bumbu rempah alami tanpa minyak jelantah."
             )
 
-        # 6. Pertanyaan Menu / Rekomendasi Makanan Umum (3J Fallback Medis Teruji)
+        # 6. Jika pertanyaan TIDAK terkait makanan/nutrisi/kesehatan, tolak sopan (jangan asal beri Menu 3J!)
+        food_or_health_intent = any(k in q for k in [
+            "makan", "menu", "resep", "gizi", "nutrisi", "kalori", "protein", "karbo", "lemak",
+            "gula", "glukosa", "darah", "diet", "diabetes", "prediabetes", "sarapan", "siang",
+            "malam", "selingan", "camilan", "buah", "sayur", "lauk", "minum", "sehat", "3j"
+        ])
+        if not food_or_health_intent:
+            return (
+                f"Halo {username}! Sebagai **Dr. Predi**, fokus saya khusus mendampingi pola makan ramah gula darah, "
+                f"nutrisi 3J, dan pencegahan prediabetes/diabetes.\n\n"
+                f"Pertanyaan tersebut berada di luar topik gizi dan kesehatan metabolik. Silakan tanyakan seputar kandungan makanan, "
+                f"rekomendasi menu sehat, atau progres harian Anda ya!"
+            )
+
+        # 7. Pertanyaan Menu / Rekomendasi Makanan Umum (3J Fallback Medis Teruji)
         return (
             f"Halo {username}! Berdasarkan prinsip 3J Kemenkes RI dan pedoman PERKENI 2021 untuk target harian {kalori_target} kkal:\n\n"
             f"🍽️ **Rekomendasi Menu 3J Terverifikasi:**\n"

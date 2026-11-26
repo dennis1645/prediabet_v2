@@ -740,8 +740,8 @@ def build_vllm_messages(
                 f"  • **Makronutrisi:** Protein **{prot_val}g** • Karbo **{carb_val}g** • Lemak **{fat_val}g**\n"
                 f"  • **Indeks Glikemik:** **GI Rendah** *(aman untuk respon insulin)*\n"
                 f"  • **Keunggulan Klinis:** **{clinical_tips}**\n\n"
-                f"  Di akhir kalimat, tanyakan dengan ramah: 'Apakah {salutation} ingin saya bagikan resep dan langkah praktis membuatnya?'\n"
-                f"- DILARANG KERAS menyodorkan daftar bumbu panjang atau langkah memasak jika pasien belum meminta resep!"
+                f"- Di akhir respon, tanyakan secara singkat apakah {salutation} ingin dibuatkan langkah resepnya.\n"
+                f"- DILARANG KERAS menyalin teks instruksi prompt atau menyodorkan daftar bumbu panjang jika pasien belum meminta resep!"
             )
         else:
             carb_val = specific_food.get('karbohidrat') if specific_food.get('karbohidrat') is not None else specific_food.get('karbo', 0)

@@ -595,8 +595,17 @@ class Neo4jClinicalGraphManager:
             "telur dadar": ["Telur Dadar"],
             "telur ceplok": ["Telur Ceplok", "Telur Dadar"],
             "telur rebus": ["Telur Rebus", "telur ayam"],
-            "mie goreng": ["Bihun goreng instan", "Mie goreng"],
+            "mie goreng": ["Indomie, mie goreng", "ABC, mie goreng spesial", "mie goreng", "mi goreng"],
+            "mi goreng": ["Indomie, mie goreng", "ABC, mie goreng spesial", "mi goreng", "mie goreng"],
             "bihun goreng": ["Bihun goreng instan", "bihun goreng"],
+            "yogurt cimory": ["Cimory, yogurt", "Cimory, yogurt original", "Cimory, yogurt plain", "Cimory, yoghurt"],
+            "cimory": ["Cimory, yogurt", "Cimory, yogurt original", "Cimory, yogurt plain", "Cimory, yoghurt"],
+            "rendang sapi": ["Rendang sapi, masakan", "Rendang Sapi", "Rumah makan sederhana, Rendang"],
+            "rendang": ["Rendang sapi, masakan", "Rendang Sapi", "Rumah makan sederhana, Rendang"],
+            "sate kambing": ["Sate Kambing", "Kambing, daging, segar"],
+            "daging kambing": ["Kambing, daging, segar", "Sate Kambing"],
+            "kambing": ["Sate Kambing", "Kambing, daging, segar", "Gulai kambing"],
+            "kfc": ["KFC, Dada ayam", "KFC, Chicken breast original recipe", "KFC"],
             "dada ayam mentah": ["dada ayam (kulit tidak dimakan)", "dada ayam"],
             "dada ayam rebus": ["dada ayam (kulit tidak dimakan)", "dada ayam"],
             "dada ayam kukus": ["dada ayam (kulit tidak dimakan)", "dada ayam"],
@@ -673,6 +682,25 @@ class Neo4jClinicalGraphManager:
             "singkong": ["Ketela pohon/ singkong kukus", "singkong"],
         }
 
+        # 0b. Deteksi item populer yang memang BELUM tersedia di dataset (misal: nasi bakar)
+        UNAVAILABLE_DISH_ALTERNATIVES = {
+            "nasi bakar": ["Nasi Putih", "Nasi Merah (Beras merah, Nasi)", "Nasi Uduk"],
+        }
+        for missing_dish, alts in UNAVAILABLE_DISH_ALTERNATIVES.items():
+            if re.search(rf"\b{re.escape(missing_dish)}\b", q, re.IGNORECASE):
+                return {
+                    "nama": f"{missing_dish.title()} (Belum Tersedia di Dataset)",
+                    "nama_makanan": missing_dish.title(),
+                    "not_found_item": missing_dish,
+                    "available_alternatives": alts,
+                    "kalori": 0,
+                    "protein": 0,
+                    "karbohidrat": 0,
+                    "lemak": 0,
+                    "gi": None,
+                    "cara_olah": "Pilih varian nasi yang tersedia di database (seperti Nasi Putih atau Nasi Merah).",
+                }
+
         # 1. PRIORITAS UTAMA: Cari kecocokan frasa makanan langsung di query pasien saat ini!
         # Deteksi negasi/koreksi pasien: contoh 'itu mah nasi putih bukan nasi padang' -> abaikan 'nasi putih'
         negated_terms = set()
@@ -740,6 +768,12 @@ class Neo4jClinicalGraphManager:
 
             # Cegah keripik / kerupuk / olahan kering terpilih jika user tidak menanyakannya
             if any(bad in lower for bad in ["keripik", "kerupik", "kerupuk", "kering"]) and not any(bad in tk for bad in ["keripik", "kerupik", "kerupuk", "kering"]):
+                return (9999, len(lower))
+
+            # Cegah sagu rendang mengalahkan rendang sapi, dan bihun mengalahkan mie goreng
+            if "rendang" in tk and "sagu" in lower and "sagu" not in tk:
+                return (9999, len(lower))
+            if ("mie" in tk or "mi goreng" in tk) and "bihun" in lower and "bihun" not in tk:
                 return (9999, len(lower))
 
             # Prioritas Pengolahan Spesifik (Mentah vs Goreng vs Kukus/Rebus)
