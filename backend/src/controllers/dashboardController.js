@@ -1,5 +1,5 @@
 import db from "../database/connection.js";
-import { generateDailyMealPlan, containsAllergen, MEAL_FREQUENCY_OPTIONS, resolveMealFrequencyConfig } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, containsAllergen, extractAllergies, MEAL_FREQUENCY_OPTIONS, resolveMealFrequencyConfig } from "../clinical/mealPlanEngine.js";
 import { hitungKesesuaianDiet } from "../clinical/assessment.js";
 
 export function getDashboard(req, res) {
@@ -22,11 +22,7 @@ export function getDashboard(req, res) {
     }
 
     // Pastikan meal plan selalu terisi & bebas dari alergen/pantangan terbaru (misal vegetarian)
-    const allergies = Array.isArray(profile.pantangan_alergi)
-      ? profile.pantangan_alergi
-      : typeof profile.pantangan_alergi === "string"
-      ? profile.pantangan_alergi.split(",").map((s) => s.trim()).filter(Boolean)
-      : [];
+    const allergies = extractAllergies(profile);
 
     const hasAllergenViolation =
       Array.isArray(analysis.meal_plan) &&
@@ -186,11 +182,7 @@ export function regenerateMealPlan(req, res) {
       analysis.diet_recommendations = hitungKesesuaianDiet(profile, analysis.bmi, analysis.kategori_risiko);
     }
 
-    const allergies = Array.isArray(profile.pantangan_alergi)
-      ? profile.pantangan_alergi
-      : typeof profile.pantangan_alergi === "string"
-      ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-      : [];
+    const allergies = extractAllergies(profile);
 
     const newMealPlan = generateDailyMealPlan(
       analysis.target_kalori || 1850,
@@ -259,11 +251,7 @@ export function updateMealFrequency(req, res) {
     analysis.pola_waktu_makan = option.label;
     analysis.frekuensi_makan = option.short;
 
-    const allergies = Array.isArray(profile.pantangan_alergi)
-      ? profile.pantangan_alergi
-      : typeof profile.pantangan_alergi === "string"
-      ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-      : [];
+    const allergies = extractAllergies(profile);
 
     analysis.meal_plan = generateDailyMealPlan(
       analysis.target_kalori || 1850,

@@ -2,7 +2,7 @@ import db from "../database/connection.js";
 import referenceService from "../services/referenceService.js";
 import { detectAndCalculateExercise } from "../utils/metCalculator.js";
 import { prosesAnalisisKlinis } from "../clinical/assessment.js";
-import { generateDailyMealPlan, DEFAULT_MEAL_POOL, containsAllergen, MEAL_FREQUENCY_OPTIONS } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, DEFAULT_MEAL_POOL, containsAllergen, extractAllergies, MEAL_FREQUENCY_OPTIONS } from "../clinical/mealPlanEngine.js";
 
 /**
  * Menentukan kategori jadwal makan berdasarkan input pengguna atau jam aktual WIB (UTC+7).
@@ -121,18 +121,7 @@ export function getUserAIContext(req, res) {
           kategori_risiko: analysis.kategori_risiko || (hasProfile ? "Normal" : "Belum diisi"),
           gula_darah_puasa: profile.gula_darah_puasa || profile.tes_gula_darah_puasa || "Belum ada tes lab",
           hba1c: profile.hba1c || profile.tes_hba1c || "Belum ada tes lab",
-          pantangan_alergi: Array.from(
-            new Set(
-              (Array.isArray(profile.pantangan_alergi)
-                ? profile.pantangan_alergi
-                : typeof profile.pantangan_alergi === "string"
-                ? profile.pantangan_alergi.split(",")
-                : []
-              )
-                .map((s) => s.trim())
-                .filter(Boolean)
-            )
-          ),
+          pantangan_alergi: extractAllergies(profile),
           komorbiditas: komorbidList,
           active_diet: analysis.active_diet_label || "Belum Dipilih (Pola Seimbang 3J)",
           target_kalori: toNumOrNull(analysis.target_kalori) || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2000),
@@ -486,15 +475,16 @@ export async function forwardChatToAI(req, res) {
     }
 
     // Pastikan meal_plan harian selalu terinisialisasi dan tersinkronisasi ke Dashboard
-    if (!analysis.meal_plan || !Array.isArray(analysis.meal_plan) || analysis.meal_plan.length === 0) {
-      const allergies = Array.isArray(profile.pantangan_alergi)
-        ? profile.pantangan_alergi
-        : typeof profile.pantangan_alergi === "string"
-        ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-        : [];
+    const initAllergies = extractAllergies(profile);
+    const hasInitAllergenViolation =
+      Array.isArray(analysis.meal_plan) &&
+      analysis.meal_plan.some(
+        (slot) => Array.isArray(slot.items) && slot.items.some((item) => containsAllergen(item.nama, initAllergies))
+      );
+    if (!analysis.meal_plan || !Array.isArray(analysis.meal_plan) || analysis.meal_plan.length === 0 || hasInitAllergenViolation) {
       analysis.meal_plan = generateDailyMealPlan(
         analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2437),
-        allergies,
+        initAllergies,
         analysis.active_diet || ""
       );
       if (hasProfile) {
@@ -677,11 +667,7 @@ export async function forwardChatToAI(req, res) {
       /\b(?:ganti|ubah)\s+(?:semua\s+)?(?:menu|meal\s*plan|jadwal makan|rencana makan)\b/i.test(lowerMessage);
 
     if (isShuffleRequest) {
-      const allergies = Array.isArray(profile.pantangan_alergi)
-        ? profile.pantangan_alergi
-        : typeof profile.pantangan_alergi === "string"
-        ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-        : [];
+      const allergies = extractAllergies(profile);
 
       const newPlan = generateDailyMealPlan(
         analysis.target_kalori || (profile.jenis_kelamin === "Perempuan" ? 1700 : 2437),
@@ -743,11 +729,7 @@ export async function forwardChatToAI(req, res) {
       let profObj = {};
       try { profObj = JSON.parse(profileRow.full_profile_data || "{}"); } catch (e) {}
 
-      const allergies = Array.isArray(profObj.pantangan_alergi)
-        ? profObj.pantangan_alergi
-        : typeof profObj.pantangan_alergi === "string"
-        ? profObj.pantangan_alergi.split(",").map((s) => s.trim())
-        : [];
+      const allergies = extractAllergies(profObj);
 
       profObj.meal_frequency = freqOpt.id;
       profObj.pola_waktu_makan = freqOpt.label;
@@ -862,13 +844,7 @@ export async function forwardChatToAI(req, res) {
       const targetSlot = analysis.meal_plan[targetSlotIdx] || analysis.meal_plan[0];
       const slotItems = targetSlot.items || [];
 
-      const allergies = Array.isArray(profile.pantangan_alergi)
-        ? profile.pantangan_alergi
-        : Array.isArray(profile.pantangan_makanan)
-        ? profile.pantangan_makanan
-        : typeof profile.pantangan_alergi === "string"
-        ? profile.pantangan_alergi.split(",").map((s) => s.trim()).filter(Boolean)
-        : [];
+      const allergies = extractAllergies(profile);
 
       let replacementFoodCandidate = "";
       const withConnectorMatch = lowerMessage.match(/(?:dengan|jadi|menjadi|ke)\s+([a-zA-Z0-9\s-]+?)(?:$|[.,!?\n]|aja|dong|ya)/i);
@@ -1253,22 +1229,7 @@ export async function forwardChatToAI(req, res) {
       tdee: cleanNum(analysis.tdee) || 2937,
       pola_waktu_makan: analysis.pola_waktu_makan || profile.pola_waktu_makan || "Normal 3J (3 kali makan utama + 2 kali selingan)",
       meal_plan: analysis.meal_plan || [],
-      pantangan_alergi: Array.from(
-        new Set(
-          (Array.isArray(profile.pantangan_alergi)
-            ? profile.pantangan_alergi
-            : Array.isArray(profile.pantangan_makanan)
-            ? profile.pantangan_makanan
-            : typeof profile.pantangan_alergi === "string"
-            ? profile.pantangan_alergi.split(",")
-            : typeof profile.pantangan_makanan === "string"
-            ? profile.pantangan_makanan.split(",")
-            : []
-          )
-            .map((s) => s.trim())
-            .filter(Boolean)
-        )
-      ),
+      pantangan_alergi: extractAllergies(profile),
       komorbiditas: profile.komorbiditas || [],
       active_diet: analysis.active_diet_label || "Belum Dipilih (Pola Seimbang 3J)",
       database_progress_cache: databaseProgressCacheText,

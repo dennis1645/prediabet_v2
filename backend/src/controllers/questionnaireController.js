@@ -1,6 +1,6 @@
 import db from "../database/connection.js";
 import { prosesAnalisisKlinis } from "../clinical/assessment.js";
-import { generateDailyMealPlan } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, extractAllergies } from "../clinical/mealPlanEngine.js";
 
 export function getDraft(req, res) {
   try {
@@ -68,11 +68,7 @@ export function submitQuestionnaire(req, res) {
     const analysis = prosesAnalisisKlinis(profil);
 
     // 2. Generate Rencana Meal Plan 3J Harian Berdasarkan Profil & Pantangan
-    const allergies = Array.isArray(profil.pantangan_alergi)
-      ? profil.pantangan_alergi
-      : typeof profil.pantangan_alergi === "string"
-      ? profil.pantangan_alergi.split(",").map((s) => s.trim())
-      : [];
+    const allergies = extractAllergies(profil);
 
     const mealPlan = generateDailyMealPlan(analysis.target_kalori, allergies, analysis.active_diet);
     analysis.meal_plan = mealPlan;

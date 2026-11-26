@@ -1,5 +1,5 @@
 import { DIET_CATALOG, hitungTargetKaloriMakro } from "../clinical/assessment.js";
-import { generateDailyMealPlan, MEAL_FREQUENCY_OPTIONS } from "../clinical/mealPlanEngine.js";
+import { generateDailyMealPlan, extractAllergies, MEAL_FREQUENCY_OPTIONS } from "../clinical/mealPlanEngine.js";
 import db from "../database/connection.js";
 
 export function getAllDiets(req, res) {
@@ -78,11 +78,7 @@ export function activateDiet(req, res) {
     analysis.active_diet_label = selectedDiet.nama;
 
     // Regenerate meal plan for new diet
-    const allergies = Array.isArray(profile.pantangan_alergi)
-      ? profile.pantangan_alergi
-      : typeof profile.pantangan_alergi === "string"
-      ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-      : [];
+    const allergies = extractAllergies(profile);
 
     const nextFreq = dietId === "intermittent_fasting" ? "2_kali" : (profile.meal_frequency || "normal_3j");
     const freqMeta = MEAL_FREQUENCY_OPTIONS[nextFreq] || MEAL_FREQUENCY_OPTIONS.normal_3j;
@@ -148,11 +144,7 @@ export function deactivateDiet(req, res) {
       analysis.catatan_pola_makan[0] = macro.catatanDiet;
     }
 
-    const allergies = Array.isArray(profile.pantangan_alergi)
-      ? profile.pantangan_alergi
-      : typeof profile.pantangan_alergi === "string"
-      ? profile.pantangan_alergi.split(",").map((s) => s.trim())
-      : [];
+    const allergies = extractAllergies(profile);
 
     const resetFreq = "normal_3j";
     const resetFreqMeta = MEAL_FREQUENCY_OPTIONS[resetFreq];

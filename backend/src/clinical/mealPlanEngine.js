@@ -69,6 +69,18 @@ const ALLERGEN_SYNONYMS = {
   "tidak makan daging": ["ayam", "ikan", "daging", "sapi", "kambing", "babi", "bebek", "udang", "cumi", "seafood", "soto ayam", "sup ayam", "pepes ikan", "kembung"],
 };
 
+export function extractAllergies(profile = {}) {
+  const toList = (val) => {
+    if (Array.isArray(val)) return val;
+    if (typeof val === "string") return val.split(",");
+    return [];
+  };
+  const combined = [...toList(profile?.pantangan_alergi), ...toList(profile?.pantangan_makanan)]
+    .map((s) => String(s || "").trim())
+    .filter((s) => s && !["skip", "tdl", "tidak ada", "none", "-", "1"].includes(s.toLowerCase()));
+  return Array.from(new Set(combined));
+}
+
 export function containsAllergen(foodName = "", allergies = []) {
   const lower = (foodName || "").toLowerCase();
   if (!lower || !Array.isArray(allergies) || allergies.length === 0) return false;
