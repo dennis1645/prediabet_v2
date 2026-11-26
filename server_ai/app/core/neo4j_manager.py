@@ -1088,6 +1088,8 @@ class Neo4jClinicalGraphManager:
                                 matched = apply_portion_scaling(matched, q)
                                 if is_generic_sate:
                                     matched["ambiguous_choices"] = ["Sate Ayam", "Sate Kambing", "Sate Sapi"]
+                                if term != search_terms[0]:
+                                    matched["requested_variant"] = search_terms[0]
                                 neo4j_logger.info("DITEMUKAN di Neo4j: '%s' cocok dengan target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                                 return matched
                     except Exception as e:
@@ -1105,6 +1107,8 @@ class Neo4jClinicalGraphManager:
                     matched = apply_portion_scaling(matched, q)
                     if is_generic_sate:
                         matched["ambiguous_choices"] = ["Sate Ayam", "Sate Kambing", "Sate Sapi"]
+                    if term != search_terms[0]:
+                        matched["requested_variant"] = search_terms[0]
                     neo4j_logger.info("DITEMUKAN di Dataset Lokal (CSV): '%s' untuk target '%s' (Kalori: %s, Protein: %s)", matched.get("nama"), target, matched.get("kalori"), matched.get("protein"))
                     return matched
 

@@ -763,7 +763,9 @@ def build_vllm_messages(
 
             ambig_instr = ""
             if specific_food.get("ambiguous_choices"):
-                ambig_instr = f"\n- WAJIB di akhir respon tanyakan dengan ramah varian sate mana yang dimaksud pasien ({', '.join(specific_food['ambiguous_choices'])}) agar lebih akurat."
+                ambig_instr += f"\n- WAJIB di akhir respon tanyakan dengan ramah varian sate mana yang dimaksud pasien ({', '.join(specific_food['ambiguous_choices'])}) agar lebih akurat."
+            if specific_food.get("requested_variant"):
+                ambig_instr += f"\n- WAJIB jelaskan di awal kalimat bahwa merk/varian spesifik '{specific_food['requested_variant']}' belum ada di database chatbot, sehingga angka di bawah menggunakan acuan '{food_title}' yang tersedia."
 
             current_user_content = (
                 f"Pesan Pasien: \"{user_query}\"\n\n"
